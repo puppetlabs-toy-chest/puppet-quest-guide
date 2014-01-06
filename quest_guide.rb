@@ -2,11 +2,9 @@ require 'redcarpet'
 require 'nokogiri'
 require 'json'
 
-def md2html (filename)
+def md2html (filename, nav_node)
 
     md_file = File.read("./quests/#{filename}.md")
-
-    nav = File.read("./html/nav.html")
 
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
 
@@ -15,6 +13,12 @@ def md2html (filename)
     doc = Nokogiri::HTML(html)
 
     body = doc.at_css "body"
+
+    # Wrap content in content div tag
+    body.children = '<div id=content>' + body.children.to_html + '</div>'
+
+    # Insert the sideNav template into the body
+    nav_node.parent = body
 
     head = doc.create_element "head"
 
@@ -32,7 +36,11 @@ end
 
 quest_guide = JSON.parse(File.read("./quest_guide.json"))
 
+nav_template = Nokogiri::HTML::DocumentFragment.parse(File.read("./html/nav.html"))
+
+nav_node = nav_template.at_css "div"
+
 for f in quest_guide["quests"]
-    md2html f
+    md2html f, nav_node
 end
 

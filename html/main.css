@@ -218,6 +218,14 @@ div[class="console"] p:before{
     content: url('./assets/console.png');
     vertical-align: middle;
 }
+#content{
+    display: block;
+    width: 80%;
+    float: right;
+}
+#navSide{
+    float: left;
+}
 * {
 	-webkit-print-color-adjust: exact;
 }
