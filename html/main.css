@@ -223,7 +223,9 @@ div[class="console"] p:before{
     width: 80%;
     float: right;
 }
-#navSide{
+#side_nav{
+    position: fixed;
+    top: 0px
     float: left;
 }
 * {
