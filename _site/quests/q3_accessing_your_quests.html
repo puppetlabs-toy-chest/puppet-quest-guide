@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Quest Guide</title>
+        <title>Accessing your Quests</title>
         <meta name="viewport" content="width=device-width">
 
         <!-- syntax highlighting CSS -->
@@ -78,8 +78,6 @@
                             <a href="/index.html">Quest Guide</a>
                         </li>
                         
-                            <ul></ul>    
-                        
                     
                         <li>
                             <a href="/quests/intro.html">The Learning Virtual Machine (VM)</a>
@@ -105,6 +103,8 @@
                             <a href="/quests/q3_accessing_your_quests.html">Accessing your Quests</a>
                         </li>
                         
+                            <ul><li><a href="#set_the_sails!">Set the sails!</a></li></ul>    
+                        
                     
                         <li>
                             <a href="/quests/template.html">Style Reference</a>
@@ -120,9 +120,44 @@
 
             <div id="content" class="clearfix" role="main">
 
-                <div id="home">
-  <h1>Quest Guide</h1>
-</div>
+                <h1>Quest #3: Accessing your quests</h1>
+
+<p>So Quest #3 is a short one, but very important. You're going to set up a site on your local machine that will access a directory of quests. From here on out, there will be no more PDF documents and you'll access all quests from this local site. We'll walk you through some steps to help you out</p>
+
+<a id="set_the_sails!"><h2>Set the sails!</h2></a>
+
+<p>Type the following command:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">quest three story
+</code></pre></div>
+<!--You did well Swabbie on your previous quest. You're a quick learner ay. I think you'll be a fine addition to the crew. The Captain sure knows how to pick'em ay. We're about to set the sails and head out to sea. Any final questions before be raise the anchor? Ay, I didn't think so. I hope your ready for some adventure!-->
+
+<p>Type the following command:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">puppet module install puppetlabs/apache
+</code></pre></div>
+<!--We may need to change the port of the apache config file to access the 'site' on their local 
+machine that will house all the quests-->
+
+<!--what about caching this module-->
+
+<!--Once this is installed and running we need to point the VM IP address to the browser-->
+
+<p>Type the following command:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">puppet apply -e bootstrap
+</code></pre></div>
+<!--installs site on the local machine-->
+
+<!--have .pp constructed and cached-->
+
+<p>Type the following command:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">facter ipaddress
+</code></pre></div>
+<p>Type the IP address into your browser.</p>
+
+<!--We need a plan for updating quests-->
+
+<!--would a package installer be an option?-->
+
+<!--how would we notify the user that there is a new package to be installed?-->
 
             </div>
         <div id="site-footer">
