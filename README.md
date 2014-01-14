@@ -6,6 +6,21 @@ The Learning VM (Virtual Machine) is a self contained environment with everythin
 
 Because the VM and Quest Guide are self contained, the user can learn Puppet anywhere; after the initial download, no internet connection is required.
 
-## Markdown Conversion
+## Jekyll Site
 
-To facilitate development of new quests, we have abstracted Quest Guide content from the delivery. Quest Guide content developed in a markdown format, and each quest is placed in the `quests` directory. To process markdown into the HTML files delivered by the VM, simply edit the `quest_guide.json` file to include the name of each new quest (without the `.md` extension). Be sure any images used in the markdown file are kept in the `assets  ` directory. Run the `quest_guide.rb` script. This script will convert the markdown files into HTML, and save them in the `html` directory.
+The Quest Guide is a static website generated from source markdown and served by Jekyll.  To view the site, first install the ruby gem Jekyll by typing the following in your console:
+	
+	sudo gem install jekyll
+	
+When Jekyll is successfully installed, you can serve the website navigating to the top directory:
+
+	cd /path/to/courseware-lvm
+	
+and entering the command:
+
+	jekyll serve --watch
+	
+Now open your web browser and point it to:
+	
+	localhost:4000
+
