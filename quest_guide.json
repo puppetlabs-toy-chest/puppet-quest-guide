@@ -1,9 +1,0 @@
-{ 
-    "quests": [
-        "intro",
-        "q1_getting_started",
-        "q2_ease_of_puppet",
-        "q2_wow_example",
-        "q3_accessing_your_quests"
-        ]
-}
