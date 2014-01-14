@@ -1,0 +1,23 @@
+{% capture html %}{{ page.content | markdownify }}{% endcapture %}
+{% capture html %}{{ html | indexer }}{% endcapture %}
+<aside id="sidebar-first" class="column sidebar first" role="complementary">
+    <div id="sidebar-first-inner" class="inner">
+        <h2 class="block-title">
+            Quests
+        </h2>
+        <div class="content">
+            <div class="menu-block-wrapper menu-block-7 menu-name-main-menu parent-mlid-0 meni-level-2">
+                <ul class="menu">
+                    {% for p in site.pages %}
+                        <li>
+                            <a href="{{ p.url }}">{{ p.title }}</a>
+                        </li>
+                        {% if p.url == page.url %}
+                            {{ html | toc }}    
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</aside>
