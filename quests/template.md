@@ -3,35 +3,19 @@ title: Style Reference
 layout: default
 ---
 
-# PDF Style Reference
-
-## Markdown Syntax
+# Style Reference
 
 There are some basic elements of markdown syntax for styling text. When exported to html, this formatting syntax is transformed into tags, which you can then select and style with a .css file.
 
-### Normal paragraph:
-
-This is normal paragraph text.
-
-	nothin' special
-
-### Strong:
+## Text Styling:
 
 For __strong__ text use double underscores like this:
 
-	__strong__
+    __I'm so strong!__
 	
-It shows up in the html file wrapped in a `<strong>` tag, like so:
-	
-	<strong>Powerful Message</strong>
-
-### Emphasis:
-
 For *em*, as in "emphasis," do this:
 
 	*em*
-
-### Block Quote:
 
 Someone told me that if you want a block quote, 
 > you should put a > character at the beginning of your text.
@@ -39,8 +23,6 @@ Someone told me that if you want a block quote,
 Like this:
 
 	>block quote 
-
-### Lists:
 
 There are lots of reasons why you might want to make a list of things. Here are some examples:
 
@@ -53,24 +35,24 @@ It almost rhymes:
 
 	* To make a list.
 	* Use asterisk.
-	
-### Inline image:
 
-![text](./assets/console.png)
-	
-	![text](./assets/console.png)
-	
-### Links: 
+## Images and Links:
 
-How about a [link](http://www.puppetlabs.com/education)? You do that like this:
+![text](../assets/console.png)
+
+It's useful to include diagrams or images to give learners a concrete visualization of a concept. To do this, use the following syntax:
+	
+	![text](../assets/console.png)
+	
+You may also want to include a link to another part of the document, or to an external site. Use the following syntax to include a link: 
 
 	[link](http://www.puppetlabs.com/education)
-	
-# Custom Elements
 
-### Console Command:
+## Custom Elements
 
-Let's not actually type this, though.
+In addition to the normal markdown flavors, we've added a few custom tags through the Liquid templating system. Jekyll interprets these and converts them to html tags for us.
+
+For example, we have a style to indicate imperative console commands, as distinct from example code blocks:
 
 <div class="console">
 <p>
@@ -78,54 +60,39 @@ sudo rm -rf /
 </p>
 </div>
 
-	<div class="console">
-	<p>
-	sudo rm -rf /
-	</p>
-	</div>
+	Markdown syntax for this feature has yet to be implemented :(
 
-```
+Check out this cool syntax highlighting feature:
+
+{% highlight ruby %}
 class { 'puppetlabs':
-	ensure => 'present',
-	foo    => 'bar',
+    ensure => 'present',
+    foo    => 'bar',
 }
-```
+{% endhighlight %}
+
+We also have a special callout element, which can be used to include tips and warnings that will appear alongside the main body of a site.
 
 <div class="callout">
 <h3>
 Puppet Tip:
 </h3>
 <p>
-You can create a nifty callout by wrapping your text in &ltdiv class="callout"&gt&lt/div&gt tags! Note that markdown syntax doesn't work in this context--you'll have to treat everything you put here like normal html. Be sure to include an h3 and put your text in p tags.
+
+	Markdown syntax for this feature has yet to be implemented :(
 </p>
 </div>
 
-### Page Breaks:
-
-This page isn't quite long enough to have a page break automatically, but I'm getting impatient. Let's end it, like so:
-
-	<div class="page-break"></div>
-
-<div class="page-break"></div>
-
-<div class="aside">
+<div class="inline_aside">
 <h3>
 Inline Aside:
 </h3>
 <p>
-If you want to talk about something that's slightly tangential, you can wrap it in a div tag with the "aside" class. Remember, markdown syntax doesn't apply, so you'll have to put your text in a p tag and include an h3 as the title.
+Similarly, we have an inline aside that can be used to include items that are relevant to a topic but tangential to the current quest.
 </p>
 </div>
 
-	<div class="aside">
-	<h3>
-	Inline Aside:
-	</h3>
-	<p>
-	If you want to talk about something that's slightly tangential, you can wrap it in a div tag with the "aside" class. Remember, markdown syntax doesn't apply, so you'll have to put your text in a p tag and include an h3 as the title.
-	</p>
-	</div>
-
+	Markdown syntax for this feature has yet to be implemented :(
 
 
 
