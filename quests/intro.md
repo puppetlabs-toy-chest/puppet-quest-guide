@@ -1,4 +1,9 @@
-# The Learning Virtual Machine (VM)
+---
+title: The Learning Virtual Machine (VM)
+layout: default
+---
+
+## The Learning Virtual Machine (VM)
 
 If you want to learn more about Puppet or are a new user of Puppet or just looking to have fun exploring Puppet, then you've come to the right place. This is our free downloadable Learning VM for you to play around with and explore. The Learning VM is a companion to our Puppet Quests a few sections below, which are a series of tutorials about the Puppet language and using its various tools. Although, please keep in mind that this Learning VM focuses on using Puppet Enterprise at its core, but most of the quests can also apply to Puppet open source.
 

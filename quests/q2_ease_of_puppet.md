@@ -1,3 +1,8 @@
+---
+title: The Ease of Puppet
+layout: default
+---
+
 # Quest #2: The Ease of Puppet
 
 Puppet is truly  wonderful tool for managing small or huge sums of nodes in a simple and effective way. In this quest we are going to see the true value of using Puppet and Puppet tools such as the Puppet Forge and Puppet Enterprise Console.
