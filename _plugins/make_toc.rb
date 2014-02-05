@@ -9,9 +9,7 @@ module Jekyll
             ul = Nokogiri::XML::Node.new "ul", doc
 
             as.each do |a|
-                puts a.to_html
                 if a["id"]
-                    puts "dfs"
                     li = Nokogiri::XML::Node.new "li", ul
                     link = Nokogiri::XML::Node.new "a", ul
                     link["href"] = '#' + a["id"]
