@@ -44,129 +44,6 @@ In relation to this example, we will teach you how to use Puppet to _describe_ y
 ### Ready to start your [Quest #1](docs.puppetlabs.com/learning) adventure? 
 
 
-	    
-========
-<div class="page-break"></div>
-
-### Resources
-
-Imagine a system’s configuration as a collection of many independent atomic units - call them “resources.”
-
-These pieces vary in size, complexity, and lifespan. Any of the following (and more) can be modeled as a single resource:
-
-* A user account
-* A specific file
-* A directory of files
-* A software package
-* A running service
-* A scheduled cron job
-
-On a given system, you might care about several of each the above types. For example, you may want to ensure that several different users are present on the system. Therefore, it follows that for each type of resource, there are several individual resources, each with a unique __title__.
-
-Also, the various resources may have characteristics that you care to manage - for example, you may want to manage the shell used by users, or their home directories. Each of these details that you care about for the resource is called an __attribute__, and each attribute will have a __value__.
-
-In summary, you can describe resource of various types, and values for the attributes that pertain to the resource. For example, on a certain Unix/Linux machine, you may want to ensure that a user with the username "elmo" is present on the system, with the home directory "/home/elmo" and that his shell is the Bourne Again Shell (bash).
-
-In order to convey your intentions in a manner understandable by Puppet, you use Puppet's Domain-Specific Language (DSL) to describe your requirements. Here is the first example of using Puppet's DSL to describe our user:
-
-        user { 'elmo':
-          ensure => 'present',
-          shell  => '/bin/bash',
-          home   => '/home/elmo',
-        }
-		
-The above is an example of a __resource declaration__, since you are describing how you want the resource to be configured. As you noticed, there is always:
-
-* a __type__, which is "user" in the example above,
-* a __title__, which is "elmo" here,
-* and one or more __attributes__ with specified __values__ - for example, the attribute "shell" has the value '/bin/bash'.
-
-Resource declarations such as the above are usually placed in a file with the extension ".pp". A file with the extension .pp, that contains puppet code is called a puppet __manifest__.
-
-#### Manifests
-
-Manifests are files containing code written in Puppet's DSL, with the filename extension ".pp". These describe how you want various resources to be configured for a system.
-
-#### Inspecting resources 
-
-Puppet provides you with a tool to inspect resources on your systems.
-
-You are already logged in to the Learning Puppet VM, as user root.
-
-Run the following command:
-
-    # puppet resource service    service { 'NetworkManager': 
-      ensure => 'stopped',
-      enable => 'false',    }    service { 'acpid':      ensure => 'running',      enable => 'true', 
-    }    service { 'anacron':
-      ensure => 'stopped', 
-      enable => 'true',    }    ...    ... (etc.)
-    
-The `puppet resource` command lets you inspect resources on your system. In the above example, `puppet resource service` returns all the resources of type 'service' on the system, in Puppet's DSL! If you pass an additional parameter - the name of a specific resource of the type, the command will return information regarding only that resource. For example, to inspect the `anacron` service, execute the following command on the VM:
-    puppet resource service anacronYou can also inspect a specific resource by providing its title. Run the following command:
-    # puppet resource user root
-    user { 'root':
-      ensure           => 'present',
-      comment          => 'root',
-      gid              => '0',
-      home             => '/root',
-      password         => '$1$jrm5tnjw$h8JJ9mCZLmJvIxvDLjw1M/',
-      password_max_age => '99999',
-      password_min_age => '0',
-      shell            => '/bin/bash',
-      uid              => '0',
-    }
-    
->In the above, what is the _type_ of the resource?  
-What is the _title_ of the resource?
-What is the _value_ of the _attribute_ 'home'?
-
-#### Resource Types
-
-Puppet has many built-in resource types. Each type can behave a bit differently, and has a different set of attributes available.  
-
-There are several ways to get information about the resource types available for use in Puppet:1. The Cheat Sheet  
-    Not all resource types are equally common or useful, so weʼve made a 	printable cheat sheet that explains the eight most useful types. 	[Download the core types cheat sheet here](http://docs.puppetlabs.com/puppet_core_types_cheatsheet.pdf).2. The Type Reference  
-	The [type reference page ](http://docs.puppetlabs.com/references/latest/type.html)lists all of Puppetʼs built-in resource types, 	in 	extreme detail. It can be a bit overwhelming for a new user, but 	it 	has most of the info youʼll need in a normal day of writing Puppet 	code.  
-3. Puppet Describe  
-	The `puppet describe` subcommand can list information about the  	currently installed resource types on a given machine.  
-		`puppet describe -l` — List all of the resource types available on the 	system.  
-	`puppet describe -s <TYPE>` — Print short information about a type, 	without describing every attribute.  
-	`puppet describe <TYPE>` — Print long information, similar to what 	appears in the type reference.
-As an aside, in addition to the resource types provided by Puppet by default, you can create and use additional resource types by means of plugins.
->Try the `puppet describe` command on the Learning Puppet VM, and learn about the 'host' resource type.
-
-
-#####  Manage a user, 'gonzo' using puppet.
-
-To complete this task:  
-
->1. In the Learning Puppet VM, in your home directory (`/root`), create a new file named `user.pp`  
->
-2. Edit the file `user.pp` and describe user gonzo using Puppet's DSL.  
-    * You may want to refer to the example above that describes user 'elmo'.  
-    * Remember that you can use `puppet describe user` and `puppet resource user` for help.  
-
->3. Once completed, run the following command:  
-
->		puppet apply /root/user.pp
-
-
-You will see that puppet does, indeed create a user called gonzo!
-
-#### Puppet Apply
-
-Try the command `puppet help apply` to learn more about the `puppet apply` command. We learn that puppet apply is the standalone puppet execution tool. You can use it to apply individual manifests.
-    
-This is very handy for learning to write code in Puppet's DSL. However, if you wanted to, you could describe the configuration of an entire system as a list of all the resources you want to manage on the system in a single puppet manifest file. But as you can imagine, that might end up being a _really_ long file! We will see how to make this more of a manageable and coherent process when we learn about Classes in a subsequent lesson.
-        
-#### Abstracting away complexity
-
-Although the example we described above manages a user on a Unix/Linux system, other operating systems have users too. The _attributes_ for the users might change, along with the values, depending on the operating system - but fundamentally, regardless of the operating system, we care about managing a _type_ of resource called "user".
-
-Puppet abstracts away the complexity of managing resources of various types, such as the user resource, by leveraging different __providers__ to realize the resource on the various operating systems. The implementation of how users are realized on various OS-es might differ - the tools that provide these implementations on various OS-es are the _providers_ for the user resource type.
-
-Puppet has a _Resource Abstraction Layer_ (RAL) that consists of types (high-level models of differnt kinds of resources) and providers (platform-specific implementations for the different types), and Puppet automatically translates your description of how you want the various resources you manage should be configured to the appropriate platform-specific commands required to realize your description.
 
 ========
 <div class="page-break"></div>
