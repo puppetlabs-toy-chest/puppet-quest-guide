@@ -5,22 +5,34 @@ layout: default
 
 # Quest #4
 
-In this quest you will be introduced to the fundamental applications of Puppet resources and using them to inspect [name of fantasy world].
+In this quest you will be introduced to the fundamental applications of Puppet resources and using them to inspect the state of your Virtual Machine.
 
 ## Puppet Resources
 
-In the [adjective][name of fantasy world], where hardware is a thing of this past, objects of [name of fantasy world] exist with certain configurations that serve an overall importance to the greater good of the system. Imagine this world configured as a collection of many independent atomic units. We call those atomic units "resources".
+> Any sufficiently advanced technology is indistinguishable from magic.
 
-These units vary in size, complexity, and lifespan. So what can a resource be in [name of fantasy world]? 
+> -Arthur C. Clarke
 
-* A user account
-* A specific file
-* A directory of files
-* A software package
-* A running service
-* A scheduled cron job
+For as long as we've had the words to tell their stories, every breed of witch and sorceror has haunted the dark woods and high towers of our fantasies. For all their different guises, these beings are alike in their ability reach beneath the visible surface of the world and call on mysterious forces to do their will.
 
-In [name of fantasy world], we care about each the above resource types. Each serves a greater good to keeping a healthy, thriving organized system.
+A careful reader of such stories, however, knows that something as powerful and simple as a magic word likely draws on some great library of ancient tomes whose dusty pages detail connections between the syllables of a wizard's spell and the elements they control.
+
+Think of the Learning VM as a kingdom. Let's call it Elvium. Elvium is populated by all manner of users and its landscape of directories is dotted with files and packages.
+
+With Puppet, you can take your rightful place as a wizard of this kingdom. You will be able to manipulate the elements with a few simple words and weave powerful enchantments to shape the very landscape to your will.
+
+As any aspiring magician must learn of the world's elements before daring to control them, we'll begin by learning about **Resources**, the fundamental components that Puppet uses to describe any environment.
+
+Though there are many resources, we'll start with some essentials: 
+
+* `user` A user account
+* `file` A specific file
+* `directory` A directory of files
+* `package` A software package
+* `service` A running service
+* `cron` A scheduled cron job
+
+For Elvium to thrive, all of these resources must be kept in balance.
 
 ## Anatomy of a Resource
 
@@ -28,7 +40,7 @@ Exisintg in [name of fantasy world] requires an understanding the unique Domain-
 
 ## Tasks
 
-1. Your Earth name is no good while you're here in [name of fantasy world]. What is your [name of fantasy world] name? Do you exist in [name of fantasy world]? Type the following command to check: 
+1. Your Earth doesn't yet have any power in Elvium. What is your [name of fantasy world] name? Do you exist in [name of fantasy world]? Type the following command to check: 
 
         puppet resource user yourname
 
