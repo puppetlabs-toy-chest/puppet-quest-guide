@@ -13,13 +13,11 @@ In this quest you will be introduced to the fundamental applications of Puppet r
 
 > -Arthur C. Clarke
 
-The Learning VM provides you with a separate environment from the host machine you're running it on; you can think of it as its own little world. In its way, it's not too differnt from the kind of place you'd read about in a fantasy novel or explore in an adventure game. Wander down a directory path and you'll see a landscape dotted with files and packages, home to an odd people called Users. In fact let's indulge our penchant for fantasy and give it a name suitable for the setting: Elvium. 
+Welcome to Elvium, user. Have a look around. Walk down a directory path and admire our landscape. Wander the verdant forests of files and hear the clamor of bustling services. But take note: what you see now is only the surface. The real channels of power in Elvium lie deeper, in the very bones of the kingdom, and you must learn of these things. You see, you are not an ordinary user, for you have been born into the Elvium with a user id of '0', the fabled mark of **Root**.
 
-But what you see navigating directories and grepping files is only the surface. 
+In recognition of this auspicious sign, the venerable council of Sudoers has seen fit to present you with this Quest Guide.
 
-For as long as we've had the words to tell their stories, witches and sorcerors have haunted the dark woods and holed up in the high towers of our fantasies. For all their guises, these beings are alike in one way: their ability to transcend the visible world and call on mysterious forces to work their will.
-
-Using Puppet, you can learn the ways of this strange power. If Elvium is a fantasy world, you can be its wizard: with only a few words, slay nefarious daemons, raise armies of Users, orchestrate services, and weave lasting enchantments to ensure that your will continues to be done as you kick back in your tower and have a cold potion.
+If you choose to follow the path set forth herein, you will learn to channel your abilities by using the art of Puppet. With only a few words, slay nefarious daemons, raise armies of users, orchestrate magnificent services, and, most importantly, weave your power into abiding enchantments to ensure that your will continues to be done in Elvium as you journey out to bring other kingdoms into your dominion.
 
 <!--
 Maybe include a very brief "wow" example here?
@@ -27,7 +25,7 @@ Maybe include a very brief "wow" example here?
 
 ## Resources
 
-The power of a magic word is never as simple as it seems. Any wizard worth his beard has a at least a few arcane tomes lying around the tower. The pages of these books (if you can decode the cryptic runes) tell of the bonds between the syllables of a spell and the elements under its influence. An aspiring Elvian magician must learn of these things in order to type the words of power with confidence and wisdom. 
+The power of a magic word is never as simple as it seems. Any wizard worth his beard has a at least a few arcane tomes lying around the tower. The pages of these books (if you can decode the cryptic runes) tell of the bonds between the syllables of a spell and the elements under its influence. As an aspirant in the mystical arts of Puppet, you must learn of these things in order to type the words of power with confidence and wisdom.
 
 We'll begin with the fundamental set of types that Puppet uses to describe an environment: **Resources**.
 
