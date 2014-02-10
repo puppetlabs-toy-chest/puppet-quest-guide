@@ -33,7 +33,7 @@ We'll begin with the fundamental set of types that Puppet uses to describe an en
 
 ## Anatomy of a Resource
 
-Effectively wrangling resources calls for an understanding Puppet's Domain-Specific Language (DSL). Build on the Ruby programming language, this DSL can be used to describe any resource you might encounter in the Elvium environment or elsewhere. Because the Puppet DSL is a **declarative** language, rather than a **procedural** one, the descriptions themselves have the power to change the state of the environment. Paint the picture you want to see, and Puppet will handle the execution.
+Effectively wrangling resources calls for an understanding Puppet's Domain-Specific Language (DSL). Build on the Ruby programming language, this DSL can be used to describe any resource you might encounter in the Elvium environment or elsewhere. Because the Puppet DSL is a **declarative** language rather than a **procedural** one, the descriptions themselves have the power to change the state of the environment. Use the DSL to paint a picture of what you want to see, and Puppet will make it so.
 
 Though there are many resource types that you can describe and manage with Puppet's DSL, we'll start with some essentials: 
 
@@ -48,15 +48,15 @@ Just as any individual cat or dog is a member of a species (*Felis catus* and *C
 
 ## Tasks
 
-1. You already have root access, but if you're going to fit in among the Elvium Users, you'll need you'll need a body of your own. Let's check if you exist in Elvium. Type the following command to check:
+1. You already have root access, but if you ever want to walk among Elvium Users discretely, you'll need your own account. Pick out a name for yourself, and type the following command to check if it exists already.
 
         puppet resource user yourname
 
-2. What, you don't exist? You'd better create a system account for yourself forthwith! Type the following commanad to add yourself to the system:
+2. What, you don't exist? You'd better create a system account for yourself right away! Type the following commanad:
 
         useradd -r yourname
 
-3. That was a close one. Any unidentified resource is terminated every 30 minutes. Go ahead and type the following command into the command line again:
+3. That was a close one. Go ahead and type the following command into the command line again:
 
         puppet resource user yourname
             
