@@ -19,7 +19,7 @@ But what you see navigating directories and grepping files is only the surface.
 
 For as long as we've had the words to tell their stories, witches and sorcerors have haunted the dark woods and holed up in the high towers of our fantasies. For all their guises, these beings are alike in one way: their ability to transcend the visible world and call on mysterious forces to work their will.
 
-Using Puppet, you can learn the ways of this strange power. If Elvium is a fantasy world, you can be its wizard. With only a few words, slay nefarious daemons, raise armies of Users, orchestrate services, and weave lasting enchantments to ensure that your will continues to be done as you kick back in your tower and have a cold potion.
+Using Puppet, you can learn the ways of this strange power. If Elvium is a fantasy world, you can be its wizard: with only a few words, slay nefarious daemons, raise armies of Users, orchestrate services, and weave lasting enchantments to ensure that your will continues to be done as you kick back in your tower and have a cold potion.
 
 <!--
 Maybe include a very brief "wow" example here?
@@ -27,15 +27,13 @@ Maybe include a very brief "wow" example here?
 
 ## Resources
 
-The power of a magic word is never as simple as it seems. Any wizard worth his beard has a at least a few arcane tomes lying around the tower. The pages of these books (if you can decode the cryptic runes) tell of the mystical bonds between the syllables of a spell and the elements they control. An aspiring Elvian magician must learn of these things in order to type the words of power with confidence and wisdom. 
+The power of a magic word is never as simple as it seems. Any wizard worth his beard has a at least a few arcane tomes lying around the tower. The pages of these books (if you can decode the cryptic runes) tell of the bonds between the syllables of a spell and the elements under its influence. An aspiring Elvian magician must learn of these things in order to type the words of power with confidence and wisdom. 
 
 We'll begin with the fundamental set of types that Puppet uses to describe an environment: **Resources**.
 
 ## Anatomy of a Resource
 
-Wrangling resources effectively calls for an understanding Puppet's Domain-Specific Language (DSL). Build on the Ruby programming language, this language can be used to describe any resource you might encounter in the Elvium environment. 
-
-So what exactly are these resources? Just like any individual cat or dog is a member of its species (*Felis catus* and *Canus lupis familiaris* to be precise) any individual instance of a resource has a **resource type**.
+Effectively wrangling resources calls for an understanding Puppet's Domain-Specific Language (DSL). Build on the Ruby programming language, this DSL can be used to describe any resource you might encounter in the Elvium environment or elsewhere. Because the Puppet DSL is a **declarative** language, rather than a **procedural** one, the descriptions themselves have the power to change the state of the environment. Paint the picture you want to see, and Puppet will handle the execution.
 
 Though there are many resource types that you can describe and manage with Puppet's DSL, we'll start with some essentials: 
 
@@ -46,21 +44,22 @@ Though there are many resource types that you can describe and manage with Puppe
 * `service` A running service
 * `cron` A scheduled cron job
 
-Each instance of a resource is uniquly identified by a **title** with **attribute** => **value** pairs.
+Just as any individual cat or dog is a member of a species (*Felis catus* and *Canus lupis familiaris* to be precise) any instance of a resource is a member of a **resource type**, such as one of those listed above. Each instance is configured to match its particular function by a set of **attribute** => **value** pairs.
 
 ## Tasks
 
-1. Your Earth doesn't yet have any power in Elvium. What is your [name of fantasy world] name? Do you exist in [name of fantasy world]? Type the following command to check: 
+1. You already have root access, but if you're going to fit in among the Elvium Users, you'll need you'll need a body of your own. Let's check if you exist in Elvium. Type the following command to check:
 
         puppet resource user yourname
 
-2. You don't exist! You better create a system account for yourself asap! Type the following commanad to add yourself to the [name of fantasy world] system:
+2. What, you don't exist? You'd better create a system account for yourself forthwith! Type the following commanad to add yourself to the system:
 
         useradd -r yourname
 
 3. That was a close one. Any unidentified resource is terminated every 30 minutes. Go ahead and type the following command into the command line again:
 
-        puppet resource user yourname        
+        puppet resource user yourname
+            
 Great! You're alive! That was a close call. Nobody is allowed to be here and not exist in the system.
 
 4. However, you're still in danger. Look at your `password => '!!'`. There isn't one! Set your user account password to *puppetlabs*.
@@ -69,8 +68,7 @@ Great! You're alive! That was a close call. Nobody is allowed to be here and not
 
 6. Everything in our world is structured. Even our root directories that house all our information are structured in an organized format. I need you to inspect your `user root` information. 
 
-Lo
-ok below at what is returned when I enter `puppet resource user root` into the command line:
+Look below at what is returned when I enter `puppet resource user root` into the command line:
  
          user {'root':
         	ensure           => 'present',
