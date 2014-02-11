@@ -27,13 +27,11 @@ Maybe include a very brief "wow" example here?
 
 The power of a magic word is never as simple as it seems. Any wizard worth his beard has a at least a few arcane tomes lying around the tower. The pages of these books (if you can decode the cryptic runes) tell of the bonds between the syllables of a spell and the elements under its influence. As an aspirant in the mystical arts of Puppet, you must learn of these things in order to type the words of power with confidence and wisdom.
 
-We'll begin with the fundamental set of types that Puppet uses to describe an environment: **Resources**.
+We'll begin with **resources**, the fundamental set of types that Puppet uses to describe an environment.
 
 ## Anatomy of a Resource
 
-Effectively wrangling resources calls for an understanding Puppet's Domain-Specific Language (DSL). Build on the Ruby programming language, this DSL can be used to describe any resource you might encounter in the Elvium environment or elsewhere. Because the Puppet DSL is a **declarative** language rather than a **procedural** one, the descriptions themselves have the power to change the state of the environment. Use the DSL to paint a picture of what you want to see, and Puppet will make it so.
-
-Though there are many resource types that you can describe and manage with Puppet's DSL, we'll start with some essentials: 
+Just as any individual cat or dog is a member of a species (*Felis catus* and *Canus lupis familiaris* to be precise) any instance of a resource is a member of a **resource type**. Though Puppet allows you to describe and manipulate many different resource types, the following are some of the most common: 
 
 * `user` A user account
 * `file` A specific file
@@ -42,43 +40,21 @@ Though there are many resource types that you can describe and manage with Puppe
 * `service` A running service
 * `cron` A scheduled cron job
 
-Just as any individual cat or dog is a member of a species (*Felis catus* and *Canus lupis familiaris* to be precise) any instance of a resource is a member of a **resource type**, such as one of those listed above. Each instance is configured to match its particular function by a set of **attribute** => **value** pairs.
+Each individual instance of a resource type is configured to match its particular function by a set of **attribute** => **value** pairs.
+
+
+
+The syntax you see here is an example of Puppet's Domain-Specific Language (DSL). Build on the Ruby programming language, this DSL can be used to describe any resource you might encounter in the Elvium environment or elsewhere. Because the Puppet DSL is a **declarative** language rather than a **procedural** one, the descriptions themselves have the power to change the state of the environment. Use the DSL to paint a picture of what you want to see, and Puppet's providers will make it so.
 
 ## Tasks
 
-1. You already have root access, but if you ever want to walk among Elvium Users discretely, you'll need your own account. Pick out a name for yourself, and type the following command to check if it exists already.
+1. Check out your user information.
 
-        puppet resource user yourname
-
-2. What, you don't exist? You'd better create a system account for yourself right away! Type the following commanad:
-
-        useradd -r yourname
-
-3. That was a close one. Go ahead and type the following command into the command line again:
-
-        puppet resource user yourname
-            
-Great! You're alive! That was a close call. Nobody is allowed to be here and not exist in the system.
-
-4. However, you're still in danger. Look at your `password => '!!'`. There isn't one! Set your user account password to *puppetlabs*.
-
-5. Awesome! Inspect your user account again. Make sure there is an encrypted value for your password.
-
-6. Everything in our world is structured. Even our root directories that house all our information are structured in an organized format. I need you to inspect your `user root` information. 
-
-Look below at what is returned when I enter `puppet resource user root` into the command line:
- 
-         user {'root':
-        	ensure           => 'present',
-        	comment          => 'root',
-        	gid              => '0',
-        	home             => '/root',
-        	password         => '$1$jrm5tnjw$h8JJ9mCZLmJvIxvDLjw1M/',
-        	password_max_age => '99999',
-        	password_min_age => '0',
-        	shell            => '/bin/bash',
-        	uid              => '0',
-        }	     
+        puppet resource user root
+        
+>1a. In the above, what is the _type_ of the resource?  
+1b. What is the _title_ of the resource?  
+1c. What is the _value_ of the _attribute_ 'home'?
 
 <!-- Carthik
 - once the user has entered `puppet resource user root` in the command the display question 6a.
@@ -86,9 +62,23 @@ Look below at what is returned when I enter `puppet resource user root` into the
 - once the user has entered the correct response in the command line, display question 6c.
 -->
 
->6a. In the above, what is the _type_ of the resource?  
-6b. What is the _title_ of the resource?  
-6c. What is the _value_ of the _attribute_ 'home'?
+2. You might get lonely. To help you out, let's make an assistant:
+
+        useradd -r ralph
+
+3. That was a close one. Go ahead and type the following command into the command line again:
+
+        puppet resource user ralph
+            
+	Great! You're alive! That was a close call. Nobody is allowed to be here and not exist in the system.
+
+4. However, you're still in danger. Look at your `password => '!!'`. There isn't one! Set your user account password to *puppetlabs*.
+
+		passwd ralph
+
+5. Awesome! Inspect your user account again. Make sure there is an encrypted value for your password.
+
+
 
 ## Supplemental Information 
 
