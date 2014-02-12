@@ -69,28 +69,6 @@ A manifest with just the single line above will apply the definition of class us
 - Think of something can be buildable into the Module Quest (next quest)
 - How can `include [resource]` be included. I will like this to be expandable in the Module Quest where multiple `include [resource]` functions will be in one manifest.
 
----
-
-Module Quest
-
-- discuss modulepath
-- module structure
-- declaring classes from modules `include [resource]`
-
----
-
-Puppet Module Quest
-
-- discuss the puppet module tool
-- install = --version --force --environment --modulepath --ignore-dependencies
-- list = --tree --version --ignore-dependencies
-- search = 
-- uninstall = --force
-- upgrade = 
-- build = 
-- changes = 
-- generate = 
-
 ## Supplemental Information
 
 ### Definitions
