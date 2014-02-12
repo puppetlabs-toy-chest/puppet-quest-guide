@@ -7,37 +7,37 @@ In this quest we examine previously discussed resources and how to group them to
 
 Remember when we talked about resources? Here's a refresher: Just as any individual cat or dog is a member of a species (*Felis catus* and *Canus lupis familiaris* to be precise) any instance of a resource is a member of a **resource type**. Though Puppet allows you to describe and manipulate many different resource types, the following are some of the most common: 
 
-* `user` A user account
-* `file` A specific file
-* `directory` A directory of files
-* `package` A software package
-* `service` A running service
-* `cron` A scheduled cron job
+* `user` - A user account
+* `file` - A specific file
+* `directory` - A directory of files
+* `package` - A software package
+* `service` - A running service
+* `cron` - A scheduled cron job
 
 ## Defining Classes
 
-When the Wizard Judge on Elvium convicts a system componenet that is causing harm or useless to the system, he categorizes them from the rest of the population. To do this in Elvium additional requirements are required for classifying. We can create a definition for a class of misfits called `broken users`. This class will store two broken components in Elvium. To do this:
+When the Wizard Judge on Elvium convicts a system componenet that is causing harm or useless to the system, he categorizes them from the rest of the population. To do this in Elvium additional requirements are required for classifying. We can create a definition for a class of misfits called `ops`. This class will store two broken components in Elvium. To do this:
 
 * Users in Elvium should have their home directories in the directory `/mnt/home`
 * We need to ensure that a group with the name of `operational` is present
 * We also need to add the names of the users who will be members of the group `operational`
 * makerbot's home directory should be `/mnt/home/makerbot`. 
 
-      class broken users {
+      class ops {
       
 		user { 'makerbot':
-		  ensure => absent,
-		  gid    => 'operational',
+		  ensure => present,
+		  gid    => 'operations',
 		  home   => '/mnt/home/makerbot',	
         }
     
         user { 'frion':
-		  ensure => absent,
-		  gid    => 'operational',
+		  ensure => present,
+		  gid    => 'operations',
 		  home   => '/mnt/home/frion',	
         }
         
-        group { 'operational':
+        group { 'operations':
           ensure => present,
           gid    => '1001',
         }
@@ -49,7 +49,7 @@ When the Wizard Judge on Elvium convicts a system componenet that is causing har
     
       }  
 
-In the above example of classifying broken users on Elvium, we **defined** a class called `broken users`, which consists of a collection of three different resources - a `user` resource, a `group` resource, and a `file` resource. The above description is both elegant, and self-documenting and 100% constructed in Puppet's DSL.
+In the above example of classifying broken users on Elvium, we **defined** a class called `ops`, which consists of a collection of three different resources - a `user` resource, a `group` resource, and a `file` resource. The above description is both elegant, and self-documenting and 100% constructed in Puppet's DSL.
 
 Now that we have a class called `broken users`, we can include the above class in the configuration of a machine to manage broken users in Elvium.
 
@@ -65,9 +65,10 @@ A manifest with just the single line above will apply the definition of class us
 
 ## Tasks
 
-- Create a manifest with the following classes that does [some task]:
-- Think of something can be buildable into the Module Quest (next quest)
-- How can `include [resource]` be included. I will like this to be expandable in the Module Quest where multiple `include [resource]` functions will be in one manifest.
+ssh or ntp  or apache or ftp
+
+I'm not sure of specific tasks to create
+
 
 ## Supplemental Information
 
