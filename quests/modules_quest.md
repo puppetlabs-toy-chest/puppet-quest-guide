@@ -18,7 +18,7 @@ A module is a directory with a pre-defined structure, with class definitions, fi
 
 ## Declaring Classes from Modules
 
-Once a class is stored in a module, there are actually several ways to declare it. You've already seen this, but you can declare classes by putting `include [resource]` in your main manifest.
+Once a class is stored in a module, there are actually several ways to declare it. You've already seen this, but you can declare classes by putting `include [class name]` in your main manifest.
 
 The `include` function declares a class, if it hasn’t already been declared somewhere else. If a class _**has**_ already been declared, `include` will notice that and do nothing.
 
@@ -32,15 +32,34 @@ This lets you safely declare a class in several places. If some class depends on
 
 		mkdir -p users/manifests
 
-3. 
+3. Now, we're going to want to edit the manifest. Type the following command:
 
+		nano users/manifest/init.pp
 
+4. Do you remember the `user` resource and the anatomy of how a resource is constructed? Using that knowledge can you make sure that user como is present in the user class.
 
+5. Next, check to make sure the syntax you entered is correct using `puppet parser`.
 
-## Supplemental Information
+6. Lets now make a test directory in the same modulepath. Type the following command:
 
-### Definitions
+		mkdir users/tests
 
-* **Module** - 
-* **Module Path** - 
-* 
+7. Like we did before, we are going to want to edit the manifest in the test directory: Type the following command:
+
+		nano users/tests/init.pp
+
+8. We are going to take advantage of the `include` function now. Type the following information into the manifest:
+
+		include users
+
+9. Next, check to make sure the syntax you entered is correct using `puppet parser`.
+
+10. Oh shoot! We forgot to add the staff `group` to user como. Can you quickly run back into the manifest and make sure the staff `group` is present. Don't forgot to add `/bin/bash` as the shell and `gid => 'staff',` for user como as well.
+
+11. Sorry about that, check again to make sure the syntax you entered is correct using `puppet parser`.
+
+12. We're not ready to execute this manifest just yet. We want to test run it first. Do you remember in the Manifests Quests when we discussed how to do that? Go ahead and apply the manifest in the test directory in `--noop` mode.
+
+13. Great! Everything is running how it should be. Now finish this off by enforcing your class on the local system.
+
+You just created your first puppet module!!

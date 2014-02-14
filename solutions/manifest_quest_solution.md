@@ -38,7 +38,7 @@ NOTE: substitute `earthname` with the name your parents gave you.
 
 6. You will then be prompted to save the file you just created. Hit 'y' on the keyboard for "Yes".
 
-7. You will be prompted to name your file. Delete 'puppet' which is prepopulated and replace with user.pp, then hit 'Enter' on the keyboard.
+7. You will be prompted to name your file. Delete 'puppet' which is prepopulated and replace with `user.pp`, then hit 'Enter' on the keyboard.
 
 	RETURNED VALUE:
 
