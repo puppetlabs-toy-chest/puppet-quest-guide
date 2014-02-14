@@ -17,11 +17,16 @@ As you saw in the Resources quest, **resource declarations** can be used to keep
 
 Manifests, like the resource declarations they contain are written in Puppet's Domain Specific Language (DSL). In addition to resource declarations, a manifest will often contain **classes**, which organize resource declarations into functional sets, and some amount of conditional logic to allow you to manage resources differently according to variables in the Elvium environment. We will get to these more complex aspects of manifest creation in a later quest.
 
-## Abstracting Away Complexity
+## Abstracting Away Implementation
 
-If you ever find yourself traveling to some exotic land with a different Operating System (it might be less legwork than you think; tales speak of a trance-like state called `ssh`) you will notice that the resources there may have a different **attributes** and **values** than what you are accustomed to seeing in Elvium. It is important for you to focus on the _type_ of resource you encounter.
+Our sages have long known that Elvium operates according to the rules of a system. They call this "Operating System" CentOS. However, travelers tell tales of a far away land where the fabric of the world has a different weave; there, the Operating System is called Ubuntu. If you ever find yourself traveling in an exotic land with a different Operating System you might need some time to get your bearing.
 
-Remember, at the core of everything in Elvium is a puppet manifest. Puppet code abstracts away the complexity of managing resources of various types by leveraging different __providers__ to realize the resource on the various operating systems. The implementation of how resources are realized on various operating systems might differ, the tools that provide these implementations on various operating systems are the __providers__ for the resource type.
+For example, if you had tried to create a user with the `useradd` command in a place with an Ubuntu Operating System, you'd be laughed out of town for getting it backwards. Ubuntu users know it should be `adduser` instead.
+
+
+ you will notice that some resources there have different **values** than what you are accustomed to seeing in Elvium. It is important for you to focus on the _type_ of resource you encounter.
+
+Puppet code abstracts away the complexity of manually managing resources of various types by leveraging different __providers__ to realize the resource on the various operating systems. The implementation of how resources are realized on various operating systems might differ, the tools that provide these implementations on various operating systems are the __providers__ for the resource type.
 
 Puppet has a __Resource Abstraction Layer__ (RAL) that consists of resource types and providers, and Puppet automatically translates your description of how you want the various resources you manage to be configured to the appropriate platform-specific commands required to realize your description.
 
