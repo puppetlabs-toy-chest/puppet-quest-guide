@@ -20,18 +20,20 @@ Know thyself, user, for you too are a resource. Use the following command to see
 	puppet resource user root
 		
 The output will look like this:
-		
-	user { 'root':
-  		ensure           => 'present',
-  		comment          => 'root',
-  		gid              => '0',
-  		home             => '/root',
-  		password         => '$1$jrm5tnjw$h8JJ9mCZLmJvIxvDLjw1M/',
-  		password_max_age => '99999',
-  		password_min_age => '0',
-  		shell            => '/bin/bash',
-  		uid              => '0',
-	}
+
+{% highlight ruby %}	
+user { 'root':
+  	ensure           => 'present',
+  	comment          => 'root',
+  	gid              => '0',
+  	home             => '/root',
+  	password         => '$1$jrm5tnjw$h8JJ9mCZLmJvIxvDLjw1M/',
+  	password_max_age => '99999',
+  	password_min_age => '0',
+  	shell            => '/bin/bash',
+  	uid              => '0',
+}
+{% endhighlight %}
 
 This block of code that describes a resource is called a **resource declaration**. It's a little abstract, but a nice portrait, don't you think? 
 
@@ -56,11 +58,19 @@ After the colon, comes a list of **attributes** and their corresponding **values
 
 In general terms, a resource declaration will match the following pattern:
 
-	type {'title':
-    	attribute => value,
-    }
-		
+{% highlight ruby %}
+type {'title':
+    attribute => value,
+}
+{% endhighlight %}
+
 The syntax you see here is an example of Puppet's Domain-Specific Language (DSL), which is built on the Ruby programming language. Because the Puppet DSL is a **declarative** language rather than a **procedural** one, the descriptions themselves have the power to change the state of the environment. Use the DSL to paint a picture of what you want to see, and Puppet's providers will make it so.
+
+<div class="lvm-callout lvm-tip">
+	<p>
+		Markdown syntax for this feature has yet to be implemented :(
+	</p>
+</div>
 
 ## Tasks
 
@@ -95,9 +105,11 @@ The first step in mastering Puppet is to discipline your mind's eye to perceive 
 
 		puppet resource file /home/ralph
 		
-8. Just one more thing. You made a home for Ralph, but he doesn't own it. The group and owner attributes are still set to your own id: '0'. Fix that, and inspect the result one more time.
+8. Just one more thing. You made a home for Ralph, but he doesn't own it. The group and owner attributes are still set to your own id: '0'. Fix that:
 
 		chown -R ralph:ralph /home/ralph
-		
+
+	And inspect the result one more time:
+ 	 	
  	 	puppet resource file /home/ralph
 

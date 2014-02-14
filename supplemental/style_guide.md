@@ -64,6 +64,12 @@ sudo rm -rf /
 
 Check out this cool syntax highlighting feature:
 
+{% tip %}
+
+Fun Puppet tip!
+
+{% endtip %}
+
 {% highlight ruby %}
 class { 'puppetlabs':
     ensure => 'present',
@@ -73,20 +79,13 @@ class { 'puppetlabs':
 
 We also have a special callout element, which can be used to include tips and warnings that will appear alongside the main body of a site.
 
-<div class="callout">
-<h3>
-Puppet Tip:
-</h3>
+<div class="lvm-callout lvm-tip">
 <p>
-
-	Markdown syntax for this feature has yet to be implemented :(
+Markdown syntax for this feature has yet to be implemented :(
 </p>
 </div>
 
-<div class="inline_aside">
-<h3>
-Inline Aside:
-</h3>
+<div class="lvm-inline-aside">
 <p>
 Similarly, we have an inline aside that can be used to include items that are relevant to a topic but tangential to the current quest.
 </p>

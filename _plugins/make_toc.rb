@@ -25,7 +25,7 @@ module Jekyll
 
         end
 
-# This fellow, he indexes your html, inserting anchors into all your h2s
+# Indexes your html, inserting anchors into all your h2s
 # Liquid syntax is {{ html | indexer}}
 
         def indexer(html)
