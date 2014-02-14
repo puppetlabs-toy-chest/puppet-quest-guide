@@ -23,31 +23,29 @@ When the Wizard Judge on Elvium convicts a system componenet that is causing har
 * We also need to add the names of the users who will be members of the group `operational`
 * makerbot's home directory should be `/mnt/home/makerbot`. 
 
-      class ops {
-      
-		user { 'makerbot':
-		  ensure => present,
-		  gid    => 'operations',
-		  home   => '/mnt/home/makerbot',	
-        }
+        class ops {
+		  user { 'makerbot':
+		    ensure => present,
+		    gid    => 'operations',
+		    home   => '/mnt/home/makerbot',	
+          }
     
-        user { 'frion':
-		  ensure => present,
-		  gid    => 'operations',
-		  home   => '/mnt/home/frion',	
-        }
+          user { 'frion':
+		    ensure => present,
+		    gid    => 'operations',
+		    home   => '/mnt/home/frion',	
+          }
         
-        group { 'operations':
-          ensure => present,
-          gid    => '1001',
-        }
+          group { 'operations':
+            ensure => present,
+            gid    => '1001',
+          }
     
-        file { '/mnt/home/':
-          ensure => directory,
-          mode   => '0755',
-        }
-    
-      }  
+          file { '/mnt/home/':
+            ensure => directory,
+            mode   => '0755',
+          }
+        }  
 
 In the above example of classifying broken users on Elvium, we **defined** a class called `ops`, which consists of a collection of three different resources - a `user` resource, a `group` resource, and a `file` resource. The above description is both elegant, and self-documenting and 100% constructed in Puppet's DSL.
 
@@ -65,14 +63,8 @@ A manifest with just the single line above will apply the definition of class us
 
 ## Tasks
 
-ssh or ntp  or apache or ftp
+<!-- ssh or ntp or apache or ftp -->
 
-I'm not sure of specific tasks to create
+<!-- I'm not sure of specific tasks to create -->
 
-
-## Supplemental Information
-
-### Definitions
-- **Class** - is a collection of resources, which, once defined, can be declared as a single unit.
-- **Defining** - Defining a class makes it available by name, but doesn’t automatically evaluate the code inside it.
-- **Declaring** - a class evaluates the code in the class, and applies all of its resources.
+<!-- IDEA: Carthik can you have a partially completed Apache manifest that the user can update? -->
