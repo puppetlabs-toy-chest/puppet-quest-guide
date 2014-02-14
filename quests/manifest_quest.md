@@ -11,15 +11,22 @@ In this quest you will gain a better understanding of resource declarations, the
 
 - Puppet Resource Quest
 
-## Resource Delarations
+## Puppet Manifests
 
-To us, **resource declarations** are the purpose describing what we do here on Elvium. They give us a purpose in this systemic life of processes and functions. Everything in Elvium, to their core, is comprised of a **manifest**. These manfiests contain our personalized puppet code for completing tasks and making sure our world continues to run as an efficient machine. Manifests are files containing code written in Puppet's DSL, with the filename extension ".pp". These describe how you want various resources to be configured for a system.
+As you saw in the Resources quest, **resource declarations** can be used to keep track of just about anything here in Elvium. So far, you have done your deeds by hand and turned to resource declarations to know the effects. Craft your own resource declarations and inscribe them in a **manifest**, and you will taste the true power and ease of Puppet. 
 
-## Abstracting away complexity
+Manifests, like the resource declarations they contain are written in Puppet's Domain Specific Language (DSL). In addition to resource declarations, a manifest will often contain **classes**, which organize resource declarations into functional sets, and some amount of conditional logic to allow you to manage resources differently according to variables in the Elvium environment. We will get to these more complex aspects of manifest creation in a later quest.
 
-As you trek around Elvium you will notice that _attributes_ for the resources will change, along with their values, depending on the [operating system region of Elvium] you are in. It is important for you to focus on the _type_ of resource you encounter.
+## Abstracting Away Implementation
 
-Remember, at the core of everything in [name of fantast world] is a puppet manifest. Puppet code abstracts away the complexity of managing resources of various types by leveraging different __providers__ to realize the resource on the various operating systems. The implementation of how resources are realized on various operating systems might differ, the tools that provide these implementations on various operating systems are the __providers__ for the resource type.
+Our sages have long known that Elvium operates according to the rules of a system. They call this "Operating System" CentOS. However, travelers tell tales of a far away land where the fabric of the world has a different weave; there, the Operating System is called Ubuntu. If you ever find yourself traveling in an exotic land with a different Operating System you might need some time to get your bearing.
+
+For example, if you had tried to create a user with the `useradd` command in a place with an Ubuntu Operating System, you'd be laughed out of town for getting it backwards. Ubuntu users know it should be `adduser` instead.
+
+
+ you will notice that some resources there have different **values** than what you are accustomed to seeing in Elvium. It is important for you to focus on the _type_ of resource you encounter.
+
+Puppet code abstracts away the complexity of manually managing resources of various types by leveraging different __providers__ to realize the resource on the various operating systems. The implementation of how resources are realized on various operating systems might differ, the tools that provide these implementations on various operating systems are the __providers__ for the resource type.
 
 Puppet has a __Resource Abstraction Layer__ (RAL) that consists of resource types and providers, and Puppet automatically translates your description of how you want the various resources you manage to be configured to the appropriate platform-specific commands required to realize your description.
 
@@ -33,6 +40,9 @@ Puppet has a __Resource Abstraction Layer__ (RAL) that consists of resource type
 3. So now we're ready to start writing are first manifest to manage the Earth verison of yourself on Elvium. First we are going to create you in the system. Enter the following command 
 
 		nano user.pp
+		
+	Note the `.pp` extension that marks the file as a manifest.
+
 
 4. Type the follow task into the manifest:
 
