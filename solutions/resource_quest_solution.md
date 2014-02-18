@@ -1,4 +1,4 @@
-# Quest #4: Solutions #
+# Resource Quest Solutions #
 
 ## Tasks
 NOTE: substitute `yourname` with your [name of fantasy world] name
