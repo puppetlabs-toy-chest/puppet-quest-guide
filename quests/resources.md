@@ -37,7 +37,9 @@ user { 'root':
 {% endhighlight %}
 
 This block of code that describes a resource is called a **resource declaration**. It's a little abstract, but a nice portrait, don't you think? 
-
+{% aside Inline Aside %}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ante justo, dictum fringilla neque non, pretium pulvinar justo. Praesent imperdiet mollis mi vel vehicula. Fusce nec neque dignissim, gravida purus pretium, ullamcorper lorem. Ut in varius turpis. Mauris egestas neque eget dolor feugiat, id pulvinar mi molestie. Ut id leo eu diam ultrices vehicula.
+{% endaside %}
 ### Resource Type
 Look at the first line of the resource declaration. The word you see before the curly brace is the **resource type**, in this case, `user`. Just as any individual cat or dog is a member of its species (*Felis catus* and *Canus lupis familiaris* to be precise) any instance of a resource must be a member of a **resource type**. Think of this type as a framework that defines the range of characteristics an individual resource can have.
 
@@ -53,6 +55,9 @@ Though Puppet allows you to describe and manipulate a great variety of resource 
 * `host` A host entry
 
 ### Resource Title
+{% warning %}
+Lorem ipsum dolor sit amet!
+{% endwarning %}
 After the resource type comes a curly brace and a single-quoted `title` of the resource: in your case, 'root'. (Be proud to have such a noble title!) Because the title of a resource is used to identify it, it must be unique. No two resources of the same type can share the same title.
 
 ### Attribute Value Pairs
