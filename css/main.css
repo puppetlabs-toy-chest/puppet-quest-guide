@@ -15,7 +15,6 @@
 #sidebar-first{
     float: left;
     width: 220px;
-    position: fixed;
 }
 
 #sidebar-first, #sidebar-second {
@@ -355,27 +354,43 @@ div.lvm-callout{
     background: #7C6AAB;
     color: #fff;
     float: right;
-    width: 25%;
+    width: 30%;
     border-radius: 4px;
-    padding: 1.5em;
+    padding: 1em;
     margin-right: 1.2em;
     page-break-inside: avoid;
 }
 
-div[class="lvm-callout"] h3{
-    color: #fff;
-    margin-bottom: 7px;
-    text-transform: uppercase;
-}
-div[class="lvm-callout"] p{
-    font-size: 12px;
+div.lvm-callout p{
+    font-size: 11px;
     width: 90%;
-    border-top: 1px solid;
 }
 
 div.lvm-tip p:before{
+    font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     content: "Tip:";
+    font-size: 16px;
     display: block;
+    border-bottom: 1px solid;
+    margin-bottom: 1em;
+}
+
+div.lvm-warning p:before{
+    font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    content: "Warning:";
+    font-size: 16px;
+    display: block;
+    border-bottom: 1px solid;
+    margin-bottom: 1em;
+}
+
+div.lvm-fact p:before{
+    font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    content: "Fact:";
+    font-size: 16px;
+    display: block;
+    border-bottom: 1px solid;
+    margin-bottom: 1em;
 }
 
 div.lvm-inline-aside{

@@ -33,26 +33,30 @@ user { 'root':
   	shell            => '/bin/bash',
   	uid              => '0',
 }
+
 {% endhighlight %}
 
 This block of code that describes a resource is called a **resource declaration**. It's a little abstract, but a nice portrait, don't you think? 
 
 ### Resource Type
-Look at the first line of the resource declaration. The word you see before the curly brace is the **resource type**, in this case, `user`. Just as any individual cat or dog is a member of a species (*Felis catus* and *Canus lupis familiaris* to be precise) any instance of a resource must be a member of a **resource type**.
+Look at the first line of the resource declaration. The word you see before the curly brace is the **resource type**, in this case, `user`. Just as any individual cat or dog is a member of its species (*Felis catus* and *Canus lupis familiaris* to be precise) any instance of a resource must be a member of a **resource type**. Think of this type as a framework that defines the range of characteristics an individual resource can have.
 
-Though Puppet allows you to describe and manipulate a great variety of resource types, the following are some of the most common: 
+Though Puppet allows you to describe and manipulate a great variety of resource types, there are some core resource types you will encounter most often: 
 
 * `user` A user
+* `group` A user group
 * `file` A specific file
 * `package` A software package
 * `service` A running service
 * `cron` A scheduled cron job
+* `exec` An external command
+* `host` A host entry
 
 ### Resource Title
 After the resource type comes a curly brace and a single-quoted `title` of the resource: in your case, 'root'. (Be proud to have such a noble title!) Because the title of a resource is used to identify it, it must be unique. No two resources of the same type can share the same title.
 
 ### Attribute Value Pairs
-After the colon, comes a list of **attributes** and their corresponding **values**. Each line consists of an attribute name, a `=>` (hash rocket), a value, and a final comma. For example, `home => '/root',` means that your home is set to the directory `/root`.
+After the colon, comes a list of **attributes** and their corresponding **values**. Each line consists of an attribute name, a `=>` (hash rocket), a value, and a final comma. For example, the attribute value pair `home => '/root',` indicates that your home is set to the directory `/root`.
 
 ### Puppet DSL
 
@@ -64,18 +68,16 @@ type {'title':
 }
 {% endhighlight %}
 
-The syntax you see here is an example of Puppet's Domain-Specific Language (DSL), which is built on the Ruby programming language. Because the Puppet DSL is a **declarative** language rather than a **procedural** one, the descriptions themselves have the power to change the state of the environment. Use the DSL to paint a picture of what you want to see, and Puppet's providers will make it so.
 
-<div class="lvm-callout lvm-tip">
-	<p>
-		Markdown syntax for this feature has yet to be implemented :(
-	</p>
-</div>
+{% tip %}
+Though a comma isn't strictly necessary at the end of the final attribute value pair, it is best practice to include it for the sake of consistency.
+{% endtip %}
+
+The syntax you see here is an example of Puppet's Domain-Specific Language (DSL), which is built on the Ruby programming language. Because the Puppet DSL is a **declarative** language rather than a **procedural** one, the descriptions themselves have the power to change the state of the environment. Use the DSL to paint a picture of what you want to see, and Puppet's providers will make it so.
 
 ## Tasks
 
 The first step in mastering Puppet is to discipline your mind's eye to perceive the world around you as a collection of **resources**. This means that you will not be using resource declarations to shape your environment just yet. Instead you will exercise your power by hand and use Puppet only to inspect the consequences of your actions.
-
 
 1. The path to greatness is a lonely one. Fortunately, your superuser status gives you the ability to create an assistant for yourself:
 
@@ -106,10 +108,12 @@ The first step in mastering Puppet is to discipline your mind's eye to perceive 
 		puppet resource file /home/ralph
 		
 8. Just one more thing. You made a home for Ralph, but he doesn't own it. The group and owner attributes are still set to your own id: '0'. Fix that:
+{% fact %}
+Though a comma isn't strictly necessary at the end of the final attribute value pair, it is best practice to include it for the sake of consistency.
+{% endfact %}
 
 		chown -R ralph:ralph /home/ralph
 
 	And inspect the result one more time:
- 	 	
- 	 	puppet resource file /home/ralph
 
+ 	 	puppet resource file /home/ralph

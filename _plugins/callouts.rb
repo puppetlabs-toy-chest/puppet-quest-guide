@@ -1,32 +1,20 @@
-require 'nokogiri'
+require 'redcarpet'
 
 class Tip < Liquid::Block
-    def initialize(tag_name, markup, tokens)
-        super
-    end
-
     def render(context)
-        "<div class = \"lvm-callout lvm-tip\">#{super}</div>"
+        "<div class = \"lvm-callout lvm-tip\"><p>#{super}</p></div></div>"
     end
 end
 
 class Warning < Liquid::Block
-    def initialize(tag_name, markup, tokens)
-        super
-    end
-
     def render(context)
-        "<div class = \"lvm-callout lvm-warning\">#{super}</div>"
+        "<div class = \"lvm-callout lvm-warning\"><p>#{super}</p></div></div>"
     end
 end
 
 class Fact < Liquid::Block
-    def initialize(tag_name, markup, tokens)
-        super
-    end
-
     def render(context)
-        "<div class = \"lvm-callout lvm-fact\">#{super}</div>"
+        "<div class = \"lvm-callout lvm-fact\"><p>#{super}</p></div></div>"
     end
 end
 
