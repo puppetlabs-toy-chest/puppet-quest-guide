@@ -57,14 +57,28 @@ In the previous section, we saw an example of a class definition and learned tha
 
 You can direct Puppet to apply a class definition on a system by using the __*include*__ function. We already know that Puppet manifests are files with the extension ".pp" and contain code in Puppet's DSL, but new information on top of that is that it has the __*include*__ directive already built in so we can use the class(es) created in the manifest.
 
-    include users
+		include users
     
 A manifest with just the single line above will apply the definition of class users to the system. But when you say, `include users` how does Puppet know where to find the class defintion? We will answer that question as you journey.
 
 ## Tasks
 
-<!-- ssh or ntp or apache or ftp -->
+1. Run the following command
 
-<!-- I'm not sure of specific tasks to create -->
+		puppet apply /root/examples/modules1-ntp1.pp
 
-<!-- IDEA: Carthik can you have a partially completed Apache manifest that the user can update? -->
+	That's funny. Nothing happened. This is because the class in the `modules1-ntp1.pp` manifest is only being defined and not delcared.
+
+2. We are going to have to modify the `modules1-ntp1.pp` manifest a little to make sure Puppet applies the defined resources. Type the following command:
+
+		nano /root/examples/modules1-ntp1.pp
+
+3. In the `modules1-ntp1.pp` manifest go ahead and add the following command at the very end. This will hopefully tell Puppet to apply the defined resources.
+
+		include ntp
+
+4. Run the following command again
+
+		puppet apply /root/examples/modules1-ntp1.pp
+
+Great! This time Puppet actually applied our defined resources. Always remember to define first, then delcare. However, please do not ever do this above example in real life, since you may want to include classes across nodes. This is just an example to show you the functionality and benefit of classes. In the Modules Quest we will show you the proper way define classes and declare classes separately.

@@ -62,4 +62,4 @@ This lets you safely declare a class in several places. If some class depends on
 
 13. Great! Everything is running how it should be. Now finish this off by enforcing your class on the local system.
 
-You just created your first puppet module!!
+### You just created your first puppet module!! ###
