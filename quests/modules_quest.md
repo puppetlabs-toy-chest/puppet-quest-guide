@@ -58,8 +58,8 @@ This lets you safely declare a class in several places. If some class depends on
 
 11. Sorry about that, check again to make sure the syntax you entered is correct using `puppet parser`.
 
-12. We're not ready to execute this manifest just yet. We want to test run it first. Do you remember in the Manifests Quests when we discussed how to do that? Go ahead and apply the manifest in the test directory in `--noop` mode.
+12. We're not ready to execute this manifest just yet. We want to test run it first. Do you remember in the Manifests Quest when we discussed how to do that? Go ahead and apply the manifest in the test directory in `--noop` mode.
 
 13. Great! Everything is running how it should be. Now finish this off by enforcing your class on the local system.
 
-You just created your first puppet module!!
+### You just created your first puppet module!! ###
