@@ -13,23 +13,9 @@ In this quest you will gain a better understanding of resource declarations, the
 
 ## Puppet Manifests
 
-As you saw in the Resources quest, **resource declarations** can be used to keep track of just about anything here in Elvium. So far, you have done your deeds by hand and turned to resource declarations to know the effects. Craft your own resource declarations and inscribe them in a **manifest**, and you will taste the true power and ease of Puppet. 
+As you saw in the Resources quest, Puppet's **resource declarations** can be used to keep track of just about anything here in Elvium. So far, you have made changes without using Puppet and looked at resource declarations only in order to keep track of the effects of those changes. In this quest, you will learn to craft your own resource declarations and inscribe them in a **manifest**. Use `puppet apply` to activate your manifest, and you will taste the true power Puppet. 
 
-Manifests, like the resource declarations they contain are written in Puppet's Domain Specific Language (DSL). In addition to resource declarations, a manifest will often contain **classes**, which organize resource declarations into functional sets, and some amount of conditional logic to allow you to manage resources differently according to variables in the Elvium environment. We will get to these more complex aspects of manifest creation in a later quest.
-
-## Abstracting Away Implementation
-
-Our sages have long known that Elvium operates according to the rules of a system. They call this "Operating System" CentOS. However, travelers tell tales of a far away land where the fabric of the world has a different weave; there, the Operating System is called Ubuntu. If you ever find yourself traveling in an exotic land with a different Operating System you might need some time to get your bearing.
-
-For example, if you had tried to create a user with the `useradd` command in a place with an Ubuntu Operating System, you'd be laughed out of town for getting it backwards. Ubuntu users know it should be `adduser` instead.
-
-
- you will notice that some resources there have different **values** than what you are accustomed to seeing in Elvium. It is important for you to focus on the _type_ of resource you encounter.
-
-Puppet code abstracts away the complexity of manually managing resources of various types by leveraging different __providers__ to realize the resource on the various operating systems. The implementation of how resources are realized on various operating systems might differ, the tools that provide these implementations on various operating systems are the __providers__ for the resource type.
-
-Puppet has a __Resource Abstraction Layer__ (RAL) that consists of resource types and providers, and Puppet automatically translates your description of how you want the various resources you manage to be configured to the appropriate platform-specific commands required to realize your description.
-
+Manifests, like the resource declarations they contain are written in Puppet's Domain Specific Language (DSL). In addition to resource declarations, a manifest will often contain **classes**, which organize resource declarations into functional sets, and **logic** to allow you to manage resources according to variables in the Elvium environment. You will learn more about these aspects of manifest creation in a later quest.
 ### Tasks
 
 1. Remember, you can use `puppet describe user` and `puppet resource user` for help using and understanding the user resource.
@@ -46,9 +32,11 @@ Puppet has a __Resource Abstraction Layer__ (RAL) that consists of resource type
 
 4. Type the follow task into the manifest:
 
-		user { 'earthname':
-		  ensure => 'present',
-		}
+{% highlight ruby %}
+user { 'earthname':
+	ensure => 'present',
+}
+{% endhighlight %}
 
 5. Save the file as `user.pp`
 
@@ -86,35 +74,20 @@ This is a very handy tool for learning to write code in Puppet's DSL and is a st
 
 You will see that puppet does, indeed create a user called `earthname`!
 
-## Supplemental Information 
+## The Resource Abstraction Layer
 
-### Definitions
+Our sages have long known that Elvium operates according to the rules of **CentOS**, which they call its **Operating System**. We know of distant continents, however, where the fabric of the world has a different weave; that is, there is a different Operating System. Considering your grand destiny, it is likely that at some point your journey will carry you to such an exotic location. If you arrive in such a strange place unprepared, you will at a considerable disadvantage.
 
-* **Resource declaration** - A fragment of Puppet code that details the desired state of a resource and instructs Puppet to manage it. This term helps to differentiate between the literal resource on disk and the specification for how to manage that resource. However, most often, these are just referred to as “resources.”
-* **Manifest** - A file containing code written in the Puppet language, and named with the `.pp` file extension. Most manifests are contained in modules. Every manifest in a module should define a single class or defined type. The Puppet code in a manifest can be any of the following:
-	*  Declare resources and classes
-	*  Set variables
-	*  Evaluate functions
-	*  Define classes, defined types, and nodes
-* **Providers** - platform-specific implementations for the different types
-* **Attributes** - Attributes are used to specify the state desired for a given configuration resource. Each resource type has a slightly different set of possible attributes, and each attribute has its own set of possible values. For example, a package resource would have an `ensure` attribute, whose value could be `present`, `latest`, `absent`, or a version number.
-* **Resource type** -   High-level models of differnt kinds of resources
+If you wake up **ssh**ipwrecked and sandy on the shores of Ubuntu and croak out a `useradd`, you will be laughed right off the beach for getting it backwards; as any Ubuntu native could tell you, `adduser` is the right way to say it there. And attempting to install a package with `yum` on a system where `apt-get` is appropriate is a *faux pas* indeed. (Not only will your command fail, but Ubuntu users may whisper about your poor manners.)
 
-### Puppet Apply Usage
+These mistakes could be embarrassing, but they only scratch the surface of the profound differences of systems you may encounter. (Indeed, travelers speak of a strange region known as Windows, though their tales of this place are perhaps too fantastical to be given much credence!)
 
-- `-d` or `--debug`: Enable full debugging.
-- `--detailed-exitcodes`: Provide transaction information via exit codes.
-- `-h` or `--help`: Print this help message
-- `--loadclasses`: Load any stored classes.
-- `-l` or `--logdest`: Where to send messages.
-- `--noop`: Viewing changes before executing them.
-- `-e` or `--execute`: Execute a specific piece of Puppet code
-- `-v` or `--verbose`: Print extra information.
-- `--catalog`: Apply a JSON catalog.
-- `--write-catalog-summary`: After compiling the catalog saves the resource list and classes list to the node in the state directory named classes.txt and resources.txt
+If you aspire to extending your influence across these distant shores, it will be wise to learn a method of applying your power consistently, no matter the local operating system.
 
-### Cheat Sheet
+Puppet uses **providers** to abstract away the complexity of managing diverse implementations of the same basic objects expressed by resource types. These providers take the descriptions expressed by resource declarations and use system-specific implementations to realize them. As a whole, this system of types and providers is called the **Resource Abstraction Layer**. By harnessing the power of the RAL, you can write manifests that work wherever you take them.
 
-Not all resource types are equally common or useful, so weʼve made a printable cheat sheet that explains the eight most useful types. [Download the core types cheat sheet here](http://docs.puppetlabs.com/puppet_core_types_cheatsheet.pdf)
 
-The [type reference page ](http://docs.puppetlabs.com/references/latest/type.html)lists all of Puppetʼs built-in resource types, 	in 	extreme detail. It can be a bit overwhelming for a new user, but 	it 	has most of the info youʼll need in a normal day of writing Puppet code.
+
+
+
+

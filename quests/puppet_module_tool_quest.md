@@ -2,6 +2,9 @@
 # Puppet Module Tool Quest
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 535578c632cbde9487c0493a182c065ceccac31e
 Create, install and search for modules on the Puppet Forge. The `puppet module` tool is a command that can do all that and more from the command line. The Puppet Forge is a repository of user-contributed Puppet code and can also generate empty modules and prepare locally developed modules for release on the Forge.
 
 ## Actions
@@ -39,6 +42,7 @@ Using the `puppet module` tool
 
 5. You don't have to, but if you would like you can uninstall module you just installed by running the below command. If you do choose to uninstall the module, you can always reinstall it later.
 
+<<<<<<< HEAD
 		puppet module uninstall [something]
 =======
 The `puppet module` tool is the most important tool in expanding Puppet. The `puppet module` tool allows you to create, install and searches for modules on the Puppet Forge. We'll discuss the Puppet Forge later, but the Puppet Forge is a repository of user-contributed Puppet code of expandable components to using Puppet. The `puppet module` tool also has subcommands that make finding, installing, and managing modules from the Puppet Forge much easier from the command line. It can also generate empty modules, and prepare locally developed modules for release on the Forge.
@@ -66,3 +70,6 @@ The `puppet module` tool is the most important tool in expanding Puppet. The `pu
 - changes = 
 - generate = 
 >>>>>>> upstream/master
+=======
+		puppet module uninstall [something]
+>>>>>>> 535578c632cbde9487c0493a182c065ceccac31e
