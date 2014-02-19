@@ -65,4 +65,8 @@ This lets you safely declare a class in several places. If some class depends on
 
 13. Great! Everything is running how it should be. Now finish this off by enforcing your class on the local system.
 
-### You just created your first puppet module!! ###
+### You just created your first puppet module!! 
+
+The two important things to note here are:
+1.  Puppet's DSL, by virtue of its __declarative__ nature, makes it possible for us to define the attributes of the resouces, without the need to concern ourselves with _how_ the definition is enforced. Puppet uses the Resource Abstraction Layer to abstract away the complexity surrounding the specific commands to be executed, and the operating system-specific tools used to realize our definition! You did not need to know or specify the command to create a new unix user group to create the group `staff`, for example.
+2. By creating a class called users, it is now possible for us to automate the process of creating the users we need on any system with Puppet installed on it, by simply including that class on that system. Class definitions are reusable!
