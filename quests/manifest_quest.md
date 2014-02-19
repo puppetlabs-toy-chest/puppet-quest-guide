@@ -114,15 +114,3 @@ user { 'ralph':
 9. Now check in on Ralph again. Hopefully he has recovered fully from his bout of non-existence.
 
 		puppet resource user ralph	
-
-## The Resource Abstraction Layer
-
-Our sages have long known that Elvium operates according to the rules of **CentOS**, which they call its **Operating System**. We know of distant continents, however, where the fabric of the world has a different weave; that is, there is a different Operating System. Considering your grand destiny, it is likely that at some point your journey will carry you to such an exotic location. If you arrive in such a strange place unprepared, you will at a considerable disadvantage.
-
-If you wake up **ssh**ipwrecked and sandy on the shores of Ubuntu and croak out a `useradd`, you will be laughed right off the beach for getting it backwards; as any Ubuntu native could tell you, `adduser` is the right way to say it there. And attempting to install a package with `yum` on a system where `apt-get` is appropriate is a *faux pas* indeed. (Not only will your command fail, but Ubuntu users may whisper about your poor manners.)
-
-These mistakes could be embarrassing, but they only scratch the surface of the profound differences of systems you may encounter. (Indeed, travelers speak of a strange region known as Windows, though their tales of this place are perhaps too fantastical to be given much credence!)
-
-If you aspire to extending your influence across these distant shores, it will be wise to learn a method of applying your power consistently, no matter the local operating system.
-
-Puppet uses **providers** to abstract away the complexity of managing diverse implementations of the same basic objects expressed by resource types. These providers take the descriptions expressed by resource declarations and use system-specific implementations to realize them. As a whole, this system of types and providers is called the **Resource Abstraction Layer**. By harnessing the power of the RAL, you can write manifests that work wherever you take them.
