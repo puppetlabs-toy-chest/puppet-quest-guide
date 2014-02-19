@@ -6,9 +6,12 @@ A Puppet **module** is a collection of resources, definitions, files, templates,
 ## Module Path
 
 All the modules are placed in a special directory specified by the **modulepath**. The modulepath is setting that can be defined in Puppet configuration file. Puppet's configuration file exists in the directory `/etc/puppetlabs/puppet/puppet.conf` in Elvium.
-You can also find the modulepath with the following command:
-    puppet agent --configprint modulepath
-What the returned value tells us is that Puppet will look in the directories `/etc/puppetlabs/puppet/modules` and then in `/opt/puppet/share/puppet/modules` to find the modules in use on the system.
+
+You can also find the modulepath with the following command:
+
+    puppet agent --configprint modulepath
+
+What the returned value tells us is that Puppet will look in the directories `/etc/puppetlabs/puppet/modules` and then in `/opt/puppet/share/puppet/modules` to find the modules in use on the system.
 
 ## Module Structure
 
@@ -58,10 +61,8 @@ This lets you safely declare a class in several places. If some class depends on
 
 11. Sorry about that, check again to make sure the syntax you entered is correct using `puppet parser`.
 
-12. We're not ready to execute this manifest just yet. We want to test run it first. Do you remember in the Manifests Quests when we discussed how to do that? Go ahead and apply the manifest in the test directory in `--noop` mode.
+12. We're not ready to execute this manifest just yet. We want to test run it first. Do you remember in the Manifests Quest when we discussed how to do that? Go ahead and apply the manifest in the test directory in `--noop` mode.
 
 13. Great! Everything is running how it should be. Now finish this off by enforcing your class on the local system.
 
-You just created your first puppet module!! The two important things to note here are:
-1.  Puppet's DSL, by virtue of its __declarative__ nature, makes it possible for us to define the attributes of the resouces, without the need to concern ourselves with _how_ the definition is enforced. Puppet uses the Resource Abstraction Layer to abstract away the complexity surrounding the specific commands to be executed, and the operating system-specific tools used to realize our definition! You did not need to know or specify the command to create a new unix user group to create the group `staff`, for example.
-2. By creating a class called users, it is now possible for us to automate the process of creating the users we need on any system with Puppet installed on it, by simply including that class on that system. Class definitions are reusable!
+### You just created your first puppet module!! ###

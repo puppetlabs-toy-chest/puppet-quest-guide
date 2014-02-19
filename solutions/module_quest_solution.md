@@ -26,11 +26,11 @@
 
 5. In the shell script, type the following task in Puppet's DSL:
 
-        class users {
-          user {'como':
-        	  ensure => 'present',
-          }
-        }
+		class users {
+		  user {'como':
+		    ensure => 'present',
+		  }
+		}
 
 6. To exit the shell script, do a 'Control X' on the keyboard
 
