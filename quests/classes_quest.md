@@ -23,31 +23,29 @@ When the Wizard Judge on Elvium convicts a system componenet that is causing har
 * We also need to add the names of the users who will be members of the group `operational`
 * makerbot's home directory should be `/mnt/home/makerbot`. 
 
-      class ops {
-      
-		user { 'makerbot':
-		  ensure => present,
-		  gid    => 'operations',
-		  home   => '/mnt/home/makerbot',	
-        }
+        class ops {
+		  user { 'makerbot':
+		    ensure => present,
+		    gid    => 'operations',
+		    home   => '/mnt/home/makerbot',	
+          }
     
-        user { 'frion':
-		  ensure => present,
-		  gid    => 'operations',
-		  home   => '/mnt/home/frion',	
-        }
+          user { 'frion':
+		    ensure => present,
+		    gid    => 'operations',
+		    home   => '/mnt/home/frion',	
+          }
         
-        group { 'operations':
-          ensure => present,
-          gid    => '1001',
-        }
+          group { 'operations':
+            ensure => present,
+            gid    => '1001',
+          }
     
-        file { '/mnt/home/':
-          ensure => directory,
-          mode   => '0755',
-        }
-    
-      }  
+          file { '/mnt/home/':
+            ensure => directory,
+            mode   => '0755',
+          }
+        }  
 
 In the above example of classifying broken users on Elvium, we **defined** a class called `ops`, which consists of a collection of three different resources - a `user` resource, a `group` resource, and a `file` resource. The above description is both elegant, and self-documenting and 100% constructed in Puppet's DSL.
 
@@ -59,20 +57,28 @@ In the previous section, we saw an example of a class definition and learned tha
 
 You can direct Puppet to apply a class definition on a system by using the __*include*__ function. We already know that Puppet manifests are files with the extension ".pp" and contain code in Puppet's DSL, but new information on top of that is that it has the __*include*__ directive already built in so we can use the class(es) created in the manifest.
 
-    include users
+		include users
     
 A manifest with just the single line above will apply the definition of class users to the system. But when you say, `include users` how does Puppet know where to find the class defintion? We will answer that question as you journey.
 
 ## Tasks
 
-ssh or ntp  or apache or ftp
+1. Run the following command
 
-I'm not sure of specific tasks to create
+		puppet apply /root/examples/modules1-ntp1.pp
 
+	That's funny. Nothing happened. This is because the class in the `modules1-ntp1.pp` manifest is only being defined and not delcared.
 
-## Supplemental Information
+2. We are going to have to modify the `modules1-ntp1.pp` manifest a little to make sure Puppet applies the defined resources. Type the following command:
 
-### Definitions
-- **Class** - is a collection of resources, which, once defined, can be declared as a single unit.
-- **Defining** - Defining a class makes it available by name, but doesn’t automatically evaluate the code inside it.
-- **Declaring** - a class evaluates the code in the class, and applies all of its resources.
+		nano /root/examples/modules1-ntp1.pp
+
+3. In the `modules1-ntp1.pp` manifest go ahead and add the following command at the very end. This will hopefully tell Puppet to apply the defined resources.
+
+		include ntp
+
+4. Run the following command again
+
+		puppet apply /root/examples/modules1-ntp1.pp
+
+Great! This time Puppet actually applied our defined resources. Always remember to define first, then delcare. However, please do not ever do this above example in real life, since you may want to include classes across nodes. This is just an example to show you the functionality and benefit of classes. In the Modules Quest we will show you the proper way define classes and declare classes separately.
