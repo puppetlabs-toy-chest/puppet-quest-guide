@@ -65,4 +65,4 @@ The [Puppet Forge](http://forge.puppetlabs.com) is a public repository of module
 
 	NOTE: This leverage a **Defined Resource Type** called `apache::vhost` that helps us create virtual hosts in Apache. You can specify the port Apache listens to by changing the value for the parameter `port`.
 
-
+<!-- How can 9 and 10 be converted into tasks -->
