@@ -29,8 +29,26 @@ If you choose to follow the path set forth herein, you will learn to channel you
 
 Your arrival has been foretold, user, and we have made the necessary preparations. You need not worry now about the details; you will learn soon enough. You need only speak a few words of power to set the prophesy in motion.
 
-1. Type the following command:
+1. Type the following command and be FTP'd to Elvium:
 
 		puppet apply -e bootstrap
 
-	CALL OUT: The power of Puppet is immense. With one command you will set up your entire quests enviornment locally
+	CALL OUT: The power of Puppet is immense. With one command you will set up your entire enviornment created locally
+
+
+2. Just in case you ever get stuck, we on Elvium have provided you an unlimited supply of help. To learn more about the help we provide, type the following command:
+
+		puppet help
+		
+3. You are a curious being. Would you like to further investigate Elvium? To do this on Elvium we use the tool `facter` to excute investigatory commands. Here are a few for you to try out
+
+		facter ipaddress
+		facter facterversion
+		facter memorysize
+		facter operatingsystem
+		facter osfamily
+		facter puppetversion
+
+	CALL OUT: You can see all `facter` commands [here](http://docs.puppetlabs.com/facter/latest/core_facts.html)
+
+4. Carthik - at this point I would go over key commands for navigating the LVM such as `progress`, `completedtasks`, `questtasks`, etc. (those are not literal examples). Don't worry about the intro.md file. It will be going away. I will be updating the Quest Map to relect this
