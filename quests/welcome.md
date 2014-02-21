@@ -29,9 +29,8 @@ If you choose to follow the path set forth herein, you will learn to channel you
 
 Your arrival has been foretold, user, and we have made the necessary preparations. You need not worry now about the details; you will learn soon enough. You need only speak a few words of power to set the prophesy in motion.
 
-1.
+1. Type the following command:
 
-<!--
-- Wow example?
-- Quest based commands such as `progress`. Carthik will know more.
--->
+		puppet apply -e bootstrap
+
+	CALL OUT: The power of Puppet is immense. With one command you will set up your entire quests enviornment locally
