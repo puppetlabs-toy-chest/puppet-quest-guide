@@ -1,8 +1,3 @@
----
-title: Getting Started
-layout: default
----
-
 # Quest #1: Getting Started
 
 We're glad to see you're joining us on this exciting journey! First, and most important, it is important to download the latest version of the Learning VM. We will use the VM as a platform to write code in Puppet's Domain Specific Language (DSL) to configure certain aspects of the VM, as a means of learning about Puppet. You're going to be a fish out of water if you don't have it.

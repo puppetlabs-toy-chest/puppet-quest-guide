@@ -1,3 +1,7 @@
+---
+title: Puppet Module Tool
+layout: default
+---
 
 # Puppet Module Tool Quest
 

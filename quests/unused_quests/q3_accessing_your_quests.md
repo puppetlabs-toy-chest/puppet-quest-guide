@@ -1,8 +1,3 @@
----
-title: Accessing your Quests
-layout: default
----
-
 # Quest #3: Accessing your quests
 
 So Quest #3 is a short one, but very important. You're going to set up a site on your local machine that will access a directory of quests. From here on out, there will be no more PDF documents and you'll access all quests from this local site. We'll walk you through some steps to help you out
