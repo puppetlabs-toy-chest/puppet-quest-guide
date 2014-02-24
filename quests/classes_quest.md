@@ -1,18 +1,7 @@
 
 # Classes Quest
 
-In this quest we examine previously discussed resources and how to group them together in a **class** that can then be applied across your machines. We have seen how _resources_ are used to configure systems by a means of specifying values for corresponding attributes of the resources we want to manage. The task of configuring a machine will involve defining the attributes of several different resources, possibly of different types. Classes provide for a layer of abstraction, wherein you can group together resources.
-
-## Resources Review
-
-Remember when we talked about resources? Here's a refresher: Just as any individual cat or dog is a member of a species (*Felis catus* and *Canus lupis familiaris* to be precise) any instance of a resource is a member of a **resource type**. Though Puppet allows you to describe and manipulate many different resource types, the following are some of the most common: 
-
-* `user` - A user account
-* `file` - A specific file
-* `directory` - A directory of files
-* `package` - A software package
-* `service` - A running service
-* `cron` - A scheduled cron job
+In this quest we cover the use **classes** to group resource declarations into reusable blocks of Puppet code.
 
 ## Defining Classes
 
