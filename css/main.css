@@ -18,7 +18,7 @@
 }
 
 #sidebar-first, #sidebar-second {
-    background: #f7f7f7;
+    background: #333333;
     padding: 20px;
 }
 
@@ -31,6 +31,7 @@
 body, #page {
     height: 100%;
     min-width: 320px;
+    background: #333333;
 }
 
 #sidebar-first h2, #sidebar-second h2 {
@@ -45,11 +46,11 @@ text-shadow: none;
 }
 
 #sidebar-first ul li a, #sidebar-second ul li a {
-    color: #999;
+    color: #ffffff;
 }
 
 #sidebar-first ul ul li a, #sidebar-second ul li a {
-    color: #7DB6D3;
+    color: #ffffff;
     font-size: 14px;
 }
 
@@ -79,17 +80,16 @@ img {
 
 #site-header {
     width: 100%;
-    background: #F7F6F4;
+    background: #635F5E;
     height: 134px;
-    border-top: 39px solid #302C6D;
-    border-bottom: 2px solid #c4c4c5;
+    border-top: 0px solid #302C6D;
     -webkit-box-shadow: rgba(0,0,0,0.15) 0 0 20px;
     -moz-box-shadow: rgba(0,0,0,0.15) 0 0 20px;
     box-shadow: rgba(0,0,0,0.15) 0 0 20px;
 }
 
 #site-header .header-primary-menu a {
-    color: #302C6D;
+    color: white;
 }
 
 li {
@@ -142,7 +142,6 @@ ul, menu, dir {
     margin-left: 240px;
     line-height: 100px;
     font-size: 18px;
-    font-weight: bold;
 }
 
 .boxes-box {
@@ -229,7 +228,7 @@ blockquote {
 
 body {
     font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-    color: #5d5e59;
+    color: #fff;
 }
 table {
 	margin: 10px 0 15px 0;
@@ -257,7 +256,7 @@ h4,
 h5, 
 h6 {
     font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    color: #6c6d6d;
+    color: #7FBA2D;
     font-weight: normal;
     line-height: 1.15em;
     margin: 1em 0 .25em;
@@ -279,11 +278,11 @@ font-size: 1.5em;
 -webkit-margin-end: 0px;
 }
 h3 {
-    color: #7C6AAB;    
+    color: #7FBA2D;    
     font-size: 18px;
 }
 h4 {
-    color: #2a2a2a;
+    color: #7FBA2D;
     font-size: 16px;
 }
 h5 {
