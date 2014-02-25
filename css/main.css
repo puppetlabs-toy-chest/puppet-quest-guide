@@ -19,19 +19,22 @@
 
 #sidebar-first, #sidebar-second {
     background: #333333;
-    padding: 20px;
+    padding: 130px 20px;
 }
 
 #content {
     float: right;
     width: 700px;
     margin: 20px 0;
+    padding-top: 130px; 
+    padding-bottom: 220px;
 }
 
 body, #page {
     height: 100%;
     min-width: 320px;
     background: #333333;
+    margin: 0px;
 }
 
 #sidebar-first h2, #sidebar-second h2 {
@@ -81,8 +84,8 @@ img {
 #site-header {
     width: 100%;
     background: #635F5E;
-    height: 134px;
-    border-top: 0px solid #302C6D;
+    height: 105px;
+    border-top: 8px solid #fff;
     -webkit-box-shadow: rgba(0,0,0,0.15) 0 0 20px;
     -moz-box-shadow: rgba(0,0,0,0.15) 0 0 20px;
     box-shadow: rgba(0,0,0,0.15) 0 0 20px;
@@ -133,8 +136,6 @@ ul, menu, dir {
 
 #site-header .logo img {
     display: block;
-    width: 215px;
-    height: 62px;
     margin: 0;
 }
 
@@ -227,8 +228,9 @@ blockquote {
 }
 
 body {
-    font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+    font-family: 'PT Sans Light', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
     color: #fff;
+    font-size: 16px;
 }
 table {
 	margin: 10px 0 15px 0;
@@ -265,13 +267,12 @@ h6 {
 
 h1 {
     margin-top: 0;
-    font-size: 36px;
-    font-size: 2.25rem;
+    font-size: 28px;
 }
 
 h2 {
 display: block;
-font-size: 1.5em;
+font-size: 20px;
 -webkit-margin-before: 0.83em;
 -webkit-margin-after: 0.83em;
 -webkit-margin-start: 0px;
@@ -283,13 +284,13 @@ h3 {
 }
 h4 {
     color: #7FBA2D;
-    font-size: 16px;
-}
-h5 {
     font-size: 14px;
 }
-h6 {
+h5 {
     font-size: 13px;
+}
+h6 {
+    font-size: 12px;
 }
 hr {
     margin: 0 0 19px;
@@ -320,7 +321,7 @@ code, pre {
     font-family: Monaco, Andale Mono, Courier New, monospace;
 }
 code {
-    background-color: #eee;
+    background-color: #7FBA2D;
     color: rgba(0, 0, 0, 0.75);
     padding: 1px 3px;
     font-size: 12px;
@@ -330,17 +331,17 @@ code {
 }
 pre {
     display: block;
-    padding: 14px;
+    padding: 4px;
     margin: 0 0 18px;
     line-height: 16px;
     font-size: 11px;
-    border: 1px solid #d9d9d9;
+    border: 1px solid #7FBA2D;
     white-space: pre-wrap;
     word-wrap: break-word;
 }
 pre code {
-    background-color: #fff;
-    color:#737373;
+    background-color: #333333;
+    color:#fff;
     font-size: 11px;
     padding: 0;
 }
@@ -350,11 +351,10 @@ sup {
     line-height: 0;
 }
 div.lvm-callout{
-    background: #7C6AAB;
+    background: #4D4D4D;
     color: #fff;
     float: right;
-    width: 30%;
-    border-radius: 4px;
+    width: 160px%;
     padding: 1em;
     margin-right: 1.2em;
     page-break-inside: avoid;
@@ -393,11 +393,11 @@ div.lvm-fact p:before{
 }
 
 div.lvm-inline-aside{
-    background: #eee;
+    font-size: 12px;
+    background: #4D4D4D;
     padding: 1em;
-    border-radius: 4px;
-    font-weight: bold;
     margin: 2em;
+    border-bottom: 5px solid #808080;
 }
 
 code.language-text:before{
