@@ -29,11 +29,24 @@ If you choose to follow the path set forth herein, you will learn to channel you
 
 Your arrival has been foretold, user, and we have made the necessary preparations. You need not worry now about the details; you will learn soon enough. You need only speak a few words of power to set the prophesy in motion.
 
-1. Type the following command and be FTP'd to Elvium:
+1. SSH to the VM with your IP address
+
+		ssh root@<ipaddress>
+
+	Use the following to login  
+	**username:** root  
+	**password:** puppet
+
+
+
+
+2. Type the following command and be ssh'd to Elvium:
 
 		puppet apply -e bootstrap
 
-	CALL OUT: The power of Puppet is immense. With one command you will set up your entire enviornment created locally
+{% tip %}
+The power of Puppet is immense. With one command you will set up your entire enviornment created locally
+{% endtip %}
 
 
 2. Just in case you ever get stuck, we on Elvium have provided you an unlimited supply of help. To learn more about the help we provide, type the following command:
@@ -49,6 +62,14 @@ Your arrival has been foretold, user, and we have made the necessary preparation
 		facter osfamily
 		facter puppetversion
 
-	CALL OUT: You can see all `facter` commands [here](http://docs.puppetlabs.com/facter/latest/core_facts.html)
+{% tip %}
+You can see all `facter` commands [here](http://docs.puppetlabs.com/facter/latest/core_facts.html)
+{% endtip %}
 
-4. Carthik - at this point I would go over key commands for navigating the LVM such as `progress`, `completedtasks`, `questtasks`, etc. (those are not literal examples). Don't worry about the intro.md file. It will be going away. I will be updating the Quest Map to relect this
+4. Transparent information is essential on Elvium. To monitor your status on Elvium we've created custom commands for you.
+
+		quest --progress
+
+5. Transparent information is essential on Elvium. To monitor your status on Elvium we've created custom commands for you.
+
+		quest --progress
