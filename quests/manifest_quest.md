@@ -21,19 +21,23 @@ Manifests, like the resource declarations they contain, are written in Puppet's 
 
 ### Tasks
 
+Let's start on a new quest for learning about manifests. Type the following command to get started:
+
+    quest --start manifest
+
 {% tip %}
 You can use `puppet describe user` and `puppet resource user` for help using and understanding the user resource.
 {% endtip %}
 
-2. To establish the manifest you want to place it in your home directory (`/root`). Make sure you're in this directory before creating your manifest.
+To establish the manifest you want to place it in your home directory (`/root`). Make sure you're in this directory before creating your manifest.
 
 		cd /root
 
-3. Now we are ready to create a manifest to manage the user Ralph. The `.pp` extension identifies a file as a manifest.
+1. Now we are ready to create a manifest to manage the user Ralph. The `.pp` extension identifies a file as a manifest.
 
 		nano ralph.pp
 
-4. Type the following deadly incantation into your manifest:
+2. Type the following deadly incantation into your manifest:
 
 {% highlight ruby %}
 user { 'ralph':
@@ -41,7 +45,7 @@ user { 'ralph':
 }
 {% endhighlight %}
 
-5. Save the file and exit nano.
+3. Save the file and exit nano.
 
 ## Puppet Parser
 
