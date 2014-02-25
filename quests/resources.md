@@ -9,9 +9,9 @@ In this quest you will be introduced to the fundamental applications of Puppet r
 
 ## Resources
 
-The power of a magic word is never as simple as it seems. Any wizard worth his beard has a at least a few arcane tomes lying around the tower. The pages of these books (if you can decode the cryptic runes) tell of the bonds between the syllables of a spell and the elements under its influence. As an aspirant in the mystical arts of Puppet, you must learn of these things in order to type the words of power with confidence and wisdom.
+The power of a magic word is never as simple as it seems. Any wizard worth his beard has at least a few arcane tomes lying around the tower. The pages of these books (if you can decode the cryptic runes) tell of the bonds between the syllables of a spell and the elements under its influence. As an aspirant in the mystical arts of Puppet, you must learn of these things in order to type the words of power with confidence and wisdom.
 
-We'll begin with **resources**, the basic units that Puppet uses to describe an environment.
+We'll begin with **Resources**, the basic units that Puppet uses to describe an environment.
 
 ## Anatomy of a Resource
 
@@ -55,9 +55,6 @@ Though Puppet allows you to describe and manipulate a great variety of resource 
 * `host` A host entry
 
 ### Resource Title
-{% warning %}
-Lorem ipsum dolor sit amet!
-{% endwarning %}
 After the resource type comes a curly brace and a single-quoted `title` of the resource: in your case, 'root'. (Be proud to have such a noble title!) Because the title of a resource is used to identify it, it must be unique. No two resources of the same type can share the same title.
 
 ### Attribute Value Pairs
@@ -69,7 +66,7 @@ In general terms, a resource declaration will match the following pattern:
 
 {% highlight ruby %}
 type {'title':
-    attribute => value,
+    attribute => 'value',
 }
 {% endhighlight %}
 
@@ -84,9 +81,14 @@ The syntax you see here is an example of Puppet's Domain-Specific Language (DSL)
 
 The first step in mastering Puppet is to discipline your mind's eye to perceive the world around you as a collection of **resources**. This means that you will not be using resource declarations to shape your environment just yet. Instead you will exercise your power by hand and use Puppet only to inspect the consequences of your actions.
 
+The tasks we are about to accomplish in the _resources_ quest will help you learn more about Puppet resources. Let's get started on the quest by running the following command:
+
+    quest --start resources
+
+
 1. The path to greatness is a lonely one. Fortunately, your superuser status gives you the ability to create an assistant for yourself:
 
-        useradd -r ralph
+        useradd ralph
 
 2. Potent stuff. Now take a look at your creation:
 
@@ -100,28 +102,29 @@ The first step in mastering Puppet is to discipline your mind's eye to perceive 
 		
 	If you take another look at `resource user ralph`, the value for his password attribute should now be set to a SHA1 hash of his password: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
 
-5. Now have a look at Ralph's `home` attribute. When you created him, it was set to `'/home/ralph'` by default. His home is a `directory`, which is a special kind of the resource type `file`. The `title` of any file is the same as the path to that file. To see Ralph's home directory, enter the command:
+5. Now have a look at Ralph's home directory. When you created him, it was set to `'/home/ralph'` by default. His home is a `directory`, which is a special kind of the resource type `file`. The `title` of any file is the same as the path to that file. Let's see if Ralph has a directory for this spells in his home! To see Ralph's spells directory, enter the command:
 
-		puppet resource file /home/ralph
+		puppet resource file /home/ralph/spells
 		
 6. What? `ensure => 'absent',`? Values of the `ensure` attribute indicate the basic state of a resource. A value of absent means it doesn't exist at all. When you created Ralph, you automatically assigned him an address, but neglected to put anything there. Do this now:
 
-		mkdir /home/ralph
+		mkdir /home/ralph/spells
 		
 7. Now have another look:
 
-		puppet resource file /home/ralph
+		puppet resource file /home/ralph/spells
 		
-8. Just one more thing. You made a home for Ralph, but he doesn't own it. The group and owner attributes are still set to your own id: '0'. Fix that:
+8. Just one more thing. Ralph does not want his spells to be seen by anyone else! Let's make it so:
+ 
 {% fact %}
 Though a comma isn't strictly necessary at the end of the final attribute value pair, it is best practice to include it for the sake of consistency.
 {% endfact %}
 
-		chown -R ralph:ralph /home/ralph
+		chmod 700 /home/ralph/spells
 
 	And inspect the result one more time:
 
- 	 	puppet resource file /home/ralph
+ 	 	puppet resource file /home/ralph/spells
  	 	
 ## The Resource Abstraction Layer
 
