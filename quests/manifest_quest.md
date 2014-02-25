@@ -65,15 +65,15 @@ This is a very handy tool for learning to write code in Puppet's DSL and is a st
 
 ### Tasks
 
-1. Simulate the change in the system without actually enforcing the `user.pp` manifest
+1. Simulate the change in the system without actually enforcing the `ralph.pp` manifest
 
 		puppet apply --noop ralph.pp
 
-2. Using `puppet apply` apply the simulate manifest `user.pp`
+2. Using `puppet apply` apply the simulated manifest `ralph.pp`
 
 		puppet apply ralph.pp
 
-3. Check in on Ralph. How is his health?:
+3. Check in on Ralph. How is his health?
 
 		puppet resource user ralph
 		
@@ -83,17 +83,17 @@ This is a very handy tool for learning to write code in Puppet's DSL and is a st
 		
 	He is not too well, it appears! Clearly Ralph was no match for your skills in magic.
 
-4. Luckily for Ralph, manifests can create as well as destroy. Open your manifest again:
+4. With manifests you can create as well as destroy. Lets create a new manifest:
 
-	nano ralph.pp
+		nano jack.pp
 
 5. Write the following code to your manifest:
 
 {% highlight ruby %}
-user { 'ralph':
+user { 'jack':
 	ensure => 'present',
 	gid => '501',
-	home => '/home/ralph',
+	home => '/home/jack',
 	password => '!!',
 	uid => '501',
 }
@@ -101,16 +101,16 @@ user { 'ralph':
 
 6. Check your syntax:
 
-	puppet parser validate ralph.pp
+		puppet parser validate jack.pp
 	
 7. Simulate your changes:
 
-	puppet apply --noop ralph.pp
+		puppet apply --noop jack.pp
 	
 8. And apply:
 
-	puppet apply ralph.pp
+		puppet apply jack.pp
 	
-9. Now check in on Ralph again. Hopefully he has recovered fully from his bout of non-existence.
+9. Now check in on Jack. You have an extordinary power to add and removed whomever and whatever you may like. Use your powers wisely.
 
-		puppet resource user ralph	
+		puppet resource user jack	
