@@ -3,11 +3,11 @@ title: Welcome
 layout: default
 ---
 
-# Welcome to Elvium
+# Welcome 
 
 In this quest you will be introduced to Elvium, the Learning Virtual Machine environment.
 
-## Welcome to Elvium
+## Elvium
 
 > Any sufficiently advanced technology is indistinguishable from magic.
 
@@ -27,7 +27,7 @@ If you choose to follow the path set forth herein, you will learn to channel you
 
 ## Tasks
 
-Your arrival has been foretold, user, and we have made the necessary preparations. You need not worry now about the details; you will learn soon enough. You need only speak a few words of power to set the prophesy in motion.
+Your arrival has been foretold, user, and we have made the necessary preparations. You need not worry now about the details; you will learn soon enough. You need only speak a few words of power to set the prophecy in motion.
 
 1. SSH to the VM with your IP address
 
@@ -38,11 +38,11 @@ Your arrival has been foretold, user, and we have made the necessary preparation
 	**password:** puppet
 
 
+2. Now that you are connected to Elvium, we need to set up a method for you to find your way! Run the following command: 
 
+		puppet apply setup/guide.pp
 
-2. Type the following command and be ssh'd to Elvium:
-
-		puppet apply -e bootstrap
+   What we just did is set up a website to be served from your VM. You can access the website in your browser by visiting: _http://<ipaddress>_ (replace the <ipaddress> with the ipaddress of your VM)
 
 {% tip %}
 The power of Puppet is immense. With one command you will set up your entire enviornment created locally
@@ -53,7 +53,7 @@ The power of Puppet is immense. With one command you will set up your entire env
 
 		puppet help
 		
-3. You are a curious being. Would you like to further investigate Elvium? To do this on Elvium we use the tool `facter` to excute investigatory commands. Here are a few for you to try out
+3. You are a curious being. Would you like to further investigate Elvium? To do this on Elvium we use the tool `facter` to obtains `facts` about the system. Here are a few for you to try out:
 
 		facter ipaddress
 		facter facterversion
@@ -66,10 +66,36 @@ The power of Puppet is immense. With one command you will set up your entire env
 You can see all `facter` commands [here](http://docs.puppetlabs.com/facter/latest/core_facts.html)
 {% endtip %}
 
-4. Transparent information is essential on Elvium. To monitor your status on Elvium we've created custom commands for you.
+4. In order to learn more about Puppet, and to work your way through Elvium, you will have to complete a series of Quests. Each Quest has Tasks that need to be completed. Transparent information is essential on Elvium. To monitor your status with the quests on Elvium we've created custom commands for you.
 
-		quest --progress
+The following command will help you with using the quest tool:
 
-5. Transparent information is essential on Elvium. To monitor your status on Elvium we've created custom commands for you.
+		quest --help
 
-		quest --progress
+The quest command provides several tools such as the following:
+
+    quest --start
+    quest --progress
+    quest --completed
+    quest --showall
+    quest --brief
+    quest --name
+
+
+If you wanted to list all the available quests, you can run the following command:
+    
+    quest --showall
+
+To being a quest called _resources_, you can type:
+    
+    quest --start resources
+
+To see your progress on the current quest you are pursuing, you can type:
+
+    quest --progress
+
+We'll explain the commands needed as we go.
+
+Now that you have a quest guide, let's get started with the Quests!
+
+
