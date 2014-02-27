@@ -63,7 +63,7 @@ The power of Puppet is immense. With one command you will set up your entire env
 		facter puppetversion
 
 {% tip %}
-You can see all `facter` commands [here](http://docs.puppetlabs.com/facter/latest/core_facts.html)
+You can see all the facts by running facter -p
 {% endtip %}
 
 4. In order to learn more about Puppet, and to work your way through Elvium, you will have to complete a series of Quests. Each Quest has Tasks that need to be completed. Transparent information is essential on Elvium. To monitor your status with the quests on Elvium we've created custom commands for you.

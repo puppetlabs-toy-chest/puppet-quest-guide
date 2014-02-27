@@ -122,7 +122,7 @@ Though a comma isn't strictly necessary at the end of the final attribute value 
 
 		chmod 700 /home/ralph/spells
 
-	And inspect the result one more time:
+..and inspect the result one more time:
 
  	 	puppet resource file /home/ralph/spells
  	 	
