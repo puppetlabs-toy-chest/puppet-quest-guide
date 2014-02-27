@@ -9,14 +9,14 @@ In this quest we cover the use **classes** to group resource declarations into r
 
 ## Defining Classes
 
-When the Wizard Judge on Elvium convicts a system componenet that is causing harm or useless to the system, he categorizes them from the rest of the population. To do this in Elvium additional requirements are required for classifying. We can create a definition for a class of misfits called `broken ops`. This class will store two broken components in Elvium. To do this:
+When the Wizard Judge on Elvium convicts a system componenet that is causing harm or useless to the system, he categorizes them from the rest of the population. To do this in Elvium additional requirements are required for classifying. We can create a definition for a class of misfits called `broken_ops`. This class will store two broken components in Elvium. To do this:
 
 * Users in Elvium should have their home directories in the directory `/mnt/home`
 * We need to ensure that a group with the name of `operational` is present
 * We also need to add the names of the users who will be members of the group `operational`
 * makerbot's home directory should be `/mnt/home/makerbot`. 
 
-        class broken ops {
+        class broken_ops {
 		  user { 'makerbot':
 		    ensure => present,
 		    gid    => 'operations',
@@ -40,9 +40,9 @@ When the Wizard Judge on Elvium convicts a system componenet that is causing har
           }
         }  
 
-In the above example of classifying broken users on Elvium, we **defined** a class called `broken ops`, which consists of a collection of three different resources - a `user` resource, a `group` resource, and a `file` resource. The above description is both elegant, and self-documenting and 100% constructed in Puppet's DSL.
+In the above example of classifying broken users on Elvium, we **defined** a class called `broken_ops`, which consists of a collection of three different resources - a `user` resource, a `group` resource, and a `file` resource. The above description is both elegant, and self-documenting and 100% constructed in Puppet's DSL.
 
-Now that we have a class called `broken users`, we can include the above class in the configuration of a machine to manage broken users in Elvium.
+Now that we have a class called `broken_ops`, we can include the above class in the configuration of a machine to manage broken users in Elvium.
 
 ### Tasks
 
