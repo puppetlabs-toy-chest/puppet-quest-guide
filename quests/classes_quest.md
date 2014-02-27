@@ -9,14 +9,14 @@ In this quest we cover the use **classes** to group resource declarations into r
 
 ## Defining Classes
 
-When the Wizard Judge on Elvium convicts a system componenet that is causing harm or useless to the system, he categorizes them from the rest of the population. To do this in Elvium additional requirements are required for classifying. We can create a definition for a class of misfits called `ops`. This class will store two broken components in Elvium. To do this:
+When the Wizard Judge on Elvium convicts a system componenet that is causing harm or useless to the system, he categorizes them from the rest of the population. To do this in Elvium additional requirements are required for classifying. We can create a definition for a class of misfits called `broken_ops`. This class will store two broken components in Elvium. To do this:
 
 * Users in Elvium should have their home directories in the directory `/mnt/home`
 * We need to ensure that a group with the name of `operational` is present
 * We also need to add the names of the users who will be members of the group `operational`
 * makerbot's home directory should be `/mnt/home/makerbot`. 
 
-        class ops {
+        class broken_ops {
 		  user { 'makerbot':
 		    ensure => present,
 		    gid    => 'operations',
@@ -40,21 +40,11 @@ When the Wizard Judge on Elvium convicts a system componenet that is causing har
           }
         }  
 
-In the above example of classifying broken users on Elvium, we **defined** a class called `ops`, which consists of a collection of three different resources - a `user` resource, a `group` resource, and a `file` resource. The above description is both elegant, and self-documenting and 100% constructed in Puppet's DSL.
+In the above example of classifying broken users on Elvium, we **defined** a class called `broken_ops`, which consists of a collection of three different resources - a `user` resource, a `group` resource, and a `file` resource. The above description is both elegant, and self-documenting and 100% constructed in Puppet's DSL.
 
-Now that we have a class called `broken users`, we can include the above class in the configuration of a machine to manage broken users in Elvium.
+Now that we have a class called `broken_ops`, we can include the above class in the configuration of a machine to manage broken users in Elvium.
 
-## Declaring Classes
-
-In the previous section, we saw an example of a class definition and learned that a class is a collection of resoure. The question that still needs answering is, how can we use the class definition? How can we tell Puppet to _use_ the defintion as part of configuring a system?
-
-You can direct Puppet to apply a class definition on a system by using the __*include*__ function. We already know that Puppet manifests are files with the extension ".pp" and contain code in Puppet's DSL, but new information on top of that is that it has the __*include*__ directive already built in so we can use the class(es) created in the manifest.
-
-		include users
-    
-A manifest with just the single line above will apply the definition of class users to the system. But when you say, `include users` how does Puppet know where to find the class defintion? We will answer that question as you journey.
-
-## Tasks
+### Tasks
 
 1. Run the following command
 
@@ -66,11 +56,22 @@ A manifest with just the single line above will apply the definition of class us
 
 		nano /root/examples/modules1-ntp1.pp
 
-3. In the `modules1-ntp1.pp` manifest go ahead and add the following command at the very end. This will hopefully tell Puppet to apply the defined resources.
 
-		include ntp
+## Declaring Classes
 
-4. Run the following command again
+In the previous section, we saw an example of a class definition and learned that a class is a collection of resoure. The question that still needs answering is, how can we use the class definition? How can we tell Puppet to _use_ the defintion as part of configuring a system?
+
+You can direct Puppet to apply a class definition on a system by using the __*include*__ function. We already know that Puppet manifests are files with the extension ".pp" and contain code in Puppet's DSL, but new information on top of that is that it has the __*include*__ directive already built in so we can use the class(es) created in the manifest.
+
+		include users
+    
+A manifest with just the single line above will apply the definition of class users to the system. But when you say, `include users` how does Puppet know where to find the class defintion? We will answer that question as you journey.
+
+### Tasks
+
+3. In the `modules1-ntp1.pp` manifest go ahead and add the `include` command at the very end. This will hopefully tell Puppet to apply the defined `ntp` resource.
+
+4. Go ahead and now apply the manifest
 
 		puppet apply /root/examples/modules1-ntp1.pp
 
