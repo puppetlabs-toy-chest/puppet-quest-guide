@@ -74,28 +74,28 @@ The following command will help you with using the quest tool:
 
 The quest command provides several tools such as the following:
 
-    quest --start
-    quest --progress
-    quest --completed
-    quest --showall
-    quest --brief
-    quest --name
+    	quest --start		# To start a quest
+    	quest --progress	# To check your task on your current quest
+    	quest --completed	# To show you all your completed quests
+    	quest --showall		# To show you available quests you are able to complete
+    	quest --brief		# 
+    	quest --name		# 
 
 
 If you wanted to list all the available quests, you can run the following command:
     
-    quest --showall
+		quest --showall
 
 To being a quest called _resources_, you can type:
     
-    quest --start resources
+		quest --start resources
 
 To see your progress on the current quest you are pursuing, you can type:
 
-    quest --progress
+		quest --progress
 
 We'll explain the commands needed as we go.
 
-Now that you have a quest guide, let's get started with the Quests!
+### Now that you have set up your quest guide, let's get started with the [Resources Quest](http://somthing)!
 
 
