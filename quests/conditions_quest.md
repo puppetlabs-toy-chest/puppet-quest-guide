@@ -13,14 +13,20 @@ Conditional statements let your Puppet code behave differently in certain situat
 
 Puppet’s `if` statements behave much like those in any other language. The `if` condition is evaluated first and, if it is true, only the `if` code block is executed. If it is false, then the `elsif` condition kicks in (if present). Should the `if` condition and `elseif` condition fail, then the `else` condition picks up the slack and is executed (if present). If all the conditions fail and there is no `else` block, Puppet will do nothing and move on.
 
-		if $is_virtual == 'true' {
-		  warning('Tried to include class ntp on virtual machine; this node may be misclassified.')
-		}
-		elsif $operatingsystem == 'Darwin' {
-		  warning('This NTP module does not yet work on our Mac laptops.')
+		if str2bool("$is_virtual") {
+		  service {'ntpd':
+			ensure => stopped,
+			enable => false,
+		  }
 		}
 		else {
-		  include ntp
+		  service { 'ntpd':
+			name       => 'ntpd',
+			ensure     => running,
+			enable     => true,
+			hasrestart => true,
+			require    => Package['ntp'],
+		  }
 		}
 
 {% tip %}
@@ -29,7 +35,25 @@ The `elsif` and `else` clauses are optional.
 
 ### Tasks
 
-1.
+1. Lets take a look at an existing manifest and update it with `if` conditions and a variable
+
+		nano somthing/something.pp
+
+2. Lets write the `if` condition in Puppet's DSL with the following criteria:
+
+	- 
+
+3. Now lets write the `elseif` considition in Puppet's DSL with the following criteria:
+
+	- 
+
+4. Now lets write the `else` considition in Puppet's DSL with the following criteria:
+
+	- 
+
+5. Save the manifest
+
+6. Apply the manifest
 
 
 ## `unless` Statements
