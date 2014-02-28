@@ -25,7 +25,7 @@ Puppet’s `if` statements behave much like those in any other language. The `if
 
 {% tip %}
 The `elsif` and `else` clauses are optional.
-{% endtop %}
+{% endtip %}
 
 ### Tasks
 

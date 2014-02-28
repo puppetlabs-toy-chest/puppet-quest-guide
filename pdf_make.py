@@ -1,6 +1,6 @@
 import json
 from subprocess import *
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 
 quest_path = "./_site/quests/"
 
@@ -27,6 +27,9 @@ quest_list.reverse()
 
 for quest in quest_list:
     body.insert(0, pull_content(quest))
+    pagebreak = Tag(name='div')
+    pagebreak['class'] = 'page-break'
+    body.insert(1, pagebreak)
 
 p = Popen(["prince", "-", "--style=./css/print.css", "Quest_Guide.pdf"], stdin=PIPE)
 
