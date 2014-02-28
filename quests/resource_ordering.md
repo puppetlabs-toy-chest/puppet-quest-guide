@@ -9,7 +9,7 @@ In this quest you will learn how to specify the order in which Puppet should man
 
 ## Explicit Ordering
 
-You are likely used to reading instructions from top to bottom. To accomidate this habit, this Quest Guide itself follows that format. If you wish to master the creation of Puppet manifests, however, you must learn to see past this habit. Puppet has no regard for the order of resources in a manifest; it will manage resources in whatever order is most effecient.
+You are likely used to reading instructions from top to bottom. If you wish to master the creation of Puppet manifests, however, you must learn think of ordering in a different way. Rather than processessing instructions from top to bottom, Puppet interprets the resource declarations in a manifest in whatever order is most effecient.
 
 Often, however, you will need to ensure that once resource declaration is applied before another. For instance, if you wish to declare in a manifest that a service should be running, you need to ensure that the package for that service is already installed and configured.
 
