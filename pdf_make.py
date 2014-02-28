@@ -1,2 +1,34 @@
 import json
-import subprocess
+from subprocess import *
+from bs4 import BeautifulSoup
+
+quest_path = "./_site/quests/"
+
+quests =["welcome.html",
+         "resources.html",
+         "manifest_quest.html",
+         "variables.html",
+         "resource_ordering.html",]
+
+quest_list = [quest_path + quest for quest in quests]
+
+def pull_content(filename):
+    with open(filename, 'r') as f:
+        html = f.read()
+    soup = BeautifulSoup(html, "html5lib")
+    return soup.select("div[role=main]")[0]
+
+html_doc = ''
+
+shell = BeautifulSoup("<html><body></body></html>", "html5lib")
+body = shell.body
+
+quest_list.reverse()
+
+for quest in quest_list:
+    body.insert(0, pull_content(quest))
+
+p = Popen(["prince", "-", "--style=./css/print.css", "Quest_Guide.pdf"], stdin=PIPE)
+
+p.stdin.write(str(shell))
+p.stdin.close()
