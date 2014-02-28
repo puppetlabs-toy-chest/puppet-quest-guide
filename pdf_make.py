@@ -2,7 +2,9 @@ import json
 from subprocess import *
 from bs4 import BeautifulSoup, Tag
 
-quest_path = "./_site/quests/"
+# You must run Jekyll first to generate the html content
+
+quest_path = "./Quest_Guide/_site/quests/"
 
 quests =["welcome.html",
          "resources.html",
