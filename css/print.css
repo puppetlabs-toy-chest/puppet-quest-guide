@@ -124,13 +124,16 @@ sup {
     line-height: 0;
 }
 div.lvm-callout{
-    background: #4D4D4D;
-    color: #fff;
+    background: #fff;
     float: right;
     width: 160px;
     padding: 1em;
     margin: 1em;
     page-break-inside: avoid;
+    position: relative;
+    border: 1px solid #808080;
+    border-top: 5px solid #808080;
+    border-bottom: 5px solid #808080;    
 }
 
 div.lvm-callout p{
@@ -170,13 +173,14 @@ div.lvm-inline-aside{
     border-top: 5px solid #808080;
 }
 
+/*
 code.language-text:before{
     content: url('../assets/console.png');
     vertical-align: middle;
     position: relative;
     left: -20px;
-    top: 7px;
 }
+*/
 
 .highlight  { background: #fff; }
 .highlight .c { color: #999988; font-style: italic } /* Comment */

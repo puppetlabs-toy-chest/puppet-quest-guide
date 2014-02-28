@@ -30,10 +30,6 @@ There are four metaparameter attributes that you can include in your resource de
 * `require`
 
 	Causes a resource to be applied **after** a target resouroce.
-	
-{% tip %}
-The before/require and notify/subscribe pairs are completely symmetrical. For example, using before in resource A and targeting resource B is exactly the same as using after in resource B and targeting resource A.
-{% endtip %}
 
 * `notify`
 
