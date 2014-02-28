@@ -14,7 +14,7 @@ The Quest Guide is a static website generated from source markdown and served by
 	
 When Jekyll is successfully installed, you can serve the website navigating to the top directory:
 
-	cd /path/to/courseware-lvm
+	cd /path/to/courseware-lvm/Quest_Guide
 	
 and entering the command:
 
