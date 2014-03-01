@@ -10,11 +10,11 @@
 
 4. Select __Autodetect__ under the __Bridged Networking__ heading as shown in the example.
 
-	![image](../assets/vmware_network_bridged.png)
+	![image](./assets/vmware_network_bridged.png)
 
 5. Next, we'll want to allocate some extra memory to the Virtual Machine to ensure that it has the resources neccessary for everything to run smoothly. Go back to __Settings__ panel and click the __Processors & Memory__ icon. We suggest allocating at least two gigabytes of memory. Use the slider to set your memory allocation. Note that the Learning VM will likely still function with less memory allocated, but you may encounter performance issues.
 
-	![image](../assets/vmware_memory.png)
+	![image](./assets/vmware_memory.png)
 
 6. Now that your settings are configured, click the __Power On__ button to boot up the VM.
 
@@ -24,7 +24,6 @@
 
 		ifconfig
 
-### Let's now get started with the [Weclome Guide](http://something)
 
 <!-- Not needed
 
