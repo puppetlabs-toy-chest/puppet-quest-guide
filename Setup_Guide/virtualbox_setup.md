@@ -10,10 +10,10 @@ NOTE: __Do not__ use the “New Virtual Machine Wizard” and select the include
 
 Don't launch the VM just yet; we'll want to adjust a couple of settings first. In the VirtualBox Manager panel, select __Network__ to access networking options. Choose __Bridged Adapter__ from the drop-down menu.
 
-![image](../assets/vbox_network_bridged.png)
+![image](./assets/vbox_network_bridged.png)
 
 1. For everything to work smoothly, we suggest allocating at least two gigabytes of memory to the VM. In the VirtualBox Manager panel, click __System__ to access system options and use the slider to set your memory allocation. Note that the Learning VM will likely still function with less memory allocated, but you may encounter performance issues.
-![image](../assets/vbox_memory.png)
+![image](./assets/vbox_memory.png)
 
 2. Now that everything is configured, click the __Start__ button in the upper left to boot up the VM.
 
@@ -22,8 +22,6 @@ Don't launch the VM just yet; we'll want to adjust a couple of settings first. I
 3. Once the VM is booted up, make a note of the IP address. You'll need this to access your Quest Guide and the Puppet Enterprise Console. If you forget the IP or if it changes, you can access it again by entering the following command in the VM commandline. 
 
 		ifconfig
-
-### Let's now get started with the [Weclome Guide](http://something)
 
 <!-- Not needed
 
