@@ -24,3 +24,23 @@ Now open your web browser and point it to:
 	
 	localhost:4000
 
+## PDF Generation
+
+The pdf_make.py script will automatically generate the PDF files that are bundled with the Learning VM download.
+
+The script uses PrinceXML to generate PDFs, so you must have Prince installed (http://www.princexml.com/download/) for it to function. Note that you must register your copy of Prince in order to generate PDFs without a watermark.
+
+The script also has three library dependencies outside of the Python standard libraries:
+
+* html5lib
+* BeautifulSoup
+* Markdown
+
+These can be installed using either pip or easy_install, e.g.
+
+	easy_install BeautifulSoup
+
+Once the dependencies are installed, navigate to the top directory of the repository, and use the arguments `--setup` or `-s` and/or `--quest` or `-q` to specify which PDFs you would like to generate, e.g.:
+	
+	python pdf_maker.py -s -q
+	 
