@@ -4,14 +4,21 @@ layout: default
 ---
 
 # Variables and Variability
+In this quest you will gain a better understanding of using variable and facts in your manifest to make operating more scalable. 
 
 >The green reed which bends in the wind is stronger than the mighty oak which breaks in a storm.
 
 > --Confuscius
 
-To start this quest enter the following command:
+The tasks we will accompish in this quest will help you learn more about manipulating your Puppet manifests to accomplish specific tasks. If you're ready to get started, type the following command:
 
-		quest --start variables
+	quest --start variables
+
+## What you should already know
+
+- Resources Quest
+- Mainfest Quest
+- Classes Quest
 
 ## Variables
 
@@ -40,7 +47,8 @@ Lets make our manifests more adaptable by using variables.
 {% highlight ruby %}
 $variable_name = "variable value!\n"
 {% endhighlight %}
-	Note the `$` symbol at the beginning of the var
+
+3. Now lets have that variable do something productive for us. Can you...
 
 ## Facts
 
@@ -54,32 +62,32 @@ Remember running `facter ipaddress`? Puppet told you your IP address without you
 
 How does this make our manifests more flexible? If I entered the following variables in a manifest:
 
-		file {'motd':
-		  ensure  => file,
-		  path    => '/etc/motd',
-		  mode    => 0644,
-		  content => "This Learning Puppet VM's IP address is ${ipaddress}. It is running ${operatingsystem} ${operatingsystemrelease} and Puppet ${puppetversion}.
+	file {'motd':
+	  ensure  => file,
+	  path    => '/etc/motd',
+	  mode    => 0644,
+	  content => "This Learning Puppet VM's IP address is ${ipaddress}. It is running ${operatingsystem} ${operatingsystemrelease} and Puppet ${puppetversion}.
 
-		Web console login:
-		  URL: https://${ipaddress_eth0}
-		  User: puppet@example.com
-		  Password: learningpuppet
-		",
-		}
+	Web console login:
+	  URL: https://${ipaddress_eth0}
+	  User: puppet@example.com
+	  Password: learningpuppet
+	  ",
+	  }
 
 and then applied the manifest, this is what would be returned: 
 
-		file {'motd':
-		  ensure  => file,
-		  path    => '/etc/motd',
-		  mode    => 0644,
-		  content => This Learning Puppet VM's IP address is 172.16.52.135. It is running CentOS 5.7 and Puppet 3.0.1.
+	file {'motd':
+	  ensure  => file,
+	  path    => '/etc/motd',
+	  mode    => 0644,
+	  content => This Learning Puppet VM's IP address is 172.16.52.135. It is running CentOS 5.7 and Puppet 3.0.1.
 
-		Web console login:
-		  URL: https://172.16.52.135
-		  User: puppet@example.com
-		  Password: learningpuppet
-		}
+	Web console login:
+	  URL: https://172.16.52.135
+	  User: puppet@example.com
+	  Password: learningpuppet
+	  }
 
 It's as simple as that without hardly doing anything on your end. Feeling confident? Lets combine our knowledge of variables and facts in our manifest
 
@@ -88,3 +96,7 @@ It's as simple as that without hardly doing anything on your end. Feeling confid
 1. 
 
 Our manifests are becoming more flexible, with pretty much no real work on our part.
+
+## 
+
+### Variables and fact are here to make using Puppet easier. Think of this as the second layer under classes in further manipulating our manifests. Again, lets journey deeper into the forest and learn more about conditional statments in the [Conditions Quest](http://somthing)!

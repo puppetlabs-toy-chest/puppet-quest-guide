@@ -7,6 +7,20 @@ layout: default
 
 A Puppet **module** is a collection of resources, definitions, files, templates, etc, organized around a particular purpose. In order to enable Puppet to find these class definitions, manifests allow one to test the class defintions that it may need to configure a machine for a particular purpose. We adhere to a consistent directory structure in which we place class definitions and any other files that are needed etc.
 
+
+The tasks we will accompish in this quest will help you learn more about specifying the order in which Puppet should manage the resources in a manifest. If you're ready to get started, type the following command:
+
+	quest --start modules
+
+## What you should already know
+
+- Resources Quest
+- Mainfest Quest
+- Classes Quest
+- Varibales Quest
+- Conditions Quest
+- Ordering Quest
+
 ## Module Path
 
 All the modules are placed in a special directory specified by the **modulepath**. The modulepath is setting that can be defined in Puppet configuration file. Puppet's configuration file exists in the directory `/etc/puppetlabs/puppet/puppet.conf` in Elvium.
@@ -74,3 +88,6 @@ This lets you safely declare a class in several places. If some class depends on
 The two important things to note here are:
 1.  Puppet's DSL, by virtue of its __declarative__ nature, makes it possible for us to define the attributes of the resouces, without the need to concern ourselves with _how_ the definition is enforced. Puppet uses the Resource Abstraction Layer to abstract away the complexity surrounding the specific commands to be executed, and the operating system-specific tools used to realize our definition! You did not need to know or specify the command to create a new unix user group to create the group `staff`, for example.
 2. By creating a class called users, it is now possible for us to automate the process of creating the users we need on any system with Puppet installed on it, by simply including that class on that system. Class definitions are reusable!
+## 
+
+### You're powers are immense and you're quickly learning how to control them. You are about to embark on a very important journey through the [Modules Quest](http://somthing)!
