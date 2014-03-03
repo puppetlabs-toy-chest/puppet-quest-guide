@@ -5,7 +5,14 @@ layout: default
 
 # Classes Quest
 
-In this quest we cover the use **classes** to group resource declarations into reusable blocks of Puppet code.
+In this quest we cover the use **classes** to group resource declarations into reusable blocks of Puppet code. If you're ready to get started, type the following command:
+
+    quest --start classes
+
+## What you should already know
+
+- Resources Quest
+- Mainfest Quest
 
 ## Defining Classes
 
@@ -14,13 +21,13 @@ When the Wizard Judge on Elvium convicts a system componenet that is causing har
 * Users in Elvium should have their home directories in the directory `/mnt/home`
 * We need to ensure that a group with the name of `operational` is present
 * We also need to add the names of the users who will be members of the group `operational`
-* makerbot's home directory should be `/mnt/home/makerbot`. 
+* makerbot's home directory should be `/mnt/home/maker`. 
 
-        class broken_ops {
-		  user { 'makerbot':
+		class broken_ops {
+		  user { 'maker':
 		    ensure => present,
 		    gid    => 'operations',
-		    home   => '/mnt/home/makerbot',	
+		    home   => '/mnt/home/maker',	
           }
     
           user { 'frion':
@@ -63,7 +70,7 @@ In the previous section, we saw an example of a class definition and learned tha
 
 You can direct Puppet to apply a class definition on a system by using the __*include*__ function. We already know that Puppet manifests are files with the extension ".pp" and contain code in Puppet's DSL, but new information on top of that is that it has the __*include*__ directive already built in so we can use the class(es) created in the manifest.
 
-		include users
+	include users
     
 A manifest with just the single line above will apply the definition of class users to the system. But when you say, `include users` how does Puppet know where to find the class defintion? We will answer that question as you journey.
 
@@ -76,3 +83,7 @@ A manifest with just the single line above will apply the definition of class us
 		puppet apply /root/examples/modules1-ntp1.pp
 
 Great! This time Puppet actually applied our defined resources. Always remember to define first, then delcare. However, please do not ever do this above example in real life, since you may want to include classes across nodes. This is just an example to show you the functionality and benefit of classes. In the Modules Quest we will show you the proper way define classes and declare classes separately.
+
+## 
+
+### Classes are a wonderful addition to manifests for applying operations across multiple nodes. However, think of it as the top layer. Lets journey deeper into the forest and manipulate our manifests with varibable and facts in the [Variables Quest](http://somthing)!
