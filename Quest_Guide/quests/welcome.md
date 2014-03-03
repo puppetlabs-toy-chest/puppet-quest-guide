@@ -49,11 +49,11 @@ The power of Puppet is immense. With one command you will set up your entire env
 {% endtip %}
 
 
-2. Just in case you ever get stuck, we on Elvium have provided you an unlimited supply of help. To learn more about the help we provide, type the following command:
+3. Just in case you ever get stuck, we on Elvium have provided you an unlimited supply of help. To learn more about the help we provide, type the following command:
 
 		puppet help
 		
-3. You are a curious being. Would you like to further investigate Elvium? To do this on Elvium we use the tool `facter` to obtains `facts` about the system. Here are a few for you to try out:
+4. You are a curious being. Would you like to further investigate Elvium? To do this on Elvium we use the tool `facter` to obtains `facts` about the system. Here are a few for you to try out:
 
 		facter ipaddress
 		facter facterversion
@@ -66,36 +66,21 @@ The power of Puppet is immense. With one command you will set up your entire env
 You can see all the facts by running facter -p
 {% endtip %}
 
-4. In order to learn more about Puppet, and to work your way through Elvium, you will have to complete a series of Quests. Each Quest has Tasks that need to be completed. Transparent information is essential on Elvium. To monitor your status with the quests on Elvium we've created custom commands for you.
+5. In order to learn more about Puppet, and to work your way through Elvium, you will have to complete a series of Quests. Each Quest has Tasks that need to be completed. Transparent information is essential on Elvium. To monitor your status with the quests on Elvium we've created custom commands for you.
 
-The following command will help you with using the quest tool:
+	The following command will help you with using the quest tool:
 
 		quest --help
 
-The quest command provides several tools such as the following:
+	The quest command provides several tools such as the following:
 
-    	quest --start		# To start a quest
-    	quest --progress	# To check your task on your current quest
-    	quest --completed	# To show you all your completed quests
-    	quest --showall		# To show you available quests you are able to complete
-    	quest --brief		# 
-    	quest --name		# 
+    	quest --start
+    	quest --progress
+    	quest --completed
+    	quest --showall
+    	quest --brief
+    	quest --name
 
-
-If you wanted to list all the available quests, you can run the following command:
-    
-		quest --showall
-
-To being a quest called _resources_, you can type:
-    
-		quest --start resources
-
-To see your progress on the current quest you are pursuing, you can type:
-
-		quest --progress
-
-We'll explain the commands needed as we go.
+	We'll explain the commands needed as we go.
 
 ### Now that you have set up your quest guide, let's get started with the [Resources Quest](http://somthing)!
-
-

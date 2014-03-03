@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Style Reference</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="page" class="page">
+        <div id="site-header" role="banner">
+    <div class="header-wrapper">
+        <div class"region region-header">
+            <div id="block-boxes-test" class="block block-boxes block-boxes simple logo block-odd">
+                <div class="content">
+                    <a href="/">
+                        <img src="/assets/Puppet-Labs-Logo.png">
+                    </a>
+                </div>
+            </div>
+            <div id="block-menu_block-2" class="block block-menu-block header-primary-menu block-even">
+                <div class="content">
+                    <div class="menu-block-wrapper menu-block-2 menu-name-main-menu parent-mlid-0 menu-level-1">
+                        <ul class="menu">
+                            <li>
+                                <a href="/">
+                                    Quests
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/">
+                                    Progress
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/">
+                                    Cheat-Sheet
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/">
+                                    About
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/">
+                                    Resources
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div id="main" clas="clearfix" role-"main">
+        <aside id="sidebar-first" class="column sidebar first" role="complementary">
+    <div id="sidebar-first-inner" class="inner">
+        <div class="content">
+            <div class="menu-block-wrapper menu-block-7 menu-name-main-menu parent-mlid-0 meni-level-2">
+                <ul class="menu">
+                    <li>
+                        <a href="/quests/welcome.html">Welcome</a>
+                    </li>
+                    <li>
+                        <a href="/quests/resources.html">Resources</a>
+                    </li>
+                    <li>
+                        <a href="/quests/manifest_quest.html">Manifests</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</aside>
+
+
+            <div id="content" class="clearfix" role="main">
+
+                <h1>Style Reference</h1>
+
+<p>There are some basic elements of markdown syntax for styling text. When exported to html, this formatting syntax is transformed into tags, which you can then select and style with a .css file.</p>
+
+<a id="text_styling:"><h2>Text Styling:</h2></a>
+
+<p>For <strong>strong</strong> text use double underscores like this:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">__I'm so strong!__
+</code></pre></div>
+<p>For <em>em</em>, as in "emphasis," do this:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">*em*
+</code></pre></div>
+<p>Someone told me that if you want a block quote, </p>
+
+<blockquote>
+<p>you should put a &gt; character at the beginning of your text.</p>
+</blockquote>
+
+<p>Like this:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&gt;block quote 
+</code></pre></div>
+<p>There are lots of reasons why you might want to make a list of things. Here are some examples:</p>
+
+<ul>
+<li>It's good for the liver.</li>
+<li>Live a little.</li>
+<li>Going shopping.</li>
+<li>etc.</li>
+</ul>
+
+<p>It almost rhymes:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">* To make a list.
+* Use asterisk.
+</code></pre></div>
+<a id="images_and_links:"><h2>Images and Links:</h2></a>
+
+<p><img src="../assets/console.png" alt="text"></p>
+
+<p>It's useful to include diagrams or images to give learners a concrete visualization of a concept. To do this, use the following syntax:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">![text](../assets/console.png)
+</code></pre></div>
+<p>You may also want to include a link to another part of the document, or to an external site. Use the following syntax to include a link: </p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">[link](http://www.puppetlabs.com/education)
+</code></pre></div>
+<a id="custom_elements"><h2>Custom Elements</h2></a>
+
+<p>In addition to the normal markdown flavors, we've added a few custom tags through the Liquid templating system. Jekyll interprets these and converts them to html tags for us.</p>
+
+<p>For example, we have a style to indicate imperative console commands, as distinct from example code blocks:</p>
+
+<div class="console">
+<p>
+sudo rm -rf /
+</p>
+</div>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">Markdown syntax for this feature has yet to be implemented :(
+</code></pre></div>
+<p>Check out this cool syntax highlighting feature:</p>
+
+<div class="lvm-callout lvm-tip"><p>
+
+Fun Puppet tip!
+
+</p></div>
+
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="p">{</span> <span class="s1">'puppetlabs'</span><span class="p">:</span>
+    <span class="k">ensure</span> <span class="o">=&gt;</span> <span class="s1">'present'</span><span class="p">,</span>
+    <span class="n">foo</span>    <span class="o">=&gt;</span> <span class="s1">'bar'</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+We also have a special callout element, which can be used to include tips and warnings that will appear alongside the main body of a site.
+
+<div class="lvm-callout lvm-tip">
+<p>
+Markdown syntax for this feature has yet to be implemented :(
+</p>
+</div>
+
+<div class="lvm-inline-aside">
+<p>
+Similarly, we have an inline aside that can be used to include items that are relevant to a topic but tangential to the current quest.
+</p>
+</div>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">Markdown syntax for this feature has yet to be implemented :(
+</code></pre></div>
+
+            </div>
+        <div id="site-footer">
+    <div class="footer-top">
+    </div>
+</div>
+
+        </div>
+    </div>
+    </body>
+</html>

@@ -5,7 +5,13 @@ layout: default
 
 # Puppet Resources
 
-In this quest you will be introduced to the fundamental applications of Puppet resources and using them to inspect the state of your Virtual Machine.
+In this quest you will be introduced to the fundamental applications of Puppet resources and using them to inspect the state of your Virtual Machine. The tasks we will accomplish in this quest will help you learn more about Puppet resources. If you're ready to get started, type the following command:
+
+    quest --start resources
+
+## What you should already know
+
+- You shouldn't know anything before this. This is your first quest!
 
 ## Resources
 
@@ -37,9 +43,7 @@ user { 'root':
 {% endhighlight %}
 
 This block of code that describes a resource is called a **resource declaration**. It's a little abstract, but a nice portrait, don't you think? 
-{% aside Inline Aside %}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ante justo, dictum fringilla neque non, pretium pulvinar justo. Praesent imperdiet mollis mi vel vehicula. Fusce nec neque dignissim, gravida purus pretium, ullamcorper lorem. Ut in varius turpis. Mauris egestas neque eget dolor feugiat, id pulvinar mi molestie. Ut id leo eu diam ultrices vehicula.
-{% endaside %}
+
 ### Resource Type
 Look at the first line of the resource declaration. The word you see before the curly brace is the **resource type**, in this case, `user`. Just as any individual cat or dog is a member of its species (*Felis catus* and *Canus lupis familiaris* to be precise) any instance of a resource must be a member of a **resource type**. Think of this type as a framework that defines the range of characteristics an individual resource can have.
 
@@ -81,11 +85,6 @@ The syntax you see here is an example of Puppet's Domain-Specific Language (DSL)
 
 The first step in mastering Puppet is to discipline your mind's eye to perceive the world around you as a collection of **resources**. This means that you will not be using resource declarations to shape your environment just yet. Instead you will exercise your power by hand and use Puppet only to inspect the consequences of your actions.
 
-The tasks we are about to accomplish in the _resources_ quest will help you learn more about Puppet resources. Let's get started on the quest by running the following command:
-
-    quest --start resources
-
-
 1. The path to greatness is a lonely one. Fortunately, your superuser status gives you the ability to create an assistant for yourself:
 
         useradd ralph
@@ -116,16 +115,17 @@ The tasks we are about to accomplish in the _resources_ quest will help you lear
 		
 8. Just one more thing. Ralph does not want his spells to be seen by anyone else! Let's make it so:
  
+		chmod 700 /home/ralph/spells
+
+	..and inspect the result one more time:
+
+		puppet resource file /home/ralph/spells
+
+
 {% fact %}
 Though a comma isn't strictly necessary at the end of the final attribute value pair, it is best practice to include it for the sake of consistency.
 {% endfact %}
-
-		chmod 700 /home/ralph/spells
-
-..and inspect the result one more time:
-
- 	 	puppet resource file /home/ralph/spells
- 	 	
+	 	
 ## The Resource Abstraction Layer
 
 Our sages have long known that Elvium operates according to the rules of **CentOS**, which they call its **Operating System**. We know of distant continents, however, where the fabric of the world has a different weave; that is, there is a different Operating System.
@@ -135,3 +135,7 @@ If you wake up **ssh**ipwrecked and sandy on the shores of Ubuntu and croak out 
 If you aspire to extend your influence across these distant shores, it will be wise to learn a method of applying your power consistently, no matter the local operating system.
 
 Puppet uses **providers** to take the descriptions expressed by resource declarations and use system-specific implementations to realize them. These **Providers** abstract away the complexity of managing diverse implementations of resource types on different systems. As a whole, this system of **types and providers** is called the **Resource Abstraction Layer**, or **RAL**. By harnessing the power of the RAL, you can be confident of the potency of your Puppet skills wherever your journey takes you.
+
+## 
+
+### Resources are the true power of Puppet. Are you ready to harness this power in the [Manifests Quest](http://somthing)?

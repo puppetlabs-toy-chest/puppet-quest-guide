@@ -5,11 +5,13 @@ layout: default
 
 # Manifest Quest
 
-In this quest you will gain a better understanding of resource declarations, the resource abstraction layer and using puppet apply for applying manifests.
+In this quest you will gain a better understanding of resource declarations, the resource abstraction layer and using puppet apply for applying manifests. The tasks we will accompish in this quest will help you learn more about Puppet manifests. If you're ready to get started, type the following command:
+
+    quest --start manifest
 
 ## What you should already know
 
-- Puppet Resource Quest
+- Resources Quest
 
 ## Puppet Manifests
 
@@ -21,17 +23,13 @@ Manifests, like the resource declarations they contain, are written in Puppet's 
 
 ### Tasks
 
-Let's start on a new quest for learning about manifests. Type the following command to get started:
-
-    quest --start manifest
-
 {% tip %}
 You can use `puppet describe user` and `puppet resource user` for help using and understanding the user resource.
 {% endtip %}
 
 To establish the manifest you want to place it in your home directory (`/root`). Make sure you're in this directory before creating your manifest.
 
-		cd /root
+	cd /root
 
 1. Now we are ready to create a manifest to manage the user Ralph. The `.pp` extension identifies a file as a manifest.
 
@@ -87,7 +85,7 @@ This is a very handy tool for learning to write code in Puppet's DSL and is a st
 		
 	He is not too well, it appears! Clearly Ralph was no match for your skills in magic.
 
-4. With manifests you can create as well as destroy. Lets create a new manifest:
+4. With manifests you can create as well as destroy. Lets create a new assistant by adding Jack to the Elvium system.
 
 		nano jack.pp
 
@@ -115,6 +113,12 @@ user { 'jack':
 
 		puppet apply jack.pp
 	
-9. Now check in on Jack. You have an extordinary power to add and removed whomever and whatever you may like. Use your powers wisely.
+9. Now check in on Jack. 
 
 		puppet resource user jack	
+
+You have an extordinary power to add and remove whomever and whatever you may like. Use your powers wisely.
+
+## 
+
+### Now that you have an understanding of how Puppet manifests work, let's get started with simplifying the process with the [Classes Quest](http://somthing)!
