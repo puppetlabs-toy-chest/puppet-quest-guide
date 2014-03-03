@@ -70,7 +70,7 @@ def setup_guide():
             with codecs.open(path+version['virt'], encoding='utf-8') as f:
                 virt_setup = BeautifulSoup(markdown.markdown(f.read()))
             body.insert(0, virt_setup)
-        p = Popen(["prince", "-", "--style=./css/print.css", "%s.pdf" %version['name']], stdin=PIPE)
+        p = Popen(["prince", "-", "--style=../Quest_Guide/css/print.css", "../%s.pdf" %version['name']], stdin=PIPE, cwd=r'./Setup_guide')
         p.stdin.write(str(shell))
         p.stdin.close()
 
