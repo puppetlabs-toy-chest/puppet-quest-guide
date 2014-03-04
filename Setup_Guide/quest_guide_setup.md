@@ -13,4 +13,4 @@
 
 		puppet apply setup/guide.pp
 
-Congratulations; the Puppet manifest you just applied configured and activated an Apache server host your very own LVM Quest Guide. To access your Quest Guide and begin your journey, direct your web browser to **http://<LVM's IP address>/welcome**.
+Congratulations; the Puppet manifest you just applied configured and activated an Apache server host your very own LVM Quest Guide. To access your Quest Guide and begin your journey, direct your web browser to **http://<LVM's IP address>/quests/welcome**.
