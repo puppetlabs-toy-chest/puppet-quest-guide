@@ -3,7 +3,13 @@
 div.page-break{
     page-break-after: always;
 }
-    
+
+ol {
+    display: block;
+    list-style: none;
+    padding: 0;
+}
+
 h1,
 h2,
 h3,
@@ -124,21 +130,19 @@ sup {
     line-height: 0;
 }
 div.lvm-callout{
-    background: #fff;
-    float: right;
-    width: 160px;
+    font-size: 12px;
     padding: 1em;
-    margin: 1em;
-    page-break-inside: avoid;
-    position: relative;
-    border: 1px solid #808080;
+    margin: 1em 0em 1em 0em;
+    border-bottom: 5px solid #808080;
     border-top: 5px solid #808080;
-    border-bottom: 5px solid #808080;    
-}
-
-div.lvm-callout p{
-    font-size: 11px;
-    width: 90%;
+    font-family: "Arvo", "Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #302B6D;
+    float:right;
+    width: 180px;
+    background: #fff;
+    position: relative;
+    left: 2em;
+    page-break-inside: avoid;
 }
 
 div.lvm-tip p:before{
@@ -161,7 +165,6 @@ div.lvm-fact p:before{
     content: "Fact:";
     font-size: 16px;
     display: block;
-    border-bottom: 1px solid;
     margin-bottom: 1em;
 }
 
