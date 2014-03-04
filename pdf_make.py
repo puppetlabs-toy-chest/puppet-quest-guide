@@ -41,7 +41,7 @@ def quest_guide():
         pagebreak['class'] = 'page-break'
         body.insert(1, pagebreak)
 
-    p = Popen(["prince", "-", "--style=./css/print.css", "Quest_Guide.pdf"], stdin=PIPE)
+    p = Popen(["prince", "-", "--style=./Quest_Guide/css/print.css", "Quest_Guide.pdf"], stdin=PIPE)
     p.stdin.write(str(shell))
     p.stdin.close()
 
