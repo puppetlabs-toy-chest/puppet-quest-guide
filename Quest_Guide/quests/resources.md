@@ -11,7 +11,7 @@ In this quest you will be introduced to the fundamental applications of Puppet r
 
 ## What you should already know
 
-- You shouldn't know anything before this. This is your first quest!
+- This is your first quest!
 
 ## Resources
 
@@ -85,42 +85,53 @@ The syntax you see here is an example of Puppet's Domain-Specific Language (DSL)
 
 The first step in mastering Puppet is to discipline your mind's eye to perceive the world around you as a collection of **resources**. This means that you will not be using resource declarations to shape your environment just yet. Instead you will exercise your power by hand and use Puppet only to inspect the consequences of your actions.
 
-1. The path to greatness is a lonely one. Fortunately, your superuser status gives you the ability to create an assistant for yourself:
+**TASK #1:** The path to greatness is a lonely one. Fortunately, your superuser status gives you the ability to create an assistant for yourself:
 
-        useradd ralph
+	useradd ralph
 
-2. Potent stuff. Now take a look at your creation:
+Awesome! Did you notice that your 'completed tasks' increased to 1/6? Check on your progress to how you're doing.
 
-        puppet resource user ralph
+	quest --progress
+
+This shows your progress by displaying tasks that you have completed and tasks that still need completeing. Lets continue on!
+
+**TASK #2:** Potent stuff. Now take a look at your creation:
+
+	puppet resource user ralph
             
-	Note that Ralph's password attribute is set to `'!!'`. This isn't a proper password at all! In fact, it's a special value indicating Ralph has no password whatsoever. If he has a soul, it's locked out of his body.
+Note that Ralph's password attribute is set to `'!!'`. This isn't a proper password at all! In fact, it's a special value indicating Ralph has no password whatsoever. If he has a soul, it's locked out of his body.
 	
-3. Rectify the situation. Set Ralph's password to *puppetlabs*.
+**TASK #3:** Rectify the situation. Set Ralph's password to *puppetlabs*.
 
-		passwd ralph
+	passwd ralph
 		
-	If you take another look at `resource user ralph`, the value for his password attribute should now be set to a SHA1 hash of his password: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
+If you take another look at `resource user ralph`, the value for his password attribute should now be set to a SHA1 hash of his password: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
 
-5. Now have a look at Ralph's home directory. When you created him, it was set to `'/home/ralph'` by default. His home is a `directory`, which is a special kind of the resource type `file`. The `title` of any file is the same as the path to that file. Let's see if Ralph has a directory for this spells in his home! To see Ralph's spells directory, enter the command:
+**TASK #4:** Now have a look at Ralph's home directory. When you created him, it was set to `'/home/ralph'` by default. His home is a `directory`, which is a special kind of the resource type `file`. The `title` of any file is the same as the path to that file. Let's see if Ralph has a directory for this spells in his home! To see Ralph's spells directory, enter the command:
 
-		puppet resource file /home/ralph/spells
+	puppet resource file /home/ralph/spells
 		
-6. What? `ensure => 'absent',`? Values of the `ensure` attribute indicate the basic state of a resource. A value of absent means it doesn't exist at all. When you created Ralph, you automatically assigned him an address, but neglected to put anything there. Do this now:
+**TASK #5:** What? `ensure => 'absent',`? Values of the `ensure` attribute indicate the basic state of a resource. A value of absent means it doesn't exist at all. When you created Ralph, you automatically assigned him an address, but neglected to put anything there. Do this now:
 
-		mkdir /home/ralph/spells
+	mkdir /home/ralph/spells
 		
-7. Now have another look:
+Now have another look:
 
-		puppet resource file /home/ralph/spells
-		
-8. Just one more thing. Ralph does not want his spells to be seen by anyone else! Let's make it so:
+	puppet resource file /home/ralph/spells
+
+You're on a roll! So far you have completed 5/6 tasks. Let's take a look at what you have completed so far.
+
+	quest --brief
+
+Almost there to officially completing your first quest!
+
+**TASK #6:** Just one more thing. Ralph does not want his spells to be seen by anyone else! Let's make it so:
  
-		chmod 700 /home/ralph/spells
+	chmod 700 /home/ralph/spells
 
-	..and inspect the result one more time:
+..and inspect the result one more time:
 
-		puppet resource file /home/ralph/spells
-
+	puppet resource file /home/ralph/spells
 
 {% fact %}
 Though a comma isn't strictly necessary at the end of the final attribute value pair, it is best practice to include it for the sake of consistency.
