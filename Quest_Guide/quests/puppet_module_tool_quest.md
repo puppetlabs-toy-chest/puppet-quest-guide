@@ -5,7 +5,19 @@ layout: default
 
 # Puppet Module Tool Quest
 
-The `puppet module` tool is the most important tool in expanding Puppet. The `puppet module` tool allows you to create, install and searches for modules on the Puppet Forge. We'll discuss the Puppet Forge more in detail below, but the Puppet Forge is a repository of user-contributed Puppet code of expandable components to using Puppet. The `puppet module` tool also has subcommands that make finding, installing, and managing modules from the Puppet Forge much easier from the command line. It can also generate empty modules, and prepare locally developed modules for release on the Forge.
+The `puppet module` tool is the most important tool in expanding Puppet. The `puppet module` tool allows you to create, install and searches for modules on the Puppet Forge. We'll discuss the Puppet Forge more in detail below, but the Puppet Forge is a repository of user-contributed Puppet code of expandable components to using Puppet. The `puppet module` tool also has subcommands that make finding, installing, and managing modules from the Puppet Forge much easier from the command line. It can also generate empty modules, and prepare locally developed modules for release on the Forge. If you're ready to take your Puppet knowledge to the next level type the following command:
+
+	quest --start puppet module tool
+
+## What you should already know
+
+- Resources Quest
+- Mainfest Quest
+- Classes Quest
+- Varibales Quest
+- Conditions Quest
+- Ordering Quest
+- Modules Quest
 
 ## Actions
 
@@ -70,3 +82,9 @@ The [Puppet Forge](http://forge.puppetlabs.com) is a public repository of module
 	NOTE: This leverage a **Defined Resource Type** called `apache::vhost` that helps us create virtual hosts in Apache. You can specify the port Apache listens to by changing the value for the parameter `port`.
 
 <!-- How can 9 and 10 be converted into tasks -->
+
+## 
+
+### Lorum Ipsem [Quest name](http://somthing).
+
+

@@ -27,15 +27,21 @@ Manifests, like the resource declarations they contain, are written in Puppet's 
 You can use `puppet describe user` and `puppet resource user` for help using and understanding the user resource.
 {% endtip %}
 
+Before you get started lets take a look at quests you have completed
+
+	quest --completed
+
+Great! It shows you have completed the Resources Quest. Feel free to use this tool anytime to checkout which quests you've completed on your jounrey. Now lets get back to learning about Puppet manifests.
+
 To establish the manifest you want to place it in your home directory (`/root`). Make sure you're in this directory before creating your manifest.
 
 	cd /root
 
-1. Now we are ready to create a manifest to manage the user Ralph. The `.pp` extension identifies a file as a manifest.
+**TASK #1:** Now we are ready to create a manifest to manage the user Ralph. The `.pp` extension identifies a file as a manifest.
 
-		nano ralph.pp
+	nano ralph.pp
 
-2. Type the following deadly incantation into your manifest:
+**TASK #2:** Type the following deadly incantation into your manifest:
 
 {% highlight ruby %}
 user { 'ralph':
@@ -43,7 +49,7 @@ user { 'ralph':
 }
 {% endhighlight %}
 
-3. Save the file and exit nano.
+Save the file and exit your text editor.
 
 ## Puppet Parser
 
@@ -55,9 +61,9 @@ user { 'ralph':
 The puppet parser can only ensure that the syntax of a manifest is well-formed. It can't guarantee that your variables are correctly named, your logic is valid, or, for that matter, that your manifest does what you want it to.
 {% endwarning %}
 
-1. Enter the following command in the command line:
+**TASK #3:** Enter the following command in the command line:
 
-		puppet parser validate ralph.pp
+	puppet parser validate ralph.pp
 
 If the parser returns nothing, continue on. If not, make the necessary changes with nano and re-validate until the syntax checks out.
 
@@ -67,29 +73,31 @@ This is a very handy tool for learning to write code in Puppet's DSL and is a st
 
 ### Tasks
 
-1. Simulate the change in the system without actually enforcing the `ralph.pp` manifest
+**TASK #4:** Simulate the change in the system without actually enforcing the `ralph.pp` manifest
 
-		puppet apply --noop ralph.pp
+	puppet apply --noop ralph.pp
 
-2. Using `puppet apply` apply the simulated manifest `ralph.pp`
+**TASK #5:** Using `puppet apply` apply the simulated manifest `ralph.pp`
 
-		puppet apply ralph.pp
+	puppet apply ralph.pp
 
-3. Check in on Ralph. How is his health?
+**TASK #6:** Check in on Ralph. How is his health?
 
-		puppet resource user ralph
+	puppet resource user ralph
 		
-	If you like, you can check the old fashioned way as well. If the user doesn't exist, it will return nothing.
+If you like, you can check the old fashioned way as well. If the user doesn't exist, it will return nothing.
 		
-		egrep -i "^ralph" /etc/passwd
+	egrep -i "^ralph" /etc/passwd
 		
-	He is not too well, it appears! Clearly Ralph was no match for your skills in magic.
+He is not too well, it appears! Clearly Ralph was no match for your skills in magic.
 
-4. With manifests you can create as well as destroy. Lets create a new assistant by adding Jack to the Elvium system.
+Check on your progress. How are you doing so far?
 
-		nano jack.pp
+**TASK #7:** With manifests you can create as well as destroy. Lets create a new assistant by adding Jack to the Elvium system.
 
-5. Write the following code to your manifest:
+	nano jack.pp
+
+**TASK #8:** Write the following code to your manifest:
 
 {% highlight ruby %}
 user { 'jack':
@@ -101,24 +109,25 @@ user { 'jack':
 }
 {% endhighlight %}
 
-6. Check your syntax:
+**TASK #9:** Check your syntax:
 
-		puppet parser validate jack.pp
+	puppet parser validate jack.pp
 	
-7. Simulate your changes:
+**TASK #10:** Simulate your changes:
 
-		puppet apply --noop jack.pp
+	puppet apply --noop jack.pp
 	
-8. And apply:
+**TASK #11:** And apply:
 
-		puppet apply jack.pp
+	puppet apply jack.pp
 	
-9. Now check in on Jack. 
+**TASK #12:** Now check in on Jack. 
 
-		puppet resource user jack	
+	puppet resource user jack	
 
 You have an extordinary power to add and remove whomever and whatever you may like. Use your powers wisely.
 
 ## 
 
 ### Now that you have an understanding of how Puppet manifests work, let's get started with simplifying the process with the [Classes Quest](http://somthing)!
+
