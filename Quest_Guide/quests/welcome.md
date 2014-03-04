@@ -13,17 +13,9 @@ In this quest you will be introduced to Elvium, the Learning Virtual Machine env
 
 > -Arthur C. Clarke
 
-Welcome to Elvium, user. Have a look around. Walk down a directory path and admire our landscape.
+Welcome to Elvium, user. Have a look around, if you like, but take note: what you see now is only the surface. The real channels of power in Elvium lie deeper. You will learn of these things. You see, you are not an ordinary user, for you have come into the Elvium with a user id of '0', the mark of the **Superuser**.
 
-<!--
-We'll need to have a few interesting files and directory structures already in place.
--->
-
-Wander the verdant forests of files and hear the clamor of bustling services. But take note: what you see now is only the surface. The real channels of power in Elvium lie deeper, in the very bones of the kingdom, and you must learn of these things. You see, you are not an ordinary user, for you have been born into the Elvium with a user id of '0', the fabled mark of the **Superuser**.
-
-In recognition of this auspicious sign, the venerable council of Sudoers has seen fit to present you with this Quest Guide.
-
-If you choose to follow the path set forth herein, you will learn to channel your abilities by using the art of Puppet. With only a few words, slay nefarious daemons, raise armies of users, orchestrate magnificent services, and, most importantly, weave your power into abiding enchantments to ensure that your will continues to be done in Elvium as you journey out to bring other kingdoms into your dominion.
+If you choose to follow the path set forth in this Quest Guide, you will learn to channel your powers by using the art of Puppet. With only a few words, slay nefarious daemons, raise armies of users, orchestrate magnificent services, and, most importantly, weave your power into abiding enchantments to ensure that your will continues to be done in Elvium as you journey out to bring other kingdoms into your dominion.
 
 ## Tasks
 
