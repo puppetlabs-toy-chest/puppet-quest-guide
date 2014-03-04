@@ -3,17 +3,15 @@ title: Resources
 layout: default
 ---
 
-# Puppet Resources
+# Resources
+
+## Quest Objectives
 
 In this quest you will be introduced to the fundamental applications of Puppet resources and using them to inspect the state of your Virtual Machine. The tasks we will accomplish in this quest will help you learn more about Puppet resources. If you're ready to get started, type the following command:
 
     quest --start resources
 
-## What you should already know
-
-- This is your first quest!
-
-## Resources
+## Puppet Resources
 
 The power of a magic word is never as simple as it seems. Any wizard worth his beard has at least a few arcane tomes lying around the tower. The pages of these books (if you can decode the cryptic runes) tell of the bonds between the syllables of a spell and the elements under its influence. As an aspirant in the mystical arts of Puppet, you must learn of these things in order to type the words of power with confidence and wisdom.
 

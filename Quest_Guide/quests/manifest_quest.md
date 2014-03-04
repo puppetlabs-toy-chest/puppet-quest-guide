@@ -3,15 +3,17 @@ title: Manifests
 layout: default
 ---
 
-# Manifest Quest
+# Manifests
+
+### Prerequisites
+
+- Resources Quest
+
+## Quest Objectives
 
 In this quest you will gain a better understanding of resource declarations, the resource abstraction layer and using puppet apply for applying manifests. The tasks we will accompish in this quest will help you learn more about Puppet manifests. If you're ready to get started, type the following command:
 
     quest --start manifest
-
-## What you should already know
-
-- Resources Quest
 
 ## Puppet Manifests
 
