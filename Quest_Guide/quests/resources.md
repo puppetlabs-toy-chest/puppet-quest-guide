@@ -13,7 +13,7 @@ In this quest you will be introduced to the fundamental applications of Puppet r
 
 ## Puppet Resources
 
-The power of a magic word is never as simple as it seems. Any wizard worth his beard has at least a few arcane tomes lying around the tower. The pages of these books (if you can decode the cryptic runes) tell of the bonds between the syllables of a spell and the elements under its influence. As an aspirant in the mystical arts of Puppet, you must learn of these things in order to type the words of power with confidence and wisdom.
+Real power, whether a spoken spell or a terminal command, is never as simple as it seems. Wizards turn to ancient tomes and grimoirs to tell of the bonds between the syllables of a spell and the elements under its influence. As an aspirant in the mystical arts of Puppet, you must learn of the connections between the syntax of Puppet and the environment around you.
 
 We'll begin with **Resources**, the basic units that Puppet uses to describe an environment.
 
@@ -81,7 +81,7 @@ The syntax you see here is an example of Puppet's Domain-Specific Language (DSL)
 
 ## Tasks
 
-The first step in mastering Puppet is to discipline your mind's eye to perceive the world around you as a collection of **resources**. This means that you will not be using resource declarations to shape your environment just yet. Instead you will exercise your power by hand and use Puppet only to inspect the consequences of your actions.
+The first step in mastering Puppet is to discipline learn to understand the world around you as a collection of **resources**. You will not be using resource declarations to shape your environment just yet. Instead you will exercise your power by hand and use Puppet only to inspect the consequences of your actions.
 
 **TASK #1:** The path to greatness is a lonely one. Fortunately, your superuser status gives you the ability to create an assistant for yourself:
 
@@ -91,21 +91,21 @@ Awesome! Did you notice that your 'completed tasks' increased to 1/6? Check on y
 
 	quest --progress
 
-This shows your progress by displaying tasks that you have completed and tasks that still need completeing. Lets continue on!
+This shows your progress by displaying tasks that you have completed and tasks that still need completeing.
 
-**TASK #2:** Potent stuff. Now take a look at your creation:
+**TASK #2:** Now take a look at your creation:
 
 	puppet resource user ralph
             
-Note that Ralph's password attribute is set to `'!!'`. This isn't a proper password at all! In fact, it's a special value indicating Ralph has no password whatsoever. If he has a soul, it's locked out of his body.
+Potent stuff. Note that Ralph's password attribute is set to `'!!'`. This isn't a proper password at all! In fact, it's a special value indicating Ralph has no password whatsoever. If he had a soul, it would be locked out of his body.
 	
 **TASK #3:** Rectify the situation. Set Ralph's password to *puppetlabs*.
 
 	passwd ralph
 		
-If you take another look at `resource user ralph`, the value for his password attribute should now be set to a SHA1 hash of his password: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
+If you take another look at `puppet resource user ralph`, the value for his password attribute should now be set to a SHA1 hash of his password, something a little like: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
 
-**TASK #4:** Now have a look at Ralph's home directory. When you created him, it was set to `'/home/ralph'` by default. His home is a `directory`, which is a special kind of the resource type `file`. The `title` of any file is the same as the path to that file. Let's see if Ralph has a directory for this spells in his home! To see Ralph's spells directory, enter the command:
+**TASK #4:** Now have a look at Ralph's home directory. When you created him, it was set to `'/home/ralph'` by default. His home is a `directory`, which is really just a special kind of the resource type `file`. The `title` of any file is the same as the path to that file. Take a look at Ralph's home directory. Enter the command:
 
 	puppet resource file /home/ralph/spells
 		
@@ -139,12 +139,8 @@ Though a comma isn't strictly necessary at the end of the final attribute value 
 
 Our sages have long known that Elvium operates according to the rules of **CentOS**, which they call its **Operating System**. We know of distant continents, however, where the fabric of the world has a different weave; that is, there is a different Operating System.
 
-If you wake up **ssh**ipwrecked and sandy on the shores of Ubuntu and croak out a `useradd`, you will be laughed right off the beach for getting it backwards; as any Ubuntu native could tell you, `adduser` is the right way to say it there. And attempting to install a package with `yum` on a system where `apt-get` is appropriate is a *faux pas* indeed.
+If you find yourself on the shores of Ubuntu and croak out a `useradd`, you will be laughed right off the beach for getting it backwards; as any Ubuntu native could tell you, `adduser` is the right way to say it there. And attempting to install a package with `yum` on a system where `apt-get` is appropriate is a *faux pas* indeed.
 
-If you aspire to extend your influence across these distant shores, it will be wise to learn a method of applying your power consistently, no matter the local operating system.
-
+If you aspire to extend your influence across these differing systems, it will be wise to learn a method of applying your power consistently.
+   
 Puppet uses **providers** to take the descriptions expressed by resource declarations and use system-specific implementations to realize them. These **Providers** abstract away the complexity of managing diverse implementations of resource types on different systems. As a whole, this system of **types and providers** is called the **Resource Abstraction Layer**, or **RAL**. By harnessing the power of the RAL, you can be confident of the potency of your Puppet skills wherever your journey takes you.
-
-## 
-
-### Resources are the true power of Puppet. Are you ready to harness this power in the [Manifests Quest](http://somthing)?

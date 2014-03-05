@@ -96,7 +96,3 @@ It's as simple as that without hardly doing anything on your end. Feeling confid
 1. 
 
 Our manifests are becoming more flexible, with pretty much no real work on our part.
-
-## 
-
-### Variables and fact are here to make using Puppet easier. Think of this as the second layer under classes in further manipulating our manifests. Again, lets journey deeper into the forest and learn more about conditional statments in the [Conditions Quest](http://somthing)!

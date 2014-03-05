@@ -1,6 +1,6 @@
 #Quest Guide Setup
 
-1. It will be much easier to interact with the Learning VM from the comfort of your own terminal. Open a terminal window and SSH to the learning VM.
+It will be much easier to interact with the Learning VM from the comfort of your own terminal. Open a terminal window and SSH to the learning VM.
 
 		ssh root@<LVM's IP address>
 
@@ -9,8 +9,10 @@
 	**password:** puppet
 
 
-2. Now that you are connected to the Learning VM, use Puppet to activate your Quest Guide:
+Now that you are connected to the Learning VM, use Puppet to activate your Quest Guide:
 
 		puppet apply setup/guide.pp
+		
+Note that this might take a few minutes to complete. Puppet is working behind the scenes to apply the `guide.pp` manifest. We prepared this manifest both as an effecient way to get your Learning VM Quest Guide up and accessible from your web browser, but also as a demonstration of what Puppet is capable of.
 
-Congratulations; the Puppet manifest you just applied configured and activated an Apache server host your very own LVM Quest Guide. To access your Quest Guide and begin your journey, direct your web browser to **http://<LVM's IP address>/quests/welcome**.
+To access your Quest Guide and begin your journey, direct your web browser to **http://<LVM's IP address>/quests/welcome**.
