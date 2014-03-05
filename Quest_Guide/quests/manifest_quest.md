@@ -43,6 +43,12 @@ To establish the manifest you want to place it in your home directory (`/root`).
 
 	nano ralph.pp
 
+{% aside On Editor Wars %}
+
+For the sake of simplicity and consistency, we use the text editor nano in our instructions. Feel free to use vim if you prefer. Emacs isn not installed.
+
+{% endaside %}
+
 **TASK #2:** Type the following deadly incantation into your manifest:
 
 {% highlight ruby %}
