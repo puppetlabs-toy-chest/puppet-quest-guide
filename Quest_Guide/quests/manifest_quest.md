@@ -3,15 +3,17 @@ title: Manifests
 layout: default
 ---
 
-# Manifest Quest
+# Manifests
+
+### Prerequisites
+
+- Resources Quest
+
+## Quest Objectives
 
 In this quest you will gain a better understanding of resource declarations, the resource abstraction layer and using puppet apply for applying manifests. The tasks we will accompish in this quest will help you learn more about Puppet manifests. If you're ready to get started, type the following command:
 
     quest --start manifest
-
-## What you should already know
-
-- Resources Quest
 
 ## Puppet Manifests
 
@@ -40,6 +42,12 @@ To establish the manifest you want to place it in your home directory (`/root`).
 **TASK #1:** Now we are ready to create a manifest to manage the user Ralph. The `.pp` extension identifies a file as a manifest.
 
 	nano ralph.pp
+
+{% aside On Editor Wars %}
+
+For the sake of simplicity and consistency, we use the text editor nano in our instructions. Feel free to use vim if you prefer. Emacs isn not installed.
+
+{% endaside %}
 
 **TASK #2:** Type the following deadly incantation into your manifest:
 

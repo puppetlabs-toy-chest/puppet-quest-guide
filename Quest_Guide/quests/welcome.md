@@ -5,9 +5,11 @@ layout: default
 
 # Welcome 
 
+## Quest Objectives
+
 In this quest you will be introduced to Elvium, the Learning Virtual Machine environment.
 
-## Elvium
+## Welcome to Elvium
 
 > Any sufficiently advanced technology is indistinguishable from magic.
 
@@ -15,48 +17,11 @@ In this quest you will be introduced to Elvium, the Learning Virtual Machine env
 
 Welcome to Elvium, user. Have a look around, if you like, but take note: what you see now is only the surface. The real channels of power in Elvium lie deeper. You will learn of these things. You see, you are not an ordinary user, for you have come into the Elvium with a user id of '0', the mark of the **Superuser**.
 
-If you choose to follow the path set forth in this Quest Guide, you will learn to channel your powers by using the art of Puppet. With only a few words, slay nefarious daemons, raise armies of users, orchestrate magnificent services, and, most importantly, weave your power into abiding enchantments to ensure that your will continues to be done in Elvium as you journey out to bring other kingdoms into your dominion.
+If you choose to follow the path set forth in this Quest Guide, you will learn to channel your powers by using the art of Puppet. With only a few words, shape the environment around as you see fit. Inscribe your wishes into potent Puppet manifests to ensure that your will continues to be done when journey beyond Elvium to bring other systems under your dominion.
 
 ## Getting Started
 
-Your arrival has been foretold, user, and we have made the necessary preparations. You need not worry now about the details; you will learn soon enough. You need only speak a few words of power to set the prophecy in motion.
-
-SSH to the VM with your IP address
-
-	ssh root@<ipaddress>
-
-Use the following to login  
-**username:** root  
-**password:** puppet
-
-
-Now that you are connected to Elvium, we need to set up a method for you to find your way! Run the following command: 
-
-	puppet apply setup/guide.pp
-
-   What we just did is set up a website to be served from your VM. You can access the website in your browser by visiting: _http://<ipaddress>_ (replace the <ipaddress> with the ipaddress of your VM)
-
-{% tip %}
-The power of Puppet is immense. With one command you will set up your entire enviornment created locally
-{% endtip %}
-
-
-Just in case you ever get stuck, we on Elvium have provided you an unlimited supply of help. To learn more about the help we provide, type the following command:
-
-	puppet help
-		
-You are a curious being. Would you like to further investigate Elvium? To do this on Elvium we use the tool `facter` to obtains `facts` about the system. Here are a few for you to try out:
-
-	facter ipaddress
-	facter facterversion
-	facter memorysize
-	facter operatingsystem
-	facter osfamily
-	facter puppetversion
-
-{% tip %}
-You can see all the facts by running facter -p
-{% endtip %}
+Your arrival has been foretold, user, and all the necessary arrangements were made to ensure that this Quest Guide would fall into your hands. By entering the command `puppet apply setup/guide.pp`, you activated a Puppet **manifest** we had prepared in anticipation of your arrival.
 
 ## Quest Navigation
 
@@ -87,5 +52,17 @@ We need to outline where the output is presented.
 We need to inform the user to use `clear` as a method of removing information from their terminal.
 -->
 
+## Facter
 
-### Now that you have set up your quest guide and understand the quest navigation commands, let's get started with the [Resources Quest](http://somthing)!
+You are a curious being. Would you like to further investigate Elvium? To do this on Elvium we use the tool `facter` to obtains `facts` about the system. Here are a few for you to try out:
+
+	facter ipaddress
+	facter facterversion
+	facter memorysize
+	facter operatingsystem
+	facter osfamily
+	facter puppetversion
+
+{% tip %}
+You can see all the facts by running facter -p
+{% endtip %}
