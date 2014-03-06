@@ -23,7 +23,7 @@ class Aside < Liquid::Block
   end
 
     def render(context)
-        "<div class = \"lvm-inline-aside\"><h3>#{@title}</h3><p>#{super}</p></div></div>"
+        "<div class = \"lvm-inline-aside\"><strong>#{@title}</strong><p>#{super}</p></div></div>"
     end
 end
 

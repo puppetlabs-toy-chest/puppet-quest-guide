@@ -14,11 +14,11 @@
 
 #sidebar-first{
     float: left;
+    position: fixed;
     width: 220px;
 }
 
 #sidebar-first, #sidebar-second {
-    background: #333333;
     padding: 130px 20px;
 }
 
@@ -26,14 +26,16 @@
     float: right;
     width: 700px;
     margin: 20px 0;
-    padding-top: 130px; 
-    padding-bottom: 220px;
+    padding-top: 100px; 
+    padding-bottom: 360px;
+    background-image: url('../assets/LVM-Forest-Background2.png');
+    background-repeat: no-repeat;
+    background-position: right bottom;
 }
 
 body, #page {
     height: 100%;
     min-width: 320px;
-    background: #333333;
     margin: 0px;
 }
 
@@ -48,12 +50,10 @@ background: #b3d4fc;
 text-shadow: none;
 }
 
-#sidebar-first ul li a, #sidebar-second ul li a {
-    color: #ffffff;
-}
+
 
 #sidebar-first ul ul li a, #sidebar-second ul li a {
-    color: #ffffff;
+    color: #cccccc;
     font-size: 14px;
 }
 
@@ -72,7 +72,7 @@ a {
     -o-transition: color 0.25s;
     transition: color 0.25s;
     text-decoration: none;
-    color: #0095dd;
+    color: #666;
 }
 
 img {
@@ -229,8 +229,7 @@ blockquote {
 
 body {
     font-family: 'PT Sans Light', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-    color: #fff;
-    font-size: 16px;
+    font-size: 14px;
 }
 table {
 	margin: 10px 0 15px 0;
@@ -249,6 +248,7 @@ a img {
 }
 p {
     margin-bottom: 9px;
+    line-height: 1.5;
 
 }
 h1, 
@@ -298,30 +298,49 @@ hr {
     border-bottom: 1px solid #ccc;
 }
 blockquote {
-    padding: 13px 13px 21px 15px;
-    margin-bottom: 18px;
-    font-family:georgia,serif;
-    font-style: italic;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+  position: relative;
+  overflow: hidden;
+  padding: 1em 20px;
+  border-top: none;
+  margin-top: 0;
+  quotes: "" "";
+  margin-bottom: 0.5em;
 }
+
 blockquote:before {
-    content:"\201C";
-    font-size:40px;
-    margin-left:-10px;
-    font-family:georgia,serif;
-    color:#eee;
+    content: "“";
+    position: absolute;
+    top: -15px;
+    left: -5px;
+    font-family: "callunaregular", Georgia, "Times New Roman", Times, serif;
+    font-size: 12em;
+    line-height: 1;
+    font-style: normal;
+    z-index: -1;
+    color: #e0e0e0;
 }
+
 blockquote p {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 300;
     line-height: 18px;
-    margin-bottom: 0;
+    margin: 0;
     font-style: italic;
+    font-family: 'PT Sans Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 code, pre {
     font-family: Monaco, Andale Mono, Courier New, monospace;
 }
 code {
-    background-color: #7FBA2D;
+    background-color: #eee;
     color: rgba(0, 0, 0, 0.75);
     padding: 1px 3px;
     font-size: 12px;
@@ -335,13 +354,12 @@ pre {
     margin: 0 0 18px;
     line-height: 16px;
     font-size: 11px;
-    border: 1px solid #7FBA2D;
+    border: 1px solid #ccc;
     white-space: pre-wrap;
     word-wrap: break-word;
 }
 pre code {
-    background-color: #333333;
-    color:#fff;
+    background: none;
     font-size: 11px;
     padding: 0;
 }
@@ -351,17 +369,18 @@ sup {
     line-height: 0;
 }
 div.lvm-callout{
-    background: #4D4D4D;
-    color: #fff;
-    float: right;
-    width: 160px;
     padding: 1em;
-    margin-right: 1.2em;
-    page-break-inside: avoid;
+    margin: 1em 0em 1em 0em;    
+    background: #eee;
+    color: #333;
+    position: relative;
+    left: 2em;
+    float: right;
+    width: 180px;
 }
 
 div.lvm-callout p{
-    font-size: 11px;
+    font-size: 12px;
     width: 90%;
 }
 
@@ -370,8 +389,7 @@ div.lvm-tip p:before{
     content: "Tip:";
     font-size: 16px;
     display: block;
-    border-bottom: 1px solid;
-    margin-bottom: 1em;
+    margin-bottom: .5em;
 }
 
 div.lvm-warning p:before{
@@ -379,7 +397,6 @@ div.lvm-warning p:before{
     content: "Warning:";
     font-size: 16px;
     display: block;
-    border-bottom: 1px solid;
     margin-bottom: 1em;
 }
 
@@ -388,22 +405,18 @@ div.lvm-fact p:before{
     content: "Fact:";
     font-size: 16px;
     display: block;
-    border-bottom: 1px solid;
     margin-bottom: 1em;
 }
 
 div.lvm-inline-aside{
     font-size: 12px;
-    background: #4D4D4D;
+    background: #eee;
+    color: #666;
     padding: 1em;
     margin: 2em;
-    border-bottom: 5px solid #808080;
 }
 
-code.language-text:before{
-    content: url('../assets/console.png');
-    vertical-align: middle;
-    position: relative;
-    left: -20px;
-    top: 7px;
+div.lvm-inline-aside strong{
+    font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;    
+    line-height: 2;    
 }

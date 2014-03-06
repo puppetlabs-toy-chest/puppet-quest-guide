@@ -4,12 +4,6 @@ div.page-break{
     page-break-after: always;
 }
 
-ol {
-    display: block;
-    list-style: none;
-    padding: 0;
-}
-
 h1,
 h2,
 h3,
@@ -24,11 +18,12 @@ blockquote {
 
 body {
     font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 p {
     margin-bottom: 9px;
+    line-height: 1.5;
 
 }
 h1, 
@@ -46,7 +41,7 @@ h6 {
 }
 
 h1 {
-    margin-top: 0;
+    margin-top: 200px;
     font-size: 28px;
 }
 
@@ -84,7 +79,7 @@ blockquote {
     font-style: italic;
 }
 blockquote:before {
-    content:"\201C";
+    content:"“";
     font-size:40px;
     margin-left:-10px;
     font-family:georgia,serif;
@@ -94,7 +89,7 @@ blockquote p {
     font-size: 14px;
     font-weight: 300;
     line-height: 18px;
-    margin-bottom: 0;
+    margin: 0;
     font-style: italic;
 }
 code, pre {
@@ -115,7 +110,7 @@ pre {
     margin: 0 0 18px;
     line-height: 16px;
     font-size: 11px;
-    border: 1px solid;
+    border: 1pt solid #ccc;
     white-space: pre-wrap;
     word-wrap: break-word;
 }
@@ -130,52 +125,56 @@ sup {
     line-height: 0;
 }
 div.lvm-callout{
-    font-size: 12px;
     padding: 1em;
     margin: 1em 0em 1em 0em;
-    border-bottom: 5px solid #808080;
-    border-top: 5px solid #808080;
-    font-family: "Arvo", "Helvetica Neue",Helvetica,Arial,sans-serif;
-    color: #302B6D;
+    color: #333;
     float:right;
     width: 180px;
-    background: #fff;
+    background: #eee;
     position: relative;
     left: 2em;
     page-break-inside: avoid;
 }
 
+div.lvm-callout p{
+    font-size: 12px;
+}
+
 div.lvm-tip p:before{
+    font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     content: "Tip:";
-    font-size: 16px;
     display: block;
-    border-bottom: 1px solid;
+    font-size: 15pt;
     margin-bottom: 1em;
 }
 
 div.lvm-warning p:before{
+    font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     content: "Warning:";
-    font-size: 16px;
     display: block;
-    border-bottom: 1px solid;
+    font-size: 15pt;
     margin-bottom: 1em;
 }
 
 div.lvm-fact p:before{
+    font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     content: "Fact:";
-    font-size: 16px;
     display: block;
+    font-size: 15pt;
     margin-bottom: 1em;
 }
 
 div.lvm-inline-aside{
     font-size: 12px;
+    background: #eee;
+    color: #666;
     padding: 1em;
     margin: 2em;
-    border-bottom: 5px solid #808080;
-    border-top: 5px solid #808080;
 }
-
+div.lvm-inline-aside strong{
+    font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;    
+    line-height: 2;    
+}
 /*
 code.language-text:before{
     content: url('../assets/console.png');
@@ -185,7 +184,7 @@ code.language-text:before{
 }
 */
 
-.highlight  { background: #fff; }
+.highlight  { background: #fff; margin: .5em;}
 .highlight .c { color: #999988; font-style: italic } /* Comment */
 .highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
 .highlight .k { font-weight: bold } /* Keyword */

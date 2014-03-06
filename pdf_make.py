@@ -17,8 +17,8 @@ def pull_content(filename):
     return soup.select("div[role=main]")[0]
 
 def quest_guide():
-    
-    # You must run Jekyll first to generate the html content
+   
+    print "Be sure you have run Jekyll. This will ensure that any new changes to the markdown files are reflected in the static html files that this script uses to generate the Quest Guide PDF. If you haven't run Jekyll you will get confused."
 
     path = "./Quest_Guide/_site/quests/"
 
@@ -37,9 +37,11 @@ def quest_guide():
 
     for quest in quest_list:
         body.insert(0, pull_content(quest))
-        pagebreak = Tag(name='div')
-        pagebreak['class'] = 'page-break'
-        body.insert(1, pagebreak)
+        #pagebreak = Tag(name='div')
+        #pagebreak['class'] = 'page-break'
+        #body.insert(1, pagebreak)       
+
+    #cover = BeautifulSoup("<div id="cover-page"><h1>Quest Guide</h1><div class = 'page-break'></div></div>", "html5lib")
 
     p = Popen(["prince", "-", "--style=./Quest_Guide/css/print.css", "Quest_Guide.pdf"], stdin=PIPE)
     p.stdin.write(str(shell))
