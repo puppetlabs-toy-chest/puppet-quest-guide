@@ -37,9 +37,9 @@ def quest_guide():
 
     for quest in quest_list:
         body.insert(0, pull_content(quest))
-        pagebreak = Tag(name='div')
-        pagebreak['class'] = 'page-break'
-        body.insert(1, pagebreak)
+        #pagebreak = Tag(name='div')
+        #pagebreak['class'] = 'page-break'
+        #body.insert(1, pagebreak)       
 
     #cover = BeautifulSoup("<div id="cover-page"><h1>Quest Guide</h1><div class = 'page-break'></div></div>", "html5lib")
 

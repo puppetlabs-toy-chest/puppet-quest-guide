@@ -41,7 +41,7 @@ h6 {
 }
 
 h1 {
-    margin-top: 0;
+    margin-top: 200px;
     font-size: 28px;
 }
 
@@ -170,9 +170,11 @@ div.lvm-inline-aside{
     color: #666;
     padding: 1em;
     margin: 2em;
-    border-bottom: 5px solid #808080;
 }
-
+div.lvm-inline-aside strong{
+    font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;    
+    line-height: 2;    
+}
 /*
 code.language-text:before{
     content: url('../assets/console.png');
