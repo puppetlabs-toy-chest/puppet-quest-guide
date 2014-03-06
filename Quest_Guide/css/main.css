@@ -410,10 +410,13 @@ div.lvm-fact p:before{
 
 div.lvm-inline-aside{
     font-size: 12px;
-    background: #4D4D4D;
+    background: #eee;
+    color: #666;
     padding: 1em;
     margin: 2em;
-    border-bottom: 5px solid #808080;
 }
 
-
+div.lvm-inline-aside strong{
+    font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;    
+    line-height: 2;    
+}
