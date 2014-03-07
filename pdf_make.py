@@ -43,6 +43,8 @@ def quest_guide():
 
     #cover = BeautifulSoup("<div id="cover-page"><h1>Quest Guide</h1><div class = 'page-break'></div></div>", "html5lib")
 
+    print str(shell)
+
     p = Popen(["prince", "-", "--style=./Quest_Guide/css/print.css", "Quest_Guide.pdf"], stdin=PIPE)
     p.stdin.write(str(shell))
     p.stdin.close()

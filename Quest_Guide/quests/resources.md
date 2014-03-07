@@ -83,6 +83,7 @@ The syntax you see here is an example of Puppet's Domain-Specific Language (DSL)
 
 The first step in mastering Puppet is to learn to understand the world around you as a collection of **resources**. You will not be using resource declarations to shape your environment just yet. Instead you will exercise your power by hand and use Puppet only to inspect the consequences of your actions.
 
+{% task q %}
 **TASK #1:** The path to greatness is a lonely one. Fortunately, your superuser status gives you the ability to create an assistant for yourself:
 
 	useradd ralph
