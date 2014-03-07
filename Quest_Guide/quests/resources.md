@@ -79,11 +79,10 @@ Though a comma isn't strictly necessary at the end of the final attribute value 
 
 The syntax you see here is an example of Puppet's Domain-Specific Language (DSL), which is built on the Ruby programming language. Because the Puppet DSL is a **declarative** language rather than a **procedural** one, the descriptions themselves have the power to change the state of the environment. Use the DSL to paint a picture of what you want to see, and Puppet's providers will make it so.
 
-## Tasks
-
 The first step in mastering Puppet is to learn to understand the world around you as a collection of **resources**. You will not be using resource declarations to shape your environment just yet. Instead you will exercise your power by hand and use Puppet only to inspect the consequences of your actions.
 
-**TASK #1:** The path to greatness is a lonely one. Fortunately, your superuser status gives you the ability to create an assistant for yourself:
+{% Task 1 %}
+The path to greatness is a lonely one. Fortunately, your superuser status gives you the ability to create an assistant for yourself:
 
 	useradd ralph
 
@@ -93,23 +92,27 @@ Awesome! Did you notice that your 'completed tasks' increased to 1/6? Check on y
 
 This shows your progress by displaying tasks that you have completed and tasks that still need completeing.
 
-**TASK #2:** Now take a look at your creation:
+{% Task 2 %}
+Now take a look at your creation:
 
 	puppet resource user ralph
             
 Potent stuff. Note that Ralph's password attribute is set to `'!!'`. This isn't a proper password at all! In fact, it's a special value indicating Ralph has no password whatsoever. If he had a soul, it would be locked out of his body.
 	
-**TASK #3:** Rectify the situation. Set Ralph's password to *puppetlabs*.
+{% Task 3 %}
+Rectify the situation. Set Ralph's password to *puppetlabs*.
 
 	passwd ralph
 		
 If you take another look at `puppet resource user ralph`, the value for his password attribute should now be set to a SHA1 hash of his password, something a little like: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
 
-**TASK #4:** Now have a look at Ralph's home directory. When you created him, it was set to `'/home/ralph'` by default. His home is a `directory`, which is really just a special kind of the resource type `file`. The `title` of any file is the same as the path to that file. Take a look at Ralph's home directory. Enter the command:
+{% Task 4 %}
+Now have a look at Ralph's home directory. When you created him, it was set to `'/home/ralph'` by default. His home is a `directory`, which is really just a special kind of the resource type `file`. The `title` of any file is the same as the path to that file. Take a look at Ralph's home directory. Enter the command:
 
 	puppet resource file /home/ralph/spells
 		
-**TASK #5:** What? `ensure => 'absent',`? Values of the `ensure` attribute indicate the basic state of a resource. A value of absent means it doesn't exist at all. When you created Ralph, you automatically assigned him an address, but neglected to put anything there. Do this now:
+{% Task 5 %}
+What? `ensure => 'absent',`? Values of the `ensure` attribute indicate the basic state of a resource. A value of absent means it doesn't exist at all. When you created Ralph, you automatically assigned him an address, but neglected to put anything there. Do this now:
 
 	mkdir /home/ralph/spells
 		
@@ -123,7 +126,8 @@ You're on a roll! So far you have completed 5/6 tasks. Let's take a look at what
 
 Almost there to officially completing your first quest!
 
-**TASK #6:** Just one more thing. Ralph does not want his spells to be seen by anyone else! Let's make it so:
+{% Task 6 %}
+Just one more thing. Ralph does not want his spells to be seen by anyone else! Let's make it so:
  
 	chmod 700 /home/ralph/spells
 

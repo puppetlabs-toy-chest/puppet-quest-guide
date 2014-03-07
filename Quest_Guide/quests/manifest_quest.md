@@ -23,8 +23,6 @@ Once you've created a manifest, you will use the `puppet apply` tool to implemen
 
 Manifests, like the resource declarations they contain, are written in Puppet's Domain Specific Language (DSL). In addition to resource declarations, a manifest will often contain **classes**, which organize resource declarations into functional sets, and **logic** to allow you to manage resources according to variables in the Elvium environment. You will learn more about these aspects of manifest creation in a later quest.
 
-### Tasks
-
 {% tip %}
 You can use `puppet describe user` and `puppet resource user` for help using and understanding the user resource.
 {% endtip %}
@@ -63,8 +61,6 @@ Save the file and exit your text editor.
 
 `puppet parser` is like Puppet's version of spellcheck. This action validates Puppet's DSL syntax without compiling a catalog or syncing any resources. If no manifest files are provided, Puppet will validate the default site manifest. If there are no syntax errors, Puppet will return nothing, otherwise Puppet will display the first syntax error encountered. 
 
-### Tasks
-
 {% warning %}
 The puppet parser can only ensure that the syntax of a manifest is well-formed. It can't guarantee that your variables are correctly named, your logic is valid, or, for that matter, that your manifest does what you want it to.
 {% endwarning %}
@@ -78,8 +74,6 @@ If the parser returns nothing, continue on. If not, make the necessary changes w
 ## Puppet Apply
 
 This is a very handy tool for learning to write code in Puppet's DSL and is a standalone puppet execution tool. However, in reality, you'll probably use this tool to describe the configurations of an entire system in a single file. This description will be constructed as a list of all resources you want to manage on your system, but as you can imagine, that might end up being a _really_ long file! You will see how this can be a more manageable process when you come across **Classes** during your journey.
-
-### Tasks
 
 **TASK #4:** Simulate the change in the system without actually enforcing the `ralph.pp` manifest
 
@@ -134,8 +128,3 @@ user { 'jack':
 	puppet resource user jack	
 
 You have an extordinary power to add and remove whomever and whatever you may like. Use your powers wisely.
-
-## 
-
-### Now that you have an understanding of how Puppet manifests work, let's get started with simplifying the process with the [Classes Quest](http://somthing)!
-
