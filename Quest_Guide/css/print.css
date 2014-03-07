@@ -1,5 +1,15 @@
 @import url(http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|PT+Sans:400,700,400italic,700italic);
 
+/*
+Uncomment to generate a larger format pdf appropriate for shared-screen user testing
+
+@page { 
+    size: 15cm 40cm;
+    margin: 10pt;
+    
+}
+*/
+
 div.page-break{
     page-break-after: always;
 }
@@ -18,7 +28,7 @@ blockquote {
 
 body {
     font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 p {
@@ -73,24 +83,43 @@ hr {
     border-bottom: 1px solid #ccc;
 }
 blockquote {
-    padding: 13px 13px 21px 15px;
-    margin-bottom: 18px;
-    font-family:georgia,serif;
-    font-style: italic;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+  position: relative;
+  overflow: hidden;
+  padding: 1em 20px;
+  border-top: none;
+  margin-top: 0;
+  quotes: "" "";
+  margin-bottom: 0.5em;
 }
+
 blockquote:before {
-    content:"“";
-    font-size:40px;
-    margin-left:-10px;
-    font-family:georgia,serif;
-    color:#eee;
+    content: "“";
+    position: absolute;
+    top: -15px;
+    left: -5px;
+    font-family: "callunaregular", Georgia, "Times New Roman", Times, serif;
+    font-size: 12em;
+    line-height: 1;
+    font-style: normal;
+    z-index: -1;
+    color: #e0e0e0;
 }
+
 blockquote p {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 300;
     line-height: 18px;
     margin: 0;
     font-style: italic;
+    font-family: 'PT Sans Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 code, pre {
     font-family: Monaco, Andale Mono, Courier New, monospace;

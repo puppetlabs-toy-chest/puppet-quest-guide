@@ -81,13 +81,13 @@ The syntax you see here is an example of Puppet's Domain-Specific Language (DSL)
 
 ## Tasks
 
-The first step in mastering Puppet is to discipline learn to understand the world around you as a collection of **resources**. You will not be using resource declarations to shape your environment just yet. Instead you will exercise your power by hand and use Puppet only to inspect the consequences of your actions.
+The first step in mastering Puppet is to learn to understand the world around you as a collection of **resources**. You will not be using resource declarations to shape your environment just yet. Instead you will exercise your power by hand and use Puppet only to inspect the consequences of your actions.
 
 **TASK #1:** The path to greatness is a lonely one. Fortunately, your superuser status gives you the ability to create an assistant for yourself:
 
 	useradd ralph
 
-Awesome! Did you notice that your 'completed tasks' increased to 1/6? Check on your progress to how you're doing.
+Awesome! Did you notice that your 'completed tasks' increased to 1/6? Check on your progress to see how you're doing.
 
 	quest --progress
 
