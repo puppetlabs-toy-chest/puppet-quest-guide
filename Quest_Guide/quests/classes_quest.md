@@ -57,7 +57,7 @@ Now that we have a class called `broken_ops`, we can include the above class in 
 
 	puppet apply /root/examples/modules1-ntp1.pp
 
-That's funny. Nothing happened. This is because the class in the `modules1-ntp1.pp` manifest is only being defined and not delcared.
+That's funny. Nothing happened. This is because the class in the `modules1-ntp1.pp` manifest is only being defined and not declared.
 
 **TASK #2:** We are going to have to modify the `modules1-ntp1.pp` manifest a little to make sure Puppet applies the defined resources. Type the following command:
 
