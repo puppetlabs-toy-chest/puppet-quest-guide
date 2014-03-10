@@ -5,17 +5,19 @@ layout: default
 
 # Resource Ordering
 
-The tasks we will accompish in this quest will help you learn more about specifying the order in which Puppet should manage the resources in a manifest. If you're ready to get started, type the following command:
-
-	quest --start ordering
-
-## What you should already know
+### Prerequisites
 
 - Resources Quest
 - Mainfest Quest
 - Classes Quest
 - Varibales Quest
 - Conditions Quest
+
+## Quest Objectives
+
+The tasks we will accompish in this quest will help you learn more about specifying the order in which Puppet should manage the resources in a manifest. If you're ready to get started, type the following command:
+
+	quest --start ordering
 
 ## Explicit Ordering
 
@@ -53,9 +55,7 @@ service { 'sshd':
 
 Here, the service resource with the title 'sshd' will be applied **after** the file resource with the title '/etc/ssh/sshd_config'. Furthermore, if any other changes are made to the targeted file resource, the service will refresh.
 
-## Tasks
-
-1. 
+{% Task 1 %}
 
 
 ## Let's do a Quick Review
@@ -63,7 +63,3 @@ Here, the service resource with the title 'sshd' will be applied **after** the f
 Up until this point you've been on a journey towards learning Puppet. To be successful at doing that, it is imperative you understand the fundatmental components of using Puppet: Resources and Manifests. Before we progress any further, it is important that you reflect on your understanding of these components. Feel free to revisit those quests should you not fully grasp the information. 
 
 Furthermore, Puppet Manifests are highly scable components to stablizing and maximizing your infrastructure. To customize that stablization, we examined Classes, Variables, Facts, Conditional Statements and Resource Ordering. It is important that you understand when and how these components to Puppet Manifests are used. Should you be in doubt of your understanding, please revisit those quests. 
-
-## 
-
-### You're powers are immense and you're quickly learning how to control them. You are about to embark on a very important journey through the [Modules Quest](http://somthing)!

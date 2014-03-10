@@ -3,16 +3,9 @@ title: Modules
 layout: default
 ---
 
-# Modules Quest
+# Modules
 
-A Puppet **module** is a collection of resources, definitions, files, templates, etc, organized around a particular purpose. In order to enable Puppet to find these class definitions, manifests allow one to test the class defintions that it may need to configure a machine for a particular purpose. We adhere to a consistent directory structure in which we place class definitions and any other files that are needed etc.
-
-
-The tasks we will accompish in this quest will explore and help you get started learning about modules. When you're ready, type the following command:
-
-	quest --start modules
-
-## What you should already know
+### Prerequisites
 
 - Resources Quest
 - Mainfest Quest
@@ -20,6 +13,15 @@ The tasks we will accompish in this quest will explore and help you get started 
 - Varibales Quest
 - Conditions Quest
 - Ordering Quest
+
+## Quest Objectives
+
+A Puppet **module** is a collection of resources, definitions, files, templates, etc, organized around a particular purpose. In order to enable Puppet to find these class definitions, manifests allow one to test the class defintions that it may need to configure a machine for a particular purpose. We adhere to a consistent directory structure in which we place class definitions and any other files that are needed etc.
+
+
+The tasks we will accompish in this quest will explore and help you get started learning about modules. When you're ready, type the following command:
+
+	quest --start modules
 
 ## Module Path
 
@@ -45,43 +47,54 @@ The `include` function declares a class, if it hasn’t already been declared so
 
 This lets you safely declare a class in several places. If some class depends on something in another class, it can declare that class without worrying whether it’s also being declared in `site.pp`.
 
-## Tasks
+{% Task 1 %}
+Find your `modulepath` and then ensure your are working in that directory.
 
-1. Find your `modulepath` and then ensure your are working in that directory.
+{% Task 2 %}
+Create your manifests directory by typing the following command:
 
-2. Create your manifests directory by typing the following command:
+	mkdir -p users/manifests
 
-		mkdir -p users/manifests
+{% Task 3 %}
+Now, we're going to want to edit the manifest. Type the following command:
 
-3. Now, we're going to want to edit the manifest. Type the following command:
+	nano users/manifest/init.pp
 
-		nano users/manifest/init.pp
+{% Task 4 %}
+Do you remember the `user` resource and the anatomy of how a resource is constructed? Using that knowledge can you make sure that user como is present in the user class.
 
-4. Do you remember the `user` resource and the anatomy of how a resource is constructed? Using that knowledge can you make sure that user como is present in the user class.
+{% Task 5 %}
+Next, check to make sure the syntax you entered is correct using `puppet parser`.
 
-5. Next, check to make sure the syntax you entered is correct using `puppet parser`.
+{% Task 6 %}
+Lets now make a test directory in the same modulepath. Type the following command:
 
-6. Lets now make a test directory in the same modulepath. Type the following command:
+	mkdir users/tests
 
-		mkdir users/tests
+{% Task 7 %}
+Like we did before, we are going to want to edit the manifest in the test directory: Type the following command:
 
-7. Like we did before, we are going to want to edit the manifest in the test directory: Type the following command:
+	nano users/tests/init.pp
 
-		nano users/tests/init.pp
-
-8. We are going to take advantage of the `include` function now. Type the following information into the manifest:
+{% Task 8 %}
+We are going to take advantage of the `include` function now. Type the following information into the manifest:
 
 		include users
 
-9. Next, check to make sure the syntax you entered is correct using `puppet parser`.
+{% Task 9 %}
+Next, check to make sure the syntax you entered is correct using `puppet parser`.
 
-10. Oh shoot! We forgot to add the staff `group` to user como. Can you quickly run back into the manifest and make sure the staff `group` is present. Don't forgot to add `/bin/bash` as the shell and `gid => 'staff',` for user como as well.
+{% Task 10 %}
+Oh shoot! We forgot to add the staff `group` to user como. Can you quickly run back into the manifest and make sure the staff `group` is present. Don't forgot to add `/bin/bash` as the shell and `gid => 'staff',` for user como as well.
 
-11. Sorry about that, check again to make sure the syntax you entered is correct using `puppet parser`.
+{% Task 11 %}
+Sorry about that, check again to make sure the syntax you entered is correct using `puppet parser`.
 
-12. We're not ready to execute this manifest just yet. We want to test run it first. Do you remember in the Manifests Quest when we discussed how to do that? Go ahead and apply the manifest in the test directory in `--noop` mode.
+{% Task 12 %}
+We're not ready to execute this manifest just yet. We want to test run it first. Do you remember in the Manifests Quest when we discussed how to do that? Go ahead and apply the manifest in the test directory in `--noop` mode.
 
-13. Great! Everything is running how it should be. Now finish this off by enforcing your class on the local system.
+{% Task 13 %}
+Great! Everything is running how it should be. Now finish this off by enforcing your class on the local system.
 
 ### You just created your first puppet module!! 
 
@@ -90,8 +103,3 @@ This lets you safely declare a class in several places. If some class depends on
 ### There are two important things to note here:
 1.  Puppet's DSL, by virtue of its __declarative__ nature, makes it possible for us to define the attributes of the resouces, without the need to concern ourselves with _how_ the definition is enforced. Puppet uses the Resource Abstraction Layer to abstract away the complexity surrounding the specific commands to be executed, and the operating system-specific tools used to realize our definition! You did not need to know or specify the command to create a new unix user group to create the group `staff`, for example.
 2. By creating a class called users, it is now possible for us to automate the process of creating the users we need on any system with Puppet installed on it, by simply including that class on that system. Class definitions are reusable!
-## 
-
-### Building modules are making you much more stronger than anticipated. I think you're ready to be introduced to another very powerful tool. When you're ready, follow the [Puppet Module Tool Quest](http://somthing) path.
-
-

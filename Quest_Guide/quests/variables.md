@@ -3,7 +3,16 @@ title: Variables
 layout: default
 ---
 
-# Variables and Variability
+# Variables
+
+### Prerequisites
+
+- Resources Quest
+- Mainfest Quest
+- Classes Quest
+
+## Quest Objectives
+
 In this quest you will gain a better understanding of using variable and facts in your manifest to make operating more scalable. 
 
 >The green reed which bends in the wind is stronger than the mighty oak which breaks in a storm.
@@ -13,12 +22,6 @@ In this quest you will gain a better understanding of using variable and facts i
 The tasks we will accompish in this quest will help you learn more about manipulating your Puppet manifests to accomplish specific tasks. If you're ready to get started, type the following command:
 
 	quest --start variables
-
-## What you should already know
-
-- Resources Quest
-- Mainfest Quest
-- Classes Quest
 
 ## Variables
 
@@ -39,16 +42,18 @@ People who write manifests to share with the public often adopt the habit of alw
 
 Lets make our manifests more adaptable by using variables.
 
-### Tasks
 
-1. To see an example of a variable doing its duty, first navigate to your workshop directory and create a new manifest called `fickle.pp`
+{% Task 1 %}
+To see an example of a variable doing its duty, first navigate to your workshop directory and create a new manifest called `fickle.pp`
 	
-2.	Enter the following to name and assign a variable:
+{% Task 2 %}
+Enter the following to name and assign a variable:
 {% highlight ruby %}
 $variable_name = "variable value!\n"
 {% endhighlight %}
 
-3. Now lets have that variable do something productive for us. Can you...
+{% Task 3 %}
+Now lets have that variable do something productive for us. Can you...
 
 ## Facts
 
@@ -91,8 +96,7 @@ and then applied the manifest, this is what would be returned:
 
 It's as simple as that without hardly doing anything on your end. Feeling confident? Lets combine our knowledge of variables and facts in our manifest
 
-### Tasks
-
-1. 
+{% Task 1 %}
+s
 
 Our manifests are becoming more flexible, with pretty much no real work on our part.
