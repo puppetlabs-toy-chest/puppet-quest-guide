@@ -22,7 +22,7 @@
 @media all{
 
         div.lvm-task-number {
-        color: #302B6D;
+        color: #7FBA2D;
         font-family: 'Arvo','Helvetica Neue',Helvetica,Arial,sans-serif;
         font-size: 16px;
         font-style: bold;
@@ -31,28 +31,69 @@
     div.lvm-task-number p:before {
         display: inline;
         font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        content: ' ';
-        font-size: 24px;
-        color: #666;
+        content: ' ';
+        font-size: 20px;
+        color: #7FBA2D;
     }
+
+        div.lvm-callout{
+        padding: 1em;
+        margin: 1em 0em 1em 0em;
+        color: #333;
+        float:right;
+        width: 180px;
+        background: #fafafa;
+        border: 1pt solid #eee;
+        position: relative;
+        left: 1em;
+        page-break-inside: avoid;
+    }
+    
+    div.lvm-callout p{
+        font-size: 12px;
+        line-height: 1.2;
+
+    }
+    
+    div.lvm-tip p:before{
+        font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        content: "  ";
+        display: block;
+        font-size: 15pt;
+        text-align: center;        
+    }
+    
+    div.lvm-warning p:before{
+        font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        content: "  ";
+        display: block;
+        font-size: 15pt;
+        text-align: center;                
+    }
+    
+    div.lvm-fact p:before{
+        font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        content: "  ";
+        display: block;
+        font-size: 15pt;
+        text-align: center;        
+    }
+    
+    div.lvm-inline-aside{
+        font-size: 12px;
+        background: #eee;
+        color: #666;
+        padding: 1em;
+        margin: 2em;
+    }
+    div.lvm-inline-aside strong{
+        font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;    
+        line-height: 2;    
+    }
+
 }
 
-@media screen {
-    div.lvm-task-number {
-        color: #7FBA2D;    
-        font-family: 'Arvo','PT Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-        font-size: 16px;
-        font-style: bold;
-    }
-    
-    div.lvm-task-number p:before {
-        display: inline;
-        font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        content: ' ';
-        font-size: 24px;
-        color: #666;
-    }
-    
+@media screen {    
     
     body, #page {
         height: 100%;
@@ -311,58 +352,7 @@
         vertical-align: super;
         line-height: 0;
     }
-    div.lvm-callout{
-        padding: 1em;
-        margin: 1em 0em 1em 0em;    
-        background: #eee;
-        color: #333;
-        position: relative;
-        left: 2em;
-        float: right;
-        width: 180px;
-    }
-    
-    div.lvm-callout p{
-        font-size: 12px;
-        width: 90%;
-    }
-    
-    div.lvm-tip p:before{
-        font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-        content: "Tip:";
-        font-size: 16px;
-        display: block;
-        margin-bottom: .5em;
-    }
-    
-    div.lvm-warning p:before{
-        font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-        content: "Warning:";
-        font-size: 16px;
-        display: block;
-        margin-bottom: 1em;
-    }
-    
-    div.lvm-fact p:before{
-        font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-        content: "Fact:";
-        font-size: 16px;
-        display: block;
-        margin-bottom: 1em;
-    }
-    
-    div.lvm-inline-aside{
-        font-size: 12px;
-        background: #eee;
-        color: #666;
-        padding: 1em;
-        margin: 2em;
-    }
-    
-    div.lvm-inline-aside strong{
-        font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;    
-        line-height: 2;    
-    }
+ 
     #sidebar-first ul li, #sidebar-second ul li {
         display: block;
         margin: 0 0 .75em;
@@ -559,7 +549,7 @@
     h5, 
     h6 {
         font-family: "Arvo", "Helvetica Neue",Helvetica,Arial,sans-serif;
-        color: #302B6D;
+        color: #7FBA2D;
         font-weight: normal;
         line-height: 1.15em;
         margin: 1em 0 .25em;
@@ -568,7 +558,8 @@
     
     content h1 {
         margin-top: 200px;
-        font-size: 28px;
+        margin-bottom: 50px;
+        font-size: 36px;
         string-set: quest-title content();
         page: content;
         prince-page-group: start;
@@ -583,11 +574,11 @@
     -webkit-margin-end: 0px;
     }
     h3 {
-        color: #302B6D;    
+        color: #7FBA2D;    
         font-size: 18px;
     }
     h4 {
-        color: #302B6D;
+        color: #7FBA2D;
         font-size: 14px;
     }
     h5 {
@@ -671,57 +662,6 @@
         font-size: 0.83em;
         vertical-align: super;
         line-height: 0;
-    }
-    div.lvm-callout{
-        padding: 1em;
-        margin: 1em 0em 1em 0em;
-        color: #333;
-        float:right;
-        width: 180px;
-        background: #eee;
-        position: relative;
-        left: 2em;
-        page-break-inside: avoid;
-    }
-    
-    div.lvm-callout p{
-        font-size: 12px;
-    }
-    
-    div.lvm-tip p:before{
-        font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-        content: "Tip:";
-        display: block;
-        font-size: 15pt;
-        margin-bottom: 1em;
-    }
-    
-    div.lvm-warning p:before{
-        font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-        content: "Warning:";
-        display: block;
-        font-size: 15pt;
-        margin-bottom: 1em;
-    }
-    
-    div.lvm-fact p:before{
-        font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-        content: "Fact:";
-        display: block;
-        font-size: 15pt;
-        margin-bottom: 1em;
-    }
-    
-    div.lvm-inline-aside{
-        font-size: 12px;
-        background: #eee;
-        color: #666;
-        padding: 1em;
-        margin: 2em;
-    }
-    div.lvm-inline-aside strong{
-        font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;    
-        line-height: 2;    
     }
 
     .highlight  { background: #fff; margin: .5em;}
