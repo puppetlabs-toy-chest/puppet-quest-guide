@@ -5,16 +5,18 @@ layout: default
 
 # Conditional Statements
 
-Conditional statements let your Puppet code behave differently in certain situations. By using facts as conditions, you can easily make Puppet do different things on different operating systems, but conditional statements are most helpful when combining facts with data retrieved from an external source. Conditional statements are not a required necessity to using Puppet, but offer an added flexible bonus proving the power of Puppet. To start this quest enter the following command:
-
-	quest --start conditions
-
-## What you should already know
+### Prerequisites
 
 - Resources Quest
 - Mainfest Quest
 - Classes Quest
 - Varibales Quest
+
+## Quest Objectives
+
+Conditional statements let your Puppet code behave differently in certain situations. By using facts as conditions, you can easily make Puppet do different things on different operating systems, but conditional statements are most helpful when combining facts with data retrieved from an external source. Conditional statements are not a required necessity to using Puppet, but offer an added flexible bonus proving the power of Puppet. To start this quest enter the following command:
+
+	quest --start conditions
 
 ## `if` Statements
 
@@ -41,27 +43,31 @@ Puppet’s `if` statements behave much like those in any other language. The `if
 The `elsif` and `else` clauses are optional.
 {% endtip %}
 
-### Tasks
+{% task 1 %}
+Lets take a look at an existing manifest and update it with `if` conditions and a variable
 
-1. Lets take a look at an existing manifest and update it with `if` conditions and a variable
+	nano somthing/something.pp
 
-		nano somthing/something.pp
-
-2. Lets write the `if` condition in Puppet's DSL with the following criteria:
-
-	- 
-
-3. Now lets write the `elseif` considition in Puppet's DSL with the following criteria:
+{% task 2 %}
+Lets write the `if` condition in Puppet's DSL with the following criteria:
 
 	- 
 
-4. Now lets write the `else` considition in Puppet's DSL with the following criteria:
+{% task 3 %}
+Now lets write the `elseif` considition in Puppet's DSL with the following criteria:
 
 	- 
 
-5. Save the manifest
+{% task 4 %}
+Now lets write the `else` considition in Puppet's DSL with the following criteria:
 
-6. Apply the manifest
+	- 
+
+{% task 5 %}
+Save the manifest
+
+{% task 6 %}
+Apply the manifest
 
 
 ## `unless` Statements
@@ -76,9 +82,8 @@ The `unless` statement works like a reversed `if` statement. They take a conditi
 You cannot include `elsif` or `else` clauses in `unless` conditional statements.
 {% endtip %}
 
-### Tasks
+{% task 7 %}
 
-1.
 
 ## Case Statements
 
@@ -103,10 +108,5 @@ Puppet compares the control expression to each of the cases, in the order they a
 - Regular expression cases are compared with the `=~` operator (which is case-sensitive).
 - The special `default` case matches anything.
 
-### Tasks
+{% task 8 %}
 
-1. 
-
-## 
-
-### I hope you're seeing the progression of your journey. Conditional statments are the third layer under classes in further manipulating our manifests. Again, lets journey one level deeper into the forest and learn more about resource ordering in the [Ordering Quest](http://somthing)!
