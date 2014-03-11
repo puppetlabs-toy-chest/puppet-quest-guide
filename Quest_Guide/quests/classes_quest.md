@@ -53,14 +53,14 @@ In the above example of classifying broken users on Elvium, we **defined** a cla
 
 Now that we have a class called `broken_ops`, we can include the above class in the configuration of a machine to manage broken users in Elvium.
 
-{% Task 1 %}
+{% task 1 %}
 Run the following command
 
 	puppet apply /root/examples/modules1-ntp1.pp
 
 That's funny. Nothing happened. This is because the class in the `modules1-ntp1.pp` manifest is only being defined and not declared.
 
-{% Task 2 %}
+{% task 2 %}
 We are going to have to modify the `modules1-ntp1.pp` manifest a little to make sure Puppet applies the defined resources. Type the following command:
 
 	nano /root/examples/modules1-ntp1.pp
@@ -76,10 +76,10 @@ You can direct Puppet to apply a class definition on a system by using the __*in
     
 A manifest with just the single line above will apply the definition of class users to the system. But when you say, `include users` how does Puppet know where to find the class defintion? We will answer that question as you journey.
 
-{% Task 3 %}
+{% task 3 %}
 In the `modules1-ntp1.pp` manifest go ahead and add the `include` command at the very end. This will hopefully tell Puppet to apply the defined `ntp` resource.
 
-{% Task 4 %}
+{% task 4 %}
 Go ahead and now apply the manifest `/root/examples/modules1-ntp1.pp`.
 
 Great! This time Puppet actually applied our defined resources. Always remember to define first, then delcare. However, please do not ever do this above example in real life, since you may want to include classes across nodes. This is just an example to show you the functionality and benefit of classes. In the Modules Quest we will show you the proper way define classes and declare classes separately.

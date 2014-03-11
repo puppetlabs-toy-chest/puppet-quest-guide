@@ -43,16 +43,16 @@ People who write manifests to share with the public often adopt the habit of alw
 Lets make our manifests more adaptable by using variables.
 
 
-{% Task 1 %}
+{% task 1 %}
 To see an example of a variable doing its duty, first navigate to your workshop directory and create a new manifest called `fickle.pp`
 	
-{% Task 2 %}
+{% task 2 %}
 Enter the following to name and assign a variable:
 {% highlight ruby %}
 $variable_name = "variable value!\n"
 {% endhighlight %}
 
-{% Task 3 %}
+{% task 3 %}
 Now lets have that variable do something productive for us. Can you...
 
 ## Facts
@@ -96,7 +96,7 @@ and then applied the manifest, this is what would be returned:
 
 It's as simple as that without hardly doing anything on your end. Feeling confident? Lets combine our knowledge of variables and facts in our manifest
 
-{% Task 1 %}
-s
+{% task 4 %}
+
 
 Our manifests are becoming more flexible, with pretty much no real work on our part.

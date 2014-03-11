@@ -19,13 +19,19 @@ Welcome to Elvium, user. Have a look around, if you like, but take note: what yo
 
 If you choose to follow the path set forth in this Quest Guide, you will learn to channel your powers by using the art of Puppet. With only a few words, shape the environment around as you see fit. Inscribe your wishes into potent Puppet manifests to ensure that your will continues to be done when journey beyond Elvium to bring other systems under your dominion.
 
+<!-- I (Bruce) think we should get rid the Getting Started section -->
+
 ## Getting Started
 
 Your arrival has been foretold, user, and all the necessary arrangements were made to ensure that this Quest Guide would fall into your hands. By entering the command `puppet apply setup/guide.pp`, you activated a Puppet **manifest** we had prepared in anticipation of your arrival.
 
 ## Quest Navigation
 
-In order to learn more about Puppet, and to work your way through Elvium, you will have to complete a series of Quests. Each Quest has Tasks that need to be completed. Transparent information is essential on Elvium. To monitor your status with the quests on Elvium we've created custom commands for you.
+In order to learn more about Puppet, and to work your way through this learning virtual machine, you will have to complete a series of Quests and with each Quest you have certain amount of 'Tasks' that need to be completed. To monitor your status as you progress, we've created custom commands for you.
+
+{% tip %}
+These custom `quest` commands are not related to Puppet. They are only related to this Learning Virtual Machine.
+{% endtip %}
 
 The following command will help you with using the quest tool:
 
@@ -40,21 +46,19 @@ The `quest --help` command provides you with an understanding of several quest t
 	quest --showall		# Show all available quests
 	quest --start		# Provide name of the quest to start tracking
 	
-We'll explain the commands needed as we go.
+{% tip Clear your terminal %}
+By typing `clear` into your terminal will clear everything on your screen.
+{% endaside %}
 
-<!-- Add a screenshot that informs the user of the following information:
-We need to display an image of a command terminal outline the 'Completed Tasks' section and when it means.
+{% aside Remember these commands %}
+These will be integrated into the first few quests to help you remember them. We'll explain these commands further as you progress.
+{% endtip %}
 
-We need to outline where one would type a command into the terminal.
-
-We need to outline where the output is presented.
-
-We need to inform the user to use `clear` as a method of removing information from their terminal.
--->
+![image](./assets/terminal.png)
 
 ## Facter
 
-You are a curious being. Would you like to further investigate Elvium? To do this on Elvium we use the tool `facter` to obtains `facts` about the system. Here are a few for you to try out:
+Facter is a Puppet tool that helps you obtain facts about your system. Here are a few items for you to get to know your system a little better:
 
 	facter ipaddress
 	facter facterversion
@@ -66,3 +70,7 @@ You are a curious being. Would you like to further investigate Elvium? To do thi
 {% tip %}
 You can see all the facts by running facter -p
 {% endtip %}
+
+## Summary
+
+In this quest we introduced you to the quest navigation commands, which provides you real time feedback on your progress using the learning virtual machine. We also introduced you to a Puppet tool called Facter, which allows to easily obtain facts about Puppet, your system, this virtual machine and so much more. This is just a primer quest to get you familar with using the command line and introduction to the quest structure. When you're ready, let's get started learning about Puppet Resources.

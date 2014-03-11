@@ -43,30 +43,30 @@ Puppet’s `if` statements behave much like those in any other language. The `if
 The `elsif` and `else` clauses are optional.
 {% endtip %}
 
-{% Task 1 %}
+{% task 1 %}
 Lets take a look at an existing manifest and update it with `if` conditions and a variable
 
 	nano somthing/something.pp
 
-{% Task 2 %}
+{% task 2 %}
 Lets write the `if` condition in Puppet's DSL with the following criteria:
 
 	- 
 
-{% Task 3 %}
+{% task 3 %}
 Now lets write the `elseif` considition in Puppet's DSL with the following criteria:
 
 	- 
 
-{% Task 4 %}
+{% task 4 %}
 Now lets write the `else` considition in Puppet's DSL with the following criteria:
 
 	- 
 
-{% Task 5 %}
+{% task 5 %}
 Save the manifest
 
-{% Task 6 %}
+{% task 6 %}
 Apply the manifest
 
 
@@ -82,7 +82,7 @@ The `unless` statement works like a reversed `if` statement. They take a conditi
 You cannot include `elsif` or `else` clauses in `unless` conditional statements.
 {% endtip %}
 
-{% Task 1 %}
+{% task 7 %}
 
 
 ## Case Statements
@@ -108,5 +108,5 @@ Puppet compares the control expression to each of the cases, in the order they a
 - Regular expression cases are compared with the `=~` operator (which is case-sensitive).
 - The special `default` case matches anything.
 
-{% Task 1 %}
+{% task 8 %}
 

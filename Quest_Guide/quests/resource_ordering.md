@@ -55,7 +55,7 @@ service { 'sshd':
 
 Here, the service resource with the title 'sshd' will be applied **after** the file resource with the title '/etc/ssh/sshd_config'. Furthermore, if any other changes are made to the targeted file resource, the service will refresh.
 
-{% Task 1 %}
+{% task 1 %}
 
 
 ## Let's do a Quick Review

@@ -37,7 +37,7 @@ To establish the manifest you want to place it in your home directory (`/root`).
 
 	cd /root
 
-{% Task 1 %}
+{% task 1 %}
 Now we are ready to create a manifest to manage the user Ralph. The `.pp` extension identifies a file as a manifest.
 
 	nano ralph.pp
@@ -48,7 +48,7 @@ For the sake of simplicity and consistency, we use the text editor nano in our i
 
 {% endaside %}
 
-{% Task 2 %}
+{% task 2 %}
 Type the following deadly incantation into your manifest:
 
 {% highlight ruby %}
@@ -67,7 +67,7 @@ Save the file and exit your text editor.
 The puppet parser can only ensure that the syntax of a manifest is well-formed. It can't guarantee that your variables are correctly named, your logic is valid, or, for that matter, that your manifest does what you want it to.
 {% endwarning %}
 
-{% Task 3 %}
+{% task 3 %}
 Enter the following command in the command line:
 
 	puppet parser validate ralph.pp
@@ -78,17 +78,17 @@ If the parser returns nothing, continue on. If not, make the necessary changes w
 
 This is a very handy tool for learning to write code in Puppet's DSL and is a standalone puppet execution tool. However, in reality, you'll probably use this tool to describe the configurations of an entire system in a single file. This description will be constructed as a list of all resources you want to manage on your system, but as you can imagine, that might end up being a _really_ long file! You will see how this can be a more manageable process when you come across **Classes** during your journey.
 
-{% Task 4 %}
+{% task 4 %}
 Simulate the change in the system without actually enforcing the `ralph.pp` manifest
 
 	puppet apply --noop ralph.pp
 
-{% Task 5 %}
+{% task 5 %}
 Using `puppet apply` apply the simulated manifest `ralph.pp`
 
 	puppet apply ralph.pp
 
-{% Task 6 %}
+{% task 6 %}
 Check in on Ralph. How is his health?
 
 	puppet resource user ralph
@@ -101,12 +101,12 @@ He is not too well, it appears! Clearly Ralph was no match for your skills in ma
 
 Check on your progress. How are you doing so far?
 
-{% Task 7 %}
+{% task 7 %}
 With manifests you can create as well as destroy. Lets create a new assistant by adding Jack to the Elvium system.
 
 	nano jack.pp
 
-{% Task 8 %}
+{% task 8 %}
 Write the following code to your manifest:
 
 {% highlight ruby %}
@@ -119,22 +119,22 @@ user { 'jack':
 }
 {% endhighlight %}
 
-{% Task 9 %}
+{% task 9 %}
 Check your syntax:
 
 	puppet parser validate jack.pp
 	
-{% Task 10 %}
+{% task 10 %}
 Simulate your changes:
 
 	puppet apply --noop jack.pp
 	
-{% Task 11 %}
+{% task 11 %}
 And apply:
 
 	puppet apply jack.pp
 	
-{% Task 12 %}
+{% task 12 %}
 Now check in on Jack. 
 
 	puppet resource user jack	

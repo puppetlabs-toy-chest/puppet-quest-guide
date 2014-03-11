@@ -47,56 +47,56 @@ The `include` function declares a class, if it hasn’t already been declared so
 
 This lets you safely declare a class in several places. If some class depends on something in another class, it can declare that class without worrying whether it’s also being declared in `site.pp`.
 
-{% Task 1 %}
+{% task 1 %}
 Find your `modulepath` and then ensure your are working in that directory.
 
-{% Task 2 %}
+{% task 2 %}
 Create your manifests directory by typing the following command:
 
 	mkdir -p users/manifests
 
-{% Task 3 %}
+{% task 3 %}
 Now, we're going to want to edit the manifest. Type the following command:
 
 	nano users/manifest/init.pp
 
-{% Task 4 %}
+{% task 4 %}
 Do you remember the `user` resource and the anatomy of how a resource is constructed? Using that knowledge can you make sure that user como is present in the user class.
 
-{% Task 5 %}
+{% task 5 %}
 Next, check to make sure the syntax you entered is correct using `puppet parser`.
 
-{% Task 6 %}
+{% task 6 %}
 Lets now make a test directory in the same modulepath. Type the following command:
 
 	mkdir users/tests
 
-{% Task 7 %}
+{% task 7 %}
 Like we did before, we are going to want to edit the manifest in the test directory: Type the following command:
 
 	nano users/tests/init.pp
 
-{% Task 8 %}
+{% task 8 %}
 We are going to take advantage of the `include` function now. Type the following information into the manifest:
 
 		include users
 
-{% Task 9 %}
+{% task 9 %}
 Next, check to make sure the syntax you entered is correct using `puppet parser`.
 
-{% Task 10 %}
+{% task 10 %}
 Oh shoot! We forgot to add the staff `group` to user como. Can you quickly run back into the manifest and make sure the staff `group` is present. Don't forgot to add `/bin/bash` as the shell and `gid => 'staff',` for user como as well.
 
-{% Task 11 %}
+{% task 11 %}
 Sorry about that, check again to make sure the syntax you entered is correct using `puppet parser`.
 
-{% Task 12 %}
+{% task 12 %}
 We're not ready to execute this manifest just yet. We want to test run it first. Do you remember in the Manifests Quest when we discussed how to do that? Go ahead and apply the manifest in the test directory in `--noop` mode.
 
-{% Task 13 %}
+{% task 13 %}
 Great! Everything is running how it should be. Now finish this off by enforcing your class on the local system.
 
-### You just created your first puppet module!! 
+#### You just created your first puppet module!! 
 
 ## 
 
