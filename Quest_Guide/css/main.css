@@ -3,23 +3,38 @@
 */
 
 @font-face {
-font-family: 'Arvo';
-src: url('../fonts/arvo/Arvo-Regular.ttf') format('truetype');
+    font-family: 'Arvo';
+    src: url('../fonts/arvo/Arvo-Regular.ttf') format('truetype');
 }
 
 @font-face {
-font-family: 'PT Sans';
-src: url('../fonts/PT-Sans/PTC55F.ttf') format('truetype');
+    font-family: 'PT Sans';
+    src: url('../fonts/PT-Sans/PTC55F.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'FontAwesome';
-  src: url('../fonts/fontawesome/fontawesome-webfont.eot?v=3.0.1');
-  src: url('../fonts/fontawesome/fontawesome-webfont.eot?#iefix&v=3.0.1') format('embedded-opentype'),
-    url('../fonts/fontawesome/fontawesome-webfont.woff?v=3.0.1') format('woff'),
-    url('../fonts/fontawesome/fontawesome-webfont.ttf?v=3.0.1') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'FontAwesome';
+    src: url('../fonts/fontawesome/fontawesome-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@media all{
+
+        div.lvm-task-number {
+        color: #302B6D;
+        font-family: 'Arvo','Helvetica Neue',Helvetica,Arial,sans-serif;
+        font-size: 16px;
+        font-style: bold;
+    }
+
+    div.lvm-task-number p:before {
+        display: inline;
+        font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        content: ' ';
+        font-size: 24px;
+        color: #666;
+    }
 }
 
 @media screen {
@@ -453,38 +468,50 @@ src: url('../fonts/PT-Sans/PTC55F.ttf') format('truetype');
 
 @media print { 
      
-    /*
-    @page { 
+    @page {
+        /*
         size: 15cm 40cm;
         margin: 10pt;
-        
+        */
+        margin: 80pt;
     }
-    */
     
     cover {
         page: cover;
     }
 
-    cover {
-        page: cover;
+    content {
+        page: content;
+        counter-reset: page 1;
     }
 
-    @page{
-        @bottom-right {
-            content: counter(page)
+    @page content{
+        @bottom {
+            content: counter(page);
+            font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            font-size: 10pt;
         }
-        /*
-        @bottom-center {
-            content: "Copyright Puppet Labs, 2014";
-            font-size: 8pt;
+        @top {
+            content: string(quest-title);
+            /*
+            font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            */
+            font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            font-size: 10pt;
+            font-style: italic;        
         }
-        */
     }
 
-    @page cover {
-        @top{
-            content: 'foober';
+    @page content:first{
+        @top {
+            content: '';
         }
+        @bottom {
+            content: counter(page);
+            font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            font-size: 10pt;
+        }
+
     }
 
     #cover-page h1{
@@ -498,18 +525,10 @@ src: url('../fonts/PT-Sans/PTC55F.ttf') format('truetype');
     #top-bar{
         background-color: #635F5E;
     }
-    
-    div.lvm-task-number {
-        color: #302B6D;
-        font-family: 'Arvo','Helvetica Neue',Helvetica,Arial,sans-serif;
-        font-size: 16px;
-        font-style: bold;
-    }
-    
+        
     div.page-break{
         page-break-after: always;
-    }
-    
+    }   
     
     h1,
     h2,
@@ -525,7 +544,7 @@ src: url('../fonts/PT-Sans/PTC55F.ttf') format('truetype');
     
     body {
         font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 16px;
+        font-size: 14px;
     }
     
     p {
@@ -547,9 +566,12 @@ src: url('../fonts/PT-Sans/PTC55F.ttf') format('truetype');
         text-rendering: optimizeLegibility;
     }
     
-    h1 {
+    content h1 {
         margin-top: 200px;
         font-size: 28px;
+        string-set: quest-title content();
+        page: content;
+        prince-page-group: start;
     }
     
     h2 {
@@ -595,6 +617,7 @@ src: url('../fonts/PT-Sans/PTC55F.ttf') format('truetype');
       margin-top: 0;
       quotes: "" "";
       margin-bottom: 0.5em;
+      page-break-inside: avoid;
     }
     
     blockquote:before {
