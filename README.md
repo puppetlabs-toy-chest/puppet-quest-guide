@@ -23,6 +23,43 @@ and entering the command:
 Now open your web browser and point it to:
 	
 	localhost:4000
+	
+## Liquid Templates
+
+We use the Liquid templating system in order to extend the syntax available in markdown and allow us to include asides and custom-formatted task notation.
+
+Errors in template syntax will prevent Jekyll from running properly. Before making a pull request with content changes, make sure that Jekyll will run. If there are Liquid syntax errors, Jekyll will throw a Liquid Exception and point you to the offending file.
+
+There are three types of aside that will be displayed floating to the right of the text. Each has an icon according to its type and will include the content between the template tags. This content should be kept brief, and you should avoid using too many of these in close succession to avoid clutter.
+
+'''
+{% tip %}
+Here's a tip!
+{% endtip %}
+
+{% warning %}
+Here's a warning!
+{% endwarning %}
+
+{% fact %}
+Here's a fact!
+{% endfact %}
+'''
+
+There is also an inline-aside style. This is displayed in the main body of the text, but is set off from the flow of the document. Unlike the asides above, this can include a title, which can include spaces. Some special characters work here, but this hasn't been tested, so be sure to double chekc that you don't break things.
+
+'''
+{% aside Title of aside %}
+Content of the aside.
+{% endaside %}
+
+'''
+
+Finally, there is a template to be used in Task numbering. Place this before each task and increment the numbering as needed.
+
+'''
+{% task 1 %}
+'''
 
 ## PDF Generation
 
