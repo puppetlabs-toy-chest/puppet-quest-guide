@@ -46,13 +46,13 @@ The `quest --help` command provides you with an understanding of several quest t
 	quest --showall		# Show all available quests
 	quest --start		# Provide name of the quest to start tracking
 	
-{% tip Clear your terminal %}
+{% tip %}
 By typing `clear` into your terminal will clear everything on your screen.
-{% endaside %}
+{% endtip %}
 
 {% aside Remember these commands %}
 These will be integrated into the first few quests to help you remember them. We'll explain these commands further as you progress.
-{% endtip %}
+{% endaside %}
 
 ![image](./assets/terminal.png)
 
