@@ -21,8 +21,6 @@ def pull_content(filename, print_output=False):
 
 def quest_guide():
    
-    print "Be sure you have run Jekyll. This will ensure that any new changes to the markdown files are reflected in the static html files that this script uses to generate the Quest Guide PDF. If you haven't run Jekyll you will get confused."
-
     path = "./Quest_Guide/_site/quests/"
 
     quests =["welcome.html",
@@ -82,6 +80,8 @@ def setup_guide():
         p.stdin.close()
 
 def main(quest, setup):
+    
+    p = Popen(["jekyll", "build"], cwd=r'./Quest_Guide')
     
     if quest:
         quest_guide()
