@@ -32,7 +32,7 @@ Errors in template syntax will prevent Jekyll from running properly. Before maki
 
 There are three types of aside that will be displayed floating to the right of the text. Each has an icon according to its type and will include the content between the template tags. This content should be kept brief, and you should avoid using too many of these in close succession to avoid clutter.
 
-'''
+```
 {% tip %}
 Here's a tip!
 {% endtip %}
@@ -44,22 +44,22 @@ Here's a warning!
 {% fact %}
 Here's a fact!
 {% endfact %}
-'''
+```
 
 There is also an inline-aside style. This is displayed in the main body of the text, but is set off from the flow of the document. Unlike the asides above, this can include a title, which can include spaces. Some special characters work here, but this hasn't been tested, so be sure to double chekc that you don't break things.
 
-'''
+```
 {% aside Title of aside %}
 Content of the aside.
 {% endaside %}
 
-'''
+```
 
 Finally, there is a template to be used in Task numbering. Place this before each task and increment the numbering as needed.
 
-'''
+```
 {% task 1 %}
-'''
+```
 
 ## PDF Generation
 
