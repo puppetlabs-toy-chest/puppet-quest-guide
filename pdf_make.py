@@ -39,6 +39,15 @@ def quest_guide():
     for quest in quest_list:
         content.insert(0, pull_content(quest))
 
+    titles = content.find_all('h1')
+    titles.reverse()
+
+    for title in titles:
+        title['id'] = '_'.join(title.string.split()).lower()
+        shell.toc.insert(0, BeautifulSoup("<ul><li><a href='#%(href)s'>%(title)s</a></li></ul>" % {'title': title.string, 'href': title['id']}, 'html5lib'))
+
+    shell.toc.insert(0, BeautifulSoup("<h2>Table of Contents</h2>", 'html5lib'))
+
     cover = shell.cover
 
     cover.insert(0, pull_content("./Quest_Guide/_includes/cover.html"))
