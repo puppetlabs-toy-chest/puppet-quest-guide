@@ -75,7 +75,7 @@ The script also has three library dependencies outside of the Python standard li
 
 These can be installed using either pip or easy_install, e.g.
 
-	easy_install BeautifulSoup
+	easy_install BeautifulSoup4
 
 Once the dependencies are installed, navigate to the top directory of the repository, and use the arguments `--setup` or `-s` and/or `--quest` or `-q` to specify which PDFs you would like to generate, e.g.:
 	
