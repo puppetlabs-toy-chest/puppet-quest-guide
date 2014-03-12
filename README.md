@@ -70,7 +70,7 @@ The script uses PrinceXML to generate PDFs, so you must have Prince installed (h
 The script also has three library dependencies outside of the Python standard libraries:
 
 * html5lib
-* BeautifulSoup
+* BeautifulSoup4
 * Markdown
 
 These can be installed using either pip or easy_install, e.g.
