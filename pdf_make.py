@@ -46,7 +46,7 @@ def quest_guide():
         title['id'] = '_'.join(title.string.split()).lower()
         shell.toc.insert(0, BeautifulSoup("<ul><li><a href='#%(href)s'>%(title)s</a></li></ul>" % {'title': title.string, 'href': title['id']}, 'html5lib'))
 
-    shell.toc.insert(0, BeautifulSoup("<h2>Table of Contents</h2>", 'html5lib'))
+    shell.toc.insert(0, BeautifulSoup("<h1>Table of Contents:</h1>", 'html5lib'))
 
     cover = shell.cover
 

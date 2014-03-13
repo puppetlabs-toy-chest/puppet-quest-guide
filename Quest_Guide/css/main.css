@@ -21,10 +21,10 @@
 
 @media all{
 
-        div.lvm-task-number {
-        color: #7FBA2D;
+    div.lvm-task-number {
+        color: #6c6d6d;
         font-family: 'Arvo','Helvetica Neue',Helvetica,Arial,sans-serif;
-        font-size: 16px;
+        font-size: 14px;
         font-style: bold;
     }
 
@@ -33,7 +33,6 @@
         font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         content: ' ';
         font-size: 20px;
-        color: #7FBA2D;
     }
 
         div.lvm-callout{
@@ -160,6 +159,9 @@
         visibility: hidden;
     }
     
+    div.lvm-task-number {
+        color: #7FBA2D;
+    }
     
     #site-header .header-wrapper,
     #site-footer .footer-wrapper,
@@ -483,9 +485,6 @@
         }
         @top {
             content: string(quest-title);
-            /*
-            font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            */
             font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
             font-size: 10pt;
             font-style: italic;        
@@ -503,9 +502,46 @@
         }
 
     }
+
+    @page toc{
+        @top {
+            content: 'Contents';
+            font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            font-size: 10pt;
+            font-style: italic;        
+        }
+
+    }
+
+    div.lvm-task-number {
+        color: #7C6AAB;
+    }
+
+    toc h1 {
+        padding-bottom: 40px;
+        padding-top: 80px;
+    }
+
+    toc ul {
+        list-style: square;
+        color: #7C6AAB;
+    }
+
+    toc {
+        page: toc;
+        width: 460px;
+        line-height: 1.6;
+        font-size: 12pt;
+    }
     
+    toc a {
+        color: #0095dd;
+    }
+
     toc a:after {
-        content: ", " target-counter(attr(href), page);
+        content: target-counter(attr(href), page);
+        float: right;
+        color: black;
     }
 
     #cover-page h1{
@@ -538,7 +574,7 @@
     
     body {
         font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 14px;
+        font-size: 12px;
     }
     
     p {
@@ -553,7 +589,7 @@
     h5, 
     h6 {
         font-family: "Arvo", "Helvetica Neue",Helvetica,Arial,sans-serif;
-        color: #7FBA2D;
+        color: #7C6AAB;
         font-weight: normal;
         line-height: 1.15em;
         margin: 1em 0 .25em;
@@ -579,11 +615,9 @@
     -webkit-margin-end: 0px;
     }
     h3 {
-        color: #7FBA2D;    
         font-size: 18px;
     }
     h4 {
-        color: #7FBA2D;
         font-size: 14px;
     }
     h5 {
