@@ -503,6 +503,10 @@
         }
 
     }
+    
+    toc a:after {
+        content: ", " target-counter(attr(href), page);
+    }
 
     #cover-page h1{
         font-size: 48pt;
@@ -561,6 +565,7 @@
         margin-bottom: 50px;
         font-size: 36px;
         string-set: quest-title content();
+        string-set:  counter(page);
         page: content;
         prince-page-group: start;
     }
