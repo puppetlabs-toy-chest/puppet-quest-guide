@@ -1,17 +1,20 @@
 <aside id="sidebar-first" class="column sidebar first" role="complementary">
     <div id="sidebar-first-inner" class="inner">
         <div class="content">
+            <h2>Quests</h2>
             <div class="menu-block-wrapper menu-block-7 menu-name-main-menu parent-mlid-0 meni-level-2">
                 <ul class="menu">
-                    <li>
-                        <a href="/quests/welcome.html">Welcome</a>
-                    </li>
-                    <li>
-                        <a href="/quests/resources.html">Resources</a>
-                    </li>
-                    <li>
-                        <a href="/quests/manifest_quest.html">Manifests</a>
-                    </li>
+                    {% for quest in site.data.quest_order %}
+                        {% if quest.url == page.url %}
+                            <li class="active">
+                                <a href="{{quest.url}}" class = "active">{{quest.title}}</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{{quest.url}}">{{quest.title}}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
                 </ul>
             </div>
         </div>
