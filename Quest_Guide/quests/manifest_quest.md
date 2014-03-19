@@ -17,7 +17,7 @@ In this quest you will gain a better understanding of resource declarations, the
 
 ## Puppet Manifests
 
-As you saw in the Resources quest, Puppet's **resource declarations** can be used to keep track of just about anything here in Elvium. So far, you have made changes to the world without using Puppet. You looked at resource declarations only in order to keep track of the effects of what you did. In this quest, you will learn to craft your own resource declarations and inscribe them in a special document called a **manifest**. 
+As you saw in the Resources quest, Puppet's **resource declarations** can be used to keep track of just about anything here in the Learning VM. So far, you have made changes to the world without using Puppet. You looked at resource declarations only in order to keep track of the effects of what you did. In this quest, you will learn to craft your own resource declarations and inscribe them in a special file called a **manifest**. 
 
 Once you've created a manifest, you will use the `puppet apply` tool to implement it. Puppet will check each resource in your environment against the resource declaration in the manifest. Puppet's **providers** will then do everything neccessary to bring the state of those resources in line with the resource declarations in your manifest.
 
@@ -42,9 +42,9 @@ Now we are ready to create a manifest to manage the user Ralph. The `.pp` extens
 
 	nano ralph.pp
 
-{% aside On Editor Wars %}
+{% aside Text Editors %}
 
-For the sake of simplicity and consistency, we use the text editor nano in our instructions. Feel free to use vim if you prefer. Emacs isn not installed.
+For the sake of simplicity and consistency, we use the text editor nano in our instructions, but feel free to use vim if you prefer.
 
 {% endaside %}
 
@@ -97,12 +97,12 @@ If you like, you can check the old fashioned way as well. If the user doesn't ex
 		
 	egrep -i "^ralph" /etc/passwd
 		
-He is not too well, it appears! Clearly Ralph was no match for your skills in magic.
+He is not too well, it appears! Clearly Ralph was no match for your Puppet skills.
 
 Check on your progress. How are you doing so far?
 
 {% task 7 %}
-With manifests you can create as well as destroy. Lets create a new assistant by adding Jack to the Elvium system.
+With manifests you can create as well as destroy. Lets create a new assistant by adding a user `jack` to the Learning VM.
 
 	nano jack.pp
 
