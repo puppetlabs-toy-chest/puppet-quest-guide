@@ -22,34 +22,37 @@
 @media all{
 
     div.lvm-task-number {
-        color: #6c6d6d;
+        color: #333;
         font-family: 'Arvo','Helvetica Neue',Helvetica,Arial,sans-serif;
-        font-size: 14px;
+        font-size: 16px;
         font-style: bold;
+        margin-left: -16px;
     }
 
     div.lvm-task-number p:before {
+        color: #7FBA2D;
         display: inline;
         font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         content: ' ';
-        font-size: 20px;
+        font-size: 15px;
     }
 
-        div.lvm-callout{
+    div.lvm-callout{
         padding: 1em;
         margin: 1em 0em 1em 0em;
         color: #333;
         float:right;
-        width: 180px;
+        width: 150px;
         background: #fafafa;
         border: 1pt solid #eee;
         position: relative;
         left: 1em;
         page-break-inside: avoid;
+        margin-right: -180px;
     }
     
     div.lvm-callout p{
-        font-size: 12px;
+        font-size: 11px;
         line-height: 1.2;
 
     }
@@ -80,26 +83,67 @@
     
     div.lvm-inline-aside{
         font-size: 12px;
-        background: #eee;
-        color: #666;
+        background: #fafafa;
+        color: #333;
         padding: 1em;
         margin: 2em;
+        border: 1pt solid #eee;        
     }
     div.lvm-inline-aside strong{
         font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;    
         line-height: 2;    
+        color: #000;
+    }
+    code, pre {
+        font-family: Monaco, Andale Mono, Courier New, monospace;
+    }
+    code {
+        background-color: #eee;
+        color: rgba(0, 0, 0, 0.75);
+        padding: 1px 3px;
+        font-size: 12px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+    pre {
+        display: block;
+        padding: 4px;
+        margin: 0 0 18px;
+        line-height: 16px;
+        font-size: 11px;
+        border: 1px solid #ccc;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+    pre code {
+        background: none;
+        font-size: 10px;
+        padding: 0;
     }
 
 }
 
-@media screen {    
-    
+@media screen {
+
     body, #page {
         height: 100%;
         min-width: 320px;
         margin: 0px;
     }
     
+    div.highlight {
+        max-width: 37em;
+    }
+
+    div.lvm-inline-aside {
+        max-width: 37em;
+    }
+
+    div.lvm-callout{
+        margin-right: 0px;
+    }
+
     img {
         max-width: 100%;
         height: auto;
@@ -110,16 +154,7 @@
         display: list-item;
         text-align: -webkit-match-parent;
     }
-    
-    
-    
-    ul.menu, ul.menu li, ul li.leaf {
-        background: none;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-    
+        
     .block-menu-block ul.menu {
         margin: 0;
         padding: 0;
@@ -158,11 +193,7 @@
         clear: both;
         visibility: hidden;
     }
-    
-    div.lvm-task-number {
-        color: #7FBA2D;
-    }
-    
+        
     #site-header .header-wrapper,
     #site-footer .footer-wrapper,
     #main{
@@ -179,11 +210,6 @@
         display: block;
     }
     
-    #sidebar {
-        display: block;
-        float: left;
-        width: 300px;
-    }
     
     #site{
         display: inline-block;
@@ -235,6 +261,7 @@
     p {
         margin-bottom: 9px;
         line-height: 1.5;
+        max-width: 37em;
     
     }
     h1, 
@@ -247,13 +274,13 @@
         color: #7FBA2D;
         font-weight: normal;
         line-height: 1.15em;
-        margin: 1em 0 .25em;
         text-rendering: optimizeLegibility;
     }
     
     h1 {
-        margin-top: 0;
-        font-size: 28px;
+        margin-bottom: 50px;
+        font-size: 36px;
+        text-shadow: 0px 0px 1px #7CB72A;
     }
     
     h2 {
@@ -322,33 +349,6 @@
         font-style: italic;
         font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
-    code, pre {
-        font-family: Monaco, Andale Mono, Courier New, monospace;
-    }
-    code {
-        background-color: #eee;
-        color: rgba(0, 0, 0, 0.75);
-        padding: 1px 3px;
-        font-size: 12px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-    }
-    pre {
-        display: block;
-        padding: 4px;
-        margin: 0 0 18px;
-        line-height: 16px;
-        font-size: 11px;
-        border: 1px solid #ccc;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-    }
-    pre code {
-        background: none;
-        font-size: 11px;
-        padding: 0;
-    }
     sup {
         font-size: 0.83em;
         vertical-align: super;
@@ -364,24 +364,24 @@
 
     #sidebar-first ul, #sidebar-second ul {
         padding: 0;
-        list-style: none;
+        list-style: disc;        
     }
 
     #sidebar-first{
         float: left;
-        position: fixed;
         width: 220px;
     }
 
     #sidebar-first, #sidebar-second {
-        padding: 130px 20px;
+        padding: 20px;
+        min-width: 100px;
+        background: #f7f7f7;
     }
 
     #content {
         float: right;
         width: 700px;
         margin: 20px 0;
-        padding-top: 100px; 
         padding-bottom: 360px;
         background-image: url('../assets/LVM-Mockup-1.png');
         background-repeat: no-repeat;
@@ -392,40 +392,36 @@
         background: #b3d4fc;
         text-shadow: none;
     }
-
-    #sidebar-first h2, #sidebar-second h2 {
-        font-size: 24px;
-        font-size: 1.5rem;
-        margin: 0 0 .66em;
-    }
-
-    #sidebar-first ul ul li a, #sidebar-second ul li a {
-        color: #cccccc;
-        font-size: 14px;
-    }
-
-    #sidebar-first ul ul, #sidebar-second ul ul {
-        margin-left: 10px;
-    }
-
-    #sidebar-first ul ul li, #sidebar-second ul ul li {
-        margin-top: .5em;
-        font-size: 14px;
-    }
     
     a {
+        text-decoration: none;
+        color: #999;
+    }
+
+    #sidebar-first a:hover {
         -webkit-transition: color 0.25s;
         -moz-transition: color 0.25s;
         -o-transition: color 0.25s;
         transition: color 0.25s;
         text-decoration: none;
-        color: #666;
+        color:  #333;
     }
+
+    #sidebar-first a.active {
+        color: #333;
+    }
+
+    #sidebar-first h2 {
+        color: #666;
+        font-size: 1.5rem;
+    }
+
     #site-header {
         width: 100%;
         background: #635F5E;
         height: 105px;
         border-top: 8px solid #fff;
+        border-bottom: 2px solid #c4c4c5;
         -webkit-box-shadow: rgba(0,0,0,0.15) 0 0 20px;
         -moz-box-shadow: rgba(0,0,0,0.15) 0 0 20px;
         box-shadow: rgba(0,0,0,0.15) 0 0 20px;
@@ -465,11 +461,16 @@
         size: 15cm 40cm;
         margin: 10pt;
         */
-        margin: 80pt;
+        margin-left: 40pt;
+        margin-right: 180pt;
     }
     
     cover {
         page: cover;
+    }
+    
+    @page cover{
+        margin: 0pt;
     }
 
     content {
@@ -514,7 +515,7 @@
     }
 
     div.lvm-task-number {
-        color: #7C6AAB;
+        color: #7FBA2D;
     }
 
     toc h1 {
@@ -524,7 +525,7 @@
 
     toc ul {
         list-style: square;
-        color: #7C6AAB;
+        color: #7FBA2D;
     }
 
     toc {
@@ -554,6 +555,17 @@
 
     #top-bar{
         background-color: #635F5E;
+        height: 70pt;
+    }
+
+    #top-bar img{
+        padding: 20px;
+    }
+
+    #title-inderline {
+        color: blue;
+        height: 10px;
+        width: 100%;
     }
         
     div.page-break{
@@ -589,7 +601,7 @@
     h5, 
     h6 {
         font-family: "Arvo", "Helvetica Neue",Helvetica,Arial,sans-serif;
-        color: #7C6AAB;
+        color: #7FBA2D;
         font-weight: normal;
         line-height: 1.15em;
         margin: 1em 0 .25em;
@@ -670,32 +682,6 @@
         margin: 0;
         font-style: italic;
         font-family: 'PT Sans Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    }
-    code, pre {
-        font-family: Monaco, Andale Mono, Courier New, monospace;
-    }
-    code {
-        background-color: #eee;
-        color: rgba(0, 0, 0, 0.75);
-        padding: 1px 3px;
-        font-size: 12px;
-        border-radius: 3px;
-    }
-    pre {
-        display: block;
-        padding: 4px;
-        margin: 0 0 18px;
-        line-height: 16px;
-        font-size: 11px;
-        border: 1pt solid #ccc;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        page-break-inside: avoid;
-    }
-    pre code {
-        background-color: #fff;
-        font-size: 11px;
-        padding: 0;
     }
     sup {
         font-size: 0.83em;
