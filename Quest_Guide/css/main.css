@@ -547,11 +547,30 @@
 
     #cover-page h1{
         font-size: 48pt;
+        padding-left: 120px;
+        padding-top: 80px
     }
 
     #cover-page h2{
         font-size: 28pt;
+        padding-left: 120px;
+        padding-right: 80px;
     }
+
+    #underline {
+        background: #7FBA2D;
+        height: 7px;
+        width: 100%;
+        margin-left: 120px;
+    }
+    
+    #image-wrapper {
+        margin-left: -320px;
+        position: fixed;
+        bottom: 0px;
+        right: 0px;
+    }
+
 
     #top-bar{
         background-color: #635F5E;
