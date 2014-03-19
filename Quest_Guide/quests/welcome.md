@@ -7,7 +7,7 @@ layout: default
 
 ## Quest Objectives
 
-In this quest you will be introduced to Elvium, the Learning Virtual Machine environment.
+In this quest you will be introduced to the Learning Virtual Machine environment.
 
 ## Welcome to Elvium
 
@@ -15,15 +15,11 @@ In this quest you will be introduced to Elvium, the Learning Virtual Machine env
 
 > -Arthur C. Clarke
 
-Welcome to Elvium, user. Have a look around, if you like, but take note: what you see now is only the surface. The real channels of power in Elvium lie deeper. You will learn of these things. You see, you are not an ordinary user, for you have come into the Elvium with a user id of '0', the mark of the **Superuser**.
+Welcome to the Learning VM. Have a look around. What you see will be fairly typical of a *nix environment. You will see a filesystem populated with many of the usual directories and files. Some services are running in the background, including the SSH service that you can use to access the Learning VM from your own terminal.
 
-If you choose to follow the path set forth in this Quest Guide, you will learn to channel your powers by using the art of Puppet. With only a few words, shape the environment around as you see fit. Inscribe your wishes into potent Puppet manifests to ensure that your will continues to be done when journey beyond Elvium to bring other systems under your dominion.
+You may have noticed that you are not an ordinary user; you are logged into the 'root' account with its user id of '0', the mark of the **Superuser**. This account gives you the ability to change just about anything you like in the Learning VM, just as you would if you were tasked with administrating a machine.
 
-<!-- I (Bruce) think we should get rid the Getting Started section -->
-
-## Getting Started
-
-Your arrival has been foretold, user, and all the necessary arrangements were made to ensure that this Quest Guide would fall into your hands. By entering the command `puppet apply setup/guide.pp`, you activated a Puppet **manifest** we had prepared in anticipation of your arrival.
+By following this Quest Guide, you will learn how Puppet allows you to use these priveleges easily and effectively.
 
 ## Quest Navigation
 

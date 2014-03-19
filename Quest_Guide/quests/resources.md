@@ -13,7 +13,7 @@ In this quest you will be introduced to the fundamental applications of Puppet r
 
 ## Puppet Resources
 
-Real power, whether a spoken spell or a terminal command, is never as simple as it seems. Wizards turn to ancient tomes and grimoirs to tell of the bonds between the syllables of a spell and the elements under its influence. As an aspirant in the mystical arts of Puppet, you must learn of the connections between the syntax of Puppet and the environment around you.
+As an aspiring practitioner of Puppet, it is important to have a thorough understanding of the relationship between the syntax of Puppet and the environment around you.
 
 We'll begin with **Resources**, the basic units that Puppet uses to describe an environment.
 
@@ -100,7 +100,7 @@ Now take a look at your creation:
 
 	puppet resource user ralph
             
-Potent stuff. Note that Ralph's password attribute is set to `'!!'`. This isn't a proper password at all! In fact, it's a special value indicating Ralph has no password whatsoever. If he had a soul, it would be locked out of his body.
+Potent stuff. Note that Ralph's password attribute is set to `'!!'`. This isn't a proper password at all! In fact, it's a special value indicating Ralph has no password whatsoever.
 	
 {% task 3 %}
 Rectify the situation. Set Ralph's password to *puppetlabs*.
