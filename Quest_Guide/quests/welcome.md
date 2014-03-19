@@ -15,7 +15,7 @@ In this quest you will be introduced to the Learning Virtual Machine environment
 
 > -Arthur C. Clarke
 
-Welcome to the Learning VM. Have a look around. What you see will be fairly typical of a *nix environment. You will see a filesystem populated with many of the usual directories and files. Some services are running in the background, including the SSH service that you can use to access the Learning VM from your own terminal.
+Welcome to the Learning VM. Have a look around. What you see will be fairly typical of a Unix-based Operating System. You will see a filesystem populated with many of the usual directories and files. Some services are running in the background, including the SSH service that you can use to access the Learning VM from your own terminal.
 
 You may have noticed that you are not an ordinary user; you are logged into the 'root' account with its user id of '0', the mark of the **Superuser**. This account gives you the ability to change just about anything you like in the Learning VM, just as you would if you were tasked with administrating a machine.
 
