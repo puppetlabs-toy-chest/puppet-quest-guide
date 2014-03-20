@@ -533,15 +533,63 @@
         color: #7FBA2D;
     }
 
-    toc {
+    div.pdfnav ul {
+        list-style: none;
+        margin-left: 23px;
+        padding: 0;
+    }
+
+    toc{
         page: toc;
         width: 460px;
         line-height: 1.6;
         font-size: 12pt;
     }
     
-    toc a {
+    div.pdfnav {
+        line-height: 1.6;
+        background: #fafafa;
+        border: 1pt solid #eee;
+        padding: 1em;
+        margin: 2em;        
+        page-break-inside: avoid;
+    }
+
+    div.pdfnav strong{
+        font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;    
+        line-height: 2;    
+        color: #000;
+    }
+
+    
+    div.lvm-callout p{
+        font-size: 11px;
+        line-height: 1.2;
+
+    }
+
+
+    toc a,
+    div.pdfnav a {
         color: #0095dd;
+        text-decoration: none;
+    }
+
+    div.pdfnav a:before {
+        font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        content: '';
+        font-size: 11px;
+        float: left;
+        margin-left: -15px;
+    }
+
+
+    div.pdfnav a.current:before {
+        font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        content: '';
+        font-size: 11px;        
+        float: left;
+        margin-left: -15px;
     }
 
     toc a:after {
@@ -641,6 +689,19 @@
         page: content;
         prince-page-group: start;
     }
+
+
+    content img::after {
+        font-style: italic;
+        font-size: 12px;
+        content: 'Figure \00a0' counter(img);
+    }
+    
+    content img {
+        max-width: 520px;
+        counter-increment: img;        
+    }
+    
     
     h2 {
     display: block;
