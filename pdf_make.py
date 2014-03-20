@@ -55,7 +55,7 @@ def quest_guide():
     with open('test.html', 'w') as f:
         f.write(str(shell))
 
-    p = Popen(["prince", "-", "--style=./Quest_Guide/css/main.css", "Quest_Guide.pdf"], stdin=PIPE)
+    p = Popen(["prince", "-", "--style=./css/main.css", "../../Quest_Guide.pdf"], cwd=r'./Quest_Guide/_site', stdin=PIPE)
     p.stdin.write(str(shell))
     p.stdin.close()
 
