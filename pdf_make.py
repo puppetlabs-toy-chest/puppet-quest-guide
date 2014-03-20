@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup, Tag
 import argparse
 import markdown
 import codecs
+import yaml
 
 # Set up the argument parser and define arguments to create Quest Guide and Setup Guide PDFs
 parser = argparse.ArgumentParser(description='Generate PDF documents for the Quest Guide and the Setup Guide')
@@ -21,22 +22,21 @@ def pull_content(filename, print_output=False):
 
 def quest_guide():
    
-    path = "./Quest_Guide/_site/quests/"
+    with open('Quest_Guide/_data/quest_order.yml', 'r') as f:
+        quest_data = yaml.safe_load(f)
 
-    quests =["welcome.html",
-             "resources.html",
-             "manifest_quest.html",
-             "variables.html",
-             "resource_ordering.html",]
+    quest_urls = [quest['url'] for quest in quest_data]
 
-    quest_list = [path + quest for quest in quests]
+    path = "./Quest_Guide/_site"
+
+    full_quest_urls = [path + quest for quest in quest_urls]
 
     shell = BeautifulSoup("<html><body><cover></cover><toc></toc><content></content></body></html>", "html5lib")
     content = shell.content
 
-    quest_list.reverse()
+    full_quest_urls.reverse()
 
-    for quest in quest_list:
+    for quest in full_quest_urls:
         content.insert(0, pull_content(quest))
 
     titles = content.find_all('h1')
