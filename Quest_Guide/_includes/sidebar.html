@@ -9,6 +9,16 @@
                             <li class="active">
                                 <a href="{{quest.url}}" class = "active">{{quest.title}}</a>
                             </li>
+                        {% elsif quest.url == '/quests/welcome.html' %}
+                            {% if page.url == '/index.html' %}
+                            <li>
+                                <a href="{{quest.url}}" class = "active">{{quest.title}}</a>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a href="{{quest.url}}">{{quest.title}}</a>
+                            </li>
+                            {% endif %}
                         {% else %}
                             <li>
                                 <a href="{{quest.url}}">{{quest.title}}</a>
