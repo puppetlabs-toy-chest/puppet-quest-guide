@@ -383,9 +383,6 @@
         width: 700px;
         margin: 20px 0;
         padding-bottom: 360px;
-        background-image: url('../assets/LVM-Mockup-1.png');
-        background-repeat: no-repeat;
-        background-position: right bottom;
     }
 
     ::selection {
@@ -445,6 +442,14 @@
         margin-left: 240px;
         line-height: 100px;
         font-size: 18px;
+    }
+
+    #cover-page h1{
+        font-size: 48pt;
+    }
+
+    #cover-page h2{
+        font-size: 28pt;
     }
 
     * {
