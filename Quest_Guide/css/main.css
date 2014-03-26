@@ -492,6 +492,7 @@
     content {
         page: content;
         counter-reset: page 1;
+        counter-reset: figure 0;
     }
 
     @page content{
