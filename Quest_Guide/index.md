@@ -50,7 +50,7 @@ By typing `clear` into your terminal will clear everything on your screen.
 These will be integrated into the first few quests to help you remember them. We'll explain these commands further as you progress.
 {% endaside %}
 
-![image](../assets/terminal.png)
+{% figure 'assets/terminal.png' %}
 
 ## Facter
 
