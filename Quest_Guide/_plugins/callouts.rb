@@ -18,12 +18,22 @@ end
 
 class Aside < Liquid::Block
   def initialize(tag_name, markup, tokens)
-     super
-     @title = markup
+    super
+    @title = markup
   end
 
+  def render(context)
+    "<div class = \"lvm-inline-aside\"><strong>#{@title}</strong><p>#{super}</p></div></div>"
+  end
+end
+
+class Figure < Liquid::Tag
+  def initialize(tag_name, text, tokens)
+     super
+     @src = text
+  end
     def render(context)
-        "<div class = \"lvm-inline-aside\"><strong>#{@title}</strong><p>#{super}</p></div></div>"
+        "<div class = \"img-wrapper\"><img src=#{@src}/><p>Figure</p></div>"
     end
 end
 
@@ -31,3 +41,4 @@ Liquid::Template.register_tag('tip', Tip)
 Liquid::Template.register_tag('warning', Warning)
 Liquid::Template.register_tag('fact', Fact)
 Liquid::Template.register_tag('aside', Aside)
+Liquid::Template.register_tag('figure', Figure)

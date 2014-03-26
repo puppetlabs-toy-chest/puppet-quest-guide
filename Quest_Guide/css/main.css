@@ -145,11 +145,22 @@
     }
 
     img {
-        max-width: 100%;
+        max-width: 520px;
         height: auto;
+        counter-increment: img;        
         vertical-align: bottom;
     }
-    
+
+    div.img-wrapper p{
+        font-style: italic;
+        margin-left: 10px;
+    }
+
+    div.img-wrapper p:after{
+        content: ' ' counter(img);
+    }
+
+        
     li {
         display: list-item;
         text-align: -webkit-match-parent;
@@ -481,6 +492,7 @@
     content {
         page: content;
         counter-reset: page 1;
+        counter-reset: figure 0;
     }
 
     @page content{
@@ -689,19 +701,21 @@
         page: content;
         prince-page-group: start;
     }
-
-
-    content img::after {
-        font-style: italic;
-        font-size: 12px;
-        content: 'Figure \00a0' counter(img);
-    }
     
     content img {
         max-width: 520px;
-        counter-increment: img;        
+        counter-increment: img;
+    }
+
+    div.img-wrapper p{
+        font-style: italic;
+        margin-left: 10px;
     }
     
+    div.img-wrapper p:after{
+        content: ' ' counter(img);
+    }
+
     
     h2 {
     display: block;
