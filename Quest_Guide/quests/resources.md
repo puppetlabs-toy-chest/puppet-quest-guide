@@ -25,7 +25,7 @@ Know thyself, user, for you too are a resource. Use the following command to see
 		
 The output will look like this:
 
-{% highlight puppet %}	
+{% highlight puppet %}
 user { 'root':
   	ensure           => 'present',
   	comment          => 'root',
