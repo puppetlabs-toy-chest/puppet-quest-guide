@@ -51,7 +51,7 @@ For the sake of simplicity and consistency, we use the text editor nano in our i
 {% task 2 %}
 Type the following deadly incantation into your manifest:
 
-{% highlight ruby %}
+{% highlight puppet %}
 user { 'ralph':
 	ensure => 'absent',
 }
@@ -109,7 +109,7 @@ With manifests you can create as well as destroy. Lets create a new assistant by
 {% task 8 %}
 Write the following code to your manifest:
 
-{% highlight ruby %}
+{% highlight puppet %}
 user { 'jack':
 	ensure => 'present',
 	gid => '501',
