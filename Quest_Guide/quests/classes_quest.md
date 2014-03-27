@@ -25,29 +25,31 @@ When the Wizard Judge on Elvium convicts a system componenet that is causing har
 * We also need to add the names of the users who will be members of the group `operational`
 * makerbot's home directory should be `/mnt/home/maker`. 
 
-		class broken_ops {
-		  user { 'maker':
-		    ensure => present,
-		    gid    => 'operations',
-		    home   => '/mnt/home/maker',	
-          }
+{% highlight puppet %}
+class broken_ops {
+  user { 'maker':
+    ensure => present,
+	gid    => 'operations',
+	home   => '/mnt/home/maker',	
+   }
     
-          user { 'frion':
-		    ensure => present,
-		    gid    => 'operations',
-		    home   => '/mnt/home/frion',	
-          }
+  user { 'frion':
+    ensure => present,
+    gid    => 'operations',
+    home   => '/mnt/home/frion',	
+  }
         
-          group { 'operations':
-            ensure => present,
-            gid    => '1001',
-          }
-    
-          file { '/mnt/home/':
-            ensure => directory,
-            mode   => '0755',
-          }
-        }  
+  group { 'operations':
+    ensure => present,
+    gid    => '1001',
+  }
+
+  file { '/mnt/home/':
+    ensure => directory,
+    mode   => '0755',
+  }
+}  
+{% endhighlight %}
 
 In the above example of classifying broken users on Elvium, we **defined** a class called `broken_ops`, which consists of a collection of three different resources - a `user` resource, a `group` resource, and a `file` resource. The above description is both elegant, and self-documenting and 100% constructed in Puppet's DSL.
 

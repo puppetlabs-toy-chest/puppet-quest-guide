@@ -29,12 +29,14 @@ What you have learned so far about manifests gives you the means to achieve a gr
 
 You’ve almost definitely used variables before in some other programming or scripting language, but `$variables` always start with a dollar sign and you assign them with the `=` operator. You can use variables as the value for any resource attribute, or as the title of a resource.
 
-	$longthing = "Really long SSH key"
+{% highlight puppet %}
+$longthing = "Really long SSH key"
 
-    file {'authorized_keys':
-      path    => '/root/.ssh/authorized_keys',
-      content => $longthing,
-    }
+file {'authorized_keys':
+  path    => '/root/.ssh/authorized_keys',
+  content => $longthing,
+}
+{% endhighlight %}
 
 {% aside What about the `$::variable` %}
 People who write manifests to share with the public often adopt the habit of always using the $::variable notation when referring to facts. The double-colon prefix specifies that a given variable should be found at top scope. This isn’t actually necessary, since variable lookup will always reach top scope anyway.
@@ -67,6 +69,7 @@ Remember running `facter ipaddress`? Puppet told you your IP address without you
 
 How does this make our manifests more flexible? If I entered the following variables in a manifest:
 
+{% highlight puppet %}
 	file {'motd':
 	  ensure  => file,
 	  path    => '/etc/motd',
@@ -78,10 +81,12 @@ How does this make our manifests more flexible? If I entered the following varia
 	  User: puppet@example.com
 	  Password: learningpuppet
 	  ",
-	  }
+	}
+{% endhighlight %}
 
 and then applied the manifest, this is what would be returned: 
 
+{% highlight puppet %}
 	file {'motd':
 	  ensure  => file,
 	  path    => '/etc/motd',
@@ -92,7 +97,8 @@ and then applied the manifest, this is what would be returned:
 	  URL: https://172.16.52.135
 	  User: puppet@example.com
 	  Password: learningpuppet
-	  }
+	}
+{% endhighlight %}
 
 It's as simple as that without hardly doing anything on your end. Feeling confident? Lets combine our knowledge of variables and facts in our manifest
 

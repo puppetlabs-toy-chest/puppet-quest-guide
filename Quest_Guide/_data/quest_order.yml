@@ -4,3 +4,9 @@
    title: Resources
  - url: /quests/manifest_quest.html
    title: Manifests
+ - url: /quests/classes_quest.html
+   title: Classes
+ - url: /quests/variables.html
+   title: Variables
+ - url: /quests/conditions_quest.html
+   title: Conditional Statements
