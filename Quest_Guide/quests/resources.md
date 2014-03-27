@@ -25,7 +25,7 @@ Know thyself, user, for you too are a resource. Use the following command to see
 		
 The output will look like this:
 
-{% highlight ruby %}	
+{% highlight puppet %}	
 user { 'root':
   	ensure           => 'present',
   	comment          => 'root',
@@ -69,7 +69,7 @@ After the colon, comes a list of **attributes** and their corresponding **values
 
 In general terms, a resource declaration will match the following pattern:
 
-{% highlight ruby %}
+{% highlight puppet %}
 type {'title':
     attribute => 'value',
 }
@@ -143,16 +143,6 @@ Just one more thing. Ralph does not want his spells to be seen by anyone else! L
 ## The Resource Abstraction Layer
 
 If you completed this quest, you will be familiar with the basics of resources. A great part of the utility of resources, however, is in their power to abstract away the partocularities of a system while still providing a full description of your environment. 
-
-<!-- Not needed
-
-Our sages have long known that Elvium operates according to the rules of **CentOS**, which they call its **Operating System**. We know of distant continents, however, where the fabric of the world has a different weave; that is, there is a different Operating System.
-
-If you find yourself on the shores of Ubuntu and croak out a `useradd`, you will be laughed right off the beach for getting it backwards; as any Ubuntu native could tell you, `adduser` is the right way to say it there. And attempting to install a package with `yum` on a system where `apt-get` is appropriate is a *faux pas* indeed.
-
-If you aspire to extend your influence across these differing systems, it will be wise to learn a method of applying your power consistently, and resources are a key part of this puzzle.
-
--->
 
 Puppet takes the descriptions expressed by resource declarations and uses providers to implement the system-specific processes to realize them. These Providers abstract away the complexity of managing diverse implementations of resource types on different systems. As a whole, this system of resource types and the providers that implement them is called the **Resource Abstraction Layer**, or **RAL**. If you want to create a user, for instance, Puppet's RAL will abstract away the `useradd` and `adduser`, giving you a single way to do things across systems. Similarly, when you wish to install a package, you can stand back and let Puppet's providers decide whether to use `yum` or `apt-get` for package management.
 
