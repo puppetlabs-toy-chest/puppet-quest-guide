@@ -9,7 +9,7 @@ layout: default
 
 In this quest you will be introduced to the Learning Virtual Machine environment.
 
-## Welcome to Elvium
+## Welcome to the Learning VM
 
 > Any sufficiently advanced technology is indistinguishable from magic.
 
