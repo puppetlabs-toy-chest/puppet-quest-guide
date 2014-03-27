@@ -123,6 +123,8 @@ Now open your web browser and point it to:
 
 The pdf_make.py script will automatically generate the PDF files that are bundled with the Learning VM download.
 
+Though the PDF is a separate end-point from the Jekyll static html version of the Quest Guide, it relies on Jekyll to parse markdown and liquid templates to html.
+
 The script uses PrinceXML to generate PDFs, so you must have Prince installed (http://www.princexml.com/download/) for it to function. Note that you must register your copy of Prince in order to generate PDFs without a watermark.
 
 The script also has three library dependencies outside of the Python standard libraries:
@@ -141,3 +143,10 @@ Once the dependencies are installed, navigate to the top directory of the reposi
 	
 Note that though this script automatically runs a `jekyll build` command, there is currently an issue with the timing of the subprocess that means the changes aren't always made before pdf generation begins. Pending a fix, you may have to run this script twice for changes to register, or manually build the jekyll site prior to running the script.
 	 
+## Quest Ordering
+
+Quest_Guide/_data/quest_order.yml contains a list of quests with url and title. The order of quests in this file determines the order that they will be listed in the website nav and the PDF version of the Quest Guide.
+
+In the future, this file will also include data about quest dependencies to allow for non-linear quest progress.
+
+Whenever possible, this file should be the single source of information for any process that requires data about quests.
