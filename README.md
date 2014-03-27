@@ -49,6 +49,17 @@ We use the Liquid templating system in order to extend the syntax available in m
 
 Errors in template syntax will prevent Jekyll from running properly. Before making a pull request with content changes, make sure that Jekyll will run. If there are Liquid syntax errors, Jekyll will throw a Liquid Exception and point you to the offending file.
 
+#### Code Highlighting
+
+Blocks of code must be wrapped in `{% highlight <language> %} {% endhighlight %}` tags, like so:
+
+	{% highlight puppet %}
+	user { 'root':
+  		ensure           => 'present',
+  	{% endhighlight %}
+
+#### Asides
+
 There are three types of aside that will be displayed floating to the right of the text. Each has an icon according to its type and will include the content between the template tags. This content should be kept brief, and you should avoid using too many of these in close succession to avoid clutter.
 
 ```
@@ -72,6 +83,7 @@ There is also an inline-aside style. This is displayed in the main body of the t
 Content of the aside.
 {% endaside %}
 ```
+#### Images
 
 To inclue images, use the following figure template:
 
@@ -81,6 +93,7 @@ To inclue images, use the following figure template:
 
 Using this template instead of standard markdown image syntax ensures that the image will be wrapped in the appropriate tags necessary for rendering and also gives it an automatically generated figure label. Note that all images should be stored in the `assets` folder in order to be accessible to both pdf and html rendering methods. Also note that you must wrap the image filepath in single quotation marks.
 
+#### Tasks
 
 Finally, there is a template to be used in Task numbering. Place this before each task. Because task numbering is associated directly with the VM task tracking function, you must enter each task number manually.
 
