@@ -6,25 +6,44 @@ The Learning VM (Virtual Machine) is a self contained environment with everythin
 
 Because the VM and Quest Guide are self contained, the user can learn Puppet anywhere; after the initial download, no internet connection is required.
 
-## Jekyll Site
+## Markdown Content
 
-The Quest Guide is a static website generated from source markdown and served by Jekyll.  To view the site, first install the ruby gem Jekyll by typing the following in your console:
-	
-	sudo gem install jekyll
-	
-When Jekyll is successfully installed, you can serve the website navigating to the top directory:
+Each Quest for the Quest Guide content is created and stored as a markdown (.md) file. Markdown is a lightweight format and allows for good separation between content, on the one hand, and on the other, parsing, formatting, and rendering implementations.
 
-	cd /path/to/courseware-lvm/Quest_Guide
-	
-and entering the command:
+### YAML Header
 
-	jekyll serve --watch
+Each quest markdown file must begin with a yaml header. This allows Jekyll to identify the file and provides variables to be used in processing. Currently, this header will consist of two lines, marked off from the rest of the file by `---` lines.
+
+The first defines the title, and should be set to the title of the Quest. The second tells Jekyll what layout template to use in generating html from the markdown. This should always be set to `default`.
+
+	---
+	title: Resource Ordering
+	layout: default
+	---
+
+### Title and Headers
+
+Each quest should start with the title of that quest as an h1. In markdown, h1 is designated with a single `#` at the beginning of the lines, e.g.:
+
+	# Resource Ordering
+
+Following the title is a list of course prerequisites under an h3. Prerequisites are entered here as a list of quest titles:
+
+	### Prerequisites
+	- Resources
+	- Manifests
 	
-Now open your web browser and point it to:
+Next is a Quest Objectives section under an h2 with that name:
+
+	## Quest Objectives
 	
-	localhost:4000
-	
-## Liquid Templates
+In this section, include a brief one paragraph summary of the quest objectives. At the end of this section, include the sentence "If you're ready to get started, type the following command:", followed by the start quest command, indented to display as a code block, and with the appropriate quest argument. (This will depend on the VM quest implementation, to be covered below.)
+
+    quest --start ordering
+    
+After this begin the main content of the quest, using h2 and h3 level headers as appropriate.
+
+### Liquid Templates
 
 We use the Liquid templating system in order to extend the syntax available in markdown and allow us to include asides and custom-formatted task notation.
 
@@ -46,20 +65,46 @@ Here's a fact!
 {% endfact %}
 ```
 
-There is also an inline-aside style. This is displayed in the main body of the text, but is set off from the flow of the document. Unlike the asides above, this can include a title, which can include spaces. Some special characters work here, but this hasn't been tested, so be sure to double chekc that you don't break things.
+There is also an inline-aside style. This is displayed in the main body of the text, but is set off from the flow of the document. Unlike the asides above, this can include a title, which can include spaces. (Some special characters work here, but this hasn't been tested, so be sure to double check that your content renders properly before making a PR.)
 
 ```
 {% aside Title of aside %}
 Content of the aside.
 {% endaside %}
-
 ```
 
-Finally, there is a template to be used in Task numbering. Place this before each task and increment the numbering as needed.
+To inclue images, use the following figure template:
+
+```
+{% figure 'assets/filename.png' %}
+```
+
+Using this template instead of standard markdown image syntax ensures that the image will be wrapped in the appropriate tags necessary for rendering and also gives it an automatically generated figure label. Note that all images should be stored in the `assets` folder in order to be accessible to both pdf and html rendering methods. Also note that you must wrap the image filepath in single quotation marks.
+
+
+Finally, there is a template to be used in Task numbering. Place this before each task. Because task numbering is associated directly with the VM task tracking function, you must enter each task number manually.
 
 ```
 {% task 1 %}
 ```
+
+## Jekyll Site
+
+The Quest Guide is a static website generated from source markdown and served by Jekyll.  To view the site, first install the ruby gem Jekyll by typing the following in your console:
+	
+	sudo gem install jekyll
+	
+When Jekyll is successfully installed, you can serve the website navigating to the top directory:
+
+	cd /path/to/courseware-lvm/Quest_Guide
+	
+and entering the command:
+
+	jekyll serve --watch
+	
+Now open your web browser and point it to:
+	
+	localhost:4000
 
 ## PDF Generation
 
@@ -80,4 +125,6 @@ These can be installed using either pip or easy_install, e.g.
 Once the dependencies are installed, navigate to the top directory of the repository, and use the arguments `--setup` or `-s` and/or `--quest` or `-q` to specify which PDFs you would like to generate, e.g.:
 	
 	python pdf_maker.py -s -q
+	
+Note that though this script automatically runs a `jekyll build` command, there is currently an issue with the timing of the subprocess that means the changes aren't always made before pdf generation begins. Pending a fix, you may have to run this script twice for changes to register, or manually build the jekyll site prior to running the script.
 	 
