@@ -22,22 +22,24 @@ Conditional statements let your Puppet code behave differently in certain situat
 
 Puppet’s `if` statements behave much like those in any other language. The `if` condition is evaluated first and, if it is true, only the `if` code block is executed. If it is false, then the `elsif` condition kicks in (if present). Should the `if` condition and `elseif` condition fail, then the `else` condition picks up the slack and is executed (if present). If all the conditions fail and there is no `else` block, Puppet will do nothing and move on.
 
-	if str2bool("$is_virtual") {
-	  service {'ntpd':
-	  ensure => stopped,
-	  enable => false,
-	  }
-	}
+{% highlight puppet %}
+if str2bool("$is_virtual") {
+  service {'ntpd':
+  ensure => stopped,
+  enable => false,
+  }
+}
 
-	else {
-	  service { 'ntpd':
-		name       => 'ntpd',
-		ensure     => running,
-		enable     => true,
-		hasrestart => true,
-		require    => Package['ntp'],
-		}
-	}
+else {
+  service { 'ntpd':
+    name       => 'ntpd',
+    ensure     => running,
+    enable     => true,
+    hasrestart => true,
+    require    => Package['ntp'],
+    }
+}
+{% endhighlight %}
 
 {% tip %}
 The `elsif` and `else` clauses are optional.
@@ -74,9 +76,11 @@ Apply the manifest
 
 The `unless` statement works like a reversed `if` statement. They take a condition and an arbitrary block of Puppet code, and will only execute the block if the condition is false. The condition is evaluated first and, if it is false, the code block is executed. If the condition is true, Puppet will do nothing and move on.
 
-	unless $memorysize > 1024 {
-	  $maxclient = 500
-	}
+{% highlight puppet %}
+unless $memorysize > 1024 {
+  $maxclient = 500
+}
+{% endhighlight %}
 
 {% tip %}
 You cannot include `elsif` or `else` clauses in `unless` conditional statements.
@@ -89,18 +93,21 @@ You cannot include `elsif` or `else` clauses in `unless` conditional statements.
 
 Like `if` statements, case statements choose one of several blocks of arbitrary Puppet code to execute. They take a control expression and a list of cases and code blocks, and will execute the first block whose case value matches the control expression.
 
-	case $operatingsystem {
-	  centos: { $apache = "httpd" }
-	  redhat: { $apache = "httpd" }
-	  debian: { $apache = "apache2" }
-	  ubuntu: { $apache = "apache2" }
-	  default: { fail("Unrecognized operating system for webserver") }
-	  }
+{% highlight puppet %}
 
-	package {'apache':
-	  name   => $apache,
-	  ensure => latest,
-	}
+case $operatingsystem {
+  centos: { $apache = "httpd" }
+  redhat: { $apache = "httpd" }
+  debian: { $apache = "apache2" }
+  ubuntu: { $apache = "apache2" }
+  default: { fail("Unrecognized operating system for webserver") }
+  }
+
+package {'apache':
+  name   => $apache,
+  ensure => latest,
+}
+{% endhighlight %}
 
 Puppet compares the control expression to each of the cases, in the order they are listed. It will execute the block of code associated with the first matching case, and ignore the remainder of the statement.
 
