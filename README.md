@@ -132,6 +132,7 @@ The script also has three library dependencies outside of the Python standard li
 * html5lib
 * BeautifulSoup4
 * Markdown
+* PyYaml
 
 These can be installed using either pip or easy_install, e.g.
 
