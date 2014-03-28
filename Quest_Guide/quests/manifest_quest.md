@@ -118,7 +118,7 @@ user { 'gigabyte':
 {% task 9 %}
 Check your syntax:
 
-	HINT: refer to puppet parser
+	HINT: refer to puppet parser above
 	
 {% task 10 %}
 Simulate your changes:
