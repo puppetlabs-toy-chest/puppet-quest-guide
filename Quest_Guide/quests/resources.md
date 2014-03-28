@@ -81,39 +81,41 @@ Again, let's take a look at the first line in the above resource declaration. Do
 {% task 2 %}
 The path to greatness is a lonely one. Fortunately, your superuser status gives you the ability to create an assistant for yourself. First let's do this in a non-Puppet way. Type the following command:
 
-	useradd ralph
+	useradd byte
 
 {% task 3 %}
 Now take a look at your new assistant. Type the following command:
 
-	puppet resource user ralph
+	puppet resource user byte
             
-Potent stuff. Note that Ralph's password attribute is set to `'!!'`. This isn't a proper password at all! In fact, it's a special value indicating Ralph has no password whatsoever.
+Potent stuff. Note that Byte's password attribute is set to `'!!'`. This isn't a proper password at all! In fact, it's a special value indicating Byte has no password whatsoever.
 
 ### Attribute Value Pairs
 
 One more time. Let's look at the above resource declaration. After the colon, comes a list of **attributes** and their corresponding **values**. Each line consists of an attribute name, a `=>` (hash rocket), a value, and a final comma. For example, the attribute value pair `home => '/root',` indicates that your home is set to the directory `/root`.
 	
 {% task 4 %}
-Rectify the Ralph's password situation by setting it to *puppetlabs*.
+Rectify the Byte's password situation by setting it to *puppetlabs*.
 
-	passwd ralph
+	passwd byte
 		
-If you take another look at `puppet resource user ralph`, the value for his password attribute should now be set to a SHA1 hash of his password, something a little like this: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
+If you take another look at `puppet resource user byte`, the value for his password attribute should now be set to a SHA1 hash of his password, something a little like this: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
 
 {% task 5 %}
-Now have a look at Ralph's home directory. When you created him, it was set to `'/home/ralph'` by default. His home is a `directory`, which is really just a special kind of the resource type `file`. The `title` of any file is the same as the path to that file. Take a look at Ralph's home directory. Enter the command:
+Now have a look at Byte's home directory, which was set to `'/home/byte'` by default. Byte's home is a `directory`, which is really just a special kind of the resource type `file`. The `title` of any file is the same as the path to that file. Take a look at Byte's home directory. Enter the command:
 
-	puppet resource file /home/ralph/assistant
+	puppet resource file /home/byte/assistant
 		
 {% task 6 %}
-What? `ensure => 'absent',`? Values of the `ensure` attribute indicate the basic state of a resource. A value of absent means it doesn't exist at all. When you created Ralph, you automatically assigned him an address, but neglected to put anything there. Do this now:
+What? `ensure => 'absent',`? Values of the `ensure` attribute indicate the basic state of a resource. A value of absent means it doesn't exist at all. When you created Byte, you automatically assigned an address, but neglected to put anything there. Do this now:
 
-	mkdir /home/ralph/assistant
+	mkdir /home/byte/assistant
 		
 Now have another look:
 
-	puppet resource file /home/ralph/assistant
+	puppet resource file /home/byte/assistant
+
+{% aside Quest Progress %}
 
 Awesome! Have you noticed when you successfully finsihed a task the 'completed tasks' increases? Check on your progress to see how you're doing. Type the following command:
 
@@ -123,14 +125,16 @@ This shows your progress by displaying tasks that you have completed and tasks t
 
 You're almost there to officially completing your first quest!
 
+{% aside %}
+
 {% task 7 %}
-Just one more thing. We do not want Ralph to be an assistant to anyone else! Let's make it so:
+Just one more thing. We do not want Byte to be an assistant to anyone else! Let's make it so:
  
-	chmod 700 /home/ralph/assistant
+	chmod 700 /home/byte/assistant
 
 ..and inspect the result one more time:
 
-	puppet resource file /home/ralph/assistant
+	puppet resource file /home/byte/assistant
 
 ## The Resource Abstraction Layer
 
