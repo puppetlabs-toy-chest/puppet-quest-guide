@@ -125,7 +125,7 @@ This shows your progress by displaying tasks that you have completed and tasks t
 
 You're almost there to officially completing your first quest!
 
-{% aside %}
+{% endaside %}
 
 {% task 7 %}
 Just one more thing. We do not want Byte to be an assistant to anyone else! Let's make it so:
