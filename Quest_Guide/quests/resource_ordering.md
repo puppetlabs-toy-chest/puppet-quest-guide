@@ -15,7 +15,7 @@ layout: default
 
 ## Quest Objectives
 
-The tasks we will accompish in this quest will help you learn more about specifying the order in which Puppet should manage the resources in a manifest. If you're ready to get started, type the following command:
+The tasks we will accompish in this quest will help you learn more about specifying the order in which Puppet should manage resources in a manifest. When you're ready to get started, type the following command:
 
 	quest --start ordering
 
@@ -43,20 +43,81 @@ There are four metaparameter attributes that you can include in your resource de
 
 * `subscribe` - causes a resource to be applied **after** the target resource. The subscribing resource will refresh if the target resource changes.
 
-These parameters are included in a resource declaration just like any other attribute value pair. For instance, refer to the following example:
+{% task 1 %}
+Let's get a copy of the current sshd config file. Type the following command:
 
-{% highlight ruby %}
-service { 'sshd':
-  ensure    => running,
-  enable    => true,
-  subscribe => File['/etc/ssh/sshd_config'],
-}
-{% endhighlight %}
+	cp /etc/ssh/sshd_config ~/examples/
+
+{% task 2 %}
+Now let's dive into the copied config file. Type the following command:
+
+	/root/examples/break_ssh.pp
+
+{% task 3 %}
+Can you correctly construct a manifest with the following criteria?
+
+	file = '/etc/ssh/sshd_config'
+	ensure = file
+	mode = 600
+	source = '/root/examples/sshd_config'
+	
+	HINT: Refer to the Manifest Quest for guidance
+
+{% task 4 %}
+However, we're only partial correct. It will change the config file, but those changes will only take effect when the service restarts. Let's now add a metaparameter to that will tell Puppet to manage the `sshd` service and have it subscribe to the config file. Add the following information to your manifest:
+
+	service = sshd
+	ensure = running
+	enable = true
+	subscribe = File['/etc/ssh/sshd_config']
+
+{% task 5 %}
+Let's make sure the syntax is correct. Remember `puppet parser`? If not, refer back to the Manifest Quest.
+
+{% task 6 %}
+We now have our Puppet code and its good to go. But it's useless until we add it to the `site.pp` so that the puppet agent can manage those resources.
+
+	Can you open the site.pp manifest and copy and paste the code you wrote?
+	
+	HINT: Refer to the Manifest Quest for guidance
+
+{% task 7 %}
+Save and close your `site.pp` manifest and now edit the original `/etc/ssh/sshd_config`. We need to change the `PermitRootLogin` from yes to no.
+
+{% task 8 %}
+Manually restart the sshd service by typing the following command then log out.
+
+	service sshd restart
 
 In the above example, the `service` resource with the title `sshd` will be applied **after** the `file` resource with the title `/etc/ssh/sshd_config`. Furthermore, if any other changes are made to the targeted file resource, the service will refresh.
 
-{% task 1 %}
+## Package/File/Service
+The **package/file/service** pattern is one of the most useful idioms in Puppet. 
 
+- The package resource makes sure the software and its config file are installed.
+- The file resource config file depends on the package resource.
+- The service resources subscribes to changes in the config file.
+
+It’s hard to overstate the importance of this pattern! If you only stopped here and learned this, you could still get a lot of work done using Puppet.
+
+Wait a minute. What about the package resource that manages the `openssh-server`? We haven't added that yet. To stay consistent with the package/file/service idiom, let's add the `openssh-server` package to the config file. Type the following command:
+
+	/root/examples/break_ssh.pp
+
+{% task 9 %}
+Can you add the following package information to your manifest with the following criteria? Make sure it is above the File and Service resources. Remember, we need to stay consistent with the package/file/service structure.
+
+	package = 'openssh-server'
+	ensure = present
+	before = File['/etc/ssh/sshd_config']
+
+Make sure to check the syntax.  
+Also, don't forget to add that code to the `site.pp` manifest!  
+Once everything looks good, go ahead and restart the sshd service.
+
+	HINT: Look at task Task 8
+
+It's a thing of beauty isn't it?
 
 ## Let's do a Quick Review
 
