@@ -10,15 +10,37 @@ layout: default
 - Resources Quest
 - Mainfest Quest
 - Classes Quest
-- Varibales Quest
+- Variables Quest
 
 ## Quest Objectives
-
-Conditional statements let your Puppet code behave differently in certain situations. By using facts as conditions, you can easily make Puppet do different things on different operating systems, but conditional statements are most helpful when combining facts with data retrieved from an external source. Conditional statements are not a required necessity to using Puppet, but offer an added flexible bonus proving the power of Puppet. To start this quest enter the following command:
+In this quest, you will learn how to use conditional statements and how to combine this conditional logic with variables in order to make your manifests adaptable. To start this quest enter the following command:
 
 	quest --start conditions
 
-## `if` Statements
+## Conditions
+
+> "Just dropped in (to see what condition my condition was in)"
+
+> -Mickey Newbury
+
+Conditional statements let you write Puppet code to behave differently based on variables.
+
+By writing conditional logic that draws on on system facts accessible through the facter tool, you can configure your Puppet manifests to perform as desired on a variety of operating systems and under differing system conditions.
+
+Similarly, you can access facts defined at different scopes 
+
+Puppet supports a few different ways of implementing conditionals:
+ 
+ * `if` statements
+ * `unless` statements
+ * case statements
+ * selectors
+ 
+We'll go over each of these below.
+
+### Scope 
+
+### 'if' Statements
 
 Puppet’s `if` statements behave much like those in any other language. The `if` condition is evaluated first and, if it is true, only the `if` code block is executed. If it is false, then the `elsif` condition kicks in (if present). Should the `if` condition and `elseif` condition fail, then the `else` condition picks up the slack and is executed (if present). If all the conditions fail and there is no `else` block, Puppet will do nothing and move on.
 
@@ -72,7 +94,7 @@ Save the manifest
 Apply the manifest
 
 
-## `unless` Statements
+### `unless` Statements
 
 The `unless` statement works like a reversed `if` statement. They take a condition and an arbitrary block of Puppet code, and will only execute the block if the condition is false. The condition is evaluated first and, if it is false, the code block is executed. If the condition is true, Puppet will do nothing and move on.
 
@@ -89,7 +111,7 @@ You cannot include `elsif` or `else` clauses in `unless` conditional statements.
 {% task 7 %}
 
 
-## Case Statements
+### Case Statements
 
 Like `if` statements, case statements choose one of several blocks of arbitrary Puppet code to execute. They take a control expression and a list of cases and code blocks, and will execute the first block whose case value matches the control expression.
 

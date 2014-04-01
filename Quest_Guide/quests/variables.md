@@ -142,19 +142,79 @@ When you learn about **conditionals**, you will see how Puppet manifests can be 
 For now, let's play with some facts to get a feel for what's available.
 
 {% task 3 %}
-Open the manifest in your text editor.
+Create a new manifest in your text editor.
 		
-		nano ~/mad_facts.pp
+		nano ~/facts.pp
 
-And edit it to look like the following:
+We will write a manifest that will interpolate facter variables into a string assigned to the `$message` variable. We can then use a `notify` resource to post a notification when the manifest is applied. We will also declare a file resource. We can use the same `$string` to assign our interpolated string to this file's content parameter.
 
 {% highlight puppet %}
 
-$madfact = "It took ${uptime} for the quick brown fox to realize that what the lazy dog told her was ${selinux}. Early on the morning of ${bios_release_date}, she put on her best ${osfamily} and took a cab to ${bios_vendor}."
+$string = "\nHi, I'm a ${osfamily} system with the hostname ${hostname}. \nMy uptime is ${uptime}. \nMy Puppet version is ${puppetversion} \nI have ${memorytotal} total memory."
 
-file {'/root/madfact.txt':
-  ensure => file,
-  content => $madfact,
+notify { 'info':
+  message => $string,
+}
+
+file { '/root/message.txt':
+  ensure  => file,
+  content => $string,
 }
 
 {% endhighlight %}
+
+Apply the manifest.
+
+You should see your message displayed along with Puppet's other notifications. You can also use the `cat` command or a text editor to have a look at the `message.txt` file with the same content.
+
+## Variable Scope
+
+A variable's **scope** is defined by the portion of Puppet code in a manifest that can access that variable.
+
+{% task 4 %}
+To see how variable scopes work, we will create a manifest that assigns variables with a few different scopes. We will reference these variables in a resource declaration and see which scopes that resource declaration has access to. 
+
+Note that in this example we use a *node definition*. If you were working with multiple machines, or *nodes*, node definitions would be one way to allow you to easily assign different classes and resources to those nodes. Don't worry too much about the details of node definition; for now, we are only concerned with how it relates to variable scope.
+
+Create a new manifest called `scopes.pp`:
+	
+	nano ~/scopes.pp
+
+Put the following Puppet code into your new `scopes.pp` manifest:
+
+{% highlight puppet %}
+class child_scope {
+  $child = "Child scope is available!"
+}
+
+node default {
+  include child_scope
+  $local = "Local scope is available!"
+  file {'/root/scope_example.txt' :
+    content => "${local}\n${top}\n${sibling}\n${child}\n",
+  }
+}
+
+node 'www1.othernode.com' {
+  $sibling = "Sibling scope is available!"
+}
+
+$top = "Top scope is available!" 
+{% endhighlight %}
+
+{% warning %}
+In actual practice, classes are defined in a separate manifest file and referred to with an `include` statement. For the sake of simplicity of this demonstration, we've defined a simple class right in the manifest.
+{% endwarning %}
+
+Use the `puppet apply` command to apply your manifest, and use the `cat` command or a text editor to inspect the `~/scope_example.txt` file your manifest created. It should look like the following example. If not, double-check your manifest (the `puppet-parser validate ~/scopes.pp` might help) and try again.
+
+{% highlight bash %}
+Local scope is available!
+Top scope is available!
+	
+	
+{% endhighlight %}
+
+Scope is often described using a family analogy: a child scope inherits all the variables set by its parent (and parent's parent, etc.). It can access those inherited variables, but cannot access variables set by its siblings or its own children.
+
+In the case of Puppet, the root of the scope 
