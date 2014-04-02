@@ -99,23 +99,21 @@ $perfect_pangram = 'Bortz waqf glyphs vex muck djin.'
 
 $pgdir = '/root/pangrams'
 
-file {[$pgdir, "${pgdir}/perfect_pangrams"]:
+file { $pgdir:
 	ensure => directory,
 }
 
-file {"${pgdir}/perfect_pangrams/bortz.txt":
+file { "${pgdir}/perfect_pangrams":
+	ensure => directory,
+}
+
+file { "${pgdir}/perfect_pangrams/bortz.txt":
   ensure  => file,
   content => "A perfect pangram: \n${perfect_pangram}",
 }
 {% endhighlight %}
 
-There are a couple of things to notice here. First, the `title` of the first file resource you declared looks a little different than the normal resource declaration syntax:
-
-	[$pgdir, "${pgdir}/perfect_pangrams"]
-
-This is because you used an **array**, which lets you declare two resources at once. By including multiple resource titles wrapped in square braces `[...]` and separated by commas, you can declare multiple resources with identical attributes. This is a common pattern for concisely declaring nested directory structures.
-
-In this case, the `$pgdir` variable resolves to `'/root/pangrams'`, and the interpolated string "${pgdir}/perfect_pangrams" resolves to `'/root/pangrams/perfect_pangrams'`.
+Here, the `$pgdir` variable resolves to `'/root/pangrams'`, and the interpolated string "${pgdir}/perfect_pangrams" resolves to `'/root/pangrams/perfect_pangrams'`. It is common to use variables in this way so as to avoid redundancy and allow for data separation in directory and filepaths. If you wanted to work in another user's home directory, for example, you would only have to change the `$pgdir` variable, and would not need to change any of your resource declarations.
 
 Have a look at the `bortz.txt` file:
 
@@ -125,6 +123,8 @@ You should see something like this, with your pangram variable inserted into the
 
 	A perfect pangram:
 	Bortz waqf glyphs vex muck djin.
+	
+What this perfect pangram actually means, however, is outside the scope of this lesson!
 
 ## Facts
 
@@ -166,59 +166,3 @@ file { '/root/message.txt':
 Apply the manifest.
 
 You should see your message displayed along with Puppet's other notifications. You can also use the `cat` command or a text editor to have a look at the `message.txt` file with the same content.
-
-## Variable Scope
-
-A variable's **scope** is defined by the portion of Puppet code in a manifest that can access that variable.
-
-Scope is often described using a family analogy: a child scope inherits all the variables set by its parent (and parent's parent, etc.). It can access those inherited variables, but cannot access variables set by its siblings or its own children.
-
-{% task 4 %}
-To see how variable scopes work, we will create a manifest that assigns variables with a few different scopes. We will reference these variables in a resource declaration and see which scopes that resource declaration has access to. 
-
-Note that in this example we use a *node definition*. If you were working with multiple machines, or *nodes*, node definitions would be one way to allow you to easily assign different classes and resources to those nodes. Don't worry too much about the details of node definition; for now, we are only concerned with how it relates to variable scope.
-
-Create a new manifest called `scopes.pp`:
-	
-	nano ~/scopes.pp
-
-Put the following Puppet code into your new `scopes.pp` manifest:
-
-{% highlight puppet %}
-class child_scope {
-  $child = "Child scope is available!"
-}
-
-node default {
-  include child_scope
-  $local = "Local scope is available!"
-  file {'/root/scope_example.txt' :
-    content => "${local}\n${top}\n${sibling}\n${child}\n",
-  }
-}
-
-node 'www1.othernode.com' {
-  $sibling = "Sibling scope is available!"
-}
-
-$top = "Top scope is available!" 
-{% endhighlight %}
-
-{% warning %}
-In actual practice, classes are defined in a separate manifest file and referred to with an `include` statement. For the sake of simplicity of this demonstration, we've defined a simple class right in the manifest.
-{% endwarning %}
-
-Use the `puppet apply` command to apply your manifest, and use the `cat` command or a text editor to inspect the `~/scope_example.txt` file your manifest created. It should look like the following example. If not, double-check your manifest (the `puppet-parser validate ~/scopes.pp` might help) and try again.
-
-{% highlight bash %}
-Local scope is available!
-Top scope is available!
-	
-	
-{% endhighlight %}
-
-Notice the two blank lines at the end of the file? These are there because the resource declaration that created the file was outside the scope of the `$sibling` and `$child` variables. When Puppet is unable to find a variable, it evaluates to a special data type called `nil`. When converted to a string, `nil` results in an empty string, hence the blank lines where the Puppet parser was unable to find the `$sibling` and `$child` variables.
-
-{% figure '../assets/scope-diagram.png' %}
-
-In the case of Puppet, the root of the scope 
