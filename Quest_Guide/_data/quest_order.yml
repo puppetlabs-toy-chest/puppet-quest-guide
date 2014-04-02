@@ -1,5 +1,7 @@
  - url: /index.html
    title: Welcome
+ - url: /quests/big_picture.html
+   title: Power of Puppet
  - url: /quests/resources.html
    title: Resources
  - url: /quests/manifest_quest.html
@@ -10,3 +12,9 @@
    title: Variables
  - url: /quests/conditions_quest.html
    title: Conditional Statements
+ - url: /quests/resource_ordering.html
+   title: Ordering
+ - url: /quests/modules_quest.html
+   title: Modules
+ - url: /quests/puppet_module_tool_quest.html
+   title: Puppet Module Tool

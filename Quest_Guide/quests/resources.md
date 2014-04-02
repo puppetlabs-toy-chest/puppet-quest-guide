@@ -5,6 +5,10 @@ layout: default
 
 # Resources
 
+### Prerequisites
+
+- Big Picture
+
 ## Quest Objectives
 
 In this quest you will be introduced to the fundamental applications of Puppet resources and using them to inspect the state of your Virtual Machine. The tasks we will accomplish in this quest will help you learn more about Puppet resources. When you're ready to get started, type the following command:
