@@ -99,23 +99,21 @@ $perfect_pangram = 'Bortz waqf glyphs vex muck djin.'
 
 $pgdir = '/root/pangrams'
 
-file {[$pgdir, "${pgdir}/perfect_pangrams"]:
+file { $pgdir:
 	ensure => directory,
 }
 
-file {"${pgdir}/perfect_pangrams/bortz.txt":
+file { "${pgdir}/perfect_pangrams":
+	ensure => directory,
+}
+
+file { "${pgdir}/perfect_pangrams/bortz.txt":
   ensure  => file,
   content => "A perfect pangram: \n${perfect_pangram}",
 }
 {% endhighlight %}
 
-There are a couple of things to notice here. First, the `title` of the first file resource you declared looks a little different than the normal resource declaration syntax:
-
-	[$pgdir, "${pgdir}/perfect_pangrams"]
-
-This is because you used an **array**, which lets you declare two resources at once. By including multiple resource titles wrapped in square braces `[...]` and separated by commas, you can declare multiple resources with identical attributes. This is a common pattern for concisely declaring nested directory structures.
-
-In this case, the `$pgdir` variable resolves to `'/root/pangrams'`, and the interpolated string "${pgdir}/perfect_pangrams" resolves to `'/root/pangrams/perfect_pangrams'`.
+Here, the `$pgdir` variable resolves to `'/root/pangrams'`, and the interpolated string "${pgdir}/perfect_pangrams" resolves to `'/root/pangrams/perfect_pangrams'`. It is common to use variables in this way so as to avoid redundancy and allow for data separation in directory and filepaths. If you wanted to work in another user's home directory, for example, you would only have to change the `$pgdir` variable, and would not need to change any of your resource declarations.
 
 Have a look at the `bortz.txt` file:
 
@@ -125,6 +123,8 @@ You should see something like this, with your pangram variable inserted into the
 
 	A perfect pangram:
 	Bortz waqf glyphs vex muck djin.
+	
+What this perfect pangram actually means, however, is outside the scope of this lesson!
 
 ## Facts
 
@@ -142,19 +142,27 @@ When you learn about **conditionals**, you will see how Puppet manifests can be 
 For now, let's play with some facts to get a feel for what's available.
 
 {% task 3 %}
-Open the manifest in your text editor.
+Create a new manifest in your text editor.
 		
-		nano ~/mad_facts.pp
+		nano ~/facts.pp
 
-And edit it to look like the following:
+We will write a manifest that will interpolate facter variables into a string assigned to the `$message` variable. We can then use a `notify` resource to post a notification when the manifest is applied. We will also declare a file resource. We can use the same `$string` to assign our interpolated string to this file's content parameter.
 
 {% highlight puppet %}
 
-$madfact = "It took ${uptime} for the quick brown fox to realize that what the lazy dog told her was ${selinux}. Early on the morning of ${bios_release_date}, she put on her best ${osfamily} and took a cab to ${bios_vendor}."
+$string = "\nHi, I'm a ${osfamily} system with the hostname ${hostname}. \nMy uptime is ${uptime}. \nMy Puppet version is ${puppetversion} \nI have ${memorytotal} total memory."
 
-file {'/root/madfact.txt':
-  ensure => file,
-  content => $madfact,
+notify { 'info':
+  message => $string,
+}
+
+file { '/root/message.txt':
+  ensure  => file,
+  content => $string,
 }
 
 {% endhighlight %}
+
+Apply the manifest.
+
+You should see your message displayed along with Puppet's other notifications. You can also use the `cat` command or a text editor to have a look at the `message.txt` file with the same content.
