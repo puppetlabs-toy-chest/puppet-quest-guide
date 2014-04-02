@@ -171,6 +171,8 @@ You should see your message displayed along with Puppet's other notifications. Y
 
 A variable's **scope** is defined by the portion of Puppet code in a manifest that can access that variable.
 
+Scope is often described using a family analogy: a child scope inherits all the variables set by its parent (and parent's parent, etc.). It can access those inherited variables, but cannot access variables set by its siblings or its own children.
+
 {% task 4 %}
 To see how variable scopes work, we will create a manifest that assigns variables with a few different scopes. We will reference these variables in a resource declaration and see which scopes that resource declaration has access to. 
 
@@ -215,6 +217,8 @@ Top scope is available!
 	
 {% endhighlight %}
 
-Scope is often described using a family analogy: a child scope inherits all the variables set by its parent (and parent's parent, etc.). It can access those inherited variables, but cannot access variables set by its siblings or its own children.
+Notice the two blank lines at the end of the file? These are there because the resource declaration that created the file was outside the scope of the `$sibling` and `$child` variables. When Puppet is unable to find a variable, it evaluates to a special data type called `nil`. When converted to a string, `nil` results in an empty string, hence the blank lines where the Puppet parser was unable to find the `$sibling` and `$child` variables.
+
+{% figure '../assets/scope-diagram.png' %}
 
 In the case of Puppet, the root of the scope 

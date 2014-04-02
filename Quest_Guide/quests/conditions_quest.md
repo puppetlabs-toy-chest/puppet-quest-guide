@@ -19,7 +19,7 @@ In this quest, you will learn how to use conditional statements and how to combi
 
 ## Conditions
 
-> "Just dropped in (to see what condition my condition was in)"
+> Just dropped in (to see what condition my condition was in)
 
 > -Mickey Newbury
 
