@@ -27,7 +27,7 @@ This is useful incase you forget which Quests you've already done. In this case 
 
 ## Puppet Manifests
 
-Once you've created a manifest, you will use the `puppet apply` tool to implement it. Puppet will check each resource in your environment against the resource declaration in the manifest. Puppet's **providers** will then do everything neccessary to bring the state of those resources in line with the resource declarations in your manifest.
+Once you've created a manifest, you will use the `puppet apply` tool to implement it. Puppet will check each resource in your environment against the resource declaration in the manifest. Puppet's **providers** will then do everything necessary to bring the state of those resources in line with the resource declarations in your manifest.
 
 Manifests, like the resource declarations they contain, are written in Puppet's Domain Specific Language (DSL). In addition to resource declarations, a manifest will often contain **classes**, which organize resource declarations into functional sets, and **logic** to allow you to manage resources according to variables in the Learning VM environment. You will learn more about these aspects of manifest creation in a later quest.
 
@@ -135,4 +135,4 @@ Now check in on GigaByte.
 
 	HINT: Remember how to inspect a resource. This is important to remember!	
 
-You have an extordinary power to add and remove whomever and whatever you may like. Use your powers wisely.
+You have an extraordinary power to add and remove whomever and whatever you may like. Use your powers wisely.

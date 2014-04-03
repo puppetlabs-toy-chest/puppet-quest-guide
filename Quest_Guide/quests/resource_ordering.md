@@ -15,13 +15,13 @@ layout: default
 
 ## Quest Objectives
 
-The tasks we will accompish in this quest will help you learn more about specifying the order in which Puppet should manage resources in a manifest. When you're ready to get started, type the following command:
+The tasks we will accomplish in this quest will help you learn more about specifying the order in which Puppet should manage resources in a manifest. When you're ready to get started, type the following command:
 
 	quest --start ordering
 
 ## Explicit Ordering
 
-You are likely use to reading instructions from top to bottom. If you wish to master the creation of Puppet manifests you must learn to think of ordering in a different way. Rather than processessing instructions from top to bottom, Puppet interprets the resource declarations in a manifest in whatever order is most effecient.
+You are likely use to reading instructions from top to bottom. If you wish to master the creation of Puppet manifests you must learn to think of ordering in a different way. Rather than processing instructions from top to bottom, Puppet interprets the resource declarations in a manifest in whatever order is most efficient.
 
 If necessary, you will need to ensure that a resource declaration is applied before another. For instance, if you wish to declare in a manifest that a service should be running, you need to ensure that the package for that service is already installed and configured beforehand.
 
@@ -37,7 +37,7 @@ There are four metaparameter attributes that you can include in your resource de
 
 * `before` - causes a resource to be applied **before** a target resource.
 	
-* `require` - causes a resource to be applied **after** a target resouroce.
+* `require` - causes a resource to be applied **after** a target resource.
 
 * `notify` - causes a resource to be applied **before** the target resource. The target resource will refresh if the notifying resource changes.
 
@@ -121,6 +121,6 @@ It's a thing of beauty isn't it?
 
 ## Let's do a Quick Review
 
-Up until this point you've been on a journey towards learning Puppet. To be successful it is imperative you understand the fundatmental components of using Puppet: Resources and Manifests. Before we progress any further, it is important that you reflect on your understanding of these components. Feel free to revisit those quests should you not fully grasp the information. 
+Up until this point you've been on a journey towards learning Puppet. To be successful it is imperative you understand the fundamental components of using Puppet: Resources and Manifests. Before we progress any further, it is important that you reflect on your understanding of these components. Feel free to revisit those quests should you not fully grasp the information. 
 
-Furthermore, Puppet manifests are highly scable components to stablizing and maximizing your infrastructure. To customize that stablization, we examined Classes, Variables, Facts, Conditional Statements and Resource Ordering. It is important that you understand when and how these components are used in Puppet manifests. Should you be in doubt of your understanding, please revisit those quests. 
+Furthermore, Puppet manifests are highly scalable components to stabilizing and maximizing your infrastructure. To customize that stabilization, we examined Classes, Variables, Facts, Conditional Statements and Resource Ordering. It is important that you understand when and how these components are used in Puppet manifests. Should you be in doubt of your understanding, please revisit those quests. 

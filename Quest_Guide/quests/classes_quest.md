@@ -69,11 +69,11 @@ We are going to have to modify the `modules1-ntp1.pp` manifest a little to make 
 
 ## Declaring Classes
 
-In the previous section, we saw an example of a class definition and learned that a class is a collection of resoures. The question that still needs answering is, how can we use the class definition? How can we tell Puppet to use the defintion as part of configuring a system?
+In the previous section, we saw an example of a class definition and learned that a class is a collection of resources. The question that still needs answering is, how can we use the class definition? How can we tell Puppet to use the definition as part of configuring a system?
 
 You can direct Puppet to apply a class definition on a system by using the `include` function. We already know that Puppet manifests are files with the extension `.pp` and contain code in Puppet's DSL. In addition to Puppet's DSL the `include` directive is already built into the Puppet infrastructure so you can use class(es) in any manifest.
 
-A manifest with the included directive of `include former assistants` will be enfored to the system. But when you say, `include former assistants` how does Puppet know where to find the class defintion? We will answer that question as you progress through the quests.
+A manifest with the included directive of `include former assistants` will be enforced to the system. But when you say, `include former assistants` how does Puppet know where to find the class definition? We will answer that question as you progress through the quests.
 
 Again, a more real life use case would applying the ntp module across your systems.
 
@@ -85,5 +85,5 @@ Go ahead and now apply the manifest `/root/examples/modules1-ntp1.pp`.
 
 	HINT: If you need help, refer to the Manifests Quest on how to apply a manifest
 
-Great! This time Puppet actually applied our defined ntp resource. Always remember to define first, then delcare. However, please do not ever do this above example in real life, since you may want to include classes across nodes. This is just an example to show you the functionality and benefit of classes. In the Modules Quest we will show you the proper way define classes and declare classes separately.
+Great! This time Puppet actually applied our defined ntp resource. Always remember to define first, then declare. However, please do not ever do this above example in real life, since you may want to include classes across nodes. This is just an example to show you the functionality and benefit of classes. In the Modules Quest we will show you the proper way define classes and declare classes separately.
 

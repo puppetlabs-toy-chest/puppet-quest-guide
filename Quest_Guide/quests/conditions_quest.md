@@ -40,7 +40,7 @@ We'll go over each of these below.
 
 Puppet’s `if` statements behave much like those in many other languages.
 
-An `if` statement includes a condition followed by a block of Puppet code that will only be executed if that condition evaluates as true. Optionally, an `if` statement can also include any number of `elsif` clauses and an `else` clause. If the `if` condition is fails, Puppet moves on to the `elsif` condition. If neither the `if` nor `elsif` conditions are true, Puppet will exectute the code in the `else` clause. If all the conditions fail and there is no `else` block, Puppet will do nothing and move on.
+An `if` statement includes a condition followed by a block of Puppet code that will only be executed if that condition evaluates as true. Optionally, an `if` statement can also include any number of `elsif` clauses and an `else` clause. If the `if` condition is fails, Puppet moves on to the `elsif` condition. If neither the `if` nor `elsif` conditions are true, Puppet will execute the code in the `else` clause. If all the conditions fail and there is no `else` block, Puppet will do nothing and move on.
 
 The following is an example of an `if` statement you might use to raise a warning when a class is included on an unsupported system:
 
