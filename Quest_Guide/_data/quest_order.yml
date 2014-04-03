@@ -1,20 +1,30 @@
  - url: /index.html
    title: Welcome
+   image_url: assets/LVM Forest Background White_1.svg
  - url: /quests/big_picture.html
    title: Power of Puppet
+   image_url: ../assets/LVM Forest Background White_2.svg
  - url: /quests/resources.html
    title: Resources
+   image_url: ../assets/LVM Forest Background White_3.svg
  - url: /quests/manifest_quest.html
    title: Manifests
+   image_url: ../assets/LVM Forest Background White_4.svg
  - url: /quests/classes_quest.html
    title: Classes
+   image_url: ../assets/LVM Forest Background White_5.svg
  - url: /quests/variables.html
    title: Variables
+   image_url: ../assets/LVM Forest Background White_6.svg
  - url: /quests/conditions_quest.html
    title: Conditional Statements
+   image_url: ../assets/LVM Forest Background White_2.svg
  - url: /quests/resource_ordering.html
    title: Ordering
+   image_url: ../assets/LVM Forest Background White_3.svg
  - url: /quests/modules_quest.html
    title: Modules
+   image_url: ../assets/LVM Forest Background White_4.svg
  - url: /quests/puppet_module_tool_quest.html
    title: Puppet Module Tool
+   image_url: ../assets/LVM Forest Background White_5.svg

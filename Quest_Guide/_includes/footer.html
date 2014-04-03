@@ -1,4 +1,7 @@
-<div id="site-footer">
-    <div class="footer-top">
-    </div>
+<div id="footer-art">
+    {% for quest in site.data.quest_order %}
+        {% if quest.url == page.url %}
+            <img src="{{quest.image_url}}">
+        {% endif %}
+    {% endfor %}
 </div>
