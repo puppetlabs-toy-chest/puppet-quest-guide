@@ -16,14 +16,17 @@ class Fact < Liquid::Block
     end
 end
 
-class Aside < Liquid::Block
-  def initialize(tag_name, markup, tokens)
-    super
-    @title = markup
-  end
-
-  def render(context)
-    "<div class = \"lvm-inline-aside\"><strong>#{@title}</strong><p>#{super}</p></div></div>"
+module Jekyll
+  class Aside < Liquid::Block
+    include Jekyll::Filters
+    def initialize(tag_name, markup, tokens)
+      super
+      @title = markup
+    end
+    def render(context)
+      @context = context
+      "<div class = \"lvm-inline-aside\"><strong>#{@title}</strong><p>#{markdownify(super)}</p></div></div>"
+    end
   end
 end
 
@@ -40,5 +43,5 @@ end
 Liquid::Template.register_tag('tip', Tip)
 Liquid::Template.register_tag('warning', Warning)
 Liquid::Template.register_tag('fact', Fact)
-Liquid::Template.register_tag('aside', Aside)
+Liquid::Template.register_tag('aside', Jekyll::Aside)
 Liquid::Template.register_tag('figure', Figure)
