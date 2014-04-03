@@ -21,7 +21,7 @@ In this quest you will learn to include variables and facts in your manifests in
 
 >The green reed which bends in the wind is stronger than the mighty oak which breaks in a storm.
 
-> -Confuscius
+> -Confucius
 
 Portability and scalability are key advantages of using Puppet; it is important that you learn to write manifests in such a way that they can function in different contexts. Effective use of **variables** is one of the fundamental methods you will use to achieve this.
 

@@ -19,7 +19,7 @@ Welcome to the Learning VM. Have a look around. What you see will be fairly typi
 
 You may have noticed that you are not an ordinary user; you are logged into the 'root' account with its user id of '0', the mark of the **Superuser**. This account gives you the ability to change just about anything you like in the Learning VM, just as you would if you were tasked with administrating a machine.
 
-By following this Quest Guide, you will learn how Puppet allows you to use these priveleges easily and effectively.
+By following this Quest Guide, you will learn how Puppet allows you to use these privileges easily and effectively.
 
 ## Quest Navigation
 
@@ -36,7 +36,7 @@ The following command will help you with using the quest tool:
 The `quest --help` command provides you with an understanding of several quest tools such as the following:
 
 	quest --progress	# Display details of tasks completed (default: true)
-	quest --brief		# Display number of tasks compelted
+	quest --brief		# Display number of tasks completed
 	quest --name		# Name of the quest to track
 	quest --completed	# Display completed quests
 	quest --showall		# Show all available quests
@@ -69,4 +69,4 @@ You can see all the facts by running facter -p
 
 ## Summary
 
-In this quest we introduced you to the quest navigation commands, which provides you real time feedback on your progress using the learning virtual machine. We also introduced you to a Puppet tool called Facter, which allows to easily obtain facts about Puppet, your system, this virtual machine and so much more. This is just a primer quest to get you familar with using the command line and introduction to the quest structure. When you're ready, let's get started learning about Puppet Resources.
+In this quest we introduced you to the quest navigation commands, which provides you real time feedback on your progress using the learning virtual machine. We also introduced you to a Puppet tool called Facter, which allows to easily obtain facts about Puppet, your system, this virtual machine and so much more. This is just a primer quest to get you familiar with using the command line and introduction to the quest structure. When you're ready, let's get started learning about Puppet Resources.

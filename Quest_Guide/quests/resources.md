@@ -121,11 +121,11 @@ Now have another look:
 
 {% aside Quest Progress %}
 
-Awesome! Have you noticed when you successfully finsihed a task the 'completed tasks' increases? Check on your progress to see how you're doing. Type the following command:
+Awesome! Have you noticed when you successfully finished a task the 'completed tasks' increases? Check on your progress to see how you're doing. Type the following command:
 
 	quest --progress
 
-This shows your progress by displaying tasks that you have completed and tasks that still need completeing.
+This shows your progress by displaying tasks that you have completed and tasks that still need completing.
 
 You're almost there to officially completing your first quest!
 
