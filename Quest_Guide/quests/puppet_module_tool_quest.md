@@ -7,6 +7,8 @@ layout: default
 
 ### Prerequisites
 
+- Welcome Quest
+- Power of Puppet Quest
 - Resources Quest
 - Mainfest Quest
 - Classes Quest
@@ -17,9 +19,17 @@ layout: default
 
 ## Quest Objectives
 
-In the previous Modules Quest we primarily learned about the structure of a module and how to create a module. Next we want to answer the questions, how do I use, install, upgrade, etc. modules from the command line? The `puppet module` tool is one of the most important tools in expanding Puppet. The `puppet module` tool allows you to create, install and searches for modules on the Puppet Forge. We'll discuss the Puppet Forge more in detail below, but the Puppet Forge is a repository of user-contributed Puppet code of expandable components to using Puppet.
+In the previous Modules Quest we primarily learned about the structure of a module and how to create a module. Next we want to answer the questions: 
 
-The `puppet module` tool also has subcommands that make finding, installing, and managing modules from the Puppet Forge much easier from the command line. It can also generate empty modules, and prepare locally developed modules for release on the Forge. If you're ready to take your Puppet knowledge to the next level type the following command:
+- How do I use a module?
+- How do I install a module?
+- What about upgrading an existing module?
+- How can I do this all from the command line?
+- And so on...
+
+The `puppet module` tool is one of the most important tools in expanding your use of Puppet. The `puppet module` tool allows you to create, install, search, (and so much more) for modules on the Puppet Forge. We'll discuss the Puppet Forge more in detail below, but the Puppet Forge is a repository of user-contributed Puppet code of expandable components to using Puppet.
+
+The `puppet module` tool also has subcommands that make finding, installing, and managing modules from the Puppet Forge much easier from the command line. It can also generate empty modules, and prepare locally developed modules for release on the Forge. When you're ready to take your Puppet knowledge to the next level, type the following command:
 
 	quest --start puppet module tool
 
@@ -36,7 +46,7 @@ The `puppet module` tool also has subcommands that make finding, installing, and
 
 
 {% task 1 %}
-Let's see what modules are already installed and where they're located. To do this, we want Puppet to show us in a tree format. Go ahead and type the following command: 
+Let's see what modules are already installed on the Learning VM and where they're located. To do this, we want Puppet to show it to us in a tree format. Go ahead and type the following command: 
 
 	puppet module list -tree
 
