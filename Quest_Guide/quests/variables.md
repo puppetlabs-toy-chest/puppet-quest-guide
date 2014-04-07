@@ -137,7 +137,7 @@ Similar to above, can you make sure the syntax of your `perfect_pangrams.pp` man
 {% task 8 %}
 Once there are no errors in your `perfect_pangrams.pp` manifest, can you simulate the change in the Learning VM without enforcing it?
 
-	HINT: Refer to Task 3. Again, another great habit to get us to.
+	HINT: Refer to Task 3. Again, another great habit to get used to.
 	
 {% task 9 %}
 Just like above in Task 4, Puppet is telling us that it hasn't made any changes but this is what it would look like in the Learning VM if the `perfect_pangrams.pp` manifest was enforced. Since this is what we want, can you enforce the `perfect_pangrams.pp` manifest?
