@@ -7,13 +7,15 @@ layout: default
 
 ### Prerequisites
 
+- Welcome Quest
+- Power of Puppet Quest
 - Resources Quest
 - Mainfest Quest
 - Classes Quest
 
 ## Quest Objectives
 
-In this quest you will learn to include variables and facts in your manifests in order to increase their portability and flexibility. If you're ready to get started, type the following command:
+Are you seeing a pattern? Resources are the individual building blocks to using Puppet. Classes are a collection of resources to perform a task. Classes are housed in a Puppet manifest. Manifests contain instructions for automating a task. Now it's time to make manifests scalable. In this quest you will learn how to include variables and facts in your manifests in order to increase their portability and flexibility. When you're ready to get started, type the following command:
 
 	quest --start variables
 
@@ -29,27 +31,24 @@ Portability and scalability are key advantages of using Puppet; it is important 
 Unlike resource declarations, variable assignments are parse-order dependent. This means that you must assign a variable in your manifest before you can resolve it.
 {% endwarning %}
 
-You have likely used variables before in some other programming or scripting language, so the concept will be familiar. Variables allow you to assign data to a variable name in one part of your manifest, then use that name to reference that data elsewhere in your manifest. In Puppet's syntax, variable names are prefixed with `$` (a dollar sign). You can assign data to a variable name with the `=` operator.
+If you have used variables before in some other programming or scripting language, the concept should be familiar. Variables allow you to assign data to a variable name in your manifest and then use that name to reference that data elsewhere in your manifest. In Puppet's syntax, variable names are prefixed with `$` (a dollar sign). You can assign data to a variable name with the `=` operator. You can use variables as the value for any resource attribute, or as the title of a resource.
 
 {% highlight puppet %}
 $myvariable = "look, data!\n"
 {% endhighlight %}
 
-You can directly assign data of any normal data type to a variable.
-
-{% tip %}
+{% aside Also... %}
 In addition to directly assigning data to a variable, you can assign the result of any expression or function that resolves to a normal data type to a variable. This variable will then refer to the result of that statement.
-{% endtip %}
-
-You can use variables as the value for any resource attribute, or as the title of a resource.
+{% endaside %}
 
 {% task 1 %}
 Create a new manifest in your home directory.
 
 	nano ~/pangrams.pp
 
-{% highlight puppet %}
+Type the following Puppet code into the `pangrams.pp` manifest:
 
+{% highlight puppet %}
 $pangram = 'The quick brown fox jumps over the lazy dog.'
 
 file {'/root/pangrams':
@@ -60,10 +59,25 @@ file {'/root/pangrams/fox.txt':
   ensure  => file,
   content => $pangram,
 }
-
 {% endhighlight %}
 
-Apply your manifest, and take look at the file to see that the contents have been set as you intended:
+{% task 2 %}
+Can you check and make sure the syntax of your `pangrams.pp` manifest is correct?
+
+	HINT: Refer to the puppet parser section Manifest Quest
+	
+{% task 3 %}
+Once there are no errors in your `pangrams.pp` manifest, can you simulate the change in the Learning VM without enforcing it?
+
+	HINT: Remember when we talked about --noop in the Manifest Quest
+	
+{% task 4 %}
+Puppet is telling us that it hasn't made any changes, but this is what would change if the `pangrams.pp` manifest was enforced. Since this is what we want, can you enforce the `pangrams.pp` manifest?
+
+	HINT: Enforce using the puppet apply tool discussed in the Manifest Quest
+
+{% task 5 %}
+Great job! Take look at the file to see that the contents have been set as you intended:
 
 	cat /root/pangrams/fox.txt
 
@@ -71,28 +85,28 @@ Apply your manifest, and take look at the file to see that the contents have bee
 A pangram is a sentence that uses every letter of the alphabet. A perfect pangram uses each letter only once.
 {% endfact %}
 
-The string assigned to the `$pangram` variable was passed into your file resource's `content` attribute, which in turn told Puppet what the content of the `/tmp/pangram.txt` file should be.
+The string assigned to the `$pangram` variable was passed into your file resource's `content` attribute, which in turn told Puppet what the content of the `/tmp/pangram.txt` file should exist.
 
 ## Variable Interpolation
 
 The extra effort required to assign variables starts to show its value when you begin to incorporate variables into your manifests in more complex ways.
 
-One way to do this is called **variable interpolation**. Interpolation allows you insert a variable into a string. The syntax for variable interpolation is just a little bit different than that for a stand-alone variable. The variable name is still preceded by a `$`, but it is also wrapped in curly braces (`${var_name}`).
+One way to do this is called **variable interpolation**. Interpolation allows you insert a variable into a string. The syntax for variable interpolation has minor addition in conjunction with the syntax of a stand-alone variable. The variable name is still preceded by a `$`, but it is now wrapped in curly braces (`${var_name}`).
 
-These braces allow the Puppet parser distinguish between the variable and the string in which it is embedded. 
+These braces allow `puppet parser` to distinguish between the variable and the string in which it is embedded. It is important to remember, a string that includes an interpolated variable must be wrapped in double quotation marks (`"..."`), rather than the single quotation marks that surround an ordinary string.  
 
-It is also important to remember that a string that includes an interpolated variable must be wrapped in double quotation marks (`"..."`), rather than the single quotation marks that surround an ordinary string.
-
-`"Variable interpolation is ${adjective}!"`
+`"Variable interpolation is ${adjective}!"`  
 
 {% tip %}
 Wrapping a string without any interpolated variables in double quotes will still work, but it goes against conventions described in the Puppet Labs style guide.
 {% endtip %}
 
-{% task 2 %}
-Now you can use variable interpolation to do something more interesting. Create a new manifest called `perfect_pangrams.pp`.
+{% task 6 %}
+Now you can use variable interpolation to do something more interesting. Go ahead and create a new manifest called `perfect_pangrams.pp`.
 
 		nano ~/perfect_pangrams.pp
+
+Type the following Puppet code into the `perfect_pangrams.pp` manifest:
 
 {% highlight puppet %}
 $perfect_pangram = 'Bortz waqf glyphs vex muck djin.'
@@ -113,8 +127,24 @@ file { "${pgdir}/perfect_pangrams/bortz.txt":
 }
 {% endhighlight %}
 
-Here, the `$pgdir` variable resolves to `'/root/pangrams'`, and the interpolated string "${pgdir}/perfect_pangrams" resolves to `'/root/pangrams/perfect_pangrams'`. It is common to use variables in this way so as to avoid redundancy and allow for data separation in directory and filepaths. If you wanted to work in another user's home directory, for example, you would only have to change the `$pgdir` variable, and would not need to change any of your resource declarations.
+Here, the `$pgdir` variable resolves to `'/root/pangrams'`, and the interpolated string "${pgdir}/perfect_pangrams" resolves to `'/root/pangrams/perfect_pangrams'`. It is best to use variables in this way to avoid redundancy and allow for data separation in the directory and filepaths. If you wanted to work in another user's home directory, for example, you would only have to change the `$pgdir` variable, and would not need to change any of your resource declarations.
 
+{% task 7 %}
+Similar to above, can you make sure the syntax of your `perfect_pangrams.pp` manifest is correct?
+
+	HINT: Refer to Task 2. This is a great habit to get use to in using Puppet.
+
+{% task 8 %}
+Once there are no errors in your `perfect_pangrams.pp` manifest, can you simulate the change in the Learning VM without enforcing it?
+
+	HINT: Refer to Task 3. Again, another great habit to get us to.
+	
+{% task 9 %}
+Just like above in Task 4, Puppet is telling us that it hasn't made any changes but this is what it would look like in the Learning VM if the `perfect_pangrams.pp` manifest was enforced. Since this is what we want, can you enforce the `perfect_pangrams.pp` manifest?
+
+	HINT: Refer to Task 4 and/or the Manifest Quest
+
+{% task 10 %}
 Have a look at the `bortz.txt` file:
 
 	cat /root/pangrams/perfect_pangrams/bortz.txt
@@ -137,16 +167,18 @@ Puppet has a bunch of built-in, pre-assigned variables that you can use. Remembe
 Remember running `facter ipaddress`? Puppet told you your IP address without you having to do anything. What if you wanted to turn `facter ipaddress` into a variable? You guessed it. It would look like this: `$ipaddress` as a stand-alone variable, or like this:
 `${ipaddress}` as a variable interpolation.
 
-When you learn about **conditionals**, you will see how Puppet manifests can be designed to perform differently depending on facts available through `facter`.
+In the Conditions Quest, you will see how Puppet manifests can be designed to perform differently depending on facts available through `facter`.
 
 For now, let's play with some facts to get a feel for what's available.
 
-{% task 3 %}
+{% task 11 %}
+We will write a manifest that will interpolate facter variables into a string assigned to the `$message` variable. We can then use a `notify` resource to post a notification when the manifest is applied. We will also declare a file resource. We can use the same `$string` to assign our interpolated string to this file's content parameter.
+
 Create a new manifest in your text editor.
 		
 		nano ~/facts.pp
 
-We will write a manifest that will interpolate facter variables into a string assigned to the `$message` variable. We can then use a `notify` resource to post a notification when the manifest is applied. We will also declare a file resource. We can use the same `$string` to assign our interpolated string to this file's content parameter.
+Type the following Puppet code into the `facts.pp` manifest:
 
 {% highlight puppet %}
 
@@ -163,6 +195,18 @@ file { '/root/message.txt':
 
 {% endhighlight %}
 
-Apply the manifest.
+{% task 11 %}
+Like above,  check your `facts.pp` manifest syntax using the `puppet parser` tool.
+
+{% task 12 %}
+Once there are no errors in your `facts.pp` manifest, simulate the change in `--noop` mode in the Learning VM without enforcing it.
+
+{% task 13 %}
+Since this what we want, enforce the `facts.pp` manifest using the `puppet apply` tool.
+
+{% task 14 %}
+Have a look at the `message.txt` file.
 
 You should see your message displayed along with Puppet's other notifications. You can also use the `cat` command or a text editor to have a look at the `message.txt` file with the same content.
+
+As you can see, by incorporating variables, variable interpolations, and facts into your manifest can bring a higher level funtion and purpose to completing automation tasks. In the next quest we will discuss conditional statements that will even further provide flexibility and scalability to using Puppet.

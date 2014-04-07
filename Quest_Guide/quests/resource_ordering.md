@@ -7,6 +7,8 @@ layout: default
 
 ### Prerequisites
 
+- Welcome Quest
+- Power of Puppet Quest
 - Resources Quest
 - Mainfest Quest
 - Classes Quest
@@ -15,7 +17,7 @@ layout: default
 
 ## Quest Objectives
 
-The tasks we will accomplish in this quest will help you learn more about specifying the order in which Puppet should manage resources in a manifest. When you're ready to get started, type the following command:
+Just as with the Variables Quest and Conditions Quest, the Resource Ordering Quest will help you learn more about specifying the order in which Puppet should manage resources in a manifest. This ordering manges and controls (like instructions) for creating flexibility and scalability in your manifests. When you're ready to get started, type the following command:
 
 	quest --start ordering
 
@@ -33,65 +35,57 @@ If you require that a group of resources be managed in a specific order, you mus
 In Puppet's DSL, a resource metaparamter is a variable that doesn't refer directly to the state of a resource, but rather tells Puppet how to process the resource declaration itself.
 {% endfact %}
 
-There are four metaparameter attributes that you can include in your resource declaration to establish order relationships among resources. The value of any relationship metaparameter should be the title or titles (in an array) of one or more target resources.
+There are four metaparameter attributes that you can include in your resource declaration to order relationships among resources. The value of any relationship metaparameter should be the title or titles (in an array) of one or more target resources.
 
-* `before` - causes a resource to be applied **before** a target resource.
-	
-* `require` - causes a resource to be applied **after** a target resource.
-
-* `notify` - causes a resource to be applied **before** the target resource. The target resource will refresh if the notifying resource changes.
-
-* `subscribe` - causes a resource to be applied **after** the target resource. The subscribing resource will refresh if the target resource changes.
+* `before` causes a resource to be applied **before** a target resource
+* `require` causes a resource to be applied **after** a target resource.
+* `notify` causes a resource to be applied **before** the target resource. The target resource will refresh if the notifying resource changes.
+* `subscribe` causes a resource to be applied **after** the target resource. The subscribing resource will refresh if the target resource changes.
 
 {% task 1 %}
-Let's get a copy of the current sshd config file. Type the following command:
+We're going to use SSH as our example. Let's dive into the sshd_config file on the Learning VM and add the following Puppet code to it:
 
-	cp /etc/ssh/sshd_config ~/examples/
+{% highlight puppet %}
+file { '/etc/ssh/sshd_config':
+  ensure => file,
+  mode   => 600,
+  source => '/root/examples/sshd_config',
+}
+{% endhighlight %}
+
+However, we're only partial correct. It will change the config file, but those changes will only take effect when the service restarts. Let's now add a metaparameter to that will tell Puppet to manage the `sshd` service and have it `subscribe` to the config file. Add the following Puppet code below your file resource:
+
+{% highlight puppet %}
+service { 'sshd':
+  ensure     => running,
+  enable     => true,
+  subscribe  => File['/etc/ssh/sshd_config'],
+}
+{% endhighlight %}
 
 {% task 2 %}
-Now let's dive into the copied config file. Type the following command:
-
-	/root/examples/break_ssh.pp
+We now have our Puppet code in the sshd_config file, but it's useless until we add it to the `site.pp` manifest so that the puppet agent can manage those resources. Copy and paste the code you just wrote in the sshd_config file into the `site.pp` manifest.
 
 {% task 3 %}
-Can you correctly construct a manifest with the following criteria?
-
-	file = '/etc/ssh/sshd_config'
-	ensure = file
-	mode = 600
-	source = '/root/examples/sshd_config'
-	
-	HINT: Refer to the Manifest Quest for guidance
+Let's make sure the syntax is correct in our `site.pp` manifest is correct. Remember `puppet parser`? If not, refer back to the Manifest Quest.
 
 {% task 4 %}
-However, we're only partial correct. It will change the config file, but those changes will only take effect when the service restarts. Let's now add a metaparameter to that will tell Puppet to manage the `sshd` service and have it subscribe to the config file. Add the following information to your manifest:
-
-	service = sshd
-	ensure = running
-	enable = true
-	subscribe = File['/etc/ssh/sshd_config']
+Once your syntax is error free, enforce the `site.pp` manifest using the `puppet apply` tool. If you're not sure how to do this, refer to the Manifest Quest.
 
 {% task 5 %}
-Let's make sure the syntax is correct. Remember `puppet parser`? If not, refer back to the Manifest Quest.
+Now you need to go back into for your sshd_config file (`/etc/ssh/sshd_config`). We need to change the `PermitRootLogin` from `yes` to `no`.
 
 {% task 6 %}
-We now have our Puppet code and its good to go. But it's useless until we add it to the `site.pp` so that the puppet agent can manage those resources.
-
-	Can you open the site.pp manifest and copy and paste the code you wrote?
-	
-	HINT: Refer to the Manifest Quest for guidance
-
-{% task 7 %}
-Save and close your `site.pp` manifest and now edit the original `/etc/ssh/sshd_config`. We need to change the `PermitRootLogin` from yes to no.
-
-{% task 8 %}
-Manually restart the sshd service by typing the following command then log out.
+Manually restart the sshd service by typing the following command:
 
 	service sshd restart
+
+Finally you will need to log out then log back in to see the changes.
 
 In the above example, the `service` resource with the title `sshd` will be applied **after** the `file` resource with the title `/etc/ssh/sshd_config`. Furthermore, if any other changes are made to the targeted file resource, the service will refresh.
 
 ## Package/File/Service
+
 The **package/file/service** pattern is one of the most useful idioms in Puppet. 
 
 - The package resource makes sure the software and its config file are installed.
@@ -100,27 +94,31 @@ The **package/file/service** pattern is one of the most useful idioms in Puppet.
 
 It’s hard to overstate the importance of this pattern! If you only stopped here and learned this, you could still get a lot of work done using Puppet.
 
-Wait a minute. What about the package resource that manages the `openssh-server`? We haven't added that yet. To stay consistent with the package/file/service idiom, let's add the `openssh-server` package to the config file. Type the following command:
+Wait a minute! What about the package resource that manages the `openssh-server`? We haven't added that yet. To stay consistent with the package/file/service idiom, let's dive back into the sshd_config file  and add the `openssh-server` package to it
 
-	/root/examples/break_ssh.pp
+{% highlight puppet %}
+package { 'openssh-server':
+  ensure => present,
+  before => File['/etc/ssh/sshd_config'],
+}
+{% endhighlight %}
 
-{% task 9 %}
-Can you add the following package information to your manifest with the following criteria? Make sure it is above the File and Service resources. Remember, we need to stay consistent with the package/file/service structure.
+{% aside Quest Progress %}
 
-	package = 'openssh-server'
-	ensure = present
-	before = File['/etc/ssh/sshd_config']
+Make sure the package information stays consistent with the package/file/service structure. Add the package information above the File and Service resources.
+
+{% endaside %}
 
 Make sure to check the syntax.  
 Also, don't forget to add that code to the `site.pp` manifest!  
 Once everything looks good, go ahead and restart the sshd service.
 
-	HINT: Look at task Task 8
+	HINT: Look at task Task 6
 
 It's a thing of beauty isn't it?
 
 ## Let's do a Quick Review
 
-Up until this point you've been on a journey towards learning Puppet. To be successful it is imperative you understand the fundamental components of using Puppet: Resources and Manifests. Before we progress any further, it is important that you reflect on your understanding of these components. Feel free to revisit those quests should you not fully grasp the information. 
+Up until this point you've been on a journey towards learning Puppet. To be successful it is imperative you understand the fundamental components of using Puppet: Resources and Manifests. Before we progress any further, it is important that you reflect on your understanding of these components. Feel free to revisit the Resources Quest and/or Manifest Quest should you not fully grasp the information. 
 
-Furthermore, Puppet manifests are highly scalable components to stabilizing and maximizing your infrastructure. To customize that stabilization, we examined Classes, Variables, Facts, Conditional Statements and Resource Ordering. It is important that you understand when and how these components are used in Puppet manifests. Should you be in doubt of your understanding, please revisit those quests. 
+Furthermore, Puppet manifests are highly flexible and scalable components to stabilizing and maximizing your infrastructure. To customize that stabilization, we examined Classes, Variables, Facts, Conditional Statements and Resource Ordering. It is important that you understand when and how these components are used in Puppet manifests. Should you be in doubt of your understanding, please revisit those quests respectively.

@@ -7,7 +7,7 @@ layout: default
 
 ## Quest Objectives
 
-In this quest you will be introduced to the Learning Virtual Machine environment.
+In this quest you will be introduced to the Learning Virtual Machine (VM) environment.
 
 ## Welcome to the Learning VM
 
@@ -15,9 +15,9 @@ In this quest you will be introduced to the Learning Virtual Machine environment
 
 > -Arthur C. Clarke
 
-Welcome to the Learning VM. Have a look around. What you see will be fairly typical of a Unix-based Operating System. You will see a filesystem populated with many of the usual directories and files. Some services are running in the background, including the SSH service that you can use to access the Learning VM from your own terminal.
+Welcome to the Learning VM. Have a look around. What you see will be fairly typical of a Unix-based operating system. You will see a filesystem populated with many of the usual directories and files. Some services are running in the background, including the SSH service that you can use to access the Learning VM from your own terminal.
 
-You may have noticed that you are not an ordinary user; you are logged into the 'root' account with its user id of '0', the mark of the **Superuser**. This account gives you the ability to change just about anything you like in the Learning VM, just as you would if you were tasked with administrating a machine.
+You may have not noticed yet, but carry the mark of a **Superuser**. You are logged into the 'root' account giving you the user id of '0'. This account gives you the ability to change just about anything you like in the Learning VM, just as you would if you were tasked with administrating a machine.
 
 By following this Quest Guide, you will learn how Puppet allows you to use these privileges easily and effectively.
 
@@ -25,10 +25,11 @@ By following this Quest Guide, you will learn how Puppet allows you to use these
 
 In order to learn more about Puppet, you will complete a series of Quests related to specific Puppet topics. Each of these Quests includes a number of interactive 'Tasks' that give you a hands-on opportunity to apply what you're learning. To monitor your status as you progress through these Quests and Tasks, we've created custom commands you can use through the Learning VM command line.
 
-{% tip %}
-Though these custom `quest` commands will help you learn Puppet, they are not a part of Puppet itself. We have added them specifically to this Learning Virtual Machine to help you keep track of your progress as you learn.
-{% endtip %}
+{% aside Custom Quest Commands %}
+These custom `quest` commands are not related to Puppet. They are only related to this Learning VM and are met to provide you with real time feedback.
+{% endaside %}
 
+{% task 1 %}
 The following command will help you with using the quest tool:
 
 	quest --help
@@ -47,16 +48,17 @@ Typing `clear` into your terminal will clear everything on your screen.
 {% endtip %}
 
 {% aside Remember these commands %}
-The quest commands will be integrated into the first few quests to help you remember them. We'll explain some of these commands further as you progress through the quests.
+These quest tools will be integrated into the first few quests to help with memory retention. We'll explain these commands in greater detail as you progress.
 {% endaside %}
 
-{% figure 'assets/terminal.png' %}
+{% figure 'assets/terminal.png' %} <!--This screenshot needs updating when the final LVM is ready-->
 
 ## Facter
 
-Facter is a Puppet tool that helps you obtain facts about your system. Here are a few items for you to get to know your system a little better:
+Puppet comes with prepackaged tools for you to use in administering your systems. One of these handy tools is called Facter, which helps you obtain facts about your system. Here are a few items for you to checkout using the Facter tool and to get to know your system a little better:
 
-	facter ipaddress
+{% task 2 - 6 %}
+
 	facter facterversion
 	facter memorysize
 	facter operatingsystem
@@ -64,9 +66,9 @@ Facter is a Puppet tool that helps you obtain facts about your system. Here are 
 	facter puppetversion
 
 {% tip %}
-You can see all the facts by running facter -p
+You can see all the facts by running `facter -p`
 {% endtip %}
 
 ## Summary
 
-In this quest we introduced you to the quest navigation commands, which provides you real time feedback on your progress using the learning virtual machine. We also introduced you to a Puppet tool called Facter, which allows to easily obtain facts about Puppet, your system, this virtual machine and so much more. This is just a primer quest to get you familiar with using the command line and introduction to the quest structure. When you're ready, let's get started learning about Puppet Resources.
+In this quest we introduced you to the quest navigation commands, which provides you real time feedback on your progress using the Learning VM. We also introduced you to a Puppet tool called Facter, which allows you to easily obtain facts about Puppet, your system, this virtual machine, and so much more. This is just a primer quest to get you familiar with using the command line and introduction to the quest structure. When you're ready, let's get started learning about the Power of Puppet.
