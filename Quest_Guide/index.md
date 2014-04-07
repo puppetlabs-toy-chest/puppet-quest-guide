@@ -23,10 +23,10 @@ By following this Quest Guide, you will learn how Puppet allows you to use these
 
 ## Quest Navigation
 
-In order to learn more about Puppet, and to work your way through this Learning VM, you will have to complete a series of Quests, and with each Quest, you will have a certain amount of 'Tasks' that need to be completed. To monitor your status as you progress, we've created custom commands for you.
+In order to learn more about Puppet, you will complete a series of Quests related to specific Puppet topics. Each of these Quests includes a number of interactive 'Tasks' that give you a hands-on opportunity to apply what you're learning. To monitor your status as you progress through these Quests and Tasks, we've created custom commands you can use through the Learning VM command line.
 
 {% aside Custom Quest Commands %}
-These custom `quest` commands are not related to Puppet. They are only related to this Learning VM and are met to provide you with real time feedback.
+These custom `quest` commands are not a part of Puppet itself. We have included them Learning VM to provide you with real-time feedback as you progress through Quests and Tasks.
 {% endaside %}
 
 {% task 1 %}
@@ -44,7 +44,7 @@ The `quest --help` command provides you with an understanding of several quest t
 	quest --start		# Provide name of the quest to start tracking
 	
 {% tip %}
-As a side notes, by typing `clear` into your terminal will remove everything on your screen.
+Typing `clear` into your terminal will clear everything on your screen.
 {% endtip %}
 
 {% aside Remember these commands %}
@@ -55,7 +55,7 @@ These quest tools will be integrated into the first few quests to help with memo
 
 ## Facter
 
-Puppet comes with prepackaged tools for you to use in administering your systems. One of these handy tools is called Facter, which helps you obtain facts about your system. Here are a few items for you to checkout using the Facter tool and to get to know your system a little better:
+Puppet comes with prepackaged tools for you to use in administering your systems. One of these handy tools is called Facter, which helps you obtain facts about your system. Here are a few items for you to check out using the Facter tool and to get to know your system a little better:
 
 {% task 2 - 6 %}
 

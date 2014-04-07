@@ -56,7 +56,7 @@ To use the classes nested in each of these modules, we need to be able enforce t
 
 ## The Puppet Enterprise Console
 
-The PE Console is Puppet’s web Graphical User Interface (GUI) to using Puppet for many automation tasks without the need to write code. You can use it to:
+The PE Console is Puppet Enterprise’s web Graphical User Interface (GUI). The Console lets you complete many of the common tasks involved in automating your infrastructure with little or no coding necessary. You can use it to:
 
 - Manage node requests to join the Puppet deployment.
 - Assign Puppet classes to nodes and groups.
@@ -72,7 +72,7 @@ We need to find your IP address. Luckly, Puppet comes prepackaged with a tool ca
 
 	facter ipaddress
 
-Please write down your returned ip address as you will need it to access the PE Console. Next, in your browsers address bar, type the following URL: **https://your-ip-address**.
+Please write down your returned IP address as you will need it to access the PE Console. Next, in your browsers address bar, type the following URL: **https://your-ip-address**.
 
 {% aside Security Restriction %}
 If your browser gives you a security notice, go ahead and accept the exception. Because we are running locally with a self-signed certificate, there is no security risk.
@@ -151,7 +151,7 @@ Running `puppet agent -t` works also. The `-t` flag is simply a short version of
 {% task 4 %}
 Let's check out the Quest Guide! In your browsers address bar, type the following URL: **http://your-ip-address**.
 
-You are all setup to get started learning Puppet!
+You are all set up to get started learning Puppet!
 
 ## Exploring The lvmguide Class
 
@@ -205,4 +205,4 @@ In the above code sample, we see that the `class lvmguide`:
 The file in the directory is sourced from the lvmguide module.
 {% endtip %}
 
-The real power here is that you now have the `class lvmguide` in a module that can be assigned to any number of nodes you wish to manage. There is no repetition or any other node-specific code that needs to be written!
+The real power here is that you now have the `class lvmguide` in a module that could be assigned to any number of nodes you wish to manage. There is no repetition or any other node-specific code that needs to be written!
