@@ -27,7 +27,7 @@ Just as we discussed about bringing flexibility and scalability to our manifest 
 
 Conditional statements allow you to write Puppet code that will behave differently under different conditions.
 
-By writing conditional logic in your manifest allows the system to draw upon facts accessible through the facter tool. For example, you can configure your Puppet manifests to perform as desired on a variety of operating systems and under differing system conditions. Pretty neat, huh?
+Writing conditional logic in your manifest allows the system to draw upon facts accessible through the facter tool. For example, you can configure your Puppet manifests to perform as desired on a variety of operating systems and under differing system conditions. Pretty neat, huh?
 
 Puppet supports a few different ways of implementing conditionals:
  
@@ -125,12 +125,12 @@ Have a look at the updated `conditionals.txt` file using the `cat` command. You 
 
 	Notice: I am a real machine.
 	
-But what happened here? We told the manifest to notify us if the Learning VM is real, which it most certainly is.
+But what happened here? We told the manifest to notify us if the Learning VM is virtual, but the notification we asserts the opposite!
 
 {% task 7 %}
 If you like, run `facter is_virtual` to double-check. So why the incorrect result?
 
-What you've encountered is a common mistake when using conditionals with facts from Facter. To understand what's going on here requires a basic understanding of how conditional statements interpret the data you give them.
+What you've encountered is a common mistake when using conditionals with facts from Facter. To understand what's going on here, we'll need to take a look at how conditional statements interpret the data you give them.
 
 ### Thank you George Boole
 
@@ -140,11 +140,11 @@ A conditional statement requires a data type called a Boolean. A Boolean has onl
 Boolean is named after the great mathematician George Boole.
 {% endtip %}
 
-When a conditional statement receives data other than a Boolean, it must convert that data type into a Boolean before the conditional statement can decide what to do. 
+When a conditional statement receives data other than a Boolean, Puppet must convert that data type into a Boolean before the conditional statement can decide what to do. 
 
 So here's where our manifest got tripped up: all Facter facts are actually constructed as a *string* data type. When converted to a Boolean, only empty strings (represented by empty quotes, e.g. `''`) are `false` and all other strings (including the string `'false'`!) are treated as `true`. Confused? Don't worry. Puppet has you covered.
 
-Luckily this isn't a problem as long as we remember to properly convert a fact before feeding it to a conditional. Luckily Puppet includes a `str2bool()` function to convert strings to Booleans in a more sensible way.
+Luckily this isn't a problem as long as we remember to properly convert a fact before feeding it to a conditional. Puppet includes a `str2bool()` function that will convert strings to Booleans in a more sensible way.
 
 We need to go back into your `conditionals.pp` manifest to properly convert the `$is_virtual` fact to a Boolean with the `str2bool()` function. Update your existing Puppet code to the following:
 
@@ -164,7 +164,7 @@ Go ahead and enforce your changes in the `conditionals.pp` using the `puppet app
 
 ### 'unless' Statements
 
-The `unless` statement works like a reversed `if` statement. They take a condition and a block of Puppet code, and will only execute the block **if** the condition is **false**. If the condition is true, Puppet will do nothing and move on. Note that there is no equivalent of `elsif` or `else` clauses for `unless` statements.
+The `unless` statement works like a reversed `if` statement. An `unless` statements takes a condition and a block of Puppet code, and will only execute the block **if** the condition is **false**. If the condition is true, Puppet will do nothing and move on. Note that there is no equivalent of `elsif` or `else` clauses for `unless` statements.
 
 ## Case Statements
 
