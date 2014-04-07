@@ -23,10 +23,10 @@ By following this Quest Guide, you will learn how Puppet allows you to use these
 
 ## Quest Navigation
 
-In order to learn more about Puppet, and to work your way through this learning virtual machine, you will have to complete a series of Quests and with each Quest you have certain amount of 'Tasks' that need to be completed. To monitor your status as you progress, we've created custom commands for you.
+In order to learn more about Puppet, you will complete a series of Quests related to specific Puppet topics. Each of these Quests includes a number of interactive 'Tasks' that give you a hands-on opportunity to apply what you're learning. To monitor your status as you progress through these Quests and Tasks, we've created custom commands you can use through the Learning VM command line.
 
 {% tip %}
-These custom `quest` commands are not related to Puppet. They are only related to this Learning Virtual Machine.
+Though these custom `quest` commands will help you learn Puppet, they are not a part of Puppet itself. We have added them specifically to this Learning Virtual Machine to help you keep track of your progress as you learn.
 {% endtip %}
 
 The following command will help you with using the quest tool:
@@ -43,11 +43,11 @@ The `quest --help` command provides you with an understanding of several quest t
 	quest --start		# Provide name of the quest to start tracking
 	
 {% tip %}
-By typing `clear` into your terminal will clear everything on your screen.
+Typing `clear` into your terminal will clear everything on your screen.
 {% endtip %}
 
 {% aside Remember these commands %}
-These will be integrated into the first few quests to help you remember them. We'll explain these commands further as you progress.
+The quest commands will be integrated into the first few quests to help you remember them. We'll explain some of these commands further as you progress through the quests.
 {% endaside %}
 
 {% figure 'assets/terminal.png' %}
