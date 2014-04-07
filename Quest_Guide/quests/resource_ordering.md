@@ -25,9 +25,9 @@ Just as with the Variables Quest and Conditions Quest, the Resource Ordering Que
 
 You are likely use to reading instructions from top to bottom. If you wish to master the creation of Puppet manifests you must learn to think of ordering in a different way. Rather than processing instructions from top to bottom, Puppet interprets the resource declarations in a manifest in whatever order is most efficient.
 
-If necessary, you will need to ensure that a resource declaration is applied before another. For instance, if you wish to declare in a manifest that a service should be running, you need to ensure that the package for that service is already installed and configured beforehand.
+Sometimes, however, you will need to ensure that a resource declaration is applied before another. For instance, if you wish to declare in a manifest that a service should be running, you need to ensure that the package for that service is installed and configured before you can start it.
 
-If you require that a group of resources be managed in a specific order, you must explicitly state the dependency relationships between these resources within the resource declarations.
+When you need a group of resources to be managed in a specific order, you must explicitly state the dependency relationships between these resources within the resource declarations.
 
 ## Relationship Metaparameters
 
@@ -35,12 +35,14 @@ If you require that a group of resources be managed in a specific order, you mus
 In Puppet's DSL, a resource metaparamter is a variable that doesn't refer directly to the state of a resource, but rather tells Puppet how to process the resource declaration itself.
 {% endfact %}
 
-There are four metaparameter attributes that you can include in your resource declaration to order relationships among resources. The value of any relationship metaparameter should be the title or titles (in an array) of one or more target resources.
+Metaparameters follow the familiar `attribute => value` syntax. There are four metaparameter **attributes** that you can include in your resource declaration to order relationships among resources.
 
 * `before` causes a resource to be applied **before** a target resource
 * `require` causes a resource to be applied **after** a target resource.
 * `notify` causes a resource to be applied **before** the target resource. The target resource will refresh if the notifying resource changes.
 * `subscribe` causes a resource to be applied **after** the target resource. The subscribing resource will refresh if the target resource changes.
+
+The **value** of the relationship metaparameter is the title or titles (in an array) of one or more target resources.
 
 {% task 1 %}
 We're going to use SSH as our example. Let's dive into the sshd_config file on the Learning VM and add the following Puppet code to it:
@@ -119,6 +121,6 @@ It's a thing of beauty isn't it?
 
 ## Let's do a Quick Review
 
-Up until this point you've been on a journey towards learning Puppet. To be successful it is imperative you understand the fundamental components of using Puppet: Resources and Manifests. Before we progress any further, it is important that you reflect on your understanding of these components. Feel free to revisit the Resources Quest and/or Manifest Quest should you not fully grasp the information. 
+Up until this point you've been on a journey towards learning Puppet. To be successful it is imperative you understand the fundamental components of using Puppet: Resources and Manifests. Before we progress any further, it is important that you reflect on your understanding of these components. Feel free to read through the Resources Quest and/or Manifest Quest again if you feel like you could use a refresher. 
 
-Furthermore, Puppet manifests are highly flexible and scalable components to stabilizing and maximizing your infrastructure. To customize that stabilization, we examined Classes, Variables, Facts, Conditional Statements and Resource Ordering. It is important that you understand when and how these components are used in Puppet manifests. Should you be in doubt of your understanding, please revisit those quests respectively.
+Furthermore, Puppet manifests are highly flexible and scalable components to stabilizing and maximizing your infrastructure. To customize that stabilization, we examined Classes, Variables, Facts, Conditional Statements and Resource Ordering. It is important that you understand when and how these components are used in Puppet manifests. Again, if you could use a refresher on these topics, it could be good to go back and read through these quests again.
