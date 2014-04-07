@@ -37,12 +37,12 @@ Once you've created a manifest, you will use the `puppet apply` tool to enforce 
 You can use `puppet describe user` and `puppet resource user` for help using and understanding the user resource...and any other resource type you're curious about.
 {% endaside %}
 
-Make sure you place newly created manifests in your home directory (`/root`). M
+Make sure you place newly created manifests in your home directory (`/root`).
 
 	cd /root
 
 {% aside Text Editors %}
-For the sake of simplicity and consistency, we use the text editor nano in our instructions, but feel free to use vim or another text editor of your choice.
+For the sake of simplicity and consistency, we use the text editor `nano` in our instructions, but feel free to use `vim` or another text editor of your choice.
 {% endaside %}
 
 {% task 1 %}
@@ -59,11 +59,11 @@ user { 'byte':
 }
 {% endhighlight %}
 
-Save the file and exit your text editor. We touched on this in the Resources Quests, the `ensure => absent` attribute/value pair states that we are going to make Byte not exist in the Learning VM.
+Save the file and exit your text editor. We touched on this in the Resources Quests, but the `ensure => absent` attribute/value pair states that we are going to make Byte not exist in the Learning VM.
 
 ## Puppet Parser
 
-The `puppet parser` tool is like Puppet's version of a spellchecker. This action validates Puppet's DSL syntax without compiling a catalog or syncing any resources. If no manifest files are provided, Puppet will validate the default `site.pp` manifest. If there are no syntax errors, Puppet will return nothing when this command is ran, otherwise Puppet will display the first syntax error encountered. 
+What if I made in error when writing Puppet code? The `puppet parser` tool is like Puppet's version of a spellchecker. This action validates Puppet's DSL syntax without compiling a catalog or syncing any resources. If no manifest files are provided, Puppet will validate the default `site.pp` manifest. If there are no syntax errors, Puppet will return nothing when this command is ran, otherwise Puppet will display the first syntax error encountered. 
 
 {% warning %}
 The `puppet parser` tool can only ensure that the syntax of a manifest is well-formed. It cannot guarantee that your variables are correctly named, your logic is valid, or that your manifest does what you want it to.
@@ -78,17 +78,17 @@ Again, if the parser returns nothing, continue on. If not, make the necessary ch
 
 ## Puppet Apply
 
-This is a very handy execution and enforcement tool for applying manifests locally in the Learning VM. However, in the real world, you'll probably use this tool to apply configurations across an entire system with a single file. The file being enforced will be constructed with a list of all resources you want to manage on your system, but as you can imagine, that might end up being a _really_ long file! You'll see how this can be a more manageable process when you come across **Classes** in your next quest.
+This is a very handy execution and enforcement tool for applying manifests locally in the Learning VM. However, in the real world, you'll probably use this tool to apply configurations across an entire system with a single file. The file being enforced will be constructed with a list of all resources you want to manage on your system, but as you can imagine, that might end up being a _really_ long file! You'll see how this can be a more manageable process in the next quest using **Classes**.
 
 {% task 4 %}
-Once your `byte.pp` manifest has no errors, we're going to simulate the change in the Learning VM without actually enforcing those changes. Let's see what happens:
+Once your `byte.pp` manifest is error free, we're going to simulate the change in the Learning VM without actually enforcing those changes. Let's see what happens:
 
 	puppet apply --noop byte.pp
 
 In the returned output, Puppet tells us that it has not made the changes to the Learning VM, but if it had, this is what would be changed.
 
 {% task 5 %}
-Since the simulated change is what we truly want, let's actually enforce the change on the Learning VM using `puppet apply`.
+Since the simulated change is what we want, let's enforce the change on the Learning VM.
 
 	puppet apply byte.pp
 
@@ -118,7 +118,7 @@ user { 'gigabyte':
 {% endhighlight %}
 
 {% task 9 %}
-Check the syntax of the `gigabyte.pp` manifest:
+Check the syntax of the `gigabyte.pp` manifest.
 
 	HINT: If you're not sure check out Task 3 above
 	

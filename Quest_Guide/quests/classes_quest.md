@@ -19,7 +19,7 @@ So we've mentioned the term classes in previous quests. Remember that little blu
     quest --start classes
 
 {% aside This is just an example %}
-This quest only exists to show you the functionality and benefit of classes. Please do not ever do this example in real life, since you may want to include classes across nodes. In the Modules Quest we will show you the proper way define classes and declare classes separately.
+This quest only exists to show you the functionality and benefit of classes. Please do not ever do this example in real life, since you may want to include classes across multiple nodes. In the Modules Quest we will show you the proper way define classes and declare classes separately.
 {% endaside %}
 
 ## Defining Classes
@@ -82,7 +82,7 @@ In the previous section, we saw an example of a class definition and learned tha
 
 You can direct Puppet to apply a class definition on a system by using the `include` directive. We already know that Puppet manifests are files with the extension `.pp` and contain code in Puppet's DSL. In addition to Puppet's DSL, the `include` directive is already built into the Puppet infrastructure so you can use class(es) in any manifest.
 
-But when you say, `include former sidekicks` how does Puppet know where to find the class definition? We will answer that question as you progress through this quest and future quests.
+But when you say `include former sidekicks`, how does Puppet know where to find the class definition? We will answer that question as you progress through this quest and future quests.
 
 Again, a more real life use case would applying the ntp module across your system.
 
@@ -92,7 +92,7 @@ In the `modules1-ntp1.pp` manifest go ahead and add the `include ntp` directive 
 {% task 4 %}
 Go ahead and now enforce the manifest `/root/examples/modules1-ntp1.pp`.
 
-	HINT: User the puppet apply tool. Refer to the Manifests Quest.
+	HINT: Use the puppet apply tool. Refer to the Manifests Quest.
 
 Great! This time Puppet actually applied our defined ntp resource. Always remember to define first, then declare.
 
