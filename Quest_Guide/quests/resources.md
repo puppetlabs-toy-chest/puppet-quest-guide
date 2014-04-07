@@ -12,7 +12,7 @@ layout: default
 
 ## Quest Objectives
 
-In this quest you will be introduced to the fundamental applications of Puppet resources and using them to inspect the state of your Learning Virtual Machine. The tasks we will accomplish in this quest will help you learn more about Puppet resources. As an aspiring practitioner of Puppet, it is important for you to have a thorough understanding of the relationship between the syntax of Puppet and the environment around you. We'll begin with **Resources**, the basic units that Puppet uses to describe an environment. When you're ready to get started, type the following command:
+In this quest you will be introduced to the fundamental applications of Puppet resources and using them to inspect the state of your Learning VM. The tasks we will accomplish in this quest will help you learn more about Puppet resources. As an aspiring practitioner of Puppet, it is important for you to have a thorough understanding of the relationship between the syntax of Puppet and the environment around you. We'll begin with **Resources**, the basic units that Puppet uses to describe an environment. When you're ready to get started, type the following command:
 
     quest --start resources
 
@@ -28,9 +28,9 @@ type {'title':
 Though a comma isn't strictly necessary at the end of the final attribute value pair, it is best practice to include it for the sake of consistency.
 {% endaside %}
 
-The syntax you see here is an example of Puppet's Domain-Specific Language (DSL), which is built on the Ruby programming language. Because the Puppet DSL is a **declarative** language, the descriptions themselves have the power to change the state of the environment. One things to note here, and pay close attention to, is the readability of the code. At a glance, Puppet's DSL allows you to decipher tasks with relative ease.
+The syntax you see here is an example of Puppet's Domain-Specific Language (DSL), which is built on the Ruby programming language. Because the Puppet DSL is a **declarative** language, the descriptions themselves have the power to change the state of the environment. One thing to note here, and pay close attention to, is the readability of the code. At a glance, Puppet's DSL allows you to decipher tasks with relative ease.
 
-The first step in mastering Puppet is to learn about the world around you. You will also realize everything is this Learning VM is a collection of **resources**. You will not be using resource declarations to shape your environment just yet. Instead you will exercise your power by hand and use Puppet only to inspect your actions.
+The first step in mastering Puppet is to learn about the world around you. You will also realize everything in this Learning VM is a collection of **resources**. You will not be using resource declarations to shape your environment just yet. Instead you will exercise your power by hand and use Puppet only to inspect your actions.
 
 ## Anatomy of a Resource
 
@@ -95,14 +95,14 @@ Potent stuff. Note that Byte's password attribute is set to `'!!'`. This isn't a
 One more time. Let's look at your above resource declaration, this time examine the body. After the colon (:) comes a list of **attributes** and their corresponding **values**. Each line consists of an attribute name, a `=>` (hash rocket), a value, and a final comma. For example, the attribute value pair `home => '/root',` indicates that your home is set to the directory `/root`.
 	
 {% task 4 %}
-Let's rectify the Byte's password situation by setting it to *puppetlabs*. Type the following command:
+Let's rectify Byte's password situation by setting it to *puppetlabs*. Type the following command:
 
 	passwd byte
 		
 If you take another look at Byte by typing the command `puppet resource user byte`, the value for his password attribute should now be set to a SHA1 hash of his password, something a little like this: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
 
 {% task 5 %}
-Now have a look at Byte's home directory, which was set to `'/home/byte'` by default. Byte's home is a directory, which is really just a special kind of file resource type. The `title` of any file is the same as the path to that file. Take a look at Byte's home directory. Enter the command:
+Now have a look at Byte's home directory, which was set to `'/home/byte'` by default. Byte's home is a directory, which is really just a special kind of file resource type. The `title` of any file is the same as the path to that file. Enter the command:
 
 	puppet resource file /home/byte/sidekick
 		
@@ -120,7 +120,7 @@ Awesome! Have you noticed when you successfully finish a task, the 'completed ta
 
 	quest --progress
 
-This shows your progress by displaying tasks that you have completed and tasks that still need completing.
+This shows your progress by displaying the tasks you've completed and tasks that still need completing.
 {% endaside %}
 
 {% task 7 %}
