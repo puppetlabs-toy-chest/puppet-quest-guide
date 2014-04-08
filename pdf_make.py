@@ -33,14 +33,14 @@ def quest_guide():
 
     shell = BeautifulSoup("<html><body><cover></cover><toc></toc><content></content></body></html>", "html5lib")
     content = shell.content
-
+    
     # It's easier to reverse the list and index to 0 with .insert methods
     full_quest_urls.reverse()
-
+    full_quest_urls.append(path + '/setup/virtualbox_setup.html')
+    full_quest_urls.append(path + '/setup/vmware_setup.html')
 
     for quest in full_quest_urls:
-        # insert placeholder tags for navigation.
-        #content.insert(0, BeautifulSoup("<div class='pdfnav'></div>", 'html5lib').body.next)
+                
         # insert quest content
         content.insert(0, pull_content(quest))
 
@@ -61,21 +61,6 @@ def quest_guide():
 
     cover.insert(0, pull_content("./Quest_Guide/_includes/cover.html"))
     
-
-    # Navigation Section (pdfnav):
-    
-#    navpoints = content.find_all('div', 'pdfnav')
-#    
-#    for nav in navpoints:
-#        #print nav.parent
-#        current_quest = nav.find_previous_sibling('div', id='content').find_all('h1')[0]
-#        for title in titles:
-#            if title == current_quest:
-#                nav.insert(0, BeautifulSoup("<ul><li><a href='#%(href)s' class='current'>%(title)s</a></li></ul>" % {'title': title.string, 'href': title['id']}, 'html5lib').body.next)
-#            else:
-#                nav.insert(0, BeautifulSoup("<ul><li><a href='#%(href)s'>%(title)s</a></li></ul>" % {'title': title.string, 'href': title['id']}, 'html5lib').body.next)
-#        nav.insert(0, BeautifulSoup("<strong>Quest Progress</strong>").body.next)
-#
     # Uncomment to write the html output for testing purposes.
 
     with open('test.html', 'w') as f:
