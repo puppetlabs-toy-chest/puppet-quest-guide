@@ -27,22 +27,23 @@ Just as we discussed about bringing flexibility and scalability to our manifest 
 
 Conditional statements allow you to write Puppet code that will behave differently under different conditions.
 
-Writing conditional logic in your manifest allows the system to draw upon facts accessible through the facter tool. For example, you can configure your Puppet manifests to perform as desired on a variety of operating systems and under differing system conditions. Pretty neat, huh?
+Writing conditional logic in your manifest allows the system to draw upon facts accessible through the Facter tool. For example, you can configure your Puppet manifests to perform as desired on a variety of operating systems and under differing system conditions. Pretty neat, dont you think?
 
 Puppet supports a few different ways of implementing conditionals:
  
  * `if` statements
  * `unless` statements
  * case statements
- * selectors
- 
-We'll go over each of these below.
 
 ## 'if' Statements
 
 Puppet’s `if` statements behave much like those in many other programming and scripting languages.
 
-An `if` statement includes a condition followed by a block of Puppet code that will only be executed **if** that condition evaluates as **true**. Optionally, an `if` statement can also include any number of `elsif` clauses and an `else` clause. If the `if` condition fails, Puppet moves on to the `elsif` condition. If both the `if` and `elsif` conditions fail, Puppet will execute the code in the `else` clause. If all the conditions fail, and there is no `else` block, Puppet will do nothing and move on.
+An `if` statement includes a condition followed by a block of Puppet code that will only be executed **if** that condition evaluates as **true**. Optionally, an `if` statement can also include any number of `elsif` clauses and an `else` clause. Here are some rules:
+
+- If the `if` condition fails, Puppet moves on to the `elsif` condition.
+- If both the `if` and `elsif` conditions fail, Puppet will execute the code in the `else` clause.
+- If all the conditions fail, and there is no `else` block, Puppet will do nothing and move on.
 
 The following is an example of an `if` statement you might use to raise a warning when a class is included on an unsupported system:
 
@@ -90,7 +91,7 @@ else {
 Check your `conditionals.pp` manifest syntax using the `puppet parser` tool.
 
 {% task 3 %}
-Once there are no errors in your `conditionals.pp` manifest, simulate the change in `--noop` mode in the Learning VM without enforcing it.
+Once there are no errors in your `conditionals.pp` manifest, simulate the change in `--noop` mode without enforcing it.
 
 {% task 4 %}
 Since this what we want, enforce the `conditionals.pp` manifest using the `puppet apply` tool.
@@ -99,7 +100,7 @@ Since this what we want, enforce the `conditionals.pp` manifest using the `puppe
 Have a look at the `conditionals.txt` file using the `cat` command.
 
 {% task 6 %}
-Use the command `facter uptime_hours` to check the uptime yourself. The notice you saw when you applied your manifest should describe the uptime returned from the facter tool.
+Use the command `facter uptime_hours` to check the uptime yourself. The notice you saw when you applied your manifest should describe the uptime returned from the Facter tool.
 
 ### Adding other conditions
 
@@ -119,13 +120,13 @@ else {
 
 Next, go ahead and check your `conditionals.pp` manifest syntax once again using the `puppet parser` tool.
 
-Once there are no errors in your `conditionals.pp` manifest, simulate the change in `--noop` mode, then enforce the `conditionals.pp` manifest in the Learning VM using the `puppet apply` tool.
+Once there are no errors in your `conditionals.pp` manifest, simulate the change in `--noop` mode, then go ahead and enforce the `conditionals.pp` manifest in the Learning VM using the `puppet apply` tool.
 
 Have a look at the updated `conditionals.txt` file using the `cat` command. You will see the notice:
 
 	Notice: I am a real machine.
 	
-But what happened here? We told the manifest to notify us if the Learning VM is virtual, but the notification we asserts the opposite!
+But what happened here? We told the manifest to notify us if the Learning VM is virtual, but the notification asserts the opposite!
 
 {% task 7 %}
 If you like, run `facter is_virtual` to double-check. So why the incorrect result?
@@ -142,7 +143,7 @@ Boolean is named after the great mathematician George Boole.
 
 When a conditional statement receives data other than a Boolean, Puppet must convert that data type into a Boolean before the conditional statement can decide what to do. 
 
-So here's where our manifest got tripped up: all Facter facts are actually constructed as a *string* data type. When converted to a Boolean, only empty strings (represented by empty quotes, e.g. `''`) are `false` and all other strings (including the string `'false'`!) are treated as `true`. Confused? Don't worry. Puppet has you covered.
+So here's where our manifest got tripped up: all Facter facts are actually constructed as *string* data types. When converted to a Boolean, only empty strings (represented by empty quotes, e.g. `''`) are `false` and all other strings (including the string `'false'`!) are treated as `true`. Confused? Don't worry. Puppet has you covered.
 
 Luckily this isn't a problem as long as we remember to properly convert a fact before feeding it to a conditional. Puppet includes a `str2bool()` function that will convert strings to Booleans in a more sensible way.
 
@@ -185,7 +186,7 @@ package {'apache':
 }
 {% endhighlight %}
 
-Puppet compares the control expression to each case, in the order the cases are listed. Puppet will execute the block of code associated with the first matching case, and ignore the remainder of the statement.
+Puppet compares the control expression to each case and the order the cases are listed. Puppet will execute the block of code associated with the first matching case, and ignore the remainder of the statement.
 
 - Basic cases are compared with the `==` operator (which is case-insensitive).
 - Regular expression cases are compared with the `=~` operator (which is case-sensitive).

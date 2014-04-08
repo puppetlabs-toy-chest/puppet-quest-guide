@@ -11,10 +11,10 @@ layout: default
 - Power of Puppet Quest
 - Resources Quest
 - Mainfest Quest
-- Classes Quest
 - Varibales Quest
 - Conditions Quest
 - Ordering Quest
+- Classes Quest
 - Modules Quest
 
 ## Quest Objectives

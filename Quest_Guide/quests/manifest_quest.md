@@ -63,7 +63,7 @@ Save the file and exit your text editor. We touched on this in the Resources Que
 
 ## Puppet Parser
 
-What if I made in error when writing Puppet code? The `puppet parser` tool is like Puppet's version of a spellchecker. This action validates Puppet's DSL syntax without compiling a catalog or syncing any resources. If no manifest files are provided, Puppet will validate the default `site.pp` manifest. If there are no syntax errors, Puppet will return nothing when this command is ran, otherwise Puppet will display the first syntax error encountered. 
+What if I made in error when writing our Puppet code? The `puppet parser` tool is like Puppet's version of a spellchecker. This action validates Puppet's DSL syntax without compiling a catalog or syncing any resources. If no manifest files are provided, Puppet will validate the default `site.pp` manifest. If there are no syntax errors, Puppet will return nothing when this command is ran, otherwise Puppet will display the first syntax error encountered. 
 
 {% warning %}
 The `puppet parser` tool can only ensure that the syntax of a manifest is well-formed. It cannot guarantee that your variables are correctly named, your logic is valid, or that your manifest does what you want it to.
@@ -78,7 +78,7 @@ Again, if the parser returns nothing, continue on. If not, make the necessary ch
 
 ## Puppet Apply
 
-This is a very handy execution and enforcement tool for applying manifests locally in the Learning VM. However, in the real world, you'll probably use this tool to apply configurations across an entire system with a single file. The file being enforced will be constructed with a list of all resources you want to manage on your system, but as you can imagine, that might end up being a _really_ long file! You'll see how this can be a more manageable process in the next quest using **Classes**.
+This is a very handy execution and enforcement tool for applying manifests locally in the Learning VM. However, in the real world, you'll probably use this tool to apply configurations across an entire system with a single file. The file being enforced will be constructed with a list of all resources you want to manage on your system, but as you can imagine, that might end up being a _really_ long file! You'll see how this can be a more manageable process in the  Classes Quest and Modules Quest.
 
 {% task 4 %}
 Once your `byte.pp` manifest is error free, we're going to simulate the change in the Learning VM without actually enforcing those changes. Let's see what happens:
