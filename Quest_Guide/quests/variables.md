@@ -86,5 +86,8 @@ A pangram is a sentence that uses every letter of the alphabet. A perfect pangra
 
 The string assigned to the `$pangram` variable was passed into your file resource's `content` attribute, which in turn told Puppet what the content of the `/tmp/pangram.txt` file should exist.
 
+## You have some options
 
+1. I would like to move on the the [Conditions Quest]().
+2. I would like to learn more about interpolating variables in the [Interpolation Quest]().
 

@@ -87,3 +87,8 @@ You should see something like this, with your pangram variable inserted into the
 	Bortz waqf glyphs vex muck djin.
 	
 What this perfect pangram actually means, however, is outside the scope of this lesson!
+
+## You have some options
+
+1. I would like to move on the the [Conditions Quest]().
+2. I would like to learn more about using facts as variables in the [Facts Quest]().

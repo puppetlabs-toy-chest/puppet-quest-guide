@@ -70,3 +70,7 @@ Have a look at the `message.txt` file.
 You should see your message displayed along with Puppet's other notifications. You can also use the `cat` command or a text editor to have a look at the `message.txt` file with the same content.
 
 As you can see, by incorporating variables, variable interpolations, and facts into your manifest can bring a higher level funtion and purpose to completing automation tasks. In the next quest we will discuss conditional statements that will even further provide flexibility and scalability to using Puppet.
+
+## You have some options
+
+Congratulations! You've extending your learning knowledge on using variables in your manifest. Lets continuing learning about making manifests more flexable and scalable in the [Conditions Quest]().
