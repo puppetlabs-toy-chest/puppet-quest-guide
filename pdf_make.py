@@ -1,23 +1,19 @@
 import json
 from subprocess import *
 from bs4 import BeautifulSoup, Tag
-import argparse
 import markdown
 import codecs
 import yaml
 
-# Set up the argument parser and define arguments to create Quest Guide and Setup Guide PDFs
-parser = argparse.ArgumentParser(description='Generate PDF documents for the Quest Guide and the Setup Guide')
-parser.add_argument('--quest', '-q', action='store_true', help='Create a PDF version of the Quest Guide')
-parser.add_argument('--setup', '-s', action='store_true', help='Create a VirtualBox, VMware and OVF Setup Guide PDFs')
+def pull_content(filename):
+    
+    # Open an html file and return a BeautifulSoup tag object of that file's 
+    # <div role='main'> contents. (Strips out header, footer, sidebar content.)
 
-# Open an html file and return a BeautifulSoup tag object of that file's <div role='main'> contents. (Strips out header, footer, sidebar content.)
-def pull_content(filename, print_output=False):
     with open(filename, 'r') as f:
         html = f.read()
     soup = BeautifulSoup(html, "html5lib")
-    if print_output:
-        print str(soup.select("div[role=main]")[0])
+    
     return soup.select("div[role=main]")[0]
 
 def quest_guide():
@@ -36,8 +32,7 @@ def quest_guide():
     
     # It's easier to reverse the list and index to 0 with .insert methods
     full_quest_urls.reverse()
-    full_quest_urls.append(path + '/setup/virtualbox_setup.html')
-    full_quest_urls.append(path + '/setup/vmware_setup.html')
+    full_quest_urls.append(path + '/setup/setup.html')
 
     for quest in full_quest_urls:
                 
@@ -72,44 +67,13 @@ def quest_guide():
     p.stdin.write(str(shell))
     p.stdin.close()
 
-def setup_guide():
-
-    path = './Setup_Guide/'
-
-    versions = [
-                 {'name'  :'SetupGuide(VBox)',
-                 'virt' :'virtualbox_setup.md'},
-                 {'name'  :'SetupGuide(VMWare)',
-                 'virt' :'vmware_setup.md'},
-                 {'name'  :'SetupGuide(OVF)',
-                 'virt' :''}
-                ]
-
-    for version in versions:
-        shell = BeautifulSoup("<html><body></body></html>", "html5lib")
-        body = shell.body
-
-        with codecs.open(path+'quest_guide_setup.md', encoding='utf-8') as f:
-                quest_setup = BeautifulSoup(markdown.markdown(f.read()))
-        body.insert(0, quest_setup)
-
-        if version['virt']:
-            with codecs.open(path+version['virt'], encoding='utf-8') as f:
-                virt_setup = BeautifulSoup(markdown.markdown(f.read()))
-            body.insert(0, virt_setup)
-        p = Popen(["prince", "-", "--style=../Quest_Guide/css/main.css", "../%s.pdf" %version['name']], stdin=PIPE, cwd=r'./Setup_guide')
-        p.stdin.write(str(shell))
-        p.stdin.close()
-
-def main(quest, setup):
+def main():
     
+    print "Generating HTML from markdown source..."
     p = Popen(["jekyll", "build"], cwd=r'./Quest_Guide')
+    p.communicate()
     
-    if quest:
-        quest_guide()
-    if setup:
-        setup_guide()
+    quest_guide()
         
 if __name__ == '__main__':
-    args = parser.parse_args()
-    main(args.quest, args.setup)
+    main()
