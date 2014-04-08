@@ -87,7 +87,8 @@
         color: #333;
         padding: 1em;
         margin: 2em;
-        border: 1pt solid #eee;        
+        border: 1pt solid #eee;
+        page-break-inside: avoid;        
     }
     div.lvm-inline-aside strong{
         font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;    
@@ -108,13 +109,14 @@
     }
     pre {
         display: block;
-        padding: 4px;
+        padding: 8px;
         margin: 0 0 18px;
         line-height: 16px;
         font-size: 11px;
         border: 1px solid #ccc;
         white-space: pre-wrap;
         word-wrap: break-word;
+        page-break-inside: avoid;        
     }
     pre code {
         background: none;
@@ -129,6 +131,7 @@
     ol,
     ul {
     max-width: 37em;
+    margin-bottom: 1em;
     }
 
     #content a {
@@ -591,9 +594,7 @@
     div.lvm-callout p{
         font-size: 11px;
         line-height: 1.2;
-
     }
-
 
     toc a,
     div.pdfnav a {
@@ -706,12 +707,12 @@
         string-set: quest-title content();
         string-set:  counter(page);
         page: content;
+        counter-reset: image;
         prince-page-group: start;
     }
     
     content img {
         max-width: 520px;
-        counter-increment: img;
     }
 
     div.img-wrapper p{
@@ -720,7 +721,8 @@
     }
     
     div.img-wrapper p:after{
-        content: ' ' counter(img);
+        counter-increment: image;
+        content: ' ' counter(image);
     }
 
     
