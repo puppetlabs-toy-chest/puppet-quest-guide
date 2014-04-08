@@ -118,10 +118,14 @@ and entering the command:
 Now open your web browser and point it to:
 	
 	localhost:4000
+	
+To build the HTML without launching the development server, use the command:
+
+	jekyll build
 
 ## PDF Generation
 
-The pdf_make.py script will automatically generate the PDF files that are bundled with the Learning VM download.
+The pdf_make.py script will automatically generate the PDF Quest Guide that is bundled with the Learning VM download.
 
 Though the PDF is a separate end-point from the Jekyll static html version of the Quest Guide, it relies on Jekyll to parse markdown and liquid templates to html.
 
@@ -138,16 +142,18 @@ These can be installed using either pip or easy_install, e.g.
 
 	easy_install BeautifulSoup4
 
-Once the dependencies are installed, navigate to the top directory of the repository, and use the arguments `--setup` or `-s` and/or `--quest` or `-q` to specify which PDFs you would like to generate, e.g.:
+Note that depending on how your python is set up, you may have to use `sudo` to install these dependencies.
+
+Once the dependencies are installed, navigate to the top directory of the repository
 	
-	python pdf_maker.py -s -q
+	python pdf_maker.py
 	
-Note that though this script automatically runs a `jekyll build` command, there is currently an issue with the timing of the subprocess that means the changes aren't always made before pdf generation begins. Pending a fix, you may have to run this script twice for changes to register, or manually build the jekyll site prior to running the script.
+Note that though this script automatically runs a `jekyll build` command, which will generate the html used to render the Quest Guide PDF. If there is an jekyll error, the script may still execute from previously generated HTML.
 	 
 ## Quest Ordering
 
-Quest_Guide/_data/quest_order.yml contains a list of quests with url and title. The order of quests in this file determines the order that they will be listed in the website nav and the PDF version of the Quest Guide.
+Quest_Guide/_data/quest_order.yml contains a list of quests with url, title, and the associated image asset. The order of quests in this file determines the order that they will be listed in the website nav and the PDF version of the Quest Guide.
 
 In the future, this file will also include data about quest dependencies to allow for non-linear quest progress.
 
-Whenever possible, this file should be the single source of information for any process that requires data about quests.
+Whenever possible, this file should be the single source of quest meta-data.
