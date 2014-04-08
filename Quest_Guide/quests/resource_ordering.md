@@ -11,13 +11,12 @@ layout: default
 - Power of Puppet Quest
 - Resources Quest
 - Mainfest Quest
-- Classes Quest
 - Varibales Quest
 - Conditions Quest
 
 ## Quest Objectives
 
-Just as with the Variables Quest and Conditions Quest, the Resource Ordering Quest will help you learn more about specifying the order in which Puppet should manage resources in a manifest. This ordering manges and controls (like instructions) for creating flexibility and scalability in your manifests. When you're ready to get started, type the following command:
+Just as with the Variables Quest and Conditions Quest, the Resource Ordering Quest will help you learn more about specifying the order in which Puppet should manage resources in a manifest. This ordering manges and controls (just like instructions) for creating flexibility and scalability in your manifests. When you're ready to get started, type the following command:
 
 	quest --start ordering
 
@@ -25,7 +24,7 @@ Just as with the Variables Quest and Conditions Quest, the Resource Ordering Que
 
 You are likely use to reading instructions from top to bottom. If you wish to master the creation of Puppet manifests you must learn to think of ordering in a different way. Rather than processing instructions from top to bottom, Puppet interprets the resource declarations in a manifest in whatever order is most efficient.
 
-Sometimes, however, you will need to ensure that a resource declaration is applied before another. For instance, if you wish to declare in a manifest that a service should be running, you need to ensure that the package for that service is installed and configured before you can start it.
+Sometimes, however, you will need to ensure that a resource declaration is applied before another. For instance, if you wish to declare that a service should be running, you need to ensure that the package for that service is installed and configured before you can start the service.
 
 When you need a group of resources to be managed in a specific order, you must explicitly state the dependency relationships between these resources within the resource declarations.
 
@@ -55,7 +54,7 @@ file { '/etc/ssh/sshd_config':
 }
 {% endhighlight %}
 
-However, we're only partial correct. It will change the config file, but those changes will only take effect when the service restarts. Let's now add a metaparameter to that will tell Puppet to manage the `sshd` service and have it `subscribe` to the config file. Add the following Puppet code below your file resource:
+However, we're only partial correct. It will change the config file, but those changes will only take effect when the service restarts. Let's now add a metaparameter that will tell Puppet to manage the `sshd` service and have it `subscribe` to the config file. Add the following Puppet code below your file resource:
 
 {% highlight puppet %}
 service { 'sshd':
@@ -69,26 +68,29 @@ service { 'sshd':
 We now have our Puppet code in the sshd_config file, but it's useless until we add it to the `site.pp` manifest so that the puppet agent can manage those resources. Copy and paste the code you just wrote in the sshd_config file into the `site.pp` manifest.
 
 {% task 3 %}
-Let's make sure the syntax is correct in our `site.pp` manifest is correct. Remember `puppet parser`? If not, refer back to the Manifest Quest.
+Let's make sure the syntax in our `site.pp` manifest is correct. Remember `puppet parser`? If not, refer back to the Manifest Quest.
 
 {% task 4 %}
-Once your syntax is error free, enforce the `site.pp` manifest using the `puppet apply` tool. If you're not sure how to do this, refer to the Manifest Quest.
+Once your syntax is error free, simulate the change using `-noop`. If you're not sure how to do this, refer to the Manifest Quest.
 
 {% task 5 %}
-Now you need to go back into for your sshd_config file (`/etc/ssh/sshd_config`). We need to change the `PermitRootLogin` from `yes` to `no`.
+Now go ahead and enforce the `site.pp` manifest using the `puppet apply` tool. If you're not sure how to do this, refer to the Manifest Quest.
 
 {% task 6 %}
+We need to go back into for your sshd_config file (`/etc/ssh/sshd_config`) and change the `PermitRootLogin` from `yes` to `no`.
+
+{% task 7 %}
 Manually restart the sshd service by typing the following command:
 
 	service sshd restart
 
 Finally you will need to log out then log back in to see the changes.
 
-In the above example, the `service` resource with the title `sshd` will be applied **after** the `file` resource with the title `/etc/ssh/sshd_config`. Furthermore, if any other changes are made to the targeted file resource, the service will refresh.
+In the above example, the `service` resource will be applied **after** the `file` resource. Furthermore, if any other changes are made to the targeted file resource, the service will refresh.
 
 ## Package/File/Service
 
-The **package/file/service** pattern is one of the most useful idioms in Puppet. 
+Wait a minute! What about the package resource that manages the `openssh-server`? We haven't added that yet. The **package/file/service** pattern is one of the most useful idioms in Puppet. 
 
 - The package resource makes sure the software and its config file are installed.
 - The file resource config file depends on the package resource.
@@ -96,7 +98,7 @@ The **package/file/service** pattern is one of the most useful idioms in Puppet.
 
 It’s hard to overstate the importance of this pattern! If you only stopped here and learned this, you could still get a lot of work done using Puppet.
 
-Wait a minute! What about the package resource that manages the `openssh-server`? We haven't added that yet. To stay consistent with the package/file/service idiom, let's dive back into the sshd_config file  and add the `openssh-server` package to it
+To stay consistent with the package/file/service idiom, let's dive back into the sshd_config file and add the `openssh-server` package to it. Type the following code in above your file resource:
 
 {% highlight puppet %}
 package { 'openssh-server':
@@ -105,22 +107,16 @@ package { 'openssh-server':
 }
 {% endhighlight %}
 
-{% aside Quest Progress %}
+- Make sure to check the syntax.  
+- Also, don't forget to add the updated code to the `site.pp` manifest!  
+- Once everything looks good, go ahead and restart the sshd service.
 
-Make sure the package information stays consistent with the package/file/service structure. Add the package information above the File and Service resources.
+		HINT: Look at task Task 7
 
-{% endaside %}
-
-Make sure to check the syntax.  
-Also, don't forget to add that code to the `site.pp` manifest!  
-Once everything looks good, go ahead and restart the sshd service.
-
-	HINT: Look at task Task 6
-
-It's a thing of beauty isn't it?
+Using Puppet is a thing of beauty isn't it?
 
 ## Let's do a Quick Review
 
-Up until this point you've been on a journey towards learning Puppet. To be successful it is imperative you understand the fundamental components of using Puppet: Resources and Manifests. Before we progress any further, it is important that you reflect on your understanding of these components. Feel free to read through the Resources Quest and/or Manifest Quest again if you feel like you could use a refresher. 
+Up until this point you've been on a journey towards learning Puppet. To be successful, it is imperative you understand the fundamental components of using Puppet: **Resources** and **Manifests**. Before we progress any further, it is important that you reflect on your understanding of these components. Feel free to read through the Resources Quest and/or Manifest Quest again if you feel like you could use a refresher. 
 
-Furthermore, Puppet manifests are highly flexible and scalable components to stabilizing and maximizing your infrastructure. To customize that stabilization, we examined Classes, Variables, Facts, Conditional Statements and Resource Ordering. It is important that you understand when and how these components are used in Puppet manifests. Again, if you could use a refresher on these topics, it could be good to go back and read through these quests again.
+Furthermore, Puppet manifests are highly flexible and scalable components to stabilizing and maximizing your infrastructure. To customize that stabilization, we examined Variables, Facts, Conditional Statements and Resource Ordering. It is important that you understand when and how these components are used in Puppet manifests. Again, if you feel like you could use a refresher on these topics, please revisit those specific quests again.

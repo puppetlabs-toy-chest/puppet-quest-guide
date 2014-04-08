@@ -13,13 +13,19 @@
  - url: /quests/variables.html
    title: Variables
    image_url: ../assets/LVM Forest Background White_5.svg
+ - url: /quests/interpolation.html
+   title: Variables
+   image_url: ../assets/LVM Forest Background White_5.svg
+ - url: /quests/facts.html
+   title: Variables
+   image_url: ../assets/LVM Forest Background White_5.svg
  - url: /quests/conditions_quest.html
    title: Conditional Statements
    image_url: ../assets/LVM Forest Background White_6.svg
  - url: /quests/resource_ordering.html
    title: Ordering
    image_url: ../assets/LVM Forest Background White_1.svg
-- url: /quests/classes_quest.html
+ - url: /quests/classes_quest.html
    title: Classes
    image_url: ../assets/LVM Forest Background White_2.svg
  - url: /quests/modules_quest.html

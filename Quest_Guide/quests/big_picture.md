@@ -56,7 +56,7 @@ To use the classes nested in each of these modules, we need to be able enforce t
 
 ## The Puppet Enterprise Console
 
-The PE Console is Puppet Enterprise’s web Graphical User Interface (GUI). The Console lets you complete many of the common tasks involved in automating your infrastructure with little or no coding necessary. You can use it to:
+The PE Console is Puppet Enterprise’s web Graphical User Interface (GUI) that lets you automate your infrastructure with little or no coding necessary. You can use it to:
 
 - Manage node requests to join the Puppet deployment.
 - Assign Puppet classes to nodes and groups.
@@ -68,7 +68,7 @@ The PE Console is Puppet Enterprise’s web Graphical User Interface (GUI). The 
 - Manage console users and their access privileges.
 
 {% task 2 %}
-We need to find your IP address. Luckly, Puppet comes prepackaged with a tool called Facter that will help you find this out easily. In your terminal, type the following command:
+We need to find your IP address. Luckly, Puppet comes prepackaged with Facter, which will help you find this out easily. In your terminal, type the following command:
 
 	facter ipaddress
 
@@ -151,7 +151,7 @@ Running `puppet agent -t` works also. The `-t` flag is simply a short version of
 {% task 4 %}
 Let's check out the Quest Guide! In your browsers address bar, type the following URL: **http://your-ip-address**.
 
-You are all set up to get started learning Puppet!
+You are all set up to get started with learning how to use Puppet to automate your infrastructure!
 
 ## Exploring The lvmguide Class
 

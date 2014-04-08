@@ -28,7 +28,7 @@ type {'title':
 Though a comma isn't strictly necessary at the end of the final attribute value pair, it is best practice to include it for the sake of consistency.
 {% endaside %}
 
-The syntax you see here is an example of Puppet's Domain-Specific Language (DSL), which is built on the Ruby programming language. Because the Puppet DSL is a **declarative** language, the descriptions themselves have the power to change the state of the environment. One thing to note here, and pay close attention to, is the readability of the code. At a glance, Puppet's DSL allows you to decipher tasks with relative ease.
+The syntax you see here is an example of Puppet's Domain-Specific Language (DSL), which is built on the Ruby programming language. Because the Puppet DSL is a **declarative** language, the descriptions themselves have the power to change the state of the environment. One thing to note here, and pay close attention to, is the readability of the code structure. At a glance, Puppet's DSL allows you to decipher tasks with relative ease.
 
 The first step in mastering Puppet is to learn about the world around you. You will also realize everything in this Learning VM is a collection of **resources**. You will not be using resource declarations to shape your environment just yet. Instead you will exercise your power by hand and use Puppet only to inspect your actions.
 
@@ -102,7 +102,7 @@ Let's rectify Byte's password situation by setting it to *puppetlabs*. Type the 
 If you take another look at Byte by typing the command `puppet resource user byte`, the value for his password attribute should now be set to a SHA1 hash of his password, something a little like this: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
 
 {% task 5 %}
-Now have a look at Byte's home directory, which was set to `'/home/byte'` by default. Byte's home is a directory, which is really just a special kind of file resource type. The `title` of any file is the same as the path to that file. Enter the command:
+Now have a look at Byte's home directory, which was set to `'/home/byte'` by default. Byte's home is a directory is really just a special kind of file resource type. The `title` of any file has to be the same as the path to that file. Enter the command:
 
 	puppet resource file /home/byte/sidekick
 		
