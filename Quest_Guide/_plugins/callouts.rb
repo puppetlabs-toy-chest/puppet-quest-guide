@@ -25,7 +25,7 @@ module Jekyll
     end
     def render(context)
       @context = context
-      "<div class = \"lvm-inline-aside\"><strong>#{@title}</strong><p>#{markdownify(super)}</p></div></div>"
+      "<div class = \"lvm-inline-aside\"><h4>#{@title}</h4><p>#{markdownify(super)}</p></div></div>"
     end
   end
 end
