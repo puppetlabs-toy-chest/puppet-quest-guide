@@ -97,7 +97,7 @@ Have a look at the `conditionals.txt` file using the `cat` command.
 {% task 3 %}
 Use the command `facter uptime_hours` to check the uptime yourself. The notice you saw when you applied your manifest should describe the uptime returned from the Facter tool.
 
-### The 'unless' Statement
+## The 'unless' Statement
 
 The `unless` statement works like a reversed `if` statement. An `unless` statements takes a condition and a block of Puppet code. It will only execute the block **if** the condition is **false**. If the condition is true, Puppet will do nothing and move on. Note that there is no equivalent of `elsif` or `else` clauses for `unless` statements.
 
