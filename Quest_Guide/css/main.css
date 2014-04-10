@@ -685,9 +685,8 @@
     }
     
     #image-wrapper {
-        margin-left: -320px;
         position: fixed;
-        bottom: 0px;
+        top: 415px;
         right: 0px;
     }
 
