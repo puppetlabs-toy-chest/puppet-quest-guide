@@ -77,7 +77,7 @@
     }
 
     div.lvm-task-number p:before {
-        color: #6c6d6d;
+        color: #7C6AAB;
         display: inline;
         font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         content: ' ';
@@ -95,7 +95,7 @@
         position: relative;
         left: 1em;
         page-break-inside: avoid;
-        margin-right: -180px;
+        margin-right: -190px;
     }
     
     div.lvm-callout p{
@@ -109,7 +109,7 @@
         content: "  ";
         display: block;
         font-size: 15pt;
-        text-align: center;        
+        text-align: center;
     }
     
     div.lvm-warning p:before{
@@ -117,7 +117,8 @@
         content: "  ";
         display: block;
         font-size: 15pt;
-        text-align: center;                
+        text-align: center;
+        color: #7C6AAB;
     }
     
     div.lvm-fact p:before{
