@@ -5,12 +5,54 @@
 @font-face {
     font-family: 'Arvo';
     src: url('../fonts/arvo/Arvo-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
+@font-face {
+    font-family: 'Arvo';
+    src: url('../fonts/arvo/Arvo-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Arvo';
+    src: url('../fonts/arvo/Arvo-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Arvo';
+    src: url('../fonts/arvo/Arvo-Bolditalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
 
 @font-face {
     font-family: 'PT Sans';
-    src: url('../fonts/PT-Sans/PTC55F.ttf') format('truetype');
+    src: url('../fonts/PT-Sans/PTS55F.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
+@font-face {
+    font-family: 'PT Sans';
+    src: url('../fonts/PT-Sans/PTS75F.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'PT Sans';
+    src: url('../fonts/PT-Sans/PTS56F.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'PT Sans';
+    src: url('../fonts/PT-Sans/PTS76F.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
 
 @font-face {
     font-family: 'FontAwesome';
@@ -20,9 +62,14 @@
 }
 
 @media all{
+    body {
+        font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+        font-size: 15px;
+        color: #5d5e59;
+    }
 
     div.lvm-task-number {
-        color: #333;
+        color: #6c6d6d;
         font-family: 'Arvo','Helvetica Neue',Helvetica,Arial,sans-serif;
         font-size: 16px;
         font-style: bold;
@@ -93,7 +140,6 @@
     div.lvm-inline-aside strong{
         font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;    
         line-height: 2;    
-        color: #000;
     }
     code, pre {
         font-family: Monaco, Andale Mono, Courier New, monospace;
@@ -123,11 +169,7 @@
         font-size: 10px;
         padding: 0;
     }
-    #content h1,
-    #content h2{
-        margin-left: -6px;    
-    }
-    
+
     ol,
     ul {
     max-width: 37em;
@@ -267,7 +309,8 @@
     
     body {
         font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-        font-size: 13px;
+        font-size: 15px;
+        color: #5d5e59;
     }
     table {
     	margin: 10px 0 15px 0;
@@ -304,14 +347,14 @@
     
     h1 {
         margin-bottom: 50px;
+        margin-top: 15px;
         font-size: 36px;
-        text-shadow: 0px 0px 1px #6c6d6d;
-        counter-reset: image;                
+        counter-reset: image;
     }
     
     h2 {
     display: block;
-    font-size: 20px;
+    font-size: 1.625rem;
     margin-bottom: 0.83em;
     margin-top: 0.83em;
     }
@@ -673,12 +716,7 @@
         margin: 0;
         padding: 0;
     }
-    
-    body {
-        font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 12px;
-    }
-    
+        
     p {
         margin-bottom: 9px;
         line-height: 1.5;
@@ -716,7 +754,7 @@
     
     h2 {
     display: block;
-    font-size: 20px;
+    font-size: 1.625rem;
     -webkit-margin-before: 0.83em;
     -webkit-margin-after: 0.83em;
     -webkit-margin-start: 0px;
