@@ -15,7 +15,7 @@ layout: default
 - Variables Quest
 
 ## Quest Objectives
-Just as we discussed about bringing flexibility and scalability to our manifest in the Variables Quest, we can further exemplify that with conditional statements. In this quest, you will learn how to use conditional statements and how to combine conditional logic with variables in order to make your manifests adaptable. To start this quest enter the following command:
+ In this quest, you will learn how to use conditional statements and how to combine conditional logic with variables in order to make your manifests adaptable. To start this quest enter the following command:
 
 	quest --start conditions
 
@@ -25,9 +25,9 @@ Just as we discussed about bringing flexibility and scalability to our manifest 
 
 > -Mickey Newbury
 
-Conditional statements allow you to write Puppet code that will behave differently under different conditions.
+We discussed the advantages of flexibility and scalability in the Variables Quest. A better understanding of conditional statements will take your manifests. Conditional statements allow you to write Puppet code that will return different values or execute different blocks of code depending on the condition you specify.
 
-Writing conditional logic in your manifest allows the system to draw upon facts accessible through the Facter tool. For example, you can configure your Puppet manifests to perform as desired on a variety of operating systems and under differing system conditions. Pretty neat, dont you think?
+Writing conditional logic in your manifest allows the system to draw upon facts accessible through the Facter tool. For example, you can configure your Puppet manifests to perform as desired on a variety of operating systems and under differing system conditions. Pretty neat, don't you think?
 
 Puppet supports a few different ways of implementing conditionals:
  
@@ -35,7 +35,7 @@ Puppet supports a few different ways of implementing conditionals:
  * `unless` statements
  * case statements
 
-## 'if' Statements
+## The 'if' Statement
 
 Puppet’s `if` statements behave much like those in many other programming and scripting languages.
 
@@ -62,6 +62,10 @@ else {
 }
 {% endhighlight %}
 
+{% aside The Warn Function %}
+The `warn()` function will not affect the execution of the rest of the manifest, but if you were running Puppet in the usual Master-Agent setup, it would log a message on the server at the 'warn' level.
+{% endaside %}
+
 {% task 1 %}
 Just as we have done in the Variables Quest, let's create a manifest and add a simple conditional statement.
 
@@ -71,129 +75,93 @@ Enter the following code into your `conditionals.pp` manifest:
 
 {% highlight puppet %}
 if $uptime_hours < 2 {
-  notify { 'uptime' :
-    message => 'Uptime is less than two hours.',
-  }
+  $uptime = 'Uptime is less than two hours.\n'
 }
 elsif $uptime_hours < 5 {
-  notify { 'uptime' :
-    message => 'Uptime is less than five hours.',
-  }
+  $uptime = 'Uptime is less than five hours.\n'
 }
 else {
-  notify { 'uptime' :
-    message => 'Uptime is greater than four hours.',
-  }
+  $uptime = 'Uptime is greater than four hours.\n'
+}
+file {'/root/conditionals.txt':
+  ensure  => present,
+  content => $uptime
 }
 {% endhighlight %}
 
 {% task 2 %}
-Check your `conditionals.pp` manifest syntax using the `puppet parser` tool.
+Use the `puppet parser` tool to check your syntax, then simulate the change in `--noop` mode without enforcing it. If the noop looks good, enforce the `conditionals.pp` manifest using the `puppet apply` tool.
 
-{% task 3 %}
-Once there are no errors in your `conditionals.pp` manifest, simulate the change in `--noop` mode without enforcing it.
-
-{% task 4 %}
-Since this what we want, enforce the `conditionals.pp` manifest using the `puppet apply` tool.
-
-{% task 5 %}
 Have a look at the `conditionals.txt` file using the `cat` command.
 
-{% task 6 %}
+{% task 3 %}
 Use the command `facter uptime_hours` to check the uptime yourself. The notice you saw when you applied your manifest should describe the uptime returned from the Facter tool.
 
-### Adding other conditions
+### The 'unless' Statement
 
-Let's add another `if` statement to the end of the `conditionals.pp` manifest. Go back into your `conditionals.pp` manifest and add the following Puppet code:
+The `unless` statement works like a reversed `if` statement. An `unless` statements takes a condition and a block of Puppet code. It will only execute the block **if** the condition is **false**. If the condition is true, Puppet will do nothing and move on. Note that there is no equivalent of `elsif` or `else` clauses for `unless` statements.
 
-{% highlight puppet %}
-if $is_virtual {
-  notify { 'virtual' :
-    message => 'I am a virtual machine.',
-  }
-else {
-  notify { 'virtual' :
-    message => 'I am a real machine.',
-  }
-}
-{% endhighlight %}
+## The 'case' Statement
 
-Next, go ahead and check your `conditionals.pp` manifest syntax once again using the `puppet parser` tool.
+Like `if` statements, case statements choose one of several blocks of arbitrary Puppet code to execute. Case statements take a control expression, a list of cases, and a series of Puppet code blocks that correspond to those cases. Puppet will execute the first block of code whose case value matches the control expression.
 
-Once there are no errors in your `conditionals.pp` manifest, simulate the change in `--noop` mode, then go ahead and enforce the `conditionals.pp` manifest in the Learning VM using the `puppet apply` tool.
+- Basic cases are compared with the `==` operator (which is case-insensitive).
+- Regular expression cases are compared with the `=~` operator (which is case-sensitive).
+- The special `default` case matches anything. It should always be included at the end of a case statement to catch anything that did not match an explicit case.
 
-Have a look at the updated `conditionals.txt` file using the `cat` command. You will see the notice:
-
-	Notice: I am a real machine.
-	
-But what happened here? We told the manifest to notify us if the Learning VM is virtual, but the notification asserts the opposite!
-
-{% task 7 %}
-If you like, run `facter is_virtual` to double-check. So why the incorrect result?
-
-What you've encountered is a common mistake when using conditionals with facts from Facter. To understand what's going on here, we'll need to take a look at how conditional statements interpret the data you give them.
-
-### Thank you George Boole
-
-A conditional statement requires a data type called a Boolean. A Boolean has only two possible values: `true` and `false`. A value of `true` tells the conditional to execute its code, while a value of `false` tells the conditional not to execute its code (or to continue on to an `elsif` or `else` clause).
-
-{% tip %}
-Boolean is named after the great mathematician George Boole.
-{% endtip %}
-
-When a conditional statement receives data other than a Boolean, Puppet must convert that data type into a Boolean before the conditional statement can decide what to do. 
-
-So here's where our manifest got tripped up: all Facter facts are actually constructed as *string* data types. When converted to a Boolean, only empty strings (represented by empty quotes, e.g. `''`) are `false` and all other strings (including the string `'false'`!) are treated as `true`. Confused? Don't worry. Puppet has you covered.
-
-Luckily this isn't a problem as long as we remember to properly convert a fact before feeding it to a conditional. Puppet includes a `str2bool()` function that will convert strings to Booleans in a more sensible way.
-
-We need to go back into your `conditionals.pp` manifest to properly convert the `$is_virtual` fact to a Boolean with the `str2bool()` function. Update your existing Puppet code to the following:
-
-{% highlight puppet %}
-if str2bool($is_virtual) {
-  notify { 'virtual' :
-    message => 'I am a virtual machine.',
-  }
-else {
-  notify { 'virtual' :
-    message => 'I am a real machine.',
-  }
-}
-{% endhighlight %}
-
-Go ahead and enforce your changes in the `conditionals.pp` using the `puppet apply` tool. Great! You are on your way to becoming a Puppet Master!
-
-### 'unless' Statements
-
-The `unless` statement works like a reversed `if` statement. An `unless` statements takes a condition and a block of Puppet code, and will only execute the block **if** the condition is **false**. If the condition is true, Puppet will do nothing and move on. Note that there is no equivalent of `elsif` or `else` clauses for `unless` statements.
-
-## Case Statements
-
-Like `if` statements, case statements choose one of several blocks of arbitrary Puppet code to execute. Case statements take a control expression, a list of cases, Puppet code blocks, and will execute the first block of code whose case value matches the control expression.
+{% task 4 %}
+Create a `case.pp` manifest with the following conditional statement and `file` resource declaration.
 
 {% highlight puppet %}
 case $operatingsystem {
-  centos: { $apache = "httpd" }
-  redhat: { $apache = "httpd" }
-  debian: { $apache = "apache2" }
-  ubuntu: { $apache = "apache2" }
+  'CentOS': { $apache = 'httpd' }
+  'Redhat': { $apache = 'httpd' }
+  'Debian': { $apache = 'apache2' }
+  'Ubuntu': { $apache = 'apache2' }
   default: { fail("Unrecognized operating system for webserver") }
-  }
+}
 
+file {'/root/case.txt':
+  ensure  => present,
+  content => "Apache package name: ${apache}\n"
+}
+{% endhighlight %}
+
+When you've validated your syntax and run a `--noop`, apply the manifest:
+
+	puppet apply case.pp
+	
+Use the `cat` command to inspect the `case.txt` file. Because the Learning VM is running CentOS, you will see that the selected Apache package name is 'httpd'.
+
+For the sake of simplicity, we've output the result of the case statement to a file, but keep in mind that in an actual practice, instead of using the result of the case statement like the one above to define the contents of a file, you could use it directly in a `package` resource declaration like the following:
+
+{% highlight puppet %}
 package {'apache':
   name   => $apache,
   ensure => latest,
 }
 {% endhighlight %}
 
-Puppet compares the control expression to each case and the order the cases are listed. Puppet will execute the block of code associated with the first matching case, and ignore the remainder of the statement.
+This would allow you to always install and manage the right Apache package for a machine's operating system. This  kind of careful accounting for different the conditions under which a manifest might run is an important part of writing flexible and re-usable Puppet code. It is a paradigm you will encounter frequently in published Puppet modules.
 
-- Basic cases are compared with the `==` operator (which is case-insensitive).
-- Regular expression cases are compared with the `=~` operator (which is case-sensitive).
-- The special `default` case matches anything. It should always be included at the end of a case statement to catch anything that did not match an explicit case.
+## The 'selector' Statement
+Selector statements are very similar to `case` statements, but instead of executing a block of code, a case statement assigns a value directly. A selector might look something like this:
+
+{% highlight puppet %}
+$rootgroup = $osfamily ? {
+  'Solaris'  => 'wheel',
+  'Darwin'   => 'wheel',
+  'FreeBSD'  => 'wheel',
+  'default'  => 'root',
+}
+{% endhighlight %}
+
+Here, the value of the `$rootgroup` is determined based on the control variable `$osfamily`. Following the control variable is a `?` (question mark) keyword. In the block surrounded by curly braces are series of cases, followed by the value that the selector should return if that case matches the control variable.
+
+Because a selector can only return a value and cannot execute a function like `fail()` or `warn()`, it is up to you to make sure your code handles unexpected conditions gracefully. You wouldn't want Puppet to forge ahead with with an inappropriate default value and encounter errors down the line.
 
 ## Before you move on
 
-We have dicussed some intense information in the Variables Quest and this Quest. The information contained in all the quests to this point have guided you in creating flexible and scalable manifests for your infrastructure. Should you not understand any of the topics previously discussed, we highly encourage you to revisit those quests before moving on to the Resource Ording Quest. The Resource Ordering Quest will be the final scalable concept for manifests as it adds another layer of cusomtized functions to your manifest.
+We have discussed some intense information in the Variables Quest and this Quest. The information contained in all the quests to this point have guided you in creating flexible and scalable manifests for your infrastructure. Should you not understand any of the topics previously discussed, we highly encourage you to revisit those quests before moving on to the Resource Ordering Quest. The Resource Ordering Quest will be the final scalable concept for manifests as it adds another layer of customized functions to your manifest.
 
 
