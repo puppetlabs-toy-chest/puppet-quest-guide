@@ -30,7 +30,7 @@
     }
 
     div.lvm-task-number p:before {
-        color: #7FBA2D;
+        color: #6c6d6d;
         display: inline;
         font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         content: ' ';
@@ -296,7 +296,7 @@
     h5, 
     h6 {
         font-family: 'Arvo','PT Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-        color: #7FBA2D;
+        color: #6c6d6d;
         font-weight: normal;
         line-height: 1.15em;
         text-rendering: optimizeLegibility;
@@ -305,7 +305,7 @@
     h1 {
         margin-bottom: 50px;
         font-size: 36px;
-        text-shadow: 0px 0px 1px #7CB72A;
+        text-shadow: 0px 0px 1px #6c6d6d;
         counter-reset: image;                
     }
     
@@ -318,13 +318,13 @@
 
     h3 {
         display: block;
-        color: #7FBA2D;    
+        color: #6c6d6d;    
         font-size: 18px;
         margin-bottom: 0.53em;
         margin-top: 0.53em;
     }
     h4 {
-        color: #7FBA2D;
+        color: #6c6d6d;
         font-size: 14px;
     }
     h5 {
@@ -443,7 +443,7 @@
 
     #site-header {
         width: 100%;
-        background: #635F5E;
+        background: #7C6AAB;
         height: 105px;
         border-top: 8px solid #fff;
         border-bottom: 2px solid #c4c4c5;
@@ -490,10 +490,6 @@
 @media print { 
      
     @page {
-        /*
-        size: 15cm 40cm;
-        margin: 10pt;
-        */
         margin-left: 40pt;
         margin-right: 180pt;
     }
@@ -548,7 +544,7 @@
     }
 
     div.lvm-task-number {
-        color: #7FBA2D;
+        color: #6c6d6d;
     }
 
     toc h1 {
@@ -627,17 +623,19 @@
     #cover-page h1{
         font-size: 48pt;
         padding-left: 120px;
-        padding-top: 80px
+        padding-top: 80px;
+        color: #EFA92D;
     }
 
     #cover-page h2{
         font-size: 28pt;
         padding-left: 120px;
         padding-right: 80px;
+        color: #7C6AAB;
     }
 
     #underline {
-        background: #7FBA2D;
+        background: #EFA92D;
         height: 7px;
         width: 100%;
         margin-left: 120px;
@@ -651,12 +649,13 @@
     }
 
     #top-bar{
-        background-color: #635F5E;
+        background-color: #7C6AAB;
         height: 70pt;
+        border-bottom: 5px solid #302B6D;
     }
 
     #top-bar img{
-        padding: 20px;
+        padding: 28px;
     }
         
     div.page-break{
@@ -692,7 +691,7 @@
     h5, 
     h6 {
         font-family: "Arvo", "Helvetica Neue",Helvetica,Arial,sans-serif;
-        color: #7FBA2D;
+        color: #6c6d6d;
         font-weight: normal;
         line-height: 1.15em;
         margin: 1em 0 .25em;
