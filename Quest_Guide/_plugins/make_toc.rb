@@ -34,7 +34,7 @@ module Jekyll
             h2s = doc.css "h2"
             
             h2s.each do |h2|
-                id = h2.text.downcase.tr(" ", "_")
+                id = h2.text.downcase.tr(" ", "-")
                 a = Nokogiri::XML::Node.new "a", doc
                 a["id"] = id
                 h2.add_next_sibling a # Insert a after h2
