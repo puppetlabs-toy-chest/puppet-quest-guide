@@ -17,7 +17,13 @@ layout: default
 
 ## Quest Objectives
 
-So we've mentioned the term classes in previous quests. Remember that little blurb regarding enforcing a collection of resource declarations across an entire system with a single file? That collection of resources is called a **class**. In this quest we cover the use of classes within a Puppet manifest to group resource declarations (and everything we've learned up to this point) into reusable blocks of Puppet code. When you're ready to get started, type the following command:
+ - Manage collections of resource declarations with a *class* definition.
+ - Familiarize yourself with the syntax of class definitions in the Puppet DSL.
+ - Use the `include` directive to declare a class.
+
+## Getting Started
+
+So we've mentioned the term *class* in previous quests. Remember that little blurb regarding enforcing a collection of resource declarations across an entire system with a single file? That collection of resources is called a **class**. In this quest we cover the use of classes within a Puppet manifest to group resource declarations (and everything we've learned up to this point) into reusable blocks of Puppet code. When you're ready to get started, type the following command:
 
     quest --start classes
 
@@ -29,7 +35,7 @@ We've written this quest to help you learn the functionality and purpose of clas
 
 In the Power of Puppet Quest, we used a class called `lvmguide` to help us set up the website version of this Quest Guide. The `lvmguide` class gives us a nice illustration of structuring a class definition. We've included the code from the `lvmguide` class declaration below for easy reference as we talk about defining classes. 
 
-There are a few more advanced concepts at work in this example, so don't worry if a few things remain unclear at this point. For now, we're going to focus primarily on how class definitions work and we will circle back to some of the other topics in later quests.
+There are a few more advanced concepts at work in this example, so don't worry if a few things remain unclear at this point. For now, we're going to focus primarily on how class definitions work.
 
 {% highlight puppet %}
 class lvmguide (  $document_root = '/var/www/html/lvmguide',  $port = '80',){  class { 'apache':    default_vhost => false,  }  apache::vhost { 'learning.puppetlabs.vm':    port    => $port,    docroot => $document_root,  }

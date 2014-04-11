@@ -17,8 +17,13 @@ layout: default
 - Classes Quest
 
 ## Quest Objectives
+ - Understand the purpose of Puppet modules.
+ - Familiarize yourself with the basic structure of modules.
+ - Write and test a simple manifest within a module structure.
+ 
+## Getting Started
 
-In this quest you will learn about the contents and structure of Puppet modules. You will learn how to create and test a simple module. When you're ready, type the following command:
+So far we've seen some simple examples of Puppet code, but what makes Puppet such an adaptable tool? When it comes to getting things done, it's all about the **module**. A Puppet module is a collection of resources, definitions, files, and templates organized around a particular purpose. Everything we have learned until this point and more can come together as part of a module. When you're ready, type the following command:
 
 	quest --start modules
 

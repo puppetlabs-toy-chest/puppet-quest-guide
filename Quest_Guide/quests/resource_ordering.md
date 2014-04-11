@@ -16,7 +16,12 @@ layout: default
 
 ## Quest Objectives
 
-Just as with the Variables Quest and Conditions Quest, the Resource Ordering Quest will help you learn more about specifying the order in which Puppet should manage resources in a manifest. This ordering manges and controls (just like instructions) for creating flexibility and scalability in your manifests. When you're ready to get started, type the following command:
+ - Understand why some resources must be managed in specific order.
+ - Use the `before`, `require`, `notify`, and `subscribe` metaparameters and the to effectively manage the order that Puppet applies resource declarations.
+
+## Getting Started
+
+The Resource Ordering Quest will help you learn more about specifying the order in which Puppet should manage resources in a manifest. This ordering manges and controls (just like instructions) for creating flexibility and scalability in your manifests. When you're ready to get started, type the following command:
 
 	quest --start ordering
 
