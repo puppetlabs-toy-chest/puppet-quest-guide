@@ -119,7 +119,7 @@ The `include` function declares a class, if it hasn’t already been declared so
 
 This lets you safely declare a class in several places. If some class depends on something in another class, it can declare that class without worrying whether it’s also being declared in `site.pp`.
 
-{% task 9 %}
+{% task 5 %}
 In order to test our `users` class, we will create a new manifest in the `tests` directory that declares it. Create a manifest called `init.pp`  in the `users/tests` directory.
 
 All we're going to do here is *declare* our `users` class with the `include` directive.
