@@ -13,7 +13,13 @@ layout: default
 
 ## Quest Objectives
 
-As you saw in the Resources Quest, Puppet's **resource declarations** can be used to keep track of just about anything in this Learning VM. So far, you have made changes to the Learning VM without using Puppet. You looked at resource declarations only in order to keep track of the effects of what you did. In this quest, you will learn to craft your own resource declarations and inscribe them in a special file called a **manifest**. When you're ready to get started, type the following command:
+- Identify what a Puppet manifest is
+- Apply acquire Puppet resource knowledge in constructing a Puppet Manifest
+- Describe "best practices" for enforcing a Puppet manifest
+
+## Getting Started
+
+As you saw in the Resources Quest, Puppet's resource declarations can be used to keep track of just about anything in this Learning VM. So far, you have made changes to the Learning VM without using Puppet. You looked at resource declarations using `puppet describe` and `puppet resource` only in order to track your effects. In this quest, you will learn to craft your own resource declarations and inscribe them in a special file called a **manifest**. When you're ready to get started, type the following command:
 
     quest --start manifest
 
@@ -27,17 +33,15 @@ This is useful incase you forget which Quests you've already done. In this case 
 
 ## Puppet Manifests
 
-Puppet programs are called “manifests” and they use the `.pp` file extension. The core of the Puppet language is the resource declaration. A resource declaration describes a desired state for one resource. This information is stored in a Puppet manifest.
+Puppet programs are called “manifests” and use the `.pp` file extension. The core of the Puppet language is the resource declaration as it describes a desired state for one resource. However, this information needs to be stored somewhere. That is where the Puppet manifest comes into play.
 
-Manifests, like the resource declarations they contain, are written in Puppet's Domain Specific Language (DSL). In addition to resource declarations, a manifest will often contain **classes**, which organize resource declarations into functional sets, and **logic** to allow you to manage resources according to variables in this Learning VM. You will learn more about these aspects of manifest creation in the coming quests.
+Manifests, like the resource declarations they contain, are written in Puppet's Domain Specific Language (DSL). In addition to resource declarations, a manifest will often contain classes, which organize resource declarations into functional sets, and logic that allows you to manage resources according to variables in this Learning VM. You will learn more about these flexable and scalable aspects of manifest creation in the coming quests.
 
-Once you've created a manifest, you will use the `puppet apply` tool to enforce it. Puppet will check each resource in your environment against the resource declaration in the manifest. Puppet's **providers** will then do everything necessary to bring the state of those resources in line with the resource declarations in your manifest.
-
-{% aside Useful Puppet Tools %}
-You can use `puppet describe user` and `puppet resource user` for help using and understanding the user resource...and any other resource type you're curious about.
+{% aside Don't Forget These Tools Too %}
+You can use `puppet describe` and `puppet resource` for help using and understanding the `user` resource...and any other resource type you're curious about.
 {% endaside %}
 
-Make sure you place newly created manifests in your home directory (`/root`).
+Let's get started by making sure you're in your home directory: `/root`.  This is where you want to place newly created manifests.
 
 	cd /root
 
@@ -46,7 +50,7 @@ For the sake of simplicity and consistency, we use the text editor `nano` in our
 {% endaside %}
 
 {% task 1 %}
-When you created Byte in the Resources Quest, a `byte.pp` manifest was also subsequently created. Unfortunately Byte just doesn't seem to be working out as a sidekick. We need to get rid of Byte and create a stronger sidekick to help you in learning Puppet. To access Byte's Puppet manifest, type the following command:
+Unfortunately Byte just doesn't seem to be working out as a sidekick. Let's create a manifest to get rid of Byte. Type the following command:
 
 	nano byte.pp
 
@@ -59,7 +63,7 @@ user { 'byte':
 }
 {% endhighlight %}
 
-Save the file and exit your text editor. We touched on this in the Resources Quests, but the `ensure => absent` attribute/value pair states that we are going to make Byte not exist in the Learning VM.
+Save the file and exit your text editor. We touched on this in the Resources Quests, but the `ensure => absent` attribute/value pair states that we are going to make Byte does not exist in the Learning VM.
 
 ## Puppet Parser
 
@@ -70,7 +74,7 @@ The `puppet parser` tool can only ensure that the syntax of a manifest is well-f
 {% endwarning %}
 
 {% task 3 %}
-Using the `puppet parser` tool let's check your manifest for any syntax errors. Type the following command:
+Using the `puppet parser` tool, let's check your manifest for any syntax errors. Type the following command:
 
 	puppet parser validate byte.pp
 
@@ -78,7 +82,7 @@ Again, if the parser returns nothing, continue on. If not, make the necessary ch
 
 ## Puppet Apply
 
-This is a very handy execution and enforcement tool for applying manifests locally in the Learning VM. However, in the real world, you'll probably use this tool to apply configurations across an entire system with a single file. The file being enforced will be constructed with a list of all resources you want to manage on your system, but as you can imagine, that might end up being a _really_ long file! You'll see how this can be a more manageable process in the  Classes Quest and Modules Quest.
+Once you've created a manifest you will use the `puppet apply` tool to enforce it. The `puppet apply` tool is a standalone execution tool to apply individual manifests locally.  However, in the real world, you'll probably use this tool to apply configurations across an entire system with a single file. The file being enforced will be constructed with a list of all resources you want to manage on your system, but as you can imagine, that might end up being a _really_ long file! Puppet will check each resource in your environment against the resource declaration in the manifest. Puppet's **providers** will then do everything necessary to bring the state of those resources in line with the resource declarations in your manifest. You'll see how this can be a more manageable process when you get to the Classes Quest and Modules Quest.
 
 {% task 4 %}
 Once your `byte.pp` manifest is error free, we're going to simulate the change in the Learning VM without actually enforcing those changes. Let's see what happens:
@@ -100,41 +104,18 @@ How is Byte doing?
 Byte does not seem to be doing well. Actually, he's gone. The `ensure => 'absent'` value clearly shows Byte was no match for your Puppet skills.
 
 {% task 7 %}
-With Puppet manifests you can create as well as destroy. Lets create a new, stronger sidekick by adding user `gigabyte` to the Learning VM.
+With Puppet manifests you can create as well as destroy. Lets create a new, stronger sidekick by adding user `gigabyte` to the Learning VM using Puppet. If you need help on how to do this, refer to the previous tasks you've just completed in this quest. One thing to note: `ensure => 'present'` will make sure GigaByte exists in the Learning VM.
 
-	nano gigabyte.pp
+## Review
 
-{% task 8 %}
-Write the following code in your manifest:
+This is a foundational quest you must understand in order to successfully use Puppet. As you saw when completing this quest we've added two new tools to your toolbox: `puppet parser` and `puppet apply`. You always want to use `puppet parser` to check the syntax of your manifest before using `puppet apply` to enfore it. This quest contained a walkthough of the "best practice" methods to creating, checking, applying your manifest. We've also have a simplified version below for your reference:
 
-{% highlight puppet %}
-user { 'gigabyte':
-	ensure => 'present',
-	gid => '501',
-	home => '/home/gigabyte',
-	password => '!!',
-	uid => '501',
-}
-{% endhighlight %}
+1. `cd` in to your home directory: `/root`
+2. Open or create a manifest with the `.pp` extension
+3. Add or edit your Puppet code
+4. Use the `puppet parser` tool to check for syntax errors _(recommended)_
+5. Simulate your manifest using `puppet apply --noop` _(recommended)_
+6. Enfore your manifest using `puppet apply`
+7. Check to make sure everything is working correctly _(recommended)_
 
-{% task 9 %}
-Check the syntax of the `gigabyte.pp` manifest.
 
-	HINT: If you're not sure check out Task 3 above
-	
-{% task 10 %}
-Once your syntax is good to go, simulate your `gigabyte.pp` manifest changes in the Learning VM without actually enforcing them:
-
-	HINT: If you're not sure check out Task 4 above
-	
-{% task 11 %}
-Great! This is exactly what we would like Puppet to enforce. Can you now enforce `gigabyte.pp` manifest?
-
-	HINT: If you're not sure check out Task 5 above
-	
-{% task 12 %}
-How is GigaByte doing? Can you check in on GigaByte?
-
-	HINT: Do the same thing as in Task 6 above
-		
-GigaByte is alive and strong in the Learning VM world. You have an extraordinary power to add and remove whomever and whatever you may like. Use your powers wisely.
