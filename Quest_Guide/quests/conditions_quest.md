@@ -15,7 +15,15 @@ layout: default
 - Variables Quest
 
 ## Quest Objectives
- In this quest, you will learn how to use conditional statements and how to combine conditional logic with variables in order to make your manifests adaptable. To start this quest enter the following command:
+ - Learn how to use conditional logic to make your manifests adaptable.
+ - Understand the syntax and function of the `if`, `unless`, `case`, and
+`selector` statements. 
+
+## Getting Started
+
+We discussed the advantages of flexibility and scalability in the Variables Quest. A better understanding of conditional statements will take your manifests. Conditional statements allow you to write Puppet code that will return different values or execute different blocks of code depending on the condition you specify.
+
+To start this quest enter the following command:
 
 	quest --start conditions
 
@@ -24,8 +32,6 @@ layout: default
 > Just dropped in (to see what condition my condition was in)
 
 > -Mickey Newbury
-
-We discussed the advantages of flexibility and scalability in the Variables Quest. A better understanding of conditional statements will take your manifests. Conditional statements allow you to write Puppet code that will return different values or execute different blocks of code depending on the condition you specify.
 
 Writing conditional logic in your manifest allows the system to draw upon facts accessible through the Facter tool. For example, you can configure your Puppet manifests to perform as desired on a variety of operating systems and under differing system conditions. Pretty neat, don't you think?
 
