@@ -181,6 +181,11 @@
         color: #0095dd;
     }
 
+    div.img-wrapper {
+      display: block;
+      text-align: center;
+    }
+
     div.img-wrapper p{
         font-style: italic;
         margin-left: 10px;
@@ -218,6 +223,7 @@
         max-width: 520px;
         height: auto;
         vertical-align: bottom;
+        text-align: center;
     }
         
     li {
