@@ -3,7 +3,7 @@ title: Power of Puppet
 layout: default
 ---
 
-# Power of Puppet
+# The Power of Puppet
 
 ### Prerequisites
 
@@ -11,30 +11,38 @@ layout: default
 
 ## Quest Objectives
 
-- Download a module from the Puppet Forge
-- Use the Puppet Enterprise (PE) Console to classify a node
-- Explore how we created the Quest Guide website locally
+- Use a module from the Forge, and a pre-written module to setup a website serving the quest guide.
+- Use the Puppet Enterprise (PE) Console to manage the Learning VM's configuration
 
 ## Getting Started
 
-In this quest you will be introduced to the power of Puppet using the Puppet Enterprise (PE) Console and the Puppet Forge. The product of this quest is to set up a functional website locally that will serve you the entire Quest Guide, as an alternative to the PDF version. Don't worry though, both the website and PDF have the same content and will help guide you on your journey to learn Puppet. However, to do this, we're not going to be writing any code in this quest. Instead, we'll be using existing code and the PE Console to see just how far Puppet can take us in automating your infrastructure without yet delving into code. Are you intrigued as to how this looks? When you're ready to get started, type the following command:
+In this quest you will be introduced to the power of Puppet using the Puppet Enterprise (PE) Console and the Puppet Forge. The objective of this quest is to set up a functional website locally that will serve you the entire Quest Guide, as an alternative to the PDF version. Don't worry though, both the website and PDF have the same content and will help guide you on your journey to learn Puppet. 
 
-    quest --start powerofpuppet
+We are not going to be writing any code in this quest to accomplish the objective. Instead, we will be using a module from the Forge, as well as another that has been written for you on the Learning VM. This will serve as an example of _how_ you can _use_ the code that you will learn to write in the succeeding sections. We hope this gives you a high-level overview of what it is like to use Puppet Enterprise to manage systems, while leveraging code developed by the community that is shared on the Forge. Some of the technical terms in this quest may not be familiar, but we promise we will explain all of it by the end of the guide!
+
+Are you intrigued as to how this looks? When you're ready to get started, type the following command:
+
+    quest --start power 
 
 ## The Puppet Forge
 
-No matter if you use Puppet open source or Puppet Enterprise, another tool at your disposal is the [Puppet Forge](http://forge.puppetlabs.com). The Forge is a public repository of modules ritten by members of the puppet community, which we can leverage to simplify the process of managing your systems. This is just a general description of the Forge, which will suffice for now. We'll go into greater detail about the Forge in the Puppet Module Tool Quest.
+The [Puppet Forge](http://forge.puppetlabs.com) is a public repository of modules written by members of the Puppet community. We can leverage the content from the Forge to simplify the process of managing your systems. This is just a general description of the Forge, which will suffice for now. We will go into greater detail about the Forge in the Puppet Module Tool Quest.
+
+But what is a Module, you ask? Simply put, a module is a self-contained bundle of code and data. We will learn about Modules in greater detail in the Module Quest.
 
 {% aside Puppet Enterprise Supported Modules %}
-Remember in the Welcome quest when we stated PE comes with many prepackaged tools? Well, another one of those tools are [Puppet Enterprise supported modules](http://forge.puppetlabs.com/puppetlabs?utf-8=%E2%9C%93&supported=yes). These modules are rigorously tested with Puppet Enterprise environment and are also supported (maintained) by Puppet Labs.
+Remember how we indicated in the Welcome Quest that Puppet Enterprise comes with several benefits, in addition to Puppet? [Puppet Enterprise supported modules](http://forge.puppetlabs.com/puppetlabs?utf-8=%E2%9C%93&supported=yes) are modules that are rigorously tested with Puppet Enterprise and are also supported (maintained) by Puppet Labs. 
 {% endaside %}
 
 {% task 1 %}
+
+Install the puppetlabs-apache module.
+
 For us to get started with setting up our Quest Guide website, we need to download and install the [apache module](http://forge.puppetlabs.com/puppetlabs/apache) from the Forge. In your terminal type the following command:
 
 	puppet module install puppetlabs-apache
 
-This tells Puppet to go into the Forge and specifcally download and install the `puppetlabs-apache` module onto this Learning VM.
+This tells Puppet to download and install the `puppetlabs-apache` module from the Forge onto the Learning VM. Modules are installed in the directory specified as Puppet's _modulepath_. For Puppet Enterprise, this defaults to `/etc/puppetlabs/puppet/modules/`.
 
 {% aside Offline? No problem. %}
 We've cached the required modules on the Learning VM. If you don't have internet access, run the following terminal commands instead of using the `puppet module` tool:
@@ -46,61 +54,67 @@ We've cached the required modules on the Learning VM. If you don't have internet
 	mv puppetlabs-apache-* apache  
 {% endaside %}
 
-Great job! You've just installed your first module from the Forge. Pretty easy don't you think? We also went ahead and pre-installed `lvmguide` module on your behalf.
+Great job! You've just installed your first module from the Forge. Pretty easy don't you think? We also went ahead and wrote the `lvmguide` module we will need. You will find this module in the `modulepath` directory as well.
 
 ### The lvmguide and apache modules
 
-The `lvmguide` module includes a simple class which stages the files for the Quest Guide website and uses the `apache` module you just installed to:
+The `lvmguide` module includes a *Class* of the same name, which configures the Learning VM to act as a webserver serving the Quest Guide as an html website. A Class is a named block of Puppet code. 
 
-- install the `apache2` httpd server.
-- start and manage the httpd service.
-- create a new virtualhost that will act as the Quest Guide website.
+It does this by using the `apache` module you just installed to:
 
-To use the classes nested in each of these modules, we need to be able to enforce the classes on particular machines. In order to configure the Learning VM to serve you the Quest Guide website, we need to assign the appropriate class(es), a process known as Classification (don't worry about the terminology at this point. We'll talk more about this in the Modules Quest). To do this we will use the PE Console.
+- install the Apache httpd server provided by the `httpd` package
+- create a new VirtualHost that will act as the Quest Guide website
+- configure httpd to serve the Quest Guide website
+- start and manage the httpd service
+
+Finally, the `lvmguide` module places the files for the website in the appropriate directory.
+
+### Putting the modules to use
+
+As we mentioned previously a class is a named block of Puppet code. The `lvmguide` class contains the definition that will configure a machine to serve the quest guide. In order to configure the Learning VM to serve you the Quest Guide website, we need to assign the `lvmguide` class to it, a process known as *Classification* (don't worry about the terminology at this point. We'll talk more about this in the Modules Quest). To do this we will use the Puppet Enterprise Console.
 
 ## The Puppet Enterprise Console
 
 The PE Console is Puppet Enterprise’s web-based Graphical User Interface (GUI) that lets you automate your infrastructure with little or no coding necessary. You can use it to:
 
-- Manage node requests to join the Puppet deployment.
-- Assign Puppet classes to nodes and groups.
-- View reports and activity graphs.
-- Trigger Puppet runs on demand.
-- Browse and compare resources on your nodes.
-- View inventory data.
-- Invoke orchestration actions on your nodes.
-- Manage console users and their access privileges.
+- Manage node requests to join the Puppet deployment
+- Assign Puppet classes to nodes and groups
+- View reports and activity graphs
+- Trigger Puppet runs on demand
+- Browse and compare resources on your nodes
+- View inventory data
+- Invoke orchestration actions on your nodes
+- Manage console users and their access privileges
+
+For this quest, we will use the PE Console to classify the VM with the `lvmguide` class.
 
 ## The Facter Tool
 
-Puppet Enterprise is often used in concert with other tools to help you administer your systems. Just as the quest tool can provide you feedback on your learning progress, you can use the Facter tool to help you obtain facts about your system. Facter is Puppet’s cross-platform system profiling library. It discovers and reports per-node facts, which are available in your Puppet manifests as variables. This tool becomes more handy in the Variables Quest, but the sooner you get familar with Facter, the better.  Go ahead and get to know your system a little better using the `facter` command.
+Puppet Enterprise is often used in concert with other tools to help you administer your systems. Just as the quest tool can provide you feedback on your learning progress, you can use the Facter tool to help you obtain facts about your system. Facter is Puppet’s cross-platform system profiling library. It discovers and reports per-node facts, which are available in your Puppet manifests as variables. 
+
+Facter is used and described in later quests, but the sooner you get familar with Facter, the better.  Go ahead and get to know your system a little better using the `facter` command.
 
 {% tip %}
-**Puppet Enterprise** comes with many prepackaged tools, including the Facter tool.
+Facter is one of the many prepackaged tools that **Puppet Enterprise** ships with.
 {% endtip %}
 
-{% task 5 - 7 %}
+{% task 2 %}
 
-	facter facterversion
-	facter operatingsystem
-	facter puppetversion
+Find the ipaddress of the VM using Facter:
+
+To access the PE Console we need to find your IP address. Luckily, Facter makes it easy to find this. In your terminal, type the following command:
+
+	facter ipaddress
+
 
 {% tip %}
 You can see all the facts by running `facter -p`
 {% endtip %}
 
-As you can see, when you enter a `facter` command, Puppet will retrieve the facts about your system.
-
-
-{% task 2 %}
-To access the PE Console we need to find your IP address. Luckly, Puppet Enterprise comes prepackaged with Facter, which will help you find this out easily. In your terminal, type the following command:
-
-	facter ipaddress
-
-Please write down your returned IP address as you will need it to access the PE Console. Next, in your browsers address bar, type the following URL: **https://your-ip-address**.
+Please write down your returned IP address as you will need it to access the PE Console. Next, in your browser's address bar, type the following URL: **https://your-ip-address**.
 
 {% aside Security Restriction %}
-If your browser gives you a security notice, go ahead and accept the exception. Because we are running locally with a self-signed certificate, there is no security risk.
+If your browser gives you a security notice, go ahead and accept the exception. The notification appears because we are using a self-signed certificate.
 {% endaside %}
 
 Awesome! You are at the doorstep of the PE Console. Enter the login information below to gain access:
@@ -110,39 +124,33 @@ Awesome! You are at the doorstep of the PE Console. Enter the login information 
 
 {% figure '../assets/PE_Login.png' %}
 
-We're in! Now that we have access to the PE Console, the next step will be to classify the "learn.localdomain" node with the `lvmguide` class.
+You're in! Now that you have access to the PE Console, the next step will be to classify the "learn.localdomain" node with the `lvmguide` class.
 
 ### Steps
+
+In order to classify the `learn.localdomain` node (the Learning VM) with the `lvmguide` class, we need to add the this class to the list of Classes available to the PE Console to classify nodes with. Let's add it.
 
 **STEP #1:** Click the "Add Classes" button  
 LOCATION: You may need to scroll to the bottom of the page. The button is located in the lower left hand corner of the screen in the Classes panel. 
 
 {% figure '../assets/PE_Add_Classes.png' %}
 
-By clicking this button will allow you to get started classifying the "learn.localdomain" node with the lvmguide class discussed in the next step.
-
-**STEP #2:** Type *lvmguide* in the "filter the list below" input box  
+**STEP #2:** Type *lvmguide* in the "Filter the list below" input box  
 
 {% figure '../assets/PE_lvmguide.png' %}
-
-To classify "learn.localdomain" node means to determine what the actual node configurations will be. We want to find the lvmguide class so we can assign it to a node, as well as provide any data the lvmguide class requires.
 
 **STEP #3:** Select the checkbox associated with *lvmguide* class that appears in your results once you filter  
 
 {% figure '../assets/PE_lvmguide_Selected.png' %}
 
-This means you want to assign the lvmguide class to this node.
-
-**STEP #4:** Click the"Add selected classes" button to add the *lvmguide* class.  
-LOCATION: You may need to scroll to the bottom of the page.
-
-{% aside Verification %}
-You should see the class appear in both class windows and a verification message at the top of your screen.
-{% endaside %}
+**STEP #4:** Click the "Add selected classes" button to add the *lvmguide* class to the list of classes that can be assigned to node in the PE Console.  
 
 {% figure '../assets/PE_Add_Selected_Classes.png' %}
 
-By clicking this button tells Puppet to classify the lvmguide to the node. 
+{% aside Verification %}
+You should see the class appear in the list of classes on the left, and also see a verification message at the top of your PE Console.
+{% endaside %}
+
 
 **STEP #5:** Click on the "Nodes" menu item in the navigation bar  
 LOCATION: You may need to scroll to the top of the page to see the navigation bar 
