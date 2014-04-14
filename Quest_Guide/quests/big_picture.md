@@ -71,6 +71,27 @@ The PE Console is Puppet Enterprise’s web-based Graphical User Interface (GUI)
 - Invoke orchestration actions on your nodes.
 - Manage console users and their access privileges.
 
+## The Facter Tool
+
+Puppet Enterprise is often used in concert with other tools to help you administer your systems. Just as the quest tool can provide you feedback on your learning progress, you can use the Facter tool to help you obtain facts about your system. Facter is Puppet’s cross-platform system profiling library. It discovers and reports per-node facts, which are available in your Puppet manifests as variables. This tool becomes more handy in the Variables Quest, but the sooner you get familar with Facter, the better.  Go ahead and get to know your system a little better using the `facter` command.
+
+{% tip %}
+**Puppet Enterprise** comes with many prepackaged tools, including the Facter tool.
+{% endtip %}
+
+{% task 5 - 7 %}
+
+	facter facterversion
+	facter operatingsystem
+	facter puppetversion
+
+{% tip %}
+You can see all the facts by running `facter -p`
+{% endtip %}
+
+As you can see, when you enter a `facter` command, Puppet will retrieve the facts about your system.
+
+
 {% task 2 %}
 To access the PE Console we need to find your IP address. Luckly, Puppet Enterprise comes prepackaged with Facter, which will help you find this out easily. In your terminal, type the following command:
 
