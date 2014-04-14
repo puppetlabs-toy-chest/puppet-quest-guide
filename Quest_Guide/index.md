@@ -27,7 +27,7 @@ Welcome to the Quest Guide for the Puppet Enterprise Learning Virtual Machine (V
 
 Use the IP address to ssh to the VM. We do this for convenience and it's essential for you to get the most out of the Learning VM and this Quest Guide. 
 
-To SSH to the VM, on a Linux/*nix-based system or a Mac, you can open a Terminal application and run the following command:
+To SSH to the VM, on a Linux system or a Mac, you can open a Terminal application and run the following command:
 
     ssh root@<ip-address>
 
@@ -52,12 +52,12 @@ So what is Puppet, and why should you care? At a high level, Puppet manages your
 
 *Puppet Enterprise* is a complete configuration management platform, with an optimized set of components proven to work well together. It combines Puppet (including a preconfigured production-grade puppet master stack), a web console for analyzing reports and controlling your infrastructure, powerful orchestration features, cloud provisioning tools, and professional support.
 
-It may seem a lot easier to "just run a command" to effect a change in configuration, or perhaps writing a script that executes a series of commands looks like a more effective way to manage the configuration of a system. This is true, as long as you are only concerned about a single change, or changes to a single system. The true power of Puppet is that it allows you to describe all the details of the configuration for multiple machines in a composable manner, and allows you to manage the configuration of multiple machines (think hundreds or thousands) without having to write complicated scripts that no one else can understand, or maintaining an inventory of all your systems, and logging in to each system in turn to run the required commands or scripts. Puppet automates the process of configuring your systems and keeping them configured exactly as you need them to be. But a journey of a thousand miles starts with a step - this Learning VM will get you started by means of examples that help you configure the VM. While doing the exercises, imagine the possibilities in being able to do the exact same thing to hundreds, or thousands of systems with no additional effort!
+It may seem a lot easier to "just run a command" to effect a change in configuration, or perhaps writing a script that executes a series of commands looks like a more effective way to manage the configuration of a system. This is true, as long as you are only concerned about a single change, or changes to a single system (or a few). The true power of Puppet is that it allows you to describe all the details of the configuration for multiple machines in a composable manner, and allows you to manage the configuration of multiple machines (think hundreds or thousands) without having to write complicated scripts that are hard to comprehend; or maintaining an inventory of all your systems, and logging in to each system in turn to run the required commands or scripts. Puppet automates the process of configuring your systems and keeping them configured exactly as you need them to be. But a journey of a thousand miles starts with a step - this Learning VM will get you started by means of examples that help you configure the VM. While doing the exercises, imagine the possibilities in using what you learn to be able to manage hundreds or thousands of systems in an effortless, intuitive manner!
 
 {% task 1 %}
 Before we dig any deeper, let's check an see what version of Puppet Enterprise we are running on this Learning VM. Type the following command:
 
-	puppet -V	# That's a captial 'V'
+	puppet -V	# That's a capital 'V'
 
 You will see something like the following:
 
@@ -90,7 +90,7 @@ The `quest --help` command provides you with a list of all the options for the `
 {% task 3 %}
 Let's find out how much progress you have made thus far! Execute the following command:
 
-	quest --progess 
+	quest --progress 
 	
 Using the quest tool is entirely optional, but we have integrated it into the first few quests to help you out if needed.
 
@@ -100,8 +100,8 @@ Typing `clear` into your terminal will remove everything on your terminal screen
 
 In addition to the quest commandline tool, we have also integrated real-time feedback into the VM, which is displayed in the bottom-right corner of the terminal, as seen in Figure 1. 
 
-{% figure 'assets/terminal.png' %} <!--This screenshot needs updating when the final LVM is ready-->
+{% figure 'assets/terminal.png' %} 
 
 ## Review
 
-In this introductory quest we've provided you with context and a sample quest structure for learning Puppet using the Learning VM. We provided a very high level explanation of what Puppet is, what a quest is, and how to use the quest tools. As you progressed through this quest, you also learned about the mechanics of successfully completing a quest by means of completing the tasks. We hope you have a general understanding of how to complete a quest and what is in store for you on your learning journey.
+In this introductory quest we provided a very high level explanation of what Puppet is, what a quest is, and how to use the quest tool. As you progressed through this quest, you learned about the mechanics of successfully completing a quest by means of completing the associated tasks. We hope you have a general understanding of how to complete a quest and what is in store for you on your learning journey.

@@ -83,8 +83,7 @@ The IP address will be listed as the 'inet addr' for the 'eth0' interface. For e
 
 {% figure './assets/setup_ifconfig.png' %}
 
-The IP address for the VM in the above example is: __192.168.16.135__. Please note that the IP address will be different. Please make a note of your IP address.
-
+The IP address for the VM in the above example is: __192.168.16.135__. Please note that the IP address for your VM will be different. Please make a note of your IP address.
 
 Now you are ready to learn more about Puppet using the installation of Puppet Enterprise on the VM. Please continue following the rest of the Quest Guide. We hope you have fun learning Puppet!
 
