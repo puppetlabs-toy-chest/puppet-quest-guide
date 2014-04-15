@@ -196,6 +196,9 @@
         content: ' ' counter(image);
     }
 
+    p{
+        text-align: justify;
+    }
 }
 
 @media screen {
