@@ -54,7 +54,7 @@ We've cached the required modules on the Learning VM. If you don't have internet
 	mv puppetlabs-apache-* apache  
 {% endaside %}
 
-Great job! You've just installed your first module from the Forge. Pretty easy don't you think? We also went ahead and wrote the `lvmguide` module we will need. You will find this module in the `modulepath` directory as well.
+Great job! You've just installed your first module from the Forge. Pretty easy don't you think? We also went ahead and created the `lvmguide` module we will need. You will find this module in the `modulepath` directory as well.
 
 ### The lvmguide and apache modules
 
@@ -67,7 +67,7 @@ It does this by using the `apache` module you just installed to:
 - configure httpd to serve the Quest Guide website
 - start and manage the httpd service
 
-Finally, the `lvmguide` module places the files for the website in the appropriate directory.
+Finally, the `lvmguide` class places the files for the website in the appropriate directory.
 
 ### Putting the modules to use
 
@@ -111,11 +111,7 @@ To access the PE Console we need to find your IP address. Luckily, Facter makes 
 You can see all the facts by running `facter -p`
 {% endtip %}
 
-Please write down your returned IP address as you will need it to access the PE Console. Next, in your browser's address bar, type the following URL: **https://your-ip-address**.
-
-{% aside Security Restriction %}
-If your browser gives you a security notice, go ahead and accept the exception. The notification appears because we are using a self-signed certificate.
-{% endaside %}
+Please write down the IP address for the VM as you will need it to access the PE Console. Next, in your browser's address bar, type in : **https://VM-ip-address**, and press Return (Enter) to load the PE Console.
 
 Awesome! You are at the doorstep of the PE Console. Enter the login information below to gain access:
 
@@ -124,14 +120,20 @@ Awesome! You are at the doorstep of the PE Console. Enter the login information 
 
 {% figure '../assets/PE_Login.png' %}
 
+{% aside Security Restriction %}
+If your browser gives you a security notice, go ahead and accept the exception. The notification appears because we are using a self-signed certificate.
+{% endaside %}
+
 You're in! Now that you have access to the PE Console, the next step will be to classify the "learn.localdomain" node with the `lvmguide` class.
 
-### Steps
+## Using the PE Console for Classification
 
-In order to classify the `learn.localdomain` node (the Learning VM) with the `lvmguide` class, we need to add the this class to the list of Classes available to the PE Console to classify nodes with. Let's add it.
+In order to classify the `learn.localdomain` node (the Learning VM) with the `lvmguide` class, we need to add the this class to the list of classes available to the PE Console to classify nodes with. Let's add it.
+
+### Adding a Class to the PE Console
 
 **STEP #1:** Click the "Add Classes" button  
-LOCATION: You may need to scroll to the bottom of the page. The button is located in the lower left hand corner of the screen in the Classes panel. 
+You may need to scroll to the bottom of the page. The button is located in the lower left hand corner of the screen in the Classes panel. 
 
 {% figure '../assets/PE_Add_Classes.png' %}
 
@@ -148,56 +150,79 @@ LOCATION: You may need to scroll to the bottom of the page. The button is locate
 {% figure '../assets/PE_Add_Selected_Classes.png' %}
 
 {% aside Verification %}
-You should see the class appear in the list of classes on the left, and also see a verification message at the top of your PE Console.
+You should see the class appear in the list of classes on the left, and also see a verification message at the top of the PE Console.
 {% endaside %}
 
+### Classifying a node 
 
-**STEP #5:** Click on the "Nodes" menu item in the navigation bar  
-LOCATION: You may need to scroll to the top of the page to see the navigation bar 
+Now that the `lvmguide` is available in the PE Console, let's classify the node `learn.localdomain` with this class. 
+
+**STEP #1:** Click on the "Nodes" menu item in the navigation menu.  You may need to scroll to the top of the page to see the navigation menu.
 
 {% figure '../assets/PE_Nodes_Menu.png' %}
 
-**STEP #6:** Click on the *learn.localdomain* node hyperlink (should be the only one listed)  
-LOCATION: Look at the center of your screen.  
+**STEP #2:** Click on the *learn.localdomain* node hyperlink (should be the only one listed since we are only managing the Learning VM with Puppet Enterprise). The list of nodes should be near the center of the PE Console.
 
 {% figure '../assets/PE_Learn_Node.png' %}
 
-**STEP #7:** Click the "Edit" button  
-LOCATION: Look at the up right corner of the screen. 
+**STEP #3:** Click the "Edit" button located in the top-right corner of the screen. 
 
 {% figure '../assets/PE_Edit_Button.png' %}
 
-**STEP #8:** In the Classes section, type *lvmguide* in the "add a class" input box  
-
-{% aside Editing Class parameters %}
-If you click on *Edit Parameters* for the lvmguide class you can see the defaults. *There is nothing for you to do here for the moment,* but it's good to notice it so you will know where to look if you need to edit class parameters in the future.
-{% endaside %}
+**STEP #4:** In the Classes section, type *lvmguide* in the "add a class" input box  
 
 {% figure '../assets/PE_Add_lvmguide_Class.png' %}
 
-**STEP #9:** Click the "Update" button  
+{% aside Editing Class parameters %}
+
+If you click on *Edit Parameters* for the lvmguide class you can see the defaults. *There is nothing for you to do here for now,* but it's good to notice it so you will know where to look if you need to edit the parameters for a class in the future.
+{% endaside %}
+
+**STEP #5:** Click the "Update" button at the bottom.
 
 {% figure '../assets/PE_Update_Button.png' %}
 
+Excellent! We just finished classifying the `learn.localdomain` node with the `lvmguide` class.
+
 ## Let's Run Puppet
 
-Now that we have classified the “learn.localdomain” node with the `lvmguide` class, we need to tell the puppet agent to fetch and enforce the definition for the “learn.localdomain” node.
+Now that we have classified the `learn.localdomain` node with the `lvmguide` class, we need to tell puppet to configure the machine appropriately. The Puppet `agent` daemon does this by default by running in the background on any nodes you manage with Puppet. Every 30 minutes, the Puppet agent daemon requests a *catalog* from the Puppet Master, and applies the retrived catalog. Since we want to see the configuration changes (as specified in the `lvmguide` class) applied immediately, we can ask the agent to fetch and enforce the definition for the “learn.localdomain” node.
 
 {% task 3 %}
+
+Run puppet agent:
+
 To fetch and apply the catalog we will manually trigger a Puppet run. Puppet will check the classification you set in the PE Console and automatically run through all the steps needed to implement the `lvmguide` class. In your terminal type the following command:
 
 	puppet agent --test
 
-You will see the test scroll in your terminal indicating that apache was installed and the website was set up. **Please note this may take about a minute to run.**
-
-{% tip %}
-Running `puppet agent -t` works also. The `-t` flag is simply a short version of `--test`.
-{% endtip %}
+After a brief delay, you will see text scroll by in your terminal indicating that some changes were made to the configuration of the VM, and the website was set up. **Please note this may take about a minute to run.** This is about the time it takes for the software packages to be downloaded and installed as needed.
 
 {% task 4 %}
-Let's check out the Quest Guide! In your browsers address bar, type the following URL: **http://your-ip-address**.
 
-You're all set up to get started with learning how to use Puppet to automate your infrastructure! Essentiall, what we’ve done here is leverage the Puppet Labs apache module to set up the quest guide.
+Ensure the website serving the Quest Guide is running!
+
+There are no commands to run for this. All the heavy lifting was done by the lvmguide and apache modules you installed.
+
+Let's check out the Quest Guide! In your browsers address bar, type the following URL: **http://VM-ip-address**.
+
+{% aside %}
+Note that http**s**://VM-ip-address will load the PE Console, while http://VM-ip-address will load the Quest Guide as a website.
+{% endaside %}
+
+The website for the quest guide will remain accessible for as long as the VM's IP address remains the same. If you were to move your computer or laptop to a different network, or if you suspended your laptop and resumed work on the Learning VM after a while, the website may not be accessible. You still have the PDF to follow along with. 
+
+In case any of the above issues happen, and you end up with a stale IP address, do the following to get a new IP address.
+
+Refresh your DHCP lease:
+
+    service network restart
+
+Find your IP address:
+
+    facter ipaddress
+
+From this point on you can either follow along with the website or with the PDF, whichever works best for you.
 
 ## Exploring the lvmguide Class
 
@@ -207,7 +232,7 @@ Let’s take a high level look at what the `lvmguide` class does for us. In your
 
 Next, using `vim`, `nano`, or a text editor of your choice, open up the `init.pp` manifest. Type the following command in you terminal:
 
-	nano manifests/init.pp
+	nano lvmguide/manifests/init.pp
 
 {% aside %}
 We will learn more detailed information about each of these concepts in future quests. However, this is a leading example of how a few lines of Puppet code can automate a relatively complex task.
@@ -242,17 +267,17 @@ class lvmguide (
 
 In the above code sample, we see that the `class lvmguide`:
 
-1. declared the class apache with the default_vhost parameter set to false.
-2. declared an apache::vhost for the quest guide.
-3. set the document root to `/var/www/html/lvmguide` (which is the default value for the $document_root parameter).
-4. ensured that the directory `/var/www/html/lvmguide` exists and that its contents are managed recursively. 
+1. Takes two parameters: $document_root and $port
+2. Declares the class apache with the default_vhost parameter set to false. That's the equivalent of saying "I need apache to be setup without the default VirtualHost."
+3. Declares an apache::vhost for the quest guide with the title "learning.puppetlabs.vm", and with $port and $docroot set to the default values. Now this is the same as saying "Please set up a VirtualHost website running on port 80, serving the "learning.puppetlabs.vm" website with the files from the /var/www/html/lvmguide' directory
+4. Sets the document root to `/var/www/html/lvmguide` (which is the default value for the $document_root parameter
+5. Finally, the class ensures that the directory `/var/www/html/lvmguide` exists and that its contents are managed recursively. We notice that the source for the contents of that directory is also specified  
 
-{% tip %}
-The file in the directory is sourced from the lvmguide module.
-{% endtip %}
+The details may not be extremely clear at this time, and will get clearer as you complete more quests from this Quest Guide. The rest of the Quest Guide will help you get to the point where you can write your own classes and modules. Our hope at this point is that the code for the `lvmguide` class listed above appears to be friendly and elegant. We often talk about Puppet's Domain Specific Language (DSL) as **self-documenting code**. 
 
-The real power here is that you now have the `class lvmguide` in a module that could be assigned to any number of nodes you wish to manage. There is no repetition or any other node-specific code that needs to be written!
+The real power here is that you now have the class `lvmguide` that can be applied to any number of nodes as long as you manage them with Puppet. Since we have lvmguide as a module in a directory by itself, you can share that directory with someone else, and ask them to place in their Puppet master's modulepath and they too can get the Quest Guide website up and running on any number of nodes. With a few lines of code, we installed and configured the Apache httpd web server to serve the website we need, by leveraging a freely available, shared, module from the forge - puppetlabs-apache. 
+ 
 
 ## Review
 
-Great job on completing this quest! To summarize, we learned how to leverage exising modules on the Forge and use the PE Console to set up our quest guide website locally. We also learned the importance of classifying when it comes to automating system tasks. Please note the block of Puppet code for the lvmguide module as we'll be reference it throughout the remaining quests to help bring context to what exactly you just did in greater detail.
+Great job on completing the quest! To summarize, we learned how to leverage exising modules on the Forge and use the PE Console to set up our quest guide website locally. We also learned how to classify a node with a class. We will continue to reference the block of Puppet code for the lvmguide module throughout the remaining quests in order to understand what we did.

@@ -69,7 +69,7 @@ What the above indicates is that Puppet Enterprise 3.2.1 is installed on the Lea
 
 Up to this point we've provided you with some basic context of this Learning VM and what Puppet is. We'll continue to dive into greater detail about these topics in future quests. Wait a minute! What's a quest? That's a great question! A **Quest** is a structured tutorial consisting of a number of interactive tasks that will help you learn about a topic related to Puppet.
 
-Each Quest includes a number of **Tasks** that give you a hands-on opportunity to apply what you have learnt. But how do you keep track of everything as you progress? What if you forget what quest you are on? These are all great questions and that's why we specifically created a 'Quest Tool' for this Learning VM to help you when you're in need.
+Each Quest includes a number of **Tasks** that give you a hands-on opportunity to apply what you have learnt. You have already finished a task by now, since the first task was to execute the `puppet -V` command earlier. But how do you keep track of everything as you progress? What if you forget what quest you are on? These are all great questions and that's why we specifically created a 'Quest Tool' for this Learning VM to help you when you're in need.
 
 ## The Quest Tool
 
