@@ -31,7 +31,7 @@ To SSH to the VM, on a Linux system or a Mac, you can open a Terminal applicatio
 
     ssh root@<ip-address>
 
-Where <ip-address> is to be replaced by the IP address for your Learning VM that you noted down at the end of the previous chapter.
+Where `<ip-address>` is to be replaced by the IP address for your Learning VM that you noted down at the end of the previous chapter.
 
 If you are using a Windows computer, please use an SSH client. We recommend [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html).
 

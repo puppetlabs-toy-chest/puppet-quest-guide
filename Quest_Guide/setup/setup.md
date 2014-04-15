@@ -64,7 +64,7 @@ For everything to work smoothly, we suggest allocating at least two gigabytes of
 
 Now that everything is configured, click the __Start__ button in the upper left to boot up the VM.
 
-	Note: Refer to [VirtualBox documentation](http://www.virtualbox.org/manual) for additional information as required.
+Note: Refer to [VirtualBox documentation](http://www.virtualbox.org/manual) for additional information as required.
 
 Once the VM is powered up in VirtualBox, follow the Next Steps below:
 

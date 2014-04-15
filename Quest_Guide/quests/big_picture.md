@@ -128,7 +128,7 @@ You're in! Now that you have access to the PE Console, the next step will be to 
 
 ## Using the PE Console for Classification
 
-In order to classify the `learn.localdomain` node (the Learning VM) with the `lvmguide` class, we need to add the this class to the list of classes available to the PE Console to classify nodes with. Let's add it.
+In order to classify the `learn.localdomain` node (the Learning VM) with the `lvmguide` class, we need to add the class to the list of classes available to the PE Console to classify nodes with. Let's add it.
 
 ### Adding a Class to the PE Console
 
