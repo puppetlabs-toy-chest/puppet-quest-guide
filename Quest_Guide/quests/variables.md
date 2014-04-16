@@ -73,7 +73,11 @@ file {'/root/pangrams/fox.txt':
 }
 {% endhighlight %}
 
-Great job! Take look at the file to see that the contents have been set as you intended:
+Now that we have a manifest, let's test it on the VM. 
+
+Remember to validate the syntax of the file, and to simulate the change using the `-noop` flag for the `puppet apply` command before you use `puppet apply` to make the required change on the system.
+
+Excellent! Take look at the file to see that the contents have been set as you intended:
 
 	cat /root/pangrams/fox.txt
 
@@ -154,7 +158,7 @@ Puppet has a bunch of built-in, pre-assigned variables that you can use. Remembe
 Remember running `facter ipaddress`? told you your IP address. What if you wanted to turn `facter ipaddress` into a variable? You guessed it. It would look like this: `$::ipaddress` as a stand-alone variable, or like this:
 `${::ipaddress}` when interpolated in a string.
 
-The `::` in the above indicates that we always was the top-scope variable, the global fact called `ipaddress`, as opposed to, say a variable called `ipaddress` you defined in a specific manifest.  
+The `::` in the above indicates that we always want the top-scope variable, the global fact called `ipaddress`, as opposed to, say a variable called `ipaddress` you defined in a specific manifest.  
 
 In the Conditions Quest, you will see how Puppet manifests can be designed to perform differently depending on facts available through `facter`. For now, let's play with some facts to get a feel for what's available.
 
@@ -182,7 +186,7 @@ file { '/root/message.txt':
 }
 {% endhighlight %}
 
-Once you have created the facts.pp file, enforce it using the appropriate `puppet apply` command, but not before you verify that the syntax is correct and have tried simulating it first. Refer to the Manifests quest if you need to refresh you memory on how to apply a manifest.
+Once you have created the facts.pp file, enforce it using the appropriate `puppet apply` command, after verifying that the syntax is correct. 
 
 You should see your message displayed along with Puppet's other notifications. You can also use the `cat` command or a text editor to have a look at the `message.txt` file with the same content.
 

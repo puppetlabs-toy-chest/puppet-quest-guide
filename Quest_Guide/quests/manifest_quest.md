@@ -62,7 +62,7 @@ user { 'byte':
 }
 {% endhighlight %}
 
-Save the file and exit your text editor. We touched on this in the Resources Quests, but the `ensure => absent` attribute/value pair states that we are going to make user byte does not exist in the Learning VM.
+Save the file and exit your text editor. We touched on this in the Resources Quests, but the `ensure => absent` attribute/value pair states that we are going to make sure user byte does not exist in the Learning VM.
 
 ## Puppet Parser
 

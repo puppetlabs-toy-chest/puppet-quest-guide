@@ -21,7 +21,7 @@ layout: default
 
 ## Getting Started
 
-We discussed the advantages of flexibility and scalability in the Variables Quest. A better understanding of conditional statements will take your manifests. Conditional statements allow you to write Puppet code that will return different values or execute different blocks of code depending on the condition you specify.
+Conditional statements allow you to write Puppet code that will return different values or execute different blocks of code depending on the conditions you specify. This, in conjunction with Facter facts, will enable you to write Puppet code that accomodates different platforms, operating systems, and functional requirements.
 
 To start this quest enter the following command:
 
@@ -33,23 +33,24 @@ To start this quest enter the following command:
 
 > -Mickey Newbury
 
-Writing conditional logic in your manifest allows the system to draw upon facts accessible through the Facter tool. For example, you can configure your Puppet manifests to perform as desired on a variety of operating systems and under differing system conditions. Pretty neat, don't you think?
+Conditional statements let your Puppet code behave differently in different situations. They are most helpful when combined with facts or with data pertaining to the systems. For example, you can configure your Puppet manifests to perform as desired on a variety of operating systems and under differing system conditions. Pretty neat, don't you think?
 
-Puppet supports a few different ways of implementing conditionals:
+Puppet supports a few different ways of implementing conditional logic:
  
  * `if` statements
  * `unless` statements
- * case statements
+ * case statements, and
+ * selectors
 
 ## The 'if' Statement
 
 Puppet’s `if` statements behave much like those in many other programming and scripting languages.
 
-An `if` statement includes a condition followed by a block of Puppet code that will only be executed **if** that condition evaluates as **true**. Optionally, an `if` statement can also include any number of `elsif` clauses and an `else` clause. Here are some rules:
+An `if` statement includes a condition followed by a block of Puppet code that will only be executed __if__ that condition evaluates as __true__. Optionally, an `if` statement can also include any number of `elsif` clauses and an `else` clause. Here are some rules:
 
-- If the `if` condition fails, Puppet moves on to the `elsif` condition.
-- If both the `if` and `elsif` conditions fail, Puppet will execute the code in the `else` clause.
-- If all the conditions fail, and there is no `else` block, Puppet will do nothing and move on.
+- If the `if` condition fails, Puppet moves on to the `elsif` condition (if one exists)
+- If both the `if` and `elsif` conditions fail, Puppet will execute the code in the `else` clause (if one exists)
+- If all the conditions fail, and there is no `else` block, Puppet will do nothing and move on
 
 The following is an example of an `if` statement you might use to raise a warning when a class is included on an unsupported system:
 
