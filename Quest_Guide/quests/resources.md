@@ -29,7 +29,7 @@ Resources are the fundamental units for modeling system configurations. Each res
 
 ### Puppet's Domain Specific Language
 
-Puppet uses its own configuration language - one that was designed to be accessible to sysadmins. The Puppet language does not require much formal programming experience. The code you see below is an example. Since it is a **declarative** language, the definitions of resources can be considered as *models* of the state of resources.
+Puppet uses its own configuration language, one that was designed to be accessible to sysadmins and does not require much formal programming experience. The code you see below is an example of what we're referring to. Since it is a **declarative** language, the definitions of resources can be considered as *models* of the state of resources.
 
 {% highlight puppet %}
 type {'title':
@@ -41,7 +41,7 @@ type {'title':
 Though a comma isn't strictly necessary at the end of the final attribute value pair, it is best practice to include it for the sake of consistency.
 {% endaside %}
 
-The first step in mastering Puppet is to learn about the world around you. You will also realize everything in this Learning VM is a collection of **resources**. You will not be using resource declarations to shape your environment just yet. Instead you will exercise your power by hand and use Puppet only to inspect your actions using the `puppet resource` and `puppet describe` tools.
+The first step in mastering Puppet is to learn about the world around you. You will also realize everything in this Learning VM is a collection of **resources**. You will not be using resource declarations to shape your environment just yet. Instead, you will exercise your power by hand and use Puppet only to inspect your actions using the `puppet resource` and `puppet describe` tools.
 
 ## Anatomy of a Resource
 
@@ -55,7 +55,7 @@ Let's say you want to learn more about the `user` resource type as it applies to
 The `puppet describe` command can list info about the currently installed resource types on a given machine.
 
 {% task 2 %}
-Great! But how would one look at a specific resource? Well, to check and see how you look in the world of Puppet type the following command :
+Great! But how would one look at a specific resource? Well, to check and see how you look in the world of Puppet, type the following command :
 
 	puppet resource user root
 		
@@ -123,7 +123,7 @@ Let's rectify Byte's password situation by setting it to *puppetlabs*. Type the 
 
 	passwd byte
 
-Now set the password to *puppetlabs* by typing it in and pressing Enter (Return) twice. You will not see anything displayed as you type the password.
+Now set the password to *puppetlabs* and pressing Enter (Return) twice. You will not see anything displayed as you type the password.
 		
 Now if you take another look at Byte using `puppet resource`, the value for Byte's password attribute should now be set to a SHA1 hash of his password, something a little like this: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
 
