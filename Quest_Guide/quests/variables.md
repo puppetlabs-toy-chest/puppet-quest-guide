@@ -32,7 +32,7 @@ Manifests contain instructions for automating tasks related to managing resource
 
 Puppet can be used to manage configurations on a variety of different operating systems and platforms. The ability to write portable code that accomodates various platforms is a significant advantage in using Puppet. It is important that you learn to write manifests in such a way that they can function in different contexts. Effective use of **variables** is one of the fundamental methods you will use to achieve this.
 
-If you have used variables before in some other programming or scripting language, the concept should be familiar. Variables allow you to assign data to a variable name in your manifest and then use that name to reference that data elsewhere in your manifest. In Puppet's syntax, variable names are prefixed with a `$` (dollar sign). You can assign data to a variable name with the `=` operator. You can also use variables as the value for any resource attribute, or as the title of a resource. In short, once you have defined a variable with a value you can use it anywhere you would have used the value or data.
+If you've used variables before in some other programming or scripting language, the concept should be familiar. Variables allow you to assign data to a variable name in your manifest and then use that name to reference that data elsewhere in your manifest. In Puppet's syntax, variable names are prefixed with a `$` (dollar sign). You can assign data to a variable name with the `=` operator. You can also use variables as the value for any resource attribute, or as the title of a resource. In short, once you have defined a variable with a value you can use it anywhere you would have used the value or data.
 
 {% warning %}
 Unlike resource declarations, variable assignments are parse-order dependent. This means that you must assign a variable in your manifest before you can use it.
@@ -75,7 +75,7 @@ file {'/root/pangrams/fox.txt':
 
 Now that we have a manifest, let's test it on the VM. 
 
-Remember to validate the syntax of the file, and to simulate the change using the `-noop` flag for the `puppet apply` command before you use `puppet apply` to make the required change on the system.
+Remember to validate the syntax of the file, and to simulate the change using the `-noop` flag  before you use `puppet apply` to make the required change on the system.
 
 Excellent! Take look at the file to see that the contents have been set as you intended:
 
