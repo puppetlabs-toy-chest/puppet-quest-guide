@@ -181,6 +181,11 @@
         color: #0095dd;
     }
 
+    div.img-wrapper {
+      display: block;
+      text-align: center;
+    }
+
     div.img-wrapper p{
         font-style: italic;
         margin-left: 10px;
@@ -191,6 +196,9 @@
         content: ' ' counter(image);
     }
 
+    p{
+        text-align: justify;
+    }
 }
 
 @media screen {
@@ -218,6 +226,7 @@
         max-width: 520px;
         height: auto;
         vertical-align: bottom;
+        text-align: center;
     }
         
     li {
@@ -564,6 +573,12 @@
             content: counter(page);
             font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
             font-size: 10pt;
+        }
+        @bottom-left {
+            content: "© 2014 Puppet Labs";
+            font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            font-size: 8pt;
+            font-style: italic;
         }
         @top {
             content: string(quest-title);

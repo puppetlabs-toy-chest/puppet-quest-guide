@@ -3,7 +3,7 @@ title: Puppet Module Tool
 layout: default
 ---
 
-# Puppet Module Tool
+# The Forge and the Puppet Module Tool
 
 ### Prerequisites
 
@@ -23,21 +23,26 @@ layout: default
 
 ## Getting Started
 
-In the previous Modules Quest we primarily learned about the structure of a module and how to create a module. Next we want to answer the questions: 
+In the previous Modules Quest we primarily learned about the structure of a module and how to create a module. Next we want to answer questions like: 
 
-- How do I use a module?
 - How do I install a module?
+- How do I use a module?
 - What about upgrading an existing module?
-- How can I do this all from the command line?
-- And so on...
+- How can I do this all this and more from the command line?
 
-The `puppet module` tool is one of the most important tools in expanding your use of Puppet. The `puppet module` tool allows you to create, install, search, (and so much more) for modules on the Forge. We'll discuss the Puppet Forge more in detail below, but the Puppet Forge is a repository of user-contributed Puppet code of expandable components to using Puppet.
+{% aside %}
 
-The `puppet module` tool also has subcommands that make finding, installing, and managing modules from the Forge much easier from the command line. It can also generate empty modules, and prepare locally developed modules for release on the Forge. When you're ready to take your Puppet knowledge to the next level, type the following command:
+To complete this quest, the Learning VM will need to be connected to the Internet.
 
-	quest --start puppet module tool
+{% endaside %}
+ 
+When you're ready to take your Puppet knowledge to the next level, type the following command:
 
-## Actions
+	quest --start forge
+
+The `puppet module` tool is one of the most important tools in expanding your use of Puppet. The `puppet module` tool allows you to create, install, search, (and so much more) for modules on the Forge. We'll also discuss the Puppet Forge more in detail below.
+
+The `puppet module` tool has subcommands that make finding, installing, and managing modules from the Forge much easier from the command line. It can also generate empty modules, and prepare locally developed modules for release on the Forge. ## Actions
 
 - `list` - List installed modules.
 - `search` - Search the Puppet Forge for a module.
@@ -50,38 +55,55 @@ The `puppet module` tool also has subcommands that make finding, installing, and
 
 
 {% task 1 %}
+
+List all the installed modules
+
 Let's see what modules are already installed on the Learning VM and where they're located. To do this, we want Puppet to show it to us in a tree format. Go ahead and type the following command: 
 
-	puppet module list -tree
+	puppet module list --tree
 
 {% task 2 %}
-Wow! you have a lot installed. That's great. But it seems like your missing the `puppetlabs-mysql` module. You should search the Forge for that module. To do so from the command line, type the following command:
+
+Search the forge for a module
+
+Wow! you have a lot installed. That's great. Let's install one more - the `puppetlabs-mysql` module. You should search the Forge for that module. To do so from the command line, type the following command:
 
 	puppet module search puppetlabs-mysql
 
-{% task 3 %}
-There's something on the Forge that exists! Let use it. Let's install `puppetlabs-mysql` module one version earlier than present. Run the following command:
+You can also search for just `mysql` to see all the modules that have `mysql` in their name or description. Modules on the Forge are always named as _authorname-modulename_. The `puppetlabs-mysql` module is a module authored and curated primarily by the puppetlabs organization.
 
-NOTE: normally I would have you install the latest version, but now I can show you how to update an existing module in the next step
+{% task 3 %}
+
+Install a module 
+
+There's something on the Forge that exists! Let use it. Let's install `puppetlabs-mysql` module. In fact, let us specify a specific version of the module. Run the following command:
 
 	puppet module install puppetlabs-mysql --version 2.2.2
 
+You will that the module is downloaded and installed. You will also see that in addition to the `puppetlabs-mysql` module, all the modules it depends on were also downloaded and installed.
+
+By default, modules are installed in the `modulepath`.
+
 {% task 4 %}
-Okay, now go ahead and upgrade earlier module version to present version
+
+Upgrade an installed module
+
+Okay, now let's go ahead and upgrade the mysql module to the latest version:
 
 	puppet module upgrade puppetlabs-mysql
 
-Please do not do this, but you can also uninstall a module by running the below command.
+Great, if you needed to uninstall a module, you can do so by running the following command:
 
 	puppet module uninstall puppetlabs-mysql
 
 ## The Puppet Forge
 
-The [Puppet Forge](http://forge.puppetlabs.com) is a public repository of modules written by members of the puppet community for Puppet Open Source and Puppet Enterprise. Modules available on the forge simplify the process of managing your systems. These modules will provide you with classes and new resource types to manage the various aspects of your infrastructure. This reduces your time from describing the classes using Puppet's DSL to using an existing description with the configuring the right options for you.
+The [Puppet Forge](http://forge.puppetlabs.com) is a public repository of modules written by members of the puppet community for Puppet. These modules will provide you with classes, new resource types, and other helpful tools such as functions, to manage the various aspects of your infrastructure. This reduces your task from describing the classes using Puppet's DSL to using existing descriptions witht the appropriate values for the parameters.
 
-If you would like to further inspect the `puppetlabs-mysql` module Puppet code, you're going to want to `cd` to the path then open the `init.pp` manifest.  
+If you would like to further inspect the `puppetlabs-mysql` module Puppet code, you need to want to `cd` to the path then open the `init.pp` manifest.  
 
-	cd /etc/puppetlabs/puppet/modules/mysql/manifests
+    cd /etc/puppetlabs/puppet/modules/mysql/manifests   
+    nano init.pp
 
 However, there is a much easier way to inspect this module by visiting the [page for the puppetlabs-mysql module on the Forge](http://forge.puppetlabs.com/puppetlabs/mysql).
 
@@ -91,5 +113,11 @@ The documentation on the page provides insight into how to use the provided clas
 
 It's as simple as that! So if we wanted our machine to have the `mysql` module installed on it, all we need to do is ensure that the above **class declaration** is in some manifest that applies it to our node.
 
+## Puppet Enterprise Supported Modules
+
+[Puppet Enterprise Supported Modules](https://forge.puppetlabs.com/supported) make it easy to ensure common services can be set up, configured and managed easily with Puppet Enterprise. These are modules that are tested with Puppet Enterprise, and officially supported under the umbrella of Puppet Enterprise support. They will be maintained, with bug and security patches as needed, and are vetted to work on multiple platforms. The list of modules is growing, and includes modules to manage, among others, NTP, Firewall, the Windows registry, APT, MySQL, Apache, and many others. Here's a [List of all supported modules at the Forge](https://forge.puppetlabs.com/modules?supported=yes).
+
 ## Review
+
+We familiarized ourselves with the Puppet Module tool, which allows to download and manage modules from the Puppet Forge. Once a module is installed, we have access to all the definitions and tools provided by the installed module. This allows us to accelerate the process of managing system configrations with Puppet, by providing us the ability to re-use the work of the Puppet community.
 

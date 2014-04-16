@@ -28,3 +28,10 @@
  - url: /quests/puppet_module_tool_quest.html
    title: Puppet Module Tool
    image_url: ../assets/LVM Forest Background White_4.svg
+ - url: /afterword.html
+   title: Afterword
+   image_url: ../assets/LVM Forest Background White_4.svg
+ - url: /glossary.html
+   title: Glossary
+   image_url: ../assets/LVM Forest Background White_4.svg
+
