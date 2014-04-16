@@ -25,7 +25,7 @@ Conditional statements allow you to write Puppet code that will return different
 
 To start this quest enter the following command:
 
-	quest --start conditions
+	quest --start conditionals
 
 ## Conditions
 
@@ -33,7 +33,7 @@ To start this quest enter the following command:
 
 > -Mickey Newbury
 
-Conditional statements let your Puppet code behave differently in different situations. They are most helpful when combined with facts or with data pertaining to the systems. For example, you can configure your Puppet manifests to perform as desired on a variety of operating systems and under differing system conditions. Pretty neat, don't you think?
+Conditional statements let your Puppet code behave differently in different situations. They are most helpful when combined with facts or with data pertaining to the systems. This enables you to write code to perform as desired on a variety of operating systems and under differing system conditions. Pretty neat, don't you think?
 
 Puppet supports a few different ways of implementing conditional logic:
  
@@ -74,34 +74,35 @@ The `warn()` function will not affect the execution of the rest of the manifest,
 {% endaside %}
 
 {% task 1 %}
-Just as we have done in the Variables Quest, let's create a manifest and add a simple conditional statement.
+Just as we have done in the Variables Quest, let's create a manifest and add a simple conditional statement. The file should report on how long the VM has been up and running.
 
 	nano ~/conditionals.pp
 
 Enter the following code into your `conditionals.pp` manifest:
 
 {% highlight puppet %}
-if $uptime_hours < 2 {
-  $uptime = 'Uptime is less than two hours.\n'
+
+if $::uptime_hours < 2 {
+  $myuptime = "Uptime is less than two hours.\n"
 }
-elsif $uptime_hours < 5 {
-  $uptime = 'Uptime is less than five hours.\n'
+elsif $::uptime_hours < 5 {
+  $myuptime = "Uptime is less than five hours.\n" 
 }
 else {
-  $uptime = 'Uptime is greater than four hours.\n'
+  $myuptime = "Uptime is greater than four hours.\n"
 }
 file {'/root/conditionals.txt':
   ensure  => present,
-  content => $uptime
+  content => $myuptime,
 }
+
 {% endhighlight %}
 
-{% task 2 %}
 Use the `puppet parser` tool to check your syntax, then simulate the change in `--noop` mode without enforcing it. If the noop looks good, enforce the `conditionals.pp` manifest using the `puppet apply` tool.
 
 Have a look at the `conditionals.txt` file using the `cat` command.
 
-{% task 3 %}
+{% task 2 %}
 Use the command `facter uptime_hours` to check the uptime yourself. The notice you saw when you applied your manifest should describe the uptime returned from the Facter tool.
 
 ## The 'unless' Statement
@@ -110,27 +111,27 @@ The `unless` statement works like a reversed `if` statement. An `unless` stateme
 
 ## The 'case' Statement
 
-Like `if` statements, case statements choose one of several blocks of arbitrary Puppet code to execute. Case statements take a control expression, a list of cases, and a series of Puppet code blocks that correspond to those cases. Puppet will execute the first block of code whose case value matches the control expression.
+Like `if` statements, case statements choose one of several blocks of Puppet code to execute. Case statements take a control expression, a list of cases, and a series of Puppet code blocks that correspond to those cases. Puppet will execute the first block of code whose case value matches the control expression.
 
 - Basic cases are compared with the `==` operator (which is case-insensitive).
 - Regular expression cases are compared with the `=~` operator (which is case-sensitive).
 - The special `default` case matches anything. It should always be included at the end of a case statement to catch anything that did not match an explicit case.
 
-{% task 4 %}
+{% task 3 %}
 Create a `case.pp` manifest with the following conditional statement and `file` resource declaration.
 
 {% highlight puppet %}
-case $operatingsystem {
-  'CentOS': { $apache = 'httpd' }
-  'Redhat': { $apache = 'httpd' }
-  'Debian': { $apache = 'apache2' }
-  'Ubuntu': { $apache = 'apache2' }
+case $::operatingsystem {
+  'CentOS': { $apache_pkg = 'httpd' }
+  'Redhat': { $apache_pkg = 'httpd' }
+  'Debian': { $apache_pkg = 'apache2' }
+  'Ubuntu': { $apache_pkg = 'apache2' }
   default: { fail("Unrecognized operating system for webserver") }
 }
 
 file {'/root/case.txt':
   ensure  => present,
-  content => "Apache package name: ${apache}\n"
+  content => "Apache package name: ${apache_pkg}\n"
 }
 {% endhighlight %}
 
@@ -143,19 +144,20 @@ Use the `cat` command to inspect the `case.txt` file. Because the Learning VM is
 For the sake of simplicity, we've output the result of the case statement to a file, but keep in mind that in an actual practice, instead of using the result of the case statement like the one above to define the contents of a file, you could use it directly in a `package` resource declaration like the following:
 
 {% highlight puppet %}
-package {'apache':
-  name   => $apache,
-  ensure => latest,
+package { $apache_pkg :
+  ensure => present,
 }
 {% endhighlight %}
 
 This would allow you to always install and manage the right Apache package for a machine's operating system. This  kind of careful accounting for different the conditions under which a manifest might run is an important part of writing flexible and re-usable Puppet code. It is a paradigm you will encounter frequently in published Puppet modules.
 
+Also note that Puppet will choose the appropriate _provider_ for the package depending on the operating system, without you have to mention it. On Debian-based systems, for example, it may use `apt` and on RedHat systems, it will use `yum`.
+
 ## The 'selector' Statement
-Selector statements are very similar to `case` statements, but instead of executing a block of code, a case statement assigns a value directly. A selector might look something like this:
+Selector statements are very similar to `case` statements, but instead of executing a block of code, a selector assigns a value directly. A selector might look something like this:
 
 {% highlight puppet %}
-$rootgroup = $osfamily ? {
+$rootgroup = $::osfamily ? {
   'Solaris'  => 'wheel',
   'Darwin'   => 'wheel',
   'FreeBSD'  => 'wheel',
@@ -163,12 +165,39 @@ $rootgroup = $osfamily ? {
 }
 {% endhighlight %}
 
-Here, the value of the `$rootgroup` is determined based on the control variable `$osfamily`. Following the control variable is a `?` (question mark) keyword. In the block surrounded by curly braces are series of cases, followed by the value that the selector should return if that case matches the control variable.
+Here, the value of the `$rootgroup` is determined based on the control variable `$osfamily`. Following the control variable is a `?` (question mark) keyword. In the block surrounded by curly braces are series of possible values for the $::osfamily fact, followed by the value that the selector should return if the value matches the control variable.
 
 Because a selector can only return a value and cannot execute a function like `fail()` or `warn()`, it is up to you to make sure your code handles unexpected conditions gracefully. You wouldn't want Puppet to forge ahead with with an inappropriate default value and encounter errors down the line.
 
+{% task 4 %}
+By writing a Puppet manifest that uses a selector, create a file `/root/architecture.txt` that lists whether the VM is a 64-bit or a 32-bit machine.
+
+To accomplish this, create a file in the root directory, called `architecture.pp`:
+
+    nano architecture.pp
+
+We know that i386 machines have a 32-bit architecture, and x86_64 machines have a 64-bit architecture. Let's set the content of the file based on this fact:
+
+{% highlight puppet %}
+file { '/root/architecture.txt' :
+  ensure => file,
+  content => $::architecture ? {
+    'i386' => "This machine has a 32-bit architecture.\n",
+    'x86_64' => "This machine has a 64-bit architecture.\n",
+  }
+}
+{% endhighlight %}
+
+See what we did here? Instead of having the selector return a value and saving it in a variable, as we did in the previous example with `$rootgroup`, we use it to specify the value of the `content` attribute in-line.
+
+Once you have created the manifest, check the syntax and apply it.
+
+Inspect the contents of the `/root/architecture.txt` file to ensure that the content is what you expect.
+
+
 ## Before you move on
 
-We have discussed some intense information in the Variables Quest and this Quest. The information contained in all the quests to this point have guided you in creating flexible and scalable manifests for your infrastructure. Should you not understand any of the topics previously discussed, we highly encourage you to revisit those quests before moving on to the Resource Ordering Quest. The Resource Ordering Quest will be the final scalable concept for manifests as it adds another layer of customized functions to your manifest.
+We have discussed some intense information in the Variables Quest and this Quest. The information contained in all the quests to this point have guided you in creating flexible manifests. Should you not understand any of the topics previously discussed, we highly encourage you to revisit those quests before moving on to the Resource Ordering Quest.
+
 
 
