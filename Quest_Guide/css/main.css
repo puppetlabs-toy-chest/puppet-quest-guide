@@ -574,6 +574,12 @@
             font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
             font-size: 10pt;
         }
+        @bottom-left {
+            content: "© 2014 Puppet Labs";
+            font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            font-size: 8pt;
+            font-style: italic;
+        }
         @top {
             content: string(quest-title);
             font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
