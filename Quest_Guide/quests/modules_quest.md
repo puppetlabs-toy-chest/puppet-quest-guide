@@ -17,21 +17,29 @@ layout: default
 - Classes Quest
 
 ## Quest Objectives
- - Understand the purpose of Puppet modules.
- - Familiarize yourself with the basic structure of modules.
- - Write and test a simple manifest within a module structure.
+ - Understand the purpose of Puppet modules
+ - Learn the basic structure and layout of modules
+ - Write and test a simple module
  
 ## Getting Started
 
-So far we've seen some simple examples of Puppet code, but what makes Puppet such an adaptable tool? When it comes to getting things done, it's all about the **module**. A Puppet module is a collection of resources, definitions, files, and templates organized around a particular purpose. Everything we have learned until this point and more can come together as part of a module. When you're ready, type the following command:
+So far we've seen some simple examples of Puppet code, but what makes Puppet such an adaptable tool? When it comes to getting things done, it's all about the **module**. A Puppet module is a self-contained bundle of code and data, organized around a particular purpose. The code would encompass manifests, the data would include all the source files, templates etc that you need to accomplish the purpose of the module. Everything we have learned until this point and more can come together as part of a module. When you're ready, type the following command:
 
 	quest --start modules
 
 ## What's a Module?
 
-If *resources* and *classes* are the atoms and molecules of Puppet, we might consider *modules* our amoebas: the first self-contained organisms of the Puppet world. Until now, we've been writing one-off manifests to demonstrate individual Puppet topics, but in actual practice, every manifest should be contained within a module. The only exception, which we will address in more detail below, is the main `site.pp` module, which contains site-wide and node-specific code.
+If *resources* and *classes* are the atoms and molecules of Puppet, we might consider *modules* our amoebas: the first self-contained organisms of the Puppet world. Until now, we've been writing one-off manifests to demonstrate individual Puppet topics, but in actual practice, every manifest should be contained within a module. 
 
-A huge convenience of using Puppet is that thousands of modules are already freely available via the Puppet Forge (and Forge content is constantly being added and improved).
+Thus far, in order to gain insight into Puppet's language features and syntax, we have been writing one-off manifests, perhaps using a source file for the contents of some configuration file (as we did for the SSH daemon configuration) etc. We have to remember, however that Puppet is designed to help you manage _lots_ of systems (not just one system) from a central point - the master. 
+
+Although it is possible to list all the resources (users, files, package, services, cron tasks etc) that you need to manage on a system in one huge manifest, and then apply that manifest on the system, this is not scalable. Neither is it composable, or flexible enough to be reused. Classes were our first stop on the path to learning how to create 'blocks' - building blocks that we can use to describe the configuration of the systems we seek to manage.
+
+There is still a missing part of the puzzle. When you ask Puppet to, say, `include ssh` on a particular node, or, as we did in the Power of Puppet quest, _classify_ a node (learn.localdomain) with a class (lvmguide), how does Puppet know _where_ to find the definition for the class, in order to ensure that the specified configuration is realized?
+
+The answer is, we agree to put the class definitions in a standard location on the file system, by placing the manifest containing the class definition in a specific directory in a module.
+
+Simple put, a Module is a directory with a specific structure - a means for us to package everything needed to achieve a certain goal. Once we agree to stick to this standard way of doing this, a significant benefit is the ability to _share_ our work, such that others who seek to achieve the same goal can re-use our work. The Forge is the central location where you can find modules that have been developed by others.
 
 In our initial Quest, we were able to use an Apache module from the Forge. This let us easily install and configure an Apache webserver to host the website version of this Quest Guide. The vast majority of the necessary code had already been written, tested, documented, and published to the Puppet Forge.
 
@@ -42,6 +50,9 @@ Modules provide a structure to make these collections of pre-written Puppet code
 All modules are located in a directory specified by the *modulepath* variable in Puppet's configuration file. On the Learning VM, Puppet's configuration file can be found at `/etc/puppetlabs/puppet/puppet.conf`.
 
 {% task 1 %}
+
+Find the modulepath on the Learning VM.
+
 If you're ever wondering where your modulepath is, you can find it by running the `puppet agent` command with the `--configprint` flag and specifying `modulepath`:
 
     puppet agent --configprint modulepath
@@ -50,13 +61,13 @@ What the returned value tells us is that Puppet will look in the directories `/e
 
 ## Module Structure
 
-The skeleton of a module is a pre-defined structure of directories that Puppet already knows how to traverse to find the module's manifests, templates, configuration files, plugins, and anything else necessary for the module to function.
+The skeleton of a module is a pre-defined structure of directories that Puppet already knows how to traverse to find the module's manifests, templates, configuration files, plugins, and anything else necessary for the module to function. Of these, we have encountered manifests and files that serve as the source for configuration files. We will learn about the rest in due course.
 
-Remember, our *modulepath* is `/etc/puppetlabs/puppet/modules`. Use the `ls` command to see what's in that directory:
+Remember, `/etc/puppetlabs/puppet/modules` is in our modulepath. Use the `ls` command to see what's in that directory:
 
 	ls /etc/puppetlabs/puppet/modules
 	
-There's the `apache` module we installed before. Use the `tree` command to take a look at the basic directory structure of the module. (To get a nice picture, we can use a few flags with the tree command to limit our output to directories, and limit the depth to two directories.)
+There's the `apache` module we installed before, as also the `lvmguide` module that is use to set up the quest guide website. Use the `tree` command to take a look at the basic directory structure of the module. (To get a nice picture, we can use a few flags with the tree command to limit our output to directories, and limit the depth to two directories.)
 
 	tree -L 2 -d /etc/puppetlabs/puppet/modules/
 	
@@ -71,23 +82,26 @@ You should see a list of directories, like so:
     	├── templates
     	└── tests
 
+Once you get down past this basic directory structure, however, the `apache` module begins to look quite complex. To keep things simple, we can create our own first module to work with.
+
 {% task 2 %}
-Once you get down past this basic directory structure, however, the `apache` module begins to look quite complex. To keep things simple, we can create our own bare-bones module to work with.
 
 First, be sure to change your working directory to the modulepath. We need our module to be in this directory if we want Puppet to be able to find it.
 
-	cd /etc/puppetlabs/puppet/modules
+	  cd /etc/puppetlabs/puppet/modules
 	
 You have created some users in the *Resources* and *Manifests* quests, so this resource type should be fairly familiar. Let's make a `users` module that will help us manage users on the Learning VM.
 
 The top directory of any module will always be the name of that module. Use the `mkdir` command to create your module directory:
 
-	mkdir users
+	  mkdir users
 
 {% task 3 %}
 Now we need two more directories, one for our manifests, which must be called `manifests`, and one for our tests, which must be called (you guessed it!) `tests`. As you will see shortly, tests allow you to easily apply and test classes defined in your module without having to deal with higher level configuration tasks like node classification.
 
 Go ahead and use the `mkdir` command to create `users/manifests` and `users/tests` directories within your new module.
+
+    mkdir users/{manifests,tests}
 
 If you use the `tree users` command to take a look at your new module, you should now see a structure like this:
 
@@ -98,11 +112,16 @@ If you use the `tree users` command to take a look at your new module, you shoul
 	2 directories, 0 files
 
 {% task 4 %}
-The manifests directory can contain any number of the `.pp` manifest files that form the bread-and-butter of your module. Whatever other manifests it contains, however, it must always contain an `init.pp` manifest. The `init.pp` manifest defines the module's main class, which must have same name as the module itself, in this case, `users`.
+
+Create a manifest defining class users:
+
+The manifests directory can contain any number of the `.pp` manifest files that form the bread-and-butter of your module. Whatever other manifests it contains, however, the `init.pp` manifest defines the module's main class, which must have same name as the module itself, in this case, `users`.
 
 Go ahead and create the `init.pp` manifest in the `users/manifests` directory. (We're assuming you're still working from the `/etc/puppetlabs/puppet/modules`. The full path would be `/etc/puppetlabs/puppet/modules/users/manifests.init.pp`)
 
-Write a simple `users` class with a `user` resource declaration:
+    nano users/manifests/init.pp
+
+Now in that file, add the following code:
 
 {% highlight puppet %}
 class users {
@@ -112,7 +131,11 @@ class users {
 }
 {% endhighlight %}
 
-Use the `puppet parser` tool to validate your manifest.
+We have defined a class with just the one resource in it. A resource of type `user` with title `alice`.
+
+Use the `puppet parser` tool to validate your manifest:
+
+    puppet parser validate users/manifests/init.pp
 
 For now, we're not going to apply anything. This manifest *defines* the `users` class, but so far, we haven't *declared* it. That is, we've described what the `users` class is, but we haven't told Puppet to actually do anything with it.
 
@@ -122,10 +145,15 @@ Remember when we talked about *declaring* classes in the Classes Quest? We said 
 
 The `include` function declares a class, if it hasn’t already been declared somewhere else. If a class has already been declared, `include` will notice that and do nothing.
 
-This lets you safely declare a class in several places. If some class depends on something in another class, it can declare that class without worrying whether it’s also being declared in `site.pp`.
+This lets you safely declare a class in several places. If some class depends on something in another class, it can declare that class without worrying whether it’s also being declared elsewhere. 
 
 {% task 5 %}
+
+Write a test for our new class:
+
 In order to test our `users` class, we will create a new manifest in the `tests` directory that declares it. Create a manifest called `init.pp`  in the `users/tests` directory.
+
+    nano users/tests/init.pp
 
 All we're going to do here is *declare* our `users` class with the `include` directive.
 
@@ -133,14 +161,27 @@ All we're going to do here is *declare* our `users` class with the `include` dir
 include users
 {% endhighlight %}
 
-Run a `--noop`. If everything looks good, apply the `users/tests/init.pp` manifest to test your `users` class.
+Try applying the new manifest with the `--noop` flag first. If everything looks good, apply the `users/tests/init.pp` manifest without the `--noop` flag to take your `users` class for a test drive, and see how it works out when applied.
 
 Use the `puppet resource` tool to see if `user alice` has been successfully created.
 
-So What happened here? Even though the `users` class was in a different manifest, we were able to *declare* our test manifest. Because our module is in Puppet's *modulepath*, Puppet was able to find the correct class any apply it.
+So What happened here? Even though the `users` class was in a different manifest, we were able to *declare* our test manifest. Because our module is in Puppet's *modulepath*, Puppet was able to find the correct class and apply it.
 
 #### You just created your first Puppet module!! 
 
+## Classification
+
+When you use a *Node Classifier*, such as the Puppet Enterprise Console, you can *classify* nodes - which is to say that you can state which classes apply to which nodes, using the node classifier. This is exactly what we did when we use the PE Console to classify our Learning VM node with the `lvmguide` class in the Power of Puppet quest. In order to be able to classify a node thus, you *must* ensure all of the following:  
+
+1. There is a module (a directory) with the same name as the class in the modulepath on the Puppet master
+2. The module has a file called `init.pp` in the `manifests` directory contained within it
+3. This `init.pp` file contains the definition of the class
+
+Once you starting writing and using modules, you can start creating composable configurations for systems. For example, let's say that you have a module called 'ssh' which provides class ssh, another called 'apache' and a third called 'mysql'. Using these three modules, and the classes provided by them, you can now classify a node to be configured with any combination of the three classes. You can have a server that has mysql and ssh managed on it (a database server), another with apache and ssh managed on it (a webserver), and a server with only ssh configured on it. The possibilities are endless. With well-written, community-vetted, even Puppet Supported Modules from the Forge, you can be off composing and managing configuration for your systems in no time. You can also write your _own_ modules that use classes from these Forge modules, as we did with the `lvmguide` class, and resuse them too.
+
 ## Review
-1.  Puppet's DSL, by virtue of its __declarative__ nature, makes it possible for us to define the attributes of the resources, without the need to concern ourselves with _how_ the definition is enforced. Puppet uses the Resource Abstraction Layer to abstract away the complexity surrounding the specific commands to be executed, and the operating system-specific tools used to realize our definition! You did not need to know or specify the command to create a new unix user group to create the group `staff`, for example.
-2. By creating a class called users, it is now possible for us to automate the process of creating the users we need on any system with Puppet installed on it, by simply including that class on that system. Class definitions are reusable!
+
+1. We identified what the features of a Puppet Module are, and understood how it is useful
+2. We wrote our first module!
+3. We learned how modules (and the classes within them) can be used to create composable configurations by using a node classifier such as the PE Console.
+ 
