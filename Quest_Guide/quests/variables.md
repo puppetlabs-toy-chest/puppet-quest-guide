@@ -161,7 +161,7 @@ In the Conditions Quest, you will see how Puppet manifests can be designed to pe
 {% task 3 %}
 We will write a manifest that will interpolate facter variables into a string assigned to the `$message` variable. We can then use a `notify` resource to post a notification when the manifest is applied. We will also declare a file resource. We can use the same `$string` to assign our interpolated string to this file's content parameter.
 
-Create a new manifest in your text editor.
+Create a new manifest with your text editor.
 		
 	nano ~/facts.pp
 
@@ -182,19 +182,19 @@ file { '/root/message.txt':
 }
 {% endhighlight %}
 
-Once you have create the facts.pp file, enforce it using the appropriate `puppet apply` command, but not before you verify that the syntax is correct and have tried simulating it first. Refer to the Manifests quest if you need to refresh you memory on how to apply a manifest.
+Once you have created the facts.pp file, enforce it using the appropriate `puppet apply` command, but not before you verify that the syntax is correct and have tried simulating it first. Refer to the Manifests quest if you need to refresh you memory on how to apply a manifest.
 
 You should see your message displayed along with Puppet's other notifications. You can also use the `cat` command or a text editor to have a look at the `message.txt` file with the same content.
 
-	cat /root/facts/message.txt
+	cat /root/message.txt
 
-As you can see, by incorporating variables, variable interpolations, and facts into your manifest can bring a higher level function and purpose to completing automation tasks. In the next quest we will discuss conditional statements that will provide for greater flexibility in using Puppet.
+As you can see, by incorporating facts and variables, and by using variable interpolation, you can add more functionality with more compact code. In the next quest we will discuss conditional statements that will provide for greater flexibility in using Puppet.
 
 ## Review
 
-In this quest you've learned how to take your Puppet manifests to the next level. There are even more levels to come, but this is a good start. We learned that **variables** allow you to assign data to a variable name in your manifest and then use that name to reference that data elsewhere in your manifest. While interpolation give you the ability to insert a variable into a string.  Likewise you can turn facts into variables in your manifest allowing you to discover information about your system.
+In this quest you've learned how to take your Puppet manifests to the next level by using variables. There are even more levels to come, but this is a good start. We learned how to assign a value to a variable and then reference the variable by name whenever we need its content. We also learned how to interpolate variables, and how Facter facts are global variables available for you to use.
 
-In addition to learning more about variables, interpolating variables, and facts, you also gained more hands-on learning with constructing Puppet manifests using Puppet's DSL. We hope you are becoming more familar and confident with using and writing Puppet code as you are progressing.
+In addition to learning about variables, interpolating variables, and facts, you also gained more hands-on learning with constructing Puppet manifests using Puppet's DSL. We hope you are becoming more familar and confident with using and writing Puppet code as you are progressing.
 
 Looking back to the Power of Puppet Quest, can you identify where and how variables are used in the `lvmguide` class?
 
