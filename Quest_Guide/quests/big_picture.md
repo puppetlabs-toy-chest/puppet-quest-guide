@@ -16,17 +16,17 @@ layout: default
 
 ## Getting Started
 
-In this quest you will be introduced to the power of Puppet using the Puppet Enterprise (PE) Console and the Puppet Forge. The objective of this quest is to set up a functional website locally that will serve you the entire Quest Guide, as an alternative to the PDF version. Don't worry though, both the website and PDF have the same content and will help guide you on your journey to learn Puppet. 
+In this quest you will be introduced to the power of Puppet using the Puppet Enterprise (PE) Console and the Puppet Forge. The objective of this quest is to set up a functional website locally that will serve you the entire Quest Guide as an alternative to the PDF version. Don't worry though, both the website and PDF have the same content and will help guide you on your journey to learn Puppet. 
 
-We are not going to be writing any code in this quest to accomplish the objectives. Instead, we will be using a module from the Forge, as well as another that has been written for you on the Learning VM. This will serve as an example of _how_ you can _use_ the code that you will learn to write in the succeeding sections. We hope this gives you a high-level overview of what it is like to use Puppet Enterprise to manage systems, while leveraging code developed by the community that is shared on the Forge. Some of the technical terms in this quest may not be familiar, but we promise we will explain all of it by the end of the guide!
+We are not going to be writing any code in this quest to accomplish the objectives. Instead, we will be using a module from the Forge, as well as another that has been written for you on the Learning VM. This will serve as an example of how you can use the code that you will learn to write in the succeeding sections. We hope this gives you a high-level overview of what it is like to use Puppet Enterprise to manage systems, while leveraging code developed by the community that is shared on the Forge. Some of the technical terms in this quest may not be familiar, but we promise we will explain all of it by the end of the guide!
 
-Are you intrigued as to how this looks? When you're ready to get started, type the following command:
+When you're ready to get started, type the following command:
 
     quest --start power 
 
 ## The Puppet Forge
 
-The [Puppet Forge](http://forge.puppetlabs.com) is a public repository of modules written by members of the Puppet community. We can leverage the content from the Forge to simplify the process of managing your systems. This is just a general description of the Forge, which will suffice for now. We will go into greater detail about the Forge in the Puppet Module Tool Quest.
+The [Puppet Forge](http://forge.puppetlabs.com) is a public repository of modules written by members of the Puppet community. We can leverage the content from the Forge to simplify the process of managing your systems. We will go into greater detail about the Forge in the Puppet Module Tool Quest.
 
 But what is a Module, you ask? Simply put, a module is a self-contained bundle of code and data. We will learn about Modules in greater detail in the Module Quest.
 
@@ -38,7 +38,7 @@ Remember how we indicated in the Welcome Quest that Puppet Enterprise comes with
 
 Install the puppetlabs-apache module.
 
-For us to get started with setting up our Quest Guide website, we need to download and install the [apache module](http://forge.puppetlabs.com/puppetlabs/apache) from the Forge. In your terminal type the following command:
+For us to get started with setting up our Quest Guide website, we need to download and install the [apache module](http://forge.puppetlabs.com/puppetlabs/apache) from the Forge. In your terminal, type the following command:
 
 	puppet module install puppetlabs-apache
 
@@ -58,7 +58,7 @@ Great job! You've just installed your first module from the Forge. Pretty easy d
 
 ### The lvmguide and apache modules
 
-The `lvmguide` module includes a *Class* of the same name, which configures the Learning VM to act as a webserver serving the Quest Guide as an html website. A Class is a named block of Puppet code. 
+The `lvmguide` module includes a *class* of the same name, which configures the Learning VM to act as a webserver serving the Quest Guide as a static html website. If you're wondering what a class is, it is a named block of Puppet code.
 
 It does this by using the `apache` module you just installed to:
 
@@ -88,14 +88,14 @@ The PE Console is Puppet Enterprise’s web-based Graphical User Interface (GUI)
 
 For this quest, we will use the PE Console to classify the VM with the `lvmguide` class.
 
-## The Facter Tool
+### The Facter Tool
 
-Puppet Enterprise is often used in concert with other tools to help you administer your systems. Just as the quest tool can provide you feedback on your learning progress, you can use the Facter tool to help you obtain facts about your system. Facter is Puppet’s cross-platform system profiling library. It discovers and reports per-node facts, which are available in your Puppet manifests as variables. 
+Puppet Enterprise is often used in concert with other tools to help you administer your systems. Facter is one such tool. You can use the Facter tool to help you obtain facts about your system. Facter is Puppet’s cross-platform system profiling library. It discovers and reports per-node facts, which are available in your Puppet manifests as variables. 
 
 Facter is used and described in later quests, but the sooner you get familar with Facter, the better.  Go ahead and get to know your system a little better using the `facter` command.
 
 {% tip %}
-Facter is one of the many prepackaged tools that **Puppet Enterprise** ships with.
+Facter is one of the many prepackaged tools that Puppet Enterprise ships with.
 {% endtip %}
 
 {% task 2 %}
@@ -175,7 +175,7 @@ Now that the `lvmguide` is available in the PE Console, let's classify the node 
 
 {% aside Editing Class parameters %}
 
-If you click on *Edit Parameters* for the lvmguide class you can see the defaults. *There is nothing for you to do here for now,* but it's good to notice it so you will know where to look if you need to edit the parameters for a class in the future.
+If you click on *Edit Parameters* for the lvmguide class you can see the defaults. There is nothing for you to do here for now, but it's good to notice it so you will know where to look if you need to edit the parameters for a class in the future.
 {% endaside %}
 
 **STEP #5:** Click the "Update" button at the bottom.
@@ -186,28 +186,28 @@ Excellent! We just finished classifying the `learn.localdomain` node with the `l
 
 ## Let's Run Puppet
 
-Now that we have classified the `learn.localdomain` node with the `lvmguide` class, we need to tell puppet to configure the machine appropriately. The Puppet `agent` daemon does this by default by running in the background on any nodes you manage with Puppet. Every 30 minutes, the Puppet agent daemon requests a *catalog* from the Puppet Master, and applies the retrived catalog. Since we want to see the configuration changes (as specified in the `lvmguide` class) applied immediately, we can ask the agent to fetch and enforce the definition for the “learn.localdomain” node.
+Now that we have classified the `learn.localdomain` node with the `lvmguide` class, we need to tell puppet to configure the machine appropriately. The Puppet `agent` daemon does this by default by running in the background on any nodes you manage with Puppet. Every 30 minutes, the Puppet agent daemon requests a *catalog* from the Puppet Master, and applies the retrieved catalog. Since we want to see the configuration changes (as specified in the `lvmguide` class) applied immediately, we can ask the agent to fetch and enforce the definition for the “learn.localdomain” node.
 
 {% task 3 %}
 
+Apply the configuration changes.
+
 Run puppet agent:
 
-To fetch and apply the catalog we will manually trigger a Puppet run. Puppet will check the classification you set in the PE Console and automatically run through all the steps needed to implement the `lvmguide` class. In your terminal type the following command:
+To fetch and apply the catalog we will manually trigger a Puppet run. Puppet will check the classification you set in the PE Console and automatically run through all the steps needed to implement the `lvmguide` class. In your terminal, type the following command:
 
 	puppet agent --test
 
-After a brief delay, you will see text scroll by in your terminal indicating that some changes were made to the configuration of the VM, and the website was set up. **Please note this may take about a minute to run.** This is about the time it takes for the software packages to be downloaded and installed as needed.
-
-{% task 4 %}
+After a brief delay, you will see text scroll by in your terminal indicating that some changes were made to the configuration of the VM and the website was set up. **Please note this may take about a minute to run.** This is about the time it takes for the software packages to be downloaded and installed as needed.
 
 Ensure the website serving the Quest Guide is running!
 
-There are no commands to run for this. All the heavy lifting was done by the lvmguide and apache modules you installed.
+There are no commands to run to make this happen - no packages to install, no files to edit, and no services to start. All the heavy lifting was done by the lvmguide and apache modules you installed.
 
-Let's check out the Quest Guide! In your browsers address bar, type the following URL: **http://<ip-address>**.
+Let's check out the Quest Guide! In your browsers address bar, type the following URL: `http://<ip-address>`.
 
 {% aside %}
-Note that "http**s**://<ip-address>" will load the PE Console, while "http://<ip-address>" will load the Quest Guide as a website.
+Note that `https://<ip-address>` will load the PE Console, while `http://<ip-address>` will load the Quest Guide as a website.
 {% endaside %}
 
 The website for the quest guide will remain accessible for as long as the VM's IP address remains the same. If you were to move your computer or laptop to a different network, or if you suspended your laptop and resumed work on the Learning VM after a while, the website may not be accessible. You still have the PDF to follow along with. 
@@ -267,9 +267,9 @@ class lvmguide (
 
 In the above code sample, we see that the `class lvmguide`:
 
-1. Takes two parameters: $document_root and $port
-2. Declares the class apache with the default_vhost parameter set to false. That's the equivalent of saying "I need apache to be setup without the default VirtualHost."
-3. Declares an apache::vhost for the quest guide with the title "learning.puppetlabs.vm", and with $port and $docroot set to the default values. Now this is the same as saying "Please set up a VirtualHost website running on port 80, serving the "learning.puppetlabs.vm" website with the files from the /var/www/html/lvmguide' directory
+1. Takes two parameters: `$document_root` and `$port`
+2. Declares the class `apache` with the `default_vhost` parameter set to `false`. That's the equivalent of saying "I need apache to be setup without the default VirtualHost."
+3. Declares an `apache::vhost` for the quest guide with the title `learning.puppetlabs.vm`, and with `$port` and `$docroot` set to the class parameters. Now this is the same as saying "Please set up a VirtualHost website running on port 80, serving the "learning.puppetlabs.vm" website with the files from the /var/www/html/lvmguide' directory
 4. Sets the document root to `/var/www/html/lvmguide` (which is the default value for the $document_root parameter
 5. Finally, the class ensures that the directory `/var/www/html/lvmguide` exists and that its contents are managed recursively. We notice that the source for the contents of that directory is also specified  
 

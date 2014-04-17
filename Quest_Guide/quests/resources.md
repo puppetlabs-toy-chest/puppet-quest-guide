@@ -29,7 +29,7 @@ Resources are the fundamental units for modeling system configurations. Each res
 
 ### Puppet's Domain Specific Language
 
-Puppet uses its own configuration language, one that was designed to be accessible to sysadmins and does not require much formal programming experience. The code you see below is an example of what we're referring to. Since it is a **declarative** language, the definitions of resources can be considered as *models* of the state of resources.
+Puppet uses its own configuration language, one that was designed to be accessible and does not require much formal programming experience. The code you see below is an example of what we're referring to. Since it is a **declarative** language, the definitions of resources can be considered as *models* of the state of resources.
 
 {% highlight puppet %}
 type {'title':
@@ -41,7 +41,7 @@ type {'title':
 Though a comma isn't strictly necessary at the end of the final attribute value pair, it is best practice to include it for the sake of consistency.
 {% endaside %}
 
-The first step in mastering Puppet is to learn about the world around you. You will also realize everything in this Learning VM is a collection of **resources**. You will not be using resource declarations to shape your environment just yet. Instead, you will exercise your power by hand and use Puppet only to inspect your actions using the `puppet resource` and `puppet describe` tools.
+You will not be using resource declarations to shape your environment just yet. Instead, you will exercise your power by hand and use Puppet only to inspect your actions using the `puppet resource` and `puppet describe` tools.
 
 ## Anatomy of a Resource
 
@@ -59,7 +59,7 @@ Great! But how would one look at a specific resource? Well, to check and see how
 
 	puppet resource user root
 		
-To Puppet, you look like this. The block of code below describes you is called a **resource declaration**. It's a little abstract, but a nice portrait, don't you think?
+The block of code below that describes you as the root user is called a **resource declaration**. It's a little abstract, but a nice portrait, don't you think?
 
 {% highlight puppet %}
 user { 'root':
@@ -102,6 +102,10 @@ If you are curious to learn about all of the different built-in resources types 
 
 Again, let's take a look at your first line in the above resource declaration. Do you see the single quoted word `'root'`? It's right _after_ the curly brace. This is called the **title**. The title of a resource is used to identify it and **must** be unique. No two resources of the same type can share the same title. Also, don't forget to always add a colon (:) after the title. That's important to remember and often overlooked!
 
+### Attribute Value Pairs
+
+One more time. Let's look at the resource declaration for user `root` listed above. After the colon (:) comes a list of **attributes** and their corresponding **values**. Each line consists of an attribute name, a `=>` (which we call a hash rocket), a value, and a final comma. For example, the attribute value pair `home => '/root',` indicates that your home is set to the directory `/root`.
+	
 {% task 3 %}
 The path to greatness is a lonely one. Fortunately, your superuser status gives you the ability to create a sidekick for yourself. First let's do this in a non-Puppet way. Type the following command:
 
@@ -114,10 +118,6 @@ Now take a look at Byte using the `puppet resource` tool. Type the following com
             
 Potent stuff. Note that Byte's password attribute is set to `'!!'`. This isn't a proper password at all! In fact, it's a special value indicating Byte has no password whatsoever.
 
-### Attribute Value Pairs
-
-One more time. Let's look at the resource declaration for user `root` listed above. After the colon (:) comes a list of **attributes** and their corresponding **values**. Each line consists of an attribute name, a `=>` (which we call a hash rocket), a value, and a final comma. For example, the attribute value pair `home => '/root',` indicates that your home is set to the directory `/root`.
-	
 {% task 5 %}
 Let's rectify Byte's password situation by setting it to *puppetlabs*. Type the following command:
 
@@ -125,19 +125,19 @@ Let's rectify Byte's password situation by setting it to *puppetlabs*. Type the 
 
 Now set the password to *puppetlabs* and pressing Enter (Return) twice. You will not see anything displayed as you type the password.
 		
-Now if you take another look at Byte using `puppet resource`, the value for Byte's password attribute should now be set to a SHA1 hash of his password, something a little like this: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
+Now if you take another look at Byte using `puppet resource`, the value for Byte's password attribute should now be set to a SHA1 hash of the password, something a little like this: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
 
 {% task 6 %}
-Now have a look at Byte's home directory, which was set to `'/home/byte'` by default. Directories are a special kind of file, and so Puppet would know of them as File resources. Byte's home is a directory is really just a special kind of file resource type. The `title` of any file is, by default, the same as the path to that file. Let's find out more about the `tools` directory where our sidekick can store his tools. Enter the command:
+Now have a look at Byte's home directory, which was set to `'/home/byte'` by default. Directories are a special kind of file, and so Puppet knows of them as File resources. The `title` of any file is, by default, the same as the path to that file. Let's find out more about the `tools` directory where our sidekick can store tools. Enter the command:
 
 	puppet resource file /home/byte/tools
 		
 {% task 7 %}
-What? `ensure => 'absent',`? Values of the `ensure` attribute indicate the basic state of a resource. A value of absent means something doesn't exist at all. We need to make a directory for Byte to store his tool in:
+What? `ensure => 'absent',`? Values of the `ensure` attribute indicate the basic state of a resource. A value of absent means something doesn't exist at all. We need to make a directory for Byte to store tools in:
 
 	mkdir /home/byte/tools
 		
-Now have another look at Byte's home directory:
+Now have another look at Byte's tools directory:
 
 	puppet resource file /home/byte/tools
 
@@ -150,7 +150,7 @@ This shows your progress by displaying the tasks you've completed and tasks that
 {% endaside %}
 
 {% task 8 %}
-We want Byte to be the owner of his own tools. To do this, type the following commands:
+We want Byte to be the owner of the tools directory. To do this, type the following commands:
  
 	chown -R byte:byte /home/byte/tools
 
