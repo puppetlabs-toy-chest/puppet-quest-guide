@@ -97,12 +97,11 @@ Since the simulated change is what we want, let's enforce the change on the Lear
 
 	puppet apply byte.pp
 
-{% task 5 %}
 How is byte doing?
 
 	HINT: Use the puppet resource command discussed in the Resource Quest.
 		
-byte does not seem to be doing well. Actually, he's gone. The `ensure => 'absent'` value clearly made short work of the user account.
+byte does not seem to be doing well. Actually, the user's gone. The `ensure => 'absent'` value clearly made short work of the user account.
 
 {% task 6 %}
 With Puppet manifests you can create as well as destroy. Lets create a new, stronger sidekick by adding user `gigabyte` to the Learning VM using Puppet. If you need help on how to do this, refer to the previous tasks you've just completed in this quest. One thing to note: `ensure => 'present'` will make sure GigaByte exists in the Learning VM.

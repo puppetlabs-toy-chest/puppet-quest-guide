@@ -7,13 +7,12 @@ layout: default
 
 ## Quest Objectives
 
-- Recognize the learning context of the Puppet Enterprise Learning Virtual Machine (VM)
-- Learn about the value of Puppet Open Soure and Puppet Enterprise
-- Identify and interpret the Quest structure and tool
+- Learn about the value of Puppet and Puppet Enterprise
+- Familiarize yourself with the Quest structure and tool
 
 ## Getting Started
 
-In this quest we'll introduce you to the context of learning Puppet through this Learning VM where we'll discuss just the right amount of information to get you started, as we don't want to spoil anything before you embark on this learning adventure. When you're ready to get started, type the following command:
+In this quest we'll introduce you to the Learning VM and give you the information you need to get you started on your learning adventure. When you're ready to get started, type the following command:
 
     quest --start welcome
 
@@ -25,13 +24,19 @@ In this quest we'll introduce you to the context of learning Puppet through this
 
 Welcome to the Quest Guide for the Puppet Enterprise Learning Virtual Machine (VM). This guide is your companion to learning Puppet using the Learning VM. You should have started up the VM by now, and have an IP Address for the VM. 
 
-Use the IP address to ssh to the VM. We do this for convenience and it's essential for you to get the most out of the Learning VM and this Quest Guide. 
+Use the IP address to SSH to the VM. We do this for convenience and it's essential for you to get the most out of the Learning VM and this Quest Guide. 
+
+If you are logged in directly to the Virtual Machine, please logout from it by typing the following command in the VM's terminal and pressing Enter:
+
+    exit
+
+We will now connect to the VM over SSH.
 
 To SSH to the VM, on a Linux system or a Mac, you can open a Terminal application and run the following command:
 
     ssh root@<ip-address>
 
-Where `<ip-address>` will be replaced by the IP address for your Learning VM that you noted down when setting up your VM.
+where `<ip-address>` will be replaced by the IP address for your Learning VM that you noted down when setting up your VM.
 
 If you are using a Windows computer, please use an SSH client. We recommend [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html).
 
@@ -40,15 +45,15 @@ Here are the credentials to log in to the Learning VM via SSH:
 username: **root**  
 password: **puppet**
 
-Once you're logged in, feel free to take a look around. You will see the Learning VM is fairly typical of a Unix-based operating system, essentially containing a filesystem populated with many of the usual directories. You should be aware though, some services are running in the background, including the SSH service you're using to access this Learning VM from your own terminal.
+Once you're logged in, feel free to take a look around. You will see the Learning VM is fairly typical of a Unix-based operating system. You should be aware though, that some services are running in the background, including the SSH service you're using to access this Learning VM from your own terminal.
 
-We should give you a heads up; since you're logged in to the `root` account, which is garnished by the `uid => 0`, means you carry the mark of a _Superuser_. Your account gives you the ability to change just about anything you would like in this Learning VM, just as you would if you were tasked with administrating a machine.
+We should give you a heads up; since you're logged in to the `root` account, which is garnished by the `uid => 0`, you carry the mark of a _Superuser_. Your account gives you the ability to change just about anything you would like in this Learning VM, just as you would if you were tasked with administrating a machine.
 
 By following this Quest Guide, you will learn how Puppet allows you to use these privileges easily and effectively.
 
 ## What is Puppet?
 
-So what is Puppet, and why should you care? At a high level, Puppet manages your servers' configurations. You describe your machine configurations in an easy-to-read declarative language, known as the Puppet DSL, and Puppet will bring your systems into the desired state and keep them there.
+So what is Puppet, and why should you care? At a high level, Puppet manages your machines' configurations. You describe your machine configurations in an easy-to-read declarative language, known as the Puppet DSL, and Puppet will bring your systems into the desired state and keep them there.
 
 *Puppet Enterprise* is a complete configuration management platform, with an optimized set of components proven to work well together. It combines Puppet (including a preconfigured production-grade puppet master stack), a web console for analyzing reports and controlling your infrastructure, powerful orchestration features, cloud provisioning tools, and professional support.
 
@@ -69,9 +74,9 @@ This indicates that Puppet Enterprise 3.2.1 is installed on the Learning VM, whi
 
 ## What is a Quest?
 
-Up to this point we've provided you with some basic context of this Learning VM and what Puppet is. We'll continue to dive into greater detail about these topics in future quests. Wait a minute! What's a quest? That's a great question! A **Quest** is a structured tutorial consisting of a number of interactive tasks that will help you learn about a topic related to Puppet.
+Up to this point we've introduced you to the Learning VM and Puppet. We'll continue to dive into greater detail about Puppet in future quests. Wait a minute! What's a quest? That's a great question! A **Quest** is a structured tutorial consisting of a number of interactive tasks that will help you learn about a topic related to Puppet.
 
-Each Quest includes a number of **Tasks** that give you a hands-on opportunity to apply what you have learnt. You have already finished a task by now, since the first task was to execute the `puppet -V` command earlier. But how do you keep track of everything as you progress? What if you forget what quest you are on? These are all great questions and that's why we specifically created a 'Quest Tool' for this Learning VM to help you when you're in need.
+Each Quest includes a number of **Tasks** that give you a hands-on opportunity to apply what you have learned. You have already finished a task by now, since the first task was to execute the `puppet -V` command earlier. But how do you keep track of everything as you progress? What if you forget what quest you are on? These are all great questions and that's why we specifically created a 'Quest Tool' for this Learning VM to help you when you're in need.
 
 ## The Quest Tool
 

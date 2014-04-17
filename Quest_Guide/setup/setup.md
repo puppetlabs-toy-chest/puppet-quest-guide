@@ -18,11 +18,13 @@ In order to get started, we need to open the file with the appropriate virtualiz
 * [VMWare Player](http://www.vmware.com/go/downloadplayer)
 * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
+We will need to ssh to the Learning VM, and Putty is a free SSH client for Windows. If you are using a Windows computer, please also download [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html). 
+
 Once that is complete, please follow the instructions in the following sections.
 
 ### VMware Setup
 
-Before we get started, please ensure you have an up-to-date installation of your VMware virtualization software. Once you're certain everything is up to date, open the *.vmx*  file you extracted from the VMware VM zip file, change the Network Adapter to use a Bridged connection, tweak the memory settings (we recommend increasing), and finally, power on the VM. If at any point, you are not sure or want to start from scratch, you can delete the files extracted from the zip archive, and start over again, by extracting the files from the archive.
+Before we get started, please ensure you have an up-to-date installation of your VMware virtualization software. Once you're certain everything is up to date, open the *.vmx*  file you extracted from the VMware VM zip file, change the Network Adapter to use a Bridged connection, tweak the memory settings (we recommend increasing), and finally, power on the VM. If at any point, you are not sure or want to start from scratch, you can delete the files extracted from the zip archive, and start over again by extracting the files from the archive.
 
 For the rest of this guide, the instructions are for VMware Fusion. However, this should assist you in using VMware Player or Workstation as well.
 
@@ -40,7 +42,7 @@ Next, we'll want to allocate some extra memory to the VM to ensure that it has t
 
 Now that your settings are configured, click the __Power On__ button to boot up the VM.
 
-	NOTE: Virtualization software uses mouse and keyboard capture to 'own' these devices communicate input to the guest operating system. The keystroke to release the mouse and keyboard will be displayed at the top right of the VM window.
+	NOTE: Virtualization software uses mouse and keyboard capture to 'own' these devices and communicate input to the guest operating system. The keystroke to release the mouse and keyboard will be displayed at the top right of the VM window.
 
 Once the VM is powered up, skip ahead to the Next Steps section below.
 
@@ -70,7 +72,7 @@ Once the VM is powered up in VirtualBox, follow the Next Steps below:
 
 ## Next Steps
 
-Once you have the VM running, check if you can log into it using the following credentials:  
+Once you have the VM running, log into it using the following credentials:  
 
 * Login Username: root
 * Password: puppet
@@ -84,6 +86,14 @@ The IP address will be listed as the `inet addr` for the `eth0` interface. For e
 {% figure './assets/setup_ifconfig.png' %}
 
 The IP address for the VM in the above example is: __192.168.16.135__. Please note that the IP address for your VM will be different.
+
+One more thing before we are done. To ensure you have the best experience, and the quest progress tracking works as expected, you need to **logout from the VM**.
+
+Type the command:
+
+    exit
+
+and press enter, in the VM.
 
 Now you are ready to learn more about Puppet using the installation of Puppet Enterprise on the VM. Please continue following the rest of the Quest Guide. We hope you have fun learning Puppet!
 

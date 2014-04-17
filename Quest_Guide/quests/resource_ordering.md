@@ -82,15 +82,9 @@ Find the line that reads:
 
   GSSAPIAuthentication yes
 
-and comment that out by adding a `#` at the beginning of the line.
+and edit it to read:
 
-Then, uncomment the line above it, the one that says:
-
-  #GSSAPIAuthentication no
-
-by editing it to:
-
-  GSSAPIAuthentication yes  
+  GSSAPIAuthentication no  
 
 Save the file and exit the text editor.
 
