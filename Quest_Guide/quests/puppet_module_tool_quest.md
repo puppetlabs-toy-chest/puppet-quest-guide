@@ -111,7 +111,7 @@ The documentation on the page provides insight into how to use the provided clas
 
 	include '::mysql::server'
 
-It's as simple as that! So if we wanted our machine to have the `mysql` module installed on it, all we need to do is ensure that the above **class declaration** is in some manifest that applies it to our node.
+It's as simple as that! So if we wanted our machine to have the `mysql` server installed on it, all we need to do is ensure that the above **class declaration** is in some manifest that applies it to our node.
 
 ## Puppet Enterprise Supported Modules
 
