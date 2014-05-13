@@ -26,7 +26,7 @@ Once that is complete, please follow the instructions in the following sections.
 
 Before we get started, please ensure you have an up-to-date installation of your VMware virtualization software. Once you're certain everything is up to date, open the *.vmx*  file you extracted from the VMware VM zip file, change the Network Adapter to use a Bridged connection, tweak the memory settings (we recommend increasing), and finally, power on the VM. If at any point, you are not sure or want to start from scratch, you can delete the files extracted from the zip archive, and start over again by extracting the files from the archive.
 
-For the rest of this guide, the instructions are for VMware Fusion. However, this should assist you in using VMware Player or Workstation as well.
+For the rest of this guide, the instructions are for VMware Fusion. 
 
 From the VMWare __File__ menu, select __Open__ and navigate to the .vmx file included in your Learning VM download. You can also drag and drop the .vmx file into the VMWare virtual machine library.
 
@@ -36,7 +36,7 @@ Select __Autodetect__ under the __Bridged Networking__ heading as shown in the e
 
 {% figure '../assets/vmware_network_bridged.png' %}
 
-Next, we'll want to allocate some extra memory to the VM to ensure that it has the resources neccessary to run smoothly. Go back to the __Settings__ panel and click the __Processors & Memory__ icon. We suggest allocating at least two gigabytes of memory. Use the slider to set your memory allocation. Note that the Learning VM will likely still function with less memory allocated, but you may encounter performance issues.
+Next, we'll want to allocate some extra memory to the VM to ensure that it has the resources neccessary to run smoothly. Go back to the __Settings__ panel and click the __Processors & Memory__ icon. We suggest allocating four gigabytes of memory, as shown in Figure 2. If you cannot allocate 4 GB, we recommend that you allocate at least 2 GB. Use the slider to set your memory allocation. Note that the Learning VM will likely still function with less memory allocated, but you may encounter performance issues.
 
 {% figure '../assets/vmware_memory.png' %}
 
@@ -60,7 +60,7 @@ In the VirtualBox Manager panel, select __Network__ to access networking options
 
 {% figure './assets/vbox_network_bridged.png' %}
 
-For everything to work smoothly, we suggest allocating at least two gigabytes of memory to the VM. In the VirtualBox Manager panel, click __System__ to access the system options and use the slider to set your memory allocation. Note that the Learning VM will likely still function with less memory allocated, but you may encounter performance issues.
+For everything to work smoothly, we suggest allocating four gigabytes of memory to the VM, as shown in Figure 4 below. If it's not possible to allocate four gigabytes, we recommend at least two gigabytes. In the VirtualBox Manager panel, click __System__ to access the system options and use the slider to set your memory allocation. Note that the Learning VM will likely still function with less memory allocated, but you may encounter performance issues.
 
 {% figure './assets/vbox_memory.png' %}
 
@@ -95,5 +95,11 @@ Type the command:
 
 and press enter, in the VM.
 
-Now you are ready to learn more about Puppet using the installation of Puppet Enterprise on the VM. Please continue following the rest of the Quest Guide. We hope you have fun learning Puppet!
+Now you are ready to learn more about Puppet using the installation of Puppet Enterprise on the VM. Please continue following the rest of the Quest Guide. In addition to the VM, the following resources may be handy in your journey to learn Puppet:
 
+* [Puppet users group](http://groups.google.com/group/puppet-users)
+* [Puppet Ask - Q&A site](http://ask.puppetlabs.com)
+* #puppet IRC channel on irc.freenode.net
+* You can also email us at <learningvm@puppetlabs.com>
+
+We hope you have fun learning Puppet!

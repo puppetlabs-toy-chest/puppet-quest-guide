@@ -66,11 +66,11 @@ Let's see what modules are already installed on the Learning VM and where they'r
 
 Search the forge for a module
 
-Wow! you have a lot installed. That's great. Let's install one more - the `puppetlabs-mysql` module. You should search the Forge for that module. To do so from the command line, type the following command:
+Wow! you have a lot installed. That's great. Let's install one more - the `puppetlabs-mysql` module. You should search the Forge modules that help you configure mysql. To do so from the command line, type the following command:
 
-	puppet module search puppetlabs-mysql
+	puppet module search mysql 
 
-You can also search for just `mysql` to see all the modules that have `mysql` in their name or description. Modules on the Forge are always named as _authorname-modulename_. The `puppetlabs-mysql` module is a module authored and curated primarily by the puppetlabs organization.
+The results list all the modules that have `mysql` in their name or description. Modules on the Forge are always named as _authorname-modulename_. You will notice that one of the modules listed in the serach results is `puppetlabs-mysql`. The `puppetlabs-mysql` module is a module authored and curated primarily by the puppetlabs organization.
 
 {% task 3 %}
 
@@ -111,7 +111,7 @@ The documentation on the page provides insight into how to use the provided clas
 
 	include '::mysql::server'
 
-It's as simple as that! So if we wanted our machine to have the `mysql` module installed on it, all we need to do is ensure that the above **class declaration** is in some manifest that applies it to our node.
+It's as simple as that! So if we wanted our machine to have the `mysql` server installed on it, all we need to do is ensure that the above **class declaration** is in some manifest that applies it to our node.
 
 ## Puppet Enterprise Supported Modules
 
