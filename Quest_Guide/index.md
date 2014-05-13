@@ -82,6 +82,11 @@ Each Quest includes a number of **Tasks** that give you a hands-on opportunity t
 
 To monitor your status as you progress through these Quests, we've created a quest tool you can use in the Learning VM. However, this quest tool is not part of Puppet itself. We have included this tool in the Learning VM to provide you with real-time feedback as you progress through the many Quests and Tasks on your journey to learn Puppet.
 
+{% warning %}
+
+The VM comes with several adjustments to enable the use of the quest tool and progress tracking, including changes to how bash is configured. Please don't replace the .bashrc file, instead append your changes
+
+{% endwarning %}
 {% task 2 %}
 To explore the command options for the quest tool, type the following command:
 
