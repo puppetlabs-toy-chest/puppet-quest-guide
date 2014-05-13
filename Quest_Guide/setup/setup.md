@@ -36,7 +36,7 @@ Select __Autodetect__ under the __Bridged Networking__ heading as shown in the e
 
 {% figure '../assets/vmware_network_bridged.png' %}
 
-Next, we'll want to allocate some extra memory to the VM to ensure that it has the resources neccessary to run smoothly. Go back to the __Settings__ panel and click the __Processors & Memory__ icon. We suggest allocating at least two gigabytes of memory. Use the slider to set your memory allocation. Note that the Learning VM will likely still function with less memory allocated, but you may encounter performance issues.
+Next, we'll want to allocate some extra memory to the VM to ensure that it has the resources neccessary to run smoothly. Go back to the __Settings__ panel and click the __Processors & Memory__ icon. We suggest allocating four gigabytes of memory, as shown in Figure 2. If you cannot allocate 4 GB, we recommend that you allocate at least 2 GB. Use the slider to set your memory allocation. Note that the Learning VM will likely still function with less memory allocated, but you may encounter performance issues.
 
 {% figure '../assets/vmware_memory.png' %}
 
@@ -60,7 +60,7 @@ In the VirtualBox Manager panel, select __Network__ to access networking options
 
 {% figure './assets/vbox_network_bridged.png' %}
 
-For everything to work smoothly, we suggest allocating four gigabytes of memory to the VM. If it's not possible to allocate four gigabytes, we recommend at least two gigabytes. In the VirtualBox Manager panel, click __System__ to access the system options and use the slider to set your memory allocation. Note that the Learning VM will likely still function with less memory allocated, but you may encounter performance issues.
+For everything to work smoothly, we suggest allocating four gigabytes of memory to the VM, as shown in Figure 4 below. If it's not possible to allocate four gigabytes, we recommend at least two gigabytes. In the VirtualBox Manager panel, click __System__ to access the system options and use the slider to set your memory allocation. Note that the Learning VM will likely still function with less memory allocated, but you may encounter performance issues.
 
 {% figure './assets/vbox_memory.png' %}
 
