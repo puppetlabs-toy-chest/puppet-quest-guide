@@ -95,5 +95,11 @@ Type the command:
 
 and press enter, in the VM.
 
-Now you are ready to learn more about Puppet using the installation of Puppet Enterprise on the VM. Please continue following the rest of the Quest Guide. We hope you have fun learning Puppet!
+Now you are ready to learn more about Puppet using the installation of Puppet Enterprise on the VM. Please continue following the rest of the Quest Guide. In addition to the VM, the following resources may be handy in your journey to learn Puppet:
 
+* [Puppet users group](http://groups.google.com/group/puppet-users)
+* [Puppet Ask - Q&A site](http://ask.puppetlabs.com)
+* #puppet IRC channel on irc.freenode.net
+* You can also email us at <learningvm@puppetlabs.com>
+
+We hope you have fun learning Puppet!
