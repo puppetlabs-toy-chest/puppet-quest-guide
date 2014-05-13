@@ -60,7 +60,7 @@ In the VirtualBox Manager panel, select __Network__ to access networking options
 
 {% figure './assets/vbox_network_bridged.png' %}
 
-For everything to work smoothly, we suggest allocating at least two gigabytes of memory to the VM. In the VirtualBox Manager panel, click __System__ to access the system options and use the slider to set your memory allocation. Note that the Learning VM will likely still function with less memory allocated, but you may encounter performance issues.
+For everything to work smoothly, we suggest allocating four gigabytes of memory to the VM. If it's not possible to allocate four gigabytes, we recommend at least two gigabytes. In the VirtualBox Manager panel, click __System__ to access the system options and use the slider to set your memory allocation. Note that the Learning VM will likely still function with less memory allocated, but you may encounter performance issues.
 
 {% figure './assets/vbox_memory.png' %}
 
