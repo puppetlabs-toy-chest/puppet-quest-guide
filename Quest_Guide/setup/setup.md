@@ -26,7 +26,7 @@ Once that is complete, please follow the instructions in the following sections.
 
 Before we get started, please ensure you have an up-to-date installation of your VMware virtualization software. Once you're certain everything is up to date, open the *.vmx*  file you extracted from the VMware VM zip file, change the Network Adapter to use a Bridged connection, tweak the memory settings (we recommend increasing), and finally, power on the VM. If at any point, you are not sure or want to start from scratch, you can delete the files extracted from the zip archive, and start over again by extracting the files from the archive.
 
-For the rest of this guide, the instructions are for VMware Fusion. However, this should assist you in using VMware Player or Workstation as well.
+For the rest of this guide, the instructions are for VMware Fusion. 
 
 From the VMWare __File__ menu, select __Open__ and navigate to the .vmx file included in your Learning VM download. You can also drag and drop the .vmx file into the VMWare virtual machine library.
 
