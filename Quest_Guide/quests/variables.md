@@ -85,7 +85,7 @@ Excellent! Take look at the file to see that the contents have been set as you i
 A pangram is a sentence that uses every letter of the alphabet. A perfect pangram uses each letter only once.
 {% endfact %}
 
-The string assigned to the `$pangram` variable was passed into your file resource's `content` attribute, which in turn told Puppet what the content of the `/tmp/pangram.txt` file should exist.
+The file resource `/root/pangrams/fox.txt` is managed, and the content for the file is specified as the value of the `$pangram` variable.
 
 ## Variable Interpolation
 
