@@ -10,12 +10,6 @@ layout: default
 - Learn about the value of Puppet and Puppet Enterprise
 - Familiarize yourself with the Quest structure and tool
 
-## Getting Started
-
-In this quest we'll introduce you to the Learning VM and give you the information you need to get you started on your learning adventure. When you're ready to get started, type the following command:
-
-    quest --start welcome
-
 ## The Puppet Enterprise Learning Virtual Machine
 
 > Any sufficiently advanced technology is indistinguishable from magic.
@@ -47,7 +41,13 @@ password: **puppet**
 
 Once you're logged in, feel free to take a look around. You will see the Learning VM is fairly typical of a Unix-based operating system. You should be aware though, that some services are running in the background, including the SSH service you're using to access this Learning VM from your own terminal.
 
-We should give you a heads up; since you're logged in to the `root` account, which is garnished by the `uid => 0`, you carry the mark of a _Superuser_. Your account gives you the ability to change just about anything you would like in this Learning VM, just as you would if you were tasked with administrating a machine.
+## Getting Started
+
+Let's get introduced to the Learning VM! Later, we will see what quests are, for now, type the following command in the terminal:
+
+    quest --start welcome
+
+We should give you a heads up; since you're logged in to the `root` account, which is garnished by the `uid => 0`, you carry the mark of a _Superuser_. Your account gives you the ability to change just about anything you would like in this Learning VM.
 
 By following this Quest Guide, you will learn how Puppet allows you to use these privileges easily and effectively.
 
