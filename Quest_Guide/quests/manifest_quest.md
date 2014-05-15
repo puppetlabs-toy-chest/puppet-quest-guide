@@ -110,7 +110,7 @@ The steps include creating a manifest file, and writing the minimal amount of Pu
 
 ## Review
 
-This is a foundational quest you must understand in order to successfully use Puppet. As you saw when completing this quest, we've added two new tools to your toolbox: `puppet parser` and `puppet apply`. You always want to use `puppet parser` to check the syntax of your manifest before using `puppet apply` to enforce it. This quest contained a walkthough of the "best practice" methods to creating, checking, applying your manifest. We've also created a simplified version below for your reference:
+This is a foundational quest you must understand in order to successfully use Puppet. As you saw when completing this quest, we've added two new tools to your toolbox: `puppet parser` and `puppet apply`. You always want to use `puppet parser` to check the syntax of your manifest before using `puppet apply` to enforce it. This quest contained a walkthrough of the "best practice" methods to creating, checking, applying your manifest. We've also created a simplified version below for your reference:
 
 1. Open or create a manifest with the `.pp` extension
 2. Add or edit your Puppet code
