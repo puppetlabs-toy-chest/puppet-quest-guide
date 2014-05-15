@@ -126,7 +126,7 @@ Now in that file, add the following code:
 {% highlight puppet %}
 class users {
   user { 'alice':
-  	ensure 	=> present;
+  	ensure 	=> present,
   }
 }
 {% endhighlight %}
