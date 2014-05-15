@@ -38,7 +38,7 @@ When you need a group of resources to be managed in a specific order, you must e
 ## Relationship Metaparameters
 
 {% fact %}
-A metaparamter is a resource attribute that can be specified for _any_ type of resource, rather than a specific type.
+A metaparameter is a resource attribute that can be specified for _any_ type of resource, rather than a specific type.
 {% endfact %}
 
 Metaparameters follow the familiar `attribute => value` syntax. There are four metaparameter **attributes** that you can include in your resource declaration to order relationships among resources.
