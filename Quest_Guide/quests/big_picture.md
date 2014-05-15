@@ -111,7 +111,7 @@ To access the PE Console we need to find your IP address. Luckily, Facter makes 
 You can see all the facts by running `facter -p`
 {% endtip %}
 
-Please write down the IP address for the VM as you will need it to access the PE Console. Next, in your browser's address bar, type in: `https://<ip-address>`, and press Return (Enter) to load the PE Console.
+Please write down the IP address for the VM as you will need it to access the PE Console. Next, in your browser's address bar, type in: `https://<ip-address>`(type in the IP address for the VM instead of `<ip-address>`), and press Return (Enter) to load the PE Console.
 
 Awesome! You are at the doorstep of the PE Console. Enter the login information below to gain access:
 
