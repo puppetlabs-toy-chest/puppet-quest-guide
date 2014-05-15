@@ -112,32 +112,32 @@ The path to greatness is a lonely one. Fortunately, your superuser status gives 
 	useradd byte
 
 {% task 4 %}
-Now take a look at Byte using the `puppet resource` tool. Type the following command:
+Now take a look at user byte using the `puppet resource` tool. Type the following command:
 
 	puppet resource user byte
             
-Potent stuff. Note that Byte's password attribute is set to `'!!'`. This isn't a proper password at all! In fact, it's a special value indicating Byte has no password whatsoever.
+Potent stuff. Note that byte's password attribute is set to `'!!'`. This isn't a proper password at all! In fact, it's a special value indicating byte has no password whatsoever.
 
 {% task 5 %}
-Let's rectify Byte's password situation by setting it to *puppetlabs*. Type the following command:
+Let's rectify byte's password situation by setting it to *puppetlabs*. Type the following command:
 
 	passwd byte
 
-Now set the password to *puppetlabs* and pressing Enter (Return) twice. You will not see anything displayed as you type the password.
+Now set the password to *puppetlabs* by typing it in and pressing Enter (Return) twice. You will not see anything displayed as you type the password.
 		
-Now if you take another look at Byte using `puppet resource`, the value for Byte's password attribute should now be set to a SHA1 hash of the password, something a little like this: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
+Now if you take another look at byte using `puppet resource`, the value for byte's password attribute should now be set to a SHA1 hash of the password, something a little like this: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
 
 {% task 6 %}
-Now have a look at Byte's home directory, which was set to `'/home/byte'` by default. Directories are a special kind of file, and so Puppet knows of them as File resources. The `title` of any file is, by default, the same as the path to that file. Let's find out more about the `tools` directory where our sidekick can store tools. Enter the command:
+Now have a look at byte's home directory, which was set to `'/home/byte'` by default. Directories are a special kind of file, and so Puppet knows of them as File resources. The `title` of any file is, by default, the same as the path to that file. Let's find out more about the `tools` directory where our sidekick can store tools. Enter the command:
 
 	puppet resource file /home/byte/tools
 		
 {% task 7 %}
-What? `ensure => 'absent',`? Values of the `ensure` attribute indicate the basic state of a resource. A value of absent means something doesn't exist at all. We need to make a directory for Byte to store tools in:
+What? `ensure => 'absent',`? Values of the `ensure` attribute indicate the basic state of a resource. A value of absent means something doesn't exist at all. We need to make a directory for byte to store tools in:
 
 	mkdir /home/byte/tools
 		
-Now have another look at Byte's tools directory:
+Now have another look at byte's tools directory:
 
 	puppet resource file /home/byte/tools
 
@@ -150,7 +150,7 @@ This shows your progress by displaying the tasks you've completed and tasks that
 {% endaside %}
 
 {% task 8 %}
-We want Byte to be the owner of the tools directory. To do this, type the following commands:
+We want byte to be the owner of the tools directory. To do this, type the following commands:
  
 	chown -R byte:byte /home/byte/tools
 
