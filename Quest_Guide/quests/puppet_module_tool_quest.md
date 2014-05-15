@@ -80,7 +80,7 @@ There's something on the Forge that exists! Let use it. Let's install `puppetlab
 
 	puppet module install puppetlabs-mysql --version 2.2.2
 
-You will that the module is downloaded and installed. You will also see that in addition to the `puppetlabs-mysql` module, all the modules it depends on were also downloaded and installed.
+You will see that the module is downloaded and installed. You will also see that in addition to the `puppetlabs-mysql` module, all the modules it depends on were also downloaded and installed.
 
 By default, modules are installed in the `modulepath`.
 
