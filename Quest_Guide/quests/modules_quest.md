@@ -10,7 +10,7 @@ layout: default
 - Welcome Quest
 - Power of Puppet Quest
 - Resources Quest
-- Mainfest Quest
+- Manifest Quest
 - Variables Quest
 - Conditions Quest
 - Ordering Quest
@@ -165,7 +165,7 @@ Try applying the new manifest with the `--noop` flag first. If everything looks 
 
 Use the `puppet resource` tool to see if `user alice` has been successfully created.
 
-So What happened here? Even though the `users` class was in a different manifest, we were able to *declare* our test manifest. Because our module is in Puppet's *modulepath*, Puppet was able to find the correct class and apply it.
+So what happened here? Even though the `users` class was in a different manifest, we were able to *declare* our test manifest. Because our module is in Puppet's *modulepath*, Puppet was able to find the correct class and apply it.
 
 #### You just created your first Puppet module!! 
 
@@ -177,7 +177,7 @@ When you use a *Node Classifier*, such as the Puppet Enterprise Console, you can
 2. The module has a file called `init.pp` in the `manifests` directory contained within it
 3. This `init.pp` file contains the definition of the class
 
-With modules, you can create composable configurations for systems. For example, let's say that you have a module called 'ssh' which provides class ssh, another called 'apache' and a third called 'mysql'. Using these three modules, and the classes provided by them, you can now classify a node to be configured with any combination of the three classes. You can have a server that has mysql and ssh managed on it (a database server), another with apache and ssh managed on it (a webserver), and a server with only ssh configured on it. The possibilities are endless. With well-written, community-vetted, even Puppet Supported Modules from the Forge, you can be off composing and managing configuration for your systems in no time. You can also write your _own_ modules that use classes from these Forge modules, as we did with the `lvmguide` class, and resuse them too.
+With modules, you can create composable configurations for systems. For example, let's say that you have a module called 'ssh' which provides class ssh, another called 'apache' and a third called 'mysql'. Using these three modules, and the classes provided by them, you can now classify a node to be configured with any combination of the three classes. You can have a server that has mysql and ssh managed on it (a database server), another with apache and ssh managed on it (a webserver), and a server with only ssh configured on it. The possibilities are endless. With well-written, community-vetted, even Puppet Supported Modules from the Forge, you can be off composing and managing configuration for your systems in no time. You can also write your _own_ modules that use classes from these Forge modules, as we did with the `lvmguide` class, and reuse them too.
 
 ## Review
 

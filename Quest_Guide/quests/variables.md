@@ -10,7 +10,7 @@ layout: default
 - Welcome Quest
 - Power of Puppet Quest
 - Resources Quest
-- Mainfest Quest
+- Manifest Quest
 
 ## Quest Objectives
 
@@ -155,7 +155,7 @@ What this perfect pangram actually means, however, is outside the scope of this 
 
 Puppet has a bunch of built-in, pre-assigned variables that you can use. Remember using the Facter tool when you first started? The Facter tool discovers information about your system and makes it available to Puppet as variables. Puppet’s compiler accesses those facts when it’s reading a manifest.
 
-Remember running `facter ipaddress` told you your IP address? What if you wanted to turn `facter ipaddress` into a variable? You guessed it. It would look like this: `$::ipaddress` as a stand-alone variable, or like this:
+Remember running `facter ipaddress` told you your IP address? What if you wanted to turn `facter ipaddress` into a variable? It would look like this: `$::ipaddress` as a stand-alone variable, or like this:
 `${::ipaddress}` when interpolated in a string.
 
 The `::` in the above indicates that we always want the top-scope variable, the global fact called `ipaddress`, as opposed to, say a variable called `ipaddress` you defined in a specific manifest.  
@@ -174,7 +174,7 @@ Create a new manifest with your text editor.
 Type the following Puppet code into the `facts.pp` manifest:
 
 {% highlight puppet %}
-$string = "Hi, I'm a ${::osfamily} system and I have been up for ${::uptime} seconds." 
+$string = "Hi, I'm a ${::osfamily} system and I have been up for ${::uptime_seconds} seconds." 
 
 notify { 'info':
   message => $string,

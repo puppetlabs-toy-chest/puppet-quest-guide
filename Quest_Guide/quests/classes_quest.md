@@ -10,7 +10,7 @@ layout: default
 - Welcome Quest
 - Power of Puppet Quest
 - Resources Quest
-- Mainfest Quest
+- Manifest Quest
 - Variables Quest
 - Conditions Quest
 - Ordering Quest
@@ -161,7 +161,7 @@ In this example we've **defined** a class called `lvmguide`. The first line of t
 class lvmguide (
 {% endhighlight %}
 
-Notice that instead of the usual curly bracket, there is an open parenthesis at the end of this first line, and it isn't until after the closing paranthesis that we see the opening curly bracket.
+Notice that instead of the usual curly bracket, there is an open parenthesis at the end of this first line, and it isn't until after the closing parenthesis that we see the opening curly bracket.
 
 {% highlight puppet %}
 class lvmguide (  
@@ -209,4 +209,4 @@ As in the above example, class definitions give you a concise way to group other
 
 ## Review
 
-We learned about classes, and how to define them. We also learned two way to invoke classes - using the `include` keyword, and declaring classes using a syntax similar to resource declarations. Classes are a whole lot more useful once we understand what modules are, and we will learn about modules in the next quest.
+We learned about classes, and how to define them. We also learned two ways to invoke classes - using the `include` keyword, and declaring classes using a syntax similar to resource declarations. Classes are a whole lot more useful once we understand what modules are, and we will learn about modules in the next quest.

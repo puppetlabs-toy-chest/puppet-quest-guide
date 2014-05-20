@@ -10,8 +10,8 @@ layout: default
 - Welcome Quest
 - Power of Puppet Quest
 - Resources Quest
-- Mainfest Quest
-- Varibales Quest
+- Manifest Quest
+- Variables Quest
 - Conditions Quest
 - Ordering Quest
 - Classes Quest

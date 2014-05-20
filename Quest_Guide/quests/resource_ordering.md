@@ -10,8 +10,8 @@ layout: default
 - Welcome Quest
 - Power of Puppet Quest
 - Resources Quest
-- Mainfest Quest
-- Varibales Quest
+- Manifest Quest
+- Variables Quest
 - Conditions Quest
 
 ## Quest Objectives
@@ -27,7 +27,7 @@ This quest will help you learn more about specifying the order in which Puppet s
 
 ## Explicit Ordering
 
-We are likely to read instructions from top to bottom and execute them in that order. When it comes to resource declarations in a Puppet manifest, Puppet does things a little differently. It works through the problem as though it were given a list of things to do, and it was left to decide the most efficient way to get those done. We have referred to the catalog vaguely in the previous sections. The **catalog** is a compilation of all the resources that will be applied to a given system, and the relationships between those resources. In building the catalog, unless we _explicitly_ specify the relationship between the resources, Puppet will manage them in its own order.  
+We are likely to read instructions from top to bottom and execute them in that order. When it comes to resource declarations in a Puppet manifest, Puppet does things a little differently. It works through the problem as though it were given a list of things to do, and it was left to decide the most efficient way to get them done. We have referred to the catalog vaguely in the previous sections. The **catalog** is a compilation of all the resources that will be applied to a given system, and the relationships between those resources. In building the catalog, unless we _explicitly_ specify the relationship between the resources, Puppet will manage them in its own order.  
 
 For the most part, Puppet specifies relationships between resources in the appropriate manner while building the catalog. For example, if you say that user `gigabyte` should exist, and the directory `/home/gigabyte/bin` should be present and be owned by user `gigabyte`, then Puppet will specify a relationship between the two - that the user should be managed before the directory. These are implicit (shall we call them obvious?) relationships. 
 
@@ -45,13 +45,36 @@ Metaparameters follow the familiar `attribute => value` syntax. There are four m
 
 * `before` causes a resource to be applied **before** a specified resource
 * `require` causes a resource to be applied **after** a specified resource
-* `notify` causes a resource to be applied **before** the specified resource. Notify will generate a refresh whenever the resource changes. 
+* `notify` causes a resource to be applied **before** the specified resource, just as with `before`. Additionally, notify will generate a refresh event for the specified resource when the notifying resource changes. 
 * `subscribe` causes a resource to be applied **after** the specified resource. The subscribing resource will  be refreshed if the target resource changes.
 
-The **value** of the relationship metaparameter is the title or titles (in an array) of one or more target resources.
+The **value** of the relationship metaparameter is the title or titles (in an array) of one or more target resources. Since this is the first time we've mentioned arrays - here's an example of an array:
 
+{% highlight puppet %}
 
-We're going to use SSH as our example. Setting the `GSSAPIAuthentication` setting for the SSH daemon to `no` will help speed up the login process when one tries to establish an SSH connection to the Learning VM. 
+$my_first_array = [ 'one', 'two', 'three']
+
+{% endhighlight %}
+
+Here's an example of how the `notify` metaparameter is used:
+
+{% highlight puppet %}
+file {'/etc/ntp.conf':
+  ensure => file,
+  source => 'puppet:///modules/ntp/ntp.conf',
+  notify => Service['ntpd'],
+}
+
+service {'ntpd':
+  ensure => running,
+}
+{% endhighlight %}
+
+In the above, the file `/etc/ntp.conf` is managed. The contents of the file are sourced from the file `ntp.conf` in the ntp module's files directory. Whenever the file `/etc/ntp.conf` changes, a refresh event is triggered for the service with the title `ntpd`. By virtue of using the notify metaparameter, we ensure that Puppet manage the file first, before it manages the service, which is to say that `notify` implies `before`.
+
+Refresh events, by default, restart a service (such as a server daemon), but you can specify what needs to be done when a refresh event is triggered, using the `refresh` attribute for the `service` resource type, which takes a command as the value.
+
+In order to better understand how to explicitly specify relationships between resources, we're going to use SSH as our example. Setting the `GSSAPIAuthentication` setting for the SSH daemon to `no` will help speed up the login process when one tries to establish an SSH connection to the Learning VM. 
 
 Let's try and disable GSSAPIAuthentication, and in the process, learn about resource relationships.
 
@@ -69,8 +92,6 @@ file { '/etc/ssh/sshd_config':
 {% endhighlight %}
 
 What we have done above is to say that Puppet should ensure that the file `/etc/ssh/sshd_config` exists, and that the contents of the file should be sourced from the file `/root/examples/sshd_config`. The `source` attribute also allows us to use a different URI to specify the file, something we will discuss in the Modules quest. For now, we are using a file in `/root/examples` as the content source for the SSH daemon's configuration file.
-
-Now that we have created the manifest, applying the manifest will ensure that the `/etc/ssh/sshd_config` file will have the exact same content as the `/root/examples/sshd_config` file.
 
 Now let us disable GSSAPIAuthentication.
 
@@ -110,7 +131,7 @@ In the above example, the `service` resource will be applied **after** the `file
 
 ## Package/File/Service
 
-Wait a minute! We are managing the service `sshd`, we are managing it's configuration file, but all that would mean nothing if SSH server package is not installed. So, to round it up, and make our manifest complete with regards to managing the SSH server on the VM, we have to ensure that the appropriate `package` resource is managed as well. 
+Wait a minute! We are managing the service `sshd`, we are managing its configuration file, but all that would mean nothing if SSH server package is not installed. So, to round it up, and make our manifest complete with regards to managing the SSH server on the VM, we have to ensure that the appropriate `package` resource is managed as well. 
 
 On CentOS machines, such as the VM we are using, the `openssh-server` package installs the SSH server. 
 
