@@ -28,7 +28,7 @@ In the previous Modules Quest we primarily learned about the structure of a modu
 - How do I install a module?
 - How do I use a module?
 - What about upgrading an existing module?
-- How can I do this all this and more from the command line?
+- How can I do all this and more from the command line?
 
 {% aside %}
 
@@ -40,7 +40,7 @@ When you're ready to take your Puppet knowledge to the next level, type the foll
 
 	quest --start forge
 
-The `puppet module` tool is one of the most important tools in expanding your use of Puppet. The `puppet module` tool allows you to create, install, search, (and so much more) for modules on the Forge. We'll also discuss the Puppet Forge more in detail below.
+The `puppet module` tool is one of the most important tools in expanding your use of Puppet. The `puppet module` tool allows you to create, install, search, (and so much more) for modules on the Forge. We'll also discuss the Puppet Forge in greater detail below.
 
 The `puppet module` tool has subcommands that make finding, installing, and managing modules from the Forge much easier from the command line. It can also generate empty modules, and prepare locally developed modules for release on the Forge. ## Actions
 
@@ -76,7 +76,7 @@ The results list all the modules that have `mysql` in their name or description.
 
 Install a module 
 
-There's something on the Forge that exists! Let use it. Let's install `puppetlabs-mysql` module. In fact, let us specify a specific version of the module. Run the following command:
+Let's install the `puppetlabs-mysql` module. In fact, let us specify a specific version of the module. Run the following command:
 
 	puppet module install puppetlabs-mysql --version 2.2.2
 
@@ -98,9 +98,9 @@ Great, if you needed to uninstall a module, you can do so by running the followi
 
 ## The Puppet Forge
 
-The [Puppet Forge](http://forge.puppetlabs.com) is a public repository of modules written by members of the puppet community for Puppet. These modules will provide you with classes, new resource types, and other helpful tools such as functions, to manage the various aspects of your infrastructure. This reduces your task from describing the classes using Puppet's DSL to using existing descriptions witht the appropriate values for the parameters.
+The [Puppet Forge](http://forge.puppetlabs.com) is a public repository of modules written by members of the puppet community for Puppet. These modules will provide you with classes, new resource types, and other helpful tools such as functions, to manage the various aspects of your infrastructure. This reduces your task from describing the classes using Puppet's DSL to using existing descriptions with the appropriate values for the parameters.
 
-If you would like to further inspect the `puppetlabs-mysql` module Puppet code, you need to want to `cd` to the path then open the `init.pp` manifest.  
+If you would like to further inspect the `puppetlabs-mysql` module Puppet code, you need to `cd` to the path then open the `init.pp` manifest.  
 
     cd /etc/puppetlabs/puppet/modules/mysql/manifests   
     nano init.pp

@@ -27,11 +27,11 @@ This quest will help you learn more about specifying the order in which Puppet s
 
 ## Explicit Ordering
 
-We are likely to reading instructions from top to bottom and execute them in that order. When it comes to resource declarations in a Puppet manifest, Puppet does things a little differently. It works through the problem as though it were give a list of things to do, and it was left to decide the most efficient way to get those done. We have referred to the catalog vaguely in the previous sections. The **catalog** is a compilation of all the resources that will be applied to a given system, and the relationships between those resources. In building the catalog, unless we _explicitly_ specify the relationship between the resources, Puppet will manage them in its own order.  
+We are likely to read instructions from top to bottom and execute them in that order. When it comes to resource declarations in a Puppet manifest, Puppet does things a little differently. It works through the problem as though it were given a list of things to do, and it was left to decide the most efficient way to get those done. We have referred to the catalog vaguely in the previous sections. The **catalog** is a compilation of all the resources that will be applied to a given system, and the relationships between those resources. In building the catalog, unless we _explicitly_ specify the relationship between the resources, Puppet will manage them in its own order.  
 
 For the most part, Puppet specifies relationships between resources in the appropriate manner while building the catalog. For example, if you say that user `gigabyte` should exist, and the directory `/home/gigabyte/bin` should be present and be owned by user `gigabyte`, then Puppet will specify a relationship between the two - that the user should be managed before the directory. These are implicit (shall we call them obvious?) relationships. 
 
-Sometimes, however, you will need to ensure that a resource declaration is applied before another. For instance, if you wish to declare that a service should be running, you need to ensure that the package for that service is installed and configured before you can start the service. One might ask as to why there is not implicit relationship in this case. The answer is that, often times, more than one package provides the same service, and what if you are using a package you built yourself? Since Puppet cannot _always_ conclusively determine the mapping between a package and a service (the names of the software package and the service or executable it provides are not always the same either), it is up to us to specify the relationship between them.
+Sometimes, however, you will need to ensure that a resource declaration is applied before another. For instance, if you wish to declare that a service should be running, you need to ensure that the package for that service is installed and configured before you can start the service. One might ask as to why there is not an implicit relationship in this case. The answer is that, often times, more than one package provides the same service, and what if you are using a package you built yourself? Since Puppet cannot _always_ conclusively determine the mapping between a package and a service (the names of the software package and the service or executable it provides are not always the same either), it is up to us to specify the relationship between them.
 
 When you need a group of resources to be managed in a specific order, you must explicitly state the dependency relationships between these resources within the resource declarations.
 
@@ -45,7 +45,7 @@ Metaparameters follow the familiar `attribute => value` syntax. There are four m
 
 * `before` causes a resource to be applied **before** a specified resource
 * `require` causes a resource to be applied **after** a specified resource
-* `notify` causes a resource to be applied **before** the specified resource. Notify will generate a refresh even whenever the resource changes. 
+* `notify` causes a resource to be applied **before** the specified resource. Notify will generate a refresh whenever the resource changes. 
 * `subscribe` causes a resource to be applied **after** the specified resource. The subscribing resource will  be refreshed if the target resource changes.
 
 The **value** of the relationship metaparameter is the title or titles (in an array) of one or more target resources.
@@ -110,7 +110,7 @@ In the above example, the `service` resource will be applied **after** the `file
 
 ## Package/File/Service
 
-Wait a minute! We are managing the service `sshd`, we are managing it's configuration file, but all that would mean nothing if the package that install the SSH server is not installed. So, to round it up, and make our manifest complete with regards to managing the SSH server on the VM, we have to ensure that the appropriate `package` resource is managed as well. 
+Wait a minute! We are managing the service `sshd`, we are managing it's configuration file, but all that would mean nothing if SSH server package is not installed. So, to round it up, and make our manifest complete with regards to managing the SSH server on the VM, we have to ensure that the appropriate `package` resource is managed as well. 
 
 On CentOS machines, such as the VM we are using, the `openssh-server` package installs the SSH server. 
 
@@ -137,9 +137,9 @@ package { 'openssh-server':
 - Make sure to check the syntax.  
 - Once everything looks good, go ahead and apply the manifest.
 
-Notice that we use `before` to ensure that the package is managed before the configuration file is managed. This makes sense, since if the package weren't installed, the configuration file (and the `/etc/ssh/` directory that contains it would not exist. If you tried to manage to contents of a file in a directory that does not exists, you are destined to fail. By specifying the relationship between the package and the file, we ensure success.
+Notice that we use `before` to ensure that the package is managed before the configuration file is managed. This makes sense, since if the package weren't installed, the configuration file (and the `/etc/ssh/` directory that contains it would not exist. If you tried to manage the contents of a file in a directory that does not exist, you are destined to fail. By specifying the relationship between the package and the file, we ensure success.
 
-Now we have a manifest that manages the package, configuration file and the service, and we specify the order in which they should be managed.
+Now we have a manifest that manages the package, configuration file and the service, and we have specified the order in which they should be managed.
 
 ## Let's do a Quick Review
 

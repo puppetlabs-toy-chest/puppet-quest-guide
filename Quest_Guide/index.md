@@ -55,7 +55,7 @@ By following this Quest Guide, you will learn how Puppet allows you to use these
 
 So what is Puppet, and why should you care? At a high level, Puppet manages your machines' configurations. You describe your machine configurations in an easy-to-read declarative language, known as the Puppet DSL, and Puppet will bring your systems into the desired state and keep them there.
 
-*Puppet Enterprise* is a complete configuration management platform, with an optimized set of components proven to work well together. It combines Puppet (including a preconfigured production-grade puppet master stack), a web console for analyzing reports and controlling your infrastructure, powerful orchestration features, cloud provisioning tools, and professional support.
+*Puppet Enterprise* is a complete configuration management platform, with an optimized set of components proven to work well together. It combines Puppet (including a preconfigured production-grade Puppet master stack), a web console for analyzing reports and controlling your infrastructure, powerful orchestration features, cloud provisioning tools, and professional support.
 
 It may seem a lot easier to "just run a command" to effect a change in configuration, or perhaps writing a script that executes a series of commands looks like a more effective way to manage the configuration of a system. This is true, as long as you're only concerned about a single change, or changes to a single system. The true power of Puppet is that it allows you to describe all the details of the configuration for multiple machines in a composable manner, and allows you to manage the configuration of multiple machines (think hundreds or thousands) without having to write complicated scripts that are hard to comprehend; or maintaining an inventory of all your systems, and logging in to each system in turn to run the required commands or scripts. Puppet automates the process of configuring your systems and keeping them configured exactly as you need them to be.
 
@@ -110,7 +110,7 @@ Using the quest tool is entirely optional, but we have also integrated it into t
 Typing `clear` into your terminal will remove everything on your terminal screen.
 {% endtip %}
 
-In addition to the quest commandline tool, we have also integrated real-time feedback into the VM, which is displayed in the bottom-right corner of the terminal, as seen in Figure 1. 
+In addition to the quest command line tool, we have also integrated real-time feedback into the VM, which is displayed in the bottom-right corner of the terminal, as seen in Figure 1. 
 
 {% figure 'assets/terminal.png' %} 
 

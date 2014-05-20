@@ -28,7 +28,7 @@ So we've mentioned the term *class* in previous quests. In this quest we cover t
     quest --start classes
 
 {% aside This is just an example %}
-We've written this quest to help you learn the functionality and purpose of classes. To keep things simple, we will write code to both define classes and include them within a single manifest. Keep in mind however, that in practice you will always define your classes in a separate manifest. In the Modules Quest we will show you the proper way define classes and declare classes separately.
+We've written this quest to help you learn the functionality and purpose of classes. To keep things simple, we will write code to both define classes and include them within a single manifest. Keep in mind however, that in practice you will always define your classes in a separate manifest. In the Modules Quest we will show you the proper way to define classes and declare classes.
 {% endaside %}
 
 ## Defining Classes
@@ -91,7 +91,7 @@ Apply the manifest containing the `ntp` class definition:
 
 That's funny. Nothing happened, and nothing changed on the system!
 
-This is because the class in the `modules1-ntp1.pp` manifest is only being defined and not declared. When you applied the manifest, it is as if Puppet went, "Ok! Got it. When you ask for class ntp, I am to know that it refers to everything in the definition." You have to _declare_ the class in order to make changes and manage to the resources specified in the definition. Declared? What's that? We will discuss that next.
+This is because the class in the `modules1-ntp1.pp` manifest is only being defined and not declared. When you applied the manifest, it is as if Puppet went, "Ok! Got it. When you ask for class ntp, I am to know that it refers to everything in the definition." You have to _declare_ the class in order to make changes and manage the resources specified in the definition. Declared? What's that? We will discuss that next.
 
 
 ## Declaring Classes
@@ -126,7 +126,7 @@ Go ahead and now apply the manifest `/root/examples/modules1-ntp2.pp`.
 
 Great! This time Puppet actually managed the resources in the definition of class ntp. 
 
-Again, please do not ever do this above example in real life, since you _always_  want to separate the definition from the declaration. This is just an example to show you the functionality and benefit of classes. In the Modules Quest we will show you the proper way define classes and declare classes separately.
+Again, please do not ever do this above example in real life, since you _always_  want to separate the definition from the declaration. This is just an example to show you the functionality and benefit of classes. In the Modules Quest we will show you the proper way to define classes and declare classes separately.
 
 ## A detailed look at the lvmguide class 
 
@@ -182,7 +182,7 @@ The first item you see inside the curly braces is... another class! One of the a
   }
 {% endhighlight %}
 
-Notice how the code looks similar to how you might describe a user, file or package resource. It looks like a _declaration_. It is, indeed, a *class declaration*. This is the an alternative to using `include` to invoke existing class definitions. In this case, we wanted to set up an apache server to host our Quest Guide content as a website. Instead of trying to reinvent the wheel, we are able to pull in the existing `apache` class from the `apache` module we downloaded from the Forge.  
+Notice how the code looks similar to how you might describe a user, file or package resource. It looks like a _declaration_. It is, indeed, a *class declaration*. This is an alternative to using `include` to invoke existing class definitions. In this case, we wanted to set up an apache server to host our Quest Guide content as a website. Instead of trying to reinvent the wheel, we are able to pull in the existing `apache` class from the `apache` module we downloaded from the Forge.  
 
 If we had wanted to include the `apache` class with its default parameter settings, we could have used the `include apache` syntax. Turns out that just like the `lvmguide` class, the `apache` class is defined to accept parameters. Since we wanted to set the `default_vhost` parameter, we used the resource-like class declaration syntax. This allows us to set `default_vhost` to `false`.
 
@@ -203,10 +203,10 @@ Our final two code blocks in the class definition are resource declarations:
   }
 {% endhighlight %}
 
-First, we declare a `apache::vhost` resource type, and pass along values from our class parameters to its `port` and `docroot` attributes.
+First, we declare an `apache::vhost` resource type, and pass along values from our class parameters to its `port` and `docroot` attributes.
 
 As in the above example, class definitions give you a concise way to group other classes and resource declarations into re-usable blocks of Puppet code. You can then selectively assign these classes to different machines across your Puppetized network in order to easily configure those machines to fulfill the defined function. Now that the `lvmguide` class is defined, enabling the Quest Guide website on other machines would be as easy as assigning that class in the PE Console.
 
 ## Review
 
-We learned about classes, and how to define them. We also learned two way to invoke classes - using the `include` keyword, and declaring classes using a syntax similar to resource declarations. Classes are whole lot more useful once we understand what modules are, and we will learn about Modules in the next quest.
+We learned about classes, and how to define them. We also learned two way to invoke classes - using the `include` keyword, and declaring classes using a syntax similar to resource declarations. Classes are a whole lot more useful once we understand what modules are, and we will learn about modules in the next quest.

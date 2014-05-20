@@ -39,7 +39,7 @@ There is still a missing part of the puzzle. When you ask Puppet to, say, `inclu
 
 The answer is, we agree to put the class definitions in a standard location on the file system, by placing the manifest containing the class definition in a specific directory in a module.
 
-Simple put, a Module is a directory with a specific structure - a means for us to package everything needed to achieve a certain goal. Once we agree to stick to this standard way of doing this, a significant benefit is the ability to _share_ our work, such that others who seek to achieve the same goal can re-use our work. The Forge is the central location where you can find modules that have been developed by others.
+Simply put, a Module is a directory with a specific structure - a means for us to package everything needed to achieve a certain goal. Once we agree to stick to the standard way of doing this, a significant benefit is the ability to _share_ our work, such that others who seek to achieve the same goal can re-use our work. The [Forge](https://forge.puppetlabs.com) is the central location where you can find modules that have been developed by others.
 
 In our initial Quest, we were able to use an Apache module from the Forge. This let us easily install and configure an Apache webserver to host the website version of this Quest Guide. The vast majority of the necessary code had already been written, tested, documented, and published to the Puppet Forge.
 
@@ -67,7 +67,7 @@ Remember, `/etc/puppetlabs/puppet/modules` is in our modulepath. Use the `ls` co
 
 	ls /etc/puppetlabs/puppet/modules
 	
-There's the `apache` module we installed before, as also the `lvmguide` module that is use to set up the quest guide website. Use the `tree` command to take a look at the basic directory structure of the module. (To get a nice picture, we can use a few flags with the tree command to limit our output to directories, and limit the depth to two directories.)
+There's the `apache` module we installed before. There is also the `lvmguide` module that was used to set up the quest guide website, that was already in place when we started. Use the `tree` command to take a look at the basic directory structure of the module. (To get a nice picture, we can use a few flags with the tree command to limit our output to directories, and limit the depth to two directories.)
 
 	tree -L 2 -d /etc/puppetlabs/puppet/modules/
 	
@@ -115,7 +115,7 @@ If you use the `tree users` command to take a look at your new module, you shoul
 
 Create a manifest defining class users:
 
-The manifests directory can contain any number of the `.pp` manifest files that form the bread-and-butter of your module. Whatever other manifests it contains, however, the `init.pp` manifest defines the module's main class, which must have same name as the module itself, in this case, `users`.
+The manifests directory can contain any number of the `.pp` manifest files that form the bread-and-butter of your module. If there is a class with the same name as the module, the definition for that class should be in a file name `init.pp`. In our case, we need a class called `users` in our module with the same name. The defintion for class users should be in a file called `init.pp` in the `manifests` directory. This is necessitated by the mechanism by which Puppet locates class definitions when you name a class. If for example, you had a file called `settings.pp` in the manifests directory, you will have to refer to it as class `users::settings` for Puppet to be able to find the class defintion contained in it. By placing the definition for class `users` in `init.pp`, we can refer to that class defintion by the name of the module - `users`. 
 
 Go ahead and create the `init.pp` manifest in the `users/manifests` directory. (We're assuming you're still working from the `/etc/puppetlabs/puppet/modules`. The full path would be `/etc/puppetlabs/puppet/modules/users/manifests.init.pp`)
 
@@ -171,13 +171,13 @@ So What happened here? Even though the `users` class was in a different manifest
 
 ## Classification
 
-When you use a *Node Classifier*, such as the Puppet Enterprise Console, you can *classify* nodes - which is to say that you can state which classes apply to which nodes, using the node classifier. This is exactly what we did when we use the PE Console to classify our Learning VM node with the `lvmguide` class in the Power of Puppet quest. In order to be able to classify a node thus, you *must* ensure all of the following:  
+When you use a *Node Classifier*, such as the Puppet Enterprise Console, you can *classify* nodes - which is to say that you can state which classes apply to which nodes, using the node classifier. This is exactly what we did when we used the PE Console to classify our Learning VM node with the `lvmguide` class in the Power of Puppet quest. In order to be able to classify a node thus, you *must* ensure all of the following:  
 
 1. There is a module (a directory) with the same name as the class in the modulepath on the Puppet master
 2. The module has a file called `init.pp` in the `manifests` directory contained within it
 3. This `init.pp` file contains the definition of the class
 
-Once you starting writing and using modules, you can start creating composable configurations for systems. For example, let's say that you have a module called 'ssh' which provides class ssh, another called 'apache' and a third called 'mysql'. Using these three modules, and the classes provided by them, you can now classify a node to be configured with any combination of the three classes. You can have a server that has mysql and ssh managed on it (a database server), another with apache and ssh managed on it (a webserver), and a server with only ssh configured on it. The possibilities are endless. With well-written, community-vetted, even Puppet Supported Modules from the Forge, you can be off composing and managing configuration for your systems in no time. You can also write your _own_ modules that use classes from these Forge modules, as we did with the `lvmguide` class, and resuse them too.
+With modules, you can create composable configurations for systems. For example, let's say that you have a module called 'ssh' which provides class ssh, another called 'apache' and a third called 'mysql'. Using these three modules, and the classes provided by them, you can now classify a node to be configured with any combination of the three classes. You can have a server that has mysql and ssh managed on it (a database server), another with apache and ssh managed on it (a webserver), and a server with only ssh configured on it. The possibilities are endless. With well-written, community-vetted, even Puppet Supported Modules from the Forge, you can be off composing and managing configuration for your systems in no time. You can also write your _own_ modules that use classes from these Forge modules, as we did with the `lvmguide` class, and resuse them too.
 
 ## Review
 
