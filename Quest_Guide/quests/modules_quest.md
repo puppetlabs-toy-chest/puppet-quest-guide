@@ -29,7 +29,7 @@ So far we've seen some simple examples of Puppet code, but what makes Puppet suc
 
 ## What's a Module?
 
-If *resources* and *classes* are the atoms and molecules of Puppet, we might consider *modules* our amoebas: the first self-contained organisms of the Puppet world. Until now, we've been writing one-off manifests to demonstrate individual Puppet topics, but in actual practice, every manifest should be contained within a module. 
+If *resources* and *classes* are the atoms and molecules of Puppet, we might consider *modules* our amoebas: the first self-contained organisms of the Puppet world. 
 
 Thus far, in order to gain insight into Puppet's language features and syntax, we have been writing one-off manifests, perhaps using a source file for the contents of some configuration file (as we did for the SSH daemon configuration) etc. We have to remember, however that Puppet is designed to help you manage _lots_ of systems (not just one system) from a central point - the master. 
 
