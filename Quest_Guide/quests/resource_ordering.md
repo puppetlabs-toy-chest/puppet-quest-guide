@@ -141,7 +141,7 @@ On CentOS machines, such as the VM we are using, the `openssh-server` package in
 
 The **package/file/service** pattern is one of the most useful idioms in Puppet. It’s hard to overstate the importance of this pattern! If you only stopped here and learned this, you could still get a lot of work done using Puppet.
 
-To stay consistent with the package/file/service idiom, let's dive back into the sshd_config file and add the `openssh-server` package to it.
+To stay consistent with the package/file/service idiom, let's dive back into the sshd.pp file and add the `openssh-server` package to it.
 
 {% task 3 %}
 Manage the package for the SSH server
