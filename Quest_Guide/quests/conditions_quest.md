@@ -55,11 +55,11 @@ An `if` statement includes a condition followed by a block of Puppet code that w
 The following is an example of an `if` statement you might use to raise a warning when a class is included on an unsupported system:
 
 {% highlight puppet %}
-if $is_virtual == 'true' {
+if $::is_virtual == 'true' {
   # Our NTP module is not supported on virtual machines:
   warn( 'Tried to include class ntp on virtual machine.' )
 }
-elsif $operatingsystem == 'Darwin' {
+elsif $::operatingsystem == 'Darwin' {
   # Our NTP module is not supported on Darwin:
   warn( 'This NTP module does not yet work on Darwin.' )
 }
@@ -72,11 +72,11 @@ else {
 In addition to the `==` operator, which tests for equality, there is also a regular expression match operator `=~`. The `==` operator is not case sensitive. In the above example, if you had:
 
 {% highlight puppet %}
-if $is_virtual == 'TRUE' {
+if $::is_virtual == 'TRUE' {
   # Our NTP module is not supported on virtual machines:
   warn( 'Tried to include class ntp on virtual machine.' )
 }
-elsif $operatingsystem == 'darwin' {
+elsif $::operatingsystem == 'darwin' {
   # Our NTP module is not supported on Darwin:
   warn( 'This NTP module does not yet work on Darwin.' )
 }
@@ -96,7 +96,7 @@ The regular expression operator `=~` helps you test whether a string matches a p
 
 {% highlight puppet %}
 
-if $hostname =~ /^www(\d+)\./ {
+if $::hostname =~ /^www(\d+)\./ {
   notice("Welcome to web server number $1")
 }
 
