@@ -163,7 +163,7 @@ A Puppet class can be derived from one other class with the `inherits` keyword. 
 Node statements can be derived from other node statements with the `inherits` keyword. This works identically to the way class inheritance works.
 
 {% aside Note:%}
-Node inheritance **should almost always be avoided.** Many new users attempt to use node inheritance to look up variables that have a common default value and a rare specific value on certain nodes; it is not suited to this task, and often yields the opposite of the expected result. If you have a lot of conditional per-node data, we recommend using the Heira tool or assigning variables with an ENC instead.
+Node inheritance **should almost always be avoided.** Many new users attempt to use node inheritance to look up variables that have a common default value and a rare specific value on certain nodes; it is not suited to this task, and often yields the opposite of the expected result. If you have a lot of conditional per-node data, we recommend using the Hiera tool or assigning variables with an ENC instead.
 {% endaside %}
 
 ## master
