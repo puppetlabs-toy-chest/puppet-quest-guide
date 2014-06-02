@@ -81,7 +81,7 @@ Again, if the parser returns nothing, continue on. If not, make the necessary ch
 
 ## Puppet Apply
 
-Once you've created a manifest you will use the `puppet apply` tool to enforce it. The `puppet apply` tool enables you to apply individual manifests locally.  In the real world, you may want an easier method to apply multiple definitions across multiple systems from a central source. We will get there when we talk about classes and modules in suceeding quests. For now, manifests and `puppet apply` aid in learning the Puppet language in small, iterative steps. 
+Once you've created a manifest you will use the `puppet apply` tool to enforce it. The `puppet apply` tool enables you to apply individual manifests locally.  In the real world, you may want an easier method to apply multiple definitions across multiple systems from a central source. We will get there when we talk about classes and modules in succeeding quests. For now, manifests and `puppet apply` aid in learning the Puppet language in small, iterative steps. 
 
 When you run `puppet apply` with a manifest file as the argument, a *catalog* is generated containing a list of all resources in the manifest, along with the desired state you specified. Puppet will check each resource in your environment against the resource declaration in the manifest. Puppet's **providers** will then do everything necessary to bring the state of those resources in line with the resource declarations in your manifest. 
 
@@ -103,14 +103,14 @@ How is byte doing?
 		
 byte does not seem to be doing well. Actually, the user's gone. The `ensure => 'absent'` value clearly made short work of the user account.
 
-{% task 6 %}
+{% task 5 %}
 With Puppet manifests you can create as well as destroy. Lets create a new, stronger sidekick by adding user `gigabyte` to the Learning VM using Puppet. If you need help on how to do this, refer to the previous tasks you've just completed in this quest. One thing to note: `ensure => 'present'` will make sure GigaByte exists in the Learning VM.
 
 The steps include creating a manifest file, and writing the minimal amount of Puppet code required to ensure that the user account is created. This task will be marked complete when the user exists on the system.
 
 ## Review
 
-This is a foundational quest you must understand in order to successfully use Puppet. As you saw when completing this quest, we've added two new tools to your toolbox: `puppet parser` and `puppet apply`. You always want to use `puppet parser` to check the syntax of your manifest before using `puppet apply` to enforce it. This quest contained a walkthough of the "best practice" methods to creating, checking, applying your manifest. We've also created a simplified version below for your reference:
+This is a foundational quest you must understand in order to successfully use Puppet. As you saw when completing this quest, we've added two new tools to your toolbox: `puppet parser` and `puppet apply`. You always want to use `puppet parser` to check the syntax of your manifest before using `puppet apply` to enforce it. This quest contained a walkthrough of the "best practice" methods to creating, checking, applying your manifest. We've also created a simplified version below for your reference:
 
 1. Open or create a manifest with the `.pp` extension
 2. Add or edit your Puppet code

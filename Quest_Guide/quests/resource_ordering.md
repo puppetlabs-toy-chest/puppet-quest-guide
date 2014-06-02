@@ -10,8 +10,8 @@ layout: default
 - Welcome Quest
 - Power of Puppet Quest
 - Resources Quest
-- Mainfest Quest
-- Varibales Quest
+- Manifest Quest
+- Variables Quest
 - Conditions Quest
 
 ## Quest Objectives
@@ -27,31 +27,54 @@ This quest will help you learn more about specifying the order in which Puppet s
 
 ## Explicit Ordering
 
-We are likely to reading instructions from top to bottom and execute them in that order. When it comes to resource declarations in a Puppet manifest, Puppet does things a little differently. It works through the problem as though it were give a list of things to do, and it was left to decide the most efficient way to get those done. We have referred to the catalog vaguely in the previous sections. The **catalog** is a compilation of all the resources that will be applied to a given system, and the relationships between those resources. In building the catalog, unless we _explicitly_ specify the relationship between the resources, Puppet will manage them in its own order.  
+We are likely to read instructions from top to bottom and execute them in that order. When it comes to resource declarations in a Puppet manifest, Puppet does things a little differently. It works through the problem as though it were given a list of things to do, and it was left to decide the most efficient way to get them done. We have referred to the catalog vaguely in the previous sections. The **catalog** is a compilation of all the resources that will be applied to a given system, and the relationships between those resources. In building the catalog, unless we _explicitly_ specify the relationship between the resources, Puppet will manage them in its own order.  
 
 For the most part, Puppet specifies relationships between resources in the appropriate manner while building the catalog. For example, if you say that user `gigabyte` should exist, and the directory `/home/gigabyte/bin` should be present and be owned by user `gigabyte`, then Puppet will specify a relationship between the two - that the user should be managed before the directory. These are implicit (shall we call them obvious?) relationships. 
 
-Sometimes, however, you will need to ensure that a resource declaration is applied before another. For instance, if you wish to declare that a service should be running, you need to ensure that the package for that service is installed and configured before you can start the service. One might ask as to why there is not implicit relationship in this case. The answer is that, often times, more than one package provides the same service, and what if you are using a package you built yourself? Since Puppet cannot _always_ conclusively determine the mapping between a package and a service (the names of the software package and the service or executable it provides are not always the same either), it is up to us to specify the relationship between them.
+Sometimes, however, you will need to ensure that a resource declaration is applied before another. For instance, if you wish to declare that a service should be running, you need to ensure that the package for that service is installed and configured before you can start the service. One might ask as to why there is not an implicit relationship in this case. The answer is that, often times, more than one package provides the same service, and what if you are using a package you built yourself? Since Puppet cannot _always_ conclusively determine the mapping between a package and a service (the names of the software package and the service or executable it provides are not always the same either), it is up to us to specify the relationship between them.
 
 When you need a group of resources to be managed in a specific order, you must explicitly state the dependency relationships between these resources within the resource declarations.
 
 ## Relationship Metaparameters
 
 {% fact %}
-A metaparamter is a resource attribute that can be specified for _any_ type of resource, rather than a specific type.
+A metaparameter is a resource attribute that can be specified for _any_ type of resource, rather than a specific type.
 {% endfact %}
 
 Metaparameters follow the familiar `attribute => value` syntax. There are four metaparameter **attributes** that you can include in your resource declaration to order relationships among resources.
 
 * `before` causes a resource to be applied **before** a specified resource
 * `require` causes a resource to be applied **after** a specified resource
-* `notify` causes a resource to be applied **before** the specified resource. Notify will generate a refresh even whenever the resource changes. 
+* `notify` causes a resource to be applied **before** the specified resource, just as with `before`. Additionally, notify will generate a refresh event for the specified resource when the notifying resource changes. 
 * `subscribe` causes a resource to be applied **after** the specified resource. The subscribing resource will  be refreshed if the target resource changes.
 
-The **value** of the relationship metaparameter is the title or titles (in an array) of one or more target resources.
+The **value** of the relationship metaparameter is the title or titles (in an array) of one or more target resources. Since this is the first time we've mentioned arrays - here's an example of an array:
 
+{% highlight puppet %}
 
-We're going to use SSH as our example. Setting the `GSSAPIAuthentication` setting for the SSH daemon to `no` will help speed up the login process when one tries to establish an SSH connection to the Learning VM. 
+$my_first_array = [ 'one', 'two', 'three']
+
+{% endhighlight %}
+
+Here's an example of how the `notify` metaparameter is used:
+
+{% highlight puppet %}
+file {'/etc/ntp.conf':
+  ensure => file,
+  source => 'puppet:///modules/ntp/ntp.conf',
+  notify => Service['ntpd'],
+}
+
+service {'ntpd':
+  ensure => running,
+}
+{% endhighlight %}
+
+In the above, the file `/etc/ntp.conf` is managed. The contents of the file are sourced from the file `ntp.conf` in the ntp module's files directory. Whenever the file `/etc/ntp.conf` changes, a refresh event is triggered for the service with the title `ntpd`. By virtue of using the notify metaparameter, we ensure that Puppet manage the file first, before it manages the service, which is to say that `notify` implies `before`.
+
+Refresh events, by default, restart a service (such as a server daemon), but you can specify what needs to be done when a refresh event is triggered, using the `refresh` attribute for the `service` resource type, which takes a command as the value.
+
+In order to better understand how to explicitly specify relationships between resources, we're going to use SSH as our example. Setting the `GSSAPIAuthentication` setting for the SSH daemon to `no` will help speed up the login process when one tries to establish an SSH connection to the Learning VM. 
 
 Let's try and disable GSSAPIAuthentication, and in the process, learn about resource relationships.
 
@@ -69,8 +92,6 @@ file { '/etc/ssh/sshd_config':
 {% endhighlight %}
 
 What we have done above is to say that Puppet should ensure that the file `/etc/ssh/sshd_config` exists, and that the contents of the file should be sourced from the file `/root/examples/sshd_config`. The `source` attribute also allows us to use a different URI to specify the file, something we will discuss in the Modules quest. For now, we are using a file in `/root/examples` as the content source for the SSH daemon's configuration file.
-
-Now that we have created the manifest, applying the manifest will ensure that the `/etc/ssh/sshd_config` file will have the exact same content as the `/root/examples/sshd_config` file.
 
 Now let us disable GSSAPIAuthentication.
 
@@ -110,7 +131,7 @@ In the above example, the `service` resource will be applied **after** the `file
 
 ## Package/File/Service
 
-Wait a minute! We are managing the service `sshd`, we are managing it's configuration file, but all that would mean nothing if the package that install the SSH server is not installed. So, to round it up, and make our manifest complete with regards to managing the SSH server on the VM, we have to ensure that the appropriate `package` resource is managed as well. 
+Wait a minute! We are managing the service `sshd`, we are managing its configuration file, but all that would mean nothing if SSH server package is not installed. So, to round it up, and make our manifest complete with regards to managing the SSH server on the VM, we have to ensure that the appropriate `package` resource is managed as well. 
 
 On CentOS machines, such as the VM we are using, the `openssh-server` package installs the SSH server. 
 
@@ -120,7 +141,7 @@ On CentOS machines, such as the VM we are using, the `openssh-server` package in
 
 The **package/file/service** pattern is one of the most useful idioms in Puppet. It’s hard to overstate the importance of this pattern! If you only stopped here and learned this, you could still get a lot of work done using Puppet.
 
-To stay consistent with the package/file/service idiom, let's dive back into the sshd_config file and add the `openssh-server` package to it.
+To stay consistent with the package/file/service idiom, let's dive back into the sshd.pp file and add the `openssh-server` package to it.
 
 {% task 3 %}
 Manage the package for the SSH server
@@ -137,9 +158,9 @@ package { 'openssh-server':
 - Make sure to check the syntax.  
 - Once everything looks good, go ahead and apply the manifest.
 
-Notice that we use `before` to ensure that the package is managed before the configuration file is managed. This makes sense, since if the package weren't installed, the configuration file (and the `/etc/ssh/` directory that contains it would not exist. If you tried to manage to contents of a file in a directory that does not exists, you are destined to fail. By specifying the relationship between the package and the file, we ensure success.
+Notice that we use `before` to ensure that the package is managed before the configuration file is managed. This makes sense, since if the package weren't installed, the configuration file (and the `/etc/ssh/` directory that contains it would not exist. If you tried to manage the contents of a file in a directory that does not exist, you are destined to fail. By specifying the relationship between the package and the file, we ensure success.
 
-Now we have a manifest that manages the package, configuration file and the service, and we specify the order in which they should be managed.
+Now we have a manifest that manages the package, configuration file and the service, and we have specified the order in which they should be managed.
 
 ## Let's do a Quick Review
 

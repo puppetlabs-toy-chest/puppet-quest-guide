@@ -10,7 +10,7 @@ layout: default
 - Welcome Quest
 - Power of Puppet Quest
 - Resources Quest
-- Mainfest Quest
+- Manifest Quest
 - Classes Quest
 - Variables Quest
 
@@ -21,7 +21,7 @@ layout: default
 
 ## Getting Started
 
-Conditional statements allow you to write Puppet code that will return different values or execute different blocks of code depending on the conditions you specify. This, in conjunction with Facter facts, will enable you to write Puppet code that accomodates different platforms, operating systems, and functional requirements.
+Conditional statements allow you to write Puppet code that will return different values or execute different blocks of code depending on conditions you specify. This, in conjunction with Facter facts, will enable you to write Puppet code that accomodates different platforms, operating systems, and functional requirements.
 
 To start this quest enter the following command:
 
@@ -55,11 +55,11 @@ An `if` statement includes a condition followed by a block of Puppet code that w
 The following is an example of an `if` statement you might use to raise a warning when a class is included on an unsupported system:
 
 {% highlight puppet %}
-if $is_virtual == 'true' {
+if $::is_virtual == 'true' {
   # Our NTP module is not supported on virtual machines:
   warn( 'Tried to include class ntp on virtual machine.' )
 }
-elsif $operatingsystem == 'Darwin' {
+elsif $::operatingsystem == 'Darwin' {
   # Our NTP module is not supported on Darwin:
   warn( 'This NTP module does not yet work on Darwin.' )
 }
@@ -69,9 +69,38 @@ else {
 }
 {% endhighlight %}
 
+In addition to the `==` operator, which tests for equality, there is also a regular expression match operator `=~`. The `==` operator is not case sensitive. In the above example, if you had:
+
+{% highlight puppet %}
+if $::is_virtual == 'TRUE' {
+  # Our NTP module is not supported on virtual machines:
+  warn( 'Tried to include class ntp on virtual machine.' )
+}
+elsif $::operatingsystem == 'darwin' {
+  # Our NTP module is not supported on Darwin:
+  warn( 'This NTP module does not yet work on Darwin.' )
+}
+else {
+  # Normal node, include the class.
+  include ntp
+}
+{% endhighlight %}
+
+... the behavior would remain unchanged.
+
 {% aside The Warn Function %}
 The `warn()` function will not affect the execution of the rest of the manifest, but if you were running Puppet in the usual Master-Agent setup, it would log a message on the server at the 'warn' level.
 {% endaside %}
+
+The regular expression operator `=~` helps you test whether a string matches a pattern you specify. For example, in the following, we capture the digits that follow `www` in the hostname, such as `www01` or `www12` and store them in the `$1` variable for use in the `notice()` function.
+
+{% highlight puppet %}
+
+if $::hostname =~ /^www(\d+)\./ {
+  notice("Welcome to web server number $1")
+}
+
+{% endhighlight %}
 
 {% task 1 %}
 Just as we have done in the Variables Quest, let's create a manifest and add a simple conditional statement. The file should report on how long the VM has been up and running.
@@ -113,9 +142,7 @@ The `unless` statement works like a reversed `if` statement. An `unless` stateme
 
 Like `if` statements, case statements choose one of several blocks of Puppet code to execute. Case statements take a control expression, a list of cases, and a series of Puppet code blocks that correspond to those cases. Puppet will execute the first block of code whose case value matches the control expression.
 
-- Basic cases are compared with the `==` operator (which is case-insensitive).
-- Regular expression cases are compared with the `=~` operator (which is case-sensitive).
-- The special `default` case matches anything. It should always be included at the end of a case statement to catch anything that did not match an explicit case.
+A special `default` case matches anything. It should always be included at the end of a case statement to catch anything that did not match an explicit case.
 
 {% task 3 %}
 Create a `case.pp` manifest with the following conditional statement and `file` resource declaration.
@@ -141,7 +168,7 @@ When you've validated your syntax and run a `--noop`, apply the manifest:
 	
 Use the `cat` command to inspect the `case.txt` file. Because the Learning VM is running CentOS, you will see that the selected Apache package name is 'httpd'.
 
-For the sake of simplicity, we've output the result of the case statement to a file, but keep in mind that in an actual practice, instead of using the result of the case statement like the one above to define the contents of a file, you could use it directly in a `package` resource declaration like the following:
+For the sake of simplicity, we've output the result of the case statement to a file, but keep in mind that instead of using the result of the case statement like the one above to define the contents of a file, you could use it as the title of a `package` resource declaration, as shown below:
 
 {% highlight puppet %}
 package { $apache_pkg :
@@ -149,9 +176,9 @@ package { $apache_pkg :
 }
 {% endhighlight %}
 
-This would allow you to always install and manage the right Apache package for a machine's operating system. This  kind of careful accounting for different the conditions under which a manifest might run is an important part of writing flexible and re-usable Puppet code. It is a paradigm you will encounter frequently in published Puppet modules.
+This would allow you to always install and manage the right Apache package for a machine's operating system. Aaccounting for the differences between various platforms is an important part of writing flexible and re-usable Puppet code. It is a paradigm you will encounter frequently in published Puppet modules.
 
-Also note that Puppet will choose the appropriate _provider_ for the package depending on the operating system, without you have to mention it. On Debian-based systems, for example, it may use `apt` and on RedHat systems, it will use `yum`.
+Also note that Puppet will choose the appropriate _provider_ for the package depending on the operating system, without you having to mention it. On Debian-based systems, for example, it may use `apt` and on RedHat systems, it will use `yum`.
 
 ## The 'selector' Statement
 Selector statements are very similar to `case` statements, but instead of executing a block of code, a selector assigns a value directly. A selector might look something like this:
@@ -165,7 +192,7 @@ $rootgroup = $::osfamily ? {
 }
 {% endhighlight %}
 
-Here, the value of the `$rootgroup` is determined based on the control variable `$osfamily`. Following the control variable is a `?` (question mark) keyword. In the block surrounded by curly braces are series of possible values for the $::osfamily fact, followed by the value that the selector should return if the value matches the control variable.
+Here, the value of the `$rootgroup` is determined based on the control variable `$osfamily`. Following the control variable is a `?` (question mark) symbol. In the block surrounded by curly braces are a series of possible values for the $::osfamily fact, followed by the value that the selector should return if the value matches the control variable.
 
 Because a selector can only return a value and cannot execute a function like `fail()` or `warn()`, it is up to you to make sure your code handles unexpected conditions gracefully. You wouldn't want Puppet to forge ahead with an inappropriate default value and encounter errors down the line.
 
@@ -197,7 +224,7 @@ Inspect the contents of the `/root/architecture.txt` file to ensure that the con
 
 ## Before you move on
 
-We have discussed some intense information in the Variables Quest and this Quest. The information contained in all the quests to this point have guided you in creating flexible manifests. Should you not understand any of the topics previously discussed, we highly encourage you to revisit those quests before moving on to the Resource Ordering Quest.
+We have discussed some intense information in the Variables Quest and this Quest. The information contained in all the quests to this point has guided you towards creating flexible manifests. Should you not understand any of the topics previously discussed, we highly encourage you to revisit those quests before moving on to the Resource Ordering Quest.
 
 
 

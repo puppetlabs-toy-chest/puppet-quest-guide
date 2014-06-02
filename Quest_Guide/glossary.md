@@ -119,7 +119,7 @@ In agent/master Puppet arrangements, agent nodes send their facts to the master.
 
 ## filebucket
 
-A repository in which Puppet stores file backups when it has to replace files. A filebucket can be either local (and owned by the node being mangaed) or site-global (and owned by the puppet master). Typically, a single filebucket is defined for a whole network and is used as the default backup location.
+A repository in which Puppet stores file backups when it has to replace files. A filebucket can be either local (and owned by the node being managed) or site-global (and owned by the puppet master). Typically, a single filebucket is defined for a whole network and is used as the default backup location.
 
 ## function
 
@@ -163,7 +163,7 @@ A Puppet class can be derived from one other class with the `inherits` keyword. 
 Node statements can be derived from other node statements with the `inherits` keyword. This works identically to the way class inheritance works.
 
 {% aside Note:%}
-Node inheritance **should almost always be avoided.** Many new users attempt to use node inheritance to look up variables that have a common default value and a rare specific value on certain nodes; it is not suited to this task, and often yields the opposite of the expected result. If you have a lot of conditional per-node data, we recommend using the Heira tool or assigning variables with an ENC instead.
+Node inheritance **should almost always be avoided.** Many new users attempt to use node inheritance to look up variables that have a common default value and a rare specific value on certain nodes; it is not suited to this task, and often yields the opposite of the expected result. If you have a lot of conditional per-node data, we recommend using the Hiera tool or assigning variables with an ENC instead.
 {% endaside %}
 
 ## master
@@ -232,7 +232,7 @@ A type of [relationship](#relationship) that both declares an order for resource
 
 Which resources should be managed before which others.
 
-By default, the order of a [manifest](#manifest) is not the order in which resources are managed. You must declare a [relationship](#relationship) if a resource depends on other resources. See ["Relationships and Ordering"][lang_puppet_relationships] in the Puppet language reference for more details.
+By default, the order of a [manifest](#manifest) is not the order in which resources are managed. You must declare a [relationship](#relationship) if a resource depends on other resources. 
 
 ## parameter
 
@@ -321,7 +321,6 @@ A class that inherits from another class. See [inheritance](#inheritance-class).
 ## subscribe
 
 A notification [relationship](#relationship), set with the `subscribe` [metaparameter](#metaparameter) or the wavy chaining arrow. (`~>`)
-See ["Relationships and Ordering"][lang_puppet_relationships] in the Puppet language reference for more details.
 
 ## template
 

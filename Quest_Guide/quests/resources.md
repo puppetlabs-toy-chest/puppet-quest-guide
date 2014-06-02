@@ -48,7 +48,7 @@ You will not be using resource declarations to shape your environment just yet. 
 Resources can be large or small, simple or complex. In the world of Puppet, you and everything around you (on the Learning VM) are resources. But let's say you wanted to learn more about a particular resource. How would one do that? Well, you have two options: `puppet describe` and `puppet resource`.
 
 {% task 1 %}
-Let's say you want to learn more about the `user` resource type as it applies to all users in the Learning VM. You would need to type the following command:
+Let's say you want to learn more about the `user` resource type as it applies to all users in the Learning VM. Type the following command:
 
 	puppet describe user
 
@@ -75,7 +75,7 @@ user { 'root':
 }
 {% endhighlight %}
 
-The `puppet resource` can interactively inspect and modify resources on a single system as well as can be useful for one-off jobs. However, Puppet was born for greater things which we'll discuss further in the Manifest Quest.
+The `puppet resource` can interactively inspect and modify resources on a single system and can also be useful for one-off jobs. However, Puppet was born for greater things which we'll discuss further in the Manifest Quest.
 
 ### Resource Type
 
@@ -112,32 +112,32 @@ The path to greatness is a lonely one. Fortunately, your superuser status gives 
 	useradd byte
 
 {% task 4 %}
-Now take a look at Byte using the `puppet resource` tool. Type the following command:
+Now take a look at user byte using the `puppet resource` tool. Type the following command:
 
 	puppet resource user byte
             
-Potent stuff. Note that Byte's password attribute is set to `'!!'`. This isn't a proper password at all! In fact, it's a special value indicating Byte has no password whatsoever.
+Potent stuff. Note that byte's password attribute is set to `'!!'`. This isn't a proper password at all! In fact, it's a special value indicating byte has no password whatsoever.
 
 {% task 5 %}
-Let's rectify Byte's password situation by setting it to *puppetlabs*. Type the following command:
+Let's rectify byte's password situation by setting it to *puppetlabs*. Type the following command:
 
 	passwd byte
 
-Now set the password to *puppetlabs* and pressing Enter (Return) twice. You will not see anything displayed as you type the password.
+Now set the password to *puppetlabs* by typing it in and pressing Enter (Return) twice. You will not see anything displayed as you type the password.
 		
-Now if you take another look at Byte using `puppet resource`, the value for Byte's password attribute should now be set to a SHA1 hash of the password, something a little like this: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
+Now if you take another look at byte using `puppet resource`, the value for byte's password attribute should now be set to a SHA1 hash of the password, something a little like this: `'$1$hNahKZqJ$9ul/RR2U.9ITZlKcMbOqJ.'`
 
 {% task 6 %}
-Now have a look at Byte's home directory, which was set to `'/home/byte'` by default. Directories are a special kind of file, and so Puppet knows of them as File resources. The `title` of any file is, by default, the same as the path to that file. Let's find out more about the `tools` directory where our sidekick can store tools. Enter the command:
+Now have a look at byte's home directory, which was set to `'/home/byte'` by default. Directories are a special kind of file, and so Puppet knows of them as File resources. The `title` of any file is, by default, the same as the path to that file. Let's find out more about the `tools` directory where our sidekick can store tools. Enter the command:
 
 	puppet resource file /home/byte/tools
 		
 {% task 7 %}
-What? `ensure => 'absent',`? Values of the `ensure` attribute indicate the basic state of a resource. A value of absent means something doesn't exist at all. We need to make a directory for Byte to store tools in:
+What? `ensure => 'absent',`? Values of the `ensure` attribute indicate the basic state of a resource. A value of absent means something doesn't exist at all. We need to make a directory for byte to store tools in:
 
 	mkdir /home/byte/tools
 		
-Now have another look at Byte's tools directory:
+Now have another look at byte's tools directory:
 
 	puppet resource file /home/byte/tools
 
@@ -150,7 +150,7 @@ This shows your progress by displaying the tasks you've completed and tasks that
 {% endaside %}
 
 {% task 8 %}
-We want Byte to be the owner of the tools directory. To do this, type the following commands:
+We want byte to be the owner of the tools directory. To do this, type the following commands:
  
 	chown -R byte:byte /home/byte/tools
 
@@ -160,18 +160,18 @@ Inspect the state of the directory one more time, to make sure everything is in 
 
 ## The Resource Abstraction Layer
 
-By now, we have seen some examples of how Puppet 'sees' resources on the system. A common pattern you might observe is that these are descriptions of *how* the resource in question should or does look like. In subsequent quests, we will see how, instead of just inspecting existing resource, we can *declare* how specific resource *should look like*, providing us the ability to model the state of these resources. 
+By now, we have seen some examples of how Puppet 'sees' resources on the system. A common pattern you might observe is that these are descriptions of *how* the resource in question should or does look. In subsequent quests, we will see how, instead of just inspecting resources, we can *declare* how specific resources *should look*, providing us the ability to model the state of these resources. 
 
-Puppet provides us this ability to describe resources of different types of resources. Each type is a high-level model of the resource. Our job in defining how a system should be configured is reduced to one of creating a *high-level model* of the *desired state* of the system. We don't need to worry about how that is achieved.
+Puppet provides us this ability to describe resources of different types. Our job of defining how a system should be configured is reduced to one of creating a *high-level model* of the *desired state* of the system. We don't need to worry about how that model is realized.
 
 Puppet takes the descriptions expressed by resource declarations and uses **providers** that are specific to the Operating System to realize them. These Providers abstract away the complexity of managing diverse implementations of resource types on different systems. As a whole, this system of resource types and the providers that implement them is called the **Resource Abstraction Layer**, or **RAL**.
 
-You can describe the ideal state of a user resource. Puppet will choose a suitable provider to realize your definition - in the case of users, Puppet can use providers to manage user records in `/etc/passwd` files or `NetInfo`, or `LDAP`. Similarly, when you wish to install a package, you can stand back and watch Puppet figure out whether to use `yum` or `apt` for package management. This lets you ignore the implentation details with managing the resources, such as the names of the commands (is it `adduser` or `useradd`?) the arguments for the commands, file formats etc and lets you focus on the more important job of modeling the desired state for your systems.
+You can describe the ideal state of a user resource. Puppet will choose a suitable provider to realize your definition - in the case of users, Puppet can use providers to manage user records in `/etc/passwd` files or `NetInfo`, or `LDAP`. Similarly, when you wish to install a package, you can stand back and watch Puppet figure out whether to use `yum` or `apt` for package management. This lets you ignore the implementation-related details of managing the resources, such as the names of the commands (is it `adduser` or `useradd`?), the arguments for the commands, file formats etc and lets you focus on the more important job of modeling the desired state for your systems.
 
 By harnessing the power of the RAL, you can be confident of the potency of your Puppet skills wherever your journey takes you.
 
 
 ## Review
 
-Let's rehash what we learned in this quest. First, we learned two very important Puppet topics: the Resource Abstraction Layer and the anatomy of a resource. To dive deeper into these two important topics, we showed you how to use the `puppet describe` and `puppet resource` tools, which also leads us to a better understanding Puppet's Language. These tools will be tremendously useful to you in the succeeding quests. Unfortunately we didn't get to write any Puppet code in this quest, but that's okay. We're going to start doing that in the Manifest Quest (the next quest)!
+Let's rehash what we learned in this quest. First, we learned two very important Puppet topics: the Resource Abstraction Layer and the anatomy of a resource. To dive deeper into these two important topics, we showed you how to use the `puppet describe` and `puppet resource` tools, which also leads us to a better understanding of Puppet's Language. These tools will be tremendously useful to you in the succeeding quests. Unfortunately we didn't get to write any Puppet code in this quest, but that's okay. We're going to start doing that in the Manifest Quest (the next quest)!
 

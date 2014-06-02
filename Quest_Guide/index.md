@@ -10,12 +10,6 @@ layout: default
 - Learn about the value of Puppet and Puppet Enterprise
 - Familiarize yourself with the Quest structure and tool
 
-## Getting Started
-
-In this quest we'll introduce you to the Learning VM and give you the information you need to get you started on your learning adventure. When you're ready to get started, type the following command:
-
-    quest --start welcome
-
 ## The Puppet Enterprise Learning Virtual Machine
 
 > Any sufficiently advanced technology is indistinguishable from magic.
@@ -47,7 +41,13 @@ password: **puppet**
 
 Once you're logged in, feel free to take a look around. You will see the Learning VM is fairly typical of a Unix-based operating system. You should be aware though, that some services are running in the background, including the SSH service you're using to access this Learning VM from your own terminal.
 
-We should give you a heads up; since you're logged in to the `root` account, which is garnished by the `uid => 0`, you carry the mark of a _Superuser_. Your account gives you the ability to change just about anything you would like in this Learning VM, just as you would if you were tasked with administrating a machine.
+## Getting Started
+
+Let's get introduced to the Learning VM! Later, we will see what quests are, for now, type the following command in the terminal:
+
+    quest --start welcome
+
+We should give you a heads up; since you're logged in to the `root` account, which is garnished by the `uid => 0`, you carry the mark of a _Superuser_. Your account gives you the ability to change just about anything you would like in this Learning VM.
 
 By following this Quest Guide, you will learn how Puppet allows you to use these privileges easily and effectively.
 
@@ -55,7 +55,7 @@ By following this Quest Guide, you will learn how Puppet allows you to use these
 
 So what is Puppet, and why should you care? At a high level, Puppet manages your machines' configurations. You describe your machine configurations in an easy-to-read declarative language, known as the Puppet DSL, and Puppet will bring your systems into the desired state and keep them there.
 
-*Puppet Enterprise* is a complete configuration management platform, with an optimized set of components proven to work well together. It combines Puppet (including a preconfigured production-grade puppet master stack), a web console for analyzing reports and controlling your infrastructure, powerful orchestration features, cloud provisioning tools, and professional support.
+*Puppet Enterprise* is a complete configuration management platform, with an optimized set of components proven to work well together. It combines Puppet (including a preconfigured production-grade Puppet master stack), a web console for analyzing reports and controlling your infrastructure, powerful orchestration features, cloud provisioning tools, and professional support.
 
 It may seem a lot easier to "just run a command" to effect a change in configuration, or perhaps writing a script that executes a series of commands looks like a more effective way to manage the configuration of a system. This is true, as long as you're only concerned about a single change, or changes to a single system. The true power of Puppet is that it allows you to describe all the details of the configuration for multiple machines in a composable manner, and allows you to manage the configuration of multiple machines (think hundreds or thousands) without having to write complicated scripts that are hard to comprehend; or maintaining an inventory of all your systems, and logging in to each system in turn to run the required commands or scripts. Puppet automates the process of configuring your systems and keeping them configured exactly as you need them to be.
 
@@ -110,7 +110,7 @@ Using the quest tool is entirely optional, but we have also integrated it into t
 Typing `clear` into your terminal will remove everything on your terminal screen.
 {% endtip %}
 
-In addition to the quest commandline tool, we have also integrated real-time feedback into the VM, which is displayed in the bottom-right corner of the terminal, as seen in Figure 1. 
+In addition to the quest command line tool, we have also integrated real-time feedback into the VM, which is displayed in the bottom-right corner of the terminal, as seen in Figure 1. 
 
 {% figure 'assets/terminal.png' %} 
 
