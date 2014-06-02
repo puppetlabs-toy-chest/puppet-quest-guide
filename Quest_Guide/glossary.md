@@ -232,7 +232,7 @@ A type of [relationship](#relationship) that both declares an order for resource
 
 Which resources should be managed before which others.
 
-By default, the order of a [manifest](#manifest) is not the order in which resources are managed. You must declare a [relationship](#relationship) if a resource depends on other resources. See ["Relationships and Ordering"][lang_puppet_relationships] in the Puppet language reference for more details.
+By default, the order of a [manifest](#manifest) is not the order in which resources are managed. You must declare a [relationship](#relationship) if a resource depends on other resources. 
 
 ## parameter
 
@@ -321,7 +321,6 @@ A class that inherits from another class. See [inheritance](#inheritance-class).
 ## subscribe
 
 A notification [relationship](#relationship), set with the `subscribe` [metaparameter](#metaparameter) or the wavy chaining arrow. (`~>`)
-See ["Relationships and Ordering"][lang_puppet_relationships] in the Puppet language reference for more details.
 
 ## template
 
