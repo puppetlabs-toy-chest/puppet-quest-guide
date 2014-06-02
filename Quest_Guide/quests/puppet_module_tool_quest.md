@@ -121,5 +121,6 @@ It's as simple as that! So if we wanted our machine to have the `mysql` server i
 
 ## Review
 
-We familiarized ourselves with the Puppet Module tool, which allows to download and manage modules from the Puppet Forge. Once a module is installed, we have access to all the definitions and tools provided by the installed module. This allows us to accelerate the process of managing system configrations with Puppet, by providing us the ability to re-use the work of the Puppet community.
+We familiarized ourselves with the Puppet Module tool, which allows us to download and manage modules from the Puppet Forge. Once a module is installed, we have access to all the definitions and tools provided by the installed module. This allows us to accelerate the process of managing system configrations with Puppet, by providing us the ability to re-use the work of the Puppet community. Once you become familiar with Puppet, you might even contribute to the Forge yourself, sharing your work with the community!
+
 
