@@ -42,7 +42,9 @@ When you're ready to take your Puppet knowledge to the next level, type the foll
 
 The `puppet module` tool is one of the most important tools in expanding your use of Puppet. The `puppet module` tool allows you to create, install, search, (and so much more) for modules on the Forge. We'll also discuss the Puppet Forge in greater detail below.
 
-The `puppet module` tool has subcommands that make finding, installing, and managing modules from the Forge much easier from the command line. It can also generate empty modules, and prepare locally developed modules for release on the Forge. ## Actions
+The `puppet module` tool has subcommands that make finding, installing, and managing modules from the Forge much easier from the command line. It can also generate empty modules, and prepare locally developed modules for release on the Forge. 
+
+### Actions
 
 - `list` - List installed modules.
 - `search` - Search the Puppet Forge for a module.
