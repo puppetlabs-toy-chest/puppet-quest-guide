@@ -277,6 +277,13 @@ The details may not be extremely clear at this point in your learning journey, b
 
 The real power here is that you now have the class `lvmguide` that can be applied to any number of nodes as long as you manage them with Puppet. Since we have `lvmguide` as a module in a directory by itself, you can share that directory with someone else, and ask them to place it in their Puppet master's modulepath, where they too can also get the Quest Guide website up and running on any number of nodes. With a few lines of code, we installed and configured the Apache httpd web server to serve us the Quest Guide website, by leveraging a freely available, shared, module from the forge - `puppetlabs-apache`. 
  
+## Modules, Classes - Oh My!
+
+As you follow along with the next few quests, it may help to keep in mind the overall structure of Puppet code. At the highest level, Puppet uses modules as a means of organizing code and bringing together all the definitions, files, templates -- all the things that are needed to manage a certain technology or directed towards a particular purpose. For example, we used the apache module in this current quest - which provides everything needed to configure or manage an apache httpd server. Modules are designed to be resused, so the same module can be used to configure systems with different operating systems and features.
+
+Modules contain definitions for Classes, which provide for reuse as well. Classes provide for containers of resources - so you can reuse common associations between several resources such as files, users, packages and services - without having to redefine them completely each time. The apache class, which belongs in the apache module includes definitions for how the httpd service should be configured, how the configuration file should look like, and what package needs to be installed to provide the httpd server etc. Combined with the ability to specify dependencies between resources (for example, you can specify that whenever the configuration file's contents change, the httpd server is to be restated), classes allow Puppet to be flexible and powerful by reusing well-defined collections of resources.
+
+Before you can embark on creating your own classes and modules, however, you will need to understand the syntax that Puppet uses to describe resources and the relationships between them. This is done using __Manifests__, and in the next few quests, we will learn how to write manifests in Puppet's language.
 
 ## Review
 
