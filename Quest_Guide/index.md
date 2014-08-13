@@ -16,40 +16,20 @@ layout: default
 
 > -Arthur C. Clarke
 
-Welcome to the Quest Guide for the Puppet Enterprise Learning Virtual Machine (VM). This guide is your companion to learning Puppet using the Learning VM. You should have started up the VM by now, and have an IP Address for the VM. 
+Welcome to the Quest Guide for the Puppet Enterprise Learning Virtual Machine (VM). This guide is your companion to learning Puppet using the Learning VM. You should have started up the VM by now, and have an open SSH session from your terminal or SSH client.
 
-Use the IP address to SSH to the VM. We do this for convenience and it's essential for you to get the most out of the Learning VM and this Quest Guide. 
+If you need to, return to the Setup section and review the instructions to get caught up. Remember, the credentials to log in to the Learning VM via SSH are:
 
-If you are logged in directly to the Virtual Machine, please logout from it by typing the following command in the VM's terminal and pressing Enter:
-
-    exit
-
-We will now connect to the VM over SSH.
-
-To SSH to the VM, on a Linux system or a Mac, you can open a Terminal application and run the following command:
-
-    ssh root@<ip-address>
-
-where `<ip-address>` will be replaced by the IP address for your Learning VM that you noted down when setting up your VM.
-
-If you are using a Windows computer, please use an SSH client. We recommend [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html).
-
-Here are the credentials to log in to the Learning VM via SSH:
-
-username: **root**  
-password: **puppet**
+ * username: **root**  
+ * password: **puppet**
 
 Once you're logged in, feel free to take a look around. You will see the Learning VM is fairly typical of a Unix-based operating system. You should be aware though, that some services are running in the background, including the SSH service you're using to access this Learning VM from your own terminal.
 
 ## Getting Started
 
-Let's get introduced to the Learning VM! Later, we will see what quests are, for now, type the following command in the terminal:
+We've created a quest tool to to provide structure and feedback as you progress through each Quest included with the Learning VM. You'll have a chance to learn more about this tool below, but for now, type the following command into your terminal to tell the quest tool you've started the "Welcome" quest.
 
     quest --start welcome
-
-We should give you a heads up; since you're logged in to the `root` account, which is garnished by the `uid => 0`, you carry the mark of a _Superuser_. Your account gives you the ability to change just about anything you would like in this Learning VM.
-
-By following this Quest Guide, you will learn how Puppet allows you to use these privileges easily and effectively.
 
 ## What is Puppet?
 
@@ -57,12 +37,12 @@ So what is Puppet, and why should you care? At a high level, Puppet manages your
 
 *Puppet Enterprise* is a complete configuration management platform, with an optimized set of components proven to work well together. It combines Puppet (including a preconfigured production-grade Puppet master stack), a web console for analyzing reports and controlling your infrastructure, powerful orchestration features, cloud provisioning tools, and professional support.
 
-It may seem a lot easier to "just run a command" to effect a change in configuration, or perhaps writing a script that executes a series of commands looks like a more effective way to manage the configuration of a system. This is true, as long as you're only concerned about a single change, or changes to a single system. The true power of Puppet is that it allows you to describe all the details of the configuration for multiple machines in a composable manner, and allows you to manage the configuration of multiple machines (think hundreds or thousands) without having to write complicated scripts that are hard to comprehend; or maintaining an inventory of all your systems, and logging in to each system in turn to run the required commands or scripts. Puppet automates the process of configuring your systems and keeping them configured exactly as you need them to be.
+At first, it may seem simpler to run a shell command or write a script to configuration of a system. As long as you're only concerned with a single change or changes to a single system, this may be true. Puppet allows you to describe all the details of the configuration for multiple systems in a composable manner. It allows you to manage the configuration of these systems (think hundreds or thousands) in a way that is simpler to maintain and understand than a collection of complicated scripts and doesn't require you to log in to each system in turn to run the required commands or scripts. Though it may take a little upfront Puppet automates the full process of configuration, maintenance, inventory, and reporting for all the systems in your infrastructure.
 
-But a journey of a thousand miles starts with a single step. This Learning VM will get you started by means of examples that help you configure the VM. While doing the exercises, imagine the possibilities in using what you learn to manage hundreds or thousands of systems in an effortless, intuitive manner!
+But a journey of a thousand miles starts with a single step. This guide will get you started with Puppet by walking through tasks to configure the Learning VM. While doing the exercises, keep in mind that the modular tools you'll apply to the Learning VM can adapted to automate the maintenance of hundreds of differing systems with little extra effort.
 
 {% task 1 %}
-Before we dig any deeper, let's check and see what version of Puppet Enterprise we are running on this Learning VM. Type the following command:
+Before digging any deeper, check and see what versions of Puppet and Puppet Enterprise are running on this Learning VM. Type the following command:
 
 	puppet -V	# That's a capital 'V'
 
@@ -70,17 +50,19 @@ You will see something like the following:
 
 _3.4.3 (Puppet Enterprise 3.2.1)_
 
-This indicates that Puppet Enterprise 3.2.1 is installed on the Learning VM, which leverages Puppet version 3.4.3. Puppet Enterprise includes more than 40 open source projects, including Puppet, MCollective, PuppetDB, Hiera, and others that we’ve integrated, certified, performance-tuned, and security-hardened to make it a complete solution suitable for automating mission-critical enterprise infrastructure. In addition, it includes several capabilities found only in Puppet Enterprise, including event inspection, supported modules, role-based access control, certification management and VMware cloud provisioning.
+This indicates that Puppet Version 3.4.3 Puppet Enterprise 3.2.1 are installed on the Learning VM. Note that the Puppet version and Puppet Enterprise versions are different. This is because Puppet Enterprise includes a version of the Puppet open source software, along with MCollective, PuppetDB, Hiera, and more than 40 other open source projects that we’ve integrated, certified, performance-tuned, and security-hardened in order to make PE a complete solution suitable for automating mission-critical enterprise infrastructure. In addition to these integrated open source projects, PE includes many of its own features, including event inspection, supported modules, role-based access control, certification management and VMware cloud provisioning.
 
 ## What is a Quest?
 
-Up to this point we've introduced you to the Learning VM and Puppet. We'll continue to dive into greater detail about Puppet in future quests. Wait a minute! What's a quest? That's a great question! A **Quest** is a structured tutorial consisting of a number of interactive tasks that will help you learn about a topic related to Puppet.
+At this point we've introduced you to the Learning VM and Puppet. We'll continue to dive into greater detail about Puppet in future quests. But first, what's a quest? This guide contains collection structured tutorials that we call *quests*. Each *quest* consists of a number of interactive *tasks* that will give you hands-on experience with a topic related to Puppet.
 
-Each Quest includes a number of **Tasks** that give you a hands-on opportunity to apply what you have learned. You have already finished a task by now, since the first task was to execute the `puppet -V` command earlier. But how do you keep track of everything as you progress? What if you forget what quest you are on? These are all great questions and that's why we specifically created a 'Quest Tool' for this Learning VM to help you when you're in need.
+If you executed the `puppet -V` command earlier, you've already completed your first task. (If not, go ahead and do so now.)
+
+But how do you keep track of everything as you progress? What if you forget what quest you are on, or which tasks you've already completed? These are all great questions and that's why we created a quest tool to provide feedback and keep you on track as you work through the quests included in this guide.
 
 ## The Quest Tool
 
-To monitor your status as you progress through these Quests, we've created a quest tool you can use in the Learning VM. However, this quest tool is not part of Puppet itself. We have included this tool in the Learning VM to provide you with real-time feedback as you progress through the many Quests and Tasks on your journey to learn Puppet.
+To help you get comfortable with the quest tool, we've included a few tasks to demonstrate the tool itself.
 
 {% warning %}
 
@@ -100,17 +82,15 @@ The `quest --help` command provides you with a list of all the options for the `
     quest --start <name> # Provide the name of a quest to start tracking progress
 	
 {% task 3 %}
-Let's find out how much progress you have made thus far! Execute the following command:
+Find out how much progress you have made so far:
 
-	quest --progress 
-	
-Using the quest tool is entirely optional, but we have also integrated it into the first few quests to help you out if needed.
+	quest --progress
 
 {% tip %}
 Typing `clear` into your terminal will remove everything on your terminal screen.
 {% endtip %}
 
-In addition to the quest command line tool, we have also integrated real-time feedback into the VM, which is displayed in the bottom-right corner of the terminal, as seen in Figure 1. 
+While you can use the quest commands to find more detailed information about your progress through the quests, you can check on your progress real time by having a look at the quest status display at the bottom right of your terminal window. A process running in the background of the VM updates this status every two seconds so you can easily keep up with your progress as you complete each task.
 
 {% figure 'assets/terminal.png' %} 
 
