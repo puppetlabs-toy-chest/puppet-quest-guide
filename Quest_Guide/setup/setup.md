@@ -34,7 +34,7 @@ Launch VMware fusion. If it opens with a setup dialogue, close out of this. This
 
 From the VMWare __File__ menu, select __Open__ and navigate to the .vmx file included in your Learning VM download. You may also drag and drop the .vmx file into the VMWare virtual machine library.
 
-Don't launch the VM just yet. There are a few configuration steps that you should complete before launching the Learning VM for the first time. If you skipped ahead and already launched the learning VM, shut it down by logging in with the credentials `root` and `puppet` and entering the command `shutdown now`. If you run into errors, remember that you can simply delete the VM and create another by unpacking the .zip archive and following the instructions above.
+Don't launch the VM just yet. There are a few configuration steps that you should complete before launching the Learning VM for the first time. If you skipped ahead and already launched the learning VM, shut it down by logging in with the credentials `root` and `puppet` and entering the command `shutdown -P now`. If you run into errors, remember that you can simply delete the VM and create another by unpacking the .zip archive and following the instructions above.
 
 With the Learning VM selected in the VMWare library, open the __Settings__ panel and click the __Network Adapter__ icon.
 
@@ -60,7 +60,7 @@ Choose “Import Appliance” from the File menu and select the .ovf file includ
 	
 __Do not__ use the “New Virtual Machine Wizard” and select the included .vmdk file as the disk; machines created this way will kernel panic during boot. 
 
-Don't launch the VM just yet. There are a few configuration steps that you should complete before launching the Learning VM for the first time. If you skipped ahead and already launched the learning VM, shut it down by logging in with the credentials `root` and `puppet` and entering the command `shutdown now`. If you run into errors, remember that you can simply delete the VM and create another by unpacking the .zip archive and following the instructions above. 
+Don't launch the VM just yet. There are a few configuration steps that you should complete before launching the Learning VM for the first time. If you skipped ahead and already launched the learning VM, shut it down by logging in with the credentials `root` and `puppet` and entering the command `shutdown -P now`. If you run into errors, remember that you can simply delete the VM and create another by unpacking the .zip archive and following the instructions above. 
 
 In the VirtualBox Manager panel, select __Network__ to access networking options. Choose __Bridged Adapter__ from the drop-down menu.
 
@@ -78,7 +78,7 @@ Once the VM is powered up, continue to the Next Steps section below.
 
 ## Next Steps
 
-Once the VM is booted, log in using the following credentials:  
+Once the VM is booted, hit enter to get to the login prompt, and log in using the following credentials:  
 
 * username: **root**
 * password: **puppet**
