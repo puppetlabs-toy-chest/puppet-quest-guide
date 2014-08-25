@@ -7,21 +7,21 @@ layout: default
 
 ## About the Learning Virtual Machine
 
-The Learning Virtual Machine (VM) is a sandbox environment equipped with everything you'll ned to get started learning Puppet and Puppet Enterprise (PE). Because we believe exploration and playfulness are key to successful learning, we've done our best to make getting started with Puppet a fun and frictionless process. The VM is powered by CentOS Linux and for your convenience, we've pre-installed Puppet Enterprise (PE) along with everything you'll need to put it into action. Before you get started, however, we'll walk you through a few steps to get the VM configured and running.
+The Learning Virtual Machine (VM) is a sandbox environment equipped with everything you'll need to get started learning Puppet and Puppet Enterprise (PE). Because we believe exploration and playfulness are key to successful learning, we've done our best to make getting started with Puppet a fun and frictionless process. The VM is powered by CentOS Linux and for your convenience, we've pre-installed Puppet Enterprise (PE) along with everything you'll need to put it into action. Before you get started, however, we'll walk you through a few steps to get the VM configured and running.
 
 The Learning VM comes in two flavors. You downloaded this guide with either a VMware (.vmx) file or an Open Virtualization Format (.ovf) file. The .vmx version works with VMware Player or VMware Workstation on Linux and Windows based machines, and VMware Fusion for Mac. The .ovf file is suitable for Oracle's Virtualbox as well as several other virtualization players that support this format.
 
-We've included specific instructions below for VMware Fusion, VMware Player, and Virtualbox. but the outlines of the setup process should be easily applicable to other virtualization software. If you run into issues getting the Learning VM set up, feel free to contact us at learningvm@puppetlabs.com, and we'll do our best to help out.
+We've included instructions below for VMware Fusion, VMware Player, and Virtualbox. If you run into issues getting the Learning VM set up, feel free to contact us at learningvm@puppetlabs.com, and we'll do our best to help out.
 
 ## Getting started with the Learning VM
 
-If you haven't already downloaded VMware Player, VMware Fusion, or Oracle Virtualbox, please see the linked below:
+If you haven't already downloaded VMware Player, VMware Fusion, or Oracle Virtualbox, please see the links below:
 
 * [VMWare Player](http://www.vmware.com/go/downloadplayer)
 * [VMWare Fusion](http://www.vmware.com/go/downloadfusion)
 * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
-We also recommend having a terminal application or SSH client to interact with the Learning VM over a Secure Shell (SSH) connection. This will be a bit more comfortable than interacting with the virtualization software directly. If you're using Mac OS, you will be able to run SSH by way of the default Terminal application or a third party application like [iTerm](http://iterm2.com/). If you are on a Windows OS, we suggest downloading [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html), a free SSH client for Windows.
+You'll also need an SSH client to interact with the Learning VM over a Secure Shell (SSH) connection. This will be more comfortable than interacting with the virtualization software directly. If you're using Mac OS, you will be able to run SSH by way of the default Terminal application or a third party application like [iTerm](http://iterm2.com/). If you are on a Windows OS, we recommend [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html), a free SSH client for Windows.
 
 Once you have an up-to-date virtualization application and the means to SSH to the Learning VM you're ready to configure the Learning VM itself.
 
@@ -29,7 +29,7 @@ If you're reading this guide, you've already extracted the .zip file that contai
 
 ## VM Setup
 
-Start by launching your virtualization software. It may open with a New Virtual Machine dialogue or wizard; if you see this, close out of it. This dialogue is for creating a new virtual machine, and will mislead you if you're trying to open the Learning VM file.
+Start by launching your virtualization software. (Don't be tempted by any dialogues or wizards that pop up the first time you open the software. These will walk you through creating a *new* virtual machine, and will mislead you if you're trying to open the *existing* Learning VM file.) 
 
 Depending on what virtualization software you're using, there are some slight variations in how you'll open Learning VM file.
 
@@ -49,7 +49,7 @@ First, in under **Network** or **Network Adapter**, confirm that the **Network A
 
 Next, you'll need to increase the memory allocation and processors to the VM to ensure that it has the resources neccessary to run smoothly. These options are under **System** in VirtualBox and **Processors & Memory** in VMware Fusion. Allocate 4 GB of memory (4096 MB) and two processor cores. You can run the Learning VM with less memory and fewer processor cores, but you may encounter performance issues.
 
-Now that your settings are configured, click the __Power On__ button to boot up the VM.
+Now that your settings are configured, select __Start__ or __Power On__ to boot up the VM.
 
 {% aside Input Capture %}
 Virtualization software uses mouse and keyboard capture to 'own' these devices and communicate input to the guest operating system. The keystroke to release the mouse and keyboard will be displayed at the top right of the VM window.
