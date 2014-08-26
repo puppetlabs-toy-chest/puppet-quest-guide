@@ -7,99 +7,89 @@ layout: default
 
 ## About the Learning Virtual Machine
 
-The Learning Virtual Machine (VM) is a sandbox environment for you to play with and learn about Puppet Enterprise. The VM is powered by CentOS Linux and for your convenience, we've already pre-installed Puppet Enterprise (PE) onto the VM. To get started with learning about Puppet Enterprise, we first need to get the VM running. 
+The Learning Virtual Machine (VM) is a sandbox environment equipped with everything you'll need to get started learning Puppet and Puppet Enterprise (PE). Because we believe exploration and playfulness are key to successful learning, we've done our best to make getting started with Puppet a fun and frictionless process. The VM is powered by CentOS Linux and for your convenience, we've pre-installed Puppet Enterprise (PE) along with everything you'll need to put it into action. Before you get started, however, we'll walk you through a few steps to get the VM configured and running.
 
-The Learning VM comes in two flavors - a VMware version that is suitable for VMware Player or VMware Workstation on Linux and Windows based machines, and VMware Fusion for Mac, as well an Open Virtualization Format (OVF) file that is suitable for all virtualization players that support it. In this case we recommend Oracle's Virtualbox. 
+The Learning VM comes in two flavors. You downloaded this guide with either a VMware (.vmx) file or an Open Virtualization Format (.ovf) file. The .vmx version works with VMware Player or VMware Workstation on Linux and Windows based machines, and VMware Fusion for Mac. The .ovf file is suitable for Oracle's Virtualbox as well as several other virtualization players that support this format.
+
+We've included instructions below for VMware Fusion, VMware Player, and Virtualbox. If you run into issues getting the Learning VM set up, feel free to contact us at learningvm@puppetlabs.com, and we'll do our best to help out.
 
 ## Getting started with the Learning VM
 
-In order to get started, we need to open the file with the appropriate virtualization software. If you haven't already downloaded VMware Player, VMware Workstation, or Oracle Virtualbox, please see the linked below:
+If you haven't already downloaded VMware Player, VMware Fusion, or Oracle Virtualbox, please see the links below:
 
 * [VMWare Player](http://www.vmware.com/go/downloadplayer)
+* [VMWare Fusion](http://www.vmware.com/go/downloadfusion)
 * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
-We will need to ssh to the Learning VM, and Putty is a free SSH client for Windows. If you are using a Windows computer, please also download [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html). 
+You'll also need an SSH client to interact with the Learning VM over a Secure Shell (SSH) connection. This will be more comfortable than interacting with the virtualization software directly. If you're using Mac OS, you will be able to run SSH by way of the default Terminal application or a third party application like [iTerm](http://iterm2.com/). If you are on a Windows OS, we recommend [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html), a free SSH client for Windows.
 
-Once that is complete, please follow the instructions in the following sections.
+Once you have an up-to-date virtualization application and the means to SSH to the Learning VM you're ready to configure the Learning VM itself.
 
-### VMware Setup
+If you're reading this guide, you've already extracted the .zip file that contains the Learning VM. Keep that .zip file around in case you want to create a fresh instance of the Learning VM without having the re-do the download.
 
-Before we get started, please ensure you have an up-to-date installation of your VMware virtualization software. Once you're certain everything is up to date, open the *.vmx*  file you extracted from the VMware VM zip file, change the Network Adapter to use a Bridged connection, tweak the memory settings (we recommend increasing), and finally, power on the VM. If at any point, you are not sure or want to start from scratch, you can delete the files extracted from the zip archive, and start over again by extracting the files from the archive.
+## VM Setup
 
-For the rest of this guide, the instructions are for VMware Fusion. 
+Start by launching your virtualization software. (Don't be tempted by any dialogues or wizards that pop up the first time you open the software. These will walk you through creating a *new* virtual machine, and will mislead you if you're trying to open the *existing* Learning VM file.) 
 
-From the VMWare __File__ menu, select __Open__ and navigate to the .vmx file included in your Learning VM download. You can also drag and drop the .vmx file into the VMWare virtual machine library.
+Depending on what virtualization software you're using, there are some slight variations in how you'll open Learning VM file.
 
-Don't launch the VM just yet; we'll want to adjust a couple of settings first. With the Learning VM selected in the VMWare library, open the __Settings__ panel and click the __Network Adapter__ icon.
+ * In __VMware Player__ there will be an _Open a Virtual Machine_ option on the Welcome screen.  You can also select *File > Open...* from the *Player* menu in the top left.
+ 
+ * For __VMWare Fusion__,  select _File > Open..._ from the menu bar.
+ 
+ * For __VirtualBox__, select _File > Import Appliance..._ from the menu bar.
+ 
+ * If you're using different virtualization software, just be sure to *open* or *import*, rather than *create new*.
 
-Select __Autodetect__ under the __Bridged Networking__ heading as shown in the example.
+Don't launch the VM just yet. There are a few configuration steps that you should complete before launching the Learning VM for the first time. (If you skipped ahead and already launched the VM, shut it down by logging in with the credentials `root` and `puppet` and entering the command `shutdown -P now`. And if you run into errors, remember that you can simply delete the VM and create another by unpacking the .zip archive and following the instructions above.)
 
-{% figure '../assets/vmware_network_bridged.png' %}
+With the Learning VM selected in the library or manager window, open the __Settings__ panel. There are a few things to adjust here.
 
-Next, we'll want to allocate some extra memory to the VM to ensure that it has the resources neccessary to run smoothly. Go back to the __Settings__ panel and click the __Processors & Memory__ icon. We suggest allocating four gigabytes of memory, as shown in Figure 2. If you cannot allocate 4 GB, we recommend that you allocate at least 2 GB. Use the slider to set your memory allocation. Note that the Learning VM will likely still function with less memory allocated, but you may encounter performance issues.
+First, in under **Network** or **Network Adapter**, confirm that the **Network Adapter** is enabled, and configure it to use **Bridged** networking.
 
-{% figure '../assets/vmware_memory.png' %}
+Next, you'll need to increase the memory allocation and processors to the VM to ensure that it has the resources neccessary to run smoothly. These options are under **System** in VirtualBox and **Processors & Memory** in VMware Fusion. Allocate 4 GB of memory (4096 MB) and two processor cores. You can run the Learning VM with less memory and fewer processor cores, but you may encounter performance issues.
 
-Now that your settings are configured, click the __Power On__ button to boot up the VM.
+Now that your settings are configured, select __Start__ or __Power On__ to boot up the VM.
 
-	NOTE: Virtualization software uses mouse and keyboard capture to 'own' these devices and communicate input to the guest operating system. The keystroke to release the mouse and keyboard will be displayed at the top right of the VM window.
-
-Once the VM is powered up, skip ahead to the Next Steps section below.
-
-### VirtualBox Setup
-
-Be sure you have an up-to-date installation of VirtualBox. The Learning VM works best with VirtualBox 4.x. If you don't have VirtualBox 4.x, please get you [free download](https://www.virtualbox.org/wiki/Downloads) of the latest version.
-
-Choose “Import Appliance” from the File menu and select the .ovf file included with your download.
-	
-NOTE: __Do not__ use the “New Virtual Machine Wizard” and select the included .vmdk file as the disk; machines created this way will kernel panic during boot. 
-
-Don't launch the VM just yet; we'll want to adjust a couple of settings first. 
-
-In the VirtualBox Manager panel, select __Network__ to access networking options. Choose __Bridged Adapter__ from the drop-down menu.
-
-{% figure './assets/vbox_network_bridged.png' %}
-
-For everything to work smoothly, we suggest allocating four gigabytes of memory to the VM, as shown in Figure 4 below. If it's not possible to allocate four gigabytes, we recommend at least two gigabytes. In the VirtualBox Manager panel, click __System__ to access the system options and use the slider to set your memory allocation. Note that the Learning VM will likely still function with less memory allocated, but you may encounter performance issues.
-
-{% figure './assets/vbox_memory.png' %}
-
-Now that everything is configured, click the __Start__ button in the upper left to boot up the VM.
-
-Note: Refer to [VirtualBox documentation](http://www.virtualbox.org/manual) for additional information as required.
-
-Once the VM is powered up in VirtualBox, follow the Next Steps below:
+{% aside Input Capture %}
+Virtualization software uses mouse and keyboard capture to 'own' these devices and communicate input to the guest operating system. The keystroke to release the mouse and keyboard will be displayed at the top right of the VM window.
+{% endaside %}
 
 ## Next Steps
 
-Once you have the VM running, log into it using the following credentials:  
+Once the VM is booted, you may have to hit `enter` to see to the login prompt. Log in using the following credentials:  
 
-* Login Username: root
-* Password: puppet
+* username: **root**
+* password: **puppet**
 
-Once you are logged in, please make a note of the IP address. You'll need this to access the VM via SSH. If you forget the IP address, or if it changes, you can access it again by entering the following command:
+All you'll want to do for now is get the Learning VM's IP address. Use the Facter tool bundled with Puppet Enterprise tool to find it.
+		
+	facter ipaddress
 
-		ifconfig
+Make a note of the IP address displayed. You'll need it to open an SSH connection to the Learning VM and in order to access to the PE Console later.
 
-The IP address will be listed as the `inet addr` for the `eth0` interface. For example:
-
-{% figure './assets/setup_ifconfig.png' %}
-
-The IP address for the VM in the above example is: __192.168.16.135__. Please note that the IP address for your VM will be different.
-
-One more thing before we are done. To ensure you have the best experience, and the quest progress tracking works as expected, you need to **logout from the VM**.
-
-Type the command:
+Now log out from the VM. Enter the command:
 
     exit
 
-and press enter, in the VM.
+Now that you have the IP address, open an SSH connection to the Learning VM. 
 
-Now you are ready to learn more about Puppet using the installation of Puppet Enterprise on the VM. Please continue following the rest of the Quest Guide. In addition to the VM, the following resources may be handy in your journey to learn Puppet:
+On a Linux system or a Mac, you can open a Terminal application and run the following command, replacing `<ip-address>` with the IP address of your Learning VM:
+
+    ssh root@<ip-address>
+
+If you are on a Windows system, use an SSH client. We recommend [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html). Enter the IP address into the *Hostname* textbox and click *Open* to start your session.
+
+Use the same credentials:
+
+ * username: **root**  
+ * password: **puppet**
+
+Now that the Learning VM is configured and you're connected, you're all set to take on your first quest! We hope you have fun learning Puppet!
+
+In addition to the VM, the following resources may be handy in your journey to learn Puppet:
 
 * [Puppet users group](http://groups.google.com/group/puppet-users)
 * [Puppet Ask - Q&A site](http://ask.puppetlabs.com)
-* #puppet IRC channel on irc.freenode.net
+* \#puppet IRC channel on irc.freenode.net
 * You can also email us at <learningvm@puppetlabs.com>
-
-We hope you have fun learning Puppet!
