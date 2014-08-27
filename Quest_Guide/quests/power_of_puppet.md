@@ -34,16 +34,12 @@ But where do these modules come from? The [Puppet Forge](http://forge.puppetlabs
 
 To get started setting up the Quest Guide website, you'll need to download and install Puppet Labs' Apache module from the Forge. (If you're offline or behind a firewall, check the aside below for instructions on using the cached version of the module.) 
 
-{% fact %}
-If you like, check out the module's [page on the Forge](http://forge.puppetlabs.com/puppetlabs/apache) to see details and documentation.
-{% endfact %}
-
 The `apache` module gives you everything you need to automate installing, configuring, and starting an Apache webserver. In your terminal, enter the following command to install the module:
 
 	puppet module install puppetlabs-apache
 	
 {% aside Offline? %}
-We've cached the required modules on the Learning VM. If you don't have internet access, run the following terminal commands instead of using the `puppet module` tool:
+If you don't have internet access, run the following terminal commands to used a cached version of the module:
 
 	cd /etc/puppetlabs/puppet/modules  
 
@@ -210,7 +206,9 @@ class lvmguide (
 
 (To exit out of the file, use the command `control-x` in nano, or `:q!` in vim.)
 
-If you're not used to reading code, this might seem like a lot of detail. We'll give you a quick overview so the concepts will be more familiar when encounter them later on, but don't worry about getting it all right away.
+Don't worry about understanding each detail of the syntax just yet. For now, we'll just give you a quick overview so the concepts won't be totally new when you encounter them later on. 
+
+#### Class Title and Parameters:
 
 {% highlight puppet %}
 class lvmguide (
@@ -221,6 +219,7 @@ class lvmguide (
 
 The class `lvmguide` takes two parameters: `$document_root` and `$port`. The default values are set as `/var/www/html/lvmguide` and `80`.
 
+#### Include the apache module's apache class:
 {% highlight puppet %}
   class { 'apache': 
     default_vhost => false,
@@ -229,6 +228,7 @@ The class `lvmguide` takes two parameters: `$document_root` and `$port`. The def
 
 The `lvmguide` class declares another class: `apache`. Puppet knows about the `apache` class because it is defined by the `apache` module you installed earlier. The `default_vhost` parameter for the `apache` class is set to `false`. This is all the equivalent of saying "Set up Apache, and don't use the default VirtualHost because I want to specify my own."
 
+#### Include the apache module's vhost class:
 {% highlight puppet %}
   apache::vhost { 'learning.puppetlabs.vm':
     port    => $port,
@@ -238,6 +238,7 @@ The `lvmguide` class declares another class: `apache`. Puppet knows about the `a
 
 This block of code declares the `apache::vhost` class for the Quest Guide with the title `learning.puppetlabs.vm`, and with `$port` and `$docroot` set to those class parameters we saw earlier. This is the same as saying "Please set up a VirtualHost website serving the 'learning.puppetlabs.vm' website, and set the port and document root based on the parameters from above."
 
+#### Manage the files for our content:
 {% highlight puppet %}
   file { '/var/www/html/lvmguide':
     ensure  => directory,
