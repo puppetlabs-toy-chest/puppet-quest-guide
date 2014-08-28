@@ -68,7 +68,7 @@ All you'll want to do for now is get the Learning VM's IP address. Use the Facte
 
 Make a note of the IP address displayed. You'll need it to open an SSH connection to the Learning VM and in order to access to the PE Console later.
 
-Now log out from the VM. Enter the command:
+For the Learning VM's quest tool to work smoothly, you'll need to log out before starting your SSH session. (The file that tracks your command line history will only be created after you log out for the first time.) Enter the command:
 
     exit
 
