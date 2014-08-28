@@ -41,11 +41,7 @@ The `apache` module gives you everything you need to automate installing, config
 {% aside Offline? %}
 If you don't have internet access, run the following terminal commands to used a cached version of the module:
 
-	cd /etc/puppetlabs/puppet/modules  
-
-	tar zxvf /usr/src/forge/puppetlabs-apache-0.8.1.tar.gz -C .  
-	
-	mv puppetlabs-apache-* apache  
+	puppet module install /usr/src/forge/puppetlabs-apache-*.tar.gz --ignore-dependencies  
 {% endaside %}
 
 This command tells Puppet to download the Puppet Labs `apache` module from the Forge and place it in the directory specified as Puppet's _modulepath_. The modulepath defines the directory on your Puppet Master where Puppet saves modules you install and accesses modules you already have installed. For Puppet Enterprise, this defaults to `/etc/puppetlabs/puppet/modules/`.
