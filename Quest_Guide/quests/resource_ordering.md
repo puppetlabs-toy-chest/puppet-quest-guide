@@ -46,13 +46,13 @@ Metaparameters follow the familiar `attribute => value` syntax. There are four m
 * `before` causes a resource to be applied **before** a specified resource
 * `require` causes a resource to be applied **after** a specified resource
 * `notify` causes a resource to be applied **before** the specified resource, just as with `before`. Additionally, notify will generate a refresh event for the specified resource when the notifying resource changes. 
-* `subscribe` causes a resource to be applied **after** the specified resource. The subscribing resource will  be refreshed if the target resource changes.
+* `subscribe` causes a resource to be applied **after** the specified resource. The subscribing resource will be refreshed if the target resource changes.
 
 The **value** of the relationship metaparameter is the title or titles (in an array) of one or more target resources. Since this is the first time we've mentioned arrays - here's an example of an array:
 
 {% highlight puppet %}
 
-$my_first_array = [ 'one', 'two', 'three']
+$my_first_array = ['one', 'two', 'three']
 
 {% endhighlight %}
 
@@ -70,13 +70,13 @@ service {'ntpd':
 }
 {% endhighlight %}
 
-In the above, the file `/etc/ntp.conf` is managed. The contents of the file are sourced from the file `ntp.conf` in the ntp module's files directory. Whenever the file `/etc/ntp.conf` changes, a refresh event is triggered for the service with the title `ntpd`. By virtue of using the notify metaparameter, we ensure that Puppet manage the file first, before it manages the service, which is to say that `notify` implies `before`.
+In the above, the file `/etc/ntp.conf` is managed. The contents of the file are sourced from the file `ntp.conf` in the ntp module's files directory. Whenever the file `/etc/ntp.conf` changes, a refresh event is triggered for the service with the title `ntpd`. By virtue of using the notify metaparameter, we ensure that Puppet manages the file first, before it manages the service, which is to say that `notify` implies `before`.
 
 Refresh events, by default, restart a service (such as a server daemon), but you can specify what needs to be done when a refresh event is triggered, using the `refresh` attribute for the `service` resource type, which takes a command as the value.
 
 In order to better understand how to explicitly specify relationships between resources, we're going to use SSH as our example. Setting the `GSSAPIAuthentication` setting for the SSH daemon to `no` will help speed up the login process when one tries to establish an SSH connection to the Learning VM. 
 
-Let's try and disable GSSAPIAuthentication, and in the process, learn about resource relationships.
+Let's try to disable GSSAPIAuthentication, and in the process, learn about resource relationships.
 
 {% task 1 %}
 Create a puppet manifest to manage the `/etc/ssh/sshd_config` file
@@ -131,7 +131,7 @@ In the above example, the `service` resource will be applied **after** the `file
 
 ## Package/File/Service
 
-Wait a minute! We are managing the service `sshd`, we are managing its configuration file, but all that would mean nothing if SSH server package is not installed. So, to round it up, and make our manifest complete with regards to managing the SSH server on the VM, we have to ensure that the appropriate `package` resource is managed as well. 
+Wait a minute! We are managing the service `sshd`, we are managing its configuration file, but all that would mean nothing if the SSH server package is not installed. So, to round it up, and make our manifest complete with regards to managing the SSH server on the VM, we have to ensure that the appropriate `package` resource is managed as well. 
 
 On CentOS machines, such as the VM we are using, the `openssh-server` package installs the SSH server. 
 
@@ -164,6 +164,6 @@ Now we have a manifest that manages the package, configuration file and the serv
 
 ## Let's do a Quick Review
 
-In this Quest, we learned how to specify relationships between resources, to provide for better control over the order in which the resources are managed by Puppet. We also learned of the Package-File-Service pattern, which emulates the natural sequence of managing a service on a system. If you were to manually install and configure a service - you would first install the package, then edit the configuration file to set things up appropriately, and finally start or restart the service.
+In this Quest, we learned how to specify relationships between resources, to provide for better control over the order in which the resources are managed by Puppet. We also learned of the Package-File-Service pattern, which emulates the natural sequence of managing a service on a system. If you were to manually install and configure a service, you would first install the package, then edit the configuration file to set things up appropriately, and finally start or restart the service.
 
 
