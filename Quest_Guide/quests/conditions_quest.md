@@ -194,7 +194,7 @@ $rootgroup = $::osfamily ? {
 
 Here, the value of the `$rootgroup` is determined based on the control variable `$osfamily`. Following the control variable is a `?` (question mark) symbol. In the block surrounded by curly braces are a series of possible values for the $::osfamily fact, followed by the value that the selector should return if the value matches the control variable.
 
-Because a selector can only return a value and cannot execute a function like `fail()` or `warn()`, it is up to you to make sure your code handles unexpected conditions gracefully. You wouldn't want Puppet to forge ahead with an inappropriate default value and encounter errors down the line.
+Because a selector can only return a value and cannot execute a function like `fail()` or `warning()`, it is up to you to make sure your code handles unexpected conditions gracefully. You wouldn't want Puppet to forge ahead with an inappropriate default value and encounter errors down the line.
 
 {% task 4 %}
 By writing a Puppet manifest that uses a selector, create a file `/root/architecture.txt` that lists whether the VM is a 64-bit or a 32-bit machine.
