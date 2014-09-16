@@ -8,6 +8,7 @@ import codecs
 import yaml
 import zipfile
 import os
+from optparse import OptionParser
 
 
 def zipdir(path, zip):
@@ -93,6 +94,10 @@ def quest_guide():
 
 def main():
     
+    with open("VERSION", "r") as versionfile:
+      version = versionfile.read().replace('\n', '')
+
+    print "Building quest guide version %s." % version
     print "Generating HTML from markdown source..."
     p = Popen(["jekyll", "build"], cwd=r'./Quest_Guide')
     p.communicate()
@@ -100,8 +105,8 @@ def main():
     quest_guide()
 
     #shutil.copy('./Quest_Guide.pdf', './Quest_Guide/_site')
-
-    with zipfile.ZipFile('lvmguide.zip', 'w') as zipf:
+    zipname = 'lvmguide'+version+'.zip'
+    with zipfile.ZipFile(zipname, 'w') as zipf:
       os.chdir('./Quest_Guide')
       zipdir('./_site', zipf)
       os.chdir('..')
