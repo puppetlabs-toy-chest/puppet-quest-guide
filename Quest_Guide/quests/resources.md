@@ -144,9 +144,17 @@ Use the `puppet resource` tool to take a look at user *galatea*. Type the follow
 
 	puppet resource user galatea
 
-Notice that while the *root* user had a *comment* attribute, Puppet hasn't created one for your new user. As you may have noticed looking over the *puppet describe* entry for the user type, this *comment* is generally the full name of the account's owner. Set the *comment* attribute for the user *galatea* to 'Galatea of Cyprus.' If you need a reminder, look at the `puppet apply` command you used to create the user account initially. You'll follow same syntax, but swap out `ensure => 'present',` for `comment => 'Galatea of Cyprus',`.
+Notice that while the *root* user had a *comment* attribute, Puppet hasn't created one for your new user. As you may have noticed looking over the *puppet describe* entry for the user type, this *comment* is generally the full name of the account's owner.
 
-Once you've applied this change, use the `puppet resource` tool again to inspect your result.
+While puppet apply with the `-e` flag can be handy for quick one-liners, you can pass an `--execute` (incidentally, also shortened to `-e`) flag to the `puppet resource` tool to edit and apply changes to a resource.
+
+	puppet resource -e user galatea
+	
+You'll see the same output for this resource as before, but this time it will be opened in a text editor (vim, by default). To add a *comment* attribute, insert a new line to the resource's list of attribute value pairs:
+
+	comment => 'Galatea of Cyprus',
+	
+Save and exit (`:wq` in vim), and the resource declaration will be applied with the added comment. If you like, use the `puppet resource` tool again to inspect the result.
 
 {% aside Quest Progress %}
 Have you noticed that when you successfully finish a task, the 'completed tasks' in the lower right corner of your terminal increases? Remember, you can also check your progress by entering the following command:
