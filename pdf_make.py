@@ -8,7 +8,6 @@ import codecs
 import yaml
 import zipfile
 import os
-from optparse import OptionParser
 
 
 def zipdir(path, zip):
