@@ -104,7 +104,7 @@ def main():
     quest_guide()
 
     #shutil.copy('./Quest_Guide.pdf', './Quest_Guide/_site')
-    zipname = 'lvmguide'+version+'.zip'
+    zipname = 'lvmguide-'+version+'.zip'
     with zipfile.ZipFile(zipname, 'w') as zipf:
       os.chdir('./Quest_Guide')
       zipdir('./_site', zipf)
