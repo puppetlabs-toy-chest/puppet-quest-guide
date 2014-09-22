@@ -183,7 +183,7 @@ include vimrc
 
 Apply the new manifest with the `--noop` flag. If everything looks good, drop the `--noop` and apply it for real.
 
-Now open a file with Vim and see if the line numbering settings have been applied.
+Now open a file with Vim and you should see your line numbering settings have been applied.
 
 ## Review
 
