@@ -24,9 +24,9 @@ In this quest you will
 > Time is the substance from which I am made. Time is a river which carries me along, but I am the river; it is a tiger that devours me, but I am the tiger; it is a fire that consumes me, but I am the fire.
 -- Jorge Luis Borges
 
-If you want the nodes in your infrastructure to play nicely together, you'll need a system in place to keep their clocks accurately synchronized. Security services, shared filesystems, certificate signing, logging systems, and many other fundamental services and applications need accurate and coordinated time to function reliably. Given variable network latency, it takes some clever algorithms and protocols to get this coordination right. 
+Security services, shared filesystems, certificate signing, logging systems, and many other fundamental services and applications require accurate and coordinated time to function reliably. Given variable network latency, it takes some clever algorithms and protocols to get this coordination right.
 
-The Network Time Protocol (NTP) provides a standard way to keep time millisecond-accurate within your network while staying synchronized to Coordinated Universal Time (UTC) by way of publicly accessible time servers. (The subtleties of NTP are outside the scope of this lesson. If you're interested, you can [read all about it](http://www.eecis.udel.edu/~ntp/ntpfaq/NTP-a-faq.htm))
+The Network Time Protocol (NTP) lets you keep time millisecond-accurate within your network while staying synchronized to Coordinated Universal Time (UTC) by way of publicly accessible timeservers. (If you're interested in the subtleties of how NTP works, you can read all about it [here](http://www.eecis.udel.edu/~ntp/ntpfaq/NTP-a-faq.htm))
 
 NTP is one of the most fundamental services you will want to include in your infrastructure. Puppet Labs maintains a supported module that makes the configuration and management of NTP simple.
 
@@ -104,13 +104,15 @@ Once the Puppet run is complete, use the puppet resource tool to inspect the `nt
 
 ### Synching up
 
-To avoid disrupting processes that rely on consistent timing, the ntpd service works by adding or removing a few microseconds to each tick of the system clock so as to slowly bring it into syncronization with the NTP server. 
+To avoid disrupting processes that rely on consistent timing, the ntpd service works gradually. It adds or removes a few microseconds to each tick of the system clock so as to slowly bring it into syncronization with the NTP server. 
 
 If you like, run the `ntpstat` command to check on the synchronization status. Don't worry about waiting to get synchronized. Because the Learning VM is virtual, its clock will probably be set based on the time it was created or last suspended. It's likely to be massively out of date with the time server, and it may take half an hour or more to get synchronized!
 
 ## Class Defaults and Class Parameters
 
-Because the `ntp` class includes default settings for its parameters, you were able to declare it with the simple `include` syntax. If you're wondering what time servers the module uses by default, there are a couple of ways to check this. Now that we've classified the Learning VM with the `ntp` class, Puppet is managing the NTP's configuration file. To see what servers the  specified, enter the command:
+The `ntp` class includes default settings for most of its parameters. The `include` syntax you used let you concisely declare the class without modifying these defaults.
+
+One of these defaults, for instance, tells Puppet which time servers to include in the NTP configuration file. To see what servers were specified by default, you can check the configuration file directly. Enter the command:
 	
 	cat /etc/ntp.conf | grep server
 	
@@ -120,9 +122,9 @@ You'll see a list of the default servers:
 	server 1.centos.pool.ntp.org
 	server 2.centos.pool.ntp.org
 
-These ntp.org servers aren't actually time servers themselves; rather, they're access points that will pass you on to one of a pool of public timeservers. Most servers assigned through the ntp.org pool are provided by volunters running NTP as an extra service on a mail or web server. While these work well enough, you'll get more accurate time and use less network resources by directly specifying local timeservers run by your ISP, a university, or a government institution.
+These ntp.org servers aren't actually time servers themselves; rather, they're access points that will pass you on to one of a pool of public timeservers. Most servers assigned through the ntp.org pool are provided by volunters running NTP as an extra service on a mail or web server. 
 
-Furthermore, though we're running through this exercise with the Learning VM as the only node, you'd generally want to configure a single node in your network as an internal timeserver. This node would synchronize with an public timeserver and act as intermediary timeserver to the rest of your network.
+While these work well enough, you'll get more accurate time and use less network resources if you pick public timeservers in your area.
 
 To manually specify which timeservers your NTPD service will poll, you'll need to override the default ntp.org pool servers set by the NTP module.
 
@@ -138,7 +140,7 @@ class { 'ntp':
 
 {% task 3 %}
 
-In your `site.pp`, replace the `include ntp` line with a parameterized class declaration based on the example above. Use the servers from the example, or, if you know of a nearer timeserver, include that. Note that you should always specify at least *three* timeservers for ntp to function reliably. You might, for instance, include two from the ntp.org pool and one known nearby timeserver. NTP will poll all specified servers and use an algorithm to select the most reliable.
+In your `site.pp`, replace the `include ntp` line with a parameterized class declaration based on the example above. Use the servers from the example, or, if you know of a nearer timeserver, include that. You should always specify at least *three* timeservers for NTP to function reliably. You might, for instance, include two from the ntp.org pool and one known nearby timeserver.
 
 {% task 4 %}
 

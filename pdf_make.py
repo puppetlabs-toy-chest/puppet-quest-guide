@@ -1,14 +1,32 @@
+#!/usr/bin/env python
 import json
+import shutil
 from subprocess import *
 from bs4 import BeautifulSoup, Tag
 import markdown
 import codecs
 import yaml
+import zipfile
+import os
+
+
+def zipdir(path, zip):
+
+  # Walks a directory and adds all contents to a specified zip archive
+
+  for root, dirs, files in os.walk(path):
+      for file in files:
+          zip.write(os.path.join(root, file))
 
 def pull_content(filename):
     
     # Open an html file and return a BeautifulSoup tag object of that file's 
     # <div role='main'> contents. (Strips out header, footer, sidebar content.)
+    # This is a bit of a convoluted process. We initially use Jekyll to generate
+    # HTML content for the website version with templates, but then pull
+    # the content back out again. Because we need to use Jekyll plugins for
+    # some other things like custom liquid tags, this backwardness is hard
+    # to avoid.
 
     with open(filename, 'r') as f:
         html = f.read()
@@ -17,6 +35,10 @@ def pull_content(filename):
     return soup.select("div[role=main]")[0]
 
 def quest_guide():
+   
+    # Generates a html string of all our quest guide content.
+    # This assumes a Jekyll subprocess has already been run
+    # to generate html from our source markdown.
    
     with open('Quest_Guide/_data/quest_order.yml', 'r') as f:
         quest_data = yaml.safe_load(f)
@@ -58,22 +80,36 @@ def quest_guide():
     
     # Uncomment to write the html output for testing purposes.
 
-    with open('test.html', 'w') as f:
-        f.write(str(shell))
+    #with open('test.html', 'w') as f:
+    #    f.write(str(shell))
 
     # Subprocess to render with PrinceXML:
+    p = Popen(["prince", "-", "--style=./css/main.css", "Quest_Guide.pdf"], cwd=r'./Quest_Guide/_site', stdin=PIPE)
 
-    p = Popen(["prince", "-", "--style=./css/main.css", "../../Quest_Guide.pdf"], cwd=r'./Quest_Guide/_site', stdin=PIPE)
+    # Pipe the html string to the prince subprocess
     p.stdin.write(str(shell))
     p.stdin.close()
+    p.wait()
 
 def main():
     
+    with open("VERSION", "r") as versionfile:
+      version = versionfile.read().replace('\n', '')
+
+    print "Building quest guide version %s." % version
     print "Generating HTML from markdown source..."
     p = Popen(["jekyll", "build"], cwd=r'./Quest_Guide')
     p.communicate()
     
     quest_guide()
-        
+
+    #shutil.copy('./Quest_Guide.pdf', './Quest_Guide/_site')
+    zipname = 'lvmguide-'+version+'.zip'
+    with zipfile.ZipFile(zipname, 'w') as zipf:
+      os.chdir('./Quest_Guide')
+      zipdir('./_site', zipf)
+      os.chdir('..')
+      zipdir('./quest_tool', zipf)
+
 if __name__ == '__main__':
     main()
