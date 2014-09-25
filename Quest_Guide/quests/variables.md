@@ -1,9 +1,9 @@
 ---
-title: Variables
+title: Variables and Conditionals
 layout: default
 ---
 
-# Variables
+# Variables and Class Parameters
 
 ### Prerequisites
 
@@ -14,28 +14,46 @@ layout: default
 
 ## Quest Objectives
 
-- Learn how to make Puppet manifests more flexible using variables
-- Learn how to interpolate variables in manifests
-- Understand how facts can be used 
+- Learn how varaibles and conditionals can make Puppet code more flexible.
+- Understand the syntax and function of the `if`, `unless`, `case`, and `selector` statements.
+- Learn how to interpolate variables.
+- Use system data from facter to assign variables and manage conditionals.
 
 ## Getting Started
 
-Manifests contain instructions for automating tasks related to managing resources. Now it's time to learn how to make manifests more flexible. In this quest you will learn how to include variables, interpolate variables, and use Facter facts in your manifests in order to increase their portability and flexibility. When you're ready to get started, type the following command:
+In this quest you will learn how to assign, invoke, and interpolate variables. You will see how to use Facter facts in your Puppet code to improve its portability and flexibility. Expanding on what you've already learned about the *user* resource, you will write a module to manage users, using variables and conditional logic to ensure applicability across several different operating systems.
+
+When you're ready to get started, type the following command to begin:
 
 	quest --start variables
 
-## Variables
+## Writing for Flexibility
 
 >The green reed which bends in the wind is stronger than the mighty oak which breaks in a storm.
 
 > -Confucius
 
-Puppet can be used to manage configurations on a variety of different operating systems and platforms. The ability to write portable code that accomodates various platforms is a significant advantage in using Puppet. It is important that you learn to write manifests in such a way that they can function in different contexts. Effective use of **variables** is one of the fundamental methods you will use to achieve this.
+Because Puppet manages configurations on a variety of systems fulfilling a variety of roles, great Puppet code means flexible and portable Puppet code. While the *types* and *providers* that form the core of Puppet's *resource abstraction layer* do a lot of heavy lifting around this kind of adaptation, there are some things better left in the hands of competent practitioners, rather than hard-coded in Puppet itself.
 
-If you've used variables before in some other programming or scripting language, the concept should be familiar. Variables allow you to assign data to a variable name in your manifest and then use that name to reference that data elsewhere in your manifest. In Puppet's syntax, variable names are prefixed with a `$` (dollar sign). You can assign data to a variable name with the `=` operator. You can also use variables as the value for any resource attribute, or as the title of a resource. In short, once you have defined a variable with a value you can use it anywhere you would have used the value or data.
+As you move from general platform-related implementation details to specific application-related implementation details, it starts making less sense to rely on Puppet to make decisions automatically, and much more sense for a module developer or user to make his or her own choices based on specific requirements. 
+
+It's sensible, for example, for Puppet's `package` providers take care of installing and maintaining packages. The inputs and outputs are standardized and stable enough that what happens in between, as long as it happens reliably, can be safely hidden by abstraction; once it's done, the details are no longer important.
+
+*What* package is installed, on the other hand, isn't something you can safely forget. In this case, the inputs and outputs are not so neatly delimited. Though there are often broadly equivalent packages for different platforms, the equivalence is rarely complete; configuration details will often vary, and these details will likely have to be accounted for elsewhere in your Puppet module.
+
+While Puppet's built-in providers can't themselves guarantee the portability of your Puppet code at this higher level of implementation, Puppet's DSL gives you the tools to build adaptability into your modules. The bread and butter of this toolset are the the **variable** and **conditional statement**.
+
+## Variables
+
+> Beauty is variable, ugliness is constant.
+
+> -Douglas Horton
+
+
+Variables allow you to assign data to a variable name and later use that name to reference that data elsewhere in your manifest. In Puppet's syntax, variable names are prefixed with a `$` (dollar sign). You can assign data to a variable name with the `=` operator. You can also use variables as the value for any resource attribute, or as the title of a resource. In short, once you have defined a variable with a value you can use it anywhere you would have used the value or data.
 
 {% warning %}
-Unlike resource declarations, variable assignments are parse-order dependent. This means that you must assign a variable in your manifest before you can use it.
+Unlike resource declarations, variable assignments are parse-order dependent. This means that you must assign a variable in your manifest *before* you can use it.
 {% endwarning %}
 
 The following is a simple example of assigning a value, which in this case, is a string, to a variable. 
@@ -44,48 +62,47 @@ The following is a simple example of assigning a value, which in this case, is a
 $myvariable = "look, data!\n"
 {% endhighlight %}
 
-{% aside Also... %}
-In addition to directly assigning data to a variable, you can assign the result of any expression or function that resolves to a normal data type to a variable. This variable will then refer to the result of that statement.
-{% endaside %}
+A simple module to manage user accounts will give you a chance to see variables in action. Before you get started, make sure you're in the `modules` directory.
 
-{% task 1 %}
-
-Using Puppet, create the file `/root/pangrams/fox.txt` with the specified content.
-
-Create a new manifest in your home directory.
-
-	nano ~/pangrams.pp
+	cd /etc/puppetlabs/puppet/modules
 	
-	HINT: Refer to the Manifest Quest if you're stuck.
+Now create the directory structure for your `accounts` module.
 
-Type the following Puppet code into the `pangrams.pp` manifest:
+	mkdir accounts
+	
+	mkdir accounts/{manifests,tests}
+	
+With Vim, create an `init.pp` manifest in your module's `manifests` directory.
 
-{% highlight puppet %}
-$pangram = 'The quick brown fox jumps over the lazy dog.'
+	vim accounts/manifests/init.pp
 
-file {'/root/pangrams':
-	ensure => directory,
-}
+## Conditionals
 
-file {'/root/pangrams/fox.txt':
-  ensure  => file,
-  content => $pangram,
-}
-{% endhighlight %}
+> Just dropped in (to see what condition my condition was in)
 
-Now that we have a manifest, let's test it on the VM. 
+> -Mickey Newbury
 
-Remember to validate the syntax of the file, and to simulate the change using the `-noop` flag  before you use `puppet apply` to make the required change on the system.
+Conditional statements allow you to write Puppet code that will return different values or execute different blocks of code depending on conditions you specify. This is key to getting your Puppet modules to perform as desired on machines running different operating systems and fulfilling different roles in your infrastructure.
 
-Excellent! Take a look at the file to see that the contents have been set as you intended:
+Puppet supports a few different ways of implementing conditional logic:
+ 
+ * `if` statements
+ * `unless` statements
+ * case statements
+ * selectors
 
-	cat /root/pangrams/fox.txt
+### The 'if' and 'unless' Statements
 
-{% fact %}
-A pangram is a sentence that uses every letter of the alphabet. A perfect pangram uses each letter only once.
-{% endfact %}
+Puppet’s `if` statements behave much like those in many other programming and scripting languages.
 
-The file resource `/root/pangrams/fox.txt` is managed, and the content for the file is specified as the value of the `$pangram` variable.
+An `if` statement includes a condition followed by a block of Puppet code that will only be executed **if** that condition evaluates as **true**. Optionally, an `if` statement can also include any number of `elsif` clauses and an `else` clause. Here are some rules:
+
+- If the `if` condition fails, Puppet moves on to the `elsif` condition (if one exists).
+- If both the `if` and `elsif` conditions fail, Puppet will execute the code in the `else` clause (if one exists).
+- If all the conditions fail, and there is no `else` block, Puppet will do nothing and move on.
+
+**Unless** is just like 
+
 
 ## Variable Interpolation
 
@@ -103,50 +120,6 @@ Wrapping a string without any interpolated variables in double quotes will still
 
 {% task 2 %}
 
-Create a file called perfect_pangrams. We will use variable substitution and interpolation in doing this.
-
-Now you can use variable interpolation to do something more interesting. Go ahead and create a new manifest called `perfect_pangrams.pp`.
-
-	nano ~/perfect_pangrams.pp
-	
-	HINT: Refer to the Manifest Quest if you're stuck
-
-Type the following Puppet code into the `perfect_pangrams.pp` manifest:
-
-{% highlight puppet %}
-$perfect_pangram = 'Bortz waqf glyphs vex muck djin.'
-
-$pgdir = '/root/pangrams'
-
-file { $pgdir:
-	ensure => directory,
-}
-
-file { "${pgdir}/perfect_pangrams":
-	ensure => directory,
-}
-
-file { "${pgdir}/perfect_pangrams/bortz.txt":
-  ensure  => file,
-  content => "A perfect pangram: \n${perfect_pangram}",
-}
-{% endhighlight %}
-
-Once you have create the `perfect_pangrams.pp` file, enforce it using the appropriate `puppet apply` command, but not before you verify that the syntax is correct and have tried simulating it first. Refer to the Manifests quest if you need to refresh you memory on how to apply a manifest.
-
-Here, the `$pgdir` variable resolves to `'/root/pangrams'`, and the interpolated string `"${pgdir}/perfect_pangrams"` resolves to `'/root/pangrams/perfect_pangrams'`. It is best to use variables in this way to avoid redundancy and allow for data separation in the directory and filepaths. If you wanted to work in another user's home directory, for example, you would only have to change the `$pgdir` variable, and would not need to change any of your resource declarations.
-
-Have a look at the `bortz.txt` file:
-
-	cat /root/pangrams/perfect_pangrams/bortz.txt
-	
-You should see something like this, with your pangram variable inserted into the file's content string:
-
-	A perfect pangram:
-	Bortz waqf glyphs vex muck djin.
-	
-What this perfect pangram actually means, however, is outside the scope of this lesson!
-
 ## Facts
 
 >Get your facts first, then distort them as you please.
@@ -158,41 +131,7 @@ Puppet has a bunch of built-in, pre-assigned variables that you can use. Remembe
 Remember running `facter ipaddress` told you your IP address? What if you wanted to turn `facter ipaddress` into a variable? It would look like this: `$::ipaddress` as a stand-alone variable, or like this:
 `${::ipaddress}` when interpolated in a string.
 
-The `::` in the above indicates that we always want the top-scope variable, the global fact called `ipaddress`, as opposed to, say a variable called `ipaddress` you defined in a specific manifest.  
-
-In the Conditions Quest, you will see how Puppet manifests can be designed to perform differently depending on facts available through `facter`. For now, let's play with some facts to get a feel for what's available.
-
-{% task 3 %}
-We will write a manifest that will interpolate facter variables into a string assigned to the `$message` variable. We can then use a `notify` resource to post a notification when the manifest is applied. We will also declare a file resource. We can use the same `$string` to assign our interpolated string to this file's content parameter.
-
-Create a new manifest with your text editor.
-		
-	nano ~/facts.pp
-
-	HINT: Refer to the Manifest Quest if you're stuck
-
-Type the following Puppet code into the `facts.pp` manifest:
-
-{% highlight puppet %}
-$string = "Hi, I'm a ${::osfamily} system and I have been up for ${::uptime_seconds} seconds." 
-
-notify { 'info':
-  message => $string,
-}
-
-file { '/root/message.txt':
-  ensure  => file,
-  content => $string,
-}
-{% endhighlight %}
-
-Once you have created the facts.pp file, enforce it using the appropriate `puppet apply` command, after verifying that the syntax is correct. 
-
-You should see your message displayed along with Puppet's other notifications. You can also use the `cat` command or a text editor to have a look at the `message.txt` file with the same content.
-
-	cat /root/message.txt
-
-As you can see, by incorporating facts and variables, and by using variable interpolation, you can add more functionality with more compact code. In the next quest we will discuss conditional statements that will provide for greater flexibility in using Puppet.
+The `::` in the above indicates that we always want the top-scope variable, the global fact called `ipaddress`, as opposed to, say a variable called `ipaddress` you defined in a specific manifest.
 
 ## Review
 
