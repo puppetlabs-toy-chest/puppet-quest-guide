@@ -33,7 +33,7 @@ To start this quest enter the following command:
 
 > -Mickey Newbury
 
-Conditional statements let your Puppet code behave differently in different situations. They are most helpful when combined with facts or with data pertaining to the systems. This enables you to write code to perform as desired on a variety of operating systems and under differing system conditions. Pretty neat, don't you think?
+Conditional statements allow you to write Puppet code that will return different values or execute different blocks of code depending on conditions you specify. This is key to getting your Puppet modules to perform as desired on machines running different operating systems and fulfilling different roles in your infrastructure.
 
 Puppet supports a few different ways of implementing conditional logic:
  
@@ -46,7 +46,7 @@ Puppet supports a few different ways of implementing conditional logic:
 
 Puppet’s `if` statements behave much like those in many other programming and scripting languages.
 
-An `if` statement includes a condition followed by a block of Puppet code that will only be executed __if__ that condition evaluates as __true__. Optionally, an `if` statement can also include any number of `elsif` clauses and an `else` clause. Here are some rules:
+An `if` statement includes a condition followed by a block of Puppet code that will only be executed **if** that condition evaluates as **true**. Optionally, an `if` statement can also include any number of `elsif` clauses and an `else` clause. Here are some rules:
 
 - If the `if` condition fails, Puppet moves on to the `elsif` condition (if one exists)
 - If both the `if` and `elsif` conditions fail, Puppet will execute the code in the `else` clause (if one exists)
