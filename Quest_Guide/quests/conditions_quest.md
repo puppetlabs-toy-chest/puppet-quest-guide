@@ -7,12 +7,6 @@ layout: default
 
 ### Prerequisites
 
-- Welcome Quest
-- Power of Puppet Quest
-- Resources Quest
-- Manifest Quest
-- Classes Quest
-- Variables Quest
 
 ## Quest Objectives
  - Learn how to use conditional logic to make your manifests adaptable.
@@ -49,7 +43,9 @@ While Puppet's built-in providers can't themselves guarantee the portability of 
 
 > -Mark Twain
 
-Puppet has a bunch of built-in, pre-assigned variables that you can use in your manifests to automatically pull in information about the system your Puppet agent is running on.
+Puppet has a bunch of built-in, pre-assigned variables that you can use in your manifests to automatically pull in system information about a node as Puppet compiles the catalog for that node.
+
+Combined with conditionals, which we'll get to in just a moment, **facts** give you a huge amount of power to write portability into your modules.
 
 Remember running `facter ipaddress` told you your IP address? What if you wanted to turn `facter ipaddress` into a variable? It would look like this: `$::ipaddress` as a stand-alone variable, or like this:
 `${::ipaddress}` when interpolated in a string.
@@ -71,7 +67,7 @@ Puppet supports a few different ways of implementing conditional logic:
  * case statements, and
  * selectors
 
-## The 'if' Statement
+### The 'if' Statement
 
 Puppet’s `if` statements behave much like those in many other programming and scripting languages.
 
@@ -130,38 +126,6 @@ if $::hostname =~ /^www(\d+)\./ {
 }
 
 {% endhighlight %}
-
-{% task 1 %}
-Just as we have done in the Variables Quest, let's create a manifest and add a simple conditional statement. The file should report on how long the VM has been up and running.
-
-	nano ~/conditionals.pp
-
-Enter the following code into your `conditionals.pp` manifest:
-
-{% highlight puppet %}
-
-if $::uptime_hours < 2 {
-  $myuptime = "Uptime is less than two hours.\n"
-}
-elsif $::uptime_hours < 5 {
-  $myuptime = "Uptime is less than five hours.\n" 
-}
-else {
-  $myuptime = "Uptime is greater than four hours.\n"
-}
-file {'/root/conditionals.txt':
-  ensure  => present,
-  content => $myuptime,
-}
-
-{% endhighlight %}
-
-Use the `puppet parser` tool to check your syntax, then simulate the change in `--noop` mode without enforcing it. If the noop looks good, enforce the `conditionals.pp` manifest using the `puppet apply` tool.
-
-Have a look at the `conditionals.txt` file using the `cat` command.
-
-{% task 2 %}
-Use the command `facter uptime_hours` to check the uptime yourself. The notice you saw when you applied your manifest should describe the uptime returned from the Facter tool.
 
 ## The 'unless' Statement
 
@@ -249,11 +213,6 @@ See what we did here? Instead of having the selector return a value and saving i
 Once you have created the manifest, check the syntax and apply it.
 
 Inspect the contents of the `/root/architecture.txt` file to ensure that the content is what you expect.
-
-
-## Before you move on
-
-We have discussed some intense information in the Variables Quest and this Quest. The information contained in all the quests to this point has guided you towards creating flexible manifests. Should you not understand any of the topics previously discussed, we highly encourage you to revisit those quests before moving on to the Resource Ordering Quest.
 
 
 
