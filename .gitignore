@@ -2,4 +2,5 @@ _site/
 *.pdf
 test.html
 .DS_Store
+*.zip
 
