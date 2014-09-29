@@ -3,4 +3,5 @@ _site/
 test.html
 .DS_Store
 *.zip
+Gemfile.lock
 
