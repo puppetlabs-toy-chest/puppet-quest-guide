@@ -1,5 +1,5 @@
 ---
-title: Variables and Conditionals
+title: Variables and Class Parameters
 layout: default
 ---
 
@@ -14,34 +14,17 @@ layout: default
 
 ## Quest Objectives
 
-- Learn how varaibles and conditionals can make Puppet code more flexible.
-- Understand the syntax and function of the `if`, `unless`, `case`, and `selector` statements.
-- Learn how to interpolate variables.
-- Use system data from facter to assign variables and manage conditionals.
+- Learn how varaibles and parameters can make modules more adaptable.
+- Use variable interpolation to insert variables into strings.
+- Use system data from facter to assign variables.
 
 ## Getting Started
 
-In this quest you will learn how to assign, invoke, and interpolate variables. You will see how to use Facter facts in your Puppet code to improve its portability and flexibility. Expanding on what you've already learned about the *user* resource, you will write a module to manage users, using variables and conditional logic to ensure applicability across several different operating systems.
+In this quest you will learn how to assign, invoke, and interpolate variables.
 
 When you're ready to get started, type the following command to begin:
 
 	quest --start variables
-
-## Writing for Flexibility
-
->The green reed which bends in the wind is stronger than the mighty oak which breaks in a storm.
-
-> -Confucius
-
-Because Puppet manages configurations on a variety of systems fulfilling a variety of roles, great Puppet code means flexible and portable Puppet code. While the *types* and *providers* that form the core of Puppet's *resource abstraction layer* do a lot of heavy lifting around this kind of adaptation, there are some things better left in the hands of competent practitioners, rather than hard-coded in Puppet itself.
-
-As you move from general platform-related implementation details to specific application-related implementation details, it starts making less sense to rely on Puppet to make decisions automatically, and much more sense for a module developer or user to make his or her own choices based on specific requirements. 
-
-It's sensible, for example, for Puppet's `package` providers take care of installing and maintaining packages. The inputs and outputs are standardized and stable enough that what happens in between, as long as it happens reliably, can be safely hidden by abstraction; once it's done, the details are no longer important.
-
-*What* package is installed, on the other hand, isn't something you can safely forget. In this case, the inputs and outputs are not so neatly delimited. Though there are often broadly equivalent packages for different platforms, the equivalence is rarely complete; configuration details will often vary, and these details will likely have to be accounted for elsewhere in your Puppet module.
-
-While Puppet's built-in providers can't themselves guarantee the portability of your Puppet code at this higher level of implementation, Puppet's DSL gives you the tools to build adaptability into your modules. The bread and butter of this toolset are the the **variable** and **conditional statement**.
 
 ## Variables
 
@@ -50,88 +33,143 @@ While Puppet's built-in providers can't themselves guarantee the portability of 
 > -Douglas Horton
 
 
-Variables allow you to assign data to a variable name and later use that name to reference that data elsewhere in your manifest. In Puppet's syntax, variable names are prefixed with a `$` (dollar sign). You can assign data to a variable name with the `=` operator. You can also use variables as the value for any resource attribute, or as the title of a resource. In short, once you have defined a variable with a value you can use it anywhere you would have used the value or data.
+Puppet's variable syntax lets you assign a name to a bit of data, and use that variable name later in your manifest to refer to that data you've assigned to it. In Puppet's syntax, variable names are prefixed with a `$` (dollar sign), and data is assigned with the `=` operator.
 
-{% warning %}
-Unlike resource declarations, variable assignments are parse-order dependent. This means that you must assign a variable in your manifest *before* you can use it.
-{% endwarning %}
-
-The following is a simple example of assigning a value, which in this case, is a string, to a variable. 
+Assigning a short string to a variable, for example, would look like this:
 
 {% highlight puppet %}
-$myvariable = "look, data!\n"
+$myvariable = "look, data!"
 {% endhighlight %}
 
-A simple module to manage user accounts will give you a chance to see variables in action. Before you get started, make sure you're in the `modules` directory.
+Once you have defined a variable you can use it anywhere in your manifest you would have used the assigned value.
 
-	cd /etc/puppetlabs/puppet/modules
-	
-Now create the directory structure for your `accounts` module.
+The basics of variables are simple enough, and will seem familiar if you know another scripting or programming language. However, there are a few caveats you should be aware of when using variables in Puppet:
 
-	mkdir accounts
-	
-	mkdir accounts/{manifests,tests}
-	
-With Vim, create an `init.pp` manifest in your module's `manifests` directory.
+1. Unlike resource declarations, variable assignments are parse-order dependent. This means that you must assign a variable in your manifest *before* you can use it.
 
-	vim accounts/manifests/init.pp
+2. If you try to use a variable that has not been defined, the Puppet parser won't complain. Instead, Puppet will treat the variable as having the special `undef` value.
 
-## Conditionals
-
-> Just dropped in (to see what condition my condition was in)
-
-> -Mickey Newbury
-
-Conditional statements allow you to write Puppet code that will return different values or execute different blocks of code depending on conditions you specify. This is key to getting your Puppet modules to perform as desired on machines running different operating systems and fulfilling different roles in your infrastructure.
-
-Puppet supports a few different ways of implementing conditional logic:
- 
- * `if` statements
- * `unless` statements
- * case statements
- * selectors
-
-### The 'if' and 'unless' Statements
-
-Puppet’s `if` statements behave much like those in many other programming and scripting languages.
-
-An `if` statement includes a condition followed by a block of Puppet code that will only be executed **if** that condition evaluates as **true**. Optionally, an `if` statement can also include any number of `elsif` clauses and an `else` clause. Here are some rules:
-
-- If the `if` condition fails, Puppet moves on to the `elsif` condition (if one exists).
-- If both the `if` and `elsif` conditions fail, Puppet will execute the code in the `else` clause (if one exists).
-- If all the conditions fail, and there is no `else` block, Puppet will do nothing and move on.
-
-**Unless** is just like 
-
+3. You can only assign a variable once within a single scope.
 
 ## Variable Interpolation
 
-The extra effort required to assign variables starts to show its value when you begin to incorporate variables into your manifests in more complex ways.
-
 **Variable interpolation** allows you to replace occurences of the variable with the *value* of the variable. In practice this helps with creating a string, the content of which contains another string which is stored in a variable. To interpolate a variable in a string, the variable name is preceded by a `$` and wrapped in curly braces (`${var_name}`). 
 
-The braces allow `puppet parser` to distinguish between the variable and the string in which it is embedded. It is important to remember, a string that includes an interpolated variable must be wrapped in double quotation marks (`"..."`), rather than the single quotation marks that surround an ordinary string. 
+A string that includes an interpolated variable must be wrapped in double quotation marks (`"..."`), rather than the single quotation marks that surround an ordinary string. These double quotation marks tell Puppet to find and parse special syntax within the string, rather than interpreting it literally.
 
 `"Variable interpolation is ${adjective}!"`  
 
 {% tip %}
-Wrapping a string without any interpolated variables in double quotes will still work, but it goes against conventions described in the Puppet Labs Style Guide.
+Using double quotes for a string without any interpolated variables will still work, but isn't considered good style.
 {% endtip %}
 
-{% task 2 %}
+## Manage a User wtih Variables
 
-## Facts
+To better understand how variables work in context, we'll walk you through creating a simple module to manage a User account on your system. Of course, creating a whole module to manage a single user generally wouldn't be worth the effort, but once you have this module working, we'll show you how to extend it to do some more interesting things.
 
->Get your facts first, then distort them as you please.
+For now, you'll create an `accounts` class to manage a *user*, a *group*, and a *file* (the user's home directory) resource. Instead of assigning all the values for these resources directly, you'll define some variables at the beginning of the class and use these variables throughout your resource declarations.
 
-> -Mark Twain
+First, you'll need to create the directory structure for your module.
 
-Puppet has a bunch of built-in, pre-assigned variables that you can use. Remember using the Facter tool when you first started? The Facter tool discovers information about your system and makes it available to Puppet as variables. Puppet’s compiler accesses those facts when it’s reading a manifest.
+Make sure you're in the `modules` directory for Puppet's modulepath.
 
-Remember running `facter ipaddress` told you your IP address? What if you wanted to turn `facter ipaddress` into a variable? It would look like this: `$::ipaddress` as a stand-alone variable, or like this:
-`${::ipaddress}` when interpolated in a string.
+	cd /etc/puppetlabs/puppet/modules/
 
-The `::` in the above indicates that we always want the top-scope variable, the global fact called `ipaddress`, as opposed to, say a variable called `ipaddress` you defined in a specific manifest.
+Now create an `accounts` directory:
+
+	mkdir accounts
+	
+...and your `manifests` and `tests` directories:
+
+	mkdir accounts/{manifests,tests}
+
+Now you're ready to create your main manifest, where you'll define the `accounts` class.
+
+	vim /accounts/manifests/init.pp
+
+{% highlight puppet %}
+class accounts {
+
+  $name    = 'paphos'
+  $comment = 'Paphos of Cyprus'
+  $uid     = '510'
+
+  user { $name:
+    ensure  => 'present',
+    home    => "/home/${name}",
+    comment => $comment
+    uid     => $uid,
+  }
+
+  group { $name:
+    gid => $uid
+  }
+
+  file { "/home/${name}":
+    ensure => 'directory',
+    owner  => $name,
+    group  => $name,
+    mode   => 0750,
+  }
+
+}
+{% endhighlight %}
+
+It might seem a little pointless, at first, to make this kind of substitution, especially as the variable names aren't even much shorter than the strings they represent. Note, however, that if you wanted to make a change, you would have to edit a single line instead of a half-dozen or so. 
+
+While there are more advanced forms of data separation in Puppet, the basic principle is the same. The more distinct your code is from the underlying data, the more resuable it is, and the less difficult it will be to refactor when you have to make changes later.
+
+Once you've validated your manifest with the `puppet parser` tool, create a test for your manifest with an `include` statement for the accounts class you created.
+
+Run the test, using the `--noop` flag for a dry run before triggering your real `puppet apply`.
+
+## Class Parameters
+
+> Freedom is not the absence of obligation or restraint, but the freedom of movement within healthy, chosen parameters.
+
+> -Kristin Armstrong
+
+Class **parameters** give you a way to set the variables within a class definition as the class is declared. 
+
+When defining a class, you can include a list of parameters and optional default values between the class name and the opening curly brace.
+
+So a parameterized class is defined as below:
+
+{% highlight puppet %}
+class classname ( $parameter = 'default' ) {
+  ...
+}
+{% endhighlight %}
+
+A parameterized class is declared with a syntax similar to that of resource declarations, including key value pairs for each parameter you want to set.
+
+{% highlight puppet %}
+class {'classname': 
+  parameter => 'value',
+}
+{% endhighlight %}
+
+Now you've got a quick way to create an account, complete with a group and home directory. But say you want to create a user not just on the Learning VM, but on each node in your infrastructure? And say you want some different values set for each of these different users? Instead of rewriting the whole class or module with these minor changes, you can use class parameters to customize these values as the class is declared.
+
+Reopen the `accounts/manifests/init.pp` manifest. You've already written variables into the resource declarations, so turning it into a parameterized class with be quick. Just add your three variables in the first line like so:
+
+{% highlight puppet %}
+class accounts ( $name, $comment, $uid ) {
+{% endhighlight %}
+
+Then go ahead and delete the variable assignments from the beginning of the class. There, that's it! Just be sure to check your syntax, and you're all set.
+
+Now open the `accounts/tests/init.pp` test manifest, and declare the accounts class with the following parameters:
+
+{% highlight puppet %}
+class {'accounts': 
+  name    => 'rick',
+  comment => 'Richard Deckard',
+  uid     => '511',
+}
+{% endhighlight %}
+
+Now give it a try. Go ahead and do a `--noop` run, then apply the test.
 
 ## Review
 
