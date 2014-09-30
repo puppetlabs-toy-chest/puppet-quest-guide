@@ -7,12 +7,6 @@ layout: default
 
 ### Prerequisites
 
-- Welcome Quest
-- Power of Puppet Quest
-- Resources Quest
-- Manifest Quest
-- Classes Quest
-- Variables Quest
 
 ## Quest Objectives
  - Learn how to use conditional logic to make your manifests adaptable.
@@ -27,13 +21,44 @@ To start this quest enter the following command:
 
 	quest --start conditionals
 
+## Writing for Flexibility
+
+>The green reed which bends in the wind is stronger than the mighty oak which breaks in a storm.
+
+> -Confucius
+
+Because Puppet manages configurations on a variety of systems fulfilling a variety of roles, great Puppet code means flexible and portable Puppet code. While the *types* and *providers* that form the core of Puppet's *resource abstraction layer* do a lot of heavy lifting around this kind of adaptation, there are some things better left in the hands of competent practitioners, rather than hard-coded in Puppet itself.
+
+As you move from general platform-related implementation details to specific application-related implementation details, it starts making less sense to rely on Puppet to make decisions automatically, and much more sense for a module developer or user to make his or her own choices based on specific requirements. 
+
+It's sensible, for example, for Puppet's `package` providers take care of installing and maintaining packages. The inputs and outputs are standardized and stable enough that what happens in between, as long as it happens reliably, can be safely hidden by abstraction; once it's done, the details are no longer important.
+
+*What* package is installed, on the other hand, isn't something you can safely forget. In this case, the inputs and outputs are not so neatly delimited. Though there are often broadly equivalent packages for different platforms, the equivalence is rarely complete; configuration details will often vary, and these details will likely have to be accounted for elsewhere in your Puppet module.
+
+While Puppet's built-in providers can't themselves guarantee the portability of your Puppet code at this higher level of implementation, Puppet's DSL gives you the tools to build adaptability into your modules. **Facts** and **Conditional statements** are the bread and butter of this functionality.
+
+## Facts
+
+>Get your facts first, then distort them as you please.
+
+> -Mark Twain
+
+Puppet has a bunch of built-in, pre-assigned variables that you can use in your manifests to automatically pull in system information about a node as Puppet compiles the catalog for that node.
+
+Combined with conditionals, which we'll get to in just a moment, **facts** give you a huge amount of power to write portability into your modules.
+
+Remember running `facter ipaddress` told you your IP address? What if you wanted to turn `facter ipaddress` into a variable? It would look like this: `$::ipaddress` as a stand-alone variable, or like this:
+`${::ipaddress}` when interpolated in a string.
+
+The `::` in the above indicates that we always want the top-scope variable, the global fact called `ipaddress`, as opposed to, say a variable called `ipaddress` you defined in a specific manifest.
+
 ## Conditions
 
 > Just dropped in (to see what condition my condition was in)
 
 > -Mickey Newbury
 
-Conditional statements let your Puppet code behave differently in different situations. They are most helpful when combined with facts or with data pertaining to the systems. This enables you to write code to perform as desired on a variety of operating systems and under differing system conditions. Pretty neat, don't you think?
+Conditional statements allow you to write Puppet code that will return different values or execute different blocks of code depending on conditions you specify. This is key to getting your Puppet modules to perform as desired on machines running different operating systems and fulfilling different roles in your infrastructure.
 
 Puppet supports a few different ways of implementing conditional logic:
  
@@ -42,11 +67,11 @@ Puppet supports a few different ways of implementing conditional logic:
  * case statements, and
  * selectors
 
-## The 'if' Statement
+### The 'if' Statement
 
 Puppet’s `if` statements behave much like those in many other programming and scripting languages.
 
-An `if` statement includes a condition followed by a block of Puppet code that will only be executed __if__ that condition evaluates as __true__. Optionally, an `if` statement can also include any number of `elsif` clauses and an `else` clause. Here are some rules:
+An `if` statement includes a condition followed by a block of Puppet code that will only be executed **if** that condition evaluates as **true**. Optionally, an `if` statement can also include any number of `elsif` clauses and an `else` clause. Here are some rules:
 
 - If the `if` condition fails, Puppet moves on to the `elsif` condition (if one exists)
 - If both the `if` and `elsif` conditions fail, Puppet will execute the code in the `else` clause (if one exists)
@@ -101,38 +126,6 @@ if $::hostname =~ /^www(\d+)\./ {
 }
 
 {% endhighlight %}
-
-{% task 1 %}
-Just as we have done in the Variables Quest, let's create a manifest and add a simple conditional statement. The file should report on how long the VM has been up and running.
-
-	nano ~/conditionals.pp
-
-Enter the following code into your `conditionals.pp` manifest:
-
-{% highlight puppet %}
-
-if $::uptime_hours < 2 {
-  $myuptime = "Uptime is less than two hours.\n"
-}
-elsif $::uptime_hours < 5 {
-  $myuptime = "Uptime is less than five hours.\n" 
-}
-else {
-  $myuptime = "Uptime is greater than four hours.\n"
-}
-file {'/root/conditionals.txt':
-  ensure  => present,
-  content => $myuptime,
-}
-
-{% endhighlight %}
-
-Use the `puppet parser` tool to check your syntax, then simulate the change in `--noop` mode without enforcing it. If the noop looks good, enforce the `conditionals.pp` manifest using the `puppet apply` tool.
-
-Have a look at the `conditionals.txt` file using the `cat` command.
-
-{% task 2 %}
-Use the command `facter uptime_hours` to check the uptime yourself. The notice you saw when you applied your manifest should describe the uptime returned from the Facter tool.
 
 ## The 'unless' Statement
 
@@ -220,11 +213,6 @@ See what we did here? Instead of having the selector return a value and saving i
 Once you have created the manifest, check the syntax and apply it.
 
 Inspect the contents of the `/root/architecture.txt` file to ensure that the content is what you expect.
-
-
-## Before you move on
-
-We have discussed some intense information in the Variables Quest and this Quest. The information contained in all the quests to this point has guided you towards creating flexible manifests. Should you not understand any of the topics previously discussed, we highly encourage you to revisit those quests before moving on to the Resource Ordering Quest.
 
 
 

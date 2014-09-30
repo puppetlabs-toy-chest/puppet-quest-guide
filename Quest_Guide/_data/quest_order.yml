@@ -14,8 +14,8 @@
    title: NTP
  - url: /quests/mysql.html
    title: MySQL
- - url: /quests/variables.html
-   title: Variables
+ - url: /quests/variables_and_parameters.html
+   title: Variables and Class Parameters
  - url: /quests/conditions_quest.html
    title: Conditional Statements
  - url: /quests/resource_ordering.html
