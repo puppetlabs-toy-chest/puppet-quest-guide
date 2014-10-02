@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "The file /root/byte.pp" do
   it 'should be created' do
     file('/root/byte.pp').should be_file
-    file('/root/byte.pp').should contain /ensure => 'absent'/
+    file('/root/byte.pp').should contain /byte/
   end
 end
 
