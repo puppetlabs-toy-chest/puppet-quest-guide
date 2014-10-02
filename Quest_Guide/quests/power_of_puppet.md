@@ -256,6 +256,16 @@ It's cool to install and configure an Apache httpd web server with a few lines o
 
 And once a class is deployed to your infrastructure, Puppet gives you the ability to manage the configuration from a single central point. You can implement your updates and changes in a test environment, then easily move them into production.
 
+## Updated Content
+
+Before continuing on to the remaining quests, let's ensure that you have the most up to date version of the quest-related content. Now that we have the website configured, please run the following command:
+
+    quest update
+
+This will download an updated PDF, files for the quest guide website, as well as the tests for the quests.
+
+You can find a copy of the update Quest Guide PDF at: `http://<your-vm's-ip-address>/Quest_Guide.pdf`, or in the `/var/www/html/lvmguide/` directory on the VM.
+
 ## Review
 
 Great job on completing the quest! You should now have a good idea of how to download exising modules from the Forge and use the PE Console node classifier to apply them to a node. You also learned how to use the `puppet agent --test` command to manually trigger a puppet run.
