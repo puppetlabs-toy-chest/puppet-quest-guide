@@ -80,9 +80,9 @@ Install a module
 
 Let's install the `puppetlabs-mysql` module. In fact, let us specify a specific version of the module. Run the following command:
 
-	puppet module install puppetlabs-mysql --version 2.2.2
+	puppet module install puppetlabs-mysql --version 2.2.2 --ignore-requirements
 
-You will see that the module is downloaded and installed. You will also see that in addition to the `puppetlabs-mysql` module, all the modules it depends on were also downloaded and installed.
+You will see that the module is downloaded and installed. With the `--ignore-requirements` flag, we specify that there is no need to verify that all of it's requirements are met. 
 
 By default, modules are installed in the `modulepath`.
 
