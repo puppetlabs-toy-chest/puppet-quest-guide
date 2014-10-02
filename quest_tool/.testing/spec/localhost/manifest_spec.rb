@@ -21,7 +21,7 @@ end
 
 describe "The byte.pp manifest" do
   it 'should be applied' do
-    file('/root/.bash_history').content.should should match /^puppet apply \/?(\w*\/)*byte.pp\s*/
+    file('/root/.bash_history').content.should match /^puppet apply \/?(\w*\/)*byte.pp\s*/
   end
 end
 
