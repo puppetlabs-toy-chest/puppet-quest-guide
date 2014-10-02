@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 
-oescribe "The /root/examples/modules1-ntp1.pp manifest" do
+describe "The /root/examples/modules1-ntp1.pp manifest" do
   it 'should be applied' do
     file('/root/.bash_history').content.should match /^puppet apply \/?(\w*\/)*modules1-ntp1.pp\s*/ 
   end

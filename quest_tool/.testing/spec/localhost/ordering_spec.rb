@@ -8,7 +8,7 @@ describe "The file /root/sshd.pp" do
 end
 
 describe "GSSAPIAuthentication" do
-  it 'should be disable in the sshd config file' do
+  it 'should be disabled in the sshd config file' do
     file('/etc/ssh/sshd_config').should contain /^GSSAPIAuthentication no/
   end
 end

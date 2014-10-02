@@ -32,7 +32,7 @@ end
 
 describe "The diretory /home/byte/tools" do
   it "should be created" do
-    file('/root/.bash_history').should be_directory
+    file('/home/byte/tools').should be_directory
   end
 end
 
