@@ -92,4 +92,5 @@ In addition to the VM, the following resources may be handy in your journey to l
 * [Puppet users group](http://groups.google.com/group/puppet-users)
 * [Puppet Ask - Q&A site](http://ask.puppetlabs.com)
 * \#puppet IRC channel on irc.freenode.net
+* [Learning VM Issue Tracker](https://tickets.puppetlabs.com/browse/LEARNVM)
 * You can also email us at <learningvm@puppetlabs.com>
