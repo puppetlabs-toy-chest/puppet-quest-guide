@@ -17,7 +17,7 @@ LOCK="/tmp/${BASE}.lck"
 RUBY='/opt/puppet/bin/ruby'
 DIR='/root/.testing'
 TEST='test.rb'
-DOWNLOADURL='http://enterprise.delivery.puppetlabs.net/learning/'
+DOWNLOADURL='http://downloads.puppetlabs.com/lvmguide/'
 CACHEDIR='/opt/lvmguide'
 WEBROOT='/var/www/html/lvmguide'
 
