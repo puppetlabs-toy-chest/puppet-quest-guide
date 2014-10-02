@@ -11,7 +11,6 @@ layout: default
 - Power of Puppet Quest
 - Resources Quest
 - Manifest Quest
-- Classes Quest
 - Variables Quest
 
 ## Quest Objectives
