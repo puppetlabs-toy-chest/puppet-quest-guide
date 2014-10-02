@@ -43,14 +43,21 @@ While Puppet's built-in providers can't themselves guarantee the portability of 
 
 > -Mark Twain
 
-Puppet has a bunch of built-in, pre-assigned variables that you can use in your manifests to automatically pull in system information about a node as Puppet compiles the catalog for that node.
+You already encountered the *facter* tool in the when we asked you to run `facter ipaddress` in the setup section of this quest guide. While it's nice the be able to run facter from the command line, it's  real utility is to make information about a system available to use as variables in your manifests.
 
-Combined with conditionals, which we'll get to in just a moment, **facts** give you a huge amount of power to write portability into your modules.
+{% fact %}
+While facter is an important component of Puppet and is bundled with Puppet Enterprise, it's actually one of the many separate open-source projects integrated into the Puppet ecosystem.
+{% endfact %}
 
-Remember running `facter ipaddress` told you your IP address? What if you wanted to turn `facter ipaddress` into a variable? It would look like this: `$::ipaddress` as a stand-alone variable, or like this:
-`${::ipaddress}` when interpolated in a string.
+Combined with conditionals, which we'll get to in a moment, **facts** give you a huge amount of power to write portability into your modules.
 
-The `::` in the above indicates that we always want the top-scope variable, the global fact called `ipaddress`, as opposed to, say a variable called `ipaddress` you defined in a specific manifest.
+To get a full list of facts available to facter, enter the command:
+	
+	facter -p | less
+	
+Any of the facts you see listed here can be used within your Puppet code with the syntax `$::factname`. The double colons `::` indicate that the fact is defined in what's called *top scope*, that is, before any variables in your node definitions or classes are assigned. While you could technically use a fact without the `::`, you would risk having it mistakenly overridden by a locally defined variable with the same name. The `::` tells Puppet to look directly in the top scope instead of using the first variable it finds with a matching name. The Puppet style guide suggests using this syntax consistently to avoid naming collisions.
+
+Using the 
 
 ## Conditions
 
@@ -58,14 +65,14 @@ The `::` in the above indicates that we always want the top-scope variable, the 
 
 > -Mickey Newbury
 
-Conditional statements allow you to write Puppet code that will return different values or execute different blocks of code depending on conditions you specify. This is key to getting your Puppet modules to perform as desired on machines running different operating systems and fulfilling different roles in your infrastructure.
+Conditional statements return different values or execute different blocks of code depending on the value of a specified variable. This is key to getting your Puppet modules to perform as desired on machines running different operating systems and fulfilling different roles in your infrastructure.
 
 Puppet supports a few different ways of implementing conditional logic:
  
- * `if` statements
- * `unless` statements
+ * `if` statements,
+ * `unless` statements,
  * case statements, and
- * selectors
+ * selectors.
 
 ### The 'if' Statement
 
@@ -73,59 +80,80 @@ Puppet’s `if` statements behave much like those in many other programming and 
 
 An `if` statement includes a condition followed by a block of Puppet code that will only be executed **if** that condition evaluates as **true**. Optionally, an `if` statement can also include any number of `elsif` clauses and an `else` clause. Here are some rules:
 
-- If the `if` condition fails, Puppet moves on to the `elsif` condition (if one exists)
-- If both the `if` and `elsif` conditions fail, Puppet will execute the code in the `else` clause (if one exists)
-- If all the conditions fail, and there is no `else` block, Puppet will do nothing and move on
-
-The following is an example of an `if` statement you might use to raise a warning when a class is included on an unsupported system:
-
-{% highlight puppet %}
-if $::is_virtual == 'true' {
-  # Our NTP module is not supported on virtual machines:
-  warning( 'Tried to include class ntp on virtual machine.' )
-}
-elsif $::operatingsystem == 'Darwin' {
-  # Our NTP module is not supported on Darwin:
-  warning( 'This NTP module does not yet work on Darwin.' )
-}
-else {
-  # Normal node, include the class.
-  include ntp
-}
-{% endhighlight %}
-
-In addition to the `==` operator, which tests for equality, there is also a regular expression match operator `=~`. The `==` operator is not case sensitive. In the above example, if you had:
-
-{% highlight puppet %}
-if $::is_virtual == 'TRUE' {
-  # Our NTP module is not supported on virtual machines:
-  warning( 'Tried to include class ntp on virtual machine.' )
-}
-elsif $::operatingsystem == 'darwin' {
-  # Our NTP module is not supported on Darwin:
-  warning( 'This NTP module does not yet work on Darwin.' )
-}
-else {
-  # Normal node, include the class.
-  include ntp
-}
-{% endhighlight %}
-
-... the behavior would remain unchanged.
+- If the `if` condition fails, Puppet moves on to the `elsif` condition (if one exists).
+- If both the `if` and `elsif` conditions fail, Puppet will execute the code in the `else` clause (if one exists).
+- If all the conditions fail, and there is no `else` block, Puppet will do nothing and move on.
 
 {% aside The Warning Function %}
 The `warning()` function will not affect the execution of the rest of the manifest, but if you were running Puppet in the usual Master-Agent setup, it would log a message on the server at the 'warn' level.
 {% endaside %}
 
-The regular expression operator `=~` helps you test whether a string matches a pattern you specify. For example, in the following, we capture the digits that follow `www` in the hostname, such as `www01` or `www12` and store them in the `$1` variable for use in the `notice()` function.
+Lets say you want to give the user you're creating with your accounts module administrative priveleges. You have a mix of CentOS and Debian systems in your infrastructure. On your CentOS machines, you use the `wheel` group to manage superuser privileges, while you use an `admin` group on the Debian machines. With the `if` statement and the `operatingsystem` fact from facter, this kind of adjustment is easy to automate with Puppet.
+
+Before getting started, make sure you're working in the `modules` directory:
+
+	cd /etc/puppetlabs/puppet/modules
+	
+Open the `accounts/manifests/init.pp` manifest.
+
+At the beginning of the `accounts` class definition, you'll add some conditional logic to set the `$groups` variable based on the value of the `$::operatingsystem` fact. In both cases, you'll add the user the new group made solely for that user, defined by the `$name` parameter. If the operating system is CentOS, you'll also add the user to the `wheel` group, and if the operating system is Debian you'll add the user to the `admin` group.
+
+So the beginning of your class definition should looks something like this:
 
 {% highlight puppet %}
+class accounts ($name,$uid) {
 
-if $::hostname =~ /^www(\d+)\./ {
-  notice("Welcome to web server number $1")
+  if $::operatingsystem == 'centos' {
+    $groups = [$name, 'wheel']
+  }
+  elsif $::operatingsystem == 'debian' {
+    $groups = [$name, 'admin']
+  }
+  else {
+    fail( "This module doesn't support ${::operatingsystem}.")
+  }
+  
+  [...]
+
 }
-
 {% endhighlight %}
+
+Note that the string matches are *not* case sensitive, so 'CENTOS' would work just as well as 'centos'. Finally, in the `else` block, you'll raise a warning that the module doesn't support the current module.
+
+Once you've written the conditional logic to set the `$groups` variable, edit the `user` resource declaration to assign the `$groups` variable to the `groups` attribute.
+
+{% highlight puppet %}
+class accounts ($name,$uid) {
+
+  [...]
+  
+  user { $name:
+    ensure => 'present',
+    home   => "/home/${name}",
+    uid    => $uid,
+    groups => $groups,
+  }
+
+  [...]  
+
+}
+{% endhighlight %}
+
+Make sure that your manifest can pass a `puppet parser validate` check before continuing on.
+
+The Learning VM is running CentOS, so to test what would happen on a Debian OS you'll have to override the `operatingsystem` fact with a little environment variable magic. To provide a custom value for any facter fact as you run a `puppet apply`, you can include `FACTER_factname=new_value` before your new terminal command.
+
+Combining this with the `--noop` flag, you can do a quick test of how your manifest would run on a different system before setting up a full testing environment.
+
+	FACTER_operatingsystem=Debian puppet apply --noop accounts/tests/init.pp
+	
+Look in the list of notices, and you'll see the changes that would have been applied.
+
+Try one more time with an unsupported operating system to check the fail condition:
+
+	FACTER_operatingsystem=Darwin puppet apply --noop accounts/tests/init.pp
+
+Now go ahead and run a `puppet apply --noop` on your test manifest without setting the environment variable. If this looks good, drop the `--noop` flag to apply the catalog generated from your manifest.
 
 ## The 'unless' Statement
 
@@ -137,8 +165,7 @@ Like `if` statements, case statements choose one of several blocks of Puppet cod
 
 A special `default` case matches anything. It should always be included at the end of a case statement to catch anything that did not match an explicit case.
 
-{% task 3 %}
-Create a `case.pp` manifest with the following conditional statement and `file` resource declaration.
+For instance, if you were setting up an Apache webserver, you might use a case statement like the following:
 
 {% highlight puppet %}
 case $::operatingsystem {
@@ -146,35 +173,18 @@ case $::operatingsystem {
   'Redhat': { $apache_pkg = 'httpd' }
   'Debian': { $apache_pkg = 'apache2' }
   'Ubuntu': { $apache_pkg = 'apache2' }
-  default: { fail("Unrecognized operating system for webserver") }
+  default: { fail("Unrecognized operating system for webserver.") }
 }
 
-file {'/root/case.txt':
-  ensure  => present,
-  content => "Apache package name: ${apache_pkg}\n"
-}
-{% endhighlight %}
-
-When you've validated your syntax and run a `--noop`, apply the manifest:
-
-	puppet apply case.pp
-	
-Use the `cat` command to inspect the `case.txt` file. Because the Learning VM is running CentOS, you will see that the selected Apache package name is 'httpd'.
-
-For the sake of simplicity, we've output the result of the case statement to a file, but keep in mind that instead of using the result of the case statement like the one above to define the contents of a file, you could use it as the title of a `package` resource declaration, as shown below:
-
-{% highlight puppet %}
 package { $apache_pkg :
   ensure => present,
 }
 {% endhighlight %}
 
-This would allow you to always install and manage the right Apache package for a machine's operating system. Aaccounting for the differences between various platforms is an important part of writing flexible and re-usable Puppet code. It is a paradigm you will encounter frequently in published Puppet modules.
-
-Also note that Puppet will choose the appropriate _provider_ for the package depending on the operating system, without you having to mention it. On Debian-based systems, for example, it may use `apt` and on RedHat systems, it will use `yum`.
+This would allow you to always install and manage the right Apache package for a machine's operating system. Accounting for the differences between various platforms is an important part of writing flexible and re-usable Puppet code, and it's a paradigm you will encounter frequently in published Puppet modules.
 
 ## The 'selector' Statement
-Selector statements are very similar to `case` statements, but instead of executing a block of code, a selector assigns a value directly. A selector might look something like this:
+Selector statements are similar to `case` statements, but instead of executing a block of code, a selector assigns a value directly. A selector might look something like this:
 
 {% highlight puppet %}
 $rootgroup = $::osfamily ? {
@@ -188,31 +198,3 @@ $rootgroup = $::osfamily ? {
 Here, the value of the `$rootgroup` is determined based on the control variable `$osfamily`. Following the control variable is a `?` (question mark) symbol. In the block surrounded by curly braces are a series of possible values for the $::osfamily fact, followed by the value that the selector should return if the value matches the control variable.
 
 Because a selector can only return a value and cannot execute a function like `fail()` or `warning()`, it is up to you to make sure your code handles unexpected conditions gracefully. You wouldn't want Puppet to forge ahead with an inappropriate default value and encounter errors down the line.
-
-{% task 4 %}
-By writing a Puppet manifest that uses a selector, create a file `/root/architecture.txt` that lists whether the VM is a 64-bit or a 32-bit machine.
-
-To accomplish this, create a file in the root directory, called `architecture.pp`:
-
-    nano architecture.pp
-
-We know that i386 machines have a 32-bit architecture, and x86_64 machines have a 64-bit architecture. Let's set the content of the file based on this fact:
-
-{% highlight puppet %}
-file { '/root/architecture.txt' :
-  ensure => file,
-  content => $::architecture ? {
-    'i386' => "This machine has a 32-bit architecture.\n",
-    'x86_64' => "This machine has a 64-bit architecture.\n",
-  }
-}
-{% endhighlight %}
-
-See what we did here? Instead of having the selector return a value and saving it in a variable, as we did in the previous example with `$rootgroup`, we use it to specify the value of the `content` attribute in-line.
-
-Once you have created the manifest, check the syntax and apply it.
-
-Inspect the contents of the `/root/architecture.txt` file to ensure that the content is what you expect.
-
-
-
