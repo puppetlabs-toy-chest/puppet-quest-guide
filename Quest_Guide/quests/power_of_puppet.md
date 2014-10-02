@@ -176,27 +176,18 @@ Next, open the `init.pp` manifest.
 {% highlight puppet %}
 class lvmguide (
   $document_root = '/var/www/html/lvmguide',
-  $port = '80',
+  $port          = '80',
 ) {
-  
-  class { 'apache': 
+
+  # Manage apache, the files for the website will be 
+  # managed by the quest tool
+  class { 'apache':
     default_vhost => false,
   }
-  
   apache::vhost { 'learning.puppetlabs.vm':
     port    => $port,
     docroot => $document_root,
   }
-
-  file { '/var/www/html/lvmguide':
-    ensure  => directory,
-    owner   => $::apache::params::user,
-    group   => $::apache::params::group,
-    source  => 'puppet:///modules/lvmguide/html',
-    recurse => true,
-    require => Class['apache'],
-  }
-
 }
 {% endhighlight %}
 
@@ -234,19 +225,9 @@ The `lvmguide` class declares another class: `apache`. Puppet knows about the `a
 
 This block of code declares the `apache::vhost` class for the Quest Guide with the title `learning.puppetlabs.vm`, and with `$port` and `$docroot` set to those class parameters we saw earlier. This is the same as saying "Please set up a VirtualHost website serving the 'learning.puppetlabs.vm' website, and set the port and document root based on the parameters from above."
 
-#### Manage the files for our content:
-{% highlight puppet %}
-  file { '/var/www/html/lvmguide':
-    ensure  => directory,
-    owner   => $::apache::params::user,
-    group   => $::apache::params::group,
-    source  => 'puppet:///modules/lvmguide/html',
-    recurse => true,
-    require => Class['apache'],
-  }
-{% endhighlight %}
+#### The files for the website
 
-Finally, the class manages the content for the website. It ensures that the directory `/var/www/html/lvmguide` exists and that its contents are managed recursively. The `source =>` line tell Puppet to copy the content for this directory from an `html` directory in the `lvmguide` module.
+The files for the quest guide are put in place by the `quest` command line tool, and thus we don't specify anything about the files in the class. Puppet is flexible enough to help you manage just what you want to, leaving you free to use other tools where more appropriate. Thus we put together a solution using Puppet to manage a portion of it, and our `quest` tool to manage the rest.
 
 It may seem like there's a lot going on here, but once you have a basic understanding of the syntax, a quick read-through will be enough to get the gist of well-written Puppet code. (We often talk about Puppet's DSL as self-documenting code.)
 
