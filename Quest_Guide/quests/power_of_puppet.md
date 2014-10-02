@@ -85,7 +85,7 @@ When prompted, use the following credentials to log in:
 
 {% figure '../assets/PE_Login.png' %}
 
-You're in! Now that you have access to the PE Console, we'll go over the steps you'll take to classify the "learn.localdomain" node (i.e. the Learning VM) with the `lvmguide` class.
+You're in! Now that you have access to the PE Console, we'll go over the steps you'll take to classify the "learning.puppetlabs.vm" node (i.e. the Learning VM) with the `lvmguide` class.
 
 ### Add a Class
 
@@ -107,17 +107,17 @@ You should see a verification message at the top of the PE Console and the the `
 
 ### Classify a Node 
 
-Now that the `lvmguide` class is available, you can use it to classify the node `learn.localdomain`.
+Now that the `lvmguide` class is available, you can use it to classify the node `learning.puppetlabs.vm`.
 
 Click on the "Nodes" menu item in the navigation menu. (You may need to scroll to the top of the page to see the navigation menu.)
 
 {% figure '../assets/PE_Nodes_Menu.png' %}
 
-Click on the *learn.localdomain* node hyperlink. (This should be the only one listed since the Learning VM is the only node you're managing with Puppet Enterprise.)
+Click on the *learning.puppetlabs.vm* node hyperlink. (This should be the only one listed since the Learning VM is the only node you're managing with Puppet Enterprise.)
 
 {% figure '../assets/PE_Learn_Node.png' %}
 
-Once you're on the node page for *learn.localdomain*, click the "Edit" button located in the top-right corner of the screen. 
+Once you're on the node page for *learning.puppetlabs.vm*, click the "Edit" button located in the top-right corner of the screen. 
 
 {% figure '../assets/PE_Edit_Button.png' %}
 
@@ -129,11 +129,11 @@ Click the "Update" button at the bottom.
 
 {% figure '../assets/PE_Update_Button.png' %}
 
-Excellent! If everything went according to plan, you've successfully classified the `learn.localdomain` node with the `lvmguide` class.
+Excellent! If everything went according to plan, you've successfully classified the `learning.puppetlabs.vm` node with the `lvmguide` class.
 
 ### Run Puppet
 
-Now that you have classified the `learn.localdomain` node with the `lvmguide` class, Puppet knows how the system should be configured. But it won't make any changes until a Puppet run occurs. 
+Now that you have classified the `learning.puppetlabs.vm` node with the `lvmguide` class, Puppet knows how the system should be configured. But it won't make any changes until a Puppet run occurs. 
 
 The Puppet `agent` daemon runs in the background on any nodes you manage with Puppet. Every 30 minutes, the Puppet agent daemon requests a *catalog* from the Puppet Master. The Puppet Master parses all the classes applied to that node and builds the catalog to describes how the node is supposed to be configured. It returns this catalog to the node's Puppet agent, which then applies any changes necessary to bring the node into the line with the state described by the catalog.
 
