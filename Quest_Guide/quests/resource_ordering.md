@@ -25,36 +25,46 @@ This quest will help you learn more about specifying the order in which Puppet s
 
 	quest --start ordering
 
-## Explicit Ordering
+## Autorequires and Explicit Ordering
 
-We are likely to read instructions from top to bottom and execute them in that order. When it comes to resource declarations in a Puppet manifest, Puppet does things a little differently. It works through the problem as though it were given a list of things to do, and it was left to decide the most efficient way to get them done. We have referred to the catalog vaguely in the previous sections. The **catalog** is a compilation of all the resources that will be applied to a given system, and the relationships between those resources. In building the catalog, unless we _explicitly_ specify the relationship between the resources, Puppet will manage them in its own order.  
+We are likely to read instructions from top to bottom and execute them in that order. When it comes to resource declarations in a Puppet manifest, Puppet does things a little differently. It works through the problem as though it were given a list of things to do, and it was left to decide the most efficient way to get them done.
 
-For the most part, Puppet specifies relationships between resources in the appropriate manner while building the catalog. For example, if you say that user `gigabyte` should exist, and the directory `/home/gigabyte/bin` should be present and be owned by user `gigabyte`, then Puppet will specify a relationship between the two - that the user should be managed before the directory. These are implicit (shall we call them obvious?) relationships. 
+The **catalog** is a compilation of all the resources that will be applied to a given system, and the relationships between those resources. For some resource types, Puppet is clever enough to figure out necessary relationships among resources itself. These implicit resource relationships are called **autorequires**.
 
-Sometimes, however, you will need to ensure that a resource declaration is applied before another. For instance, if you wish to declare that a service should be running, you need to ensure that the package for that service is installed and configured before you can start the service. One might ask as to why there is not an implicit relationship in this case. The answer is that, often times, more than one package provides the same service, and what if you are using a package you built yourself? Since Puppet cannot _always_ conclusively determine the mapping between a package and a service (the names of the software package and the service or executable it provides are not always the same either), it is up to us to specify the relationship between them.
+You can see what a resource can autorequire with the `puppet describe` tool.
 
-When you need a group of resources to be managed in a specific order, you must explicitly state the dependency relationships between these resources within the resource declarations.
+Take a look at the entry for the `group` resource:
+
+	puppet describe group
+	
+A few paragraphs down, you'll see the following section:
+
+	**Autorequires:** If Puppet is managing the user or group that owns a file, the file resource will autorequire them. If Puppet is managing any parent directories of a file, the file resource will autorequire them.
+
+(The information you find with the `describe` tool can also be found in the [type reference](https://docs.puppetlabs.com/references/latest/type.html) section of Puppets docs site.)
+
+When you declared `user`, `file`, resources in your `accounts` module, the autorequires of these resources ensured that everything went smoothly. 
+
+Sometimes, however, you will need to tell Puppet explicitly that a resource declaration is applied before another. For instance, if you wish to declare that a service should be running, you need to ensure that the package for that service is installed and configured before you can start the service. Just as Puppet's built-in providers don't (and shouldn't!) automatically decide what package you might want to use on a given operating system, Puppet doesn't try to guess what services are associated with a given package.
+
+Often, more than one package provides the same service, and what if you are using a package you built yourself? Since Puppet cannot *always* conclusively determine the mapping between a package and a service (the names of the software package and the service or executable it provides are not always the same either), it is up to the user to specify the relationship between them.
+
+To overcome this issue, Puppet's syntax includes a few different ways to explicitly manage resource ordering.
 
 ## Relationship Metaparameters
 
-{% fact %}
-A metaparameter is a resource attribute that can be specified for _any_ type of resource, rather than a specific type.
-{% endfact %}
+One way of telling Puppet what order to use when managing resources is by including ordering **metaparameters** in your resource declarations.
 
-Metaparameters follow the familiar `attribute => value` syntax. There are four metaparameter **attributes** that you can include in your resource declaration to order relationships among resources.
+Metaparameters are attributes that can be set in any resource to tells Puppet *how* to manage that resource. In addition to resource ordering, metaparameters can help with things like logging, auditing, and scheduling. For now, however, we'll be concentrating only on resource ordering metaparameters.
 
-* `before` causes a resource to be applied **before** a specified resource
-* `require` causes a resource to be applied **after** a specified resource
+There are four metaparameter **attributes** that you can include in your resource declaration to order relationships among resources.
+
+* `before` causes a resource to be applied **before** a specified resource.
+* `require` causes a resource to be applied **after** a specified resource.
 * `notify` causes a resource to be applied **before** the specified resource, just as with `before`. Additionally, notify will generate a refresh event for the specified resource when the notifying resource changes. 
 * `subscribe` causes a resource to be applied **after** the specified resource. The subscribing resource will be refreshed if the target resource changes.
 
-The **value** of the relationship metaparameter is the title or titles (in an array) of one or more target resources. Since this is the first time we've mentioned arrays - here's an example of an array:
-
-{% highlight puppet %}
-
-$my_first_array = ['one', 'two', 'three']
-
-{% endhighlight %}
+The **value** of the relationship metaparameter is the title or titles (in an array) of one or more target resources.
 
 Here's an example of how the `notify` metaparameter is used:
 
@@ -78,20 +88,35 @@ In order to better understand how to explicitly specify relationships between re
 
 Let's try to disable GSSAPIAuthentication, and in the process, learn about resource relationships.
 
-{% task 1 %}
-Create a puppet manifest to manage the `/etc/ssh/sshd_config` file
+Before getting started, ensure that you're in the `modules` directory:
 
-Create the file `/root/sshd.pp` using a text editor, with the following content in it.
+	cd /etc/puppetlabs/puppet/modules
+
+{% task 1 %}
+Create an `sshd` directory and create `tests`, `manifests`, and `files` subdirectories.
+
+{% task 2 %}
+We've already prepared an `sshd_config` file to use as a base for your source file. Copy it into your module's `files` directory:
+
+	cp /root/examples/sshd_config sshd/files/sshd_config
+
+{% task 3 %}
+
+Create a `sshd/manifests/init.pp` manifest with the following class definition:
 
 {% highlight puppet %}
-file { '/etc/ssh/sshd_config':
-  ensure => file,
-  mode   => 600,
-  source => '/root/examples/sshd_config',
+class { 'sshd':
+
+  file { '/etc/ssh/sshd_config':
+    ensure => file,
+    mode   => 600,
+    source => 'puppet::///modules/sshd/sshd_config',
+  }
+  
 }
 {% endhighlight %}
 
-What we have done above is to say that Puppet should ensure that the file `/etc/ssh/sshd_config` exists, and that the contents of the file should be sourced from the file `/root/examples/sshd_config`. The `source` attribute also allows us to use a different URI to specify the file, something we will discuss in the Modules quest. For now, we are using a file in `/root/examples` as the content source for the SSH daemon's configuration file.
+This will tell Puppet to ensure that the file `/etc/ssh/sshd_config` exists, and that the contents of the file should be sourced from the file `/root/examples/sshd_config`. The `source` attribute also allows us to use a different URI to specify the file, something we will discuss in the Modules quest. For now, we are using a file in `/root/examples` as the content source for the SSH daemon's configuration file.
 
 Now let us disable GSSAPIAuthentication.
 
