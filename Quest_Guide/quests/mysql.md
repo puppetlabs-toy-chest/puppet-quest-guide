@@ -21,12 +21,9 @@ In this quest you will
 
 ## Why SQL
 
-> 
--- 
+The Puppet Labs MySQL module is a great example of how a well-written module can build on Puppet's foundation to simplify a complex configuration task without sacrificing robustness and control.
 
-While some modules are designed to manage a single service, the 
-
-The `puppetlabs-mysql` module lets you manage your server and client MySQL installations, as well as several MySQL resources such as *users*, *grants*.
+The module lets you install and configure both server and client MySQL instances, and extends Puppet's starndard resource types to let you manage MySQL *users*, *grants*, and *databases* with Puppet's standard resource syntax.
 
 ## Server Install
 
@@ -36,10 +33,12 @@ Install the `puppetlabs-mysql` module:
 
 Classify the LVM with the MySQL server	class. Using class parameters, specify a root password and set the server's max connections to '1024.'
 
+{% highlight puppet %}
 	class { '::mysql::server':
 	  root_password    => 'strongpassword',
 	  override_options => { 'mysqld' => { 'max_connections' => '1024' } },
 	}
+{% endhighlight %}
 	
 In addition to some standard parameters like the `root_password`, the class takes a hash of `override_options`, which you can use to address any configuration options you would normally set in the `/etc/my.cnf` file. Using a hash lets you set any options you like in the MySQL configuration file without requiring each to be written into the class as a separate parameter. The structure of the `override_options` hash is analogous to the `[section]`, `var_name = value` syntax of a `my.cnf` file.
 
@@ -120,11 +119,9 @@ Trigger a Puppet run, and you will see notices indicating that the test database
 	Notice: /Stage[main]/Mysql::Server::Account_security/Mysql_user[@localhost]/ensure: removed
 	Notice: /Stage[main]/Mysql::Server::Account_security/Mysql_user[root@127.0.0.1]/ensure: removed
 
-With these default users removed, you'll likely want to set up your own user account.
-
 ## Types and Providers
 
-Luckily, the MySQL module includes some custom *types and providers* that let you manage some critical bits of MySQL as resources with Puppet DSL just like you would with a system user or service.
+The MySQL module includes some custom *types and providers* that let you manage some critical bits of MySQL as resources with the Puppet DSL just like you would with a system user or service.
 
 A **type** defines the interface for a resource: the set of *properties* you can use to define a desired state for the resource, and the *parameters* that don't directly map to things on the system, but tell Puppet how to manage the resource. Both properties and parameters appear in the resource declaration syntax as attribute value pairs.
 
@@ -132,31 +129,35 @@ A **provider** is what does the heavy lifting to bring the system into line with
 
 The MySQL module includes custom types and providers that make `mysql_user`, `mysql_database`, and `mysql_grant` available as resources.
 
-### Create users:
+## Create a Database:
 
-	mysql_user { 'lvm@127.0.0.1':
-	  ensure                   => 'present',
-	  max_connections_per_hour => '0',
-	  max_queries_per_hour     => '0',
-	  max_updates_per_hour     => '0',
-	  max_user_connections     => '0',
-	  password_hash            => '*F3A2A51A9B0F2BE2468926B4132313728C250DBF',
-	}
-	
+These custom resource types make creating a new database with Puppet pretty simple. Simply add the following to your `site.pp` manifest.
 
-### Create database:
-
-	mysql_database { 'marionettes':
+{% highlight puppet %}
+	mysql_database { 'lvm':
   	  ensure  => 'present',
   	  charset => 'utf8',
 	}
+{% endhighlight %}
+
+## Create a Users:
+
+Just add the following to your `site.pp` manifest:
+
+{% highlight puppet %}
+	mysql_user { 'lvm_user@localhost':
+	  ensure => 'present',
+	}
+{% endhighlight %}
 
 ### Create grants:
 
-	mysql_grant {
-
-### Install client
-
-	node 'client.puppetlabs.vm' {
-	  include ::mysql::client
+{% highlight puppet %}
+	mysql_grant { 'lvm_user@localhost/lvm.*':
+	  ensure      => 'present',
+	  options     => ['GRANT'],
+	  privileges  => ['ALL'],
+	  table       => 'lvm.*',
+	  user        => 'lvm_user@localhost',
 	}
+{% endhighlight %}
