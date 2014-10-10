@@ -27,7 +27,7 @@ Before you get started, let's take a look at the quests you have completed. Type
 
 	quest --completed
 
-This is useful in case you forget which Quests you've already done. In this case it shows that you have completed three quests: (1)Welcome Quest (2)Power of Puppet Quest and (3)Resources Quest.
+This is useful in case you forget which Quests you've already done. In this case it shows that you have completed four quests: (1)Begin (2)Welcome Quest (3)Power of Puppet Quest and (4)Resources Quest.
 {% endaside %}
 
 ## Puppet Manifests
@@ -58,7 +58,7 @@ Type the following instructions into Byte's manifest:
 
 {% highlight puppet %}
 user { 'byte':
-	ensure => 'absent',
+  ensure => 'absent',
 }
 {% endhighlight %}
 
