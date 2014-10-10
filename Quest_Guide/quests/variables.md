@@ -64,7 +64,7 @@ Type the following Puppet code into the `pangrams.pp` manifest:
 $pangram = 'The quick brown fox jumps over the lazy dog.'
 
 file {'/root/pangrams':
-	ensure => directory,
+  ensure => directory,
 }
 
 file {'/root/pangrams/fox.txt':
@@ -119,11 +119,11 @@ $perfect_pangram = 'Bortz waqf glyphs vex muck djin.'
 $pgdir = '/root/pangrams'
 
 file { $pgdir:
-	ensure => directory,
+  ensure => directory,
 }
 
 file { "${pgdir}/perfect_pangrams":
-	ensure => directory,
+  ensure => directory,
 }
 
 file { "${pgdir}/perfect_pangrams/bortz.txt":
