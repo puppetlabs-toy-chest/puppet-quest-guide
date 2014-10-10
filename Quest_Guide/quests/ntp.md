@@ -7,22 +7,29 @@ layout: default
 
 ### Prerequisites
 
-- 
+- Welcome
+- Power of Puppet
+- Resources
+- Manifests and Classes
+- Modules
 
 ## Quest Objectives
 
-- 
+- Use the `puppet module` tool to find and install modules on the Puppet Forge
+- Learn how you can use the `site.pp` manifest to classify nodes.
+- Use class parameters to adjust variables in a class as you declare it.
 
 ## Getting Started
 
-In this quest you will
+In the previous Modules Quest we primarily learned about the structure of a module and how to create a module. In this quest, you'll learn how you can use an existing module from the Puppet Forge to manage an important service on your machine: NTP.
 
     quest --start ntp
 
 ## What's NTP
 
 > Time is the substance from which I am made. Time is a river which carries me along, but I am the river; it is a tiger that devours me, but I am the tiger; it is a fire that consumes me, but I am the fire.
--- Jorge Luis Borges
+
+> -- Jorge Luis Borges
 
 Security services, shared filesystems, certificate signing, logging systems, and many other fundamental services and applications require accurate and coordinated time to function reliably. Given variable network latency, it takes some clever algorithms and protocols to get this coordination right.
 
@@ -32,7 +39,7 @@ NTP is one of the most fundamental services you will want to include in your inf
 
 ## Package/File/Service
 
-So you've decided to use Puppet to manage NTP on your infrastructure. We'll show you how to install and deploy the NTP module in a moment, but first, take a look at the current state of your system. This way, you'll be able to keep track of what Puppet changes and understand why the NTP module does what it does.
+We'll show you how to install and deploy the NTP module in a moment, but first, take a look at the current state of your system. This way, you'll be able to keep track of what Puppet changes and understand why the NTP module does what it does.
 
 To get the NTP service running, there are three key resources that Puppet will manage. The puppet resource resource tool can show you the current state of each of these resources.
 
@@ -48,15 +55,17 @@ finally, see if the Network Time Protocol Daemon (NTPD) *service* is running:
 
 	puppet resource service ntpd
 	
-You'll see that the NTP package is installed on the Learning VM, that the configuration file exists, and that the ntpd service is 'stopped'.
+You'll see that the NTP package is installed on the Learning VM, that the configuration file exists, but that the ntpd service is 'stopped'.
 
-As you continue to work with Puppet, you'll find that this *package/file/service* pattern is very useful. These three resource types correspond to the common sequence of installing a package, customizing that package's functionality with configuration file, and starting the service provided by that package.
+As you continue to work with Puppet, you'll find that this *package/file/service* pattern is very common. These three resource types correspond to the common sequence of installing a package, customizing that package's functionality with configuration file, and starting the service provided by that package.
 
-Also, note that the *package/file/service* pattern describes the typical relationships of dependency among these three resources: a well-written class will define these relationships, telling Puppet to restart the service if the configuration file has been modified, and re-create the configuration file when the package is installed or updated. We'll get into the specifics of how these dependencies are defined in a later quest. But now, on to the installation!
+The *package/file/service* pattern also describes the typical relationships of dependency among these three resources: a well-written class will define these relationships, telling Puppet to restart the service if the configuration file has been modified, and re-create the configuration file when the package is installed or updated. You'll be working with an existing module in this quest, so these dependencies are already taken care of; we'll get into the specifics of how they can be managed in a later quest.
+
+But now, on to the installation!
 
 ## Installation
 
-Before you classify the Learning VM with the NTP class, you'll need to install the NTP module from the forge. While the module itself is called `ntp`, modules in the forge are prefixed by the name of their creator. So to get the Puppet Labs NTP module from the forge, you'll specify `puppetlabs-ntp`, but when you look at the module saved to the modulepath on your Puppet Master, it will be named `ntp`. Keep this in mind, as trying to install multiple modules of the same name can lead to conflicts!
+Before you classify the Learning VM with the NTP class, you'll need to install the NTP module from the forge. While the module itself is called `ntp`, modules in the forge are prefixed by the account name of the uploader. So to get the Puppet Labs NTP module, you'll specify `puppetlabs-ntp`. When you look at the module saved to the modulepath on your Puppet master, however, it will be named `ntp`. Keep this in mind, as trying to install multiple modules of the same name can lead to conflicts!
 
 {% task 1 %}
 
@@ -74,7 +83,9 @@ In the Power of Puppet quest, you learned how to classify a node with the PE Con
 
 `site.pp` is the first manifest the Puppet agent checks when it connects to the master. It defines global settings and resource defaults that will apply to all nodes in your infrastructure. It is also where you will put your *node definitions* (sometimes called `node statements`). A node definition is a block of Puppet code that specifies a set one or more nodes and declares the classes that Puppet will enforce on that set.
 
-Because it's more ammenable to monitoring with the Learning VM quest tool, we'll be primarily using this site.pp method of classification in this Quest Guide. Once you've learned the basic mechanics of node definitions and class declarations, however, this knowledge will be portable to whatever methods of classification you decide to use later.
+In a sense, this node definition is a bit like the tet manifests you've been using so far. While classes are generally defined in separate manifests, the node definition, like a test manifest, is a place where you actually declare them. Of course tests are just that, tests, while the node definitions in your `site.pp` manifest describe what you actually want your infrastructure to look like.
+
+Because it's more ammenable to monitoring with the Learning VM quest tool, we'll be primarily using this `site.pp` method of classification in this Quest Guide. Once you've learned the basic mechanics of node definitions and class declarations, however, much of this knowledge will be portable to whatever methods of classification you decide to use later, including the PE Console node classifier you saw in the Power of Puppet quest.
 
 {% task 2 %}
 
@@ -138,16 +149,22 @@ class { 'ntp':
 
 {% endhighlight %}
 
-{% task 3 %}
+The `servers` parameter in our class declaration takes a list of servers as a value, not just one. This list of values, separated by commas (`,`) and wrapped in brackets (`[]`), is called an *array*. Arrays allow you assign a list of values to a single variable or attribute.
+
+{% task 4 %}
 
 In your `site.pp`, replace the `include ntp` line with a parameterized class declaration based on the example above. Use the servers from the example, or, if you know of a nearer timeserver, include that. You should always specify at least *three* timeservers for NTP to function reliably. You might, for instance, include two from the ntp.org pool and one known nearby timeserver.
 
-{% task 4 %}
+{% task 5 %}
 
 Once you've made your changes to the `site.pp` manifest and used the puppet parser tool to validate your syntax, use the puppet agent tool to trigger a puppet run.
 
 You will see in the output that Puppet has changed the `/etc/ntp.conf` file and triggered a refresh of the `ntpd` service.
 
-### And One More Thing: Arrays
+## Review
 
-In our haste to override the server defaults, we glossed over an important detail above. You likely noticed that the `servers` parameter in our class declaration took a list of servers as a value, not just one. This list of values, separated by commas (`,`) and wrapped in brackets (`[]`), is called an *array*.
+We covered some details of finding and downloading modules from the Puppet Forge with the `puppet module` tool. We also covered the common Package/File/Service pattern, and how it's used by the NTP module to install, configure, and run the ntpd service.
+
+Rather than just running tests, you learned how to use the `site.pp` manifest to include classes within a node declaration.
+
+After getting the ntpd service running, we went over class parameters, and showed how they can be used to set class parameters as a class is declared.
