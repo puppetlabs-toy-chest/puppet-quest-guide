@@ -31,7 +31,7 @@ In the previous Modules Quest we primarily learned about the structure of a modu
 
 > -- Jorge Luis Borges
 
-Security services, shared filesystems, certificate signing, logging systems, and many other fundamental services and applications require accurate and coordinated time to function reliably. Given variable network latency, it takes some clever algorithms and protocols to get this coordination right.
+Security services, shared filesystems, certificate signing, logging systems, and many other fundamental services and applications (including Puppet itself!) need on accurate and coordinated time to function reliably. Given variable network latency, it takes some clever algorithms and protocols to get this coordination right.
 
 The Network Time Protocol (NTP) lets you keep time millisecond-accurate within your network while staying synchronized to Coordinated Universal Time (UTC) by way of publicly accessible timeservers. (If you're interested in the subtleties of how NTP works, you can read all about it [here](http://www.eecis.udel.edu/~ntp/ntpfaq/NTP-a-faq.htm))
 
@@ -133,7 +133,7 @@ You'll see a list of the default servers:
 	server 1.centos.pool.ntp.org
 	server 2.centos.pool.ntp.org
 
-These ntp.org servers aren't actually time servers themselves; rather, they're access points that will pass you on to one of a pool of public timeservers. Most servers assigned through the ntp.org pool are provided by volunters running NTP as an extra service on a mail or web server. 
+These ntp.org servers aren't actually time servers themselves; rather, they're access points that will pass you on to one of a pool of public timeservers. Most servers assigned through the ntp.org pool are provided by volunteers running NTP as an extra service on a mail or web server. 
 
 While these work well enough, you'll get more accurate time and use less network resources if you pick public timeservers in your area.
 
