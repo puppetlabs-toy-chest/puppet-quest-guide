@@ -182,6 +182,8 @@ class {'web':
 
 Now give it a try. Go ahead and do a `--noop` run, then apply the test.
 
+Your new page should now be available as `http://<LVM's IP>/hola.html`!
+
 ## Review
 
 In this quest you've learned how to take your Puppet manifests to the next level by using variables.You learned how to assign a value to a variable and then reference the variable by name whenever you need its content. You also learned how to interpolate variables.
