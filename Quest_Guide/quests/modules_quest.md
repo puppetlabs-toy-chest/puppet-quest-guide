@@ -99,6 +99,8 @@ The top directory will be the name you want for the module. In this case, let's 
 
 	  mkdir vimrc
 
+{% task 3 %}
+
 Now you need three more directories, one for manifests, one for tests, and one for files.
 
     mkdir vimrc/{manifests,tests,files}
@@ -112,13 +114,13 @@ If you use the `tree vimrc` command to take a look at your new module, you shoul
 
 	3 directories, 0 files
 
-{% task 3 %}
+{% task 4 %}
 
 We've already set up the Learning VM with some custom settings for Vim. Instead of starting from scratch, copy the existing `.vimrc` file into the `files` directory of your new module. Any file in the `files` directory of a module in the Puppet master's modulepath will be available to client nodes through Puppet's built-in fileserver.
 
 	cp ~/.vimrc vimrc/files/vimrc
 	
-{% task 4 %}
+{% task 5 %}
 	
 Once you've copied the file, open so you can make an addition.
 
@@ -130,7 +132,7 @@ We'll keep things simple. By default, line numbering is disabled. Add the follow
 	
 Save and exit.
 
-{% task 5 %}
+{% task 6 %}
 
 Now that your source file is ready, you need to write a manifest to tell puppet what to do with it.
 
@@ -181,7 +183,7 @@ Save the manifest, and use the `puppet parser` tool to validate your syntax:
 
 Remember, this manifest *defines* the `vimrc` class, but you'll need to *declare* it for it to have an effect. That is, we've described what the `vimrc` class is, but you haven't told Puppet to actually do anything with it.
 
-{% task 6 %}
+{% task 7 %}
 
 To test the `vimrc` class, create a manifest called `init.pp`  in the `vimrc/tests` directory.
 
@@ -192,6 +194,8 @@ All you'll do here is *declare* the `vimrc` class with the `include` directive.
 {% highlight puppet %}
 include vimrc
 {% endhighlight %}
+
+{% task 8 %}
 
 Apply the new manifest with the `--noop` flag. If everything looks good, drop the `--noop` and apply it for real.
 
