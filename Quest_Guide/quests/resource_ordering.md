@@ -7,12 +7,13 @@ layout: default
 
 ### Prerequisites
 
-- Welcome Quest
-- Power of Puppet Quest
-- Resources Quest
-- Manifest Quest
-- Variables Quest
-- Conditions Quest
+- Welcome
+- Power of Puppet
+- Resources
+- Manifests and Classes
+- Modules
+- Variables and Class Parameters
+- Conditions
 
 ## Quest Objectives
 
@@ -120,7 +121,7 @@ This will tell Puppet to ensure that the file `/etc/ssh/sshd_config` exists, and
 
 Now let us disable GSSAPIAuthentication.
 
-{% task 2 %}
+{% task 4 %}
 Disable GSSAPIAuthentication for the SSH service
 
 Edit the `/root/examples/sshd_config` file.  
@@ -148,7 +149,13 @@ service { 'sshd':
 
 Notice that in the above the `subscribe` metaparameter has the value `File['/etc/ssh/sshd_config']`. The value indicates that we are talking about a file resource (that Puppet knows about), with the _title_ `/etc/ssh/sshd_config`. That is the file resource we have in the manifest. References to resources always take this form. Ensure that the first letter of the type ('File' in this case) is always capitalized when you refer to a resource in a manifest.
 
-Now, let's apply the change. Remember to check syntax, and do a dry-run using the `--noop` flag first, before using `puppet apply /root/sshd.pp` to apply your changes. 
+{% task 5 %}
+
+Create a test manifest to include your `sshd` class.
+
+{% task 6 %}
+
+Now, let's apply the change. Remember to check syntax, and do a dry-run using the `--noop` flag first, before using `puppet apply` to run your test manifest.
 
 You will see Puppet report that the content of the `/etc/ssh/sshd_config` file changed. You should also be able to see that the SSH service was restarted. 
 
@@ -168,10 +175,10 @@ The **package/file/service** pattern is one of the most useful idioms in Puppet.
 
 To stay consistent with the package/file/service idiom, let's dive back into the sshd.pp file and add the `openssh-server` package to it.
 
-{% task 3 %}
+{% task 7 %}
 Manage the package for the SSH server
 
-Type the following code in above your file resource in file `/root/sshd.pp`
+Add the following code above your file resource in your `sshd/manifests/init.pp` manifest
 
 {% highlight puppet %}
 package { 'openssh-server':
@@ -180,15 +187,12 @@ package { 'openssh-server':
 }
 {% endhighlight %}
 
-- Make sure to check the syntax.  
-- Once everything looks good, go ahead and apply the manifest.
+Make sure to check the syntax. Once everything looks good, go ahead and apply the manifest.
 
 Notice that we use `before` to ensure that the package is managed before the configuration file is managed. This makes sense, since if the package weren't installed, the configuration file (and the `/etc/ssh/` directory that contains it would not exist. If you tried to manage the contents of a file in a directory that does not exist, you are destined to fail. By specifying the relationship between the package and the file, we ensure success.
 
 Now we have a manifest that manages the package, configuration file and the service, and we have specified the order in which they should be managed.
 
-## Let's do a Quick Review
+## Review
 
 In this Quest, we learned how to specify relationships between resources, to provide for better control over the order in which the resources are managed by Puppet. We also learned of the Package-File-Service pattern, which emulates the natural sequence of managing a service on a system. If you were to manually install and configure a service, you would first install the package, then edit the configuration file to set things up appropriately, and finally start or restart the service.
-
-
