@@ -19,7 +19,7 @@ layout: default
  
 ## Getting Started
 
-If you want to get things done effeciently in Puppet, the **module** will be your best friend. You got a little taste of module structure in the Manifests and Classes quest. In this quest, we'll get into the details. 
+If you want to get things done effeciently in Puppet, the **module** will be your best friend. You got a little taste of module structure in the Manifests and Classes quest. In this quest, we'll take you deeper into the details. 
 
 In short, a Puppet module is a self-contained bundle of all the Puppet code and other data needed to manage some aspect of your configuration. In this quest, we'll go over the purpose and structure of Puppet modules, before showing you how to create your own.
 
@@ -28,11 +28,17 @@ When you're ready, type the following command:
 	quest --start modules
 
 ## Why Meddle with Modules?
+
+> Creation always builds upon something else. There is no art that doesn't reuse.
+
+> --Lawrence Lessig
+
+
 There's no hard-and-fast technical reason why you can't toss all the resource declarations for a node into one massive class. But this wouldn't be very Puppetish. Puppet's not just about bringing your nodes in line with a desired configuration state; it's about doing this in a way that's transparent, repeatable, and as painless as possible.
 
-Modules are a big part of how Puppet eases the challenges of configuration management. Modules allow you to organize your Puppet code into units that are testable, reusable, and portable, in short, *modular*. This means that instead of writing Puppet code from scratch for every configuration you need, you can mix and match solutions from a few well-written modules. And because these modules are separate and self-contained, they're much easier to test, maintain, and share than a collection of one-off solutions.
+Modules allow you to organize your Puppet code into units that are testable, reusable, and portable, in short, *modular*. This means that instead of writing Puppet code from scratch for every configuration you need, you can mix and match solutions from a few well-written modules. And because these modules are separate and self-contained, they're much easier to test, maintain, and share than a collection of one-off solutions.
 
-Though there are some technical aspects to how Puppet treats modules, they're not much more than a convention for organizing Puppet code. The standard module filestructure gives Puppet a consistent way to locate whatever classes, files, templates, plugins, and binaries are required to manage a given function on a node.
+Though there are some technical aspects to how Puppet treats modules, at root they're little more than a conventional directory structure and some naming standards. The module file structure gives Puppet a consistent way to locate whatever classes, files, templates, plugins, and binaries are required to fulfill the function of the module.
 
 Modules and the module directory structure also provide an important way to manage scope within Puppet. Keeping everything nicely tucked away in its own module means you have to worry much less about name collisions and confusion.
 
@@ -87,6 +93,8 @@ Change your working directory to the modulepath if you're not already there.
 
 	  cd /etc/puppetlabs/puppet/modules
 
+{% task 2 %}
+
 The top directory will be the name you want for the module. In this case, let's call it "vimrc." Use the `mkdir` command to create your module directory:
 
 	  mkdir vimrc
@@ -104,11 +112,13 @@ If you use the `tree vimrc` command to take a look at your new module, you shoul
 
 	3 directories, 0 files
 
-{% task 4 %}
+{% task 3 %}
 
 We've already set up the Learning VM with some custom settings for Vim. Instead of starting from scratch, copy the existing `.vimrc` file into the `files` directory of your new module. Any file in the `files` directory of a module in the Puppet master's modulepath will be available to client nodes through Puppet's built-in fileserver.
 
 	cp ~/.vimrc vimrc/files/vimrc
+	
+{% task 4 %}
 	
 Once you've copied the file, open so you can make an addition.
 
@@ -119,6 +129,8 @@ We'll keep things simple. By default, line numbering is disabled. Add the follow
 	set number
 	
 Save and exit.
+
+{% task 5 %}
 
 Now that your source file is ready, you need to write a manifest to tell puppet what to do with it.
 
@@ -146,7 +158,7 @@ First, the optional server hostname is nearly always omitted, as it defaults to 
 
 Second, nearly all file serving in Puppet is done through modules. Puppet provides a couple of shortcuts to make accessing files in modules simpler. First, Puppet treats `modules` as a special mount point that will point to the Puppet master's modulepath. So the first part of the URI will generally look like `puppet:///modules/`
 
-Second, because all files to be served must be kept in the module's `files` directory, this directory is implicit and must be left out of the URI.
+Finally, because all files to be served from a module must be kept in the module's `files` directory, this directory is implicit and is left out of the URI.
 
 So while the full path to the vimrc source file is `/etc/puppetlabs/puppet/modules/vimrc/files/vimrc`, Puppet's URI abstraction shortens it to `/modules/vimrc/vimrc`. Combined with the implicit hostname, then, the attribute value pair for the source URI is:
 
@@ -169,7 +181,7 @@ Save the manifest, and use the `puppet parser` tool to validate your syntax:
 
 Remember, this manifest *defines* the `vimrc` class, but you'll need to *declare* it for it to have an effect. That is, we've described what the `vimrc` class is, but you haven't told Puppet to actually do anything with it.
 
-{% task 5 %}
+{% task 6 %}
 
 To test the `vimrc` class, create a manifest called `init.pp`  in the `vimrc/tests` directory.
 
@@ -183,10 +195,16 @@ include vimrc
 
 Apply the new manifest with the `--noop` flag. If everything looks good, drop the `--noop` and apply it for real.
 
-Now open a file with Vim and you should see your line numbering settings have been applied.
+You'll see something like the following:
+
+	Notice: /Stage[main]/Vimrc/File[/root/.vimrc]/content: content changed '{md5}99430edcb284f9e83f4de1faa7ab85c8' to '{md5}f685bf9bc0c197f148f06704373dfbe5'
+	
+When you tell Puppet to manage a file, it compares the md5 hash of the target file against that of the specified source file to check if any changes need to be made. Because the hashes did not match, Puppet knew that the target file did not match the desired state, and changed it to match the source file you had specified.
+
+To see that your line numbering settings have been applied, open a file with Vim. You should see the number of each line listed to the left.
 
 ## Review
 
-1. We identified what the features of a Puppet Module are, and understood how it is useful
-2. We wrote our first module!
- 
+In this quest, you learned about the structure and purpose of Puppet modules. You created a module directory structure, and wrote the class you need to manage a configuration file for Vim. You also saw how Puppet uses md5 hashes to determine whether a target file matches the specified source file. 
+
+In the quests that follow, you'll learn more about installing and deploying pre-made modules from the Puppet Forge.

@@ -7,43 +7,60 @@ layout: default
 
 ### Prerequisites
 
-- 
+- Welcome
+- Power of Puppet
+- Resources
+- Manifests and Classes
+- Modules
+- NTP
 
 ## Quest Objectives
 
-- 
+- Install and configure a MySQL server.
+- Add a MySQL user, database, and grant.
 
 ## Getting Started
 
-In this quest you will
+In this quest, we'll continue to explore how existing modules from the Puppet forge can simplify otherwise complex configuration tasks. You will use Puppet Labs' MySQL module to install and configure a server, then explore the custom resource types included with the module. To get started, enter the following command.
 
     quest --start mysql
 
-## Why SQL
+## WhySQL?
 
-> 
--- 
+The Puppet Labs MySQL module is a great example of how a well-written module can build on Puppet's foundation to simplify a complex configuration task without sacrificing robustness and control.
 
-While some modules are designed to manage a single service, the 
-
-The `puppetlabs-mysql` module lets you manage your server and client MySQL installations, as well as several MySQL resources such as *users*, *grants*.
+The module lets you install and configure both server and client MySQL instances, and extends Puppet's starndard resource types to let you manage MySQL *users*, *grants*, and *databases* with Puppet's standard resource syntax.
 
 ## Server Install
 
-Install the `puppetlabs-mysql` module:
+{% task 1 %}
+
+Before getting started configuring your MySQL server installation, fetch the `puppetlabs-mysql` module from the Puppet Forge with the `puppet module` tool.
 
 	puppet module install puppetlabs-mysql
+	
+With this module installed in the Puppet master's module path, all the included classes are available to classify nodes.
 
-Classify the LVM with the MySQL server	class. Using class parameters, specify a root password and set the server's max connections to '1024.'
+{% task 2 %}
 
+Edit `/etc/puppetlabs/puppet/manifests/site.pp` to classify the LVM with the MySQL server	class. Using class parameters, specify a root password and set the server's max connections to '1024.'
+
+{% highlight puppet %}
 	class { '::mysql::server':
 	  root_password    => 'strongpassword',
 	  override_options => { 'mysqld' => { 'max_connections' => '1024' } },
 	}
+{% endhighlight %}
 	
 In addition to some standard parameters like the `root_password`, the class takes a hash of `override_options`, which you can use to address any configuration options you would normally set in the `/etc/my.cnf` file. Using a hash lets you set any options you like in the MySQL configuration file without requiring each to be written into the class as a separate parameter. The structure of the `override_options` hash is analogous to the `[section]`, `var_name = value` syntax of a `my.cnf` file.
 
-Grep the `/etc/my.cnf` file:
+Use the `puppet parser validate` tool to check your syntax, then trigger a puppet run:
+
+	puppet agent -t
+	
+If you want to check out your new database, you can connect to the MySQL monitor with the `mysql` command, and exit with the `\q` command.
+
+To see the result of the 'max_connections' override option you set, grep the `/etc/my.cnf` file:
 
 	cat /etc/my.cnf | grep -B 9 max_connections
 
@@ -110,7 +127,11 @@ So the `mysql` class is found here:
 
 /etc/puppetlabs/modules/**mysql**/manifests/init.pp
 
+## Account Security
+
 For security reasons, you will generally want to remove the default users and the 'test' database from a new MySQL installation. The `account_security` class mentioned above does just this.
+
+{% task 2 %}
 
 Go back to your `site.pp` manifest and include the `mysql::server::account_security` class. Remember, you don't need to pass any parameters to this class, so a simple `include` statement will work in place of a parameterized class declaration. 
 
@@ -120,11 +141,9 @@ Trigger a Puppet run, and you will see notices indicating that the test database
 	Notice: /Stage[main]/Mysql::Server::Account_security/Mysql_user[@localhost]/ensure: removed
 	Notice: /Stage[main]/Mysql::Server::Account_security/Mysql_user[root@127.0.0.1]/ensure: removed
 
-With these default users removed, you'll likely want to set up your own user account.
-
 ## Types and Providers
 
-Luckily, the MySQL module includes some custom *types and providers* that let you manage some critical bits of MySQL as resources with Puppet DSL just like you would with a system user or service.
+The MySQL module includes some custom *types and providers* that let you manage some critical bits of MySQL as resources with the Puppet DSL just like you would with a system user or service.
 
 A **type** defines the interface for a resource: the set of *properties* you can use to define a desired state for the resource, and the *parameters* that don't directly map to things on the system, but tell Puppet how to manage the resource. Both properties and parameters appear in the resource declaration syntax as attribute value pairs.
 
@@ -132,31 +151,47 @@ A **provider** is what does the heavy lifting to bring the system into line with
 
 The MySQL module includes custom types and providers that make `mysql_user`, `mysql_database`, and `mysql_grant` available as resources.
 
-### Create users:
+## Database, User, Grant:
 
-	mysql_user { 'lvm@127.0.0.1':
-	  ensure                   => 'present',
-	  max_connections_per_hour => '0',
-	  max_queries_per_hour     => '0',
-	  max_updates_per_hour     => '0',
-	  max_user_connections     => '0',
-	  password_hash            => '*F3A2A51A9B0F2BE2468926B4132313728C250DBF',
-	}
-	
+{% task 3 %}
 
-### Create database:
+These custom resource types make creating a new database with Puppet pretty simple. 
 
-	mysql_database { 'marionettes':
+Just add the following resource declaration to your node definition in the `site.pp` manifest.
+
+{% highlight puppet %}
+	mysql_database { 'lvm':
   	  ensure  => 'present',
   	  charset => 'utf8',
 	}
+{% endhighlight %}
 
-### Create grants:
+Similarly, with a user, all you have to do is specify the name and host as the resource title, and set the ensure attribute to 'present'. Enter the following in your node definition as well.
 
-	mysql_grant {
-
-### Install client
-
-	node 'client.puppetlabs.vm' {
-	  include ::mysql::client
+{% highlight puppet %}
+	mysql_user { 'lvm_user@localhost':
+	  ensure => 'present',
 	}
+{% endhighlight %}
+
+Now that you have a user and database, you can use a grant to define the privileges for that user. Note that the `*` character will match any table, meaning that the `lvm_user` has access to all tables in the `lvm` database.
+
+{% highlight puppet %}
+	mysql_grant { 'lvm_user@localhost/lvm.*':
+	  ensure      => 'present',
+	  options     => ['GRANT'],
+	  privileges  => ['ALL'],
+	  table       => 'lvm.*',
+	  user        => 'lvm_user@localhost',
+	}
+{% endhighlight %}
+
+Once you've added declarations for these three custom resources, use the `puppet parser validate` command on the `site.pp` manifest to check your syntax, and trigger a puppet run with
+	
+	puppet agent -t
+	
+## Review
+
+In this quest, you learned how to install and make configuration changes to a MySQL server. You also got an overview of how classes are organized withing the module structure and how their names within your Puppet manifests reflect this organization.
+
+The MySQL module we used for this quest provides a nice example of how custom types and providers can extend Puppet's available resources to make service or application specific elements easily configurable through Puppet's resource declaration syntax.

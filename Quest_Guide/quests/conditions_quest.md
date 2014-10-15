@@ -7,15 +7,20 @@ layout: default
 
 ### Prerequisites
 
+- Welcome
+- Power of Puppet
+- Resources
+- Manifests and Classes
+- Modules
+- Variables and Class Parameters
 
 ## Quest Objectives
  - Learn how to use conditional logic to make your manifests adaptable.
- - Understand the syntax and function of the `if`, `unless`, `case`, and
-`selector` statements. 
+ - Understand the syntax and function of the `if`, `unless`, `case`, and `selector` statements.
 
 ## Getting Started
 
-Conditional statements allow you to write Puppet code that will return different values or execute different blocks of code depending on conditions you specify. This, in conjunction with Facter facts, will enable you to write Puppet code that accomodates different platforms, operating systems, and functional requirements.
+Conditional statements allow you to write Puppet code that will return different values or execute different blocks of code depending on conditions you specify. This, in conjunction with Facter, which makes details of a machine available as variables, lets you write Puppet code that flexibly accomodates different platforms, operating systems, and functional requirements.
 
 To start this quest enter the following command:
 
@@ -27,15 +32,15 @@ To start this quest enter the following command:
 
 > -Confucius
 
-Because Puppet manages configurations on a variety of systems fulfilling a variety of roles, great Puppet code means flexible and portable Puppet code. While the *types* and *providers* that form the core of Puppet's *resource abstraction layer* do a lot of heavy lifting around this kind of adaptation, there are some things better left in the hands of competent practitioners, rather than hard-coded in Puppet itself.
+Because Puppet manages configurations on a variety of systems fulfilling a variety of roles, great Puppet code means flexible and portable Puppet code. While the *types* and *providers* that form the core of Puppet's *resource abstraction layer* do a lot of heavy lifting around this kind of adaptation, there are some things better left in the hands of competent practitioners rather than hard-coded in Puppet itself.
 
-As you move from general platform-related implementation details to specific application-related implementation details, it starts making less sense to rely on Puppet to make decisions automatically, and much more sense for a module developer or user to make his or her own choices based on specific requirements. 
+As you move from general platform-related implementation details to specific application-related implementation details, it starts making less sense to rely on Puppet to make decisions automatically, and much more sense for a module developer or user to make his or her own choices. 
 
 It's sensible, for example, for Puppet's `package` providers take care of installing and maintaining packages. The inputs and outputs are standardized and stable enough that what happens in between, as long as it happens reliably, can be safely hidden by abstraction; once it's done, the details are no longer important.
 
-*What* package is installed, on the other hand, isn't something you can safely forget. In this case, the inputs and outputs are not so neatly delimited. Though there are often broadly equivalent packages for different platforms, the equivalence is rarely complete; configuration details will often vary, and these details will likely have to be accounted for elsewhere in your Puppet module.
+*What* package is installed, on the other hand, isn't something you can safely forget. In this case, the inputs and outputs are not so neatly delimited. Though there are often broadly equivalent packages for different platforms, the equivalence isn't always complete; configuration details will often vary, and these details will likely have to be accounted for elsewhere in your Puppet module.
 
-While Puppet's built-in providers can't themselves guarantee the portability of your Puppet code at this higher level of implementation, Puppet's DSL gives you the tools to build adaptability into your modules. **Facts** and **Conditional statements** are the bread and butter of this functionality.
+While Puppet's built-in providers can't themselves guarantee the portability of your Puppet code at this higher level of implementation, Puppet's DSL gives you the tools to build adaptability into your modules. **facts** and **conditional statements** are the bread and butter of this functionality.
 
 ## Facts
 
@@ -43,7 +48,7 @@ While Puppet's built-in providers can't themselves guarantee the portability of 
 
 > -Mark Twain
 
-You already encountered the *facter* tool in the when we asked you to run `facter ipaddress` in the setup section of this quest guide. While it's nice the be able to run facter from the command line, it's  real utility is to make information about a system available to use as variables in your manifests.
+You already encountered the *facter* tool in the when we asked you to run `facter ipaddress` in the setup section of this quest guide. While it's nice the be able to run facter from the command line, its real utility is to make information about a system available to use as variables in your manifests.
 
 {% fact %}
 While facter is an important component of Puppet and is bundled with Puppet Enterprise, it's actually one of the many separate open-source projects integrated into the Puppet ecosystem.
@@ -56,8 +61,6 @@ To get a full list of facts available to facter, enter the command:
 	facter -p | less
 	
 Any of the facts you see listed here can be used within your Puppet code with the syntax `$::factname`. The double colons `::` indicate that the fact is defined in what's called *top scope*, that is, before any variables in your node definitions or classes are assigned. While you could technically use a fact without the `::`, you would risk having it mistakenly overridden by a locally defined variable with the same name. The `::` tells Puppet to look directly in the top scope instead of using the first variable it finds with a matching name. The Puppet style guide suggests using this syntax consistently to avoid naming collisions.
-
-Using the 
 
 ## Conditions
 
@@ -84,19 +87,23 @@ An `if` statement includes a condition followed by a block of Puppet code that w
 - If both the `if` and `elsif` conditions fail, Puppet will execute the code in the `else` clause (if one exists).
 - If all the conditions fail, and there is no `else` block, Puppet will do nothing and move on.
 
-{% aside The Warning Function %}
-The `warning()` function will not affect the execution of the rest of the manifest, but if you were running Puppet in the usual Master-Agent setup, it would log a message on the server at the 'warn' level.
-{% endaside %}
-
 Lets say you want to give the user you're creating with your accounts module administrative priveleges. You have a mix of CentOS and Debian systems in your infrastructure. On your CentOS machines, you use the `wheel` group to manage superuser privileges, while you use an `admin` group on the Debian machines. With the `if` statement and the `operatingsystem` fact from facter, this kind of adjustment is easy to automate with Puppet.
 
 Before getting started, make sure you're working in the `modules` directory:
 
 	cd /etc/puppetlabs/puppet/modules
 	
-Open the `accounts/manifests/init.pp` manifest.
+Create an `accounts` directory:
 
-At the beginning of the `accounts` class definition, you'll add some conditional logic to set the `$groups` variable based on the value of the `$::operatingsystem` fact. In both cases, you'll add the user the new group made solely for that user, defined by the `$name` parameter. If the operating system is CentOS, you'll also add the user to the `wheel` group, and if the operating system is Debian you'll add the user to the `admin` group.
+	mkdir accounts
+	
+And your `tests` and `manifests` directories:
+
+	mkdir accounts{manifests,tests}
+	
+Open the `accounts/manifests/init.pp` manifest in Vim.
+
+At the beginning of the `accounts` class definition, you'll include some conditional logic to set the `$groups` variable based on the value of the `$::operatingsystem` fact. In both cases, you'll add the user the new group made solely for that user, defined by the `$name` parameter. If the operating system is CentOS, you'll also add the user to the `wheel` group, and if the operating system is Debian you'll add the user to the `admin` group.
 
 So the beginning of your class definition should looks something like this:
 
@@ -113,7 +120,7 @@ class accounts ($name,$uid) {
     fail( "This module doesn't support ${::operatingsystem}.")
   }
   
-  [...]
+  ...
 
 }
 {% endhighlight %}
@@ -125,7 +132,7 @@ Once you've written the conditional logic to set the `$groups` variable, edit th
 {% highlight puppet %}
 class accounts ($name,$uid) {
 
-  [...]
+  ...
   
   user { $name:
     ensure => 'present',
@@ -134,7 +141,7 @@ class accounts ($name,$uid) {
     groups => $groups,
   }
 
-  [...]  
+  ...
 
 }
 {% endhighlight %}
@@ -195,6 +202,14 @@ $rootgroup = $::osfamily ? {
 }
 {% endhighlight %}
 
-Here, the value of the `$rootgroup` is determined based on the control variable `$osfamily`. Following the control variable is a `?` (question mark) symbol. In the block surrounded by curly braces are a series of possible values for the $::osfamily fact, followed by the value that the selector should return if the value matches the control variable.
+Here, the value of the `$rootgroup` is determined based on the control variable `$::osfamily`. Following the control variable is a `?` (question mark) symbol. In the block surrounded by curly braces are a series of possible values for the `$::osfamily` fact, followed by the value that the selector should return if the value matches the control variable.
 
 Because a selector can only return a value and cannot execute a function like `fail()` or `warning()`, it is up to you to make sure your code handles unexpected conditions gracefully. You wouldn't want Puppet to forge ahead with an inappropriate default value and encounter errors down the line.
+
+## Review
+
+In this quest, you saw how you can use facts from the `facter` tool along with conditional logic to write Puppet code that will adapt to the envoronment where you're applying it.
+
+You used an `if` statement in conjunction with the `$::osfamily` variable from facter to determine how to set the group for an administrator user account.
+
+We also covered a few other forms of conditional statement: 'unless', the case statement, and the selector. Though there aren't any hard-and-fast rules for which conditional statement is best in a given situation, there will generally be one that results in the most concise and readible code. It's up to you to decide what works best.
