@@ -20,7 +20,7 @@ layout: default
 
 ## Getting Started
 
-Conditional statements allow you to write Puppet code that will return different values or execute different blocks of code depending on conditions you specify. This, in conjunction with Facter facts, will enable you to write Puppet code that accomodates different platforms, operating systems, and functional requirements.
+Conditional statements allow you to write Puppet code that will return different values or execute different blocks of code depending on conditions you specify. This, in conjunction with Facter facts, will enable you to write Puppet code that accommodates different platforms, operating systems, and functional requirements.
 
 To start this quest enter the following command:
 
@@ -175,7 +175,7 @@ package { $apache_pkg :
 }
 {% endhighlight %}
 
-This would allow you to always install and manage the right Apache package for a machine's operating system. Aaccounting for the differences between various platforms is an important part of writing flexible and re-usable Puppet code. It is a paradigm you will encounter frequently in published Puppet modules.
+This would allow you to always install and manage the right Apache package for a machine's operating system. Accounting for the differences between various platforms is an important part of writing flexible and re-usable Puppet code. It is a paradigm you will encounter frequently in published Puppet modules.
 
 Also note that Puppet will choose the appropriate _provider_ for the package depending on the operating system, without you having to mention it. On Debian-based systems, for example, it may use `apt` and on RedHat systems, it will use `yum`.
 
