@@ -30,6 +30,13 @@ describe "user byte's password" do
   end
 end
 
+describe "The puppet resource command" do
+  it 'should be used to inspect the tools directory for the byte user' do
+    file('/root/.bash_history').should contain 'puppet resource file /home/byte/tools'
+  end
+end
+
+
 describe "The diretory /home/byte/tools" do
   it "should be created" do
     file('/home/byte/tools').should be_directory
