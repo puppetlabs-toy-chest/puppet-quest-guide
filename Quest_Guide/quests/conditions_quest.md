@@ -93,6 +93,8 @@ Before getting started, make sure you're working in the `modules` directory:
 
 	cd /etc/puppetlabs/puppet/modules
 	
+{% task 1 %}
+	
 Create an `accounts` directory:
 
 	mkdir accounts
@@ -101,6 +103,8 @@ And your `tests` and `manifests` directories:
 
 	mkdir accounts{manifests,tests}
 	
+{% task 2 %}
+	
 Open the `accounts/manifests/init.pp` manifest in Vim.
 
 At the beginning of the `accounts` class definition, you'll include some conditional logic to set the `$groups` variable based on the value of the `$::operatingsystem` fact. In both cases, you'll add the user the new group made solely for that user, defined by the `$name` parameter. If the operating system is CentOS, you'll also add the user to the `wheel` group, and if the operating system is Debian you'll add the user to the `admin` group.
@@ -108,7 +112,7 @@ At the beginning of the `accounts` class definition, you'll include some conditi
 So the beginning of your class definition should looks something like this:
 
 {% highlight puppet %}
-class accounts ($name,$uid) {
+class accounts ($name) {
 
   if $::operatingsystem == 'centos' {
     $groups = [$name, 'wheel']
@@ -117,7 +121,7 @@ class accounts ($name,$uid) {
     $groups = [$name, 'admin']
   }
   else {
-    fail( "This module doesn't support ${::operatingsystem}.")
+    fail( "This module doesn't support ${::operatingsystem}." )
   }
   
   ...
@@ -125,19 +129,18 @@ class accounts ($name,$uid) {
 }
 {% endhighlight %}
 
-Note that the string matches are *not* case sensitive, so 'CENTOS' would work just as well as 'centos'. Finally, in the `else` block, you'll raise a warning that the module doesn't support the current module.
+Note that the string matches are *not* case sensitive, so 'CENTOS' would work just as well as 'centos'. Finally, in the `else` block, you'll raise a warning that the module doesn't support the current OS.
 
 Once you've written the conditional logic to set the `$groups` variable, edit the `user` resource declaration to assign the `$groups` variable to the `groups` attribute.
 
 {% highlight puppet %}
-class accounts ($name,$uid) {
+class accounts ($name) {
 
   ...
   
   user { $name:
     ensure => 'present',
     home   => "/home/${name}",
-    uid    => $uid,
     groups => $groups,
   }
 
@@ -148,6 +151,20 @@ class accounts ($name,$uid) {
 
 Make sure that your manifest can pass a `puppet parser validate` check before continuing on.
 
+{% task 3 %}
+
+Create a test manifest (`accounts/tests/init.pp`) and declare the accounts manifest with the name parameter set to `dana`.
+
+{% highlight puppet %}
+
+class {'accounts':
+  name => 'dana',
+}
+
+{% endhighlight %}
+
+{% task 4 %}
+
 The Learning VM is running CentOS, so to test what would happen on a Debian OS you'll have to override the `operatingsystem` fact with a little environment variable magic. To provide a custom value for any facter fact as you run a `puppet apply`, you can include `FACTER_factname=new_value` before your new terminal command.
 
 Combining this with the `--noop` flag, you can do a quick test of how your manifest would run on a different system before setting up a full testing environment.
@@ -156,11 +173,17 @@ Combining this with the `--noop` flag, you can do a quick test of how your manif
 	
 Look in the list of notices, and you'll see the changes that would have been applied.
 
+{% task 5 %}
+
 Try one more time with an unsupported operating system to check the fail condition:
 
 	FACTER_operatingsystem=Darwin puppet apply --noop accounts/tests/init.pp
 
+{% task 6 %}
+
 Now go ahead and run a `puppet apply --noop` on your test manifest without setting the environment variable. If this looks good, drop the `--noop` flag to apply the catalog generated from your manifest.
+
+You can use the `puppet resource` tool to verify the results.
 
 ## The 'unless' Statement
 
