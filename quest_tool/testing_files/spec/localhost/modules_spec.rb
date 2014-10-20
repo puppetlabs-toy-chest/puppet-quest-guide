@@ -40,7 +40,7 @@ end
 # Task 6
 describe 'The vimrc/manifests/init.pp manifest' do
   it 'should define the vimrc class' do
-    file('/etc/puppetlabs/puppet/modules/users/manifests/init.pp').should contain 'class vimrc'
+    file('/etc/puppetlabs/puppet/modules/vimrc/manifests/init.pp').should contain 'class vimrc'
   end
 end
 
