@@ -65,6 +65,6 @@ end
 # Task 9
 describe "The cowsayings/test/init.pp test manifest" do
   it "should be applied" do
-    file('root/.bash_history').should contain 'puppet apply cowsayings/tests/init.pp'
+    file('/root/.bash_history').should contain 'puppet apply cowsayings/tests/init.pp'
   end
 end
