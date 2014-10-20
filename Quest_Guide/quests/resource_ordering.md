@@ -106,12 +106,12 @@ We've already prepared an `sshd_config` file to use as a base for your source fi
 Create a `sshd/manifests/init.pp` manifest with the following class definition:
 
 {% highlight puppet %}
-class { 'sshd':
+class sshd {
 
   file { '/etc/ssh/sshd_config':
     ensure => file,
     mode   => 600,
-    source => 'puppet::///modules/sshd/sshd_config',
+    source => 'puppet:///modules/sshd/sshd_config',
   }
   
 }
