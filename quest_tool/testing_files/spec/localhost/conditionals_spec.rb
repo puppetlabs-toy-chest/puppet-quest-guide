@@ -12,15 +12,15 @@ end
 # Task 2
 describe "The accounts/manifests/init.pp manifest" do
   it 'should define the accounts class' do
-    file('/etc/puppetlabs/puppet/modules/accounts/manifests/init.pp').content.should match /class accounts \(\s*(\$name|\$uid),\s*(\$name|\$uid)\s*\)\s*\{\s+if\s+\$::operatingsystem\s==\s\'\w+\'\s+\{/
-    file('/etc/puppetlabs/puppet/modules/accounts/manifests/init.pp').content.should match /user\s+\{\s+\$name:\s+ensure\s+=>\s+\'present\',(.|\s)+(\$groups,)\s+\}/
+    file('/etc/puppetlabs/puppet/modules/accounts/manifests/init.pp').content.should match /class accounts \(\s*\$name\s*\)\s*\{\s+if\s+\$::operatingsystem\s==\s\'\w+\'\s+\{/
+    file('/etc/puppetlabs/puppet/modules/accounts/manifests/init.pp').content.should match /user\s+\{\s*\$name:\s+ensure\s+=>\s+\'present\',(.|\s)+(\$groups,)\s+\}/
   end
 end
 
 # Task 3
 describe "The accounts/tests/init.pp manifest" do
   it 'should declare the accounts class' do 
-    file('/etc/puppetlabs/puppet/modules/accounts/tests/init.pp').content.should match /class\s+\{\s+\'?accounts\'?/
+    file('/etc/puppetlabs/puppet/modules/accounts/tests/init.pp').content.should match /class\s+\{\s*\'?accounts\'?/
   end
 end
 

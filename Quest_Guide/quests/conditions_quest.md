@@ -101,7 +101,7 @@ Create an `accounts` directory:
 	
 And your `tests` and `manifests` directories:
 
-	mkdir accounts{manifests,tests}
+	mkdir accounts/{manifests,tests}
 	
 {% task 2 %}
 	
@@ -115,14 +115,16 @@ So the beginning of your class definition should looks something like this:
 class accounts ($name) {
 
   if $::operatingsystem == 'centos' {
-    $groups = [$name, 'wheel']
+    $groups = 'wheel'
   }
   elsif $::operatingsystem == 'debian' {
-    $groups = [$name, 'admin']
+    $groups = 'admin'
   }
   else {
     fail( "This module doesn't support ${::operatingsystem}." )
   }
+  
+  notice ( "Groups for user ${name} set to ${groups}" )
   
   ...
 
