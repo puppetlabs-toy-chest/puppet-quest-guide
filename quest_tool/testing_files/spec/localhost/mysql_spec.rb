@@ -27,15 +27,15 @@ end
 # Task 4 
 describe "The mysql::server::account_security class" do
   it "should be applied" do
-    shell("mysql -e 'show databases;'|grep test").exit_code.should_not be_zero
+    command("mysql -e 'show databases;'|grep test").exit_status.should_not be_zero
   end
 end
 
 # Task 5
 describe "A database, user, and grant" do
   it "should be created" do
-    shell("mysql -e 'show databases;'|grep lvm").exit_code.should be_zero
-    shell("mysql -e 'SELECT User FROM mysql.user;'|grep lvm_user").exit_code.should be_zero
-    shell("mysql -e 'show grants;'|grep lvm_user").exit_code.should be_zero
+    command("mysql -e 'show databases;'|grep lvm").exit_status.should be_zero
+    command("mysql -e 'SELECT User FROM mysql.user;'|grep lvm_user").exit_status.should be_zero
+    command("mysql -e 'show grants for lvm_user@localhost;'|grep lvm.*").exit_status.should be_zero
   end
 end
