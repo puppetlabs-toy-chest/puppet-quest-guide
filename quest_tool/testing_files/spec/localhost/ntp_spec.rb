@@ -11,7 +11,7 @@ end
 # Task 2
 describe "The site.pp manifest" do
   it 'should include the ntp class in the default node definition' do
-    file('/etc/puppetlabs/puppet/manifests/site.pp').should contain 'include ntp'
+    file('/etc/puppetlabs/puppet/manifests/site.pp').should contain 'ntp'
   end
 end
 
@@ -32,7 +32,7 @@ end
 # Task 5
 describe 'The /etc/ntp.conf file' do
   it 'should contain non-default servers' do
-    file('/etc/puppetlabs/puppet/modules/users/manifests/init.pp').content.should_not match /(\s*server \d.centos.pool.ntp.org\s*){3}/
-    file('/etc/puppetlabs/puppet/modules/users/manifests/init.pp').content.should match /(\s+.*\.\w{3}$){3}/
+    file('/etc/ntp.conf').content.should_not match /(\s*server \d.centos.pool.ntp.org\s*){3}/
+    file('/etc/ntp.conf').content.should match /(\s+.*\.\w{3}$){3}/
   end
 end
