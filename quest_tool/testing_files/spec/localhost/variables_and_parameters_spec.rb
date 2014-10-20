@@ -19,7 +19,7 @@ end
 # Task 3
 describe "The web/tests/init.pp manifest" do
   it 'should declare the web class' do
-    file('/etc/puppetlabs/puppet/modules/web/tests/init.pp').should contain 'include web'
+    file('/etc/puppetlabs/puppet/modules/web/tests/init.pp').should contain 'web'
   end
 end
 
@@ -42,7 +42,7 @@ end
 # Task 6 
 describe "The web/tests/init.pp manifest" do
   it 'should declare the web class with parameters' do
-    file('/etc/puppetlabs/puppet/modules/web/tests/init.pp').content.should match /class \{\'web\':\s+(page_name\s+=>\s+\'\w+\'|message\s+=>\s+\'.+\'),\s+(\s+page_name\s+=>\s+\'\w+\'|message\s+=>\s+\'.+\'),\s}/
+    file('/etc/puppetlabs/puppet/modules/web/tests/init.pp').content.should match /class \{\s*\'web\':\s+(page_name\s+=>\s+\'\w+\'|message\s+=>\s+\'.+\'),\s+(\s+page_name\s+=>\s+\'\w+\'|message\s+=>\s+\'.+\'),\s}/
   end
 end
 
