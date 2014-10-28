@@ -97,9 +97,11 @@ Now create an `web` directory:
 
 	mkdir web/{manifests,tests}
 
+{% task 2 %}
+
 Now you're ready to create your main manifest, where you'll define the `web` class.
 
-	vim /web/manifests/init.pp
+	vim web/manifests/init.pp
 
 {% highlight puppet %}
 class web {
@@ -124,7 +126,11 @@ class web {
 
 Note that if you wanted to make a change to the `$doc_root` directory, you'd only have to do this in one place. While there are more advanced forms of data separation in Puppet, the basic principle is the same: The more distinct your code is from the underlying data, the more resuable it is, and the less difficult it will be to refactor when you have to make changes later.
 
+{% task 3 %}
+
 Once you've validated your manifest with the `puppet parser` tool, create a test for your manifest with an `include` statement for the web class you created.
+
+{% task 4 %}
 
 Run the test, using the `--noop` flag for a dry run before triggering your real `puppet apply`.
 
@@ -156,10 +162,12 @@ class {'classname':
 
 Say you want to make these pages available not just on the Learning VM, but on each node in your infrastructure, but that you want a few changes on each one. Instead of rewriting the whole class or module with these minor changes, you can use class parameters to customize these values as the class is declared.
 
-To get started re-writing your `web` class with parameters, reopen the `web/manifests/init.pp` manifest. You've already written variables into the resource declarations, so turning it into a parameterized class will be quick. Just add your three parameters in a pair of parenthesis following the name of the class:
+{% task 5 %}
+
+To get started re-writing your `web` class with parameters, reopen the `web/manifests/init.pp` manifest. You've already written variables into the resource declarations, so turning it into a parameterized class will be quick. Just add your parameters in a pair of parenthesis following the name of the class:
 
 {% highlight puppet %}
-class accounts ( $page_name, $message ) {
+class web ( $page_name, $message ) {
 {% endhighlight %}
 
 Now create a third file resource declaration to use the variables set by your parameters:
@@ -171,6 +179,8 @@ file { "${doc_root}/${page_name}.html":
 }
 {% endhighlight %}
 
+{% task 6 %}
+
 As before, use the test manifest to declare the class. You'll open `web/tests/init.pp` and replace the simple `include` statement with the parameterized class declaration syntax to set each of the class parameters:
 
 {% highlight puppet %}
@@ -179,6 +189,8 @@ class {'web':
   message   => 'Hola mundo!',
 }
 {% endhighlight %}
+
+{% task 7 %}
 
 Now give it a try. Go ahead and do a `--noop` run, then apply the test.
 

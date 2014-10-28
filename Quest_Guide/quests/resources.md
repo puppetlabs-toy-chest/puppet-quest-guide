@@ -43,6 +43,8 @@ One of the points where there is a nice carry over from Ruby is the *hash* synta
 
 A nice feature of Puppet's declarative model is that it goes both ways; that is, you can inspect the current state of any existing resource in the same syntax you would use to declare a desired state.
 
+{% task 1 %}
+
 Using the *puppet resource* tool, take a look at your root user account. Note the pattern of the command will be: *puppet resource \<type\> \<name\>*.
 
 	puppet resource user root 
@@ -134,7 +136,11 @@ Though the comma at the end of the final attribute value pair isn't strictly nec
 
 So in the world of Puppet, you and everything around you can be respresented as a resource, and resources follow this tidy declarative syntax. As pretty as they are, presumably you don't want to just look at resources all day, you want to change them! 
 
-You can, and easily. But before making any changes, take a moment to learn a bit more about the user type. You'll want a way of knowing *what* you're changing before you start changing attributes. Use the *puppet describe* tool to get a description of the *user* type, including a list of its parameters.
+You can, and easily. But before making any changes, take a moment to learn a bit more about the user type. You'll want a way of knowing *what* you're changing before you start changing attributes. 
+
+{% task 2 %}
+
+Use the *puppet describe* tool to get a description of the *user* type, including a list of its parameters.
 
 	puppet describe user | less
 	
@@ -146,7 +152,7 @@ No need to read all the way through, but take a minute to skim the *describe* pa
 
 You can use the Puppet resource declaration syntax with the *puppet apply* tool to make quick changes to resources on the system. (Note, though, that while *puppet apply* is great for tests and exploration, it's limited to this kind of one-off change. We'll get to the more robust ways to manage resources in later quests.)
 
-{% task 1 %}
+{% task 3 %}
 
 You can use the *puppet apply* tool with the *-e* (*--execute*) flag to execute a bit of Puppet code. In this example, you'll create a new user called *galatea*. Puppet uses some defaults for unspecified user attributes, so all you'll need to do to create a new user is set the 'ensure' attribute to 'present'. This 'present' value tells Puppet to check if the resource exists on the system, and to create the specified resource if it does not.
 
@@ -158,7 +164,7 @@ Use the `puppet resource` tool to take a look at user *galatea*. Type the follow
 
 Notice that while the *root* user had a *comment* attribute, Puppet hasn't created one for your new user. As you may have noticed looking over the *puppet describe* entry for the user type, this *comment* is generally the full name of the account's owner.
 
-{% task 2 %}
+{% task 4 %}
 
 While puppet apply with the `-e` flag can be handy for quick one-liners, you can pass an `--execute` (incidentally, also shortened to `-e`) flag to the `puppet resource` tool to edit and apply changes to a resource.
 

@@ -106,12 +106,12 @@ We've already prepared an `sshd_config` file to use as a base for your source fi
 Create a `sshd/manifests/init.pp` manifest with the following class definition:
 
 {% highlight puppet %}
-class { 'sshd':
+class sshd {
 
   file { '/etc/ssh/sshd_config':
     ensure => file,
     mode   => 600,
-    source => 'puppet::///modules/sshd/sshd_config',
+    source => 'puppet:///modules/sshd/sshd_config',
   }
   
 }
@@ -137,7 +137,7 @@ Save the file and exit the text editor.
 
 Even though we have edited the source for the configuration file for the SSH daemon, simply changing the content of the configuration file will not disable the GSSAPIAuthentication option. For the option to be disabled, the service (the SSH server daemon) needs to be restarted. That's when the newly specified settings will take effect.
 
-Let's now add a metaparameter that will tell Puppet to manage the `sshd` service and have it `subscribe` to the config file. Add the following Puppet code below your file resource:
+Let's now add a metaparameter that will tell Puppet to manage the `sshd` service and have it `subscribe` to the config file. Add the following Puppet code below your file resource in the `sshd` module's `init.pp` manifest:
 
 {% highlight puppet %}
 service { 'sshd':
@@ -153,9 +153,7 @@ Notice that in the above the `subscribe` metaparameter has the value `File['/etc
 
 Create a test manifest to include your `sshd` class.
 
-{% task 6 %}
-
-Now, let's apply the change. Remember to check syntax, and do a dry-run using the `--noop` flag first, before using `puppet apply` to run your test manifest.
+Let's apply the change. Remember to check syntax and do a dry-run using the `--noop` flag before using `puppet apply` to run your test manifest.
 
 You will see Puppet report that the content of the `/etc/ssh/sshd_config` file changed. You should also be able to see that the SSH service was restarted. 
 
@@ -175,7 +173,7 @@ The **package/file/service** pattern is one of the most useful idioms in Puppet.
 
 To stay consistent with the package/file/service idiom, let's dive back into the sshd.pp file and add the `openssh-server` package to it.
 
-{% task 7 %}
+{% task 6 %}
 Manage the package for the SSH server
 
 Add the following code above your file resource in your `sshd/manifests/init.pp` manifest

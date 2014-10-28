@@ -66,6 +66,8 @@ While a module can include many classes, it will often have a main class that sh
 
 In order to configure the Learning VM to serve you the Quest Guide website, you'll need to *classify* it with the `lvmguide` class. Classification tells Puppet which classes to apply to which machines in your infrastructure. Though there are a few different ways to classify nodes, we'll be using the PE Console's node classifier for this quest.
 
+{% task 2 %}
+
 To access the PE Console you'll need the Learning VM's IP address. Remember, you can use the `facter` tool packaged with PE.
 
 	facter ipaddress

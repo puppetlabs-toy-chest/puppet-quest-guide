@@ -54,6 +54,8 @@ Edit `/etc/puppetlabs/puppet/manifests/site.pp` to classify the LVM with the MyS
 	
 In addition to some standard parameters like the `root_password`, the class takes a hash of `override_options`, which you can use to address any configuration options you would normally set in the `/etc/my.cnf` file. Using a hash lets you set any options you like in the MySQL configuration file without requiring each to be written into the class as a separate parameter. The structure of the `override_options` hash is analogous to the `[section]`, `var_name = value` syntax of a `my.cnf` file.
 
+{% task 3 %}
+
 Use the `puppet parser validate` tool to check your syntax, then trigger a puppet run:
 
 	puppet agent -t
@@ -131,7 +133,7 @@ So the `mysql` class is found here:
 
 For security reasons, you will generally want to remove the default users and the 'test' database from a new MySQL installation. The `account_security` class mentioned above does just this.
 
-{% task 2 %}
+{% task 4 %}
 
 Go back to your `site.pp` manifest and include the `mysql::server::account_security` class. Remember, you don't need to pass any parameters to this class, so a simple `include` statement will work in place of a parameterized class declaration. 
 
@@ -153,7 +155,7 @@ The MySQL module includes custom types and providers that make `mysql_user`, `my
 
 ## Database, User, Grant:
 
-{% task 3 %}
+{% task 5 %}
 
 These custom resource types make creating a new database with Puppet pretty simple. 
 
