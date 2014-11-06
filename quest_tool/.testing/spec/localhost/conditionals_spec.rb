@@ -1,26 +1,46 @@
 require 'spec_helper'
 
-describe "The file /root/conditionals.txt" do
-  it 'should exist and contain your Uptime' do
-    file('/root/conditionals.txt').should contain 'Uptime is'
+# Task 1
+describe "The directory structure for your accounts module" do
+  it 'should be created' do
+    file('/etc/puppetlabs/puppet/modules/accounts').should be_directory
+    file('/etc/puppetlabs/puppet/modules/accounts/tests').should be_directory
+    file('/etc/puppetlabs/puppet/modules/accounts/manifests').should be_directory
   end
 end
 
-describe "Facter" do
-  it 'should be used to find your uptime in hours' do
-    file('/root/.bash_history').should contain 'facter uptime_hours'
+# Task 2
+describe "The accounts/manifests/init.pp manifest" do
+  it 'should define the accounts class' do
+    file('/etc/puppetlabs/puppet/modules/accounts/manifests/init.pp').content.should match /class accounts \(\s*\$name\s*\)\s*\{\s+if\s+\$::operatingsystem\s==\s\'\w+\'\s+\{/
+    file('/etc/puppetlabs/puppet/modules/accounts/manifests/init.pp').content.should match /user\s+\{\s*\$name:\s+ensure\s+=>\s+\'present\',(.|\s)+(\$groups,)\s+\}/
   end
 end
 
-describe "The file /root/case.txt" do
-  it 'should contain your Apache package name' do
-    file('/root/case.txt').should contain "Apache package name: httpd"
+# Task 3
+describe "The accounts/tests/init.pp manifest" do
+  it 'should declare the accounts class' do 
+    file('/etc/puppetlabs/puppet/modules/accounts/tests/init.pp').content.should match /class\s+\{\s*\'?accounts\'?/
   end
 end
 
-describe "The file /root/architecture.txt" do
-  it 'should contain your architecture' do
-    file('/root/architecture.txt').should contain "This machine has a 32-bit architecture"
+# Task 4
+describe "The accounts test manifest" do
+  it 'should be applied with the FACTER_operatingsystem=Debian and the --noop flag' do 
+    file('/root/.bash_history').content.should match /FACTER_operatingsystem=debian\spuppet\sapply\s--noop\s(\w*\/)*init.pp/i
   end
 end
 
+# Task 5
+describe "The accounts test manifest" do
+  it 'should be applied with FACTER_operatingsystem set to an unsupported value and the --noop flag' do 
+    file('/root/.bash_history').content.should match /FACTER_operatingsystem=((?!(centos|debian)).)*\spuppet\sapply\s--noop\s(\w*\/)*init.pp/i
+  end
+end
+
+# Task 6
+describe 'The user dana' do
+  it 'should be present and be in the wheel group' do
+    shell("groups dana | grep wheel").exit_code.should be_zero
+  end
+end

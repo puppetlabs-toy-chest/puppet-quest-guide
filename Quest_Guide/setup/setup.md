@@ -7,11 +7,15 @@ layout: default
 
 ## About the Learning Virtual Machine
 
-The Learning Virtual Machine (VM) is a sandbox environment equipped with everything you'll need to get started learning Puppet and Puppet Enterprise (PE). Because we believe exploration and playfulness are key to successful learning, we've done our best to make getting started with Puppet a fun and frictionless process. The VM is powered by CentOS Linux and for your convenience, we've pre-installed Puppet Enterprise (PE) along with everything you'll need to put it into action. Before you get started, however, we'll walk you through a few steps to get the VM configured and running.
+The Learning Virtual Machine (VM) is a sandbox environment equipped with everything you'll need to get started learning Puppet and Puppet Enterprise (PE). Because we believe exploration and playfulness are key to successful learning, we've done our best to make getting started with Puppet a fun and frictionless process. The VM is powered by CentOS Linux and for your convenience, we've pre-installed Puppet Enterprise (PE) along with everything you'll need to put it into action. 
+
+Before you get started, however, we'll walk you through a few steps to get the VM configured and running.
 
 The Learning VM comes in two flavors. You downloaded this guide with either a VMware (.vmx) file or an Open Virtualization Format (.ovf) file. The .vmx version works with VMware Player or VMware Workstation on Linux and Windows based machines, and VMware Fusion for Mac. The .ovf file is suitable for Oracle's Virtualbox as well as several other virtualization players that support this format.
 
-We've included instructions below for VMware Fusion, VMware Player, and Virtualbox. If you run into issues getting the Learning VM set up, feel free to contact us at learningvm@puppetlabs.com, and we'll do our best to help out.
+We've included instructions below for VMware Fusion, VMware Player, and Virtualbox. 
+
+If you run into issues getting the Learning VM set up, feel free to contact us at learningvm@puppetlabs.com, and we'll do our best to help out.
 
 ## Getting started with the Learning VM
 
@@ -25,7 +29,7 @@ You'll also need an SSH client to interact with the Learning VM over a Secure Sh
 
 Once you have an up-to-date virtualization application and the means to SSH to the Learning VM you're ready to configure the Learning VM itself.
 
-If you're reading this guide, you've already extracted the .zip file that contains the Learning VM. Keep that .zip file around in case you want to create a fresh instance of the Learning VM without having the re-do the download.
+If you're reading this guide, you've probably already extracted the .zip file that contains the Learning VM. Keep that .zip file around in case you want to create a fresh instance of the Learning VM without having the re-do the download.
 
 ## VM Setup
 
@@ -68,7 +72,7 @@ All you'll want to do for now is get the Learning VM's IP address. Use the Facte
 
 Make a note of the IP address displayed. You'll need it to open an SSH connection to the Learning VM and in order to access to the PE Console later.
 
-For the Learning VM's quest tool to work smoothly, you'll need to log out before starting your SSH session. The file that tracks your command line history will only be created after you log out for the first time. Enter the command:
+For the Learning VM's quest tool to work smoothly, you'll need to log out before starting your SSH session. The file that tracks your command line history and helps us test completion of some tasks will only be created after you log out for the first time. Enter the command:
 
     exit
 

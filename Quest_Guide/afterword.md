@@ -13,9 +13,5 @@ If you are interested in learning more about Puppet, please visit the [Puppet La
 
 To get started with Puppet Enterprise [download it for free](http://info.puppetlabs.com/download-pe.html).
 
-Please let us know about your experience with the Learning VM. 
-
-Please report issues at the [Learning VM issue tracker](https://tickets.puppetlabs.com/browse/LEARNVM).  
-
-You can also reach us at [learningvm@puppetlabs.com](mailto:learningvm@puppetlabs.com). We look forward to hearing from you.
+Please let us know about your experience with the Learning VM! Fill out our [feedback survey](http://puppetlabs.Learning-VM-Feedback.sgizmo.com/s3/) or reach us at [learningvm@puppetlabs.com](mailto:learningvm@puppetlabs.com). We look forward to hearing from you.
 

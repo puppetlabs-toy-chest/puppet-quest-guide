@@ -18,7 +18,7 @@ layout: default
 
 In this quest you will use the Puppet Enterprise (PE) Console in conjunction with existing modules to cut away much of the complexity of a common configuration task.  You'll configure the Learning VM to serve the content of this Quest Guide as a locally accessible static HTML website. We'll show you how you can use Puppet and freely available Puppet modules to fully automate the process instead of writing code or using standard terminal commands.
 
-As you go through this quest, remember that while Puppet can simplify many tasks, it's a powerful and complex tool. There's a lot to learn if you want to use it to its full potential. We will explain concepts as needed to complete and understand each task in this quest, but sometimes we'll hold off on a fuller explanation of some detail until a later quest. Don't worry if you don't feel like you're getting the whole story right away; keep at it and we'll get there when the time is right!
+As you go through this quest, remember that while Puppet can simplify many tasks, it's a powerful and complex tool. We will explain concepts as needed to complete and understand each task in this quest, but sometimes we'll hold off on a fuller explanation of some detail until a later quest. Don't worry if you don't feel like you're getting the whole story right away; keep at it and we'll get there when the time is right!
 
 When you're ready to get started, type the following command:
 
@@ -28,7 +28,7 @@ When you're ready to get started, type the following command:
 
 A **module** is a bundle of Puppet code packaged along with the other files and data you need manage some aspect of a system. Need to set up NTP? There's a module for that. Manage system users? That too. But likely you'll want to do both of these things and more. Modules let you mix and match reusable bits of Puppet code to make achieving your desired configuration as painless as possible. Modules are designed to be, well, *modular*.
 
-But where do these modules come from? The [Puppet Forge](http://forge.puppetlabs.com) is a public repository of modules contributed by members of the Puppet community, including many written and maintained by Puppet Labs employees and partners. The Forge also includes a list PE Supported Modules, which Puppet Labs has rigorously tested and is committed to supporting and maintaining through their lifecycle.
+But where do these modules come from? The [Puppet Forge](http://forge.puppetlabs.com) is a public repository of modules contributed by members of the Puppet community, including many written and maintained by Puppet Labs employees and partners. The Forge also includes a list of PE Supported Modules, which Puppet Labs has rigorously tested and is committed to supporting and maintaining through their lifecycle.
 
 {% task 1 %}
 
@@ -60,11 +60,13 @@ The `lvmguide` *module* includes Puppet code that defines an `lvmguide` *class*.
 Despite some superficial similarities, Puppet's classes aren't like the classes in Object Oriented programming. You'll just get confused if you think of them this way!
 {% endwarning %}
 
-While a module can include many classes, it will always have a main class that shares the name of the module. This class serves as the access point for the module's functionality and calls on other classes within the module or from pre-requisite modules as needed.
+While a module can include many classes, it will often have a main class that shares the name of the module. This class serves as the access point for the module's functionality and calls on other classes within the module or from pre-requisite modules as needed.
 
 ## Put your Modules to Use
 
 In order to configure the Learning VM to serve you the Quest Guide website, you'll need to *classify* it with the `lvmguide` class. Classification tells Puppet which classes to apply to which machines in your infrastructure. Though there are a few different ways to classify nodes, we'll be using the PE Console's node classifier for this quest.
+
+{% task 2 %}
 
 To access the PE Console you'll need the Learning VM's IP address. Remember, you can use the `facter` tool packaged with PE.
 
@@ -151,7 +153,7 @@ From this point on you can either follow along with the website or with the PDF,
 
 ## IP Troubleshooting
 
-The website for the quest guide will remain accessible for as long as the VM's IP address remains the same. If you move your computer or laptop to a different network, or if you suspend your laptop and resumed work on the Learning VM after a while, the website may not be accessible.
+The website for the quest guide will remain accessible for as long as the VM's IP address remains the same. If you move your computer or laptop to a different network, or if you suspend your laptop and resumed work on the Learning VM later, the website may not be accessible.
 
 In case any of the above issues happen, and you end up with a stale IP address, run the following commands on the Learning VM to get a new IP address. (Remember, if you're ever unable to establish an SSH session, you can log in directly through the interface of your virtualization software.)
 
@@ -171,7 +173,7 @@ To understand how the `lvmguide` class works, you can take a look under the hood
 
 Next, open the `init.pp` manifest.
 
-	nano lvmguide/manifests/init.pp
+	vim lvmguide/manifests/init.pp
 
 {% highlight puppet %}
 class lvmguide (
@@ -191,9 +193,9 @@ class lvmguide (
 }
 {% endhighlight %}
 
-(To exit out of the file, use the command `control-x` in nano, or `:q!` in vim.)
+(To exit out of the file without saving any changes, make sure you're in `command` mode in vim by hitting the `esc` key, and enter the command `:q!`.)
 
-Don't worry about understanding each detail of the syntax just yet. For now, we'll just give you a quick overview so the concepts won't be totally new when you encounter them later on. 
+Don't worry about understanding each detail of the syntax just yet. For now, we'll just give you a quick overview so the concepts won't be totally new when you encounter them again later on. 
 
 #### Class Title and Parameters:
 
@@ -204,7 +206,7 @@ class lvmguide (
 ) {
 {% endhighlight %}
 
-The class `lvmguide` takes two parameters: `$document_root` and `$port`. The default values are set as `/var/www/html/lvmguide` and `80`.
+The class `lvmguide` takes two parameters, as defined in the parentheses following the class name. Parameters allow variables within a class to be set as the class is declared. Because you didn't specify parameter values, the two variables `$document_root` and `$port` were set to their defaults, `/var/www/html/lvmguide` and `80`.
 
 #### Include the apache module's apache class:
 {% highlight puppet %}
@@ -229,7 +231,7 @@ This block of code declares the `apache::vhost` class for the Quest Guide with t
 
 The files for the quest guide are put in place by the `quest` command line tool, and thus we don't specify anything about the files in the class. Puppet is flexible enough to help you manage just what you want to, leaving you free to use other tools where more appropriate. Thus we put together a solution using Puppet to manage a portion of it, and our `quest` tool to manage the rest.
 
-It may seem like there's a lot going on here, but once you have a basic understanding of the syntax, a quick read-through will be enough to get the gist of well-written Puppet code. (We often talk about Puppet's DSL as self-documenting code.)
+It may seem like there's a lot going on here, but by the time you get through this quest guide, a quick read-through will be enough to get the gist of well-written Puppet code. One advantage of a declarative language like Puppet is that the code tends to be much more self-documenting.
 
 ### Repeatable, Portable, Testable
 
