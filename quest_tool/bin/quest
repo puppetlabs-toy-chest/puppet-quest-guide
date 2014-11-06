@@ -1,0 +1,102 @@
+#!/bin/bash
+#
+# Run with "update" to update quest content.
+# Run with "resetlocks" for emergency cleanup.  The updatecache argument
+# is to just force an update of the caches, namely to be run from bash's
+# PROMPT_COMMAND so that tmux can just use the caches instead of wasting
+# cpu on running a command over and over that can only change when the
+# user runs a command anyway.
+# Authors: Evan K Langlois, Carthik Sharma, Josh Samuelson.
+# This script was written by Evan K Langlois and donated to PuppetLabs
+# without restrictions of any kind.  Comments to: uudruid74@gmail.com
+
+CMDLINE=`echo $* | tr -d ' '` 
+BASE=`basename $0`
+BUFFER="/tmp/${BASE}${CMDLINE}.out"
+LOCK="/tmp/${BASE}.lck"
+RUBY='/opt/puppet/bin/ruby'
+DIR='/root/.testing'
+TEST='test.rb'
+DOWNLOADURL='http://downloads.puppetlabs.com/lvmguide/'
+CACHEDIR='/opt/lvmguide'
+WEBROOT='/var/www/html/lvmguide'
+
+vergr() {
+  lower=$(echo -e "$1\n$2" | sort -V | head -n1)
+  [ "$2" = "$lower" ] && return 0
+}
+
+vercmp() {
+  [ "$1" = "$2" ] && return 1 || vergr $1 $2
+}
+
+cleanup() {
+  rm -rf $CACHEDIR/{_site,quest_tool}
+}
+
+if [ "$1" == "update" ]; then
+  if [ ! -e $CACHEDIR ]; then
+    mkdir $CACHEDIR
+  fi
+  LATEST=$(curl -fs $DOWNLOADURL/LATEST)
+  if [ $? != 0 ]; then
+    echo "Could not find latest version information"
+    exit 1
+  fi
+  if [ -e "$DIR/VERSION" ]; then
+    CURRENT=$(head -n 1 $DIR/VERSION)
+  else
+    CURRENT="0"
+  fi
+  if [ ! -z "$LATEST" ] && vercmp $LATEST $CURRENT ; then
+    trap cleanup EXIT
+    echo "Updating content to version: $LATEST from version: $CURRENT"
+    ZIPFILE=lvmguide-$LATEST.zip
+    curl -sSz $CACHEDIR/$ZIPFILE $DOWNLOADURL/$ZIPFILE -o $CACHEDIR/$ZIPFILE
+    unzip -uqq $CACHEDIR/$ZIPFILE -d $CACHEDIR
+
+    # replace content
+    rsync -ab --backup-dir=.backup_$CURRENT $CACHEDIR/_site/ $WEBROOT/
+    rsync -ab --backup-dir=.backup_$CURRENT $CACHEDIR/quest_tool/ /root/
+  else
+    echo "Current version: $CURRENT. Latest: $LATEST. No update required."
+  fi
+  exit
+fi
+
+#- As long as a lock file exists, we use the previous output
+#- The cached output isn't used as long as there is no lock,
+#- meaning the command line completed.
+
+if [ "$1" == "updatecache" ]; then
+  shift
+  CMDLINE=`echo $* | tr -d ' '`  BUFFER="/tmp/${BASE}${CMDLINE}.out"
+  if [ -e $LOCK ]; then       #- lock exists
+    if [ -s $BUFFER ]; then   #- is not empty - use cached output
+      cat $BUFFER
+    fi
+    exit                      #- there is a lock and nothing in the buffer
+                              # so exit and let previous invocation
+                              # finish
+  else                        #- no lock, run new copy
+    trap "rm -f $LOCK" EXIT
+    touch $LOCK
+  fi
+                              #- This part is run by tmux and cached
+  $RUBY $DIR/$TEST $* 2>/dev/null | tee $BUFFER.part
+                              #- Only cache non-empty outputs
+  if [ -s "$BUFFER.part" ]; then
+      mv $BUFFER.part $BUFFER
+  fi
+else                          #- if not run with updatecache
+  if [ "$1" == "resetlocks" ]; then
+    echo Killing all instances of $TEST and resetting lock
+    trap "rm -f /tmp/${BASE}*" EXIT
+    ps -ef | grep $RUBY | grep $TEST | awk  '{ print $2 }' \
+          | xargs kill 2>/dev/null
+    exit
+  else                      #- No caching, just run
+                            #- Manually run - original script
+    $RUBY $DIR/$TEST $* 2>/dev/null 
+  fi
+fi

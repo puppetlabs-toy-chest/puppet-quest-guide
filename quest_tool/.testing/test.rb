@@ -59,6 +59,12 @@ brief = p.leftovers.first == "brief"
 given = opts.select { |key, value| key.to_s.match(/_given/)}
 noargs = given.empty?
 
+if not File.file?('/root/.testing/log.yml')
+  initialize_yaml = Hash.new()
+  initialize_yaml["current"] = "begin"
+  File.open('/root/.testing/log.yml', 'w') {|f| f.write initialize_yaml.to_yaml }
+end
+
 if opts[:list] then
   if brief then
     questlog = YAML::load_file('/root/.testing/log.yml')

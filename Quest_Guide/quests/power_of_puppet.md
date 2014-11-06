@@ -87,7 +87,7 @@ When prompted, use the following credentials to log in:
 
 {% figure '../assets/PE_Login.png' %}
 
-You're in! Now that you have access to the PE Console, we'll go over the steps you'll take to classify the "learn.localdomain" node (i.e. the Learning VM) with the `lvmguide` class.
+You're in! Now that you have access to the PE Console, we'll go over the steps you'll take to classify the "learning.puppetlabs.vm" node (i.e. the Learning VM) with the `lvmguide` class.
 
 ### Add a Class
 
@@ -109,17 +109,17 @@ You should see a verification message at the top of the PE Console and the the `
 
 ### Classify a Node 
 
-Now that the `lvmguide` class is available, you can use it to classify the node `learn.localdomain`.
+Now that the `lvmguide` class is available, you can use it to classify the node `learning.puppetlabs.vm`.
 
 Click on the "Nodes" menu item in the navigation menu. (You may need to scroll to the top of the page to see the navigation menu.)
 
 {% figure '../assets/PE_Nodes_Menu.png' %}
 
-Click on the *learn.localdomain* node hyperlink. (This should be the only one listed since the Learning VM is the only node you're managing with Puppet Enterprise.)
+Click on the *learning.puppetlabs.vm* node hyperlink. (This should be the only one listed since the Learning VM is the only node you're managing with Puppet Enterprise.)
 
 {% figure '../assets/PE_Learn_Node.png' %}
 
-Once you're on the node page for *learn.localdomain*, click the "Edit" button located in the top-right corner of the screen. 
+Once you're on the node page for *learning.puppetlabs.vm*, click the "Edit" button located in the top-right corner of the screen. 
 
 {% figure '../assets/PE_Edit_Button.png' %}
 
@@ -131,11 +131,11 @@ Click the "Update" button at the bottom.
 
 {% figure '../assets/PE_Update_Button.png' %}
 
-Excellent! If everything went according to plan, you've successfully classified the `learn.localdomain` node with the `lvmguide` class.
+Excellent! If everything went according to plan, you've successfully classified the `learning.puppetlabs.vm` node with the `lvmguide` class.
 
 ### Run Puppet
 
-Now that you have classified the `learn.localdomain` node with the `lvmguide` class, Puppet knows how the system should be configured. But it won't make any changes until a Puppet run occurs. 
+Now that you have classified the `learning.puppetlabs.vm` node with the `lvmguide` class, Puppet knows how the system should be configured. But it won't make any changes until a Puppet run occurs. 
 
 The Puppet `agent` daemon runs in the background on any nodes you manage with Puppet. Every 30 minutes, the Puppet agent daemon requests a *catalog* from the Puppet Master. The Puppet Master parses all the classes applied to that node and builds the catalog to describes how the node is supposed to be configured. It returns this catalog to the node's Puppet agent, which then applies any changes necessary to bring the node into the line with the state described by the catalog.
 
@@ -178,27 +178,18 @@ Next, open the `init.pp` manifest.
 {% highlight puppet %}
 class lvmguide (
   $document_root = '/var/www/html/lvmguide',
-  $port = '80',
+  $port          = '80',
 ) {
-  
-  class { 'apache': 
+
+  # Manage apache, the files for the website will be 
+  # managed by the quest tool
+  class { 'apache':
     default_vhost => false,
   }
-  
   apache::vhost { 'learning.puppetlabs.vm':
     port    => $port,
     docroot => $document_root,
   }
-
-  file { '/var/www/html/lvmguide':
-    ensure  => directory,
-    owner   => $::apache::params::user,
-    group   => $::apache::params::group,
-    source  => 'puppet:///modules/lvmguide/html',
-    recurse => true,
-    require => Class['apache'],
-  }
-
 }
 {% endhighlight %}
 
@@ -236,19 +227,9 @@ The `lvmguide` class declares another class: `apache`. Puppet knows about the `a
 
 This block of code declares the `apache::vhost` class for the Quest Guide with the title `learning.puppetlabs.vm`, and with `$port` and `$docroot` set to those class parameters we saw earlier. This is the same as saying "Please set up a VirtualHost website serving the 'learning.puppetlabs.vm' website, and set the port and document root based on the parameters from above."
 
-#### Manage the files for our content:
-{% highlight puppet %}
-  file { '/var/www/html/lvmguide':
-    ensure  => directory,
-    owner   => $::apache::params::user,
-    group   => $::apache::params::group,
-    source  => 'puppet:///modules/lvmguide/html',
-    recurse => true,
-    require => Class['apache'],
-  }
-{% endhighlight %}
+#### The files for the website
 
-Finally, the class manages the content for the website. It ensures that the directory `/var/www/html/lvmguide` exists and that its contents are managed recursively. The `source =>` line tell Puppet to copy the content for this directory from an `html` directory in the `lvmguide` module.
+The files for the quest guide are put in place by the `quest` command line tool, and thus we don't specify anything about the files in the class. Puppet is flexible enough to help you manage just what you want to, leaving you free to use other tools where more appropriate. Thus we put together a solution using Puppet to manage a portion of it, and our `quest` tool to manage the rest.
 
 It may seem like there's a lot going on here, but by the time you get through this quest guide, a quick read-through will be enough to get the gist of well-written Puppet code. One advantage of a declarative language like Puppet is that the code tends to be much more self-documenting.
 
@@ -257,6 +238,16 @@ It may seem like there's a lot going on here, but by the time you get through th
 It's cool to install and configure an Apache httpd web server with a few lines of code and some clicks in the console, but keep in mind that the best part can't be shown with the Learning VM: once the `lvmguide` module is installed, you can apply the `lvmguide` class to as many nodes as you like, even if they have different specifications or run different operating systems.
 
 And once a class is deployed to your infrastructure, Puppet gives you the ability to manage the configuration from a single central point. You can implement your updates and changes in a test environment, then easily move them into production.
+
+## Updated Content
+
+Before continuing on to the remaining quests, let's ensure that you have the most up to date version of the quest-related content. Now that we have the website configured, please run the following command:
+
+    quest update
+
+This will download an updated PDF, files for the quest guide website, as well as the tests for the quests.
+
+You can find a copy of the update Quest Guide PDF at: `http://<your-vm's-ip-address>/Quest_Guide.pdf`, or in the `/var/www/html/lvmguide/` directory on the VM.
 
 ## Review
 

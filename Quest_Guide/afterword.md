@@ -11,7 +11,7 @@ We had a lot of fun writing the guide, and hope it was fun to read and use as we
 
 If you are interested in learning more about Puppet, please visit the [Puppet Labs Workshop](https://puppetlabs.com/learn).
 
-To get started with Puppet Enterprise [download it for free](http://info.puppetlabs.com/download-pe.html)
+To get started with Puppet Enterprise [download it for free](http://info.puppetlabs.com/download-pe.html).
 
 Please let us know about your experience with the Learning VM! Fill out our [feedback survey](http://puppetlabs.Learning-VM-Feedback.sgizmo.com/s3/) or reach us at [learningvm@puppetlabs.com](mailto:learningvm@puppetlabs.com). We look forward to hearing from you.
 

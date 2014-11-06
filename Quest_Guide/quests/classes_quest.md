@@ -133,24 +133,19 @@ Again, please do not ever do this above example in real life, since you _always_
 In the Power of Puppet Quest, we used a class called `lvmguide` to help us set up the website version of this Quest Guide. The `lvmguide` class gives us a nice illustration of structuring a class definition. We've included the code from the `lvmguide` class declaration below for easy reference as we talk about defining classes. Don't worry if a few things remain unclear at this point. For now, we're going to focus primarily on how class definitions work.
 
 {% highlight puppet %}
-class lvmguide ( 
+class lvmguide (
   $document_root = '/var/www/html/lvmguide',
-  $port = '80',
-){
- class { 'apache':
-   default_vhost => false,
- }
- apache::vhost { 'learning.puppetlabs.vm':
-   port    => $port,
-   docroot => $document_root,
- }
- file { '/var/www/html/lvmguide':
-   ensure  => directory,
-   owner   => $::apache::params::user,    
-   group   => $::apache::params::group,    
-   source  => 'puppet:///modules/lvmguide/html', 
-   recurse => true,    
-   require => Class['apache'],
+  $port          = '80',
+) {
+
+  # Manage apache, the files for the website will be 
+  # managed by the quest tool
+  class { 'apache':
+    default_vhost => false,
+  }
+  apache::vhost { 'learning.puppetlabs.vm':
+    port    => $port,
+    docroot => $document_root,
   }
 }
 {% endhighlight %}
@@ -186,24 +181,16 @@ Notice how the code looks similar to how you might describe a user, file or pack
 
 If we had wanted to include the `apache` class with its default parameter settings, we could have used the `include apache` syntax. Turns out that just like the `lvmguide` class, the `apache` class is defined to accept parameters. Since we wanted to set the `default_vhost` parameter, we used the resource-like class declaration syntax. This allows us to set `default_vhost` to `false`.
 
-Our final two code blocks in the class definition are resource declarations:
+Our final code block in the class definition is a resource declarations:
 
 {% highlight puppet %}
   apache::vhost { 'learning.puppetlabs.vm':
     port    => $port,
     docroot => $document_root,
   }
-  file { '/var/www/html/lvmguide':
-    ensure  => directory,
-    owner   => $::apache::params::user,
-    group   => $::apache::params::group,
-    source  => 'puppet:///modules/lvmguide/html',
-    recurse => true,
-    require => Class['apache'],
-  }
 {% endhighlight %}
 
-First, we declare an `apache::vhost` resource type, and pass along values from our class parameters to its `port` and `docroot` attributes.
+First, we declare an `apache::vhost` resource type, and pass along values from our class parameters to its `port` and `docroot` attributes. The `apache::vhost` resource type is defined in, and provided by the `apache` module that we installed, and helps manage the configuration of Apache2 Virtual Hosts.
 
 As in the above example, class definitions give you a concise way to group other classes and resource declarations into re-usable blocks of Puppet code. You can then selectively assign these classes to different machines across your Puppetized network in order to easily configure those machines to fulfill the defined function. Now that the `lvmguide` class is defined, enabling the Quest Guide website on other machines would be as easy as assigning that class in the PE Console.
 

@@ -1,4 +1,0 @@
-#!/bin/bash
-
-cd /root/.testing/
-/opt/puppet/bin/ruby /root/.testing/test.rb $* 2>/dev/null

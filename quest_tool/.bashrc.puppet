@@ -47,7 +47,14 @@ function parse_git_branch() {
 }
 export PS1="\[${ORANGE}\][\[${BOLD}${MAGENTA}\]\u@\h \[${GREEN}\]\w\[${BOLD}\]\$(is_on_git && [[ -n \$(git branch 2> /dev/null) ]] && echo \":\")\[${PURPLE}\]\$(parse_git_branch)\[${RESET}\]\[${ORANGE}\]]\[${RESET}\]# "
 
-export PROMPT_COMMAND='history -a; history -r'
+function check_quest() {
+  if [ -x '/root/bin/quest' ]; then
+    (/root/bin/quest updatecache --list brief >/dev/null && \
+    /root/bin/quest updatecache --progress brief >/dev/null &)
+  fi
+}
+
+export PROMPT_COMMAND='history -a; history -r; check_quest'
 
 # If not running interactively, do not do anything
 [[ $- != *i* ]] && return
