@@ -15,7 +15,7 @@ end
 
 describe "Version 2.2.2 of the puppetlabs-mysql module" do
   it 'should be installed' do
-    file('/root/.bash_history').should contain "puppet module install puppetlabs-mysql --version 2.2.2"
+    file('/root/.bash_history').content.should match /puppet module install puppetlabs-mysql --version 2.2.2/ 
   end
 end
 

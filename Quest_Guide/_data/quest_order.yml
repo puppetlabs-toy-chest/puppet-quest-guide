@@ -4,20 +4,22 @@
    title: Power of Puppet
  - url: /quests/resources.html
    title: Resources
- - url: /quests/manifest_quest.html
-   title: Manifests
- - url: /quests/variables.html
-   title: Variables
- - url: /quests/conditions_quest.html
-   title: Conditional Statements
- - url: /quests/resource_ordering.html
-   title: Ordering
- - url: /quests/classes_quest.html
-   title: Classes
+ - url: /quests/manifests_and_classes.html
+   title: Manifests and Classes
  - url: /quests/modules_quest.html
    title: Modules
  - url: /quests/puppet_module_tool_quest.html
    title: Puppet Module Tool
+ - url: /quests/ntp.html
+   title: NTP
+ - url: /quests/mysql.html
+   title: MySQL
+ - url: /quests/variables_and_parameters.html
+   title: Variables and Class Parameters
+ - url: /quests/conditions_quest.html
+   title: Conditional Statements
+ - url: /quests/resource_ordering.html
+   title: Ordering
  - url: /afterword.html
    title: Afterword
  - url: /troubleshooting.html
