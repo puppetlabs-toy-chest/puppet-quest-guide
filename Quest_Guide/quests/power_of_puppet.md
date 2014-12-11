@@ -380,7 +380,7 @@ You can find a copy of the update Quest Guide PDF at:
 ## Review
 
 Great job on completing the quest! You should now have a good idea of how to
-download exising modules from the Forge and use the PE Console node classifier
+download existing modules from the Forge and use the PE Console node classifier
 to apply them to a node. You also learned how to use the `puppet agent --test`
 command to manually trigger a puppet run.
 

@@ -8,8 +8,6 @@
    title: Manifests and Classes
  - url: /quests/modules_quest.html
    title: Modules
- - url: /quests/puppet_module_tool_quest.html
-   title: Puppet Module Tool
  - url: /quests/ntp.html
    title: NTP
  - url: /quests/mysql.html
