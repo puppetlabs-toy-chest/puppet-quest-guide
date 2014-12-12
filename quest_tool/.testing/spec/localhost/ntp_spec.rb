@@ -3,8 +3,8 @@ require 'spec_helper'
 # Task 1
 describe "The Puppet Labs NTP module" do
   it 'should be installed' do
-    file('/etc/puppetlabs/puppet/modules/ntp').should be_directory
-    file('/etc/puppetlabs/puppet/modules/ntp/metadata.json').should contain 'puppetlabs-ntp'
+    file('/etc/puppetlabs/puppet/environments/production/modules/ntp').should be_directory
+    file('/etc/puppetlabs/puppet/environments/production/modules/ntp/metadata.json').should contain 'puppetlabs-ntp'
   end
 end
 

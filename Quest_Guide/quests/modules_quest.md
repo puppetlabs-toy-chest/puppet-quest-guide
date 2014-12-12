@@ -81,7 +81,7 @@ argument:
     puppet agent --configprint modulepath
 
 This will tell you that Puppet looks in the directories
-`/etc/puppetlabs/puppet/modules` and then in `/opt/puppet/share/puppet/modules`
+`/etc/puppetlabs/puppet/environments/production/modules` and then in `/opt/puppet/share/puppet/modules`
 to find available modules.
 
 ## Module Structure
@@ -93,7 +93,7 @@ reliably locate the module's contents.
 
 Use the `ls` command to see what's in the modulepath:
 
-    ls /etc/puppetlabs/puppet/modules
+    ls /etc/puppetlabs/puppet/environments/production/modules
 	
 You'll probably recognize some familiar names from previous quests.
 
@@ -101,11 +101,11 @@ To get clear picture of the directory structure of the modules here, you can use
 a couple flags with the `tree` command to limit the output to directories, and
 limit the depth to two directories.
 
-    tree -L 2 -d /etc/puppetlabs/puppet/modules/
+    tree -L 2 -d /etc/puppetlabs/puppet/environments/production/modules/
 	
 You'll see a list of directories, like so:
 
-    /etc/puppetlabs/puppet/modules/
+    /etc/puppetlabs/puppet/environments/production/modules/
     └── apache
         ├── files
         ├── lib
@@ -135,7 +135,7 @@ resource type can be very handy for managing these settings.
 
 Change your working directory to the modulepath if you're not already there.
 
-    cd /etc/puppetlabs/puppet/modules
+    cd /etc/puppetlabs/puppet/environments/production/modules
 
 {% task 2 %}
 
@@ -237,7 +237,7 @@ module's `files` directory, this directory is implicit and is left out of the
 URI.
 
 So while the full path to the vimrc source file is
-`/etc/puppetlabs/puppet/modules/vimrc/files/vimrc`, Puppet's URI abstraction
+`/etc/puppetlabs/puppet/environments/production/modules/vimrc/files/vimrc`, Puppet's URI abstraction
 shortens it to `/modules/vimrc/vimrc`. Combined with the implicit hostname,
 then, the attribute value pair for the source URI is:
 

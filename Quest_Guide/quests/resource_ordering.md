@@ -139,7 +139,7 @@ resource relationships.
 
 Before getting started, ensure that you're in the `modules` directory:
 
-    cd /etc/puppetlabs/puppet/modules
+    cd /etc/puppetlabs/puppet/environments/production/modules
 
 {% task 1 %}
 Create an `sshd` directory and create `tests`, `manifests`, and `files`

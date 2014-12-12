@@ -3,8 +3,8 @@ require 'spec_helper'
 # Task 1
 describe "The Puppet Labs MySQL module" do
   it 'should be installed' do
-    file('/etc/puppetlabs/puppet/modules/mysql').should be_directory
-    file('/etc/puppetlabs/puppet/modules/mysql/metadata.json').should contain 'puppetlabs-mysql'
+    file('/etc/puppetlabs/puppet/environments/production/modules/mysql').should be_directory
+    file('/etc/puppetlabs/puppet/environments/production/modules/mysql/metadata.json').should contain 'puppetlabs-mysql'
   end
 end
 
