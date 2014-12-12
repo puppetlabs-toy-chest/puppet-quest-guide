@@ -120,7 +120,7 @@ First, you'll need to create the directory structure for your module.
 
 Make sure you're in the `modules` directory for Puppet's modulepath.
 
-    cd /etc/puppetlabs/puppet/modules/
+    cd /etc/puppetlabs/puppet/environments/production/modules/
 
 Now create an `web` directory:
 

@@ -3,24 +3,24 @@ require 'spec_helper'
 # Task 1
 describe "The directory structure for your accounts module" do
   it 'should be created' do
-    file('/etc/puppetlabs/puppet/modules/accounts').should be_directory
-    file('/etc/puppetlabs/puppet/modules/accounts/tests').should be_directory
-    file('/etc/puppetlabs/puppet/modules/accounts/manifests').should be_directory
+    file('/etc/puppetlabs/puppet/environments/production/modules/accounts').should be_directory
+    file('/etc/puppetlabs/puppet/environments/production/modules/accounts/tests').should be_directory
+    file('/etc/puppetlabs/puppet/environments/production/modules/accounts/manifests').should be_directory
   end
 end
 
 # Task 2
 describe "The accounts/manifests/init.pp manifest" do
   it 'should define the accounts class' do
-    file('/etc/puppetlabs/puppet/modules/accounts/manifests/init.pp').content.should match /class accounts \(\s*\$name\s*\)\s*\{\s+if\s+\$::operatingsystem\s==\s\'\w+\'\s+\{/
-    file('/etc/puppetlabs/puppet/modules/accounts/manifests/init.pp').content.should match /user\s+\{\s*\$name:\s+ensure\s+=>\s+\'present\',(.|\s)+(\$groups,)\s+\}/
+    file('/etc/puppetlabs/puppet/environments/production/modules/accounts/manifests/init.pp').content.should match /class accounts \(\s*\$name\s*\)\s*\{\s+if\s+\$::operatingsystem\s==\s\'\w+\'\s+\{/
+    file('/etc/puppetlabs/puppet/environments/production/modules/accounts/manifests/init.pp').content.should match /user\s+\{\s*\$name:\s+ensure\s+=>\s+\'present\',(.|\s)+(\$groups,)\s+\}/
   end
 end
 
 # Task 3
 describe "The accounts/tests/init.pp manifest" do
   it 'should declare the accounts class' do 
-    file('/etc/puppetlabs/puppet/modules/accounts/tests/init.pp').content.should match /class\s+\{\s*\'?accounts\'?/
+    file('/etc/puppetlabs/puppet/environments/production/modules/accounts/tests/init.pp').content.should match /class\s+\{\s*\'?accounts\'?/
   end
 end
 

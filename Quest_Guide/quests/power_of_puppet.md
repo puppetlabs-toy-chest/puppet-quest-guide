@@ -229,7 +229,7 @@ To understand how the `lvmguide` class works, you can take a look under the
 hood. In your terminal, use the `cd` command to navigate to the module
 directory. (Remember, `cd` for 'change directory.')
 
-    cd /etc/puppetlabs/puppet/modules
+    cd /etc/puppetlabs/puppet/environments/production/modules
 
 Next, open the `init.pp` manifest.
 

@@ -113,7 +113,7 @@ command with a filter to include only `.pp` manifest files:
 
 You'll see something like the following:
 
-    /etc/puppetlabs/puppet/modules/mysql/manifests/
+    /etc/puppetlabs/puppet/environments/production/modules/mysql/manifests/
     ├── backup.pp
     ├── bindings
     │   ├── java.pp

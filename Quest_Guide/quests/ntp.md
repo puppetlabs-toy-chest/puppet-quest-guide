@@ -111,7 +111,7 @@ Use the puppet module tool to install the Puppet Labs `ntp` module.
     puppet module install puppetlabs-ntp
 	
 This command tells the puppet module tool to fetch the module from the Puppet
-Forge and place it in Puppet's modulepath: `/etc/puppetlabs/puppet/modules`.
+Forge and place it in Puppet's modulepath: `/etc/puppetlabs/puppet/environments/production/modules`.
 
 ## Classification with the site.pp Manifest
 
