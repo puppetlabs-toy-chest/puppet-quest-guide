@@ -34,7 +34,7 @@ machine: NTP.
 > along, but I am the river; it is a tiger that devours me, but I am the tiger;
 > it is a fire that consumes me, but I am the fire.
 
-> -- Jorge Luis Borges
+> -Jorge Luis Borges
 
 Security services, shared filesystems, certificate signing, logging systems, and
 many other fundamental services and applications (including Puppet itself!) need
@@ -65,15 +65,15 @@ of these resources.
 
 First, check the state of the NTP *package*:
 
-  puppet resource package ntp
+    puppet resource package ntp
 	
 check the NTP configuration *file*:
 	
-  puppet resource file /etc/ntp.conf
+    puppet resource file /etc/ntp.conf
 
 finally, see if the Network Time Protocol Daemon (NTPD) *service* is running:
 
-  puppet resource service ntpd
+    puppet resource service ntpd
 	
 You'll see that the NTP package is installed on the Learning VM, that the
 configuration file exists, but that the ntpd service is 'stopped'.
@@ -108,7 +108,7 @@ can lead to conflicts!
 
 Use the puppet module tool to install the Puppet Labs `ntp` module. 
 
-  puppet module install puppetlabs-ntp
+    puppet module install puppetlabs-ntp
 	
 This command tells the puppet module tool to fetch the module from the Puppet
 Forge and place it in Puppet's modulepath: `/etc/puppetlabs/puppet/modules`.
@@ -147,7 +147,7 @@ classifier you saw in the Power of Puppet quest.
 
 Open the site.pp manifest in your text editor.
 
-  vim /etc/puppetlabs/puppet/manifests/site.pp
+    vim /etc/puppetlabs/puppet/manifests/site.pp
 	
 Skip to the bottom of the file. (You can use the vim shortcut `G`)
 
@@ -196,13 +196,13 @@ One of these defaults, for instance, tells Puppet which time servers to include
 in the NTP configuration file. To see what servers were specified by default,
 you can check the configuration file directly. Enter the command:
 	
-  cat /etc/ntp.conf | grep server
+    cat /etc/ntp.conf | grep server
 	
 You'll see a list of the default servers:
 
-  server 0.centos.pool.ntp.org
-  server 1.centos.pool.ntp.org
-  server 2.centos.pool.ntp.org
+    server 0.centos.pool.ntp.org
+    server 1.centos.pool.ntp.org
+    server 2.centos.pool.ntp.org
 
 These ntp.org servers aren't actually time servers themselves; rather, they're
 access points that will pass you on to one of a pool of public timeservers. Most
