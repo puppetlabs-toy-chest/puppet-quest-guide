@@ -29,7 +29,7 @@ platforms, operating systems, and functional requirements.
 
 To start this quest enter the following command:
 
-  quest --start conditionals
+    quest --start conditionals
 
 ## Writing for Flexibility
 
@@ -90,7 +90,7 @@ huge amount of power to write portability into your modules.
 
 To get a full list of facts available to facter, enter the command:
 	
-  facter -p | less
+    facter -p | less
 	
 Any of the facts you see listed here can be used within your Puppet code with
 the syntax `$::factname`. The double colons `::` indicate that the fact is
@@ -146,17 +146,17 @@ adjustment is easy to automate with Puppet.
 
 Before getting started, make sure you're working in the `modules` directory:
 
-  cd /etc/puppetlabs/puppet/modules
+    cd /etc/puppetlabs/puppet/modules
 	
 {% task 1 %}
 	
 Create an `accounts` directory:
 
-  mkdir accounts
+    mkdir accounts
 	
 And your `tests` and `manifests` directories:
 
-  mkdir accounts/{manifests,tests}
+    mkdir accounts/{manifests,tests}
 	
 {% task 2 %}
 	
@@ -243,7 +243,7 @@ Combining this with the `--noop` flag, you can do a quick test of how your
 manifest would run on a different system before setting up a full testing
 environment.
 
-  FACTER_operatingsystem=Debian puppet apply --noop accounts/tests/init.pp
+    FACTER_operatingsystem=Debian puppet apply --noop accounts/tests/init.pp
 	
 Look in the list of notices, and you'll see the changes that would have been
 applied.
@@ -253,7 +253,7 @@ applied.
 Try one more time with an unsupported operating system to check the fail
 condition:
 
-  FACTER_operatingsystem=Darwin puppet apply --noop accounts/tests/init.pp
+    FACTER_operatingsystem=Darwin puppet apply --noop accounts/tests/init.pp
 
 {% task 6 %}
 

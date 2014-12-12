@@ -37,7 +37,7 @@ When you're ready, type the following command:
 > Creation always builds upon something else. There is no art that doesn't
 > reuse.
 
-> --Lawrence Lessig
+> -Lawrence Lessig
 
 
 There's no hard-and-fast technical reason why you can't toss all the resource
@@ -93,7 +93,7 @@ reliably locate the module's contents.
 
 Use the `ls` command to see what's in the modulepath:
 
-  ls /etc/puppetlabs/puppet/modules
+    ls /etc/puppetlabs/puppet/modules
 	
 You'll probably recognize some familiar names from previous quests.
 
@@ -101,19 +101,19 @@ To get clear picture of the directory structure of the modules here, you can use
 a couple flags with the `tree` command to limit the output to directories, and
 limit the depth to two directories.
 
-  tree -L 2 -d /etc/puppetlabs/puppet/modules/
+    tree -L 2 -d /etc/puppetlabs/puppet/modules/
 	
 You'll see a list of directories, like so:
 
-  /etc/puppetlabs/puppet/modules/
-  └── apache
-      ├── files
-      ├── lib
-      ├── manifests
-      ├── spec
-      ├── templates
-      └── tests
-      ...
+    /etc/puppetlabs/puppet/modules/
+    └── apache
+        ├── files
+        ├── lib
+        ├── manifests
+        ├── spec
+        ├── templates
+        └── tests
+        ...
     	
 Each of the standardized subdirectory names you see tells Puppet users and
 Puppet itself where to find each of the various components that come together to
@@ -154,12 +154,12 @@ for files.
 If you use the `tree vimrc` command to take a look at your new module, you
 should now see a structure like this:
 
-  vimrc
-  ├── files
-  ├── manifests
-  └── tests
-
-  3 directories, 0 files
+    vimrc
+    ├── files
+    ├── manifests
+    └── tests
+  
+    3 directories, 0 files
 
 {% task 4 %}
 
@@ -169,18 +169,18 @@ directory of your new module. Any file in the `files` directory of a module in
 the Puppet master's modulepath will be available to client nodes through
 Puppet's built-in fileserver.
 
-  cp ~/.vimrc vimrc/files/vimrc
+    cp ~/.vimrc vimrc/files/vimrc
 	
 {% task 5 %}
 	
 Once you've copied the file, open so you can make an addition.
 
-  vim vimrc/files/vimrc
+    vim vimrc/files/vimrc
 
 We'll keep things simple. By default, line numbering is disabled. Add the
 following line to then end of the file to tell Vim to turn on line numbering.
 
-  set number
+    set number
 	
 Save and exit.
 
@@ -193,7 +193,7 @@ Remember, the manifest that includes the main class for a module is always
 called `init.pp`. Create the `init.pp` manifest in your module's manifests
 directory.
 
-  vim vimrc/manifests/init.pp
+    vim vimrc/manifests/init.pp
 
 The Puppet code you put in here will be pretty simple. You need to define a
 class `vimrc`, and within it, make a *file* resource declaration to tell Puppet
@@ -216,7 +216,7 @@ source file.
 
 All Puppet file server URIs are structured as follows:
 
-  puppet://{server hostname (optional)}/{mount point}/{remainder of path}
+    puppet://{server hostname (optional)}/{mount point}/{remainder of path}
 	
 However, there's some URI abstraction magic built in to Puppet that makes these
 URIs more concise.
@@ -241,7 +241,7 @@ So while the full path to the vimrc source file is
 shortens it to `/modules/vimrc/vimrc`. Combined with the implicit hostname,
 then, the attribute value pair for the source URI is:
 
-  source => 'puppet:///modules/vimrc/vimrc',
+    source => 'puppet:///modules/vimrc/vimrc',
 
 Putting this all together, your init.pp manifest should contain the following:
 
@@ -282,9 +282,9 @@ the `--noop` and apply it for real.
 
 You'll see something like the following:
 
-  Notice: /Stage[main]/Vimrc/File[/root/.vimrc]/content: content changed
-  '{md5}99430edcb284f9e83f4de1faa7ab85c8' to
-  '{md5}f685bf9bc0c197f148f06704373dfbe5'
+    Notice: /Stage[main]/Vimrc/File[/root/.vimrc]/content: content changed
+    '{md5}99430edcb284f9e83f4de1faa7ab85c8' to
+    '{md5}f685bf9bc0c197f148f06704373dfbe5'
 	
 When you tell Puppet to manage a file, it compares the md5 hash of the target
 file against that of the specified source file to check if any changes need to

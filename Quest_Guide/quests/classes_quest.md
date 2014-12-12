@@ -107,7 +107,7 @@ definition?
 
 Apply the manifest containing the `ntp` class definition:
 
-  puppet apply /root/examples/modules1-ntp1.pp
+    puppet apply /root/examples/modules1-ntp1.pp
 
 That's funny. Nothing happened, and nothing changed on the system!
 
@@ -155,8 +155,6 @@ as the very last line of the file.
 Declare class ntp
 
 Go ahead and now apply the manifest `/root/examples/modules1-ntp2.pp`.
-
-  HINT: Use the puppet apply tool. Refer to the Manifests Quest.
 
 Great! This time Puppet actually managed the resources in the definition of
 class ntp. 

@@ -36,7 +36,7 @@ When you're ready to get started, type the following command:
 > For me, abstraction is real, probably more real than nature. I'll go further
 > and say that abstraction is nearer my heart. I prefer to see with closed eyes.
 
-> --Joseph Albers
+> -Joseph Albers
 
 Resources are the fundamental units for modeling system configurations. Each
 resource describes some aspect of a system and its state, like a service that
@@ -75,7 +75,7 @@ you would use to declare a desired state.
 Using the *puppet resource* tool, take a look at your root user account. Note
 the pattern of the command will be: *puppet resource \<type\> \<name\>*.
 
-  puppet resource user root 
+    puppet resource user root 
 	
 You'll see something like the following.
 
@@ -193,7 +193,7 @@ before you start changing attributes.
 Use the *puppet describe* tool to get a description of the *user* type,
 including a list of its parameters.
 
-  puppet describe user | less
+    puppet describe user | less
 	
 (You can use the `jk` key mapping or the arrow keys to scroll, and `q` to exit
 less.)
@@ -219,12 +219,12 @@ you'll need to do to create a new user is set the 'ensure' attribute to
 'present'. This 'present' value tells Puppet to check if the resource exists on
 the system, and to create the specified resource if it does not.
 
-  puppet apply -e "user { 'galatea': ensure => 'present', }"
+    puppet apply -e "user { 'galatea': ensure => 'present', }"
 
 Use the `puppet resource` tool to take a look at user *galatea*. Type the
 following command:
 
-  puppet resource user galatea
+    puppet resource user galatea
 
 Notice that while the *root* user had a *comment* attribute, Puppet hasn't
 created one for your new user. As you may have noticed looking over the *puppet
@@ -237,7 +237,7 @@ While puppet apply with the `-e` flag can be handy for quick one-liners, you can
 pass an `--execute` (incidentally, also shortened to `-e`) flag to the `puppet
 resource` tool to edit and apply changes to a resource.
 
-  puppet resource -e user galatea
+    puppet resource -e user galatea
 	
 You'll see the same output for this resource as before, but this time it will be
 opened in a text editor (vim, by default). To add a *comment* attribute, insert
@@ -245,7 +245,7 @@ a new line to the resource's list of attribute value pairs. (If you're not used
 to Vim, note that you must use the `i` command to enter insert mode before you
 can insert text.)
 
-  comment => 'Galatea of Cyprus',
+    comment => 'Galatea of Cyprus',
 	
 Save and exit (`esc` to return to command mode, and `:wq` in vim), and the
 resource declaration will be applied with the added comment. If you like, use
@@ -256,7 +256,7 @@ Have you noticed that when you successfully finish a task, the 'completed tasks'
 in the lower right corner of your terminal increases? Remember, you can also
 check your progress by entering the following command:
 
-  quest --progress
+    quest --progress
 
 {% endaside %}
 

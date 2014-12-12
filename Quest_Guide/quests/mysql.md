@@ -46,7 +46,7 @@ instances, and extends Puppet's starndard resource types to let you manage MySQL
 Before getting started configuring your MySQL server installation, fetch the
 `puppetlabs-mysql` module from the Puppet Forge with the `puppet module` tool.
 
-  puppet module install puppetlabs-mysql
+    puppet module install puppetlabs-mysql
 	
 With this module installed in the Puppet master's module path, all the included
 classes are available to classify nodes.
@@ -77,7 +77,7 @@ structure of the `override_options` hash is analogous to the `[section]`,
 Use the `puppet parser validate` tool to check your syntax, then trigger a
 puppet run:
 
-  puppet agent -t
+    puppet agent -t
 	
 If you want to check out your new database, you can connect to the MySQL monitor
 with the `mysql` command, and exit with the `\q` command.
@@ -85,14 +85,14 @@ with the `mysql` command, and exit with the `\q` command.
 To see the result of the 'max_connections' override option you set, grep the
 `/etc/my.cnf` file:
 
-  cat /etc/my.cnf | grep -B 9 max_connections
+    cat /etc/my.cnf | grep -B 9 max_connections
 
 And you'll see that Puppet translated the hash into appropriate syntax for the
 MySQL configuration file:
 
-  [mysqld]
-  ...
-  max_connections = 1024
+    [mysqld]
+    ...
+    max_connections = 1024
 
 ## Scope
 
@@ -109,36 +109,36 @@ conflicts between variables or classes with the same name.
 Take a look at the directories and manifests in the MySQL module. Use the `tree`
 command with a filter to include only `.pp` manifest files:
 
-  tree -P *.pp /etc/puppetlabs/modules/mysql/manifests/
+    tree -P *.pp /etc/puppetlabs/modules/mysql/manifests/
 
 You'll see something like the following:
 
-  /etc/puppetlabs/puppet/modules/mysql/manifests/
-  ├── backup.pp
-  ├── bindings
-  │   ├── java.pp
-  │   ├── perl.pp
-  │   ├── php.pp
-  │   ├── python.pp
-  │   └── ruby.pp
-  ├── bindings.pp
-  ├── client
-  │   └── install.pp
-  ├── client.pp
-  ├── db.pp
-  ├── init.pp
-  ├── params.pp
-  ├── server
-  │   ├── account_security.pp
-  │   ├── backup.pp
-  │   ├── config.pp
-  │   ├── install.pp
-  │   ├── monitor.pp
-  │   ├── mysqltuner.pp
-  │   ├── providers.pp
-  │   ├── root_password.pp
-  │   └── service.pp
-  └── server.pp
+    /etc/puppetlabs/puppet/modules/mysql/manifests/
+    ├── backup.pp
+    ├── bindings
+    │   ├── java.pp
+    │   ├── perl.pp
+    │   ├── php.pp
+    │   ├── python.pp
+    │   └── ruby.pp
+    ├── bindings.pp
+    ├── client
+    │   └── install.pp
+    ├── client.pp
+    ├── db.pp
+    ├── init.pp
+    ├── params.pp
+    ├── server
+    │   ├── account_security.pp
+    │   ├── backup.pp
+    │   ├── config.pp
+    │   ├── install.pp
+    │   ├── monitor.pp
+    │   ├── mysqltuner.pp
+    │   ├── providers.pp
+    │   ├── root_password.pp
+    │   └── service.pp
+    └── server.pp
 	
 Notice the `server.pp` manifest in the top level of the `mysql/manifests`
 directory. 
@@ -149,12 +149,12 @@ class name, Puppet knows to find the class definition in a manifest called
 
 So `mysql::server` corresponds to:
 
-/etc/puppetlabs/modules/**mysql**/manifests/**server**.pp
+    /etc/puppetlabs/modules/**mysql**/manifests/**server**.pp
 
 To take an example one level deeper, the `mysql::server::account_security` class
 corresponds to:
 
-/etc/puppetlabs/modules/**mysql**/manifests/**server**/**account_security**.pp
+    /etc/puppetlabs/modules/**mysql**/manifests/**server**/**account_security**.pp
 
 We won't be calling the `mysql` class directly in this quest, but it's worth
 reiterating the special case of a module's self-named class. This will always be
@@ -163,7 +163,7 @@ directory.
 
 So the `mysql` class is found here:
 
-/etc/puppetlabs/modules/**mysql**/manifests/init.pp
+    /etc/puppetlabs/modules/**mysql**/manifests/init.pp
 
 ## Account Security
 
@@ -181,15 +181,15 @@ a parameterized class declaration.
 Trigger a Puppet run, and you will see notices indicating that the test database
 and two users have been removed:
 
-  Notice:
-  /Stage[main]/Mysql::Server::Account_security/Mysql_database[test]/ensure:
-  removed
-  Notice:
-  /Stage[main]/Mysql::Server::Account_security/Mysql_user[@localhost]/ensure:
-  removed
-  Notice:
-  /Stage[main]/Mysql::Server::Account_security/Mysql_user[root@127.0.0.1]/ensure:
-  removed
+    Notice:
+    /Stage[main]/Mysql::Server::Account_security/Mysql_database[test]/ensure:
+    removed
+    Notice:
+    /Stage[main]/Mysql::Server::Account_security/Mysql_user[@localhost]/ensure:
+    removed
+    Notice:
+    /Stage[main]/Mysql::Server::Account_security/Mysql_user[root@127.0.0.1]/ensure:
+    removed
 
 ## Types and Providers
 
@@ -257,7 +257,7 @@ Once you've added declarations for these three custom resources, use the `puppet
 parser validate` command on the `site.pp` manifest to check your syntax, and
 trigger a puppet run with
 	
-  puppet agent -t
+    puppet agent -t
 	
 ## Review
 

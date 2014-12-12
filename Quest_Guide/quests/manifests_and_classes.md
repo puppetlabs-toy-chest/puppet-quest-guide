@@ -89,14 +89,14 @@ We've already created a `cowsayings` module directory in Puppet's *modulepath*,
 and included two subdirectories: `manifests` and `tests`. Before getting started
 writing manifests, change directories to save yourself some typing:
 
-  cd /etc/puppet/puppetlabs/modules
+    cd /etc/puppet/puppetlabs/modules
 
 ### Cowsay
 {% task 1 %}
 You'll want to put the manifest with your cowsay class definition in the
 manifests directory. Use vim to create a `cowsay.pp` manifest:
 
-  vim cowsayings/manifests/cowsay.pp
+    vim cowsayings/manifests/cowsay.pp
 
 Enter the following class definition, then save and exit (`:wq`):
 
@@ -112,7 +112,7 @@ Now that you're working with manifests, you can use some validation tools to
 check your code before you apply it. Use the `puppet parser` tool to check the
 syntax of your new manifest:
 
-  puppet parser validate cowsayings/manifests/cowsay.pp
+    puppet parser validate cowsayings/manifests/cowsay.pp
 	
 The parser will return nothing if there are no errors. If it does detect a
 syntax error, open the file again and fix the problem before continuing.
@@ -127,11 +127,11 @@ hasn't yet been told to do anything with it.
 {% task 2 %}
 To actually declare the class, create a `cowsay.pp` test in the tests directory.
 
-  vim cowsayings/tests/cowsay.pp
+    vim cowsayings/tests/cowsay.pp
 
 In this manifest, *declare* the cowsay class with the `include` keyword.
 
-  include cowsayings::cowsay
+    include cowsayings::cowsay
 	
 Save and exit.
 
@@ -140,18 +140,18 @@ Before applying any changes to your system, it's always a good idea to use the
 catalog and notify you of the changes that Puppet would have made without
 actually applying any of those changes to your system.
 
-  puppet apply --noop tests/cowsay.pp
+    puppet apply --noop tests/cowsay.pp
 
 You should see an output like the following:
 
-  Notice: Compiled catalog for learn.localdomain in environment production in
-  0.62 seconds
-  Notice: /Stage[main]/Cowsayings::Cowsay/Package[cowsay]/ensure: current_value
-  absent, should be present (noop)
-  Notice: Class[Cowsayings::Cowsay]: Would have triggered 'refresh' from 1
-  events
-  Notice: Stage[main]: Would have triggered 'refresh' from 1 events
-  Notice: Finished catalog run in 1.08 seconds
+    Notice: Compiled catalog for learn.localdomain in environment production in
+    0.62 seconds
+    Notice: /Stage[main]/Cowsayings::Cowsay/Package[cowsay]/ensure: current_value
+    absent, should be present (noop)
+    Notice: Class[Cowsayings::Cowsay]: Would have triggered 'refresh' from 1
+    events
+    Notice: Stage[main]: Would have triggered 'refresh' from 1 events
+    Notice: Finished catalog run in 1.08 seconds
 
 {% task 3 %}
 
@@ -159,18 +159,18 @@ If your dry run looks good, go ahead and run `puppet apply` again without the
 `--noop` flag. If everything went according to plan, the cowsay package is now
 installed on the Learning VM. Give it a try!
 
-  cowsay Puppet is awesome!
+    cowsay Puppet is awesome!
 
 Your bovine friend clearly knows what's up.
 
-   ____________________
-  < Puppet is awesome! >
-   --------------------
-          \   ^__^
-           \  (oo)\_______
-              (__)\       )\/\
-                  ||----w |
-                  ||     ||
+     ____________________
+    < Puppet is awesome! >
+     --------------------
+            \   ^__^
+             \  (oo)\_______
+                (__)\       )\/\
+                    ||----w |
+                    ||     ||
 
 ### Fortune
 But this module isn't just about cowsay; it's about cow *sayings*. With the
@@ -180,7 +180,7 @@ fortune package, you can provide your cow with a whole database of wisdom.
 
 Create a new manifest for your fortune class definition:
 
-  vim cowsayings/manifests/fortune.pp
+    vim cowsayings/manifests/fortune.pp
 	
 Write your class definition here:
 
@@ -198,7 +198,7 @@ Again, you'll want to validate your new manifests syntax with the `puppet parser
 validate` command. When everything checks out, you're ready to make your test
 manifest:
 
-  vim cowsayings/tests/fortune.pp
+    vim cowsayings/tests/fortune.pp
 	
 As before, use `include` to declare your `cowsayings::fortune` class. 
 
@@ -210,7 +210,7 @@ looks good, apply again without the flag.
 Now that you have both packages installed, you can use them together. Try piping
 the output of the `fortune` command to `cowsay`:
 
-  fortune | cowsay
+    fortune | cowsay
 	
 So you've installed two packages that can work together to do something more
 interesting than either would do on its own. This is a bit of a silly example,
@@ -237,7 +237,7 @@ main class.
 So to contain your main `cowsayings` class, create an `init.pp` manifest in the
 `cowsayings/manifests` directory:
 
-  vim cowsayings/manifests/init.pp
+    vim cowsayings/manifests/init.pp
 	
 Here, you'll create define the `cowsayings` class. Within it, use the same
 `include` syntax you used in your tests to declare the `cowsayings::cowsay` and
@@ -256,19 +256,19 @@ Save the manifest, and check your syntax with the `puppet parser` tool.
 
 Next, create a test for the `init.pp` manifest in the tests directory.
 
-  vim cowsayings/tests/init.pp
+    vim cowsayings/tests/init.pp
 	
 Here, just declare the `cowsayings` class:
 
-  include cowsayings
+    include cowsayings
 
 At this point, you've already got both packages you want installed on the
 Learning VM. Applying the changes again wouldn't actually do anything. For the
 sake of demonstration, go ahead and use a `puppet apply -e` to delete them so
 you can test the functionality of your new `cowsayings` class:
 
-  puppet apply -e "package { 'fortune-mod': ensure => 'absent', } \
-   package {'cowsay': ensure => 'absent', }"
+    puppet apply -e "package { 'fortune-mod': ensure => 'absent', } \
+     package {'cowsay': ensure => 'absent', }"
 
 {% task 9 %}
 

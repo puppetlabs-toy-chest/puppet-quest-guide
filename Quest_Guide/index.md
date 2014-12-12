@@ -88,7 +88,7 @@ provisioning tools.
 Now that you know what Puppet and Puppet Enterprise are, check and see what
 versions of are running on this Learning VM. Type the following command:
 
-  puppet -V	# That's a capital 'V'
+    puppet -V	# That's a capital 'V'
 
 You will see something like the following:
 
@@ -124,7 +124,7 @@ replace the .bashrc file, instead append your changes.
 {% task 2 %}
 To explore the command options for the quest tool, type the following command:
 
-  quest --help
+    quest --help
 
 The `quest --help` command provides you with a list of all the options for the
 `quest` command. You can invoke the quest command with each of those options,
@@ -139,7 +139,7 @@ such as:
 {% task 3 %}
 Find out how much progress you have made so far:
 
-  quest --progress
+    quest --progress
 
 {% tip %}
 Typing `clear` into your terminal will remove everything on your terminal

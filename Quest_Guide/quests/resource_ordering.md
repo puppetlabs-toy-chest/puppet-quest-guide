@@ -27,7 +27,7 @@ This quest will help you learn more about specifying the order in which Puppet
 should manage resources in a manifest. When you're ready to get started, type
 the following command:
 
-  quest --start ordering
+    quest --start ordering
 
 ## Autorequires and Explicit Ordering
 
@@ -47,7 +47,7 @@ You can see what a resource can autorequire with the `puppet describe` tool.
 
 Take a look at the entry for the `group` resource:
 
-  puppet describe group
+    puppet describe group
 	
 A few paragraphs down, you'll see the following section:
 
@@ -139,7 +139,7 @@ resource relationships.
 
 Before getting started, ensure that you're in the `modules` directory:
 
-  cd /etc/puppetlabs/puppet/modules
+    cd /etc/puppetlabs/puppet/modules
 
 {% task 1 %}
 Create an `sshd` directory and create `tests`, `manifests`, and `files`
@@ -149,7 +149,7 @@ subdirectories.
 We've already prepared an `sshd_config` file to use as a base for your source
 file. Copy it into your module's `files` directory:
 
-  cp /root/examples/sshd_config sshd/files/sshd_config
+    cp /root/examples/sshd_config sshd/files/sshd_config
 
 {% task 3 %}
 
@@ -182,11 +182,11 @@ Disable GSSAPIAuthentication for the SSH service
 Edit the `/root/examples/sshd_config` file.  
 Find the line that reads:
 
-  GSSAPIAuthentication yes
+    GSSAPIAuthentication yes
 
 and edit it to read:
 
-  GSSAPIAuthentication no  
+    GSSAPIAuthentication no  
 
 Save the file and exit the text editor.
 

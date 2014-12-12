@@ -34,7 +34,7 @@ declared.
 
 When you're ready to get started, type the following command to begin:
 
-  quest --start variables
+    quest --start variables
 
 ## Variables
 
@@ -120,22 +120,22 @@ First, you'll need to create the directory structure for your module.
 
 Make sure you're in the `modules` directory for Puppet's modulepath.
 
-  cd /etc/puppetlabs/puppet/modules/
+    cd /etc/puppetlabs/puppet/modules/
 
 Now create an `web` directory:
 
-  mkdir web
+    mkdir web
 	
 ...and your `manifests` and `tests` directories:
 
-  mkdir web/{manifests,tests}
+    mkdir web/{manifests,tests}
 
 {% task 2 %}
 
 Now you're ready to create your main manifest, where you'll define the `web`
 class.
 
-  vim web/manifests/init.pp
+    vim web/manifests/init.pp
 
 {% highlight puppet %}
 class web {
