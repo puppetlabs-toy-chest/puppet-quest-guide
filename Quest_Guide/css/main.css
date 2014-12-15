@@ -64,7 +64,7 @@
 @media all{
     body {
         font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-        font-size: 15px;
+        font-size: 14px;
         color: #5d5e59;
     }
 
@@ -184,18 +184,20 @@
     div.img-wrapper {
       display: block;
       text-align: center;
+      padding-top: 2em;
+      padding-bottom: 2em;
     }
 
     div.img-wrapper p{
         font-style: italic;
         margin-left: 10px;
     }
-    
+/** Figure labels   
     div.img-wrapper p:after{
         counter-increment: image;
         content: ' ' counter(image);
     }
-
+**/
     p{
         text-align: justify;
     }
