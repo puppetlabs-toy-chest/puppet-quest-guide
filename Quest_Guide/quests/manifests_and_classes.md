@@ -89,7 +89,7 @@ We've already created a `cowsayings` module directory in Puppet's *modulepath*,
 and included two subdirectories: `manifests` and `tests`. Before getting started
 writing manifests, change directories to save yourself some typing:
 
-    cd /etc/puppet/puppetlabs/modules
+    cd /etc/puppetlabs/puppet/environments/production/modules
 
 ### Cowsay
 {% task 1 %}
@@ -140,7 +140,7 @@ Before applying any changes to your system, it's always a good idea to use the
 catalog and notify you of the changes that Puppet would have made without
 actually applying any of those changes to your system.
 
-    puppet apply --noop tests/cowsay.pp
+    puppet apply --noop cowsayings/tests/cowsay.pp
 
 You should see an output like the following:
 
@@ -204,8 +204,8 @@ As before, use `include` to declare your `cowsayings::fortune` class.
 
 {% task 6 %}
 
-Apply the `tests/fortune.pp` manifest with the `--noop` flag. If everything
-looks good, apply again without the flag.
+Apply the `cowsayings/tests/fortune.pp` manifest with the `--noop` flag. If 
+everything looks good, apply again without the flag.
 
 Now that you have both packages installed, you can use them together. Try piping
 the output of the `fortune` command to `cowsay`:
