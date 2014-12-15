@@ -87,7 +87,7 @@ if you run into errors, remember that you can simply delete the VM and create
 With the Learning VM selected in the library or manager window, open the
 __Settings__ panel. There are a few things to adjust here.
 
-First, in under **Network** or **Network Adapter**, confirm that the **Network
+First, under **Network** or **Network Adapter**, confirm that the **Network
 Adapter** is enabled, and configure it to use **Bridged** networking.
 
 Next, you'll need to increase the memory allocation and processors to the VM to
@@ -109,7 +109,7 @@ the mouse and keyboard will be displayed at the top right of the VM window.
 ## Next Steps
 
 Once the VM is booted, you may have to hit `enter` to see to the login prompt.
-Log in using the following credentials:  
+Log in using the following credentials:
 
 * username: **root**
 * password: **puppet**
@@ -144,7 +144,7 @@ session.
 
 Use the same credentials:
 
- * username: **root**  
+ * username: **root**
  * password: **puppet**
 
 Now that the Learning VM is configured and you're connected, you're all set to
