@@ -178,7 +178,7 @@ Once you've copied the file, open so you can make an addition.
     vim vimrc/files/vimrc
 
 We'll keep things simple. By default, line numbering is disabled. Add the
-following line to then end of the file to tell Vim to turn on line numbering.
+following line to the end of the file to tell Vim to turn on line numbering.
 
     set number
 	
