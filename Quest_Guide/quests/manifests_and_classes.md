@@ -31,7 +31,7 @@ towards writing testable and reusable Puppet code.
 
 When you're ready to get started, enter the following command to begin:
 
-    quest --start manifests_and_classes
+    quest --start manifests_classes
 
 ### Manifests
 
