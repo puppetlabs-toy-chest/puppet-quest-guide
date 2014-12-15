@@ -36,7 +36,7 @@ class Figure < Liquid::Tag
      @src = text
   end
     def render(context)
-        "<div class = \"img-wrapper\"><img src=#{@src}/><p>Figure</p></div>"
+        "<div class = \"img-wrapper\"><img src=#{@src}/></div>"
     end
 end
 
