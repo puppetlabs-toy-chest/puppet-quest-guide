@@ -38,7 +38,7 @@ machine: NTP.
 
 Security services, shared filesystems, certificate signing, logging systems, and
 many other fundamental services and applications (including Puppet itself!) need
-on accurate and coordinated time to function reliably. Given variable network
+accurate and coordinated time to function reliably. Given variable network
 latency, it takes some clever algorithms and protocols to get this coordination
 right.
 
@@ -111,7 +111,8 @@ Use the puppet module tool to install the Puppet Labs `ntp` module.
     puppet module install puppetlabs-ntp
 	
 This command tells the puppet module tool to fetch the module from the Puppet
-Forge and place it in Puppet's modulepath: `/etc/puppetlabs/puppet/environments/production/modules`.
+Forge and place it in Puppet's modulepath: 
+`/etc/puppetlabs/puppet/environments/production/modules`.
 
 ## Classification with the site.pp Manifest
 
@@ -147,7 +148,7 @@ classifier you saw in the Power of Puppet quest.
 
 Open the site.pp manifest in your text editor.
 
-    vim /etc/puppetlabs/puppet/manifests/site.pp
+    vim /etc/puppetlabs/puppet/environments/production/manifests/site.pp
 	
 Skip to the bottom of the file. (You can use the vim shortcut `G`)
 

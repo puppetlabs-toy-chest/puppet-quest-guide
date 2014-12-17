@@ -29,7 +29,7 @@ terminal or SSH client.
 If you need to, return to the Setup section and review the instructions to get
 caught up. Remember, the credentials to log in to the Learning VM via SSH are:
 
- * username: **root**  
+ * username: **root**
  * password: **puppet**
 
 If you're comfortable in a Unix command-line environment, feel free to take a
@@ -92,9 +92,9 @@ versions of are running on this Learning VM. Type the following command:
 
 You will see something like the following:
 
-_3.4.3 (Puppet Enterprise 3.2.2)_
+_3.7.3 (Puppet Enterprise 3.7.1)_
 
-This indicates that Puppet Version 3.4.3 Puppet Enterprise 3.2.2 are installed.
+This indicates that Puppet Version 3.7.3 Puppet Enterprise 3.7.1 are installed.
 
 ## What is a Quest?
 
@@ -128,7 +128,7 @@ To explore the command options for the quest tool, type the following command:
 
 The `quest --help` command provides you with a list of all the options for the
 `quest` command. You can invoke the quest command with each of those options,
-such as:  
+such as:
 
     quest --progress     # Displays details of tasks completed
     quest --completed    # Displays completed quests
@@ -160,7 +160,7 @@ quickly you'll learn. As far as is reasonable, we've tried to construct quests
 around plausible use cases, and to this end, most quests will introduce several
 related concepts at once.
 
-The first several quests up to and including the Modules quest are your
+The first several quests, up to and including the Modules quest, are your
 foundations. Learning about these things is like tying your shoe laces: no
 matter where you're trying to get to, you're going to get tripped up if you
 don't have a solid understanding of things like *resources*, *classes*,

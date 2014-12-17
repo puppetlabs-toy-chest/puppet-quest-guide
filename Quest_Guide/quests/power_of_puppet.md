@@ -131,7 +131,7 @@ self-signed. Go ahead and click through this notice to continue to the console.
 
 When prompted, use the following credentials to log in:
 
-**Username:** admin  
+**Username:** admin 
 **Password:** learningpuppet
 
 ### Create a node group

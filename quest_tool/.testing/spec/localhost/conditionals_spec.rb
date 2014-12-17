@@ -41,6 +41,6 @@ end
 # Task 6
 describe 'The user dana' do
   it 'should be present and be in the wheel group' do
-    shell("groups dana | grep wheel").exit_code.should be_zero
+    user('dana').should belong_to_group 'wheel'
   end
 end

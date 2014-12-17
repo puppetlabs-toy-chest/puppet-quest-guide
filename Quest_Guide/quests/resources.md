@@ -25,7 +25,7 @@ blocks of Puppet's declarative modeling syntax. You will learn how to inspect
 and modify resources on the Learning VM using Puppet command-line tools. A
 thorough understanding of how the Puppet resource syntax reflects the state of a
 system will be an important foundation as you continue to learn the more complex
-aspects of Puppet and it's DSL.
+aspects of Puppet and its DSL.
 
 When you're ready to get started, type the following command:
 
@@ -267,7 +267,7 @@ expressed by resource declarations and uses *providers* specific to the
 operating system to realize them. These providers abstract away the complexity
 of managing diverse implementations of resource types on different systems. As a
 whole, we call this system of resource types and providers the **Resource
-Abstraction Layer**, or **RAL**.
+Abstraction Layer** or **RAL**.
 
 In the case of users, Puppet can use providers to manage users with LDAP,
 Windows ADSI, AIX, and several other providers depending on a node's system.
@@ -284,7 +284,7 @@ So let's rehash what you learned in this quest. First, we covered two very
 important Puppet topics: the Resource Abstraction Layer and the anatomy of a
 resource. To dive deeper into these topics, we showed you how to use the `puppet
 describe` and `puppet resource` tools, which also leads to a better
-understanding of Puppet's Language We also showed you how you can actually
+understanding of Puppet's Language. We also showed you how you can actually
 change the state of the system by declaring resources with the `puppet apply`
 and `puppet resource` tools. These tools will be useful as you progress through
 the following quests.

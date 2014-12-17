@@ -17,7 +17,7 @@ layout: default
 ## Quest Objectives
 
 - Install and configure a MySQL server.
-- Add a MySQL user, database, and grant.
+- Add a MySQL user, add a database, and grant permissions.
 
 ## Getting Started
 
@@ -109,7 +109,7 @@ conflicts between variables or classes with the same name.
 Take a look at the directories and manifests in the MySQL module. Use the `tree`
 command with a filter to include only `.pp` manifest files:
 
-    tree -P *.pp /etc/puppetlabs/modules/mysql/manifests/
+    tree -P *.pp /etc/puppetlabs/puppet/environments/production/modules/mysql/manifests/ 
 
 You'll see something like the following:
 
@@ -149,7 +149,7 @@ class name, Puppet knows to find the class definition in a manifest called
 
 So `mysql::server` corresponds to:
 
-    /etc/puppetlabs/modules/**mysql**/manifests/**server**.pp
+    /etc/puppetlabs/puppet/environments/production/modules/**mysql**/manifests/**server**.pp
 
 To take an example one level deeper, the `mysql::server::account_security` class
 corresponds to:

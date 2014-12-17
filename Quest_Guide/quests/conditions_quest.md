@@ -23,8 +23,8 @@ layout: default
 
 Conditional statements allow you to write Puppet code that will return different
 values or execute different blocks of code depending on conditions you specify.
-This, in conjunction with Facter, which makes details of a machine available as
-variables, lets you write Puppet code that flexibly accomodates different
+In conjunction with Facter, which makes details of a machine available as 
+variables, this lets you write Puppet code that flexibly accomodates different
 platforms, operating systems, and functional requirements.
 
 To start this quest enter the following command:
