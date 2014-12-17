@@ -42,6 +42,6 @@ end
 # Task 6
 describe "The sshd/manifests/init.pp manifest" do
   it 'should contain a package declaration' do
-    file('/etc/puppetlabs/puppet/environments/production/modules/sshd/tests/init.pp').should contain "package {"
+    file('/etc/puppetlabs/puppet/environments/production/modules/sshd/manifests/init.pp').should contain "package {"
   end
 end

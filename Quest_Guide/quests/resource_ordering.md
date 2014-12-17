@@ -84,7 +84,7 @@ explicitly manage resource ordering.
 One way of telling Puppet what order to use when managing resources is by
 including ordering **metaparameters** in your resource declarations.
 
-Metaparameters are attributes that can be set in any resource to tells Puppet
+Metaparameters are attributes that can be set in any resource to tell Puppet
 *how* to manage that resource. In addition to resource ordering, metaparameters
 can help with things like logging, auditing, and scheduling. For now, however,
 we'll be concentrating only on resource ordering metaparameters.
@@ -169,7 +169,7 @@ class sshd {
 
 This will tell Puppet to ensure that the file `/etc/ssh/sshd_config` exists, and
 that the contents of the file should be sourced from the file
-`/root/examples/sshd_config`. The `source` attribute also allows us to use a
+`sshd/files/sshd_config`. The `source` attribute also allows us to use a
 different URI to specify the file, something we will discuss in the Modules
 quest. For now, we are using a file in `/root/examples` as the content source
 for the SSH daemon's configuration file.
@@ -179,7 +179,7 @@ Now let us disable GSSAPIAuthentication.
 {% task 4 %}
 Disable GSSAPIAuthentication for the SSH service
 
-Edit the `/root/examples/sshd_config` file.  
+Edit the `sshd/files/sshd_config` file.  
 Find the line that reads:
 
     GSSAPIAuthentication yes
