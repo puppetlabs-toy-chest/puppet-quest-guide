@@ -52,7 +52,9 @@ if [ "$1" == "update" ]; then
     trap cleanup EXIT
     echo "Updating content to version: $LATEST from version: $CURRENT"
     ZIPFILE=lvmguide-$LATEST.zip
-    curl -sSz $CACHEDIR/$ZIPFILE $DOWNLOADURL/$ZIPFILE -o $CACHEDIR/$ZIPFILE
+    if [ ! -e $CACHEDIR/$ZIPFILE ]
+    	curl -sSz $CACHEDIR/$ZIPFILE $DOWNLOADURL/$ZIPFILE -o $CACHEDIR/$ZIPFILE
+    fi
     unzip -uqq $CACHEDIR/$ZIPFILE -d $CACHEDIR
 
     # replace content
