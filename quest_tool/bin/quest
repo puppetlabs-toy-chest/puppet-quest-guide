@@ -35,7 +35,7 @@ cleanup() {
 }
 
 if [ "$1" == "update" ]; then
-  if [ ! -e $CACHEDIR ]; then
+  if [ ! -e "$CACHEDIR" ]; then
     mkdir $CACHEDIR
   fi
   LATEST=$(curl -fs $DOWNLOADURL/LATEST)
@@ -52,7 +52,9 @@ if [ "$1" == "update" ]; then
     trap cleanup EXIT
     echo "Updating content to version: $LATEST from version: $CURRENT"
     ZIPFILE=lvmguide-$LATEST.zip
-    curl -sSz $CACHEDIR/$ZIPFILE $DOWNLOADURL/$ZIPFILE -o $CACHEDIR/$ZIPFILE
+    if [ ! -e "$CACHEDIR/$ZIPFILE" ]; then
+    	curl -sSz $CACHEDIR/$ZIPFILE $DOWNLOADURL/$ZIPFILE -o $CACHEDIR/$ZIPFILE
+    fi
     unzip -uqq $CACHEDIR/$ZIPFILE -d $CACHEDIR
 
     # replace content
@@ -71,8 +73,8 @@ fi
 if [ "$1" == "updatecache" ]; then
   shift
   CMDLINE=`echo $* | tr -d ' '`  BUFFER="/tmp/${BASE}${CMDLINE}.out"
-  if [ -e $LOCK ]; then       #- lock exists
-    if [ -s $BUFFER ]; then   #- is not empty - use cached output
+  if [ -e "$LOCK" ]; then       #- lock exists
+    if [ -s "$BUFFER" ]; then   #- is not empty - use cached output
       cat $BUFFER
     fi
     exit                      #- there is a lock and nothing in the buffer
