@@ -53,7 +53,7 @@ classes are available to classify nodes.
 
 {% task 2 %}
 
-Edit `/etc/puppetlabs/puppet/manifests/site.pp` to classify the LVM with the
+Edit `/etc/puppetlabs/puppet/environments/production/manifests/site.pp` to classify the LVM with the
 MySQL server	class. Using class parameters, specify a root password and set the
 server's max connections to '1024.'
 

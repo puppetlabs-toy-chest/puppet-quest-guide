@@ -459,7 +459,7 @@ nodes within an organization.
 The main "point of entry" [manifest](#manifest) used by the puppet master when
 compiling a catalog. The location of this manifest is set with the `manifest`
 setting in puppet.conf. Its default value is usually
-`/etc/puppet/manifests/site.pp` or `/etc/puppetlabs/puppet/manifests/site.pp`.
+`/etc/puppet/manifests/site.pp` or `/etc/puppetlabs/puppet/environments/production/manifests/site.pp`.
 
 The site manifest usually contains [node definitions](#node-definition). When an
 [ENC](#external-node-classifier) is being used, the site manifest may be nearly
