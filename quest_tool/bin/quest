@@ -71,9 +71,9 @@ if [ "$1" == "betaupdate" ]; then
   if [ -e "$LOCALREPO" ]; then
     cd $LOCALREPO
     git pull
-    cp -r /usr/src/courseware-lvm/quest_tool/* /root/
-    cp -r /usr/src/courseware-lvm/quest_tool/.testing /root/
-    cp /usr/src/courseware-lvm/VERSION /root/.testing/VERSION
+    cp --remove-destination -r /usr/src/courseware-lvm/quest_tool/* /root/
+    cp --remove-destination -r /usr/src/courseware-lvm/quest_tool/.testing /root/
+    cp --remove-destination /usr/src/courseware-lvm/VERSION /root/.testing/VERSION
   else
     echo "Unable to update to beta content.  No local content repository found."
   fi
