@@ -76,7 +76,9 @@ if [ "$1" == "betaupdate" ]; then
   else
     echo "Unable to update to beta content.  No local content repository found."
   fi
+  exit
 fi
+
 #- As long as a lock file exists, we use the previous output
 #- The cached output isn't used as long as there is no lock,
 #- meaning the command line completed.
