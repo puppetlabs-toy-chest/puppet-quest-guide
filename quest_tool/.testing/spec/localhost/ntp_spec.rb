@@ -11,7 +11,7 @@ end
 # Task 2
 describe "The site.pp manifest" do
   it 'should include the ntp class in the default node definition' do
-    file('/etc/puppetlabs/puppet/manifests/site.pp').should contain 'ntp'
+    file('/etc/puppetlabs/puppet/environments/production/manifests/site.pp').should contain 'ntp'
   end
 end
 
@@ -25,7 +25,7 @@ end
 # Task 4 
 describe "The site.pp manifest" do
   it "should declare the ntp class with the servers parameter set" do
-    file('/etc/puppetlabs/puppet/manifests/site.pp').content.should match /\s*servers\s*=>\s*\[\'/
+    file('/etc/puppetlabs/puppet/environments/production/manifests/site.pp').content.should match /\s*servers\s*=>\s*\[\'/
   end
 end
 
