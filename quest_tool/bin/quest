@@ -20,6 +20,7 @@ TEST='test.rb'
 DOWNLOADURL='http://downloads.puppetlabs.com/lvmguide/'
 CACHEDIR='/opt/lvmguide'
 WEBROOT='/var/www/html/lvmguide'
+LOCALREPO='/usr/src/courseware-lvm'
 
 vergr() {
   lower=$(echo -e "$1\n$2" | sort -V | head -n1)
@@ -66,6 +67,16 @@ if [ "$1" == "update" ]; then
   exit
 fi
 
+if [ "$1" == "betaupdate" ]; then
+  if [ -e "$LOCALREPO" ]; then
+    cd $LOCALREPO
+    git pull
+    cp -r /usr/src/courseware-lvm/quest_tool/* /root/
+    cp -r /usr/src/courseware-lvm/quest_tool/.testing /root/
+  else if
+    echo "Unable to update to beta content.  No local content repository found."
+  fi
+fi
 #- As long as a lock file exists, we use the previous output
 #- The cached output isn't used as long as there is no lock,
 #- meaning the command line completed.
