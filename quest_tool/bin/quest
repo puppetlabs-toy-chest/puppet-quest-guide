@@ -73,7 +73,7 @@ if [ "$1" == "betaupdate" ]; then
     git pull
     cp -r /usr/src/courseware-lvm/quest_tool/* /root/
     cp -r /usr/src/courseware-lvm/quest_tool/.testing /root/
-  else if
+  else
     echo "Unable to update to beta content.  No local content repository found."
   fi
 fi
