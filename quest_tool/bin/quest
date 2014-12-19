@@ -20,6 +20,7 @@ TEST='test.rb'
 DOWNLOADURL='http://downloads.puppetlabs.com/lvmguide/'
 CACHEDIR='/opt/lvmguide'
 WEBROOT='/var/www/html/lvmguide'
+LOCALREPO='/usr/src/courseware-lvm'
 
 vergr() {
   lower=$(echo -e "$1\n$2" | sort -V | head -n1)
@@ -62,6 +63,19 @@ if [ "$1" == "update" ]; then
     rsync -ab --backup-dir=.backup_$CURRENT $CACHEDIR/quest_tool/ /root/
   else
     echo "Current version: $CURRENT. Latest: $LATEST. No update required."
+  fi
+  exit
+fi
+
+if [ "$1" == "betaupdate" ]; then
+  if [ -e "$LOCALREPO" ]; then
+    cd $LOCALREPO
+    git pull
+    rsync -ab --backup-dir=/root/.backup $LOCALREPO/quest_tool/* /root/
+    rsync -ab --backup-dir=/root/.backup $LOCALREPO/quest_tool/.testing /root/
+    rsync -ab --backup-dir=/root/.backup $LOCALREPO/VERSION /root/.testing/VERSION
+  else
+    echo "Unable to update to beta content.  No local content repository found."
   fi
   exit
 fi
