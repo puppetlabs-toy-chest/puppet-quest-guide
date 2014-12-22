@@ -59,7 +59,7 @@ A few paragraphs down, you'll see the following section:
 [type reference](https://docs.puppetlabs.com/references/latest/type.html)
 section of Puppets docs site.)
 
-When you declared `user`, `file`, resources in your `accounts` module, the
+When you declared `user` and `file` resources in your `accounts` module, the
 autorequires of these resources ensured that everything went smoothly. 
 
 Sometimes, however, you will need to tell Puppet explicitly that a resource
@@ -95,10 +95,10 @@ resource declaration to order relationships among resources.
 * `before` causes a resource to be applied **before** a specified resource.
 * `require` causes a resource to be applied **after** a specified resource.
 * `notify` causes a resource to be applied **before** the specified resource,
-* just as with `before`. Additionally, notify will generate a refresh event for
-* the specified resource when the notifying resource changes. 
+just as with `before`. Additionally, notify will generate a refresh event for
+the specified resource when the notifying resource changes.
 * `subscribe` causes a resource to be applied **after** the specified resource.
-* The subscribing resource will be refreshed if the target resource changes.
+The subscribing resource will be refreshed if the target resource changes.
 
 The **value** of the relationship metaparameter is the title or titles (in an
 array) of one or more target resources.
@@ -170,7 +170,7 @@ class sshd {
 This will tell Puppet to ensure that the file `/etc/ssh/sshd_config` exists, and
 that the contents of the file should be sourced from the file
 `sshd/files/sshd_config`. The `source` attribute also allows us to use a
-different URI to specify the file, something we will discuss in the Modules
+different URI to specify the file, something we discussed in the Modules
 quest. For now, we are using a file in `/root/examples` as the content source
 for the SSH daemon's configuration file.
 
@@ -251,7 +251,7 @@ It’s hard to overstate the importance of this pattern! If you only stopped her
 and learned this, you could still get a lot of work done using Puppet.
 
 To stay consistent with the package/file/service idiom, let's dive back into the
-sshd.pp file and add the `openssh-server` package to it.
+sshd init.pp file and add the `openssh-server` package to it.
 
 {% task 6 %}
 Manage the package for the SSH server

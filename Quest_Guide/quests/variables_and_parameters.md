@@ -29,8 +29,8 @@ you'll see how to include parameters in your own classes.
 
 To explore these two concepts, you'll be writing a module to manage a user
 account. First, you'll write a simple class using a few variables, then you'll
-add parameters your class so that those variables can be set when the class is
-declared.
+add parameters to your class so that those variables can be set when the class
+is declared.
 
 When you're ready to get started, type the following command to begin:
 
