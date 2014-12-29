@@ -131,8 +131,9 @@ self-signed. Go ahead and click through this notice to continue to the console.
 
 When prompted, use the following credentials to log in:
 
-**Username:** admin 
-**Password:** learningpuppet
+  * username: **admin** 
+  
+  * password: **learningpuppet**
 
 ### Create a node group
 
@@ -158,7 +159,7 @@ in this group, so create a rule that will match on the name `learning.puppetlabs
 
 {% figure '../assets/rule.png' %}
 
-Click *Add rule*, then click the *Commit* button in the bottom right of the console
+Click *Add rule*, then click the *Commit 1 change* button in the bottom right of the console
 interface to commit your change.
 
 {% figure '../assets/commit.png' %}
@@ -167,7 +168,7 @@ interface to commit your change.
 
 Now that the `lvmguide` class is available, you can use it to classify the node
 `learning.puppetlabs.vm`. Under the *Classes* tab, enter `lvmguide` in the text
-box, then click the *Add class* and *Commit* buttons to confirm your changes.
+box, then click the *Add class* and *Commit 1 change* buttons to confirm your changes.
 
 ### Run puppet
 
@@ -196,7 +197,7 @@ takes for the software packages to be downloaded and installed as needed. After
 a brief delay, you will see text scroll by in your terminal indicating that
 Puppet has made all the specified changes to the Learning VM.
 
-Check out the Quest Guide website! In your browsers address bar, type the following URL:
+Check out the Quest Guide website! In your browser's address bar, type the following URL:
 `http://<IPADDRESS>`. (Though the IP address is the same, using `https` will
 load the PE console, while `http` will load the Quest Guide as a website.)
 
