@@ -130,7 +130,7 @@ definitions* (sometimes called `node statements`). A node definition is a block
 of Puppet code that specifies a set one or more nodes and declares the classes
 that Puppet will enforce on that set.
 
-In a sense, this node definition is a bit like the tet manifests you've been
+In a sense, this node definition is a bit like the test manifests you've been
 using so far. While classes are generally defined in separate manifests, the
 node definition, like a test manifest, is a place where you actually declare
 them. Of course tests are just that, tests, while the node definitions in your
