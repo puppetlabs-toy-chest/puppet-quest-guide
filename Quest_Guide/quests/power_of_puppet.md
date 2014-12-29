@@ -314,7 +314,8 @@ Puppet to manage a portion of it, and our `quest` tool to manage the rest.
 It may seem like there's a lot going on here, but by the time you get through
 this quest guide, a quick read-through will be enough to get the gist of
 well-written Puppet code. One advantage of a declarative language like Puppet is
-that the code tends to be much more self-documenting.
+that the code tends to be much more self-documenting than code written in an
+imperative language.
 
 ### Repeatable, portable, testable
 
