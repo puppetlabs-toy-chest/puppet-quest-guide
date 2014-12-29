@@ -149,12 +149,12 @@ class name, Puppet knows to find the class definition in a manifest called
 
 So `mysql::server` corresponds to:
 
-    /etc/puppetlabs/puppet/environments/production/modules/**mysql**/manifests/**server**.pp
+    /etc/puppetlabs/puppet/environments/production/modules/mysql/manifests/server.pp
 
 To take an example one level deeper, the `mysql::server::account_security` class
 corresponds to:
 
-    /etc/puppetlabs/modules/**mysql**/manifests/**server**/**account_security**.pp
+    /etc/puppetlabs/modules/mysql/manifests/server/account_security.pp
 
 We won't be calling the `mysql` class directly in this quest, but it's worth
 reiterating the special case of a module's self-named class. This will always be
@@ -163,7 +163,7 @@ directory.
 
 So the `mysql` class is found here:
 
-    /etc/puppetlabs/modules/**mysql**/manifests/init.pp
+    /etc/puppetlabs/modules/mysql/manifests/init.pp
 
 ## Account Security
 
