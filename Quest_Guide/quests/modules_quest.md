@@ -81,8 +81,16 @@ argument:
     puppet agent --configprint modulepath
 
 This will tell you that Puppet looks in the directories
-`/etc/puppetlabs/puppet/environments/production/modules` and then in `/opt/puppet/share/puppet/modules`
-to find available modules.
+`/etc/puppetlabs/puppet/environments/production/modules`,
+`/etc/puppetlabs/puppet/modules`, and then in
+`/opt/puppet/share/puppet/modules` to find available modules.
+
+Throughout the quests in the Learning VM, you will work in the
+`/etc/puppetlabs/puppet/environments/production/modules` directory. This
+is where you keep modules for your production environment. (Site specific
+modules you need to be available for all environments are kept in
+`/etc/puppetlabs/puppet/modules`, and modules required by Puppet Enterprise
+itself are kept in the `/opt/puppet/share/puppet/modules` directory.)
 
 ## Module Structure
 Now that you have an idea of why modules are useful and where they're kept, it's
@@ -91,7 +99,7 @@ time to delve a little deeper into the anatomy of a module.
 A module consists of a pre-defined structure of directories that help Puppet
 reliably locate the module's contents.
 
-Use the `ls` command to see what's in the modulepath:
+Use the `ls` command to see what modules are already installed:
 
     ls /etc/puppetlabs/puppet/environments/production/modules
 	
