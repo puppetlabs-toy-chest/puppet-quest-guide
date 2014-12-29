@@ -27,6 +27,7 @@ end
 # Task 4 
 describe "The mysql::server::account_security class" do
   it "should be applied" do
+    file('/usr/bin/mysql').should be_file
     command("mysql -e 'show databases;'|grep test").exit_status.should_not be_zero
   end
 end

@@ -117,7 +117,7 @@ Log in using the following credentials:
 All you'll want to do for now is get the Learning VM's IP address. Use the
 Facter tool bundled with Puppet Enterprise tool to find it.
 		
-  facter ipaddress
+    facter ipaddress
 
 Make a note of the IP address displayed. You'll need it to open an SSH
 connection to the Learning VM and in order to access to the PE Console later.
