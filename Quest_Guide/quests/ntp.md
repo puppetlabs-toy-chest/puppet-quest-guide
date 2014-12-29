@@ -60,8 +60,8 @@ keep track of what Puppet changes and understand why the NTP module does what it
 does.
 
 To get the NTP service running, there are three key resources that Puppet will
-manage. The puppet resource resource tool can show you the current state of each
-of these resources.
+manage. The puppet resource tool can show you the current state of each of
+these resources.
 
 First, check the state of the NTP *package*:
 
@@ -106,12 +106,12 @@ can lead to conflicts!
 
 {% task 1 %}
 
-Use the puppet module tool to install the Puppet Labs `ntp` module. 
+Use the puppet module tool to install the Puppet Labs `ntp` module.
 
     puppet module install puppetlabs-ntp
 	
 This command tells the puppet module tool to fetch the module from the Puppet
-Forge and place it in Puppet's modulepath: 
+Forge and place it in Puppet's modulepath:
 `/etc/puppetlabs/puppet/environments/production/modules`.
 
 ## Classification with the site.pp Manifest
@@ -121,7 +121,7 @@ use in node classification.
 
 In the Power of Puppet quest, you learned how to classify a node with the PE
 Console. In this quest, we introduce another method of node classification: the
-`site.pp` manifest. 
+`site.pp` manifest.
 
 `site.pp` is the first manifest the Puppet agent checks when it connects to the
 master. It defines global settings and resource defaults that will apply to all

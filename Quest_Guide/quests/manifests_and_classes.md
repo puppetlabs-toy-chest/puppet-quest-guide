@@ -239,7 +239,7 @@ So to contain your main `cowsayings` class, create an `init.pp` manifest in the
 
     vim cowsayings/manifests/init.pp
 	
-Here, you'll create define the `cowsayings` class. Within it, use the same
+Here, you'll define the `cowsayings` class. Within it, use the same
 `include` syntax you used in your tests to declare the `cowsayings::cowsay` and
 `cowsayings::fortune` classes.
 
@@ -290,7 +290,7 @@ extension. In this quest, we used manifests in the `./manifests` directory each
 to define a single class, and used a corresponding test manifest in the
 `./tests` directory to declare each of those classes.
 
-There are also few details about classes and manifests we haven't gotten to just
-yet. As we mentioned in the Power of Puppet, quest, for example, classes can
-also be declared with *parameters* to customize their functionality. Don't
+There are also a few details about classes and manifests we haven't gotten to
+just yet. As we mentioned in the Power of Puppet quest, for example, classes
+can also be declared with *parameters* to customize their functionality. Don't
 worry, we'll get there soon enough!

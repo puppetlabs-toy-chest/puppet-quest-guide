@@ -50,7 +50,7 @@ application-related implementation details, it starts making less sense to rely
 on Puppet to make decisions automatically, and much more sense for a module
 developer or user to make his or her own choices. 
 
-It's sensible, for example, for Puppet's `package` providers take care of
+It's sensible, for example, for Puppet's `package` providers to take care of
 installing and maintaining packages. The inputs and outputs are standardized and
 stable enough that what happens in between, as long as it happens reliably, can
 be safely hidden by abstraction; once it's done, the details are no longer
@@ -74,7 +74,7 @@ statements** are the bread and butter of this functionality.
 
 > -Mark Twain
 
-You already encountered the *facter* tool in the when we asked you to run
+You already encountered the *facter* tool when we asked you to run
 `facter ipaddress` in the setup section of this quest guide. While it's nice the
 be able to run facter from the command line, its real utility is to make
 information about a system available to use as variables in your manifests.

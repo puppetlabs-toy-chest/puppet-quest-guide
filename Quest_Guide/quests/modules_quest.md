@@ -30,7 +30,7 @@ how to create your own.
 
 When you're ready, type the following command:
 
-  quest --start modules
+    quest --start modules
 
 ## Why Meddle with Modules?
 
@@ -53,8 +53,8 @@ solutions from a few well-written modules. And because these modules are
 separate and self-contained, they're much easier to test, maintain, and share
 than a collection of one-off solutions.
 
-Though there are some technical aspects to how Puppet treats modules, at root
-they're little more than a conventional directory structure and some naming
+Though there are some technical aspects to how Puppet treats modules, at their
+root they're little more than a conventional directory structure and some naming
 standards. The module file structure gives Puppet a consistent way to locate
 whatever classes, files, templates, plugins, and binaries are required to
 fulfill the function of the module.
@@ -245,9 +245,9 @@ module's `files` directory, this directory is implicit and is left out of the
 URI.
 
 So while the full path to the vimrc source file is
-`/etc/puppetlabs/puppet/environments/production/modules/vimrc/files/vimrc`, Puppet's URI abstraction
-shortens it to `/modules/vimrc/vimrc`. Combined with the implicit hostname,
-then, the attribute value pair for the source URI is:
+`/etc/puppetlabs/puppet/environments/production/modules/vimrc/files/vimrc`,
+Puppet's URI abstraction shortens it to `/modules/vimrc/vimrc`. Combined with
+the implicit hostname, then, the attribute value pair for the source URI is:
 
     source => 'puppet:///modules/vimrc/vimrc',
 
