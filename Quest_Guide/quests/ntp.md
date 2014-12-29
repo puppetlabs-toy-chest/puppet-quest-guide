@@ -168,10 +168,18 @@ node default {
 
 {% task 3 %}
 
-Test the `site.pp` manifest with the `puppet parser validate` command, and run
-`puppet agent -t` to trigger a Puppet run.
+Note that triggering a puppet run with the `puppet agent` tool is useful for
+learning and testing, but that in a production environment you would want to
+let the puppet agent run as scheduled, every 30 minutes, by default. Because
+you'll be running puppet right after making changes to the `site.pp` manifest
+puppet may not have a chance to refresh its cache. If your changes to the
+`site.pp` manifest aren't reflected in a puppet run triggered by the
+`puppet agent -t` command, try running the command again.
 
-Once the Puppet run is complete, use the puppet resource tool to inspect the
+Test the `site.pp` manifest with the `puppet parser validate` command, and run
+`puppet agent -t` to trigger a puppet run.
+
+Once the puppet run is complete, use the puppet resource tool to inspect the
 `ntpd` service again. If the class has been successfully applied, you will see
 that the service is running.
 
