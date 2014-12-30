@@ -49,12 +49,15 @@ if [ "$1" == "update" ]; then
   else
     CURRENT="0"
   fi
-  if [ ! -z "$LATEST" ] && vercmp $LATEST $CURRENT ; then
+  if [ ! -z "$LATEST" ] && vercmp $LATEST $CURRENT || vergr $CURRENT $LATEST ; then
     trap cleanup EXIT
-    echo "Updating content to version: $LATEST from version: $CURRENT"
-    ZIPFILE=lvmguide-$LATEST.zip
-    if [ ! -e "$CACHEDIR/$ZIPFILE" ]; then
-    	curl -sSz $CACHEDIR/$ZIPFILE $DOWNLOADURL/$ZIPFILE -o $CACHEDIR/$ZIPFILE
+    if vercmp $LATEST $CURRENT ; then
+      echo "Updating content to version: $LATEST from version: $CURRENT"
+      ZIPFILE=lvmguide-$LATEST.zip
+      curl -sSz $CACHEDIR/$ZIPFILE $DOWNLOADURL/$ZIPFILE -o $CACHEDIR/$ZIPFILE
+    else #If the local copy is newer, don't download
+      echo "Updating content to version: $CURRENT"
+      ZIPFILE=lvmguide-$CURRENT.zip
     fi
     unzip -uqq $CACHEDIR/$ZIPFILE -d $CACHEDIR
 
