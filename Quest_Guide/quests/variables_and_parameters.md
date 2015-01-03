@@ -150,7 +150,7 @@ class web {
     content => "<em>${english}</em>",
   }
   
-  file { "${doc_root}/bonjour.html"}
+  file { "${doc_root}/bonjour.html":
     ensure => 'present',
     content => "<em>${french}</em>",
   }
