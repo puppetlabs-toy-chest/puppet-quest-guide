@@ -337,7 +337,7 @@ you're applying it.
 You used an `if` statement in conjunction with the `$::osfamily` variable from
 facter to determine how to set the group for an administrator user account.
 
-We also covered a few other forms of conditional statement: 'unless', the case
+We also covered a few other forms of conditional statement: `unless`, the case
 statement, and the selector. Though there aren't any hard-and-fast rules for
 which conditional statement is best in a given situation, there will generally
 be one that results in the most concise and readible code. It's up to you to
