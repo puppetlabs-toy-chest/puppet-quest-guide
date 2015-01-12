@@ -90,10 +90,10 @@ curly braces (`${var_name}`). For example, you might use it in the title of a
 few *file* resource declarations:
 
 {% highlight puppet %}
-file { "${doc_root}index.html":
+file { "${doc_root}/index.html":
   ...
 }
-file { "${doc_root}about.html":
+file { "${doc_root}/about.html":
   ...
 }
 {% endhighlight %}
