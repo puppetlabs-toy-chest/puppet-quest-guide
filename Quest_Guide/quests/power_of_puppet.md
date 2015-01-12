@@ -167,8 +167,9 @@ interface to commit your change.
 ### Add a class
 
 Now that the `lvmguide` class is available, you can use it to classify the node
-`learning.puppetlabs.vm`. Under the *Classes* tab, enter `lvmguide` in the text
-box, then click the *Add class* and *Commit 1 change* buttons to confirm your changes.
+`learning.puppetlabs.vm`. Under the *Classes* tab in the interface for the 
+Learning VM node group, enter `lvmguide` in the *Class name* text box, then 
+click the *Add class* and *Commit 1 change* buttons to confirm your changes.
 
 ### Run puppet
 
