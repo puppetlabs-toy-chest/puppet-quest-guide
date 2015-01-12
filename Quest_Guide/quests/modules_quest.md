@@ -99,11 +99,8 @@ time to delve a little deeper into the anatomy of a module.
 A module consists of a pre-defined structure of directories that help Puppet
 reliably locate the module's contents.
 
-Use the `ls` command to see what modules are already installed:
-
-    ls /etc/puppetlabs/puppet/environments/production/modules
-	
-You'll probably recognize some familiar names from previous quests.
+Use the the `puppet module list` command to see what modules are already 
+installed. You'll probably recognize some familiar names from previous quests.
 
 To get clear picture of the directory structure of the modules here, you can use
 a couple flags with the `tree` command to limit the output to directories, and
