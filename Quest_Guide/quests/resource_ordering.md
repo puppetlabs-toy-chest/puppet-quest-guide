@@ -45,9 +45,9 @@ resources itself. These implicit resource relationships are called
 
 You can see what a resource can autorequire with the `puppet describe` tool.
 
-Take a look at the entry for the `group` resource:
+Take a look at the entry for the `file` resource:
 
-    puppet describe group
+    puppet describe file
 	
 A few paragraphs down, you'll see the following section:
 
@@ -94,11 +94,12 @@ resource declaration to order relationships among resources.
 
 * `before` causes a resource to be applied **before** a specified resource.
 * `require` causes a resource to be applied **after** a specified resource.
-* `notify` causes a resource to be applied **before** the specified resource,
-just as with `before`. Additionally, notify will generate a refresh event for
-the specified resource when the notifying resource changes.
-* `subscribe` causes a resource to be applied **after** the specified resource.
-The subscribing resource will be refreshed if the target resource changes.
+* `notify` causes a resource to be applied **before** the specified resource, 
+  just as with `before`. Additionally, notify will generate a refresh event for 
+  the specified resource when the notifying resource changes.
+* `subscribe` causes a resource to be applied **after** the specified resource,
+  just as with `after`. The subscribing resource will be refreshed if the 
+  target resource changes.
 
 The **value** of the relationship metaparameter is the title or titles (in an
 array) of one or more target resources.
