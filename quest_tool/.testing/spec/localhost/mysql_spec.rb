@@ -11,7 +11,7 @@ end
 # Task 2
 describe "The site.pp manifest" do
   it 'should declare the mysql class' do
-    file('/etc/puppetlabs/puppet/environments/production/manifests/site.pp').should contain "class { '::mysql::server':"
+    file('/etc/puppetlabs/puppet/environments/production/manifests/site.pp').content.should match /class\s*{\s*'(::)?mysql::server':/
     file('/etc/puppetlabs/puppet/environments/production/manifests/site.pp').content.should match /\s*root_password\s+=>\s+/
     file('/etc/puppetlabs/puppet/environments/production/manifests/site.pp').content.should match /\s*override_options\s+=>\s+/
   end
