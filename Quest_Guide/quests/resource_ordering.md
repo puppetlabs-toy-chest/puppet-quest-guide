@@ -97,8 +97,9 @@ resource declaration to order relationships among resources.
 * `notify` causes a resource to be applied **before** the specified resource, 
   just as with `before`. Additionally, notify will generate a refresh event for 
   the specified resource when the notifying resource changes.
-* `subscribe` causes a resource to be applied **after** the specified resource. 
-  The subscribing resource will be refreshed if the target resource changes.
+* `subscribe` causes a resource to be applied **after** the specified resource,
+  just as with `after`. The subscribing resource will be refreshed if the 
+  target resource changes.
 
 The **value** of the relationship metaparameter is the title or titles (in an
 array) of one or more target resources.
