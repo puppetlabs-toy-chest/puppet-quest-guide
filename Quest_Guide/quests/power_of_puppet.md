@@ -69,7 +69,7 @@ following command to install the module:
 If you don't have internet access, run the following terminal commands to use
 cached versions of all the modules used in the quests:
 
-    cd /usr/source/forge/
+    cd /usr/src/forge/
     for m in `ls`; do puppet module install $m --ignore-dependencies ; done
 
 {% endaside %}
