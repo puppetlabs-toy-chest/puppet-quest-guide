@@ -66,11 +66,12 @@ following command to install the module:
     puppet module install puppetlabs-apache
 	
 {% aside Offline? %}
-If you don't have internet access, run the following terminal commands to used a
-cached version of the module:
+If you don't have internet access, run the following terminal commands to use
+cached versions of all the modules used in the quests:
 
-    puppet module install /usr/src/forge/puppetlabs-apache-*.tar.gz
-    --ignore-dependencies  
+    cd /usr/source/forge/
+    for m in `ls`; do puppet module install $m --ignore-dependencies ; done
+
 {% endaside %}
 
 This command tells Puppet to download the Puppet Labs `apache` module from the
