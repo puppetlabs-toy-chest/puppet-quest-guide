@@ -196,7 +196,7 @@ including a list of its parameters.
     puppet describe user | less
 	
 (You can use the `jk` key mapping or the arrow keys to scroll, and `q` to exit
-less.)
+*less*.)
 	
 No need to read all the way through, but take a minute to skim the *describe*
 page for the *user* type. Notice the documentation for some of the attributes

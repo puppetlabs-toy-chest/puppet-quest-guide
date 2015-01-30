@@ -323,7 +323,7 @@ imperative language.
 
 It's cool to install and configure an Apache httpd web server with a few lines
 of code and some clicks in the console, but keep in mind that the best part
-can't be shown with the Learning VM: once the `lvmguide` module is installed,
+can't be shown with the Learning VM. Once the `lvmguide` module is installed,
 you can apply the `lvmguide` class to as many nodes as you like, even if they
 have different specifications or run different operating systems.
 
@@ -343,7 +343,7 @@ website configured, please run the following command:
 This will download an updated PDF, files for the quest guide website, as well as
 the tests for the quests.
 
-You can find a copy of the update Quest Guide PDF at:
+You can find a copy of the updated Quest Guide PDF at:
 `http://<IPADDRESS>/Quest_Guide.pdf`, or in the
 `/var/www/html/lvmguide/` directory on the VM.
 

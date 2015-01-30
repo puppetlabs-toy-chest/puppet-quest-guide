@@ -171,7 +171,7 @@ node default {
 Note that triggering a puppet run with the `puppet agent` tool is useful for
 learning and testing, but that in a production environment you would want to
 let the puppet agent run as scheduled, every 30 minutes, by default. Because
-you'll be running puppet right after making changes to the `site.pp` manifest
+you'll be running puppet right after making changes to the `site.pp` manifest,
 puppet may not have a chance to refresh its cache. If your changes to the
 `site.pp` manifest aren't reflected in a puppet run triggered by the
 `puppet agent -t` command, try running the command again.

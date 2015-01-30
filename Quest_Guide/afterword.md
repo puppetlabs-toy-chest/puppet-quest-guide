@@ -8,8 +8,8 @@ layout: default
 Thank you for embarking on the journey to learn Puppet. We hope that the
 Learning VM and the Quest Guide helped you get started on this journey. 
 
-We had a lot of fun writing the guide, and hope it was fun to read and use as
-well. This is just the beginning for us, too. We want to make Learning VM the
+We had a lot of fun writing this guide, and hope it was fun to read and use as
+well. This is just the beginning for us, too. We want to make the Learning VM the
 best possible first step in a beginner's journey to learning Puppet. With time,
 we will add more quests covering more concepts. 
 
