@@ -343,7 +343,7 @@ website configured, please run the following command:
 This will download an updated PDF, files for the quest guide website, as well as
 the tests for the quests.
 
-You can find a copy of the update Quest Guide PDF at:
+You can find a copy of the updated Quest Guide PDF at:
 `http://<IPADDRESS>/Quest_Guide.pdf`, or in the
 `/var/www/html/lvmguide/` directory on the VM.
 
