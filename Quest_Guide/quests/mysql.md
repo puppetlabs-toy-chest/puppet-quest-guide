@@ -36,7 +36,7 @@ build on Puppet's foundation to simplify a complex configuration task without
 sacrificing robustness and control.
 
 The module lets you install and configure both server and client MySQL
-instances, and extends Puppet's starndard resource types to let you manage MySQL
+instances, and extends Puppet's standard resource types to let you manage MySQL
 *users*, *grants*, and *databases* with Puppet's standard resource syntax.
 
 ## Server Install
