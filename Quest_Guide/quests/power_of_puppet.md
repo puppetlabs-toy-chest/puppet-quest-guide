@@ -323,7 +323,7 @@ imperative language.
 
 It's cool to install and configure an Apache httpd web server with a few lines
 of code and some clicks in the console, but keep in mind that the best part
-can't be shown with the Learning VM: once the `lvmguide` module is installed,
+can't be shown with the Learning VM. Once the `lvmguide` module is installed,
 you can apply the `lvmguide` class to as many nodes as you like, even if they
 have different specifications or run different operating systems.
 
