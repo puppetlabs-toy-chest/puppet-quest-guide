@@ -86,7 +86,7 @@ provisioning tools.
 
 {% task 1 %}
 Now that you know what Puppet and Puppet Enterprise are, check and see what
-versions of are running on this Learning VM. Type the following command:
+versions of Puppet are running on this Learning VM. Type the following command:
 
     puppet -V	# That's a capital 'V'
 
