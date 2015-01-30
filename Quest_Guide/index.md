@@ -62,7 +62,7 @@ you're looking for without pounding out the code yourself.
 
 Why not just run a few shell commands or write a script? If you're comfortable
 with shell scripting and concerned with a few changes on a few machines, this
-may indeed be simpler. The appeal of Puppet is that allows you to describe all
+may indeed be simpler. The appeal of Puppet is that it allows you to describe all
 the details of a configuration in a way that abstracts away from operating
 system specifics, then manage those configurations on as many machines as you
 like. It lets you control your whole infrastructure (think hundreds or thousands
