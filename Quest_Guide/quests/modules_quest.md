@@ -190,6 +190,7 @@ Puppet's built-in fileserver.
     cp ~/.vimrc vimrc/files/vimrc
 	
 {% task 5 %}
+---
 - execute: vim /etc/puppetlabs/puppet/environments/production/modules/vimrc/files/vimrc
   input:
     - G
@@ -212,6 +213,7 @@ following line to the end of the file to tell Vim to turn on line numbering.
 Save and exit.
 
 {% task 6 %}
+---
 - file: /etc/puppetlabs/puppet/environments/production/modules/vimrc/manifests/init.pp
   content: |
     class vimrc {
@@ -299,6 +301,7 @@ Remember, this manifest *defines* the `vimrc` class, but you'll need to
 class is, but you haven't told Puppet to actually do anything with it.
 
 {% task 7 %}
+---
 - file: /etc/puppetlabs/puppet/environments/production/modules/vimrc/tests/init.pp
   content: include vimrc
 {% endtask %}
