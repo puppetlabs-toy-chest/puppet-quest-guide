@@ -53,6 +53,9 @@ of PE Supported Modules, which Puppet Labs has rigorously tested and is
 committed to supporting and maintaining through their lifecycle.
 
 {% task 1 %}
+---
+- execute: puppet module install puppetlabs-apache
+{% endtask %}
 
 To get started setting up the Quest Guide website, you'll need to download and
 install Puppet Labs' `apache` module from the Forge. (If you're offline or behind
@@ -112,6 +115,9 @@ there are a few different ways to classify nodes, we'll be using the PE
 console's node classifier for this quest.
 
 {% task 2 %}
+---
+- execute: facter ipaddress
+{% endtask %}
 
 To access the PE console you'll need the Learning VM's IP address. Remember, you
 can use the `facter` tool packaged with PE.
@@ -187,6 +193,11 @@ necessary to bring the node into the line with the state described by the
 catalog.
 
 {% task 3 %}
+---
+- execute: |
+    curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -H "Content-Type: application/json" -X POST -d '{"name":"Learning VM", "environment":"production", "parent":"00000000-0000-4000-8000-000000000000", "classes":{"lvmguide" : {} },  "rule":["or", ["=", "name", "learning.puppetlabs.vm"]]}' https://localhost:4433/classifier-api/v1/groups
+- execute: puppet agent --test
+{% endtask %}
 
 Instead of waiting for the puppet agent to make its scheduled run, use the
 `puppet agent` tool to trigger one yourself. In the terminal, type the

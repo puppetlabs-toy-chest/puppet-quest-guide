@@ -74,6 +74,10 @@ specified by the *modulepath* variable in Puppet's configuration file. On the
 Learning VM, this configuration file is `/etc/puppetlabs/puppet/puppet.conf`.
 
 {% task 1 %}
+---
+- execute: puppet agent --configprint modulepath
+{% endtask %}
+
 You can find the modulepath on any system with Puppet installed by running the
 `puppet agent` command with the `--configprint` flag and the `modulepath`
 argument:
@@ -143,6 +147,9 @@ Change your working directory to the modulepath if you're not already there.
     cd /etc/puppetlabs/puppet/environments/production/modules
 
 {% task 2 %}
+---
+- execute: mkdir /etc/puppetlabs/puppet/environments/production/modules/vimrc
+{% endtask %}
 
 The top directory will be the name you want for the module. In this case, let's
 call it "vimrc." Use the `mkdir` command to create your module directory:
@@ -150,6 +157,9 @@ call it "vimrc." Use the `mkdir` command to create your module directory:
     mkdir vimrc
 
 {% task 3 %}
+---
+- execute: mkdir /etc/puppetlabs/puppet/environments/production/modules/vimrc/{manifests,tests,files}
+{% endtask %}
 
 Now you need three more directories, one for manifests, one for tests, and one
 for files.
@@ -167,6 +177,9 @@ should now see a structure like this:
     3 directories, 0 files
 
 {% task 4 %}
+---
+- execute: cp /root/.vimrc /etc/puppetlabs/puppet/environments/production/modules/vimrc/files/vimrc
+{% endtask %}
 
 We've already set up the Learning VM with some custom settings for Vim. Instead
 of starting from scratch, copy the existing `.vimrc` file into the `files`
@@ -177,6 +190,16 @@ Puppet's built-in fileserver.
     cp ~/.vimrc vimrc/files/vimrc
 	
 {% task 5 %}
+---
+- execute: vim /etc/puppetlabs/puppet/environments/production/modules/vimrc/files/vimrc
+  input:
+    - G
+    - O
+    - set number
+    - "\e"
+    - ":"
+    - "wq\r"
+{% endtask %}
 	
 Once you've copied the file, open so you can make an addition.
 
@@ -190,6 +213,16 @@ following line to the end of the file to tell Vim to turn on line numbering.
 Save and exit.
 
 {% task 6 %}
+---
+- file: /etc/puppetlabs/puppet/environments/production/modules/vimrc/manifests/init.pp
+  content: |
+    class vimrc {
+      file { '/root/.vimrc':
+        ensure => 'present',
+        source => 'puppet:///modules/vimrc/vimrc',
+      }
+    } 
+{% endtask %}
 
 Now that your source file is ready, you need to write a manifest to tell puppet
 what to do with it.
@@ -268,6 +301,10 @@ Remember, this manifest *defines* the `vimrc` class, but you'll need to
 class is, but you haven't told Puppet to actually do anything with it.
 
 {% task 7 %}
+---
+- file: /etc/puppetlabs/puppet/environments/production/modules/vimrc/tests/init.pp
+  content: include vimrc
+{% endtask %}
 
 To test the `vimrc` class, create a manifest called `init.pp`  in the
 `vimrc/tests` directory.
@@ -281,6 +318,9 @@ include vimrc
 {% endhighlight %}
 
 {% task 8 %}
+---
+- execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/vimrc/tests/init.pp
+{% endtask %}
 
 Apply the new manifest with the `--noop` flag. If everything looks good, drop
 the `--noop` and apply it for real.

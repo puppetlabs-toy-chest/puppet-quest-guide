@@ -63,8 +63,10 @@ describe "The cowsayings/tests/init.pp" do
 end
 
 # Task 9
-describe "The cowsayings/test/init.pp test manifest" do
+describe "The cowsayings/tests/init.pp test manifest" do
   it "should be applied" do
-    file('/root/.bash_history').should contain 'puppet apply cowsayings/tests/init.pp'
+    file('/etc/puppetlabs/puppet/environments/production/modules/cowsayings/tests/init.pp').should be_file
+    file('/usr/bin/cowsay').should be_file
+    file('/usr/bin/fortune').should be_file
   end
 end

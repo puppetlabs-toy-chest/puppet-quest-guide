@@ -143,16 +143,38 @@ Before getting started, ensure that you're in the `modules` directory:
     cd /etc/puppetlabs/puppet/environments/production/modules
 
 {% task 1 %}
+---
+- execute: mkdir -p /etc/puppetlabs/puppet/environments/production/modules/sshd/{tests,manifests,files}
+{% endtask %}
+
 Create an `sshd` directory and create `tests`, `manifests`, and `files`
 subdirectories.
 
 {% task 2 %}
+---
+- execute: cp /root/examples/sshd_config /etc/puppetlabs/puppet/environments/production/modules/sshd/files/sshd_config
+{% endtask %}
+
 We've already prepared an `sshd_config` file to use as a base for your source
 file. Copy it into your module's `files` directory:
 
     cp /root/examples/sshd_config sshd/files/sshd_config
 
 {% task 3 %}
+---
+- file: /etc/puppetlabs/puppet/environments/production/modules/sshd/manifests/init.pp
+  content: |
+    class sshd {  
+
+      file { '/etc/ssh/sshd_config':
+        ensure => file,
+        mode => 600,
+        source => 'puppet:///modules/sshd/sshd_config',
+      }
+
+    }
+
+{% endtask %}
 
 Create a `sshd/manifests/init.pp` manifest with the following class definition:
 
@@ -178,6 +200,26 @@ for the SSH daemon's configuration file.
 Now let us disable GSSAPIAuthentication.
 
 {% task 4 %}
+---
+- execute: vim /etc/puppetlabs/puppet/environments/production/modules/sshd/files/sshd_config
+  input:
+    - "/GSSAPIAuthentication yes\r"
+    - ":%s/yes/no/g\r"
+    - ":wq\r"
+- execute: vim /etc/puppetlabs/puppet/environments/production/modules/sshd/manifests/init.pp
+  input: 
+    - "/class sshd {\r"
+    - o
+    - |
+      service { 'sshd':
+        ensure     => running,
+        enable     => true,
+        subscribe  => File['/etc/ssh/sshd_config'],
+      }
+    - "\e"
+    - ":wq\r"
+{% endtask %}
+
 Disable GSSAPIAuthentication for the SSH service
 
 Edit the `sshd/files/sshd_config` file.  
@@ -218,6 +260,11 @@ the type ('File' in this case) is always capitalized when you refer to a
 resource in a manifest.
 
 {% task 5 %}
+---
+- file: /etc/puppetlabs/puppet/environments/production/modules/sshd/tests/init.pp
+  content: include sshd
+- execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/sshd/tests/init.pp
+{% endtask %}
 
 Create a test manifest to include your `sshd` class.
 
@@ -255,6 +302,21 @@ To stay consistent with the package/file/service idiom, let's dive back into the
 sshd init.pp file and add the `openssh-server` package to it.
 
 {% task 6 %}
+---
+- execute: vim /etc/puppetlabs/puppet/environments/production/modules/sshd/manifests/init.pp
+  input:
+    - "/class sshd {\r"
+    - "o"
+    - |
+        package { 'openssh-server':
+          ensure => present,
+          before => File['/etc/ssh/sshd_config'],
+        }
+    - "\e"
+    - ":wq\r"
+- execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/sshd/tests/init.pp
+{% endtask %}
+
 Manage the package for the SSH server
 
 Add the following code above your file resource in your `sshd/manifests/init.pp`
