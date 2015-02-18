@@ -105,6 +105,9 @@ module saved to the modulepath on your Puppet master, however, it will be named
 can lead to conflicts!
 
 {% task 1 %}
+---
+- execute: puppet module install puppetlabs-ntp
+{% endtask %}
 
 Use the puppet module tool to install the Puppet Labs `ntp` module.
 
@@ -145,6 +148,16 @@ methods of classification you decide to use later, including the PE Console node
 classifier you saw in the Power of Puppet quest.
 
 {% task 2 %}
+---
+- execute: vim /etc/puppetlabs/puppet/environments/production/manifests/site.pp
+  input:
+    - "/default {\r"
+    - o
+    - "include ntp"
+    - "\e"
+    - ":"
+    - "wq\r"
+{% endtask %}
 
 Open the site.pp manifest in your text editor.
 
@@ -167,6 +180,9 @@ node default {
 {% endhighlight %}
 
 {% task 3 %}
+---
+- execute: puppet agent -t
+{% endtask %}
 
 Note that triggering a puppet run with the `puppet agent` tool is useful for
 learning and testing, but that in a production environment you would want to
@@ -244,6 +260,19 @@ in brackets (`[]`), is called an *array*. Arrays allow you assign a list of
 values to a single variable or attribute.
 
 {% task 4 %}
+---
+- execute: vim /etc/puppetlabs/puppet/environments/production/manifests/site.pp
+  input:
+    - "/include ntp\r"
+    - dd
+    - i
+    - "  class { 'ntp':\r"
+    - "servers => ['nist-time-server.eoni.com','nist1-lv.ustiming.org','ntp-nist.ldsbc.edu']\r"
+    - "}"
+    - "\e"
+    - ":"
+    - "wq\r"
+{% endtask %}
 
 In your `site.pp`, replace the `include ntp` line with a parameterized class
 declaration based on the example above. Use the servers from the example, or, if
@@ -252,6 +281,9 @@ least *three* timeservers for NTP to function reliably. You might, for instance,
 include two from the ntp.org pool and one known nearby timeserver.
 
 {% task 5 %}
+---
+- execute: puppet apply -t
+{% endtask %}
 
 Once you've made your changes to the `site.pp` manifest and used the puppet
 parser tool to validate your syntax, use the puppet agent tool to trigger a

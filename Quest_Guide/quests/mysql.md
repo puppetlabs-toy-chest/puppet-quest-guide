@@ -42,6 +42,9 @@ instances, and extends Puppet's standard resource types to let you manage MySQL
 ## Server Install
 
 {% task 1 %}
+---
+- execute: puppet module install puppetlabs-mysql
+{% endtask %}
 
 Before getting started configuring your MySQL server installation, fetch the
 `puppetlabs-mysql` module from the Puppet Forge with the `puppet module` tool.
@@ -52,9 +55,21 @@ With this module installed in the Puppet master's module path, all the included
 classes are available to classify nodes.
 
 {% task 2 %}
+---
+- execute: vim /etc/puppetlabs/puppet/environments/production/manifests/site.pp
+  input:
+    - "/default {\r"
+    - o
+    - "class { '::mysql::server':\r"
+    - "root_password => 'strongpassword',\r"
+    - "override_options => { 'mysqld' => { 'max_connections' => '1024' } },\r"
+    - "}"
+    - "\e"
+    - ":wq\r"
+{% endtask %}
 
 Edit `/etc/puppetlabs/puppet/environments/production/manifests/site.pp` to classify the LVM with the
-MySQL server	class. Using class parameters, specify a root password and set the
+MySQL server class. Using class parameters, specify a root password and set the
 server's max connections to '1024.'
 
 {% highlight puppet %}
@@ -73,6 +88,9 @@ structure of the `override_options` hash is analogous to the `[section]`,
 `var_name = value` syntax of a `my.cnf` file.
 
 {% task 3 %}
+---
+- execute: puppet agent -t
+{% endtask %}
 
 Use the `puppet parser validate` tool to check your syntax, then trigger a
 puppet run:
@@ -172,6 +190,15 @@ the 'test' database from a new MySQL installation. The `account_security` class
 mentioned above does just this.
 
 {% task 4 %}
+---
+- execute: vim /etc/puppetlabs/puppet/environments/production/manifests/site.pp
+  input:
+    - "/default {\r"
+    - o
+    - "include mysql::server::account_security"
+    - "\e"
+    - ":wq\r"
+{% endtask %}
 
 Go back to your `site.pp` manifest and include the
 `mysql::server::account_security` class. Remember, you don't need to pass any
@@ -215,6 +242,29 @@ The MySQL module includes custom types and providers that make `mysql_user`,
 ## Database, User, Grant:
 
 {% task 5 %}
+---
+- execute: vim /etc/puppetlabs/puppet/environments/production/manifests/site.pp
+  input:
+    - "/default {\r"
+    - o
+    - "mysql_database { 'lvm':\r"
+    - "ensure => 'present',\r"
+    - "charset => 'utf8',\r"
+    - "}\r"
+    - "mysql_user { 'lvm_user@localhost':\r"
+    - "ensure => 'present',\r"
+    - "}\r"
+    - "mysql_grant { 'lvm_user@localhost/lvm.*':\r"
+    - "ensure => 'present',\r"
+    - "options => ['GRANT'],\r"
+    - "privileges => ['ALL'],\r"
+    - "table => 'lvm.*',\r"
+    - "user => 'lvm_user@localhost',\r"
+    - "}"
+    - "\e"
+    - ":wq\r"
+- execute: puppet agent -t
+{% endtask %}
 
 These custom resource types make creating a new database with Puppet pretty
 simple. 

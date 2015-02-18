@@ -115,6 +115,10 @@ creating a simple `web` module to drop some new files into the directory served
 by the Apache service you set up in the Power of Puppet quest.
 
 {% task 1 %}
+---
+- execute: mkdir /etc/puppetlabs/puppet/environments/production/modules/web
+- execute: mkdir /etc/puppetlabs/puppet/environments/production/modules/web/{manifests,tests}
+{% endtask %}
 
 First, you'll need to create the directory structure for your module.
 
@@ -131,6 +135,26 @@ Now create an `web` directory:
     mkdir web/{manifests,tests}
 
 {% task 2 %}
+- file: /etc/puppetlabs/puppet/environments/production/modules/web/manifests/init.pp
+  content: |
+    class web {
+    
+      $doc_root = '/var/www/html/lvmguide'
+    
+      $english = 'Hello world!'
+      $french = 'Bonjour le monde!'
+    
+      file { "${doc_root}/hello.html":
+        ensure => 'present',
+        content => "<em>${english}</em>",
+      }
+    
+      file { "${doc_root}/bonjour.html":
+        ensure => 'present',
+        content => "<em>${french}</em>",
+      }
+    }
+{% endtask %}
 
 Now you're ready to create your main manifest, where you'll define the `web`
 class.
@@ -165,11 +189,18 @@ code is from the underlying data, the more resuable it is, and the less
 difficult it will be to refactor when you have to make changes later.
 
 {% task 3 %}
+---
+- file: /etc/puppetlabs/puppet/environments/production/modules/web/tests/init.pp
+  content: include web
+{% endtask %}
 
 Once you've validated your manifest with the `puppet parser` tool, create a test
 for your manifest with an `include` statement for the web class you created.
 
 {% task 4 %}
+---
+- execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/web/tests/init.pp
+{% endtask %}
 
 Run the test, using the `--noop` flag for a dry run before triggering your real
 `puppet apply`.
@@ -216,6 +247,22 @@ Instead of rewriting the whole class or module with these minor changes, you can
 use class parameters to customize these values as the class is declared.
 
 {% task 5 %}
+---
+- execute: vim /etc/puppetlabs/puppet/environments/production/modules/web/manifests/init.pp
+  input:
+    - "/class web\r"
+    - "2Wi"
+    - "( $page_name, $message ) "
+    - "\e"
+    - "GO"
+    - |
+      file { "${doc_root}/${page_name}.html":
+        ensure => 'present',
+        content => "<em>${message}</em>",
+      }
+    - "\e"
+    - ":wq\r"
+{% endtask %}
 
 To get started re-writing your `web` class with parameters, reopen the
 `web/manifests/init.pp` manifest. You've already written variables into the
@@ -238,6 +285,18 @@ file { "${doc_root}/${page_name}.html":
 {% endhighlight %}
 
 {% task 6 %}
+---
+- execute: vim /etc/puppetlabs/puppet/environments/production/modules/web/tests/init.pp
+  input:
+    - "ddi"
+    - "class {'web':\r"
+    - "  page_name => 'hola',\r"
+    - "  message => 'Hola mundo!',\r"
+    - "}"
+    - "\e"
+    - ":"
+    - "wq\r"
+{% endtask %}
 
 As before, use the test manifest to declare the class. You'll open
 `web/tests/init.pp` and replace the simple `include` statement with the
@@ -251,6 +310,9 @@ class {'web':
 {% endhighlight %}
 
 {% task 7 %}
+---
+- execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/web/tests/init.pp
+{% endtask %}
 
 Now give it a try. Go ahead and do a `--noop` run, then apply the test.
 
