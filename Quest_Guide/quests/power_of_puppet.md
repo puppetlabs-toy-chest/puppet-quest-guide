@@ -75,6 +75,8 @@ cached versions of all the modules used in the quests:
     cd /usr/src/forge/
     for m in `ls`; do puppet module install $m --ignore-dependencies ; done
 
+Note: This installs the modules for all of the quests in this guide. You can
+skip future instructions for installing modules.
 {% endaside %}
 
 This command tells Puppet to download the Puppet Labs `apache` module from the
