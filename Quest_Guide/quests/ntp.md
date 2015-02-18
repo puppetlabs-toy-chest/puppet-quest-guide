@@ -140,7 +140,7 @@ them. Of course tests are just that, tests, while the node definitions in your
 `site.pp` manifest describe what you actually want your infrastructure to look
 like.
 
-Because it's more ammenable to monitoring with the Learning VM quest tool, we'll
+Because it's more amenable to monitoring with the Learning VM quest tool, we'll
 be primarily using this `site.pp` method of classification in this Quest Guide.
 Once you've learned the basic mechanics of node definitions and class
 declarations, however, much of this knowledge will be portable to whatever
@@ -203,7 +203,7 @@ that the service is running.
 
 To avoid disrupting processes that rely on consistent timing, the ntpd service
 works gradually. It adds or removes a few microseconds to each tick of the
-system clock so as to slowly bring it into syncronization with the NTP server. 
+system clock so as to slowly bring it into synchronization with the NTP server. 
 
 If you like, run the `ntpstat` command to check on the synchronization status.
 Don't worry about waiting to get synchronized. Because the Learning VM is

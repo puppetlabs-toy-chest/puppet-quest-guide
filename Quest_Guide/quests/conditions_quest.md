@@ -138,7 +138,7 @@ clause. Here are some rules:
   nothing and move on.
 
 Lets say you want to give the user you're creating with your accounts module
-administrative priveleges. You have a mix of CentOS and Debian systems in your
+administrative privileges. You have a mix of CentOS and Debian systems in your
 infrastructure. On your CentOS machines, you use the `wheel` group to manage
 superuser privileges, while you use an `admin` group on the Debian machines.
 With the `if` statement and the `operatingsystem` fact from facter, this kind of

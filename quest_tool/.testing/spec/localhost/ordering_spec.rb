@@ -19,7 +19,7 @@ describe "The file sshd_config file" do
 end
 
 # Task 3
-describe "The manifests/init.pp manifest should" do
+describe "The sshd/manifests/init.pp manifest should" do
   it 'should define the sshd class' do
     file('/etc/puppetlabs/puppet/environments/production/modules/sshd/manifests/init.pp').content.should match /source\s=>\s\'puppet:\/\/\/modules\/sshd\/sshd_config\',/
   end
