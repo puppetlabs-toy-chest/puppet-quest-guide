@@ -49,7 +49,7 @@ on Ruby.
 
 Puppet's DSL is a *declarative* language rather than an *imperative* one. This
 means that instead of defining a process or set of commands, Puppet code
-describes (or declares) only the desired end state, and relies of built-in
+describes (or declares) only the desired end state, and relies on built-in
 *providers* to deal with implementation.
 
 When Luke Kanies was initially designing Puppet, he experimented with several
