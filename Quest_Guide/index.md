@@ -85,10 +85,14 @@ inspection, role-based access control, certification management, and cloud
 provisioning tools.
 
 {% task 1 %}
+---
+- execute: puppet -V
+{% endtask %}
 Now that you know what Puppet and Puppet Enterprise are, check and see what
 versions of Puppet are running on this Learning VM. Type the following command:
 
     puppet -V	# That's a capital 'V'
+
 
 You will see something like the following:
 
@@ -121,7 +125,12 @@ progress tracking, including changes to how bash is configured. Please don't
 replace the .bashrc file. If you would like to make changes, append them to the existing file.
 
 {% endwarning %}
+
 {% task 2 %}
+---
+- execute: quest --help
+{% endtask %}
+
 To explore the command options for the quest tool, type the following command:
 
     quest --help
@@ -137,6 +146,10 @@ such as:
     progress
 	
 {% task 3 %}
+---
+- execute: quest --progress
+{% endtask %}
+
 Find out how much progress you have made so far:
 
     quest --progress
