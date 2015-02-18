@@ -135,6 +135,7 @@ Now create an `web` directory:
     mkdir web/{manifests,tests}
 
 {% task 2 %}
+---
 - file: /etc/puppetlabs/puppet/environments/production/modules/web/manifests/init.pp
   content: |
     class web {

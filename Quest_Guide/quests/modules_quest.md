@@ -318,6 +318,7 @@ include vimrc
 {% endhighlight %}
 
 {% task 8 %}
+---
 - execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/vimrc/tests/init.pp
 {% endtask %}
 
