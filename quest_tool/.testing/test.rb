@@ -88,7 +88,7 @@ if opts[:solve]
           # Capture an environment variable if present.
           # Note that this will only currently work for one
           # environment variable.
-          m = /(\S+)=(\S+)\s(.*)/.match(s['execute'])
+          m = /^(\S+)=(\S+)\s(.*)/.match(s['execute'])
           # If there is an environment variable, pass that to the
           # process as a hash, preceding the string otherwise pass
           # the raw string.
