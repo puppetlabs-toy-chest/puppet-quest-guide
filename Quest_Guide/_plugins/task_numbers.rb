@@ -1,4 +1,4 @@
-class Task < Liquid::Tag
+class Task < Liquid::Block
   def initialize(tag_name, markup, tokens)
      super
      @number = markup
