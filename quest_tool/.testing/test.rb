@@ -151,7 +151,7 @@ if opts[:start] then
     puts "You have started the #{name.capitalize} quest."
   else
     puts "Please select another quest. The Quest you specified does not exist."
-    puts "The command: 'quests --list' will list all available quests."
+    puts "The command: 'quest --list' will list all available quests."
     exit 1
   end
 end
