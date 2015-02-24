@@ -1,9 +1,9 @@
 ---
-title: Variables and Class Parameters
+title: Variables and Parameters
 layout: default
 ---
 
-# Variables and Class Parameters
+# Variables and Parameters
 
 ### Prerequisites
 

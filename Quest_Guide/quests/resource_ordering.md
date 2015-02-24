@@ -1,5 +1,5 @@
 ---
-title: Ordering
+title: Resource Ordering
 layout: default
 ---
 
@@ -12,8 +12,8 @@ layout: default
 - Resources
 - Manifests and Classes
 - Modules
-- Variables and Class Parameters
-- Conditions
+- Variables and Parameters
+- Conditional Statements
 
 ## Quest Objectives
 

@@ -1,5 +1,5 @@
 ---
-title: Conditions
+title: Conditional Statements
 layout: default
 ---
 
@@ -12,7 +12,7 @@ layout: default
 - Resources
 - Manifests and Classes
 - Modules
-- Variables and Class Parameters
+- Variables and Parameters
 
 ## Quest Objectives
  - Learn how to use conditional logic to make your manifests adaptable.
