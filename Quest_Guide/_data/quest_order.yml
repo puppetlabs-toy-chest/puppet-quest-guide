@@ -6,18 +6,18 @@
    title: Resources
  - url: /quests/manifests_and_classes.html
    title: Manifests and Classes
- - url: /quests/modules_quest.html
+ - url: /quests/modules.html
    title: Modules
  - url: /quests/ntp.html
    title: NTP
  - url: /quests/mysql.html
    title: MySQL
  - url: /quests/variables_and_parameters.html
-   title: Variables and Class Parameters
- - url: /quests/conditions_quest.html
+   title: Variables and Parameters
+ - url: /quests/conditional_statements.html
    title: Conditional Statements
  - url: /quests/resource_ordering.html
-   title: Ordering
+   title: Resource Ordering
  - url: /afterword.html
    title: Afterword
  - url: /troubleshooting.html
