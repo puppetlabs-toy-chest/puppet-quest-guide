@@ -101,7 +101,7 @@ if opts[:all]
   failures = []
   quests.each do |q|
     solve_quest(q)
-    RSpec::Core::Runner.run(["/root/.testing/spec/localhost/#{name}_spec.rb"])
+    RSpec::Core::Runner.run(["/root/.testing/spec/localhost/#{q}_spec.rb"])
     json_formatter.output_hash[:examples].each do |example|
       if example[:status] == 'failed'
         failures << {quest: name, task: example[:full_description]}
