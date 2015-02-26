@@ -1,0 +1,106 @@
+#!/opt/puppet/bin/ruby
+
+class String
+def bold;           "\033[1m#{self}\033[22m" end
+def cyan;           "\033[36m#{self}\033[0m" end
+def green;          "\033[32m#{self}\033[0m" end
+end
+
+Dir.chdir "/root/.testing"
+require 'rubygems'
+require 'serverspec'
+require 'pathname'
+require 'yaml'
+require 'trollop'
+include Serverspec::Helper::Exec
+include Serverspec::Helper::DetectOS
+
+Spec.configure do |c|
+  c.add_formatter(:json)
+end
+
+config = RSpec.configuration
+json_formatter = RSpec::Core::Formatters::JsonFormatter.new(config.out)
+reporter  = RSpec::Core::Reporter.new(json_formatter)
+config.instance_variable_set(:@reporter, reporter)
+
+p = Trollop::Parser.new do
+  banner <<EOS
+
+test: Learning VM task testing tool
+Usage:
+EOS
+  opt :all, "Run all task of all quests"
+  opt :quest, "Run tasks for the specified quest", :type => :string
+end
+
+opts = Trollop::with_standard_exception_handling p do
+  options = p.parse
+end
+
+if opts[:all]
+  quests = ['welcome',
+            'power_of_puppet',
+            'resources',
+            'manifests_and_classes',
+            'modules',
+            'ntp',
+            'mysql',
+            'variables_and_parameters',
+            'conditional_statements',
+            'resource_ordering']
+  quests.each{ |q| solve_quest(q) }
+end
+
+if opts[:quest]
+  solve_quest(opts[:quest])
+end
+
+def solve_quest(name)
+  
+  quest = name.downcase == 'welcome' ? 'index' : "quests/#{name.downcase.split.join('_')}"
+  
+  f = File.open("/usr/src/courseware-lvm/Quest_Guide/#{quest}.md")
+  task_specs = f.read.scan(/{%\stask\s(\d+)\s%}(.*?){%\sendtask\s%}/m)
+  tasks = task_specs.collect do |m|
+    begin
+      YAML.load(m[1])
+    rescue Psych::SyntaxError => e
+      puts "There was an error parsing the solution for Task #{m[0]}"
+      puts "Validate that the following is valid YAML: #{m[1]}"
+      raise
+    end
+  end
+  f.close
+  tasks.each do |t|
+    t.each do |s|
+      if s['execute']
+        # Capture an environment variable if present.
+        # Note that this will only currently work for one
+        # environment variable.
+        m = /^(\S+)=(\S+)\s(.*)/.match(s['execute'])
+        # If there is an environment variable, pass that to the
+        # process as a hash, preceding the string otherwise pass
+        # the raw string.
+        a = m ? [{m[1] => m[2]}, m[3]] : [s['execute']]
+        Open3.popen3(*a) do |i, o, e, t|
+          if s['input']
+            s['input'].each { |w| puts w.inspect }
+            s['input'].each { |w| i.write(w) }
+          end
+          i.close
+          puts o.read
+        end
+        # Some task spec tests just check bash history
+        open('/root/.bash_history', 'a') { |f|
+          f.puts s['execute']
+        }
+      end
+      if s['file']
+        open(s['file'], 'w') { |f|
+          f.puts s['content']
+        }
+      end
+    end
+  end
+end
