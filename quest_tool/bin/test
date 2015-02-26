@@ -12,6 +12,7 @@ require 'serverspec'
 require 'pathname'
 require 'yaml'
 require 'trollop'
+require 'pp'
 include Serverspec::Helper::Exec
 include Serverspec::Helper::DetectOS
 
@@ -124,7 +125,7 @@ if opts[:quest]
     end
   end
   unless failures.empty?
-    abort pretty_inspect(failures)
+    abort failures.pretty_inspect
   end
 end
 
