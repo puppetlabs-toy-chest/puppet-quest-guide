@@ -32,7 +32,7 @@ reporter  = RSpec::Core::Reporter.new(json_formatter)
 config.instance_variable_set(:@reporter, reporter)
 
 p = Trollop::Parser.new do
-  version "0.0.1 (c) 2014 Puppet Labs"
+  version "0.2.0 (c) 2015 Puppet Labs"
   banner <<EOS
 
 quest: learning progress feedback tool 
@@ -40,11 +40,11 @@ Usage:
 quest [--option] (brief)
 where [--option] is one of:
 EOS
-  opt :progress, "Display details of tasks completed"
+  opt :progress, "Display details of tasks completed for the current quest"
   opt :completed, "Display completed quests"
   opt :list, "Show all available quests"
-  opt :start, "Provide name of the quest to track", :type => :string
-  opt :solve, "Provide the name of the quest to solve", :type => :string
+  opt :start, "Begin tracking the specified quest", :type => :string
+  opt :test, "Run the test solution of the specified quest", :type => :string
 end
 
 opts = Trollop::with_standard_exception_handling p do
@@ -66,8 +66,8 @@ if not File.file?('/root/.testing/log.yml')
   File.open('/root/.testing/log.yml', 'w') {|f| f.write initialize_yaml.to_yaml }
 end
 
-if opts[:solve]
-  name = opts[:solve].downcase
+if opts[:test]
+  name = opts[:test].downcase
   quest = name == 'welcome' ? 'index' : "quests/#{name}"
   if File.exists?("/usr/src/courseware-lvm/Quest_Guide/#{quest}.md")
     f = File.open("/usr/src/courseware-lvm/Quest_Guide/#{quest}.md")
