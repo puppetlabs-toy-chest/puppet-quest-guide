@@ -18,14 +18,7 @@ you'll need to put it into action.
 Before you get started, however, we'll walk you through a few steps to get the
 VM configured and running.
 
-The Learning VM comes in two flavors. You downloaded this guide with either a
-VMware (.vmx) file or an Open Virtualization Format (.ovf) file. The .vmx
-version works with VMware Player or VMware Workstation on Linux and Windows
-based machines, and VMware Fusion for Mac. The .ovf file is suitable for
-Oracle's Virtualbox as well as several other virtualization players that support
-this format.
-
-We've included instructions below for VMware Fusion, VMware Player, and
+We've included instructions for VMware Fusion, VMware Player, and
 Virtualbox. 
 
 If you run into issues getting the Learning VM set up, feel free to contact us
