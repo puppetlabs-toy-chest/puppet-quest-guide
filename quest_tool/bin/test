@@ -108,19 +108,24 @@ if opts[:all]
       end
     end
   end
-  if failures
+  unless failures.empty?
     puts failures
     exit 1
   end
 end
 
-if not File.file?('/root/.testing/log.yml')
-  initialize_yaml = Hash.new()
-  initialize_yaml["current"] = "begin"
-  File.open('/root/.testing/log.yml', 'w') {|f| f.write initialize_yaml.to_yaml }
-end
-
 if opts[:quest]
   solve_quest(opts[:quest])
+  RSpec::Core::Runner.run(["/root/.testing/spec/localhost/#{q}_spec.rb"])
+  failures = []
+  json_formatter.output_hash[:examples].each do |example|
+    if example[:status] == 'failed'
+      failures << {quest: name, task: example[:full_description]}
+    end
+  end
+  unless failures.empty?
+    puts failures
+    exit 1
+  end
 end
 
