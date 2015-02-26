@@ -18,14 +18,7 @@ you'll need to put it into action.
 Before you get started, however, we'll walk you through a few steps to get the
 VM configured and running.
 
-The Learning VM comes in two flavors. You downloaded this guide with either a
-VMware (.vmx) file or an Open Virtualization Format (.ovf) file. The .vmx
-version works with VMware Player or VMware Workstation on Linux and Windows
-based machines, and VMware Fusion for Mac. The .ovf file is suitable for
-Oracle's Virtualbox as well as several other virtualization players that support
-this format.
-
-We've included instructions below for VMware Fusion, VMware Player, and
+We've included instructions for VMware Fusion, VMware Player, and
 Virtualbox. 
 
 If you run into issues getting the Learning VM set up, feel free to contact us
@@ -63,29 +56,11 @@ dialogues or wizards that pop up the first time you open the software. These
 will walk you through creating a *new* virtual machine, and will mislead you if
 you're trying to open the *existing* Learning VM file.) 
 
-Depending on what virtualization software you're using, there are some slight
-variations in how you'll open Learning VM file.
+Next, you'll select *File > Import* or *File > Import Appliance...* and import
+the OVA file included with your virtualization software.
 
- * In __VMware Player__ there will be an _Open a Virtual Machine_ option on the
- * Welcome screen.  You can also select *File > Open...* from the *Player* menu
- * in the top left.
- 
- * For __VMWare Fusion__,  select _File > Open..._ from the menu bar.
- 
- * For __VirtualBox__, select _File > Import Appliance..._ from the menu bar.
- 
- * If you're using different virtualization software, just be sure to *open* or
- * *import*, rather than *create new*.
-
-Don't launch the VM just yet. There are a few configuration steps that you
-should complete before launching the Learning VM for the first time. (If you
-skipped ahead and already launched the VM, shut it down by logging in with the
-credentials `root` and `puppet` and entering the command `shutdown -P now`. And
-if you run into errors, remember that you can simply delete the VM and create
-  another by unpacking the .zip archive and following the instructions above.)
-
-With the Learning VM selected in the library or manager window, open the
-__Settings__ panel. There are a few things to adjust here.
+The way you'll adjust configuration settings vary depending on which
+virtualization software you're using, but the settings are the same.
 
 First, under **Network** or **Network Adapter**, confirm that the **Network
 Adapter** is enabled, and configure it to use **Bridged** networking.
@@ -97,8 +72,8 @@ Allocate 4 GB of memory (4096 MB) and two processor cores. You can run the
 Learning VM with less memory and fewer processor cores, but you may encounter
 performance issues.
 
-Now that your settings are configured, select __Start__ or __Power On__ to boot
-up the VM.
+With the VM imported and settings configured, select __Start__ or __Power On__
+to boot up the VM.
 
 {% aside Input Capture %}
 Virtualization software uses mouse and keyboard capture to 'own' these devices
