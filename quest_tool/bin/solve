@@ -34,7 +34,7 @@ config.instance_variable_set(:@reporter, reporter)
 p = Trollop::Parser.new do
   banner <<EOS
 
-test: Learning VM task testing tool
+solve: Learning VM task solution testing tool
 Usage:
 EOS
   opt :all, "Run all task of all quests"
