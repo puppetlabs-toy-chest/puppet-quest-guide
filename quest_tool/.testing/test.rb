@@ -32,7 +32,7 @@ reporter  = RSpec::Core::Reporter.new(json_formatter)
 config.instance_variable_set(:@reporter, reporter)
 
 p = Trollop::Parser.new do
-  version "0.0.1 (c) 2014 Puppet Labs"
+  version "0.2.0 (c) 2015 Puppet Labs"
   banner <<EOS
 
 quest: learning progress feedback tool 
@@ -40,11 +40,10 @@ Usage:
 quest [--option] (brief)
 where [--option] is one of:
 EOS
-  opt :progress, "Display details of tasks completed"
+  opt :progress, "Display details of tasks completed for the current quest"
   opt :completed, "Display completed quests"
   opt :list, "Show all available quests"
-  opt :start, "Provide name of the quest to track", :type => :string
-  opt :solve, "Provide the name of the quest to solve", :type => :string
+  opt :start, "Begin tracking the specified quest", :type => :string
 end
 
 opts = Trollop::with_standard_exception_handling p do
@@ -64,60 +63,6 @@ if not File.file?('/root/.testing/log.yml')
   initialize_yaml = Hash.new()
   initialize_yaml["current"] = "begin"
   File.open('/root/.testing/log.yml', 'w') {|f| f.write initialize_yaml.to_yaml }
-end
-
-if opts[:solve]
-  name = opts[:solve].downcase
-  quest = name == 'welcome' ? 'index' : "quests/#{name}"
-  if File.exists?("/usr/src/courseware-lvm/Quest_Guide/#{quest}.md")
-    f = File.open("/usr/src/courseware-lvm/Quest_Guide/#{quest}.md")
-    task_specs = f.read.scan(/{%\stask\s(\d+)\s%}(.*?){%\sendtask\s%}/m)
-    tasks = task_specs.collect do |m|
-      begin
-        YAML.load(m[1])
-      rescue Psych::SyntaxError => e
-        puts "There was an error parsing the solution for Task #{m[0]}"
-        puts "Validate that the following is valid YAML: #{m[1]}"
-        raise
-      end
-    end
-    f.close
-    tasks.each do |t|
-      t.each do |s|
-        if s['execute']
-          # Capture an environment variable if present.
-          # Note that this will only currently work for one
-          # environment variable.
-          m = /^(\S+)=(\S+)\s(.*)/.match(s['execute'])
-          # If there is an environment variable, pass that to the
-          # process as a hash, preceding the string otherwise pass
-          # the raw string.
-          a = m ? [{m[1] => m[2]}, m[3]] : [s['execute']]
-          Open3.popen3(*a) do |i, o, e, t|
-            if s['input']
-              s['input'].each { |w| puts w.inspect }
-              s['input'].each { |w| i.write(w) }
-            end
-            i.close
-            puts o.read
-          end
-          # Some task spec tests just check bash history
-          open('/root/.bash_history', 'a') { |f|
-            f.puts s['execute']
-          }
-        end
-        if s['file']
-          open(s['file'], 'w') { |f|
-            f.puts s['content']
-          }
-        end
-      end
-    end
-  else
-    puts "The #{quest} quest does not exist."
-    puts "The command: 'quests --list' will list all available quests."
-    exit 1
-  end
 end
 
 if opts[:list] then
