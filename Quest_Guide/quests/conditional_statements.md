@@ -380,7 +380,7 @@ an inappropriate default value and encounter errors down the line.
 ## Review
 
 In this quest, you saw how you can use facts from the `facter` tool along with
-conditional logic to write Puppet code that will adapt to the envoronment where
+conditional logic to write Puppet code that will adapt to the environment where
 you're applying it.
 
 You used an `if` statement in conjunction with the `$::osfamily` variable from
