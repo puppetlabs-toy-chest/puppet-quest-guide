@@ -87,7 +87,7 @@
         float:right;
         width: 150px;
         background: #fafafa;
-        border: 1pt solid #eee;
+        border: 1pt solid #eeeeee;
         position: relative;
         left: 1em;
         page-break-inside: avoid;
@@ -131,7 +131,7 @@
         color: #333;
         padding: 1em;
         margin: 2em;
-        border: 1pt solid #eee;
+        border: 1pt solid #eeeeee;
         page-break-inside: avoid;        
     }
     .lvm-inline-aside strong{
@@ -142,7 +142,7 @@
         font-family: Monaco, Andale Mono, Courier New, monospace;
     }
     code {
-        background-color: #eee;
+        background-color: #eeeeee;
         color: rgba(0, 0, 0, 0.75);
         padding: 1px 3px;
         font-size: 12px;
@@ -156,7 +156,7 @@
         margin: 0 0 18px;
         line-height: 16px;
         font-size: 11px;
-        border: 1px solid #ccc;
+        border: 1px solid #cccccc;
         white-space: pre-wrap;
         word-wrap: break-word;
         page-break-inside: avoid;        
@@ -322,7 +322,7 @@
       border-collapse: collapse;
     }
     td,th { 
-      border: 1px solid #ddd;
+      border: 1px solid #dddddd;
       padding: 3px 10px;
     }
     th {
@@ -384,7 +384,7 @@
     hr {
         margin: 0 0 19px;
         border: 0;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid #cccccc;
     }
     blockquote {
       margin: 0;
@@ -477,15 +477,15 @@
         -o-transition: color 0.25s;
         transition: color 0.25s;
         text-decoration: none;
-        color:  #333;
+        color:  #333333;
     }
 
     #sidebar-first a.active {
-        color: #333;
+        color: #333333;
     }
 
     #sidebar-first h2 {
-        color: #666;
+        color: #666666;
         font-size: 1.5rem;
     }
 
@@ -493,7 +493,7 @@
         width: 100%;
         background: #7C6AAB;
         height: 105px;
-        border-top: 8px solid #fff;
+        border-top: 8px solid #ffffff;
         border-bottom: 2px solid #c4c4c5;
         -webkit-box-shadow: rgba(0,0,0,0.15) 0 0 20px;
         -moz-box-shadow: rgba(0,0,0,0.15) 0 0 20px;
