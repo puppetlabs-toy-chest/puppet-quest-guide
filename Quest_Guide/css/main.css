@@ -64,83 +64,15 @@
         color: #5d5e59;
     }
 
-    .lvm-task-number {
-        color: #6c6d6d;
-        font-family: 'Arvo','Helvetica Neue',Helvetica,Arial,sans-serif;
-        font-size: 16px;
-        font-style: bold;
-        margin-left: -16px;
+    p {
+        text-align: justify;
     }
 
-    .lvm-task-number p:before {
-        color: #7C6AAB;
-        display: inline;
-        font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        content: ' ';
-        font-size: 15px;
-    }
-
-    .lvm-callout{
-        padding: 1em;
-        margin: 1em 0em 1em 0em;
-        color: #333;
-        float:right;
-        width: 150px;
-        background: #fafafa;
-        border: 1pt solid #eeeeee;
-        position: relative;
-        left: 1em;
-        page-break-inside: avoid;
-        margin-right: -190px;
-    }
-    
-    .lvm-callout p{
-        font-size: 11px;
-        line-height: 1.2;
-
-    }
-    
-    .lvm-tip p:before{
-        font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        content: "  ";
-        display: block;
-        font-size: 15pt;
-        text-align: center;
-    }
-    
-    .lvm-warning p:before{
-        font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        content: "  ";
-        display: block;
-        font-size: 15pt;
-        text-align: center;
-        color: #7C6AAB;
-    }
-    
-    .lvm-fact p:before{
-        font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        content: "  ";
-        display: block;
-        font-size: 15pt;
-        text-align: center;        
-    }
-    
-    .lvm-inline-aside{
-        font-size: 12px;
-        background: #fafafa;
-        color: #333;
-        padding: 1em;
-        margin: 2em;
-        border: 1pt solid #eeeeee;
-        page-break-inside: avoid;        
-    }
-    .lvm-inline-aside strong{
-        font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;    
-        line-height: 2;    
-    }
-    code, pre {
+    code, 
+    pre {
         font-family: Monaco, Andale Mono, Courier New, monospace;
     }
+
     code {
         background-color: #eeeeee;
         color: rgba(0, 0, 0, 0.75);
@@ -150,6 +82,7 @@
         -moz-border-radius: 3px;
         border-radius: 3px;
     }
+
     pre {
         display: block;
         padding: 8px;
@@ -161,16 +94,17 @@
         word-wrap: break-word;
         page-break-inside: avoid;        
     }
-    pre code {
-        background: none;
-        font-size: 10px;
-        padding: 0;
-    }
+
+        pre code {
+            background: none;
+            font-size: 10px;
+            padding: 0;
+        }
 
     ol,
     ul {
-    max-width: 37em;
-    margin-bottom: 1em;
+        max-width: 37em;
+        margin-bottom: 1em;
     }
 
     #content a {
@@ -184,14 +118,82 @@
       padding-bottom: 2em;
     }
 
-    .img-wrapper p{
-        font-style: italic;
-        margin-left: 10px;
+        .img-wrapper p {
+            font-style: italic;
+            margin-left: 10px;
+        }
+
+    .lvm-task-number {
+        color: #6c6d6d;
+        font-family: 'Arvo','Helvetica Neue',Helvetica,Arial,sans-serif;
+        font-size: 16px;
+        font-style: bold;
+        margin-left: -16px;
     }
 
-    p{
-        text-align: justify;
+        .lvm-task-number p:before {
+            color: #7C6AAB;
+            display: inline;
+            font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            content: ' ';
+            font-size: 15px;
+        }
+    .lvm-callout,
+    .lvm-inside-aside {
+        background: #fafafa;
+        color: #333333;
+        padding: 1em;
+        border: 1pt solid #eeeeee;
+        page-break-inside: avoid;              
     }
+        
+    .lvm-inline-aside {
+        font-size: 12px;
+        margin: 2em;
+    }
+
+        .lvm-inline-aside strong {
+            font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;    
+            line-height: 2;    
+        }
+
+    .lvm-callout {
+        margin: 1em 0em 1em 0em;
+        float:right;
+        width: 150px;
+        position: relative;
+        left: 1em;
+        margin-right: -190px;
+    }
+    
+        .lvm-callout p {
+            font-size: 11px;
+            line-height: 1.2;
+        }
+
+        /* .lvm-tip, -warning and -fact always seem to be combined with -callout */
+        .lvm-tip p:before,
+        .lvm-warning p:before,
+        .lvm-fact p:before {
+            font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            display: block;
+            font-size: 21px;
+            text-align: center;       
+        }
+
+            .lvm-tip p:before {
+                content: "  ";
+            }
+            
+            .lvm-warning p:before {
+                content: "  ";
+                color: #7C6AAB;
+            }
+            
+            .lvm-fact p:before {
+                content: "  ";
+            }
+
 }
 
 @media screen {
@@ -532,7 +534,6 @@
         box-shadow: rgba(0,0,0,0.15) 0 0 20px;
     }
     
-
     * {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
