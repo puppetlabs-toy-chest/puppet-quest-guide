@@ -1,7 +1,3 @@
-/*
-@import url(http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|PT+Sans:400,700,400italic,700italic);
-*/
-
 @font-face {
     font-family: 'Arvo';
     src: url('../fonts/arvo/Arvo-Regular.ttf') format('truetype');
@@ -68,7 +64,7 @@
         color: #5d5e59;
     }
 
-    div.lvm-task-number {
+    .lvm-task-number {
         color: #6c6d6d;
         font-family: 'Arvo','Helvetica Neue',Helvetica,Arial,sans-serif;
         font-size: 16px;
@@ -76,7 +72,7 @@
         margin-left: -16px;
     }
 
-    div.lvm-task-number p:before {
+    .lvm-task-number p:before {
         color: #7C6AAB;
         display: inline;
         font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -84,7 +80,7 @@
         font-size: 15px;
     }
 
-    div.lvm-callout{
+    .lvm-callout{
         padding: 1em;
         margin: 1em 0em 1em 0em;
         color: #333;
@@ -98,13 +94,13 @@
         margin-right: -190px;
     }
     
-    div.lvm-callout p{
+    .lvm-callout p{
         font-size: 11px;
         line-height: 1.2;
 
     }
     
-    div.lvm-tip p:before{
+    .lvm-tip p:before{
         font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         content: "  ";
         display: block;
@@ -112,7 +108,7 @@
         text-align: center;
     }
     
-    div.lvm-warning p:before{
+    .lvm-warning p:before{
         font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         content: "  ";
         display: block;
@@ -121,7 +117,7 @@
         color: #7C6AAB;
     }
     
-    div.lvm-fact p:before{
+    .lvm-fact p:before{
         font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         content: "  ";
         display: block;
@@ -129,7 +125,7 @@
         text-align: center;        
     }
     
-    div.lvm-inline-aside{
+    .lvm-inline-aside{
         font-size: 12px;
         background: #fafafa;
         color: #333;
@@ -138,7 +134,7 @@
         border: 1pt solid #eee;
         page-break-inside: avoid;        
     }
-    div.lvm-inline-aside strong{
+    .lvm-inline-aside strong{
         font-family: "Arvo","PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;    
         line-height: 2;    
     }
@@ -181,23 +177,18 @@
         color: #0095dd;
     }
 
-    div.img-wrapper {
+    .img-wrapper {
       display: block;
       text-align: center;
       padding-top: 2em;
       padding-bottom: 2em;
     }
 
-    div.img-wrapper p{
+    .img-wrapper p{
         font-style: italic;
         margin-left: 10px;
     }
-/** Figure labels   
-    div.img-wrapper p:after{
-        counter-increment: image;
-        content: ' ' counter(image);
-    }
-**/
+
     p{
         text-align: justify;
     }
@@ -212,15 +203,15 @@
         position: relative;
     }
     
-    div.highlight {
+    .highlight {
         max-width: 37em;
     }
 
-    div.lvm-inline-aside {
+    .lvm-inline-aside {
         max-width: 37em;
     }
 
-    div.lvm-callout{
+    .lvm-callout{
         margin-right: 0px;
     }
 
@@ -248,7 +239,7 @@
         display: inline;
     }
     
-    ul, menu, dir {
+    ul, menu {
         display: block;
         list-style-type: disc;
         -webkit-margin-before: 1em;
@@ -276,7 +267,6 @@
     }
         
     #site-header .header-wrapper,
-    #site-footer .footer-wrapper,
     #main{
         width: 940px;
         position: relative;
@@ -305,7 +295,7 @@
         left: 5px;
     }
     
-    div.page-break{
+    .page-break{
         page-break-after: always;
     }
         
@@ -328,15 +318,15 @@
         height: 100%;
     }
     table {
-    	margin: 10px 0 15px 0;
-    	border-collapse: collapse;
+      margin: 10px 0 15px 0;
+      border-collapse: collapse;
     }
-    td,th {	
-    	border: 1px solid #ddd;
-    	padding: 3px 10px;
+    td,th { 
+      border: 1px solid #ddd;
+      padding: 3px 10px;
     }
     th {
-    	padding: 5px 10px;	
+      padding: 5px 10px;  
     }
     
     a img {
@@ -442,14 +432,14 @@
         line-height: 0;
     }
  
-    #sidebar-first ul li, #sidebar-second ul li {
+    #sidebar-first ul li {
         display: block;
         margin: 0 0 .75em;
         font-size: 18px;
         line-height: 1.25;
     }
 
-    #sidebar-first ul, #sidebar-second ul {
+    #sidebar-first ul {
         padding: 0;
         list-style: disc;        
     }
@@ -459,7 +449,7 @@
         width: 220px;
     }
 
-    #sidebar-first, #sidebar-second {
+    #sidebar-first {
         padding: 20px;
         min-width: 100px;
         background: #f7f7f7;
