@@ -42,7 +42,7 @@ task :deploy => :build do
 end
 
 task :build do
-  Open3.popen3('jekyll', 'build', chdir: QUEST_GUIDE) do |i, o, e, t|
+  Open3.popen3('jekyll', 'build', :chdir => QUEST_GUIDE) do |i, o, e, t|
     i.close
     puts e.read
     puts t.value
@@ -160,7 +160,7 @@ def test_all
     RSpec::Core::Runner.run(["/root/.testing/spec/localhost/#{q}_spec.rb"])
     json_formatter.output_hash[:examples].each do |example|
       if example[:status] == 'failed'
-        failures << {quest: name, task: example[:full_description]}
+        failures << {:quest => name, :task => example[:full_description]}
       end
     end
   end
@@ -175,7 +175,7 @@ def test_quest(name)
   failures = []
   json_formatter.output_hash[:examples].each do |example|
     if example[:status] == 'failed'
-      failures << {quest: name, task: example[:full_description]}
+      failures << {:quest => name, :task => example[:full_description]}
     end
   end
   unless failures.empty?
