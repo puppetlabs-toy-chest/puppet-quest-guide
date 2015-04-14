@@ -1,3 +1,6 @@
+$:.unshift File.join( %w{ /root .gem ruby 1.9.1 } )
+ENV['PATH'] +=  ':/root/.gem/ruby/1.9.1/bin'
+
 require 'open3'
 
 # GitHub repository data
@@ -20,6 +23,7 @@ TARGET_PREFIX = ENV['HOSTNAME'] == "learning.puppetlabs.vm" ? '' : '/tmp/learnin
 TEST_DIR =  "#{TARGET_PREFIX}/root/"
 BIN_DIR =   "#{TARGET_PREFIX}/root/"
 SITE_ROOT = "#{TARGET_PREFIX}/var/www/questguide/"
+# PE webserver will serve out static files
 
 # Tasks
 
