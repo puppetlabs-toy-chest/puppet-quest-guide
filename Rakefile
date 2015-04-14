@@ -2,6 +2,9 @@ $:.unshift File.join( %w{ /root .gem ruby 1.9.1 } )
 ENV['PATH'] +=  ':/root/.gem/ruby/1.9.1/bin'
 
 require 'open3'
+require 'yaml'
+require 'rspec'
+require 'pp'
 
 # GitHub repository data
 
@@ -66,7 +69,9 @@ task :test_all do
   unless ENV['HOSTNAME'] == "learning.puppetlabs.vm"
     raise "Aborting test. Tests should only be run on the Learning VM itself."
   end
-  test_all
+  Dir.chdir "/root/.testing" do
+    test_all
+  end
 end
 
 # Helper Functions
@@ -148,6 +153,10 @@ def solve_quest(name)
 end
 
 def test_all
+  config = RSpec.configuration
+  json_formatter = Rspec::Core::Formatters::JsonFormatter.new(config.out)
+  reporter = RSpec::Core::Reporter.new(json_formatter)
+  config.instance_variable_set(:@reporter, reporter)
   quests = ['welcome',
             'power_of_puppet',
             'resources',
@@ -166,20 +175,6 @@ def test_all
       if example[:status] == 'failed'
         failures << {:quest => name, :task => example[:full_description]}
       end
-    end
-  end
-  unless failures.empty?
-    abort failures.pretty_inspect
-  end
-end
-
-def test_quest(name)
-  solve_quest(name)
-  RSpec::Core::Runner.run(["/root/.testing/spec/localhost/#{name}_spec.rb"])
-  failures = []
-  json_formatter.output_hash[:examples].each do |example|
-    if example[:status] == 'failed'
-      failures << {:quest => name, :task => example[:full_description]}
     end
   end
   unless failures.empty?
