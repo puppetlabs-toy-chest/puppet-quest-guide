@@ -56,6 +56,8 @@ task :build do
   end
 end
 
+task :update => [:fetch, :deploy]
+
 task :fetch => :config do
   checkout_master
   pull('upstream', 'master')
