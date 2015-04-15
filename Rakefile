@@ -17,14 +17,12 @@ DIR = File.dirname(__FILE__)
 
 QUEST_GUIDE =      File.join(DIR, 'Quest_Guide')
 
-TEST_DIR_SOURCE =  File.join(DIR, 'quest_tool/.testing')
-BIN_SOURCE =       File.join(DIR, 'quest_tool/bin') 
+HOME_DIR_SOURCE =  File.join(DIR, 'quest_tool/.')
 SITE_ROOT_SOURCE = File.join(DIR, 'Quest_Guide/_site')
 
 TARGET_PREFIX = ENV['HOSTNAME'] == "learning.puppetlabs.vm" ? '' : '/tmp/learningvm'
 
-TEST_DIR =  "#{TARGET_PREFIX}/root/"
-BIN_DIR =   "#{TARGET_PREFIX}/root/"
+HOME_DIR =  "#{TARGET_PREFIX}/root/"
 SITE_ROOT = "#{TARGET_PREFIX}/var/www/questguide/"
 # PE webserver will serve out static files
 
@@ -37,14 +35,11 @@ task :deploy => :build do
       raise "There was an error creating the /tmp/learningvm directory"
     end
   end
-  unless system("cp -R #{TEST_DIR_SOURCE} #{TEST_DIR}")
-    raise "There was an error copying the test files"
+  unless system("cp -R #{HOME_DIR_SOURCE} #{HOME_DIR}")
+    raise "There was an error copying the home directory files"
   end
   unless system("cp -R #{SITE_ROOT_SOURCE} #{SITE_ROOT}")
     raise "There was an error copying the Quest Guide files"
-  end
-  unless system("cp -R #{BIN_SOURCE} #{BIN_DIR}")
-    raise "There was an error copying the bin files"
   end
 end
 
@@ -56,14 +51,21 @@ task :build do
   end
 end
 
-task :update => [:fetch, :deploy]
+task :update_stable => [:fetch, :deploy]
+task :update_newest => [:fetch_newest, :deploy]
 
 task :fetch => :config do
-  checkout_master
+  checkout('release')
+  pull('upstream', 'release')
+end
+
+task :fetch_newest => :config do
+  checkout('master')
   pull('upstream', 'master')
 end
 
 task :config do
+  ensure_branch('release')
   ensure_remote('upstream', "https://github.com/#{GH_DEV}/#{GH_REPO}.git")
 end
 
@@ -87,8 +89,12 @@ def ensure_remote(remote, url)
   end
 end
 
-def checkout_master
-  unless system("git checkout master --quiet")
+def ensure_branch(branch)
+  system("git branch #{branch} > /dev/null")
+end
+
+def checkout(branch)
+  unless system("git checkout #{branch} --quiet")
     raise "Your current branch has unsaved changes."
   end
 end
