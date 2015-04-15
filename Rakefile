@@ -1,6 +1,8 @@
-$:.unshift File.join( %w{ /root .gem ruby 1.9.1 } )
-ENV['PATH'] +=  ':/root/.gem/ruby/1.9.1/bin'
+#$:.unshift File.join( %w{ /root .gem ruby 1.9.1 } )
+#ENV['PATH'] +=  ':/root/.gem/ruby/1.9.1/bin'
 
+require 'rubygems'
+require 'bundler/setup'
 require 'open3'
 require 'yaml'
 require 'rspec'
