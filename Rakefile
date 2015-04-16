@@ -1,8 +1,9 @@
-#$:.unshift File.join( %w{ /root .gem ruby 1.9.1 } )
-#ENV['PATH'] +=  ':/root/.gem/ruby/1.9.1/bin'
+# Use bin and gems in /opt/quest to avoid conflicts with puppet's
+# bin and gems contents
 
-require 'rubygems'
-require 'bundler/setup'
+ENV['PATH'] +=  ':/opt/quest/bin'
+ENV['GEM_PATH'] = '/opt/quest/gems'
+
 require 'open3'
 require 'yaml'
 require 'rspec'
@@ -46,10 +47,8 @@ task :deploy => :build do
 end
 
 task :build do
-  Open3.popen3('jekyll', 'build', :chdir => QUEST_GUIDE) do |i, o, e, t|
-    i.close
-    puts e.read
-    puts t.value
+  Dir.chdir QUEST_GUIDE do
+    system('jekyll build')
   end
 end
 
@@ -188,6 +187,9 @@ def test_all
     end
   end
   unless failures.empty?
+    File.open('failures.json', 'w') do |f|
+      json.dump(failures, f)
+    end
     abort failures.pretty_inspect
   end
 end
