@@ -162,10 +162,6 @@ def solve_quest(name)
 end
 
 def test_all
-  config = RSpec.configuration
-  json_formatter = Rspec::Core::Formatters::JsonFormatter.new(config.out)
-  reporter = RSpec::Core::Reporter.new(json_formatter)
-  config.instance_variable_set(:@reporter, reporter)
   quests = ['welcome',
             'power_of_puppet',
             'resources',
@@ -179,16 +175,21 @@ def test_all
   failures = []
   quests.each do |q|
     solve_quest(q)
+    config = RSpec.configuration
+    json_formatter = RSpec::Core::Formatters::JsonFormatter.new(config.out)
+    reporter = RSpec::Core::Reporter.new(json_formatter)
+    config.instance_variable_set(:@reporter, reporter)
     RSpec::Core::Runner.run(["/root/.testing/spec/localhost/#{q}_spec.rb"])
     json_formatter.output_hash[:examples].each do |example|
       if example[:status] == 'failed'
-        failures << {:quest => name, :task => example[:full_description]}
+        failures << example
       end
     end
+    RSpec.reset
   end
   unless failures.empty?
-    File.open('failures.json', 'w') do |f|
-      json.dump(failures, f)
+    File.open('/var/log/quest.json', 'w') do |f|
+      f.write(JSON.pretty_generate(failures))
     end
     abort failures.pretty_inspect
   end
