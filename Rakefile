@@ -1,8 +1,9 @@
-#$:.unshift File.join( %w{ /root .gem ruby 1.9.1 } )
-#ENV['PATH'] +=  ':/root/.gem/ruby/1.9.1/bin'
+# Use bin and gems in /opt/quest to avoid conflicts with puppet's
+# bin and gems contents
 
-require 'rubygems'
-require 'bundler/setup'
+ENV['PATH'] +=  ':/opt/quest/bin'
+ENV['GEM_PATH'] = '/opt/quest/gems'
+
 require 'open3'
 require 'yaml'
 require 'rspec'
@@ -46,10 +47,8 @@ task :deploy => :build do
 end
 
 task :build do
-  Open3.popen3('jekyll', 'build', :chdir => QUEST_GUIDE) do |i, o, e, t|
-    i.close
-    puts e.read
-    puts t.value
+  Dir.chdir QUEST_GUIDE do
+    system('jekyll build')
   end
 end
 
@@ -163,10 +162,6 @@ def solve_quest(name)
 end
 
 def test_all
-  config = RSpec.configuration
-  json_formatter = Rspec::Core::Formatters::JsonFormatter.new(config.out)
-  reporter = RSpec::Core::Reporter.new(json_formatter)
-  config.instance_variable_set(:@reporter, reporter)
   quests = ['welcome',
             'power_of_puppet',
             'resources',
@@ -180,14 +175,22 @@ def test_all
   failures = []
   quests.each do |q|
     solve_quest(q)
+    config = RSpec.configuration
+    json_formatter = RSpec::Core::Formatters::JsonFormatter.new(config.out)
+    reporter = RSpec::Core::Reporter.new(json_formatter)
+    config.instance_variable_set(:@reporter, reporter)
     RSpec::Core::Runner.run(["/root/.testing/spec/localhost/#{q}_spec.rb"])
     json_formatter.output_hash[:examples].each do |example|
       if example[:status] == 'failed'
-        failures << {:quest => name, :task => example[:full_description]}
+        failures << example
       end
     end
+    RSpec.reset
   end
   unless failures.empty?
+    File.open('/var/log/quest.json', 'w') do |f|
+      f.write(JSON.pretty_generate(failures))
+    end
     abort failures.pretty_inspect
   end
 end
