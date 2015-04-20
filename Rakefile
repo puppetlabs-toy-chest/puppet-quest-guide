@@ -144,6 +144,7 @@ def solve_quest(name)
             s['input'].each { |w| i.write(w) }
           end
           i.close
+          o.read
         end
         # Some task spec tests just check bash history
         open('/root/.bash_history', 'a') { |f|
@@ -170,25 +171,19 @@ def test_all
             'variables_and_parameters',
             'conditional_statements',
             'resource_ordering']
-  failures = []
+  failures = false
   quests.each do |q|
     solve_quest(q)
     config = RSpec.configuration
-    json_formatter = RSpec::Core::Formatters::JsonFormatter.new(config.out)
-    reporter = RSpec::Core::Reporter.new(json_formatter)
+    config.output_stream = File.open('/var/log/quest_spec', 'a')
+    json_formatter = RSpec::Core::Formatters::JsonFormatter.new(config.output_stream)
+    reporter = RSpec::Core::Reporter.new(formatter)
     config.instance_variable_set(:@reporter, reporter)
     RSpec::Core::Runner.run(["/root/.testing/spec/localhost/#{q}_spec.rb"])
-    json_formatter.output_hash[:examples].each do |example|
-      if example[:status] == 'failed'
-        failures << example
-      end
+    unless RSpec::Core::Runner.run(["/root/.testing/spec/localhost/#{q}_spec.rb"]) == 0
+      failures = true
     end
     RSpec.reset
   end
-  unless failures.empty?
-    File.open('/var/log/quest.json', 'w') do |f|
-      f.write(JSON.pretty_generate(failures))
-    end
-    abort failures.pretty_inspect
-  end
+  abort if failures
 end
