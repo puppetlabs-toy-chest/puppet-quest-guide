@@ -7,6 +7,7 @@ ENV['GEM_PATH'] = '/opt/quest/gems'
 require 'open3'
 require 'yaml'
 require 'rspec'
+require 'rspec/core/formatters/base_text_formatter'
 require 'pp'
 
 # GitHub repository data
@@ -176,10 +177,9 @@ def test_all
     solve_quest(q)
     config = RSpec.configuration
     config.output_stream = File.open('/var/log/quest_spec', 'a')
-    json_formatter = RSpec::Core::Formatters::JsonFormatter.new(config.output_stream)
+    formatter = RSpec::Core::Formatters::BaseTextFormatter.new(config.output_stream)
     reporter = RSpec::Core::Reporter.new(formatter)
     config.instance_variable_set(:@reporter, reporter)
-    RSpec::Core::Runner.run(["/root/.testing/spec/localhost/#{q}_spec.rb"])
     unless RSpec::Core::Runner.run(["/root/.testing/spec/localhost/#{q}_spec.rb"]) == 0
       failures = true
     end
