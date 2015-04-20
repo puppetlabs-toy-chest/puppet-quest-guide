@@ -58,6 +58,7 @@ classes are available to classify nodes.
 ---
 - execute: vim /etc/puppetlabs/puppet/environments/production/manifests/site.pp
   input:
+    - ":set paste\r"
     - "/default {\r"
     - o
     - "class { '::mysql::server':\r"
