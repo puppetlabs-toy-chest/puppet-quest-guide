@@ -24,11 +24,8 @@ QUEST_GUIDE =      File.join(DIR, 'Quest_Guide')
 HOME_DIR_SOURCE =  File.join(DIR, 'quest_tool/.')
 SITE_ROOT_SOURCE = File.join(DIR, 'Quest_Guide/_site/.')
 
-TARGET_PREFIX = ENV['HOSTNAME'] == "learning.puppetlabs.vm" ? '' : '/tmp/learningvm'
-
-HOME_DIR =  "#{TARGET_PREFIX}/root/"
-SITE_ROOT = "#{TARGET_PREFIX}/var/www/html/questguide/"
-# PE webserver will serve out static files
+HOME_DIR =  "/root/"
+SITE_ROOT = "/var/www/html/questguide/"
 
 # Tasks
 
