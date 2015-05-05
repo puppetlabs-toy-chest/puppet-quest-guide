@@ -11,118 +11,137 @@ layout: default
 
 ## Quest objectives
 
-- Using existing Puppet modules, configure the Learning VM to serve a web
-  version of the Quest Guide.
-- Learn how the Puppet Enterprise (PE) console's node classifier can manage the
+- Use a Puppet module to set up a Graphite monitoring server on the Learning VM.
+- Use the Puppet Enterprise console's node classifier to effeciently manage the
   Learning VM's configuration.
 
-## Getting started
+## Get started
 
-In this quest you will use the Puppet Enterprise (PE) console in conjunction
-with existing modules to cut away much of the complexity of a common
-configuration task.  You'll configure the Learning VM to serve the content of
-this Quest Guide as a locally accessible static HTML website. We'll show you how
-you can use Puppet and freely available Puppet modules to fully automate the
-process instead of writing code or using standard terminal commands.
+We covered introductions in the last quest. Now it's time to dive in and see
+what Puppet can actually do.
 
-As you go through this quest, remember that while Puppet can simplify many
-tasks, it's a powerful and complex tool. We will explain concepts as needed to
-complete and understand each task in this quest, but sometimes we'll hold off on
-a fuller explanation of some detail until a later quest. Don't worry if you
-don't feel like you're getting the whole story right away; keep at it and we'll
-get there when the time is right!
+In this quest you will use the Puppet Enterprise (PE) console to set up Graphite,
+an open-source graphing tool that lets you easily visualize the state of your
+infrastructure. Graphite, like Puppet, helps span the gap between nuts-and-bolts and
+the big-picture, so it's a nice example to get you started on your path to Puppet mastery.
 
-When you're ready to get started, type the following command:
+For the sake of simplicity, we've already written out the HTML for a simple dashboard.
+Take a look [here](http://localhost:8080/graphite_dashboard.html). Of course, without
+Graphite running, there's not much to display. Go ahead and take
+should be served by Graphite is missing. Let's go ahead and use Puppet to fix that!
+
+One more note: as you go through this quest, remember that Puppet is a powerful
+and complex tool. We will explain concepts as needed to complete and understand
+each task in this quest, but sometimes we'll hold off on a fuller explanation until
+a later quest. Don't worry if you don't feel like you're getting the whole story
+right away; keep at it and we'll get there when the time is right!
+
+Ready to get started? Type the following command:
 
     quest --start power 
 
-## Forging ahead
+## Forge ahead
 
-A **module** is a bundle of Puppet code packaged along with the other files and
-data you need manage some aspect of a system. Need to set up NTP? There's a
-module for that. Manage system users? That too. But likely you'll want to do
-both of these things and more. Modules let you mix and match reusable bits of
-Puppet code to make achieving your desired configuration as painless as
-possible. Modules are designed to be, well, *modular*.
+Graphite is built from several components, including the Graphite Django webapp frontend,
+a storage application called Carbon, and Whisper, a lightweight database system. Each of
+these components requires its own dependencies, installation, and configuration. Wouldn't
+it be nice is somebody had already done the work for you?
 
-But where do these modules come from? The [Puppet
-Forge](http://forge.puppetlabs.com) is a public repository of modules
-contributed by members of the Puppet community, including many written and
-maintained by Puppet Labs employees and partners. The Forge also includes a list
-of PE Supported Modules, which Puppet Labs has rigorously tested and is
-committed to supporting and maintaining through their lifecycle.
+You're in luck! Puppet Labs opperates a service called the [Puppet Forge](http://forge.puppetlabs.com),
+which serves as a repository for Puppet *modules*. A module includes all the code and data
+Puppet needs to manage a given aspect if your infrastructure. (Don't worry, we'll get more
+into the anatomy and contents of a module in a later quest!)
 
 {% task 1 %}
 ---
-- execute: puppet module install puppetlabs-apache
+- execute: puppet module search graphite
 {% endtask %}
 
-To get started setting up the Quest Guide website, you'll need to download and
-install Puppet Labs' `apache` module from the Forge. (If you're offline or behind
-a firewall, check the aside below for instructions on using the cached version
-of the module.) 
+The `puppet module` tool lets you search for modules directly from the command line.
+See what you can find for Graphite. (If you're offline and run into an error, look for
+instructions below on installing a locally cached copy of the module.)
 
-The `apache` module gives you everything you need to automate installing,
-configuring, and starting an Apache webserver. In your terminal, enter the
-following command to install the module:
+    puppet module search graphite
 
-    puppet module install puppetlabs-apache
-	
+Cool, it looks like there are several matches for Graphite. For this quest, use 
+Daniel Werdermann's module: `dwerder-graphite`.
+
+{% aside Supported and Approved %}
+Among the available modules, the Forge includes two categories of reviewed modules.
+**Puppet Approved** modules adhere to a set of Puppet Labs specifications for style, documentation, and
+semantic versioning, along with other best practices standards. **Puppet Supported** modules are
+rigorously tested for compatibility with Puppet Enterprise and are fully supported by Puppet Labs.
+{% endaside %}
+
+{% task 2 %}
+---
+- execute: puppet module install dwerder-graphite
+{% endtask %}
+
+Now that you know what module you want, you'll need to install it to the puppet
+master to make it available for your infrastructure. The `puppet module` tool makes
+this installation easy. Go ahead and run:
+
+    puppet module install dwerder-graphite
+    
 {% aside Offline? %}
 If you don't have internet access, run the following terminal commands to use
-cached versions of all the modules used in the quests:
+cached versions of all the modules reqiuired for quests in this guide:
 
     cd /usr/src/forge/
     for m in `ls`; do puppet module install $m --ignore-dependencies ; done
 
-Note: This installs the modules for all of the quests in this guide. You can
+This installs the modules for all of the quests in this guide. You can
 skip future instructions for installing modules.
 {% endaside %}
 
-This command tells Puppet to download the Puppet Labs `apache` module from the
-Forge and place it in the directory specified as Puppet's _modulepath_. The
-modulepath defines the directory on your puppet master where Puppet saves
-modules you install and accesses modules you already have installed. For Puppet
-Enterprise, this defaults to `/etc/puppetlabs/puppet/environments/production/modules`.
+Easy enough, but what did we do, exactly?
 
-To help set up the Quest Guide website, we've also prepared an `lvmguide`
-module. It's already in the VM's module path, so there's no need to fetch it
-from the Forge. This small `lvmguide` module draws on some resources from the
-`apache` module and uses some code and content of its own to finish the
-configuration of the Quest Guide website. 
+When you ran the `puppet module` command, Puppet retrieved the `graphite` module from
+Forge and placed it in the puppet master's *modulepath*. The modulepath is where
+puppet will look to find puppet classes and other files and resources made available by any
+modules you download or create. For Puppet Enterprise, the default modulepath is
+`/etc/puppetlabs/puppet/environments/production/modules`.
 
-### The lvmguide and apache modules
+## Class and Classification
 
-Before using these modules, you should know a little more about how they work. 
+The `graphite` *module* includes Puppet code that defines a `graphite` *class*.
+In Puppet, a *class* is simply a named block of Puppet code that defines a set
+of associated system resources. A class might install a package, customize an
+associated configuration file for that package, and start a service provided by
+that package. These are related and interdependent processes, so it makes sense
+to organize them into a single configurable unit: a class.
 
-The `lvmguide` *module* includes Puppet code that defines an `lvmguide` *class*.
-In Puppet, a *class* is simply a named block of Puppet code organized in a way
-that defines a set of associated system resources. A class might install a
-package, customize an associated configuration file for that package, and start
-a service provided by that package. These are related and interdependent
-processes, so it makes sense to organize them into a single configurable unit: a
-class.
+While a module can include many classes, it will generally have a main class that
+shares the name of the module. This main class will often handle the basic installation
+and configuration of the primary component the module is designed to manage.
 
-While a module can include many classes, it will often have a main class that
-shares the name of the module. This class serves as the access point for the
-module's functionality and calls on other classes within the module or from
-pre-requisite modules as needed.
+The `graphite` class contains the instructions puppet needs to set up Graphite,
+but you still need to tell puppet where and how you want it to apply the class
+across your infrastructure. This process of matching classes to nodes is
+called *classification*.
 
-## Put your modules to use
+### Access the PE console
 
-In order to configure the Learning VM to serve you the Quest Guide website,
-you'll need to *classify* it with the `lvmguide` class. Classification tells
-Puppet which classes to apply to which machines in your infrastructure. Though
-there are a few different ways to classify nodes, we'll be using the PE
-console's node classifier for this quest.
+We're going to explore some alternative ways to classify nodes in future quests, but for
+the moment we'll opt for the simplicity of the the PE console's built-in node classifier.
+Now that you have the module installed, let's go through the steps of creating
+a node group, adding the Learning VM to the group, and classifying the group with the
+`graphite` class.
+
+But before you can access the PE console you'll need the Learning VM's IP address.
 
 {% task 2 %}
 ---
 - execute: facter ipaddress
 {% endtask %}
 
-To access the PE console you'll need the Learning VM's IP address. Remember, you
-can use the `facter` tool packaged with PE.
+Of course, you could a command like `ifconfig` to find this, but let's do it the puppet
+way. Puppet uses a tool called `facter` to collect facts about a system and make them
+available at catalog compilation. This is how it knows, for example, whether it's on
+Ubuntu and needs to use `apt-get` or CentOS and needs `yum`. You'll learn more about
+facts and conditionals in puppet later. For now, we can use `facter` in the command-line
+to determine the Learning VM's IP address.
 
     facter ipaddress
 
@@ -133,10 +152,10 @@ the `facter` command.
 
 Open a web browser on your host machine and go to `https://<IPADDRESS>`, where
 `<IPADDRESS>` is the Learning VM's IP address. (Be sure to include the `s` in
-`https`)
+`https`!)
 
-Your browser may give you a security notice because the PE console certificate is
-self-signed. Go ahead and click through this notice to continue to the console.
+The PE console certificate is self-signed, so your browser may give you a security notice.
+Go ahead and bypass this notice to continue to the console.
 
 When prompted, use the following credentials to log in:
 
@@ -147,10 +166,10 @@ When prompted, use the following credentials to log in:
 ### Create a node group
 
 Now that you have access to the PE console, we'll walk you through the steps
-needed to classify the "learning.puppetlabs.vm" node (i.e. the Learning VM)
-with the `lvmguide` class.
+to classify the "learning.puppetlabs.vm" node (i.e. the Learning VM)
+with the `graphite` class.
 
-First, you'll create a **Learning VM** node group. Node groups allow you to 
+First, create a **Learning VM** node group. Node groups allow you to 
 segment all the nodes in your infrastructure into separately configurable groups
 based on information collected by the `facter` tool.
 
@@ -164,7 +183,8 @@ your new node group.
 {% figure '../assets/node_group.png' %}
 
 Click on the new group to set the rules for this group. You only want the Learning VM
-in this group, so create a rule that will match on the name `learning.puppetlabs.vm`.
+in this group, so create a rule that will match on the Learning VM's domain name:
+`learning.puppetlabs.vm`.
 
 {% figure '../assets/rule.png' %}
 
@@ -175,197 +195,68 @@ interface to commit your change.
 
 ### Add a class
 
-Now that the `lvmguide` class is available, you can use it to classify the node
-`learning.puppetlabs.vm`. Under the *Classes* tab in the interface for the 
-Learning VM node group, enter `lvmguide` in the *Class name* text box, then 
-click the *Add class* and *Commit 1 change* buttons to confirm your changes.
+With the `graphite` class available from the module installed, you can use it
+to classify the node `learning.puppetlabs.vm`. Under the *Classes* tab, enter
+`graphite` in the textbox. The click the *Add class* button and *commit 1 change*
+button to confirm your changes.
+
+Under the *Classes* tab in the interface for the Learning VM node group, enter `graphite`
+in the *Class name* text box, then click the *Add class* button.
+
+One more thing before you're ready to apply your changes. By default, Graphite's web
+service runs on port 80, the same port that our Apache server is using to serve
+this Quest Guide. Luckily, Puppet's class parameters make this kind of configuration
+change easy. From the *Parameter name* dropdown menu, select *gr_apache_port*, enter
+90 in the *Value* field, and click the *Add parameter* button.
+
+Finally, click the *Commit 2 changes* button in the bottom right of the console window
+to commit your changes.
 
 ### Run puppet
 
 Now that you have classified the `learning.puppetlabs.vm` node with the
-`lvmguide` class, Puppet knows how the system should be configured, but it won't
+`graphite` class, Puppet knows how the system should be configured, but it won't
 make any changes until a Puppet run occurs. 
 
-The puppet agent daemon runs in the background on any nodes you manage with
+The puppet agent daemon runs in the background on all nodes you manage with
 Puppet. Every 30 minutes, the puppet agent daemon requests a *catalog* from the
-puppet master. The puppet master parses all the classes applied to that node and
-builds the catalog to describes how the node is supposed to be configured. It
-returns this catalog to the node's puppet agent, which then applies any changes
+puppet master. The puppet master parses all the classes applied to that node,
+builds the catalog to describes how the node is supposed to be configured, and
+returns this catalog to the node's puppet agent. The agent then applies any changes
 necessary to bring the node into the line with the state described by the
 catalog.
 
 {% task 3 %}
 ---
 - execute: |
-    curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -H "Content-Type: application/json" -X POST -d '{"name":"Learning VM", "environment":"production", "parent":"00000000-0000-4000-8000-000000000000", "classes":{"lvmguide" : {} },  "rule":["or", ["=", "name", "learning.puppetlabs.vm"]]}' https://localhost:4433/classifier-api/v1/groups
+    curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -H "Content-Type: application/json" -X POST -d '{"name":"Learning VM", "environment":"production", "parent":"00000000-0000-4000-8000-000000000000", "classes":{"graphite" : {"gr_apache_port" : "90"} },  "rule":["or", ["=", "name", "learning.puppetlabs.vm"]]}' https://localhost:4433/classifier-api/v1/groups
 - execute: puppet agent --test
 {% endtask %}
 
 Instead of waiting for the puppet agent to make its scheduled run, use the
-`puppet agent` tool to trigger one yourself. In the terminal, type the
-following command:
+`puppet agent` tool to trigger one yourself. Just remember: the Learning VM is running
+both a puppet master *and* a puppet agent, which is a bit different than what you'd
+typically see with a puppet master node controlling a collection of agent nodes.
+Installing modules is a puppet *master* thing and puppet runs are a puppet *agent* thing.
+
+So put on your agent hat and trigger a puppet run:
 
   puppet agent --test
 
-This may take a minute to run. This is about the time it
-takes for the software packages to be downloaded and installed as needed. After
-a brief delay, you will see text scroll by in your terminal indicating that
-Puppet has made all the specified changes to the Learning VM.
+This may take a minute to run. After a brief delay, you will see text scroll
+by in your terminal indicating that Puppet has made all the specified
+changes to the Learning VM.
 
-Check out the Quest Guide website! In your browser's address bar, type the following URL:
-`http://<IPADDRESS>`. (Though the IP address is the same, using `https` will
-load the PE console, while `http` will load the Quest Guide as a website.)
-
-From this point on you can either follow along with the website or with the PDF,
-whichever works best for you.
-
-## IP troubleshooting
-
-The website for the quest guide will remain accessible for as long as the VM's
-IP address remains the same. If you move your computer or laptop to a different
-network, or if you suspend your laptop and resumed work on the Learning VM
-later, the website may not be accessible.
-
-In case any of the above issues happen, and you end up with a stale IP address,
-run the following commands on the Learning VM to get a new IP address.
-(Remember, if you're ever unable to establish an SSH session, you can log in
-directly through the interface of your virtualization software.)
-
-Refresh your DHCP lease:
-
-    service network restart
-
-Find your IP address:
-
-    facter ipaddress
-
-## Explore the lvmguide class
-
-To understand how the `lvmguide` class works, you can take a look under the
-hood. In your terminal, use the `cd` command to navigate to the module
-directory. (Remember, `cd` for 'change directory.')
-
-    cd /etc/puppetlabs/puppet/environments/production/modules
-
-Next, open the `init.pp` manifest.
-
-    vim lvmguide/manifests/init.pp
-
-{% highlight puppet %}
-class lvmguide (
-  $document_root = '/var/www/html/lvmguide',
-  $port          = '80',
-) {
-
-  # Manage apache, the files for the website will be 
-  # managed by the quest tool
-  class { 'apache':
-    default_vhost => false,
-  }
-  apache::vhost { 'learning.puppetlabs.vm':
-    port    => $port,
-    docroot => $document_root,
-  }
-}
-{% endhighlight %}
-
-(To exit out of the file without saving any changes, make sure you're in
-`command` mode in vim by hitting the `esc` key, and enter the command `:q!`.)
-
-Don't worry about understanding each detail of the syntax just yet. For now,
-we'll just give you a quick overview so the concepts won't be totally new when
-you encounter them again later on. 
-
-#### Class title and parameters:
-
-{% highlight puppet %}
-class lvmguide (
-  $document_root = '/var/www/html/lvmguide',
-  $port = '80',
-) {
-{% endhighlight %}
-
-The class `lvmguide` takes two parameters, as defined in the parentheses
-following the class name. Parameters allow variables within a class to be set as
-the class is declared. Because you didn't specify parameter values, the two
-variables `$document_root` and `$port` were set to their defaults,
-`/var/www/html/lvmguide` and `80`.
-
-#### Include the apache module's apache class:
-{% highlight puppet %}
-  class { 'apache': 
-    default_vhost => false,
-  }
-{% endhighlight %}
-
-The `lvmguide` class declares another class: `apache`. Puppet knows about the
-`apache` class because it is defined by the `apache` module you installed
-earlier. The `default_vhost` parameter for the `apache` class is set to `false`.
-This is all the equivalent of saying "Set up Apache, and don't use the default
-VirtualHost because I want to specify my own."
-
-#### Include the apache module's vhost class:
-{% highlight puppet %}
-  apache::vhost { 'learning.puppetlabs.vm':
-    port    => $port,
-    docroot => $document_root,
-  }
-{% endhighlight %}
-
-This block of code declares the `apache::vhost` class for the Quest Guide with
-the title `learning.puppetlabs.vm`, and with `$port` and `$docroot` set to those
-class parameters we saw earlier. This is the same as saying "Please set up a
-VirtualHost website serving the 'learning.puppetlabs.vm' website, and set the
-port and document root based on the parameters from above."
-
-#### The files for the website
-
-The files for the quest guide are put in place by the `quest` command line tool,
-and thus we don't specify anything about the files in the class. Puppet is
-flexible enough to help you manage just what you want to, leaving you free to
-use other tools where more appropriate. Thus we put together a solution using
-Puppet to manage a portion of it, and our `quest` tool to manage the rest.
-
-It may seem like there's a lot going on here, but by the time you get through
-this quest guide, a quick read-through will be enough to get the gist of
-well-written Puppet code. One advantage of a declarative language like Puppet is
-that the code tends to be much more self-documenting than code written in an
-imperative language.
-
-### Repeatable, portable, testable
-
-It's cool to install and configure an Apache httpd web server with a few lines
-of code and some clicks in the console, but keep in mind that the best part
-can't be shown with the Learning VM. Once the `lvmguide` module is installed,
-you can apply the `lvmguide` class to as many nodes as you like, even if they
-have different specifications or run different operating systems.
-
-And once a class is deployed to your infrastructure, Puppet gives you the
-ability to manage the configuration from a single central point. You can
-implement your updates and changes in a test environment, then easily move them
-into production.
-
-## Updated content
-
-Before continuing on to the remaining quests, let's ensure that you have the
-most up to date version of the quest-related content. Now that we have the
-website configured, please run the following command:
-
-    quest update
-
-This will download an updated PDF, files for the quest guide website, as well as
-the tests for the quests.
-
-You can find a copy of the updated Quest Guide PDF at:
-`http://<IPADDRESS>/Quest_Guide.pdf`, or in the
-`/var/www/html/lvmguide/` directory on the VM.
+Now that Graphite is up and running, have another look at our dashboard, and you'll
+see that it's collecting and graphing some basic information about the Learning VM.
 
 ## Review
 
 Great job on completing the quest! You should now have a good idea of how to
 download existing modules from the Forge and use the PE console node classifier
-to apply them to a node. You also learned how to use the `puppet agent --test`
-command to manually trigger a puppet run.
+to apply them to a node. You also learned how to use the the `facter` command
+to retrieve system information, and the `puppet agent --test` command to manually
+trigger a puppet run.
 
 Though we'll go over many of the details of the Puppet DSL in later quests, you
 had your first look at a Puppet class, and some of the elements that make it up.
