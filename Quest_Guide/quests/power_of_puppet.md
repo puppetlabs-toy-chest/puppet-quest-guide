@@ -26,9 +26,9 @@ infrastructure. Graphite, like Puppet, helps span the gap between nuts-and-bolts
 the big-picture, so it's a nice example to get you started on your path to Puppet mastery.
 
 For the sake of simplicity, we've already written out the HTML for a simple dashboard.
-Take a look [here](http://localhost:8080/graphite_dashboard.html). Of course, without
-Graphite running, there's not much to display. Go ahead and take
-should be served by Graphite is missing. Let's go ahead and use Puppet to fix that!
+Take a look [here](http://localhost:90/graphite_dashboard.html). Of course, without
+Graphite running, there's not much to display.
+Let's go ahead and use Puppet to fix that!
 
 One more note: as you go through this quest, remember that Puppet is a powerful
 and complex tool. We will explain concepts as needed to complete and understand
@@ -88,8 +88,7 @@ this installation easy. Go ahead and run:
 If you don't have internet access, run the following terminal commands to use
 cached versions of all the modules reqiuired for quests in this guide:
 
-    cd /usr/src/forge/
-    for m in `ls`; do puppet module install $m --ignore-dependencies ; done
+    for m in /usr/src/forge/*; do puppet module install $m --ignore-dependencies; done
 
 This installs the modules for all of the quests in this guide. You can
 skip future instructions for installing modules.
@@ -131,7 +130,7 @@ a node group, adding the Learning VM to the group, and classifying the group wit
 
 But before you can access the PE console you'll need the Learning VM's IP address.
 
-{% task 2 %}
+{% task 3 %}
 ---
 - execute: facter ipaddress
 {% endtask %}
@@ -226,7 +225,7 @@ returns this catalog to the node's puppet agent. The agent then applies any chan
 necessary to bring the node into the line with the state described by the
 catalog.
 
-{% task 3 %}
+{% task 4 %}
 ---
 - execute: |
     curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -H "Content-Type: application/json" -X POST -d '{"name":"Learning VM", "environment":"production", "parent":"00000000-0000-4000-8000-000000000000", "classes":{"graphite" : {"gr_apache_port" : "90"} },  "rule":["or", ["=", "name", "learning.puppetlabs.vm"]]}' https://localhost:4433/classifier-api/v1/groups
