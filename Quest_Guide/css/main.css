@@ -60,12 +60,8 @@
 @media all{
     body {
         font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-        font-size: 14px;
-        color: #5d5e59;
-    }
-
-    p {
-        text-align: justify;
+        font-size: 1.3em;
+        color: #383838;
     }
 
     code, 
@@ -120,8 +116,8 @@
 
     .lvm-task-number {
         color: #6c6d6d;
-        font-family: 'Arvo','Helvetica Neue',Helvetica,Arial,sans-serif;
-        font-size: 16px;
+        font-family: 'PT Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+        font-size: 1.625rem;
         font-style: bold;
         margin-left: -16px;
     }
@@ -208,7 +204,7 @@
         min-width: 320px;
         margin: 0px;
         position: relative;
-        font-size: 15px;
+        font-size: 1.3em;
         height: 100%;
     }
 
@@ -274,9 +270,10 @@
     }
 
     p {
-        margin-bottom: 9px;
-        line-height: 1.5;
+        margin-bottom: 1.4em;
+        line-height: 1.6em;
         max-width: 37em;
+        letter-spacing: .5px;
     }
 
     h1, 
@@ -285,8 +282,8 @@
     h4, 
     h5, 
     h6 {
-        font-family: 'Arvo','PT Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-        color: #6c6d6d;
+        font-family: 'PT Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+        color: #000;
         font-weight: normal;
         line-height: 1.15em;
         text-rendering: optimizeLegibility;
@@ -296,7 +293,6 @@
         margin-bottom: 50px;
         margin-top: 15px;
         font-size: 36px;
-        counter-reset: image;
     }
     
     h2 {
@@ -308,14 +304,12 @@
 
     h3 {
         display: block;
-        color: #6c6d6d;    
         font-size: 18px;
         margin-bottom: 0.53em;
         margin-top: 0.53em;
     }
 
     h4 {
-        color: #6c6d6d;
         font-size: 14px;
     }
 
@@ -429,7 +423,6 @@
         width: 220px;
         padding: 20px;
         min-width: 100px;
-        background: #f7f7f7;
     }
 
         #sidebar-first ul {
