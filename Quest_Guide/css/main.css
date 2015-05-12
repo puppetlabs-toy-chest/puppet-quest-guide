@@ -60,36 +60,27 @@
 @media all{
     body {
         font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-        font-size: 14px;
-        color: #5d5e59;
-    }
-
-    p {
-        text-align: justify;
+        font-size: 1.2em;
+        color: #383838;
     }
 
     code, 
     pre {
         font-family: Monaco, Andale Mono, Courier New, monospace;
+        font-size: .9em;
     }
 
     code {
-        background-color: #eeeeee;
-        color: rgba(0, 0, 0, 0.75);
         padding: 1px 3px;
-        font-size: 12px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
     }
 
     pre {
         display: block;
+        border: 1px solid #eee;
+        border-radius: 3px;
         padding: 8px;
         margin: 0 0 18px;
-        line-height: 16px;
-        font-size: 11px;
-        border: 1px solid #cccccc;
+        line-height: 1em;
         white-space: pre-wrap;
         word-wrap: break-word;
         page-break-inside: avoid;        
@@ -97,7 +88,6 @@
 
         pre code {
             background: none;
-            font-size: 10px;
             padding: 0;
         }
 
@@ -120,8 +110,8 @@
 
     .lvm-task-number {
         color: #6c6d6d;
-        font-family: 'Arvo','Helvetica Neue',Helvetica,Arial,sans-serif;
-        font-size: 16px;
+        font-family: 'PT Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+        font-size: 1.625rem;
         font-style: bold;
         margin-left: -16px;
     }
@@ -131,21 +121,19 @@
             display: inline;
             font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             content: ' ';
-            font-size: 15px;
+            font-size: 1em;
         }
 
     .lvm-callout,
-    .lvm-inside-aside {
-        background: #fafafa;
-        color: #333333;
+    .lvm-inline-aside {
         padding: 1em;
-        border: 1pt solid #eeeeee;
         page-break-inside: avoid;              
     }
         
     .lvm-inline-aside {
-        font-size: 12px;
-        margin: 2em;
+        font-size: .8em;
+        margin: 2em 0em;
+        background: #fafafa;
     }
 
         .lvm-inline-aside strong {
@@ -154,16 +142,15 @@
         }
 
     .lvm-callout {
-        margin: 1em 0em 1em 0em;
-        margin-right: -190px;
+        margin-right: -200px;
         left: 1em;
-        width: 150px;
+        width: 220px;
         float: right;
         position: relative;
     }
     
         .lvm-callout p {
-            font-size: 11px;
+            font-size: .7em;
             line-height: 1.2;
         }
 
@@ -191,7 +178,6 @@
             }
             
     .highlight { 
-        background: #eeeeee; 
         margin: .5em;
     }
 }
@@ -208,7 +194,7 @@
         min-width: 320px;
         margin: 0px;
         position: relative;
-        font-size: 15px;
+        font-size: 1.2em;
         height: 100%;
     }
 
@@ -274,9 +260,9 @@
     }
 
     p {
-        margin-bottom: 9px;
-        line-height: 1.5;
-        max-width: 37em;
+        margin-bottom: 1.4em;
+        line-height: 1.6em;
+        letter-spacing: .5px;
     }
 
     h1, 
@@ -285,8 +271,8 @@
     h4, 
     h5, 
     h6 {
-        font-family: 'Arvo','PT Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-        color: #6c6d6d;
+        font-family: 'PT Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+        color: #666666;
         font-weight: normal;
         line-height: 1.15em;
         text-rendering: optimizeLegibility;
@@ -296,7 +282,6 @@
         margin-bottom: 50px;
         margin-top: 15px;
         font-size: 36px;
-        counter-reset: image;
     }
     
     h2 {
@@ -308,15 +293,13 @@
 
     h3 {
         display: block;
-        color: #6c6d6d;    
-        font-size: 18px;
+        font-size: 1.5rem;
         margin-bottom: 0.53em;
         margin-top: 0.53em;
     }
 
     h4 {
-        color: #6c6d6d;
-        font-size: 14px;
+        font-size: 1.25rem;
     }
 
     h5 {
@@ -360,9 +343,8 @@
         }
         
         blockquote p {
-            font-size: 15px;
+            font-size: 1.2em;
             font-weight: 300;
-            line-height: 18px;
             margin: 0;
             font-style: italic;
             font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -372,15 +354,6 @@
         font-size: 0.83em;
         vertical-align: super;
         line-height: 0;
-    }
-
-    .highlight,
-    .lvm-inline-aside {
-        max-width: 37em;
-    }
-
-    .lvm-callout {
-        margin-right: 0px;
     }
         
     .block-menu-block ul.menu {
@@ -429,7 +402,6 @@
         width: 220px;
         padding: 20px;
         min-width: 100px;
-        background: #f7f7f7;
     }
 
         #sidebar-first ul {
@@ -819,10 +791,5 @@
         font-size: 0.83em;
         vertical-align: super;
         line-height: 0;
-    }
-
-    .highlight { 
-        background: #ffffff; 
-        margin: .5em;
     }
 } 
