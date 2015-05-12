@@ -1,18 +1,18 @@
 class Tip < Liquid::Block
     def render(context)
-        "<div class = \"lvm-callout lvm-tip\"><p>#{super}</p></div></div>"
+        "<div class = \"lvm-callout lvm-tip\"><p>#{super}</p></div>"
     end
 end
 
 class Warning < Liquid::Block
     def render(context)
-        "<div class = \"lvm-callout lvm-warning\"><p>#{super}</p></div></div>"
+        "<div class = \"lvm-callout lvm-warning\"><p>#{super}</p></div>"
     end
 end
 
 class Fact < Liquid::Block
     def render(context)
-        "<div class = \"lvm-callout lvm-fact\"><p>#{super}</p></div></div>"
+        "<div class = \"lvm-callout lvm-fact\"><p>#{super}</p></div>"
     end
 end
 
@@ -25,7 +25,7 @@ module Jekyll
     end
     def render(context)
       @context = context
-      "<div class = \"lvm-inline-aside\"><h4>#{@title}</h4><p>#{markdownify(super)}</p></div></div>"
+      "<div class = \"lvm-inline-aside\"><h4>#{@title}</h4><p>#{markdownify(super)}</p></div>"
     end
   end
 end

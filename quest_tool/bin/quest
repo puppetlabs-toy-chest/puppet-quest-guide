@@ -15,68 +15,25 @@ BASE=`basename $0`
 BUFFER="/tmp/${BASE}${CMDLINE}.out"
 LOCK="/tmp/${BASE}.lck"
 RUBY='/opt/puppet/bin/ruby'
+RAKE='/opt/puppet/bin/rake'
 DIR='/root/.testing'
 TEST='test.rb'
-DOWNLOADURL='http://downloads.puppetlabs.com/lvmguide/'
 CACHEDIR='/opt/lvmguide'
 WEBROOT='/var/www/html/lvmguide'
 LOCALREPO='/usr/src/courseware-lvm'
 
-vergr() {
-  lower=$(echo -e "$1\n$2" | sort -V | head -n1)
-  [ "$2" = "$lower" ] && return 0
-}
-
-vercmp() {
-  [ "$1" = "$2" ] && return 1 || vergr $1 $2
-}
-
-cleanup() {
-  rm -rf $CACHEDIR/{_site,quest_tool}
-}
-
 if [ "$1" == "update" ]; then
-  if [ ! -e "$CACHEDIR" ]; then
-    mkdir $CACHEDIR
-  fi
-  LATEST=$(curl -fs $DOWNLOADURL/LATEST)
-  if [ $? != 0 ]; then
-    echo "Could not find latest version information"
-    exit 1
-  fi
-  if [ -e "$DIR/VERSION" ]; then
-    CURRENT=$(head -n 1 $DIR/VERSION)
+  if [ -e "$LOCALREPO" ]; then
+    $RAKE update
   else
-    CURRENT="0"
-  fi
-  if [ ! -z "$LATEST" ] && vercmp $LATEST $CURRENT || vergr $CURRENT $LATEST ; then
-    trap cleanup EXIT
-    if vercmp $LATEST $CURRENT ; then
-      echo "Updating content to version: $LATEST from version: $CURRENT"
-      ZIPFILE=lvmguide-$LATEST.zip
-      curl -sSz $CACHEDIR/$ZIPFILE $DOWNLOADURL/$ZIPFILE -o $CACHEDIR/$ZIPFILE
-    else #If the local copy is newer, don't download
-      echo "Updating content to version: $CURRENT"
-      ZIPFILE=lvmguide-$CURRENT.zip
-    fi
-    unzip -uqq $CACHEDIR/$ZIPFILE -d $CACHEDIR
-
-    # replace content
-    rsync -ab --backup-dir=.backup_$CURRENT $CACHEDIR/_site/ $WEBROOT/
-    rsync -ab --backup-dir=.backup_$CURRENT $CACHEDIR/quest_tool/ /root/
-  else
-    echo "Current version: $CURRENT. Latest: $LATEST. No update required."
+    echo "Unable to update to content.  No local content repository found."
   fi
   exit
 fi
 
 if [ "$1" == "betaupdate" ]; then
   if [ -e "$LOCALREPO" ]; then
-    cd $LOCALREPO
-    git pull
-    rsync -ab --backup-dir=/root/.backup $LOCALREPO/quest_tool/* /root/
-    rsync -ab --backup-dir=/root/.backup $LOCALREPO/quest_tool/.testing /root/
-    rsync -ab --backup-dir=/root/.backup $LOCALREPO/VERSION /root/.testing/VERSION
+    $RAKE update_newest
   else
     echo "Unable to update to beta content.  No local content repository found."
   fi
