@@ -44,6 +44,7 @@ EOS
   opt :completed, "Display completed quests"
   opt :list, "Show all available quests"
   opt :start, "Begin tracking the specified quest", :type => :string
+  opt :update, "Update quest content"
 end
 
 opts = Trollop::with_standard_exception_handling p do

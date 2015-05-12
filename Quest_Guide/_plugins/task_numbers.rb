@@ -5,7 +5,7 @@ class Task < Liquid::Block
   end
 
     def render(context)
-        "<div class = \"lvm-task-number\"><p>Task #{@number}:</p></div></div>"
+        "<div class = \"lvm-task-number\"><p>Task #{@number}:</p></div>"
     end
 end
 
