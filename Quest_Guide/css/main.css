@@ -60,14 +60,14 @@
 @media all{
     body {
         font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-        font-size: 1.3em;
+        font-size: 1.2em;
         color: #383838;
     }
 
     code, 
     pre {
         font-family: Monaco, Andale Mono, Courier New, monospace;
-        font-size: .8em;
+        font-size: .9em;
     }
 
     code {
@@ -76,6 +76,8 @@
 
     pre {
         display: block;
+        border: 1px solid #eee;
+        border-radius: 3px;
         padding: 8px;
         margin: 0 0 18px;
         line-height: 1em;
@@ -131,6 +133,7 @@
     .lvm-inline-aside {
         font-size: .8em;
         margin: 2em 0em;
+        background: #fafafa;
     }
 
         .lvm-inline-aside strong {
@@ -191,7 +194,7 @@
         min-width: 320px;
         margin: 0px;
         position: relative;
-        font-size: 1.3em;
+        font-size: 1.2em;
         height: 100%;
     }
 
@@ -259,7 +262,6 @@
     p {
         margin-bottom: 1.4em;
         line-height: 1.6em;
-        max-width: 37em;
         letter-spacing: .5px;
     }
 
@@ -297,7 +299,7 @@
     }
 
     h4 {
-        font-size: 14px;
+        font-size: 1.25rem;
     }
 
     h5 {
