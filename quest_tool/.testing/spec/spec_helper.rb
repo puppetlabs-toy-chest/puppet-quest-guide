@@ -5,6 +5,8 @@ require 'pathname'
 include Serverspec::Helper::Exec
 include Serverspec::Helper::DetectOS
 
+MODULE_PATH = '/etc/puppetlabs/puppet/environments/production/modules/'
+
 RSpec.configure do |c|
   if ENV['ASK_SUDO_PASSWORD']
     require 'highline/import'
