@@ -24,18 +24,10 @@ LOCALREPO='/usr/src/courseware-lvm'
 
 if [ "$1" == "update" ]; then
   if [ -e "$LOCALREPO" ]; then
+    cd $LOCALREPO
     $RAKE update
   else
     echo "Unable to update to content.  No local content repository found."
-  fi
-  exit
-fi
-
-if [ "$1" == "betaupdate" ]; then
-  if [ -e "$LOCALREPO" ]; then
-    $RAKE update_newest
-  else
-    echo "Unable to update to beta content.  No local content repository found."
   fi
   exit
 fi
