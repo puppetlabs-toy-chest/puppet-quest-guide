@@ -11,9 +11,11 @@ require 'rspec/core/formatters/base_text_formatter'
 require 'pp'
 
 # GitHub repository data
-
-GH_DEV  = 'puppetlabs'
-GH_REPO = 'courseware-lvm'
+# Set ENV variables to override repository information for testing.
+GH_DEV  = ENV['GH_DEV'] | 'puppetlabs'
+GH_REPO = ENV['GH_REPO'] | 'courseware-lvm'
+GH_REMOTE = ENV['GH_REMOTE'] | 'upstream'
+GH_BRANCH = ENV['GH_BRANCH'] | 'release'
 
 # Directories
 
@@ -30,12 +32,6 @@ SITE_ROOT = "/var/www/html/questguide/"
 # Tasks
 
 task :deploy => :build do
-  unless ENV['HOSTNAME'] == "learning.puppetlabs.vm"
-    puts "HOSTNAME != learning.puppetlabs.vm. Deploy tasks will target /tmp/learningvm for testing purposes."
-    unless system("mkdir -p /tmp/learningvm/{root,var/www/questguide}")
-      raise "There was an error creating the /tmp/learningvm directory"
-    end
-  end
   unless system("cp -R #{HOME_DIR_SOURCE} #{HOME_DIR}")
     raise "There was an error copying the home directory files"
   end
@@ -50,28 +46,23 @@ task :build do
   end
 end
 
-task :update_stable => [:fetch, :deploy]
-task :update_newest => [:fetch_newest, :deploy]
+task :update => [:warn, :fetch, :deploy]
 
-task :fetch => :config do
-  checkout('release')
-  pull('upstream', 'release')
+task :warn do
+  provide_bailout("Updating may disrupt current quest progress.")
 end
 
-task :fetch_newest => :config do
-  checkout('master')
-  pull('upstream', 'master')
+task :fetch => :config do
+  checkout(GH_BRANCH)
+  pull(GH_REMOTE, GH_BRANCH)
 end
 
 task :config do
-  ensure_branch('release')
-  ensure_remote('upstream', "https://github.com/#{GH_DEV}/#{GH_REPO}.git")
+  ensure_branch(GH_BRANCH)
+  ensure_remote(GH_REMOTE, "https://github.com/#{GH_DEV}/#{GH_REPO}.git")
 end
 
 task :test_all do
-  unless ENV['HOSTNAME'] == "learning.puppetlabs.vm"
-    raise "Aborting test. Tests should only be run on the Learning VM itself."
-  end
   Dir.chdir "/root/.testing" do
     test_all
   end
@@ -89,7 +80,12 @@ def ensure_remote(remote, url)
 end
 
 def ensure_branch(branch)
-  system("git branch #{branch} > /dev/null")
+  unless system("git rev-parse --verify 2> /dev/hull")
+    # Create branch if it doesn't already exist
+    unless system("git branch #{branch} > /dev/null")
+      raise "There was an error creating branch #{branch}"
+    end
+  end
 end
 
 def checkout(branch)

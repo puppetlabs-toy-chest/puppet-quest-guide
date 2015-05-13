@@ -25,11 +25,6 @@ an open-source graphing tool that lets you easily visualize the state of your
 infrastructure. Graphite, like Puppet, helps span the gap between nuts-and-bolts and
 the big-picture, so it's a nice example to get you started on your path to Puppet mastery.
 
-For the sake of simplicity, we've already written out the HTML for a simple dashboard.
-Take a look [here](http://localhost:90/graphite_dashboard.html). Of course, without
-Graphite running, there's not much to display.
-Let's go ahead and use Puppet to fix that!
-
 One more note: as you go through this quest, remember that Puppet is a powerful
 and complex tool. We will explain concepts as needed to complete and understand
 each task in this quest, but sometimes we'll hold off on a fuller explanation until
@@ -102,7 +97,7 @@ puppet will look to find puppet classes and other files and resources made avail
 modules you download or create. For Puppet Enterprise, the default modulepath is
 `/etc/puppetlabs/puppet/environments/production/modules`.
 
-## Class and Classification
+## Class and classification
 
 The `graphite` *module* includes Puppet code that defines a `graphite` *class*.
 In Puppet, a *class* is simply a named block of Puppet code that defines a set
@@ -240,7 +235,7 @@ Installing modules is a puppet *master* thing and puppet runs are a puppet *agen
 
 So put on your agent hat and trigger a puppet run:
 
-  puppet agent --test
+    puppet agent --test
 
 This may take a minute to run. After a brief delay, you will see text scroll
 by in your terminal indicating that Puppet has made all the specified
