@@ -1,59 +1,51 @@
 require 'spec_helper'
 
-# Task 1
-describe "Find the modulepath" do 
-  it 'using puppet agent --configprint' do
+describe "Task 1:" do 
+  it 'Use puppet agent --configprint find the modulepath' do
     file('/root/.bash_history').should contain "puppet agent --configprint modulepath"
   end
 end
 
-# Task 2
-describe "The directory for the new vimrc module" do
-  it 'should be created' do
-    file('/etc/puppetlabs/puppet/environments/production/modules/vimrc').should be_directory
+describe "Task 2:" do
+  it 'Create a directory for your vimrc module' do
+    file("#{MODULE_PATH}vimrc").should be_directory
   end
 end
 
-# Task 3
-describe "The directories for manifests, tests, and files" do
-  it 'should be created' do
-    file('/etc/puppetlabs/puppet/environments/production/modules/vimrc/manifests').should be_directory
-    file('/etc/puppetlabs/puppet/environments/production/modules/vimrc/tests').should be_directory
-    file('/etc/puppetlabs/puppet/environments/production/modules/vimrc/files').should be_directory
+describe "Task 3:" do
+  it 'Create manifests, tests, and files subdirectories' do
+    file("#{MODULE_PATH}vimrc/manifests").should be_directory
+    file("#{MODULE_PATH}vimrc/tests").should be_directory
+    file("#{MODULE_PATH}vimrc/files").should be_directory
   end
 end
 
-# Task 4
-describe "The vimrc file" do
-  it 'should be copied into the module files directory' do
-    file('/etc/puppetlabs/puppet/environments/production/modules/vimrc/files/vimrc').should be_file
+describe "Task 4:" do
+  it 'Copy the .vimrc into the module files directory' do
+    file("#{MODULE_PATH}vimrc/files/vimrc").should be_file
   end
 end
 
-# Task 5
-describe "The vimrc/files/vimrc file" do
-  it "should contain the 'set number' command" do
-    file('/etc/puppetlabs/puppet/environments/production/modules/vimrc/files/vimrc').should contain /set nu/
+describe "Task 5:" do
+  it "Add the 'set nu' command to the vimrc file" do
+    file("#{MODULE_PATH}vimrc/files/vimrc").should contain /set nu/
   end
 end
 
-# Task 6
-describe 'The vimrc/manifests/init.pp manifest' do
-  it 'should define the vimrc class' do
-    file('/etc/puppetlabs/puppet/environments/production/modules/vimrc/manifests/init.pp').should contain 'class vimrc'
+describe 'Task 6:' do
+  it 'Define the vimrc class' do
+    file("#{MODULE_PATH}vimrc/manifests/init.pp").should contain 'class vimrc'
   end
 end
 
-# Task 7
-describe 'The test manifest for the users class' do
-  it 'should include the vimrc class' do
-    file('/etc/puppetlabs/puppet/environments/production/modules/vimrc/tests/init.pp').should contain 'include vimrc'
+describe 'Task 7:' do
+  it 'Include the vimrc class in a test manifest' do
+    file("#{MODULE_PATH}vimrc/tests/init.pp").should contain 'include vimrc'
   end
 end
 
-# Task 8
-describe 'The /root/.vimrc configuration file' do
-  it "should contain the 'set number' command" do
+describe 'Task 8:' do
+  it "Apply the test to add the 'set nu' command to your .vimrc" do
     file('/root/.vimrc').should contain /set nu/
   end
 end

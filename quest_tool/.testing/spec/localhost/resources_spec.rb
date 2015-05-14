@@ -1,29 +1,25 @@
 require 'spec_helper'
 
-# Task 1
-describe "The puppet resource command" do
-  it 'should be used to inspect user root' do
+describe "Task 1:" do
+  it 'Inspect the root user resource' do
     file('/root/.bash_history').should contain 'puppet resource user root'
   end
 end
 
-# Task 2
-describe "The puppet describe command" do
-  it 'should be used to get a description of the user type' do
+describe "Task 2:" do
+  it 'View the description of the user resource' do
     file('/root/.bash_history').should contain 'puppet describe user'
   end
 end
 
-# Task 3
-describe "The user galatea" do
-  it 'should exist on the system' do
+describe "Task 3:" do
+  it 'Create the user galatea' do
     file('/etc/passwd').should contain "galatea"
   end
 end
 
-# Task 4
-describe "The user galatea" do
-  it 'should have the comment Galatea of Cyprus' do
+describe "Task 4:" do
+  it 'Give the galatea user the comment Galatea of Cyprus' do
     file('/etc/passwd').should contain 'Galatea of Cyprus'
   end
 end

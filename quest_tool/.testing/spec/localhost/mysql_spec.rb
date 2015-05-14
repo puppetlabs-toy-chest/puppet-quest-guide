@@ -1,40 +1,35 @@
 require 'spec_helper'
 
-# Task 1
-describe "The Puppet Labs MySQL module" do
-  it 'should be installed' do
-    file('/etc/puppetlabs/puppet/environments/production/modules/mysql').should be_directory
-    file('/etc/puppetlabs/puppet/environments/production/modules/mysql/metadata.json').should contain 'puppetlabs-mysql'
+describe "Task 1:" do
+  it 'Install the puppetlabs-mysql module' do
+    file("#{MODULE_PATH}mysql").should be_directory
+    file("#{MODULE_PATH}mysql/metadata.json").should contain 'puppetlabs-mysql'
   end
 end
 
-# Task 2
-describe "The site.pp manifest" do
-  it 'should declare the mysql class' do
-    file('/etc/puppetlabs/puppet/environments/production/manifests/site.pp').content.should match /class\s*{\s*'(::)?mysql::server':/
-    file('/etc/puppetlabs/puppet/environments/production/manifests/site.pp').content.should match /\s*root_password\s+=>\s+/
-    file('/etc/puppetlabs/puppet/environments/production/manifests/site.pp').content.should match /\s*override_options\s+=>\s+/
+describe "Task 2:" do
+  it 'Define the mysql class' do
+    file("#{PROD_PATH}manifests/site.pp").content.should match /class\s*{\s*'(::)?mysql::server':/
+    file("#{PROD_PATH}manifests/site.pp").content.should match /\s*root_password\s+=>\s+/
+    file("#{PROD_PATH}manifests/site.pp").content.should match /\s*override_options\s+=>\s+/
   end
 end
 
-# Task 3
-describe "A MySQL server" do
-  it 'should be installed' do
+describe "Task 3:" do
+  it 'Trigger a puppet agent run to install MySQL' do
     file('/usr/bin/mysql').should be_file
   end
 end
 
-# Task 4 
-describe "The mysql::server::account_security class" do
-  it "should be applied" do
+describe "Task 4:" do
+  it "Apply the mysql::server::account_security class" do
     file('/usr/bin/mysql').should be_file
     command("mysql -e 'show databases;'|grep test").exit_status.should_not be_zero
   end
 end
 
-# Task 5
-describe "A database, user, and grant" do
-  it "should be created" do
+describe "Task 5:" do
+  it "Create a new database, user, and grant" do
     command("mysql -e 'show databases;'|grep lvm").exit_status.should be_zero
     command("mysql -e 'SELECT User FROM mysql.user;'|grep lvm_user").exit_status.should be_zero
     command("mysql -e 'show grants for lvm_user@localhost;'|grep lvm.*").exit_status.should be_zero
