@@ -25,9 +25,9 @@ QUEST_GUIDE =      File.join(DIR, 'Quest_Guide')
 
 HOME_DIR_SOURCE =  File.join(DIR, 'quest_tool/.')
 SITE_ROOT_SOURCE = File.join(DIR, 'Quest_Guide/_site/.')
-TEST_DIR = File.join(HOME_DIR, ".testing/spec/localhost/")
 
 HOME_DIR =  "/root/"
+TEST_DIR = File.join(HOME_DIR, ".testing/spec/localhost/")
 SITE_ROOT = "/var/www/html/questguide/"
 
 # Tasks
