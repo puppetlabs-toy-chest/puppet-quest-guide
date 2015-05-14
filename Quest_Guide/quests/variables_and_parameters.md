@@ -77,11 +77,11 @@ the term "variable" is, you're not alone!)
 
 **Variable interpolation** gives you a way to insert a string stored as a
 variable into another string. For instance, if you want Puppet to manage the
-files in the `/var/www/html/lvmguide` directory you set up in the Power of
+files in the `/var/www/html/questguide` directory you set up in the Power of
 Puppet quest, you can assign this directory path to a variable:
 
 {% highlight puppet %}
-$doc_root = '/var/root/www/html/lvmguide'
+$doc_root = '/var/root/www/html/questguide'
 {% endhighlight %}
 
 Once the variable is set, you can use the variable interpolation syntax to
@@ -140,7 +140,7 @@ Now create an `web` directory:
   content: |
     class web {
     
-      $doc_root = '/var/www/html/lvmguide'
+      $doc_root = '/var/www/html/questguide'
     
       $english = 'Hello world!'
       $french = 'Bonjour le monde!'
@@ -165,7 +165,7 @@ class.
 {% highlight puppet %}
 class web {
 
-  $doc_root = '/var/www/html/lvmguide'
+  $doc_root = '/var/www/html/questguide'
   
   $english = 'Hello world!'
   $french = 'Bonjour le monde!'
