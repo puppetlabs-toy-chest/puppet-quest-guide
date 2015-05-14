@@ -25,6 +25,7 @@ QUEST_GUIDE =      File.join(DIR, 'Quest_Guide')
 
 HOME_DIR_SOURCE =  File.join(DIR, 'quest_tool/.')
 SITE_ROOT_SOURCE = File.join(DIR, 'Quest_Guide/_site/.')
+TEST_DIR = File.join(HOME_DIR, ".testing/spec/localhost/")
 
 HOME_DIR =  "/root/"
 SITE_ROOT = "/var/www/html/questguide/"
@@ -32,6 +33,9 @@ SITE_ROOT = "/var/www/html/questguide/"
 # Tasks
 
 task :deploy => :build do
+  unless system("rm -rf #{TEST_DIR}*.rb")
+    raise "There was an error deleting existing tests"
+  end
   unless system("cp -R #{HOME_DIR_SOURCE} #{HOME_DIR}")
     raise "There was an error copying the home directory files"
   end
