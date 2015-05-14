@@ -80,7 +80,7 @@ def ensure_remote(remote, url)
 end
 
 def ensure_branch(branch)
-  unless system("git rev-parse --verify 2> /dev/hull")
+  unless system("git rev-parse --verify #{branch} 2> /dev/null")
     # Create branch if it doesn't already exist
     unless system("git branch #{branch} > /dev/null")
       raise "There was an error creating branch #{branch}"
