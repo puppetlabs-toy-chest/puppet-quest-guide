@@ -12,10 +12,10 @@ require 'pp'
 
 # GitHub repository data
 # Set ENV variables to override repository information for testing.
-GH_DEV  = ENV['GH_DEV'] | 'puppetlabs'
-GH_REPO = ENV['GH_REPO'] | 'courseware-lvm'
-GH_REMOTE = ENV['GH_REMOTE'] | 'upstream'
-GH_BRANCH = ENV['GH_BRANCH'] | 'release'
+GH_DEV  = ENV['GH_DEV'] || 'puppetlabs'
+GH_REPO = ENV['GH_REPO'] || 'courseware-lvm'
+GH_REMOTE = ENV['GH_REMOTE'] || 'upstream'
+GH_BRANCH = ENV['GH_BRANCH'] || 'release'
 
 # Directories
 
