@@ -1,19 +1,19 @@
 require 'spec_helper'
 
-describe "The version of Puppet" do
-  it 'should be checked' do 
+describe "Task 1:" do
+  it 'Use puppet -V to check the puppet version' do 
     file('/root/.bash_history').should contain 'puppet -V'
   end
 end
 
-describe "The options for the quest tool" do
-  it 'should be explored' do
+describe "Task 2:" do
+  it 'View the options for the quest tool' do
     file('/root/.bash_history').should contain "quest --help"
   end
 end
 
-describe "Quest progress" do
-  it 'should be checked' do 
+describe "Task 3:" do
+  it 'Check the quest progress' do 
     file('/root/.bash_history').should contain "quest --progress"
   end
 end
