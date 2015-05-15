@@ -23,13 +23,20 @@ WEBROOT='/var/www/html/lvmguide'
 LOCALREPO='/usr/src/courseware-lvm'
 
 if [ "$1" == "update" ]; then
-  if [ -e "$LOCALREPO" ]; then
-    cd $LOCALREPO
-    $RAKE update
-  else
-    echo "Unable to update to content.  No local content repository found."
-  fi
-  exit
+  read -r -p "Updating may disrupt current quest progress. Continue? [Y/n] " response
+  case $response in
+    [nN][oO]|[nN])
+      echo "Update aborted"
+      exit
+    *)
+    if [ -e "$LOCALREPO" ]; then
+      cd $LOCALREPO
+      $RAKE update
+    else
+      echo "Unable to update to content.  No local content repository found."
+    fi
+    exit
+  esac
 fi
 
 #- As long as a lock file exists, we use the previous output

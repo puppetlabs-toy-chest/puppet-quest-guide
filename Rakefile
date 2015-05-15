@@ -50,11 +50,7 @@ task :build do
   end
 end
 
-task :update => [:warn, :fetch, :deploy]
-
-task :warn do
-  provide_bailout("Updating may disrupt current quest progress.")
-end
+task :update => [:fetch, :deploy]
 
 task :fetch => :config do
   checkout(GH_BRANCH)
@@ -103,12 +99,6 @@ def pull(remote, branch)
     raise "Could not pull #{remote} #{branch}"
   end
 end
-
-def provide_bailout(message)
-  print "#{message} Continue? [Y/n]: "
-  raise "User cancelled" unless [ 'y', 'yes', '' ].include? STDIN.gets.strip.downcase
-end
-
 
 def solve_quest(name)
 
