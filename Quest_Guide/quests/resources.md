@@ -5,12 +5,7 @@ layout: default
 
 # Resources
 
-### Prerequisites
-
-- Welcome Quest
-- Power of Puppet Quest
-
-## Quest Objectives
+## Quest objectives
 
 - Understand how resources on the system are modeled in Puppet's Domain Specific
   Language (DSL).
@@ -20,12 +15,12 @@ layout: default
 
 ## Getting Started
 
-In this quest, you will be introduced to **resources**, the fundamental building
-blocks of Puppet's declarative modeling syntax. You will learn how to inspect
-and modify resources on the Learning VM using Puppet command-line tools. A
-thorough understanding of how the Puppet resource syntax reflects the state of a
-system will be an important foundation as you continue to learn the more complex
-aspects of Puppet and its DSL.
+Before you go on to learn the more complex aspects of Puppet, you should start
+with a solid understanding of **resources**, the fundamental building
+blocks of Puppet's declarative modeling syntax.
+
+In this quest, you will learn what resources are and how to inspect and modify
+them with Puppet command-line tools.
 
 When you're ready to get started, type the following command:
 
@@ -38,49 +33,61 @@ When you're ready to get started, type the following command:
 
 > -Joseph Albers
 
-Resources are the fundamental units for modeling system configurations. Each
-resource describes some aspect of a system and its state, like a service that
-should be running or a package you want installed. The block of code that
-describes a resource is called a **resource declaration**. These resource
-declarations are written in Puppet code, a Domain Specific Language (DSL) built
-on Ruby.
+There's a big emphasis on novelty in technology. We celebrate the trail-blazers
+who spark our imagination and guide us to places we hadn't imagined. Often, however,
+it's not these frontier fireworks themselves that truly drive innovation in a field.
+It's something more basic: abstraction. Taking common tasks and abstracting away
+the complexities and pitfalls doesn't just make those tasks themselves easier, it gives you
+the stable, repeatable, and testable foundation you need to build something new.
+
+For Puppet, this foundation is a system called the *resource abstraction layer*.
+In Puppet, just about any aspect of your system configuration you want to manage
+(users, files, services, and packages, to give some common examples) is represented
+as a unit called a *resource*. Puppet knows how to translate back and forth between
+the resource syntax and the 'native' tools of the system it's running on. Ask Puppet
+about a user, for example, and it can represent all the information about that user
+as a resource of the *user* type. Of course, it's more useful to work in the opposite
+direction. Describe how you want a user resource to look, and Puppet can go out and
+make all the changes on the system to actually create or modify a user to match that
+description.
+
+The block of code that describes a resource is called a **resource declaration**.
+These resource declarations are written in Puppet code, a Domain Specific Language
+(DSL) based on Ruby. A good understanding of the Puppet DSL will be key to learning
+how to use Puppet effectively.
 
 ### Puppet's Domain Specific Language
+
+A good understanding of the Puppet DSL is a key first step in learning how to
+use Puppet effectively. Tools like the PE console give you quite a bit of power
+without asking you to edit code, but you'll be much better off with a solid
+understanding of what's going on under the hood.
 
 Puppet's DSL is a *declarative* language rather than an *imperative* one. This
 means that instead of defining a process or set of commands, Puppet code
 describes (or declares) only the desired end state, and relies on built-in
 *providers* to deal with implementation.
 
-When Luke Kanies was initially designing Puppet, he experimented with several
-languages before settling on Ruby as the best match for his vision of a
-transparent and readable way to model system states. While the Puppet DSL has
-inherited many of these appealing aspects of Ruby, you're better off thinking of
-it as a distinct language. While a bit of Ruby knowledge certainly won't hurt in
-your quest to master Puppet, you don't need to know any Ruby to use Puppet, and
-you may even end up in trouble if you blindly assume that things will carry
-over.
-
 One of the points where there is a nice carry over from Ruby is the *hash*
 syntax. It provides a clean way to format this kind of declarative model, and is
 the basis for the *resource declarations* you'll be learning about in this
 quest.
 
-A nice feature of Puppet's declarative model is that it goes both ways; that is,
-you can inspect the current state of any existing resource in the same syntax
-you would use to declare a desired state.
+As we mentioned above, a key feature of Puppet's declarative model is that it
+goes both ways; that is, you can inspect the current state of any existing resource
+in the same syntax you would use to declare a desired state.
 
 {% task 1 %}
 ---
 - execute: puppet resource user root
 {% endtask %}
 
-Using the *puppet resource* tool, take a look at your root user account. Note
-the pattern of the command will be: *puppet resource \<type\> \<name\>*.
+Use the *puppet resource* tool to take a look at your root user account. The
+syntax of the command is: *puppet resource \<type\> \<name\>*.
 
     puppet resource user root 
 	
-You'll see something like the following.
+You'll see something like the following:
 
 {% highlight puppet %}
 user { 'root':
@@ -96,24 +103,27 @@ user { 'root':
 }
 {% endhighlight %}
 
-It's a little abstract, but a nice portrait, don't you think?
-
 ### Resource Type
 
-To be sure that you have a solid understanding of how resources are represented,
-we'll go through this example point by point.
+You'll get used to the resource syntax as you use it, but for this first look
+we'll go through the example point by point.
 
-Take a look at your first line in the above resource declaration.
+We'll start with the first line first:
 
 {% highlight puppet %}
   user { 'root':
+    ...
+  }
 {% endhighlight %}
 
 The word `user`, right _before_ the curly brace, is the **resource type**.
+The type represents the kind of thing that the resource describes. It tells
+Puppet how to interpret the rest of the resource declaration and what kind of
+providers to use for managing the underlying system details.
 
-Puppet includes a variety of built-in resource types, which allow you to manage
-various aspects of a system. Below are some of the core resource types you'll
-likely encounter most often: 
+Puppet includes a number of built-in resource types, which allow you to manage
+aspects of a system. Below are some of the core resource types you'll encounter
+most often:
 
 * `user` A user
 * `group` A user group
@@ -124,9 +134,10 @@ likely encounter most often:
 * `exec` An external command
 * `host` A host entry
 
-If you are curious to learn about all of the different built-in resources types
-available for you to manage, see the [Type Reference
+If you are curious to learn about all of the built-in resources types
+available, see the [Type Reference
 Document](http://docs.puppetlabs.com/references/latest/type.html) 
+or try the command `puppet describe --list`.
 
 ### Resource Title
 
@@ -134,12 +145,28 @@ Take another look at the first line of the resource declaration.
 
 {% highlight puppet %}
   user { 'root':
+    ...
+  }
 {% endhighlight %}
 
-The single quoted word 'root' just before the colon is the resource **title**.
-Puppet uses a resource's title as a unique identifer for that resource. This
-means that no two resources of the same type can share a title. In the case of
-the user resource, the title is also the name of the user account being managed.
+The single quoted word `'root'` just before the colon is the resource **title**.
+Puppet uses the resource title as its own internal unique identifier for that
+resource. This means that no two resources of the same type can have the same title.
+
+In our example, the resource title, `'root'`, is also the name of the user we're inspecting
+with the `puppet resource` command. Generally, a resource title will match the name
+of the thing on the system that the resource is managing. A package resource will
+usually be titled with the name of the managed package, for example, and a file resource
+will be titled with the full path of the file.
+
+Keep in mind, however, that when you're creating your own resources, you can set
+these values explicitly body of a resource declaration instead of letting them
+default to the resource title. For example, as long as you tell explicitly tell Puppet
+that a user resource's `name` is `'root'`, you can actually give the resource any
+title you like. (`'superuser'`, maybe, or even `'spaghetti'`) Just because you *can* do
+this, though, doesn't mean it's generally a good idea! Unless you have a good
+reason to do otherwise, letting Puppet do it's defaulting magic with titles
+will save you typing and make your puppet code more readable.
 
 ### Attribute Value Pairs
 
@@ -163,7 +190,7 @@ user { 'root':
 After the colon in that first line comes a hash of **attributes** and their
 corresponding **values**. Each line consists of an attribute name, a `=>`
 (pronounced 'hash rocket'), a value, and a final comma. For instance, the
-attribute value pair `home => '/root',` indicates that your home is set to the
+attribute value pair `home => '/root',` indicates that root's home is set to the
 directory `/root`.
 
 So to bring this all together, a resource declaration will match the following
@@ -175,17 +202,16 @@ type {'title':
 }
 {% endhighlight %}
 
-{% aside The Trailing Comma %}
-Though the comma at the end of the final attribute value pair isn't strictly
-necessary, it is best practice to include it for the sake of consistency. Leave
-it out, and you'll inevitably forget to insert it when you add another attribute
-value pair on the following line!
+{% aside Trailing comma %}
+The comma at the end of the final attribute value pair isn't required, but it is
+best practice to include it for the sake of consistency. Leave it out, and you'll
+inevitably forget to insert it when you add another attribute value pair on the
+following line!
 {% endaside %}
 
-So in the world of Puppet, you and everything around you can be respresented as
-a resource, and resources follow this tidy declarative syntax. As pretty as they
-are, presumably you don't want to just look at resources all day, you want to
-change them! 
+In the world of Puppet, everything around you can be represented as
+a resource, and resources follow this tidy declarative syntax. You don't want to
+just look at resources all day, you want to change them! 
 
 You can, and easily. But before making any changes, take a moment to learn a bit
 more about the user type. You'll want a way of knowing *what* you're changing
@@ -195,7 +221,7 @@ before you start changing attributes.
 ---
 - execute: "puppet describe user | less"
   input:
-    - 'q\r'
+    - 'q'
 {% endtask %}
 
 Use the *puppet describe* tool to get a description of the *user* type,
@@ -212,11 +238,9 @@ you saw for the *root* user.
 
 ## Puppet Apply
 
-You can use the Puppet resource declaration syntax with the *puppet apply* tool
-to make quick changes to resources on the system. (Note, though, that while
-*puppet apply* is great for tests and exploration, it's limited to this kind of
-one-off change. We'll get to the more robust ways to manage resources in later
-quests.)
+You can use the `puppet apply` tool with the `-e` (`--execute`) flag to execute
+a bit of Puppet code. Though `puppet apply -e` is limited to one-off changes, it's
+a great tool for tests and exploration.
 
 {% task 3 %}
 ---
@@ -224,16 +248,15 @@ quests.)
     puppet apply -e "user { 'galatea': ensure => 'present', }"
 {% endtask %}
 
-You can use the *puppet apply* tool with the *-e* (*--execute*) flag to execute
-a bit of Puppet code. In this example, you'll create a new user called
-*galatea*. Puppet uses some defaults for unspecified user attributes, so all
-you'll need to do to create a new user is set the 'ensure' attribute to
-'present'. This 'present' value tells Puppet to check if the resource exists on
-the system, and to create the specified resource if it does not.
+In this task, you'll create a new user called *galatea*. Puppet uses reasonable
+defaults for unspecified user attributes, so all you need to do to create a new
+user is set the `ensure` attribute to `present`. This `present` value tells
+Puppet to check if the resource exists on the system, and to create the specified
+resource if it does not.
 
     puppet apply -e "user { 'galatea': ensure => 'present', }"
 
-Use the `puppet resource` tool to take a look at user *galatea*. Type the
+Use the `puppet resource` tool to take a look at user `galatea`. Type the
 following command:
 
     puppet resource user galatea
@@ -254,50 +277,28 @@ the account's owner.
     - "wq\r"
 {% endtask %}
 
-While puppet apply with the `-e` flag can be handy for quick one-liners, you can
-pass an `--execute` (incidentally, also shortened to `-e`) flag to the `puppet
-resource` tool to edit and apply changes to a resource.
+Though you could add a comment with the `puppet apply -e`, you'd have to cram
+the whole resource declaration into one line, and you wouldn't be able to see
+the current state of the resource before making your changes. Luckily, the
+`puppet resource` tool can also take a `-e` flag. This will drop the current
+state of a resource into a text editor where you can make any changes
+you like.
+
+Let's give it a try:
 
     puppet resource -e user galatea
 	
-You'll see the same output for this resource as before, but this time it will be
-opened in a text editor (vim, by default). To add a *comment* attribute, insert
+You should see the same output for this resource as before, but this time it will be
+opened in a text editor (Vim, by default). To add a *comment* attribute, insert
 a new line to the resource's list of attribute value pairs. (If you're not used
 to Vim, note that you must use the `i` command to enter insert mode before you
 can insert text.)
 
     comment => 'Galatea of Cyprus',
 	
-Save and exit (`esc` to return to command mode, and `:wq` in vim), and the
+Save and exit (`ESC` to return to command mode, and `:wq` to save and exit Vim), and the
 resource declaration will be applied with the added comment. If you like, use
 the `puppet resource` tool again to inspect the result.
-
-{% aside Quest Progress %}
-Have you noticed that when you successfully finish a task, the 'completed tasks'
-in the lower right corner of your terminal increases? Remember, you can also
-check your progress by entering the following command:
-
-    quest --progress
-
-{% endaside %}
-
-## The Resource Abstraction Layer
-
-As we mentioned at the beginning of this quest, Puppet takes the descriptions
-expressed by resource declarations and uses *providers* specific to the
-operating system to realize them. These providers abstract away the complexity
-of managing diverse implementations of resource types on different systems. As a
-whole, we call this system of resource types and providers the **Resource
-Abstraction Layer** or **RAL**.
-
-In the case of users, Puppet can use providers to manage users with LDAP,
-Windows ADSI, AIX, and several other providers depending on a node's system.
-Similarly, when you wish to install a package, you can stand back and watch
-Puppet figure out whether to use 'yum', 'apt', 'rpm', or one of several other
-providers for package management. This lets you set aside the
-implementation-related details of managing the resources, such as the names of
-commands (is it `adduser` or `useradd`?), arguments for the commands, and file
-formats, and lets you focus on the end result.
 
 ## Review
 
