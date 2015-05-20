@@ -2,19 +2,38 @@
 
 ## Synopsis
 
-The Learning VM (Virtual Machine) is a self contained environment with everything a new user needs to get started learning Puppet. The courses are in an extensible quest-based format to allow users to explore and build on concepts at their own pace. The self-paced learning format lets users at any level, not just command-line ninjas, get started with Puppet quickly and painlessly.
+The Learning VM (Virtual Machine) is a self contained learning environment.
+It includes with everything a new user needs to get started learning Puppet.
+The courses are in an extensible quest-based format to allow users to
+explore and build on concepts at their own pace. 
 
-Because the VM and Quest Guide are self contained, the user can learn Puppet anywhere; after the initial download, no internet connection is required.
+The Learning VM is written with Puppet Enterprise (PE) in mind, and some of
+the content is PE-specific. That being said, however, a user interested
+in Puppet Open Source will likely find the content helpful as well.
 
-## Markdown Content
+Because the VM and Quest Guide are self contained, a user can learn
+Puppet anywhere; after the initial download, no internet connection is
+required.
 
-Each Quest for the Quest Guide content is created and stored as a markdown (.md) file. Markdown is a lightweight format and allows for good separation between content, on the one hand, and on the other, parsing, formatting, and rendering implementations.
+## Quest content
+
+Content for the Quest Guide is created in a Markdown (.md) format. We're
+currently using the (Jekyll)[http://jekyllrb.com/] static site generator
+to build the Quest Guide from raw Markdown source. While the bulk of
+content follows standard (Markdown)[http://daringfireball.net/projects/markdown/]
+syntax, the content includes a few other elements. We'll go over
+some conventions and extensions below. 
 
 ### YAML Header
 
-Each quest markdown file must begin with a yaml header. This allows Jekyll to identify the file and provides variables to be used in processing. Currently, this header will consist of two lines, marked off from the rest of the file by `---` lines.
+Each quest Markdown file must begin with a yaml header. This allows
+Jekyll to identify the file and provides variables to be used in
+processing. Currently, this header will consist of two lines, marked
+off from the rest of the file by `---` lines.
 
-The first defines the title, and should be set to the title of the Quest. The second tells Jekyll what layout template to use in generating html from the markdown. This should always be set to `default`.
+The first defines the title, and should be set to the title of the quest.
+The second tells Jekyll what layout template to use in generating html from
+the Markdown. This should always be set to `default`.
 
 	---
 	title: Resource Ordering
@@ -23,35 +42,46 @@ The first defines the title, and should be set to the title of the Quest. The se
 
 ### Title and Headers
 
-Each quest should start with the title of that quest as an h1. In markdown, h1 is designated with a single `#` at the beginning of the lines, e.g.:
+Each quest should start with the title of that quest as an h1. In Markdown,
+h1 is designated with a single `#` at the beginning of the lines, e.g.:
 
 	# Resource Ordering
-
-Following the title is a list of course prerequisites under an h3. Prerequisites are entered here as a list of quest titles:
-
-	### Prerequisites
-	- Resources
-	- Manifests
 	
 Next is a Quest Objectives section under an h2 with that name:
 
 	## Quest Objectives
 	
-In this section, include a brief one paragraph summary of the quest objectives. At the end of this section, include the sentence "If you're ready to get started, type the following command:", followed by the start quest command, indented to display as a code block, and with the appropriate quest argument. (This will depend on the VM quest implementation, to be covered below.)
+In this section, include a brief one paragraph summary of the quest
+objectives. At the end of this section, include the a sentence like
+"If you're ready to get started, type the following command:",
+followed by the start quest command, indented to display as a code
+block, and with the quest name as its argument. This argument
+refers to the spec file for that quest, so replace any spaces
+with underscores to match the spec filename.
 
-    quest --start ordering
+    quest --start resource_ordering
     
-After this begin the main content of the quest, using h2 and h3 level headers as appropriate.
+After this, begin the main content of the quest, using h2 and h3
+level headers as appropriate.
 
-### Liquid Templates
+### Liquid templates
 
-We use the Liquid templating system in order to extend the syntax available in markdown and allow us to include asides and custom-formatted task notation.
+We use the Liquid templating system to extend the syntax available
+in Markdown and allow us to include asides and custom-formatted
+task notation.
 
-Errors in template syntax will prevent Jekyll from running properly. Before making a pull request with content changes, make sure that Jekyll will run. If there are Liquid syntax errors, Jekyll will throw a Liquid Exception and point you to the offending file.
+These custom templates are defined by Ruby files in the
+`Quest_Guide/_plugins` directory.
+
+Errors in template syntax will prevent Jekyll from running properly.
+Before making a pull request with content changes, make sure that
+Jekyll will run. If there are Liquid syntax errors, Jekyll will throw
+a Liquid Exception and point you to the offending file.
 
 #### Code Highlighting
 
-Blocks of code must be wrapped in `{% highlight <language> %} {% endhighlight %}` tags, like so:
+Blocks of code must be wrapped in `{% highlight <language> %} {% endhighlight %}`
+tags, like so:
 
 	{% highlight puppet %}
 	user { 'root':
@@ -60,7 +90,15 @@ Blocks of code must be wrapped in `{% highlight <language> %} {% endhighlight %}
 
 #### Asides
 
-There are three types of aside that will be displayed floating to the right of the text. Each has an icon according to its type and will include the content between the template tags. This content should be kept brief, and you should avoid using too many of these in close succession to avoid clutter.
+(NOTE: We're considering deprecating the tip, warning, and fact
+aside styles or replacing them with to simplify our styles and
+formatting)
+
+There are three types of aside that will be displayed floating
+to the right of the text. Each has an icon according to its
+type and will include the content between the template tags.
+This content should be kept brief, and you should avoid using
+too many of these in close succession to avoid clutter.
 
 ```
 {% tip %}
@@ -76,38 +114,79 @@ Here's a fact!
 {% endfact %}
 ```
 
-There is also an inline-aside style. This is displayed in the main body of the text, but is set off from the flow of the document. Unlike the asides above, this can include a title, which can include spaces. (Some special characters work here, but this hasn't been tested, so be sure to double check that your content renders properly before making a PR.)
+There is also an inline-aside style. This is displayed in the
+main body of the text, but is set off from the flow of the document.
+Unlike the asides above, this can include a title, which can include
+spaces. (Some special characters work here, but this hasn't been
+tested, so be sure to double check that your content renders properly
+before making a PR.)
 
 ```
 {% aside Title of aside %}
 Content of the aside.
 {% endaside %}
 ```
-#### Images
-
-To inclue images, use the following figure template:
-
-```
-{% figure 'assets/filename.png' %}
-```
-
-Using this template instead of standard markdown image syntax ensures that the image will be wrapped in the appropriate tags necessary for rendering and also gives it an automatically generated figure label. Note that all images should be stored in the `assets` folder in order to be accessible to both pdf and html rendering methods. Also note that you must wrap the image filepath in single quotation marks.
 
 #### Tasks
 
-Finally, there is a template to be used in Task numbering. Place this before each task. Because task numbering is associated directly with the VM task tracking function, you must enter each task number manually.
+Finally, there is a template to be used in numbering tasks and specifying
+completion steps for the automated testing system. Place this before
+each task. Because task numbering is associated directly with the VM
+task tracking function, you must enter each task number manually.
+
+The content of the task template is a block of YAML that scripts
+the steps required to complete a task. See the Rakefile for the
+code that implements this content.
+
+The YAML content is parsed into a list of steps. A step can either
+specify a command to execute and an optional list of inputs to supply
+if that command opens a subprocess, or give a filename and the content
+for that file.
+
+An excute command will look something like this:
 
 ```
-{% task 1 %}
+{% task 2 %}
+---
+- execute: "puppet describe user | less"
+  input:
+    - 'q'
+{% endtask %}
 ```
 
-## Jekyll Site
+Note that if you open a subprocess, you must also include an
+input that will exit that process. In the example above,
+we send the `q` command to exit `less`.
 
-The Quest Guide is a static website generated from source markdown and served by Jekyll.  To view the site, first install the ruby gem Jekyll by typing the following in your console:
+A File command will look like this:
+
+```
+{% task 6 %}
+---
+- file: /etc/puppetlabs/puppet/environments/production/modules/vimrc/manifests/init.pp
+  content: |
+    class vimrc {
+      file { '/root/.vimrc':
+        ensure => 'present',
+        source => 'puppet:///modules/vimrc/vimrc',
+      }
+    }
+{% endtask %}
+```
+
+(NOTE: Though these completion steps are currently included in the corresponding
+quest Markdown files, they will likely be split out into separate files in
+the future.)
+
+## Jekyll
+
+The Quest Guide is a static website generated from source Markdown and served
+by Jekyll.  To view the site, first install the ruby gem Jekyll:
 	
-	sudo gem install jekyll
+	gem install jekyll
 	
-When Jekyll is successfully installed, you can serve the website navigating to the top directory:
+When Jekyll is successfully installed, you can serve the
+website by navigating to the top directory:
 
 	cd /path/to/courseware-lvm/Quest_Guide
 	
@@ -122,38 +201,11 @@ Now open your web browser and point it to:
 To build the HTML without launching the development server, use the command:
 
 	jekyll build
-
-## PDF Generation
-
-The pdf_make.py script will automatically generate the PDF Quest Guide that is bundled with the Learning VM download.
-
-Though the PDF is a separate end-point from the Jekyll static html version of the Quest Guide, it relies on Jekyll to parse markdown and liquid templates to html.
-
-The script uses PrinceXML to generate PDFs, so you must have Prince installed (http://www.princexml.com/download/) for it to function. Note that you must register your copy of Prince in order to generate PDFs without a watermark.
-
-The script also has three library dependencies outside of the Python standard libraries:
-
-* html5lib
-* BeautifulSoup4
-* Markdown
-* PyYaml
-
-These can be installed using either pip or easy_install, e.g.
-
-	easy_install BeautifulSoup4
-
-Note that depending on how your python is set up, you may have to use `sudo` to install these dependencies.
-
-Once the dependencies are installed, navigate to the top directory of the repository
-	
-	python pdf_maker.py
-	
-Note that though this script automatically runs a `jekyll build` command, which will generate the html used to render the Quest Guide PDF. If there is an jekyll error, the script may still execute from previously generated HTML.
 	 
-## Quest Ordering
+## Quest ordering
 
-Quest_Guide/_data/quest_order.yml contains a list of quests with url, title, and the associated image asset. The order of quests in this file determines the order that they will be listed in the website nav and the PDF version of the Quest Guide.
-
-In the future, this file will also include data about quest dependencies to allow for non-linear quest progress.
+Quest_Guide/_data/quest_order.yml contains a list of quests with url and
+title. The order of quests in this file determines the order that they
+will be listed in the website navbar.
 
 Whenever possible, this file should be the single source of quest meta-data.
