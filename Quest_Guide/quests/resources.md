@@ -195,7 +195,7 @@ before you start changing attributes.
 ---
 - execute: "puppet describe user | less"
   input:
-    - 'q\r'
+    - 'q'
 {% endtask %}
 
 Use the *puppet describe* tool to get a description of the *user* type,
