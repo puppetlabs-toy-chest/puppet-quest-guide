@@ -5,21 +5,14 @@ layout: default
 
 # Modules
 
-### Prerequisites
-
-- Welcome
-- Power of Puppet
-- Resources
-- Manifests and Classes
-
-## Quest Objectives
+## Quest objectives
  - Understand the purpose of Puppet modules
  - Learn the module directory structure
  - Write and test a simple module
  
-## Getting Started
+## Getting started
 
-If you want to get things done effeciently in Puppet, the **module** will be
+If you want to get things done efficiently in Puppet, the **module** will be
 your best friend. You got a little taste of module structure in the Manifests
 and Classes quest. In this quest, we'll take you deeper into the details. 
 
@@ -32,7 +25,7 @@ When you're ready, type the following command:
 
     quest --start modules
 
-## Why Meddle with Modules?
+## Why meddle with modules?
 
 > Creation always builds upon something else. There is no art that doesn't
 > reuse.
@@ -96,7 +89,7 @@ modules you need to be available for all environments are kept in
 `/etc/puppetlabs/puppet/modules`, and modules required by Puppet Enterprise
 itself are kept in the `/opt/puppet/share/puppet/modules` directory.)
 
-## Module Structure
+## Module structure
 Now that you have an idea of why modules are useful and where they're kept, it's
 time to delve a little deeper into the anatomy of a module. 
 
@@ -176,16 +169,20 @@ should now see a structure like this:
   
     3 directories, 0 files
 
+## Managing files
+
+We've already set up the Learning VM with some custom settings for Vim. Instead
+of starting from scratch, you can copy the existing `.vimrc` file into the `files`
+directory of your new module. Any file in the `files` directory of a module in
+the Puppet master's modulepath will be available to client nodes through
+Puppet's built-in fileserver.
+
 {% task 4 %}
 ---
 - execute: cp /root/.vimrc /etc/puppetlabs/puppet/environments/production/modules/vimrc/files/vimrc
 {% endtask %}
 
-We've already set up the Learning VM with some custom settings for Vim. Instead
-of starting from scratch, copy the existing `.vimrc` file into the `files`
-directory of your new module. Any file in the `files` directory of a module in
-the Puppet master's modulepath will be available to client nodes through
-Puppet's built-in fileserver.
+Copy the existing `.vimrc` file to your module's `files` directory:
 
     cp ~/.vimrc vimrc/files/vimrc
 	
@@ -295,6 +292,8 @@ class vimrc {
 Save the manifest, and use the `puppet parser` tool to validate your syntax:
 
     puppet parser validate vimrc/manifests/init.pp
+
+## Test your module
 
 Remember, this manifest *defines* the `vimrc` class, but you'll need to
 *declare* it for it to have an effect. That is, we've described what the `vimrc`
