@@ -12,7 +12,7 @@ layout: default
  
 ## Getting started
 
-If you want to get things done effeciently in Puppet, the **module** will be
+If you want to get things done efficiently in Puppet, the **module** will be
 your best friend. You got a little taste of module structure in the Manifests
 and Classes quest. In this quest, we'll take you deeper into the details. 
 
