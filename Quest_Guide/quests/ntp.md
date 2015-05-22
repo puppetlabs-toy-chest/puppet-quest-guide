@@ -24,11 +24,11 @@ thousands of other users' infrastructures.
 
 Furthermore, using (Puppet Supported)[https://forge.puppetlabs.com/supported]
 and (Puppet Approved)[https://forge.puppetlabs.com/approved] modules
-add another layer of validation and reliability.
+adds another layer of validation and reliability.
 
-Keep in mind, though, that no matter whose code you're using, external
-validation is no substitute for your own thorough review and testing
-of anything you're going to put into production!
+Keep in mind, though, that no matter whose code you're using, relying on external
+checks is no substitute for your own thorough review and testing
+of anything you're putting into production!
 
 In this quest, you'll learn how you can use an existing
 module from the Puppet Forge to manage an important service on your
