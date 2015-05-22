@@ -3,23 +3,14 @@ title: Conditional Statements
 layout: default
 ---
 
-# Conditional Statements
+# Conditional statements
 
-### Prerequisites
-
-- Welcome
-- Power of Puppet
-- Resources
-- Manifests and Classes
-- Modules
-- Variables and Parameters
-
-## Quest Objectives
+## Quest objectives
  - Learn how to use conditional logic to make your manifests adaptable.
  - Understand the syntax and function of the `if`, `unless`, `case`, and
    `selector` statements.
 
-## Getting Started
+## Getting started
 
 Conditional statements allow you to write Puppet code that will return different
 values or execute different blocks of code depending on conditions you specify.
@@ -31,7 +22,7 @@ To start this quest enter the following command:
 
     quest --start conditionals
 
-## Writing for Flexibility
+## Writing for flexibility
 
 >The green reed which bends in the wind is stronger than the mighty oak which
 >breaks in a storm.
@@ -42,13 +33,7 @@ Because Puppet manages configurations on a variety of systems fulfilling a
 variety of roles, great Puppet code means flexible and portable Puppet code.
 While the *types* and *providers* that form the core of Puppet's *resource
 abstraction layer* do a lot of heavy lifting around this kind of adaptation,
-there are some things better left in the hands of competent practitioners rather
-than hard-coded in Puppet itself.
-
-As you move from general platform-related implementation details to specific
-application-related implementation details, it starts making less sense to rely
-on Puppet to make decisions automatically, and much more sense for a module
-developer or user to make his or her own choices. 
+there are many things best left in the hands of competent practitioners.
 
 It's sensible, for example, for Puppet's `package` providers to take care of
 installing and maintaining packages. The inputs and outputs are standardized and
@@ -75,9 +60,10 @@ statements** are the bread and butter of this functionality.
 > -Mark Twain
 
 You already encountered the *facter* tool when we asked you to run
-`facter ipaddress` in the setup section of this quest guide. While it's nice the
-be able to run facter from the command line, its real utility is to make
-information about a system available to use as variables in your manifests.
+`facter ipaddress` in the setup section of this Quest Guide. While it's nice the
+be able to run facter from the command line, it really shows its worth on the
+back end, making information about a system available to use as variables
+in your manifests.
 
 {% fact %}
 While facter is an important component of Puppet and is bundled with Puppet
@@ -91,16 +77,17 @@ huge amount of power to write portability into your modules.
 To get a full list of facts available to facter, enter the command:
 	
     facter -p | less
-	
-Any of the facts you see listed here can be used within your Puppet code with
-the syntax `$::factname`. The double colons `::` indicate that the fact is
-defined in what's called *top scope*, that is, before any variables in your node
-definitions or classes are assigned. While you could technically use a fact
-without the `::`, you would risk having it mistakenly overridden by a locally
-defined variable with the same name. The `::` tells Puppet to look directly in
-the top scope instead of using the first variable it finds with a matching name.
-The Puppet style guide suggests using this syntax consistently to avoid naming
-collisions.
+
+You can reference any of the facts you see listed here with the same syntax
+you would use for a variable you had assigned within your manifest. There
+is one notable difference, however. Because facts for a node are available
+in any manifest compiled for that node, they exist somewhere called *top scope*.
+This means that though a fact can be accessed anywhere, it can also be overwritten
+by any variable of the same name in a lower scope (e.g. in node or class scope).
+To avoid potential collisions, it's best to explicitly scope references to facts.
+You specify top scope by prepending your factname with double colons `::`
+(pronounced "scope scope"). So a fact in your manifest should look like this:
+`$::factname`.
 
 ## Conditions
 
@@ -120,15 +107,20 @@ Puppet supports a few different ways of implementing conditional logic:
  * case statements, and
  * selectors.
 
-### The 'if' Statement
+Because the same concept underlies these different modes of conditional logic,
+we'll only cover the `if` statement in the tasks for this quest. Once you have
+a good understanding of how to implement `if` statements, we'll leave you with
+descriptions of the other forms and some notes on when you may find them useful.
 
-Puppet’s `if` statements behave much like those in many other programming and
+### If
+
+Puppet’s `if` statements behave much like those in other programming and
 scripting languages.
 
 An `if` statement includes a condition followed by a block of Puppet code that
 will only be executed **if** that condition evaluates as **true**. Optionally,
 an `if` statement can also include any number of `elsif` clauses and an `else`
-clause. Here are some rules:
+clause.
 
 - If the `if` condition fails, Puppet moves on to the `elsif` condition (if one
   exists).
@@ -181,7 +173,7 @@ And your `tests` and `manifests` directories:
       notice ( "Groups for user ${name} set to ${groups}" )
 
       user { $name:
-        ensure => 'present',
+        ensure => present,
         home => "/home/${name}",
         groups => $groups,
       }
@@ -191,14 +183,13 @@ And your `tests` and `manifests` directories:
 	
 Open the `accounts/manifests/init.pp` manifest in Vim.
 
-At the beginning of the `accounts` class definition, you'll include some
+At the beginning of the `accounts` class definition, you'll include
 conditional logic to set the `$groups` variable based on the value of the
-`$::operatingsystem` fact. In both cases, you'll add the user the new group made
-solely for that user, defined by the `$name` parameter. If the operating system
-is CentOS, you'll also add the user to the `wheel` group, and if the operating
-system is Debian you'll add the user to the `admin` group.
+`$::operatingsystem` fact. If the operating system is CentOS, Puppet will
+add the user to the `wheel` group, and if the operating system is Debian.
+Puppet will ad the user to the `admin` group.
 
-So the beginning of your class definition should looks something like this:
+The beginning of your class definition will like this:
 
 {% highlight puppet %}
 class accounts ($name) {
@@ -214,23 +205,20 @@ class accounts ($name) {
   }
   
   notice ( "Groups for user ${name} set to ${groups}" )
- 
-  user { $name:
-    ensure => 'present',
-    home => "/home/${name}",
-    groups => $groups,
-  }
+
+  ... 
 
 }
 {% endhighlight %}
 
 Note that the string matches are *not* case sensitive, so 'CENTOS' would work
-just as well as 'centos'. Finally, in the `else` block, you'll raise a warning
-that the module doesn't support the current OS.
+just as well as 'centos'. Finally, in the `else` block, you'll raise an error
+if the module doesn't support the current OS.
 
-Once you've written the conditional logic to set the `$groups` variable, edit
-the `user` resource declaration to assign the `$groups` variable to the `groups`
-attribute.
+Once you've written the conditional logic to set the `$groups` variable, create
+a `user` resource declaration. Use the `$name` variable set by your class parameter
+to set the title and home of your user, and use the `$groups` variable to set the
+user's `groups` attribute.
 
 {% highlight puppet %}
 class accounts ($name) {
@@ -238,7 +226,7 @@ class accounts ($name) {
   ...
   
   user { $name:
-    ensure => 'present',
+    ensure => present,
     home   => "/home/${name}",
     groups => $groups,
   }
@@ -276,15 +264,14 @@ class {'accounts':
 - execute: FACTER_operatingsystem=Debian puppet apply --noop /etc/puppetlabs/puppet/environments/production/modules/accounts/tests/init.pp
 {% endtask %}
 
-The Learning VM is running CentOS, so to test what would happen on a Debian OS
-you'll have to override the `operatingsystem` fact with a little environment
-variable magic. To provide a custom value for any facter fact as you run a
-`puppet apply`, you can include `FACTER_factname=new_value` before your new
-terminal command.
+The Learning VM is running CentOS, but to test our conditional logic,
+we want to see what would happen on a Debian system. Luckily, we can use
+a little environment variable magic to override the `operatingsystem` fact
+for a test run. To provide a custom value for any facter fact as you run a
+`puppet apply`, you can include `FACTER_factname=new_value` before your command.
 
-Combining this with the `--noop` flag, you can do a quick test of how your
-manifest would run on a different system before setting up a full testing
-environment.
+Combine this with the `--noop` flag, to do a quick test of how your
+manifest would run on a different system.
 
     FACTER_operatingsystem=Debian puppet apply --noop accounts/tests/init.pp
 	
@@ -312,7 +299,7 @@ apply the catalog generated from your manifest.
 
 You can use the `puppet resource` tool to verify the results.
 
-## The 'unless' Statement
+### Unless
 
 The `unless` statement works like a reversed `if` statement. An `unless`
 statements takes a condition and a block of Puppet code. It will only execute
@@ -320,7 +307,7 @@ the block **if** the condition is **false**. If the condition is true, Puppet
 will do nothing and move on. Note that there is no equivalent of `elsif` or
 `else` clauses for `unless` statements.
 
-## The 'case' Statement
+### Case
 
 Like `if` statements, case statements choose one of several blocks of Puppet
 code to execute. Case statements take a control expression, a list of cases, and
@@ -352,7 +339,7 @@ machine's operating system. Accounting for the differences between various
 platforms is an important part of writing flexible and re-usable Puppet code,
 and it's a paradigm you will encounter frequently in published Puppet modules.
 
-## The 'selector' Statement
+### Selector
 Selector statements are similar to `case` statements, but instead of executing a
 block of code, a selector assigns a value directly. A selector might look
 something like this:
