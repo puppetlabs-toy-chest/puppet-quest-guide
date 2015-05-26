@@ -5,25 +5,33 @@ layout: default
 
 # NTP
 
-### Prerequisites
-
-- Welcome
-- Power of Puppet
-- Resources
-- Manifests and Classes
-- Modules
-
-## Quest Objectives
+## Quest objectives
 
 - Use the `puppet module` tool to find and install modules on the Puppet Forge
 - Learn how you can use the `site.pp` manifest to classify nodes.
 - Use class parameters to adjust variables in a class as you declare it.
 
-## Getting Started
+## Getting started
 
-In the previous Modules Quest we primarily learned about the structure of a
-module and how to create a module. In this quest, you'll learn how you can use
-an existing module from the Puppet Forge to manage an important service on your
+In the Modules quest, you learned about the structure of a Puppet module and
+how to create one. It's important to have some hands-on module-writing
+experience so you know what you're doing when you integrate existing code
+into your infrastructure. It's just as important, however, that you
+understand how to make use of existing modules. Using an existing module
+isn't just easier. When you use a publicly available module, you're often
+getting code that has already been tested and deployed across hundreds or
+thousands of other users' infrastructures.
+
+Furthermore, using (Puppet Supported)[https://forge.puppetlabs.com/supported]
+and (Puppet Approved)[https://forge.puppetlabs.com/approved] modules
+adds another layer of validation and reliability.
+
+Keep in mind, though, that no matter whose code you're using, relying on external
+checks is no substitute for your own thorough review and testing
+of anything you're putting into production!
+
+In this quest, you'll learn how you can use an existing
+module from the Puppet Forge to manage an important service on your
 machine: NTP.
 
     quest --start ntp
@@ -117,7 +125,7 @@ This command tells the puppet module tool to fetch the module from the Puppet
 Forge and place it in Puppet's modulepath:
 `/etc/puppetlabs/puppet/environments/production/modules`.
 
-## Classification with the site.pp Manifest
+## Classification with the site.pp manifest
 
 Now that the NTP module is installed, all the included classes are available to
 use in node classification.
@@ -199,7 +207,7 @@ Once the puppet run is complete, use the puppet resource tool to inspect the
 `ntpd` service again. If the class has been successfully applied, you will see
 that the service is running.
 
-### Synching up
+### Syncing up
 
 To avoid disrupting processes that rely on consistent timing, the ntpd service
 works gradually. It adds or removes a few microseconds to each tick of the
@@ -211,7 +219,7 @@ virtual, its clock will probably be set based on the time it was created or last
 suspended. It's likely to be massively out of date with the time server, and it
 may take half an hour or more to get synchronized!
 
-## Class Defaults and Class Parameters
+## Class defaults and class parameters
 
 The `ntp` class includes default settings for most of its parameters. The
 `include` syntax you used let you concisely declare the class without modifying
