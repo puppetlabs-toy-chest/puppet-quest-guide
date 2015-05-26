@@ -5,21 +5,12 @@ layout: default
 
 # MySQL
 
-### Prerequisites
-
-- Welcome
-- Power of Puppet
-- Resources
-- Manifests and Classes
-- Modules
-- NTP
-
 ## Quest Objectives
 
 - Install and configure a MySQL server.
 - Add a MySQL user, add a database, and grant permissions.
 
-## Getting Started
+## Getting started
 
 In this quest, we'll continue to explore how existing modules from the Puppet
 forge can simplify otherwise complex configuration tasks. You will use Puppet
@@ -39,7 +30,7 @@ The module lets you install and configure both server and client MySQL
 instances, and extends Puppet's standard resource types to let you manage MySQL
 *users*, *grants*, and *databases* with Puppet's standard resource syntax.
 
-## Server Install
+## Server install
 
 {% task 1 %}
 ---
@@ -184,7 +175,7 @@ So the `mysql` class is found here:
 
     /etc/puppetlabs/puppet/environments/production/modules/mysql/manifests/init.pp
 
-## Account Security
+## Account security
 
 For security reasons, you will generally want to remove the default users and
 the 'test' database from a new MySQL installation. The `account_security` class
@@ -219,7 +210,7 @@ and two users have been removed:
     /Stage[main]/Mysql::Server::Account_security/Mysql_user[root@127.0.0.1]/ensure:
     removed
 
-## Types and Providers
+## Types and providers
 
 The MySQL module includes some custom *types and providers* that let you manage
 some critical bits of MySQL as resources with the Puppet DSL just like you would
@@ -240,7 +231,7 @@ the **type** into system-specific implementations.
 The MySQL module includes custom types and providers that make `mysql_user`,
 `mysql_database`, and `mysql_grant` available as resources.
 
-## Database, User, Grant:
+## Database, user, grant:
 
 {% task 5 %}
 ---
