@@ -3,25 +3,15 @@ title: Resource Ordering
 layout: default
 ---
 
-# Resource Ordering
+# Resource ordering
 
-### Prerequisites
-
-- Welcome
-- Power of Puppet
-- Resources
-- Manifests and Classes
-- Modules
-- Variables and Parameters
-- Conditional Statements
-
-## Quest Objectives
+## Quest objectives
 
  - Understand why some resources must be managed in a specific order.
  - Use the `before`, `require`, `notify`, and `subscribe` metaparameters to
-   effectively manage the order that Puppet applies resource declarations.
+   specify the order in which Puppet applies resource declarations.
 
-## Getting Started
+## Getting started
 
 This quest will help you learn more about specifying the order in which Puppet
 should manage resources in a manifest. When you're ready to get started, type
@@ -29,325 +19,356 @@ the following command:
 
     quest --start ordering
 
-## Autorequires and Explicit Ordering
+## Resource order
 
-We are likely to read instructions from top to bottom and execute them in that
-order. When it comes to resource declarations in a Puppet manifest, Puppet does
-things a little differently. It works through the problem as though it were
-given a list of things to do, and it was left to decide the most efficient way
-to get them done.
+So far, the modules you've been writing have been pretty simple. We've walked
+you through minimal examples designed to demonstrate different features of Puppet and
+its language constructs. Because we've only been handling a few resources at a time
+in these cases, we haven't been worried about dependencies among those resources.
+When you start tackling more complex problems, however, it will quickly become clear
+that things have to happen in the right order. You can hardly configure a package
+before it has been installed, or give ownership of a file to a user you haven't
+yet created.
 
-The **catalog** is a compilation of all the resources that will be applied to a
-given system, and the relationships between those resources. For some resource
-types, Puppet is clever enough to figure out necessary relationships among
-resources itself. These implicit resource relationships are called
-**autorequires**.
+So how does Puppet manage these relationships? 
 
-You can see what a resource can autorequire with the `puppet describe` tool.
+Remember, in a declarative language like Puppet you're describing a desired
+state for a system, not listing the steps required to achieve that state.
+Because Puppet manifests describe a state, not a process, you don't get the
+implicit linear order of steps you would from an imperative language. Puppet
+needs another way to know how to order resources.
 
-Take a look at the entry for the `file` resource:
+This is where **resource relationships** come in. Puppet's resource relationship
+syntax lets you explicitly define the dependency relationships among your resources.
 
-    puppet describe file
-	
-A few paragraphs down, you'll see the following section:
-
-  **Autorequires:** If Puppet is managing the user or group that owns a file,
-  the file resource will autorequire them. If Puppet is managing any parent
-  directories of a file, the file resource will autorequire them.
-
-(The information you find with the `describe` tool can also be found in the
-[type reference](https://docs.puppetlabs.com/references/latest/type.html)
-section of Puppets docs site.)
-
-When you declared `user` and `file` resources in your `accounts` module, the
-autorequires of these resources ensured that everything went smoothly. 
-
-Sometimes, however, you will need to tell Puppet explicitly that a resource
-declaration is applied before another. For instance, if you wish to declare that
-a service should be running, you need to ensure that the package for that
-service is installed and configured before you can start the service. Just as
-Puppet's built-in providers don't (and shouldn't!) automatically decide what
-package you might want to use on a given operating system, Puppet doesn't try to
-guess what services are associated with a given package.
-
-Often, more than one package provides the same service, and what if you are
-using a package you built yourself? Since Puppet cannot *always* conclusively
-determine the mapping between a package and a service (the names of the software
-package and the service or executable it provides are not always the same
-either), it is up to the user to specify the relationship between them.
-
-To overcome this issue, Puppet's syntax includes a few different ways to
-explicitly manage resource ordering.
-
-## Relationship Metaparameters
-
-One way of telling Puppet what order to use when managing resources is by
-including ordering **metaparameters** in your resource declarations.
-
-Metaparameters are attributes that can be set in any resource to tell Puppet
-*how* to manage that resource. In addition to resource ordering, metaparameters
-can help with things like logging, auditing, and scheduling. For now, however,
-we'll be concentrating only on resource ordering metaparameters.
-
-There are four metaparameter **attributes** that you can include in your
-resource declaration to order relationships among resources.
-
-* `before` causes a resource to be applied **before** a specified resource.
-* `require` causes a resource to be applied **after** a specified resource.
-* `notify` causes a resource to be applied **before** the specified resource, 
-  just as with `before`. Additionally, notify will generate a refresh event for 
-  the specified resource when the notifying resource changes.
-* `subscribe` causes a resource to be applied **after** the specified resource,
-  just as with `after`. The subscribing resource will be refreshed if the 
-  target resource changes.
-
-The **value** of the relationship metaparameter is the title or titles (in an
-array) of one or more target resources.
-
-Here's an example of how the `notify` metaparameter is used:
+Though there are a couple ways to define these relationships the simplest are
+the **relationship metaparameters**. Relationship metaparameters are set in a
+resource declaration along with the rest of a resource's attribute value pairs.
+If you're writing a module to manage SSH, for instance, you will need to ensure
+that the `openssh-server` package is installed *before* you try to manage the `sshd`
+service. To achieve this, you include a `before` metaparameter with the value
+`Service['sshd']`:
 
 {% highlight puppet %}
-file {'/etc/ntp.conf':
-  ensure => file,
-  source => 'puppet:///modules/ntp/ntp.conf',
-  notify => Service['ntpd'],
-}
-
-service {'ntpd':
-  ensure => running,
+package { 'openssh-server':
+  ensure => present,
+  before => Service['sshd'],
 }
 {% endhighlight %}
 
-In the above, the file `/etc/ntp.conf` is managed. The contents of the file are
-sourced from the file `ntp.conf` in the ntp module's files directory. Whenever
-the file `/etc/ntp.conf` changes, a refresh event is triggered for the service
-with the title `ntpd`. By virtue of using the notify metaparameter, we ensure
-that Puppet manages the file first, before it manages the service, which is to
-say that `notify` implies `before`.
+You can also approach the problem from the other direction. The `require`
+metaparameter is the mirror image of `before`. `require` tells Puppet that the current
+resource *requires* the one specified by the metaparameter.
 
-Refresh events, by default, restart a service (such as a server daemon), but you
-can specify what needs to be done when a refresh event is triggered, using the
-`refresh` attribute for the `service` resource type, which takes a command as
-the value.
+{% aside Metaparameters%}
+Metaparameters are attributes that can be set in any resource to give Puppet
+extra information about how to manage a resource. In addition to resource
+ordering, metaparameters can help with logging, auditing, and scheduling.
+{% endaside %}
 
-In order to better understand how to explicitly specify relationships between
-resources, we're going to use SSH as our example. Setting the
-`GSSAPIAuthentication` setting for the SSH daemon to `no` will help speed up the
-login process when one tries to establish an SSH connection to the Learning VM. 
+Using `before` in the `openssh-server` package resource is exactly equivalent to
+using `require` in the `sshd` service resource:
 
-Let's try to disable GSSAPIAuthentication, and in the process, learn about
-resource relationships.
+{% highlight puppet %}
+service { 'sshd':
+  ensure   => running,
+  enable   => true,
+  require  => Package['openssh-server'],
+}
+{% endhighlight %}
 
-Before getting started, ensure that you're in the `modules` directory:
+In both of these cases, take note of the way you refer to the target resource.
+The target's *type* is capitalized, and followed by an *array* (denoted by the 
+square brackets) of one or more resource titles:
 
-    cd /etc/puppetlabs/puppet/environments/production/modules
+{% highlight puppet %}
+Type['title']
+{% endhighlight %}
+
+We've already covered a couple of the resources you'll need, so why not make
+a simple SSH module to explore resource relationships?
+
+SSH is already running on the Learning VM, so we'll make things a little more
+interesting by managing its configuration as well as the package and service.
+Specifically, we'll change the `GSSAPIAuthentication` setting for the SSH daemon
+to `no`. (You're not using this method of authentication to connect to the
+Learning VM, so this will be a safe setting to change without disrupting any
+aspects of the service you need for the Learning VM itself.)
 
 {% task 1 %}
 ---
 - execute: mkdir -p /etc/puppetlabs/puppet/environments/production/modules/sshd/{tests,manifests,files}
 {% endtask %}
 
-Create an `sshd` directory and create `tests`, `manifests`, and `files`
-subdirectories.
+To get started with your module, create an `sshd` directory with `tests`,
+`manifests`, and `files` subdirectories.
 
 {% task 2 %}
----
-- execute: cp /root/examples/sshd_config /etc/puppetlabs/puppet/environments/production/modules/sshd/files/sshd_config
-{% endtask %}
-
-We've already prepared an `sshd_config` file to use as a base for your source
-file. Copy it into your module's `files` directory:
-
-    cp /root/examples/sshd_config sshd/files/sshd_config
-
-{% task 3 %}
 ---
 - file: /etc/puppetlabs/puppet/environments/production/modules/sshd/manifests/init.pp
   content: |
     class sshd {  
 
-      file { '/etc/ssh/sshd_config':
-        ensure => file,
-        mode => 600,
-        source => 'puppet:///modules/sshd/sshd_config',
+      package { 'openssh-server':
+        ensure => present,
+      }
+
+      service { 'sshd':
+        ensure => running,
+        enable => true,
       }
 
     }
 
 {% endtask %}
 
-Create a `sshd/manifests/init.pp` manifest with the following class definition:
+With your directory structure in place, it's time to get started on your `sshd` class.
+Create an `sshd/manifests/init.pp` manifest and fill in your `sshd` class with the
+`openssh-server` package resource and `sshd` service resource. Don't forget to include
+a `require` or `before` to specify the relationship between these two resources.
+(If you need a hint, feel free to refer back to the examples above!)
+
+When you're done use the `puppet parser validate` command to check your manifest.
+
+Before we add the `file` resource to manage the the `sshd` configuration,
+let's take a look at the relationship between the `package` and `service`
+resources from another perspective.
+
+When Puppet compiles a catalog, it generates a **graph** that represents the network
+of resource relationships in that catalog. Not to be confused with the more common sense
+of "chart," *graph*, in this context, refers to a method used in computer science and
+mathematics to model connections among a collection of objects. Puppet uses a graph
+to determine a workable order for applying resources.
+
+This graph can also be a great tool to help a user visualize and understand the relationships
+among resources.
+
+{% task 3 %}
+---
+- file: /etc/puppetlabs/puppet/environments/production/modules/sshd/tests/init.pp
+  content: include sshd
+- execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/sshd/tests/init.pp --noop --graph
+{% endtask %}
+
+The quickest way to get Puppet to generate a graph for this kind of testing is to run a test
+manifest with the `--noop` and `--graph` flags. Go ahead and set up a `sshd/tests/init.pp`
+manifest. You don't have any parameters here, so you can use a simple:
 
 {% highlight puppet %}
-class sshd {
-
-  file { '/etc/ssh/sshd_config':
-    ensure => file,
-    mode   => 600,
-    source => 'puppet:///modules/sshd/sshd_config',
-  }
-  
-}
+include sshd
 {% endhighlight %}
 
-This will tell Puppet to ensure that the file `/etc/ssh/sshd_config` exists, and
-that the contents of the file should be sourced from the file
-`sshd/files/sshd_config`. The `source` attribute also allows us to use a
-different URI to specify the file, something we discussed in the Modules
-quest. For now, we are using a file in `/root/examples` as the content source
-for the SSH daemon's configuration file.
+With this done, run a `puppet apply` on your test manifest with the `--noop` and `--graph`
+flags:
 
-Now let us disable GSSAPIAuthentication.
+    puppet apply sshd/tests/init.pp --noop --graph
+
+{% task 3 %}
+---
+  - execute: dot -Tpng /var/opt/lib/pe-puppet/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
+{% endtask %}
+
+Puppet outputs a `.dot` file to a location defined as the `graphdir`. You can find
+the `graphdir` location with the `puppet config print` command:
+
+    puppet config print graphdir
+
+Use the `dot` command to convert the `relationships.dot` file in the `graphdir` into
+a `.png` image. Set the location of the output to the root of the Quest Guide's web
+directory so that it will be easily viewable from your browser.
+
+    dot -Tpng /var/opt/lib/pe-puppet/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
+
+Take a look at (the graph)[/relationships.png]. Notice that the `openssh-server`
+and `sshd` resources you defined are connected by an arrow to indicate the
+dependency relationship.
+
+{% figure '/relationships1.png' %}
+
+{% task 2 %}
+---
+- execute: cp /etc/ssh/sshd_config /etc/puppetlabs/puppet/environments/production/modules/sshd/files/sshd_config
+{% endtask %}
+
+Now let's move on to the next step. We'll use a `file` resource to manage the `sshd`
+configuration. First, we'll need a source file. As you did for the `vimrc` file in
+the Modules quest, you can copy the existing configuration file into your module's
+`files`.
+
+    cp /etc/ssh/sshd_config sshd/files/sshd_config
 
 {% task 4 %}
 ---
 - execute: vim /etc/puppetlabs/puppet/environments/production/modules/sshd/files/sshd_config
   input:
+    - "/#GSSAPIAuthentication no\r"
+    - "x"
     - "/GSSAPIAuthentication yes\r"
-    - ":%s/yes/no/g\r"
+    - "i#"
     - ":wq\r"
+{% endtask %}
+
+Now, let's disable GSSAPIAuthentication. Open the `sshd/files/sshd_config` file
+and find the `GSSAPIAuthentication` line. Uncomment the `no` line, and comment out the
+`yes` line.
+
+{% task 5 %}
 - execute: vim /etc/puppetlabs/puppet/environments/production/modules/sshd/manifests/init.pp
   input: 
     - "/class sshd {\r"
     - o
     - |
-      service { 'sshd':
-        ensure     => running,
-        enable     => true,
-        subscribe  => File['/etc/ssh/sshd_config'],
+      file { '/etc/ssh/sshd_config':
+        ensure     => present,
+        source     => 'puppet:///modules/sshd/sshd_conf',
+        require    => Package['openssh-server'],
       }
     - "\e"
     - ":wq\r"
 {% endtask %}
 
-Disable GSSAPIAuthentication for the SSH service
-
-Edit the `sshd/files/sshd_config` file.  
-Find the line that reads:
-
-    GSSAPIAuthentication yes
-
-and edit it to read:
-
-    GSSAPIAuthentication no  
-
-Save the file and exit the text editor.
-
-Even though we have edited the source for the configuration file for the SSH
-daemon, simply changing the content of the configuration file will not disable
-the GSSAPIAuthentication option. For the option to be disabled, the service (the
-SSH server daemon) needs to be restarted. That's when the newly specified
-settings will take effect.
-
-Let's now add a metaparameter that will tell Puppet to manage the `sshd` service
-and have it `subscribe` to the config file. Add the following Puppet code below
-your file resource in the `sshd` module's `init.pp` manifest:
+With the source file prepared, go back to your `sshd/manifests/init.pp`
+manifest and add a `file` resource to manage the `sshd_config` file.
+You want to ensure that this `file` resource is applied *after* the
+`openssh-server` package, so include a `require` metaparameter targeting
+that resource.
 
 {% highlight puppet %}
-service { 'sshd':
-  ensure     => running,
-  enable     => true,
-  subscribe  => File['/etc/ssh/sshd_config'],
+class sshd {
+
+  ...
+
+  file { '/etc/ssh/sshd_config':
+    ensure     => present,
+    source     => 'puppet:///modules/sshd/sshd_conf',
+    require    => Package['openssh-server'],
+  }
+
 }
 {% endhighlight %}
 
-Notice that in the above the `subscribe` metaparameter has the value
-`File['/etc/ssh/sshd_config']`. The value indicates that we are talking about a
-file resource (that Puppet knows about), with the _title_
-`/etc/ssh/sshd_config`. That is the file resource we have in the manifest.
-References to resources always take this form. Ensure that the first letter of
-the type ('File' in this case) is always capitalized when you refer to a
-resource in a manifest.
 
-{% task 5 %}
+{% task 3 %}
 ---
-- file: /etc/puppetlabs/puppet/environments/production/modules/sshd/tests/init.pp
-  content: include sshd
-- execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/sshd/tests/init.pp
+  - execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/sshd/tests/init.pp --noop --graph
+  - execute: dot -Tpng /var/opt/lib/pe-puppet/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
 {% endtask %}
 
-Create a test manifest to include your `sshd` class.
+Apply your test manifest again with the `--graph` and `--noop` flags,
+then use the `dot` tool again to regenerate your graph image.
 
-Let's apply the change. Remember to check syntax and do a dry-run using the
-`--noop` flag before using `puppet apply` to run your test manifest.
+    dot -Tpng /var/opt/lib/pe-puppet/state/graphs/arelationships.dot -o /var/www/html/questguide/relationships.png
 
-You will see Puppet report that the content of the `/etc/ssh/sshd_config` file
-changed. You should also be able to see that the SSH service was restarted. 
+Check (your graph)[/relationships.png] again to see how your new `file` resource
+fits in.
 
-In the above example, the `service` resource will be applied **after** the
-`file` resource. Furthermore, if any other changes are made to the targeted file
-resource, the service will refresh.
+{% figure '/relationships2.png' %}
 
-## Package/File/Service
+You can easily see from the graph diagram that both the `file` and `service` resources
+require the `package` resource. What's missing from the picture so far?
+If you want your configuration changes to have an effect, you will have to
+either make those changes before the service is started, or restart the service
+after you've made your changes.
 
-Wait a minute! We are managing the service `sshd`, we are managing its
-configuration file, but all that would mean nothing if the SSH server package is
-not installed. So, to round it up, and make our manifest complete with regards
-to managing the SSH server on the VM, we have to ensure that the appropriate
-`package` resource is managed as well. 
+Puppet uses another pair of metaparameters to manage this special relationship
+between a service and its configuration file: `notify` and `subscribe`. The `notify`
+and `subscribe` metaparameters establish the same dependency relationships as `before`
+and `require`, respectively, and also trigger a refresh whenever Puppet makes a change
+to the dependency.
 
-On CentOS machines, such as the VM we are using, the `openssh-server` package
-installs the SSH server. 
+While any resource can be the dependency that triggers a refresh, there are only
+a couple of resource types that can respond to one. In the following task, we'll
+look at `service` which should already be familiar to you. (The second is called
+`exec`, and the details of how it works are beyond the scope of this quest.)
 
-- The package resource makes sure the software and its config file are
-  installed.
-- The file resource config file depends on the package resource.
-- The service resources subscribes to changes in the config file.
-
-The **package/file/service** pattern is one of the most useful idioms in Puppet.
-It’s hard to overstate the importance of this pattern! If you only stopped here
-and learned this, you could still get a lot of work done using Puppet.
-
-To stay consistent with the package/file/service idiom, let's dive back into the
-sshd init.pp file and add the `openssh-server` package to it.
+Like `before` and `require`, `notify` and `subscribe` are mirror images of each other.
+Including a `notify` in your `file` resource has exactly the same result as including
+`subscribe` in your `service` resource.
 
 {% task 6 %}
----
 - execute: vim /etc/puppetlabs/puppet/environments/production/modules/sshd/manifests/init.pp
-  input:
-    - "/class sshd {\r"
-    - "o"
-    - |
-        package { 'openssh-server':
-          ensure => present,
-          before => File['/etc/ssh/sshd_config'],
-        }
+  input: 
+    - "/service\r"
+    - o
+    - subscribe => File['/etc/ssh/sshd_config'],
     - "\e"
-    - ":wq\r"
-- execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/sshd/tests/init.pp
-{% endtask %}
+{% endtask %} 
 
-Manage the package for the SSH server
-
-Add the following code above your file resource in your `sshd/manifests/init.pp`
-manifest
+Edit your `sshd/manifests/init.pp` manifest to add a `subscribe` metaparameter
+to the the `sshd` resource.
 
 {% highlight puppet %}
-package { 'openssh-server':
-  ensure => present,
-  before => File['/etc/ssh/sshd_config'],
+class sshd {
+
+  ...
+  
+  service { 'sshd':
+    ensure    => running,
+    enable    => true,
+    subscribe => File['/etc/ssh/sshd_config'],
+  }
+
+  ...
+
 }
 {% endhighlight %}
 
-Make sure to check the syntax. Once everything looks good, go ahead and apply
-the manifest.
+Validate your syntax with the `puppet parser` tool. When your syntax looks good,
+apply your test manifest with the `--graph` and `--noop` flags, then use the `dot`
+tool again to regenerate your graph image again.
 
-Notice that we use `before` to ensure that the package is managed before the
-configuration file is managed. This makes sense, since if the package weren't
-installed, the configuration file (and the `/etc/ssh/` directory that contains
-it would not exist. If you tried to manage the contents of a file in a directory
-that does not exist, you are destined to fail. By specifying the relationship
-between the package and the file, we ensure success.
+Check (your graph)[/relationships.png] one more time. Notice that the `sshd`
+resource now depends on the `/etc/ssh/sshf_config` file.
 
-Now we have a manifest that manages the package, configuration file and the
-service, and we have specified the order in which they should be managed.
+{% figure '/relationships2.png' %}
+
+Finally, drop the `--noop` flag to actually apply your changes. You'll see a notice
+that the content of the config file has changed, followed by a notice for the 'refresh'
+for the `sshd` service.
+
+## Chaining arrows
+
+**Chaining arrows** provide another means for creating relationships between
+resources or groups of resources. The appropriate occasions for using chaining
+arrows involve concepts beyond the scope of this quest, but for the sake of
+completeness, we'll give a brief overview.
+
+The `->` (ordering arrow) operator causes the resource to the left to be applied
+before the resource to the right.
+
+The `~>` (notification arrow) operator causes the resource on the left to be
+applied before the resource on the right, and sends a refresh event to the
+resource on the right if the left resource changes.
+
+Though you may see chaining arrows used between resource declarations themselves,
+this generally isn't good practice. It is easy to overlook chaining arrows,
+especially if you're refactoring a large manifest with many resources and
+resource relationships.
+
+So what are chaining arrows good for? Unlike metaparameters, chaining
+arrows aren't embedded in a specific resource declaration. This means
+that you can place chaining arrows between resource references, arrays
+of resource references, and resource collectors to concisely and
+dynamically create one-to-many or many-to-many dependency relationships
+among groups of resources.
+
+## Autorequires
+
+**Autorequires** are relationships between resources that Puppet can figure out
+for itself. For instance, Puppet knows that a file resource should always
+come after a parent directory that contains it, and that a user resource should
+always be managed after the primary group it belongs to has been created. You can
+find these relationships in the (type reference)[http://docs.puppetlabs.com/references/4.1.latest/type.html]
+section of the Puppet Docs page, as well as the output of the `puppet describe`
+tool.
 
 ## Review
 
-In this Quest, we learned how to specify relationships between resources, to
-provide for better control over the order in which the resources are managed by
-Puppet. We also learned of the Package-File-Service pattern, which emulates the
-natural sequence of managing a service on a system. If you were to manually
-install and configure a service, you would first install the package, then edit
-the configuration file to set things up appropriately, and finally start or
-restart the service.
+In this Quest, you learned how to specify relationships between resources. These
+relationships let you specify aspects of the order Puppet follows as it applies
+resources. You learned how to use the `--graph` flag and `dot` tool to visualize
+resource relationships, and how to use `notify` and `subscribe` to refresh
+a service when a related configuration file changes. Finally, you learned about
+chaining arrows, an alternate syntax for specifying resource relationships, and
+autorequires, Puppet's built-in knowledge about how some resources should be
+ordered.
