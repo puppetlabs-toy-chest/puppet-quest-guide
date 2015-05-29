@@ -41,13 +41,13 @@ needs another way to know how to order resources.
 This is where **resource relationships** come in. Puppet's resource relationship
 syntax lets you explicitly define the dependency relationships among your resources.
 
-There are a few ways to define these relationships. We'll start with the simplest,
-the **relationship metaparameter**. You include relationship metaparameters in a
-resource declaration with the rest of that resource's attribute value pairs.
-Say you're writing a module to manage SSH, and you need to ensure that the
-`openssh-server` package is installed *before* you try to manage the `sshd`
-servuce. When declaring the `openssh-server`, package. You would include a `before`
-metaparameter with the value `Service['sshd']`:
+Though there are a couple ways to define these relationships the simplest are
+the **relationship metaparameters**. Relationship metaparameters are set in a
+resource declaration along with the rest of a resource's attribute value pairs.
+If you're writing a module to manage SSH, for instance, you will need to ensure
+that the `openssh-server` package is installed *before* you try to manage the `sshd`
+service. To achieve this, you include a `before` metaparameter with the value
+`Service['sshd']`:
 
 {% highlight puppet %}
 package { 'openssh-server':
@@ -57,14 +57,13 @@ package { 'openssh-server':
 {% endhighlight %}
 
 You can also approach the problem from the other direction. The `require`
-metaparameter is the mirror image of `before`. It tells Puppet that the current
+metaparameter is the mirror image of `before`. `require` tells Puppet that the current
 resource *requires* the one specified by the metaparameter.
 
 {% aside Metaparameters%}
 Metaparameters are attributes that can be set in any resource to give Puppet
 extra information about how to manage a resource. In addition to resource
-ordering, metaparameters can help with things like logging, auditing, and
-scheduling.
+ordering, metaparameters can help with logging, auditing, and scheduling.
 {% endaside %}
 
 Using `before` in the `openssh-server` package resource is exactly equivalent to
@@ -91,11 +90,10 @@ a simple SSH module to explore resource relationships?
 
 SSH is already running on the Learning VM, so we'll make things a little more
 interesting by managing its configuration as well as the package and service.
-
 Specifically, we'll change the `GSSAPIAuthentication` setting for the SSH daemon
-to `no`. You're not using this method of authentication to connect to the
+to `no`. (You're not using this method of authentication to connect to the
 Learning VM, so this will be a safe setting to change without disrupting any
-aspects of the service you need for the Learning VM itself.
+aspects of the service you need for the Learning VM itself.)
 
 {% task 1 %}
 ---
@@ -132,15 +130,15 @@ a `require` or `before` to specify the relationship between these two resources.
 
 When you're done use the `puppet parser validate` command to check your manifest.
 
-We haven't added the `file` resource to manage the the `sshd` configuration, but
-before getting to this, let's take a look at the relationship between the `package` and
-`service` resources from another perspective.
+Before we add the `file` resource to manage the the `sshd` configuration,
+let's take a look at the relationship between the `package` and `service`
+resources from another perspective.
 
 When Puppet compiles a catalog, it generates a **graph** that represents the network
-of resource relationships in that catalog. Not to be confused with the more general sense
-of meaning "chart," *graph*, in this context, refers to a method commonly used in computer
-science and mathematics to model connections among a collection of objects. Puppet uses
-a graph to determine a workable order for applying resources.
+of resource relationships in that catalog. Not to be confused with the more common sense
+of "chart," *graph*, in this context, refers to a method used in computer science and
+mathematics to model connections among a collection of objects. Puppet uses a graph
+to determine a workable order for applying resources.
 
 This graph can also be a great tool to help a user visualize and understand the relationships
 among resources.
@@ -160,7 +158,7 @@ manifest. You don't have any parameters here, so you can use a simple:
 include sshd
 {% endhighlight %}
 
-With this done, run a `puppet apply` of your test manifest with the `--noop` and `--graph`
+With this done, run a `puppet apply` on your test manifest with the `--noop` and `--graph`
 flags:
 
     puppet apply sshd/tests/init.pp --noop --graph
@@ -275,13 +273,13 @@ after you've made your changes.
 Puppet uses another pair of metaparameters to manage this special relationship
 between a service and its configuration file: `notify` and `subscribe`. The `notify`
 and `subscribe` metaparameters establish the same dependency relationships as `before`
-and `require`, respectively, and also trigger a refresh in the whenever Puppet
-makes a change to the dependency.
+and `require`, respectively, and also trigger a refresh whenever Puppet makes a change
+to the dependency.
 
 While any resource can be the dependency that triggers a refresh, there are only
-two resource types that can respond to one: `service` and `exec`. When
-a `service` receives a refresh event, it will restart. When an `exec` receives
-a refresh message, it will execute its specified command again.
+a couple of resource types that can respond to one. In the following task, we'll
+look at `service` which should already be familiar to you. (The second is called
+`exec`, and the details of how it works are beyond the scope of this quest.)
 
 Like `before` and `require`, `notify` and `subscribe` are mirror images of each other.
 Including a `notify` in your `file` resource has exactly the same result as including
@@ -315,7 +313,7 @@ class sshd {
 }
 {% endhighlight %}
 
-Validate your syntax with the `puppet parser` tool. When your syntax checks out,
+Validate your syntax with the `puppet parser` tool. When your syntax looks good,
 apply your test manifest with the `--graph` and `--noop` flags, then use the `dot`
 tool again to regenerate your graph image again.
 
@@ -331,7 +329,7 @@ for the `sshd` service.
 ## Chaining arrows
 
 **Chaining arrows** provide another means for creating relationships between
-resources or groups of resources. The approiate occasions for using chaining
+resources or groups of resources. The appropriate occasions for using chaining
 arrows involve concepts beyond the scope of this quest, but for the sake of
 completeness, we'll give a brief overview.
 
@@ -348,11 +346,11 @@ especially if you're refactoring a large manifest with many resources and
 resource relationships.
 
 So what are chaining arrows good for? Unlike metaparameters, chaining
-arrows aren't embedded in a specific resource declaration, which means
-that you can use them between resource references, arrays of resource
-references, and resource collectors to concisely and dynamically create
-one-to-many or many-to-many dependency relationships among groups
-of resources.
+arrows aren't embedded in a specific resource declaration. This means
+that you can place chaining arrows between resource references, arrays
+of resource references, and resource collectors to concisely and
+dynamically create one-to-many or many-to-many dependency relationships
+among groups of resources.
 
 ## Autorequires
 
