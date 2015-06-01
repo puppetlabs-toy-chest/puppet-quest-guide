@@ -25,7 +25,7 @@ variables, you will make your class more concise and easier to refactor later.
 Once this basic class structure is complete, you'll add parameters. This will
 let you set the value of your class's variables as you declare it.
 
-When you're ready to get started, type the following command to begin:
+When you're ready to get started, enter the following command:
 
     quest --start variables
 
@@ -230,7 +230,7 @@ class {'classname':
 }
 {% endhighlight %}
 
-Say you wanted to deploy your webpage to servers around the world, and wanted
+Say you want to deploy your webpage to servers around the world, and want
 changes in content depending on the language in each region. Instead of rewriting
 the whole class or module for each region, you can use class parameters
 to customize these values as the class is declared.
@@ -255,7 +255,7 @@ to customize these values as the class is declared.
 
 To get started re-writing your `web` class with parameters, reopen the
 `web/manifests/init.pp` manifest. To create a new regionalized page, you
-will need to be able to set the message and page name as class parameters.
+need to be able to set the message and page name as class parameters.
 
 {% highlight puppet %}
 class web ( $page_name, $message ) {
