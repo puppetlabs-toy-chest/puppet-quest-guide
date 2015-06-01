@@ -24,11 +24,11 @@ LOCALREPO='/usr/src/courseware-lvm'
 
 if [ "$1" == "update" ]; then
   read -r -p "Updating may disrupt current quest progress. Continue? [Y/n] " response
-  case $response in
-    [nN][oO]|[nN])
+  if [[ $response =~ ^[nN][oO]|[nN]$ ]]
+  then
       echo "Update aborted"
       exit
-    *)
+  else
     if [ -e "$LOCALREPO" ]; then
       cd $LOCALREPO
       $RAKE update
@@ -36,7 +36,7 @@ if [ "$1" == "update" ]; then
       echo "Unable to update to content.  No local content repository found."
     fi
     exit
-  esac
+  fi
 fi
 
 #- As long as a lock file exists, we use the previous output
