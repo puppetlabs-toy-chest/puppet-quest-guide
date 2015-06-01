@@ -163,7 +163,7 @@ flags:
 
     puppet apply sshd/tests/init.pp --noop --graph
 
-{% task 3 %}
+{% task 4 %}
 ---
   - execute: dot -Tpng /var/opt/lib/pe-puppet/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
 {% endtask %}
@@ -185,7 +185,7 @@ dependency relationship.
 
 {% figure '/relationships1.png' %}
 
-{% task 2 %}
+{% task 5 %}
 ---
 - execute: cp /etc/ssh/sshd_config /etc/puppetlabs/puppet/environments/production/modules/sshd/files/sshd_config
 {% endtask %}
@@ -197,7 +197,7 @@ the Modules quest, you can copy the existing configuration file into your module
 
     cp /etc/ssh/sshd_config sshd/files/sshd_config
 
-{% task 4 %}
+{% task 6 %}
 ---
 - execute: vim /etc/puppetlabs/puppet/environments/production/modules/sshd/files/sshd_config
   input:
@@ -212,7 +212,7 @@ Now, let's disable GSSAPIAuthentication. Open the `sshd/files/sshd_config` file
 and find the `GSSAPIAuthentication` line. Uncomment the `no` line, and comment out the
 `yes` line.
 
-{% task 5 %}
+{% task 7 %}
 - execute: vim /etc/puppetlabs/puppet/environments/production/modules/sshd/manifests/init.pp
   input: 
     - "/class sshd {\r"
@@ -220,7 +220,7 @@ and find the `GSSAPIAuthentication` line. Uncomment the `no` line, and comment o
     - |
       file { '/etc/ssh/sshd_config':
         ensure     => present,
-        source     => 'puppet:///modules/sshd/sshd_conf',
+        source     => 'puppet:///modules/sshd/sshd_config',
         require    => Package['openssh-server'],
       }
     - "\e"
@@ -240,7 +240,7 @@ class sshd {
 
   file { '/etc/ssh/sshd_config':
     ensure     => present,
-    source     => 'puppet:///modules/sshd/sshd_conf',
+    source     => 'puppet:///modules/sshd/sshd_config',
     require    => Package['openssh-server'],
   }
 
@@ -248,7 +248,7 @@ class sshd {
 {% endhighlight %}
 
 
-{% task 3 %}
+{% task 8 %}
 ---
   - execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/sshd/tests/init.pp --noop --graph
   - execute: dot -Tpng /var/opt/lib/pe-puppet/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
@@ -285,7 +285,7 @@ Like `before` and `require`, `notify` and `subscribe` are mirror images of each 
 Including a `notify` in your `file` resource has exactly the same result as including
 `subscribe` in your `service` resource.
 
-{% task 6 %}
+{% task 9 %}
 - execute: vim /etc/puppetlabs/puppet/environments/production/modules/sshd/manifests/init.pp
   input: 
     - "/service\r"
@@ -320,7 +320,7 @@ tool again to regenerate your graph image again.
 Check (your graph)[/relationships.png] one more time. Notice that the `sshd`
 resource now depends on the `/etc/ssh/sshf_config` file.
 
-{% figure '/relationships2.png' %}
+{% figure '/relationships3.png' %}
 
 Finally, drop the `--noop` flag to actually apply your changes. You'll see a notice
 that the content of the config file has changed, followed by a notice for the 'refresh'
