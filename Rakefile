@@ -71,7 +71,7 @@ end
 # Helper Functions
 
 def ensure_remote(remote, url)
-  unless system("git config --get remote.#{remote}.url > /dev/null")
+  unless system("git config --get remote.#{remote}.url 2> /dev/null")
     # Add the remote if it doesn't already exist
     unless system("git remote add #{remote} #{url}")
       raise "Could not add the '#{remote}' remote."
@@ -82,20 +82,20 @@ end
 def ensure_branch(branch)
   unless system("git rev-parse --verify #{branch} 2> /dev/null")
     # Create branch if it doesn't already exist
-    unless system("git branch #{branch} > /dev/null")
+    unless system("git branch #{branch} 2> /dev/null")
       raise "There was an error creating branch #{branch}"
     end
   end
 end
 
 def checkout(branch)
-  unless system("git checkout #{branch} --quiet")
+  unless system("git checkout #{branch} 2> /dev/null")
     raise "Your current branch has unsaved changes."
   end
 end
 
 def pull(remote, branch)
-  unless system("git pull #{remote} #{branch} > /dev/null")
+  unless system("git pull #{remote} #{branch} 2> /dev/null")
     raise "Could not pull #{remote} #{branch}"
   end
 end
