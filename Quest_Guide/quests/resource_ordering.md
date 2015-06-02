@@ -201,10 +201,7 @@ the Modules quest, you can copy the existing configuration file into your module
 ---
 - execute: vim /etc/puppetlabs/puppet/environments/production/modules/sshd/files/sshd_config
   input:
-    - "/#GSSAPIAuthentication no\r"
-    - "x"
-    - "/GSSAPIAuthentication yes\r"
-    - "i#"
+    - ":%s/GSSAPIAuthentication yes/GSSAPIAuthentication no/g\r"
     - ":wq\r"
 {% endtask %}
 
