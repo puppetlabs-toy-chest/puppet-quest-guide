@@ -60,7 +60,7 @@
 @media all{
     body {
         font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-        font-size: 1.2em;
+        font-size: 1.1em;
         color: #383838;
     }
 
@@ -72,6 +72,10 @@
 
     code {
         padding: 1px 3px;
+        background-color: #eee;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
     }
 
     pre {
@@ -343,11 +347,11 @@
         }
         
         blockquote p {
-            font-size: 1.2em;
+            font-size: .9em;
             font-weight: 300;
             margin: 0;
             font-style: italic;
-            font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: Helvetica, Arial, sans-serif;
         }
 
     sup {
