@@ -2,10 +2,10 @@ Set up the Learning VM
 
 1. Be sure you have an up-to-date version of your virtualization software.
 We suggest using either VirtualBox or a VMware appropriate for your platform.
-(VirtualBox)[https://www.virtualbox.org/wiki/Downloads], is free and available
+[VirtualBox](https://www.virtualbox.org/wiki/Downloads), is free and available
 for Linux, OS X, and Windows. VMware has several desktop virtualization applications,
-including (VMWare Fusion)[https://www.vmware.com/products/fusion/] for Mac and
-(VMware Workstation)[https://www.vmware.com/products/workstation/] for Windows.
+including [VMWare Fusion](https://www.vmware.com/products/fusion/) for Mac and
+[VMware Workstation](https://www.vmware.com/products/workstation/) for Windows.
 
 2. Once you have downloaded the Learning VM .OVA file and (if needed)
 your virtualization software, you're ready to import the Learning VM. Please
@@ -33,7 +33,7 @@ boot, then make note of the IP address. You will have a much better experience
 if you connect to the VM via SSH, rather than interacting with it directly through
 your virtualization software. On OS X, you can use the default Terminal application
 or a third-party application like iTerm. For Windows, we suggest the free SSH
-client (PuTTY)[http://www.putty.org/]. Connect to the Learning VM with the login
+client [PuTTY](http://www.putty.org/). Connect to the Learning VM with the login
 `root` and password `puppet`.
 
 6. The Learning VM comes with a pre-configured webserver hosting the Quest Guide
