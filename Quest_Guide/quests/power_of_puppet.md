@@ -42,7 +42,7 @@ Graphite is built from several components, including the Graphite Django webapp 
 a storage application called Carbon, and Whisper, a lightweight database system. Each of
 these components has its own set of dependencies and requires its own installation, and
 configuration. You could probably get it up and running yourself if you set aside a little
-time to read through the documentation, but wouldn't it be nice is somebody had already
+time to read through the documentation, but wouldn't it be nice if somebody had already
 done the work for you?
 
 You're in luck! Puppet Labs opperates a service called the [Puppet Forge](http://forge.puppetlabs.com),
@@ -245,9 +245,9 @@ This may take a minute to run. After a brief delay, you will see text scroll
 by in your terminal indicating that Puppet has made all the specified
 changes to the Learning VM.
 
-Now that Graphite is up and running, try refreshing the page to see a live graph of the
-Learning VM's Memory and CPU use.
-{% figure '/graphite/render/?width=586&height=308&_salt=1430506380.148&from=-1hours&fontItalic=false&fontName=Courier&target=alias(carbon.agents.learning_puppetlabs_vm-a.cpuUsage%2C"CPU")&target=alias(secondYAxis(carbon.agents.learning_puppetlabs_vm-a.memUsage)%2C"Memory")&majorGridLineColor=C0C0C0&minorGridLineColor=C0C0C0' %}
+Now that Graphite is up and running, its API is available for generating graphs
+suitable for including in a dashboard. We've selected a few parameters as an
+example, which you can see (here.)[/graphite/render/?width=586&height=308&_salt=1430506380.148&from=-1hours&fontItalic=false&fontName=Courier&target=alias(carbon.agents.learning_puppetlabs_vm-a.cpuUsage%2C"CPU")&target=alias(secondYAxis(carbon.agents.learning_puppetlabs_vm-a.memUsage)%2C"Memory")&majorGridLineColor=C0C0C0&minorGridLineColor=C0C0C0]
 
 You can also check out the Graphite console running on port 90. (<IPADDRESS>:90)
 
