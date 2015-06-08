@@ -21,7 +21,7 @@ end
 describe "Task 3:" do
   it "Create a test manifest, and apply it with `--noop` and `--graph` flags" do
     file("#{MODULE_PATH}sshd/tests/init.pp").should contain "include sshd"
-    file("/var/opt/bin/lib/pe-puppet/state/graphs/relationships.dot").should contain "sshd"
+    file("/var/opt/lib/pe-puppet/state/graphs/relationships.dot").should contain "sshd"
   end
 end
 
@@ -48,7 +48,7 @@ describe "Task 7:" do
   it 'Add a `file` resource to manage the `sshd` configuration file' do
     file("#{MODULE_PATH}sshd/manifests/init.pp").content.should match /file\s+\{\s+'\/etc\/ssh\/sshd_config':/
     file("#{MODULE_PATH}sshd/manifests/init.pp").content.should match /source\s+=>\s+'puppet:\/\/\/modules\/sshd\/sshd_config',/
-    file("#{MODULE_PATH}sshd/manifests/init.pp").content.should match /require\s+=>\s+'Package\['openssh-server'\]'/
+    file("#{MODULE_PATH}sshd/manifests/init.pp").content.should match /require\s+=>\s+Package\['openssh-server'\]/
   end
 end
 
@@ -61,6 +61,6 @@ end
 
 describe "Task 9:" do
   it 'Add a `subscribe` metaparameter to your `sshd` resource' do
-    file("#{MODULE_PATH}sshd/manifests/init.pp").content.should match /subscribe\s+=>\s+File\['\/etc\/ssh\/sshd_config\]/
+    file("#{MODULE_PATH}sshd/manifests/init.pp").content.should match /subscribe\s+=>\s+File\['\/etc\/ssh\/sshd_config'\]/
   end
 end
