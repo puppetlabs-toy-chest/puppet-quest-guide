@@ -247,9 +247,9 @@ changes to the Learning VM.
 
 Now that Graphite is up and running, its API is available for generating graphs
 suitable for including in a dashboard. We've selected a few parameters as an
-example, which you can see (here.)[/graphite/render/?width=586&height=308&_salt=1430506380.148&from=-1hours&fontItalic=false&fontName=Courier&target=alias(carbon.agents.learning_puppetlabs_vm-a.cpuUsage%2C"CPU")&target=alias(secondYAxis(carbon.agents.learning_puppetlabs_vm-a.memUsage)%2C"Memory")&majorGridLineColor=C0C0C0&minorGridLineColor=C0C0C0]
+example, which you can see [here.](/graphite/render/?width=586&height=308&_salt=1430506380.148&from=-1hours&fontItalic=false&fontName=Courier&target=alias(carbon.agents.learning_puppetlabs_vm-a.cpuUsage%2C"CPU")&target=alias(secondYAxis(carbon.agents.learning_puppetlabs_vm-a.memUsage)%2C"Memory")&majorGridLineColor=C0C0C0&minorGridLineColor=C0C0C0)
 
-You can also check out the Graphite console running on port 90. (<IPADDRESS>:90)
+You can also check out the Graphite console running on port 90. (`<IPADDRESS>:90`)
 
 ## Review
 
