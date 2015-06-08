@@ -17,7 +17,7 @@ This quest will help you learn more about specifying the order in which Puppet
 should manage resources in a manifest. When you're ready to get started, type
 the following command:
 
-    quest --start ordering
+    quest --start resource_ordering
 
 ## Resource order
 
@@ -88,13 +88,6 @@ Type['title']
 We've already covered a couple of the resources you'll need, so why not make
 a simple SSH module to explore resource relationships?
 
-SSH is already running on the Learning VM, so we'll make things a little more
-interesting by managing its configuration as well as the package and service.
-Specifically, we'll change the `GSSAPIAuthentication` setting for the SSH daemon
-to `no`. (You're not using this method of authentication to connect to the
-Learning VM, so this will be a safe setting to change without disrupting any
-aspects of the service you need for the Learning VM itself.)
-
 {% task 1 %}
 ---
 - execute: mkdir -p /etc/puppetlabs/puppet/environments/production/modules/sshd/{tests,manifests,files}
@@ -132,16 +125,14 @@ When you're done use the `puppet parser validate` command to check your manifest
 
 Before we add the `file` resource to manage the the `sshd` configuration,
 let's take a look at the relationship between the `package` and `service`
-resources from another perspective.
+resources from another perspective: the graph.
 
 When Puppet compiles a catalog, it generates a **graph** that represents the network
-of resource relationships in that catalog. Not to be confused with the more common sense
-of "chart," *graph*, in this context, refers to a method used in computer science and
-mathematics to model connections among a collection of objects. Puppet uses a graph
-to determine a workable order for applying resources.
-
-This graph can also be a great tool to help a user visualize and understand the relationships
-among resources.
+of resource relationships in that catalog. Graph, in this context, refers to a method
+used in computer science and mathematics to model connections among a collection of
+objects. Puppet uses a graph internally to determine a workable order for applying
+resources, and you can access it yourself to visualize and better understand these
+resource relationships.
 
 {% task 3 %}
 ---
@@ -179,11 +170,11 @@ directory so that it will be easily viewable from your browser.
 
     dot -Tpng /var/opt/lib/pe-puppet/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
 
-Take a look at (the graph)[/relationships.png]. Notice that the `openssh-server`
+Take a look at [the graph](/relationships.png). Notice that the `openssh-server`
 and `sshd` resources you defined are connected by an arrow to indicate the
 dependency relationship.
 
-{% figure '/relationships1.png' %}
+{% figure '../assets/relationships1.png' %}
 
 {% task 5 %}
 ---
@@ -205,9 +196,12 @@ the Modules quest, you can copy the existing configuration file into your module
     - ":wq\r"
 {% endtask %}
 
-Now, let's disable GSSAPIAuthentication. Open the `sshd/files/sshd_config` file
-and find the `GSSAPIAuthentication` line. Uncomment the `no` line, and comment out the
-`yes` line.
+Of course, SSH is already reasonably configured on the Learning VM, but for the sake
+of example, let's make a change so you can see how Puppet handles it. We're not using
+GSS API Authentication, so you can improve connection performance by setting the
+GSSAPIAuthentication setting to `no`. Open the `sshd/files/sshd_config` file
+and find the `GSSAPIAuthentication` line. Change the setting to `no`, then save the
+file and exit your editor.
 
 {% task 7 %}
 - execute: vim /etc/puppetlabs/puppet/environments/production/modules/sshd/manifests/init.pp
@@ -256,10 +250,10 @@ then use the `dot` tool again to regenerate your graph image.
 
     dot -Tpng /var/opt/lib/pe-puppet/state/graphs/arelationships.dot -o /var/www/html/questguide/relationships.png
 
-Check (your graph)[/relationships.png] again to see how your new `file` resource
+Check [your graph](/relationships.png) again to see how your new `file` resource
 fits in.
 
-{% figure '/relationships2.png' %}
+{% figure '../assets/relationships2.png' %}
 
 You can easily see from the graph diagram that both the `file` and `service` resources
 require the `package` resource. What's missing from the picture so far?
@@ -314,10 +308,10 @@ Validate your syntax with the `puppet parser` tool. When your syntax looks good,
 apply your test manifest with the `--graph` and `--noop` flags, then use the `dot`
 tool again to regenerate your graph image again.
 
-Check (your graph)[/relationships.png] one more time. Notice that the `sshd`
+Check [your graph](/relationships.png) one more time. Notice that the `sshd`
 resource now depends on the `/etc/ssh/sshf_config` file.
 
-{% figure '/relationships3.png' %}
+{% figure '..//assets/relationships3.png' %}
 
 Finally, drop the `--noop` flag to actually apply your changes. You'll see a notice
 that the content of the config file has changed, followed by a notice for the 'refresh'
