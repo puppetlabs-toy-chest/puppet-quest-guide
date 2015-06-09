@@ -209,11 +209,11 @@ file and exit your editor.
     - "/class sshd {\r"
     - o
     - |
-      file { '/etc/ssh/sshd_config':
-        ensure     => present,
-        source     => 'puppet:///modules/sshd/sshd_config',
-        require    => Package['openssh-server'],
-      }
+        file { '/etc/ssh/sshd_config':
+          ensure     => present,
+          source     => 'puppet:///modules/sshd/sshd_config',
+          require    => Package['openssh-server'],
+        }
     - "\e"
     - ":wq\r"
 {% endtask %}
@@ -282,7 +282,7 @@ Including a `notify` in your `file` resource has exactly the same result as incl
     - "/service\r"
     - o
     - subscribe => File['/etc/ssh/sshd_config'],
-    - "\e"
+    - "\e:wq\r"
 {% endtask %} 
 
 Edit your `sshd/manifests/init.pp` manifest to add a `subscribe` metaparameter
