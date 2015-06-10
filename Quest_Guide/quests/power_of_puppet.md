@@ -198,13 +198,15 @@ to classify the node `learning.puppetlabs.vm`.
 Under the *Classes* tab in the interface for the Learning VM node group, enter `graphite`
 in the *Class name* text box, then click the *Add class* button.
 
-One more thing before you're ready to apply your changes. We've pre-configured
-the Quest Guide's Apache server to pass `http://localhost/graphite` to the Graphite
-webapp. To avoid conflicts we'll need to disable Graphite's default web server.
-The PE console interface makes this kind of adjustment simple. Set the `gr_web_server`
+One more thing before you're ready to apply your changes. We've already configured the
+Learning VM's Apache server, so to avoid conflicts we'll need to disable Graphite's
+default web server settings.
+
+The PE console interface makes this kind of adjustment simple. Using the dropdown parameter
+menus under the **Class:** graphite section, set the `gr_web_server`
 parameter to `'none'`, and the `gr_disable_webapp_cache` parameter to `true`. (Note
-that because `'none'` is a string, it should be wrapped in single quotes, while
-the boolean `true` need not be quoted.)
+that because `'none'` is a string, it should be wrapped in single quotes, while the
+boolean `true` need not be quoted.)
 
 Finally, click the *Commit 2 changes* button in the bottom right of the console window
 to commit your changes.
@@ -226,7 +228,7 @@ catalog.
 {% task 4 %}
 ---
 - execute: |
-    curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -H "Content-Type: application/json" -X POST -d '{"name":"Learning VM", "environment":"production", "parent":"00000000-0000-4000-8000-000000000000", "classes":{"graphite" : {"gr_apache_port" : "90"} },  "rule":["or", ["=", "name", "learning.puppetlabs.vm"]]}' https://localhost:4433/classifier-api/v1/groups
+    curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -H "Content-Type: application/json" -X POST -d '{"name":"Learning VM", "environment":"production", "parent":"00000000-0000-4000-8000-000000000000", "classes":{"graphite" : {"gr_web_server" : "none"} },  "rule":["or", ["=", "name", "learning.puppetlabs.vm"]]}' https://localhost:4433/classifier-api/v1/groups
 - execute: puppet agent --test
 {% endtask %}
 
@@ -248,6 +250,9 @@ changes to the Learning VM.
 Now that Graphite is up and running, its API is available for generating graphs
 suitable for including in a dashboard. We've selected a few parameters as an
 example, which you can see [here.](/graphite/render/?width=586&height=308&_salt=1430506380.148&from=-1hours&fontItalic=false&fontName=Courier&target=alias(carbon.agents.learning_puppetlabs_vm-a.cpuUsage%2C"CPU")&target=alias(secondYAxis(carbon.agents.learning_puppetlabs_vm-a.memUsage)%2C"Memory")&majorGridLineColor=C0C0C0&minorGridLineColor=C0C0C0)
+Note that Graphite has only been running for a few minutes, so it may not yet
+have much data to chart. If you wait a minute and refresh the page in your
+browser, you will see the graph update with new data.
 
 You can also check out the Graphite console running on port 90. (`<IPADDRESS>:90`)
 
