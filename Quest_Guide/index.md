@@ -96,9 +96,9 @@ versions of Puppet are running on this Learning VM. Type the following command:
 
 You will see something like the following:
 
-_3.7.3 (Puppet Enterprise 3.7.1)_
+_3.8.0 (Puppet Enterprise 3.8.1)_
 
-This indicates that Puppet Version 3.7.3 Puppet Enterprise 3.7.1 are installed.
+This indicates that Puppet Version 3.8.0 Puppet Enterprise 3.8.1 are installed.
 
 ## What is a Quest?
 
@@ -154,16 +154,9 @@ Find out how much progress you have made so far:
 
     quest --progress
 
-{% tip %}
-Typing `clear` into your terminal will remove everything on your terminal
-screen.
-{% endtip %}
-
 While you can use the quest commands to find more detailed information about
 your progress through the quests, you can check the quest status display at the
 bottom right of your terminal window to keep up with your progress in real time.
-
-{% figure 'assets/terminal.png' %} 
 
 ## Structure of this Quest Guide
 
@@ -173,7 +166,10 @@ quickly you'll learn. As far as is reasonable, we've tried to construct quests
 around plausible use cases, and to this end, most quests will introduce several
 related concepts at once.
 
-The first several quests, up to and including the Modules quest, are your
+After this Welcome quest, the Power of Puppet quest will give you a glimpse of
+the big picture so you have context for the quests that follow.
+
+The first several quests after that, up to and including the Modules quest, are your
 foundations. Learning about these things is like tying your shoe laces: no
 matter where you're trying to get to, you're going to get tripped up if you
 don't have a solid understanding of things like *resources*, *classes*,
