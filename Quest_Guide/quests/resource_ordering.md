@@ -21,11 +21,12 @@ the following command:
 
 ## Resource order
 
-So far, the modules you've been writing have been pretty simple. We've walked
+So far, the modules you've written have been pretty simple. We walked
 you through minimal examples designed to demonstrate different features of Puppet and
-its language constructs. Because we've only been handling a few resources at a time
+its language constructs. Because you've only handled a few resources at a time
 in these cases, we haven't been worried about dependencies among those resources.
-When you start tackling more complex problems, however, it will quickly become clear
+
+When you start tackling more complex problems, it will quickly become clear
 that things have to happen in the right order. You can hardly configure a package
 before it has been installed, or give ownership of a file to a user you haven't
 yet created.
@@ -42,8 +43,11 @@ This is where **resource relationships** come in. Puppet's resource relationship
 syntax lets you explicitly define the dependency relationships among your resources.
 
 Though there are a couple ways to define these relationships the simplest are
-the **relationship metaparameters**. Relationship metaparameters are set in a
+the **relationship metaparameters**. A metaparameter is a kind of attribute value
+pair that tells Puppet how you want it to implement a resource, rather than the
+details of the resource itself. Relationship metaparameters are set in a
 resource declaration along with the rest of a resource's attribute value pairs.
+
 If you're writing a module to manage SSH, for instance, you will need to ensure
 that the `openssh-server` package is installed *before* you try to manage the `sshd`
 service. To achieve this, you include a `before` metaparameter with the value
@@ -59,12 +63,6 @@ package { 'openssh-server':
 You can also approach the problem from the other direction. The `require`
 metaparameter is the mirror image of `before`. `require` tells Puppet that the current
 resource *requires* the one specified by the metaparameter.
-
-{% aside Metaparameters%}
-Metaparameters are attributes that can be set in any resource to give Puppet
-extra information about how to manage a resource. In addition to resource
-ordering, metaparameters can help with logging, auditing, and scheduling.
-{% endaside %}
 
 Using `before` in the `openssh-server` package resource is exactly equivalent to
 using `require` in the `sshd` service resource:
@@ -115,13 +113,12 @@ To get started with your module, create an `sshd` directory with `tests`,
 
 {% endtask %}
 
-With your directory structure in place, it's time to get started on your `sshd` class.
 Create an `sshd/manifests/init.pp` manifest and fill in your `sshd` class with the
 `openssh-server` package resource and `sshd` service resource. Don't forget to include
 a `require` or `before` to specify the relationship between these two resources.
 (If you need a hint, feel free to refer back to the examples above!)
 
-When you're done use the `puppet parser validate` command to check your manifest.
+When you're done use, the `puppet parser validate` command to check your manifest.
 
 Before we add the `file` resource to manage the the `sshd` configuration,
 let's take a look at the relationship between the `package` and `service`
@@ -248,7 +245,7 @@ class sshd {
 Apply your test manifest again with the `--graph` and `--noop` flags,
 then use the `dot` tool again to regenerate your graph image.
 
-    dot -Tpng /var/opt/lib/pe-puppet/state/graphs/arelationships.dot -o /var/www/html/questguide/relationships.png
+    dot -Tpng /var/opt/lib/pe-puppet/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
 
 Check [your graph](/relationships.png) again to see how your new `file` resource
 fits in.
@@ -349,7 +346,7 @@ among groups of resources.
 for itself. For instance, Puppet knows that a file resource should always
 come after a parent directory that contains it, and that a user resource should
 always be managed after the primary group it belongs to has been created. You can
-find these relationships in the (type reference)[http://docs.puppetlabs.com/references/4.1.latest/type.html]
+find these relationships in the [type reference](http://docs.puppetlabs.com/references/4.1.latest/type.html)
 section of the Puppet Docs page, as well as the output of the `puppet describe`
 tool.
 
