@@ -45,7 +45,7 @@ configuration. You could probably get it up and running yourself if you set asid
 time to read through the documentation, but wouldn't it be nice if somebody had already
 done the work for you?
 
-You're in luck! Puppet Labs opperates a service called the [Puppet Forge](http://forge.puppetlabs.com),
+You're in luck! Puppet Labs operates a service called the [Puppet Forge](http://forge.puppetlabs.com),
 which serves as a repository for Puppet *modules*. A module nicely packages all the
 code and data Puppet needs to manage a given aspect if your infrastructure, which
 is expecially helpful when you're dealing with a complex application like Graphite.
