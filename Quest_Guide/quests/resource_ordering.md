@@ -118,7 +118,7 @@ Create an `sshd/manifests/init.pp` manifest and fill in your `sshd` class with t
 a `require` or `before` to specify the relationship between these two resources.
 (If you need a hint, feel free to refer back to the examples above!)
 
-When you're done use, the `puppet parser validate` command to check your manifest.
+When you're done, use the `puppet parser validate` command to check your manifest.
 
 Before we add the `file` resource to manage the the `sshd` configuration,
 let's take a look at the relationship between the `package` and `service`
