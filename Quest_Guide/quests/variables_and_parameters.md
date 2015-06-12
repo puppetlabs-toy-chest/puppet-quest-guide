@@ -62,8 +62,8 @@ won't complain. Instead, Puppet will treat the variable as having the special
 in some cases it will pass through and cause unexpected results.
 
 3. You can only assign a variable once within a single scope. Once it's
-assigned, the value cannot be changed. A Puppet variable varies across
-different systems in your infrastructure, not within them.
+assigned, the value cannot be changed. The value of a Puppet variable may vary
+across different systems in your infrastructure, but not within them.
 
 ### Variable interpolation
 
