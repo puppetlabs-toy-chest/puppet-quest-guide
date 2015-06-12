@@ -46,7 +46,7 @@ solutions from a few well-written modules. And because these modules are
 separate and self-contained, they're much easier to test, maintain, and share
 than a collection of one-off solutions.
 
-At their root, modules are little more than a structure of directories and manifests
+At their root, modules are little more than a structure of directories and files
 that follow Puppet's naming conventions. The module file structure gives Puppet a consistent
 way to locate whatever classes, files, templates, plugins, and binaries are required to
 fulfill the function of the module.
