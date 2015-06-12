@@ -194,6 +194,7 @@ Your bovine friend clearly knows what's up.
                     ||     ||
 
 ### Fortune
+
 But this module isn't just about cowsay; it's about cow *sayings*. With the
 fortune package, you can provide your cow with a whole database of wisdom.
 
@@ -255,6 +256,7 @@ of course, but it's not so different than, say, installing packages for both
 Apache and PHP on a webserver. 
 
 ### Main class: init.pp
+
 Often a module will gather several classes that work together into a single
 class to let you declare everything at once.
 
