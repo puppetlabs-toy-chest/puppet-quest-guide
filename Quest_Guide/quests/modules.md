@@ -46,10 +46,9 @@ solutions from a few well-written modules. And because these modules are
 separate and self-contained, they're much easier to test, maintain, and share
 than a collection of one-off solutions.
 
-Though there are some technical aspects to how Puppet treats modules, at their
-root they're little more than a conventional directory structure and some naming
-standards. The module file structure gives Puppet a consistent way to locate
-whatever classes, files, templates, plugins, and binaries are required to
+At their root, modules are little more than a structure of directories and manifests
+that follow Puppet's naming conventions. The module file structure gives Puppet a consistent
+way to locate whatever classes, files, templates, plugins, and binaries are required to
 fulfill the function of the module.
 
 Modules and the module directory structure also provide an important way to
@@ -63,19 +62,18 @@ developed and maintained by others.
 
 ## The modulepath
 All modules accessible by your Puppet Master are located in the directories
-specified by the *modulepath* variable in Puppet's configuration file. On the
-Learning VM, this configuration file is `/etc/puppetlabs/puppet/puppet.conf`.
+specified by the *modulepath* variable in Puppet's configuration file.
 
 {% task 1 %}
 ---
-- execute: puppet agent --configprint modulepath
+- execute: puppet master --configprint modulepath
 {% endtask %}
 
-You can find the modulepath on any system with Puppet installed by running the
-`puppet agent` command with the `--configprint` flag and the `modulepath`
-argument:
+You can find the modulepath on your puppet master by running the
+`puppet master` command with the `--configprint` flag and the
+`modulepath` argument:
 
-    puppet agent --configprint modulepath
+    puppet master --configprint modulepath
 
 This will tell you that Puppet looks in the directories
 `/etc/puppetlabs/puppet/environments/production/modules`,
@@ -105,17 +103,16 @@ limit the depth to two directories.
 
     tree -L 2 -d /etc/puppetlabs/puppet/environments/production/modules/
 	
-You'll see a list of directories, like so:
+You'll see a list of directories, something like this:
 
     /etc/puppetlabs/puppet/environments/production/modules/
-    └── apache
-        ├── files
-        ├── lib
-        ├── manifests
-        ├── spec
-        ├── templates
-        └── tests
-        ...
+    ├── cowsayings
+    │   ├── manifests
+    │   └── tests
+    └── graphite
+       ├── manifests
+       ├── spec
+       └── templates
     	
 Each of the standardized subdirectory names you see tells Puppet users and
 Puppet itself where to find each of the various components that come together to
@@ -278,7 +275,7 @@ the implicit hostname, then, the attribute value pair for the source URI is:
 
     source => 'puppet:///modules/vimrc/vimrc',
 
-Putting this all together, your init.pp manifest should contain the following:
+Putting this all together, your `init.pp` manifest should contain the following:
 
 {% highlight puppet %}
 class vimrc {
