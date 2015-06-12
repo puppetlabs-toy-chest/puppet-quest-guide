@@ -27,7 +27,7 @@ let you set the value of your class's variables as you declare it.
 
 When you're ready to get started, enter the following command:
 
-    quest --start variables
+    quest --start variables_and_parameters
 
 ## Variables
 
@@ -36,9 +36,7 @@ When you're ready to get started, enter the following command:
 > -Douglas Horton
 
 
-Puppet's variable syntax lets you assign a name to a bit of data. Once a variable
-is assigned, so you can use its name to easily refer back to the assigned value
-throughout your manifest. In Puppet, variable names are prefixed with a `$`
+In Puppet, variable names are prefixed with a `$`
 (dollar sign), and a value is assigned with the `=` operator.
 
 Assigning a short string to a variable, for example, would look like this:
@@ -64,8 +62,8 @@ won't complain. Instead, Puppet will treat the variable as having the special
 in some cases it will pass through and cause unexpected results.
 
 3. You can only assign a variable once within a single scope. Once it's
-assigned, the value cannot be changed. (If this makes you wonder how accurate
-the term "variable" is, you're not alone!)
+assigned, the value cannot be changed. The value of a Puppet variable may vary
+across different systems in your infrastructure, but not within them.
 
 ### Variable interpolation
 
@@ -197,8 +195,7 @@ for your manifest with an `include` statement for the web class you created.
 Run the test, using the `--noop` flag for a dry run before triggering your real
 `puppet apply`.
 
-Connect to `http://<LVM's IP>/hello.html` and `http://<LVM's IP>/bonjour.html`
-to see your new pages.
+Take a look [here](/hello.html) and [here](/bonjour.html) to see your new pages.
 
 ## Class parameters
 
@@ -303,7 +300,7 @@ class {'web':
 
 Now give it a try. Go ahead and do a `--noop` run, then apply the test.
 
-Your new page should now be available as `http://<LVM's IP>/hola.html`!
+Your new page should now be available [here](/hola.html)!
 
 ## Review
 

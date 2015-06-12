@@ -34,7 +34,7 @@ right away; keep at it and we'll get there when the time is right!
 
 Ready to get started? Type the following command:
 
-    quest --start power 
+    quest --start power_of_puppet 
 
 ## Forge ahead
 
@@ -45,10 +45,10 @@ configuration. You could probably get it up and running yourself if you set asid
 time to read through the documentation, but wouldn't it be nice if somebody had already
 done the work for you?
 
-You're in luck! Puppet Labs opperates a service called the [Puppet Forge](http://forge.puppetlabs.com),
-which serves as a repository for Puppet *modules*. A module includes all the code and data
-Puppet needs to manage a given aspect if your infrastructure. (Don't worry, we'll get more
-into the anatomy and contents of a module in a later quest!)
+You're in luck! Puppet Labs operates a service called the [Puppet Forge](http://forge.puppetlabs.com),
+which serves as a repository for Puppet *modules*. A module nicely packages all the
+code and data Puppet needs to manage a given aspect if your infrastructure, which
+is expecially helpful when you're dealing with a complex application like Graphite.
 
 {% task 1 %}
 ---
@@ -158,7 +158,7 @@ When prompted, use the following credentials to log in:
 
   * username: **admin** 
   
-  * password: **learningpuppet**
+  * password: **puppetlabs**
 
 ### Create a node group
 
@@ -195,7 +195,14 @@ interface to commit your change.
 With the `graphite` class available from the module installed, you can use it
 to classify the node `learning.puppetlabs.vm`.
 
-Under the *Classes* tab in the interface for the Learning VM node group, enter `graphite`
+Under the *Classes* tab in the interface for the Learning VM node group, find the *Class name*
+text box. It may take a minute for Puppet to pick up on classes from the newly installed
+`graphite` module. Try entering `graphite` in the text box. Puppet autocompletes from the list
+of available classes, so you can quickly see if a class is available. If `graphite` is not yet
+available, click the *Refresh* button near the top right of the classes interface and wait a
+moment before trying again.
+
+ enter `graphite`
 in the *Class name* text box, then click the *Add class* button.
 
 One more thing before you're ready to apply your changes. We've already configured the
@@ -233,23 +240,24 @@ catalog.
 {% endtask %}
 
 To avoid surprises, however, we've disabled these scheduled runs on the Learning VM.
-Instead, we'll be using the `puppet agent` tool to trigger runs manually. Just
-remember: the Learning VM is running both a puppet master *and* a puppet agent,
-which is a bit different than what you'd typically see with a puppet master node
-controlling a collection of agent nodes. Installing modules is a puppet *master* thing
-and puppet runs are a puppet *agent* thing.
+Instead, we'll be using the `puppet agent` tool to trigger runs manually.
+
+Remember as you're working through this quest guide that the Learning VM is running both
+a puppet master *and* a puppet agent, which is a bit different than what you'd typically
+see with a puppet master node controlling a collection of agent nodes. Installing modules
+is a puppet *master* thing and puppet runs are a puppet *agent* thing.
 
 So put on your agent hat and trigger a puppet run:
 
     puppet agent --test
 
-This may take a minute to run. After a brief delay, you will see text scroll
-by in your terminal indicating that Puppet has made all the specified
-changes to the Learning VM.
+Graphite is a complex piece of software with many dependencies, so this may take a while
+to run. After a brief delay, you will see text scroll by in your terminal indicating
+that Puppet has made all the specified changes to the Learning VM.
 
 Now that Graphite is up and running, its API is available for generating graphs
 suitable for including in a dashboard. We've selected a few parameters as an
-example, which you can see [here.](/graphite/render/?width=586&height=308&_salt=1430506380.148&from=-1hours&fontItalic=false&fontName=Courier&target=alias(carbon.agents.learning_puppetlabs_vm-a.cpuUsage%2C"CPU")&target=alias(secondYAxis(carbon.agents.learning_puppetlabs_vm-a.memUsage)%2C"Memory")&majorGridLineColor=C0C0C0&minorGridLineColor=C0C0C0)
+example, which you can see [here.](/graphite/render/?width=586&height=308&_salt=1430506380.148&from=-30minutes&fontItalic=false&fontName=Courier&target=alias(carbon.agents.learning_puppetlabs_vm-a.cpuUsage%2C"CPU")&target=alias(secondYAxis(carbon.agents.learning_puppetlabs_vm-a.memUsage)%2C"Memory")&majorGridLineColor=C0C0C0&minorGridLineColor=C0C0C0)
 Note that Graphite has only been running for a few minutes, so it may not yet
 have much data to chart. If you wait a minute and refresh the page in your
 browser, you will see the graph update with new data.
@@ -263,6 +271,3 @@ download existing modules from the Forge and use the PE console node classifier
 to apply them to a node. You also learned how to use the the `facter` command
 to retrieve system information, and the `puppet agent --test` command to manually
 trigger a puppet run.
-
-Though we'll go over many of the details of the Puppet DSL in later quests, you
-had your first look at a Puppet class, and some of the elements that make it up.

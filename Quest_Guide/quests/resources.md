@@ -60,10 +60,10 @@ how to use Puppet effectively.
 
 A good understanding of the Puppet DSL is a key first step in learning how to
 use Puppet effectively. Tools like the PE console give you quite a bit of power
-without asking you to edit code, but you'll be much better off with a solid
-understanding of what's going on under the hood.
+without asking you to write your own modules, but you'll be much better off
+with a solid understanding of the Puppet code under the hood.
 
-Puppet's DSL is a *declarative* language rather than an *imperative* one. This
+The Puppet's DSL is a *declarative* language rather than an *imperative* one. This
 means that instead of defining a process or set of commands, Puppet code
 describes (or declares) only the desired end state, and relies on built-in
 *providers* to deal with implementation.
@@ -102,6 +102,14 @@ user { 'root':
   uid              => '0',
 }
 {% endhighlight %}
+
+This resource declaration syntax is composed of three main components:
+
+- Type
+- Title
+- Attribute value pairs
+
+We'll go over each of these below.
 
 ### Resource Type
 
@@ -209,20 +217,17 @@ inevitably forget to insert it when you add another attribute value pair on the
 following line!
 {% endaside %}
 
-In the world of Puppet, everything around you can be represented as
-a resource, and resources follow this tidy declarative syntax. You don't want to
-just look at resources all day, you want to change them! 
-
-You can, and easily. But before making any changes, take a moment to learn a bit
-more about the user type. You'll want a way of knowing *what* you're changing
-before you start changing attributes. 
-
 {% task 2 %}
 ---
 - execute: "puppet describe user | less"
   input:
     - 'q'
 {% endtask %}
+
+Of course, the real meat of a resource is in these attribute value pairs. You
+can't do much with a resource without a good understanding of its attributes.
+The `puppet describe` makes this kind of information easily available from
+the command line.
 
 Use the *puppet describe* tool to get a description of the *user* type,
 including a list of its parameters.
@@ -306,7 +311,8 @@ So let's rehash what you learned in this quest. First, we covered two very
 important Puppet topics: the Resource Abstraction Layer and the anatomy of a
 resource. To dive deeper into these topics, we showed you how to use the `puppet
 describe` and `puppet resource` tools, which also leads to a better
-understanding of Puppet's Language. We also showed you how you can actually
-change the state of the system by declaring resources with the `puppet apply`
-and `puppet resource` tools. These tools will be useful as you progress through
-the following quests.
+understanding of Puppet's Language.
+
+We also showed you how you can change the state of the system by declaring
+resources with the `puppet apply` and `puppet resource` tools. These tools
+will be useful as you progress through the following quests!

@@ -22,8 +22,8 @@ isn't just easier. When you use a publicly available module, you're often
 getting code that has already been tested and deployed across hundreds or
 thousands of other users' infrastructures.
 
-Furthermore, using (Puppet Supported)[https://forge.puppetlabs.com/supported]
-and (Puppet Approved)[https://forge.puppetlabs.com/approved] modules
+Furthermore, using [Puppet Supported](https://forge.puppetlabs.com/supported)
+and [Puppet Approved](https://forge.puppetlabs.com/approved) modules
 adds another layer of validation and reliability.
 
 Keep in mind, though, that no matter whose code you're using, relying on external
@@ -138,8 +138,9 @@ Console. In this quest, we introduce another method of node classification: the
 master. It defines global settings and resource defaults that will apply to all
 nodes in your infrastructure. It is also where you will put your *node
 definitions* (sometimes called `node statements`). A node definition is a block
-of Puppet code that specifies a set one or more nodes and declares the classes
-that Puppet will enforce on that set.
+of Puppet code that specifies a set of nodes and declares the classes that Puppet
+will enforce on those nodes. You can think of it as a code-defined version of the
+node group you set up in the Power of Puppet quest.
 
 In a sense, this node definition is a bit like the test manifests you've been
 using so far. While classes are generally defined in separate manifests, the
@@ -200,8 +201,10 @@ puppet may not have a chance to refresh its cache. If your changes to the
 `site.pp` manifest aren't reflected in a puppet run triggered by the
 `puppet agent -t` command, try running the command again.
 
-Test the `site.pp` manifest with the `puppet parser validate` command, and run
-`puppet agent -t` to trigger a puppet run.
+Test the `site.pp` manifest with the `puppet parser validate` command, and trigger
+a puppet run.
+
+    puppet agent -t
 
 Once the puppet run is complete, use the puppet resource tool to inspect the
 `ntpd` service again. If the class has been successfully applied, you will see

@@ -20,7 +20,7 @@ platforms, operating systems, and functional requirements.
 
 To start this quest enter the following command:
 
-    quest --start conditionals
+    quest --start conditional_statements
 
 ## Writing for flexibility
 
@@ -50,7 +50,7 @@ module.
 
 While Puppet's built-in providers can't themselves guarantee the portability of
 your Puppet code at this higher level of implementation, Puppet's DSL gives you
-the tools to build adaptability into your modules. **facts** and **conditional
+the tools to build adaptability into your modules. **Facts** and **conditional
 statements** are the bread and butter of this functionality.
 
 ## Facts
@@ -129,14 +129,15 @@ clause.
 - If all the conditions fail, and there is no `else` block, Puppet will do
   nothing and move on.
 
-Lets say you want to give the user you're creating with your accounts module
+Let's say you want to give the user you're creating with your `accounts` module
 administrative privileges. You have a mix of CentOS and Debian systems in your
 infrastructure. On your CentOS machines, you use the `wheel` group to manage
 superuser privileges, while you use an `admin` group on the Debian machines.
 With the `if` statement and the `operatingsystem` fact from facter, this kind of
 adjustment is easy to automate with Puppet.
 
-Before getting started, make sure you're working in the `modules` directory:
+Before you get started writing your module, make sure you're working in the
+`modules` directory:
 
     cd /etc/puppetlabs/puppet/environments/production/modules
 	
@@ -189,7 +190,7 @@ conditional logic to set the `$groups` variable based on the value of the
 add the user to the `wheel` group, and if the operating system is Debian,
 Puppet will ad the user to the `admin` group.
 
-The beginning of your class definition will like this:
+The beginning of your class definition should look like this:
 
 {% highlight puppet %}
 class accounts ($name) {

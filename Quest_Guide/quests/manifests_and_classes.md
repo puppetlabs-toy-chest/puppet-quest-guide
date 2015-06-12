@@ -33,16 +33,11 @@ When you're ready to get started, enter the following command:
 
 > -James Cameron
 
-At its simplest, a **manifest** is little more than some puppet code
+At its simplest, a **manifest** is nothing more than some puppet code
 saved to a file with the `.pp` extension. It's the same stuff you saw using
 the `puppet resource` tool and applied with the `puppet apply` tool. Easy
 enough, but it's where you put a manifest and what you put in it that really
 matter.
-
-In theory, you could put whatever bits and pieces of syntactically valid Puppet
-code you want into a manifest and apply them as you like. However, if you want
-to use your manifests to build a Puppetized infrastructure, you need
-to be systematic about what you include in your manifests and where you put them.
 
 Much of this organizational structure, both in terms of a manifest's content and
 its location on the puppet master's filesystem, is related to Puppet *classes*. 
@@ -199,6 +194,7 @@ Your bovine friend clearly knows what's up.
                     ||     ||
 
 ### Fortune
+
 But this module isn't just about cowsay; it's about cow *sayings*. With the
 fortune package, you can provide your cow with a whole database of wisdom.
 
@@ -260,6 +256,7 @@ of course, but it's not so different than, say, installing packages for both
 Apache and PHP on a webserver. 
 
 ### Main class: init.pp
+
 Often a module will gather several classes that work together into a single
 class to let you declare everything at once.
 
@@ -268,10 +265,10 @@ may have noticed that the classes you wrote for cowsay and fortune were both
 prepended by `cowsayings::`. When you declare a class, this scope syntax tells
 Puppet where to find that class; in this case, it's in the cowsayings module. 
 
-For the main class of a module, however, things are a little different. The main
-class shares the name of the module itself. Instead of following the pattern of
-the manifest for the class it contains, however, Puppet recognizes the special
-file name `init.pp` as designating the manifest that will contain a module's
+For the main class of a module, things are a little different. The main
+class shares the name of the module itself, but instead of following the pattern of
+naming the manifest for the class it contains, Puppet recognizes the special
+file name `init.pp` for the manifest that will contain a module's
 main class.
 
 {% task 7 %}
@@ -305,19 +302,20 @@ Save the manifest, and check your syntax with the `puppet parser` tool.
 {% task 8 %}
 ---
 - execute: |
-    puppet apply -e "package { 'fortune-mod': ensure => 'absent', } \
-    package {'cowsay': ensure => 'absent, }"
+    puppet resource package fortune-mod ensure=absent
+- execute: |
+    puppet resource package cowsay ensure=absent
 - file: /etc/puppetlabs/puppet/environments/production/modules/cowsayings/tests/init.pp
   content: include cowsayings
 {% endtask %}
 
 At this point, you already have both packages you want installed on the
 Learning VM. Applying the changes again wouldn't actually do anything. For the
-sake of testing, go ahead and use a `puppet apply -e` to delete them so
+sake of testing, you can use the `puppet resource` tool to delete them so
 you can try out the functionality of your new `cowsayings` class:
 
-    puppet apply -e "package { 'fortune-mod': ensure => 'absent', } \
-     package {'cowsay': ensure => 'absent', }"
+    puppet resource package fortune-mod ensure=absent
+    puppet resource package cowsay ensure=absent
 
 Next, create a test for the `init.pp` manifest in the tests directory.
 
