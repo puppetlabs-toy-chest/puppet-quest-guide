@@ -118,14 +118,6 @@ quests and tasks you've completed successfully and which are still pending.
 We've written a couple of tasks in this quest to demonstrate the features of the
 quest tool itself.
 
-{% warning %}
-
-The VM comes with several adjustments to enable the use of the quest tool and
-progress tracking, including changes to how bash is configured. Please don't
-replace the .bashrc file. If you would like to make changes, append them to the existing file.
-
-{% endwarning %}
-
 {% task 2 %}
 ---
 - execute: quest --help
@@ -153,11 +145,6 @@ such as:
 Find out how much progress you have made so far:
 
     quest --progress
-
-{% tip %}
-Typing `clear` into your terminal will remove everything on your terminal
-screen.
-{% endtip %}
 
 While you can use the quest commands to find more detailed information about
 your progress through the quests, you can check the quest status display at the
