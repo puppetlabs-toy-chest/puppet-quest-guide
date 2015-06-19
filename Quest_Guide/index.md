@@ -118,14 +118,6 @@ quests and tasks you've completed successfully and which are still pending.
 We've written a couple of tasks in this quest to demonstrate the features of the
 quest tool itself.
 
-{% warning %}
-
-The VM comes with several adjustments to enable the use of the quest tool and
-progress tracking, including changes to how bash is configured. Please don't
-replace the .bashrc file. If you would like to make changes, append them to the existing file.
-
-{% endwarning %}
-
 {% task 2 %}
 ---
 - execute: quest --help

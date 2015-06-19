@@ -142,11 +142,6 @@ to determine the Learning VM's IP address.
 
     facter ipaddress
 
-{% tip %}
-You can see a list of all the system facts accessible through facter by running
-the `facter` command.
-{% endtip %}
-
 Open a web browser on your host machine and go to `https://<IPADDRESS>`, where
 `<IPADDRESS>` is the Learning VM's IP address. (Be sure to include the `s` in
 `https`!)
