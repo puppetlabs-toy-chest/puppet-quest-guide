@@ -98,7 +98,7 @@ end
 def ensure_branch(branch)
   unless system("git rev-parse --verify #{branch} > /dev/null")
     # Create branch if it doesn't already exist
-    unless system("git branch #{branch} 2> /dev/null")
+    unless system("git branch #{branch} > /dev/null")
       raise "There was an error creating branch #{branch}"
     end
   end
