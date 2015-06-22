@@ -50,7 +50,7 @@ task :build do
   end
 end
 
-task :update => [:fetch, :deploy]
+task :update => [:fetch, :deploy, :helper]
 
 task :fetch => :config do
   checkout(GH_BRANCH)
@@ -66,6 +66,10 @@ task :test_all do
   Dir.chdir "/root/.testing" do
     test_all
   end
+end
+
+task :helper do
+  `/opt/puppet/bin/ruby /usr/src/courseware-lvm/update_helper.rb`
 end
 
 # Helper Functions
