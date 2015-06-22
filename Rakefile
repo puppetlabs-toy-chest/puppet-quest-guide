@@ -80,10 +80,10 @@ end
 # Helper Functions
 
 def latest_tag
-  unless system("git fetch --tags 2> /dev/null")
+  unless system("git fetch --tags")
     raise "There was an error fetching the latest tags"
   end
-  `git describe --tags --abbrev=0 2> /dev/null`
+  `git describe --tags --abbrev=0`
 end
 
 def ensure_remote(remote, url)
