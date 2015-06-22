@@ -15,7 +15,7 @@ require 'pp'
 GH_DEV  = ENV['GH_DEV'] || 'puppetlabs'
 GH_REPO = ENV['GH_REPO'] || 'courseware-lvm'
 GH_REMOTE = ENV['GH_REMOTE'] || 'upstream'
-GH_BRANCH = ENV['GH_BRANCH'] || 'release'
+GH_BRANCH = ENV['GH_BRANCH'] || 'master'
 
 # Directories
 
@@ -46,15 +46,24 @@ end
 
 task :build do
   Dir.chdir QUEST_GUIDE do
-    system('jekyll build')
+    system('jekyll build --quiet')
   end
 end
 
 task :update => [:fetch, :deploy]
 
 task :fetch => :config do
-  checkout(GH_BRANCH)
-  pull(GH_REMOTE, GH_BRANCH)
+  # If we're dealing with the master branch, we want to get the
+  # latest tagged release.
+  if GH_BRANCH == 'master'
+    tag = latest_tag
+    puts "Checking out #{GH_REPO} release #{tag}"
+    checkout_tag(tag)
+  # Otherwise, check out head of the specified branch.
+  else
+    checkout(GH_BRANCH)
+    pull(GH_REMOTE, GH_BRANCH)
+  end
 end
 
 task :config do
@@ -70,8 +79,15 @@ end
 
 # Helper Functions
 
+def latest_tag
+  unless system("git fetch --tags")
+    raise "There was an error fetching the latest tags"
+  end
+  `git describe --tags --abbrev=0`
+end
+
 def ensure_remote(remote, url)
-  unless system("git config --get remote.#{remote}.url 2> /dev/null")
+  unless system("git config --get remote.#{remote}.url > /dev/null")
     # Add the remote if it doesn't already exist
     unless system("git remote add #{remote} #{url}")
       raise "Could not add the '#{remote}' remote."
@@ -80,22 +96,28 @@ def ensure_remote(remote, url)
 end
 
 def ensure_branch(branch)
-  unless system("git rev-parse --verify #{branch} 2> /dev/null")
+  unless system("git rev-parse --verify #{branch} > /dev/null")
     # Create branch if it doesn't already exist
-    unless system("git branch #{branch} 2> /dev/null")
+    unless system("git branch #{branch} > /dev/null")
       raise "There was an error creating branch #{branch}"
     end
   end
 end
 
 def checkout(branch)
-  unless system("git checkout #{branch} 2> /dev/null")
+  unless system("git checkout #{branch} > /dev/null")
     raise "Your current branch has unsaved changes."
   end
 end
 
+def checkout_tag(tag)
+  system("git clean -df")
+  system("git checkout -- . > /dev/null")
+  system("git checkout tags/#{tag} > /dev/null")
+end
+
 def pull(remote, branch)
-  unless system("git pull #{remote} #{branch} 2> /dev/null")
+  unless system("git pull #{remote} #{branch} > /dev/null")
     raise "Could not pull #{remote} #{branch}"
   end
 end
