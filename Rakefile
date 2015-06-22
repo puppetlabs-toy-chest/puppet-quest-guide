@@ -111,6 +111,8 @@ def checkout(branch)
 end
 
 def checkout_tag(tag)
+  system("git clean -df")
+  system("git checkout -- . > /dev/null")
   system("git checkout tags/#{tag} > /dev/null")
 end
 
