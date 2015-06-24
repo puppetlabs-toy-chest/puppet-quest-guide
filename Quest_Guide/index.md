@@ -96,9 +96,9 @@ versions of Puppet are running on this Learning VM. Type the following command:
 
 You will see something like the following:
 
-_3.8.0 (Puppet Enterprise 3.8.1)_
+_3.8.1 (Puppet Enterprise 3.8.1)_
 
-This indicates that Puppet Version 3.8.0 Puppet Enterprise 3.8.1 are installed.
+This indicates that Puppet Version 3.8.1 Puppet Enterprise 3.8.1 are installed.
 
 ## What is a Quest?
 
@@ -110,6 +110,11 @@ learn them.
 
 If you executed the `puppet -V` command earlier, you've already completed your
 first task. (If not, go ahead and do so now.)
+
+If you don't see your progress register, it may be because your `bash_history`
+file hasn't been initialized. To fix this, run the command
+
+    exec bash
 
 ## The Quest Tool
 
