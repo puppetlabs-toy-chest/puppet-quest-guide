@@ -47,7 +47,7 @@ done the work for you?
 
 You're in luck! Puppet Labs operates a service called the [Puppet Forge](http://forge.puppetlabs.com),
 which serves as a repository for Puppet *modules*. A module nicely packages all the
-code and data Puppet needs to manage a given aspect if your infrastructure, which
+code and data Puppet needs to manage a given aspect in your infrastructure, which
 is expecially helpful when you're dealing with a complex application like Graphite.
 
 {% task 1 %}
