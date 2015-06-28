@@ -206,8 +206,8 @@ default web server settings.
 
 The PE console interface makes this kind of adjustment simple. Using the dropdown parameter
 menus under the **Class:** graphite section, set the `gr_web_server`
-parameter to `'none'`, and the `gr_disable_webapp_cache` parameter to `true`. (Note
-that because `'none'` is a string, it should be wrapped in single quotes, while the
+parameter to `"none"`, and the `gr_disable_webapp_cache` parameter to `true`. (Note
+that because `"none"` is a string, it should be wrapped in double quotes, while the
 boolean `true` need not be quoted.)
 
 Finally, click the *Commit 2 changes* button in the bottom right of the console window
