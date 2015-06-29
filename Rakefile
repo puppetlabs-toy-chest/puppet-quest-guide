@@ -87,7 +87,7 @@ def latest_tag
   unless system("git fetch --tags")
     raise "There was an error fetching the latest tags"
   end
-  `git tag | grep -ve "rc|beta" | sort -V | tail -1`
+  `git tag | grep -ve "[rc|beta]" | sort -V | tail -1`
 end
 
 def ensure_remote(remote, url)
