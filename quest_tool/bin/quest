@@ -23,6 +23,13 @@ WEBROOT='/var/www/html/lvmguide'
 LOCALREPO='/usr/src/courseware-lvm'
 
 if [ "$1" == "--update" -o "$1" == "-u" ]; then
+  latest="$(cd /usr/src/courseware-lvm && git tag | grep -ve "[rc|beta]" | sort -V | tail -1)"
+  current="$(cd /usr/src/courseware-lvm && git describe --tags --abbrev=0)"
+  if [ $latest == $current ]; then
+    echo "Quest content is already up to date. (${current})"
+    exit
+  fi
+  echo "Current version is ${current}. Latest version is ${latest}."
   read -r -p "Updating may disrupt current quest progress. Continue? [Y/n] " response
   if [[ $response =~ ^[nN][oO]|[nN]$ ]]
   then
