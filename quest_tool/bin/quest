@@ -22,7 +22,7 @@ CACHEDIR='/opt/lvmguide'
 WEBROOT='/var/www/html/lvmguide'
 LOCALREPO='/usr/src/courseware-lvm'
 
-if [ "$1" == "update" ]; then
+if [ "$1" == "--update" -o "$1" == "-u" ]; then
   read -r -p "Updating may disrupt current quest progress. Continue? [Y/n] " response
   if [[ $response =~ ^[nN][oO]|[nN]$ ]]
   then
