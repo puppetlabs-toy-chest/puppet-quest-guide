@@ -32,7 +32,6 @@ reporter  = RSpec::Core::Reporter.new(json_formatter)
 config.instance_variable_set(:@reporter, reporter)
 
 p = Trollop::Parser.new do
-  version "0.2.0 (c) 2015 Puppet Labs"
   banner <<EOS
 
 quest: learning progress feedback tool 
