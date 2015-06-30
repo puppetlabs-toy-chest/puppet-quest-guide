@@ -166,15 +166,6 @@ corresponds to:
 
     /etc/puppetlabs/puppet/environments/production/modules/mysql/manifests/server/account_security.pp
 
-We won't be calling the `mysql` class directly in this quest, but it's worth
-reiterating the special case of a module's self-named class. This will always be
-found in a manifest called `init.pp` in the top level of the module's manifests
-directory.
-
-So the `mysql` class is found here:
-
-    /etc/puppetlabs/puppet/environments/production/modules/mysql/manifests/init.pp
-
 ## Account security
 
 For security reasons, you will generally want to remove the default users and
