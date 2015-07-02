@@ -215,11 +215,13 @@ A Puppet class can be derived from one other class with the `inherits` keyword.
 The derived class will declare all of the same resources, but can override some
 of their attributes and add new resources.
 
-> **Note:** Most users should avoid inheritance most of the time. Unlike
-> object-oriented programming languages, inheritance isn't terribly important in
-> Puppet; it is only useful for overriding attributes, which can be done equally
-> well by using a single class with a few
-> [parameters](#parameter-defined-types-and-parameterized-classes).
+{% aside Note: %}
+Most users should avoid inheritance most of the time. Unlike
+object-oriented programming languages, inheritance isn't terribly important in
+Puppet; it is only useful for overriding attributes, which can be done equally
+well by using a single class with a few
+[parameters](#parameter-defined-types-and-parameterized-classes).
+{% endaside %}
 
 
 
@@ -228,7 +230,7 @@ of their attributes and add new resources.
 Node statements can be derived from other node statements with the `inherits`
 keyword. This works identically to the way class inheritance works.
 
-{% aside Note:%}
+{% aside Note: %}
 Node inheritance **should almost always be avoided.** Many new users attempt to
 use node inheritance to look up variables that have a common default value and a
 rare specific value on certain nodes; it is not suited to this task, and often
