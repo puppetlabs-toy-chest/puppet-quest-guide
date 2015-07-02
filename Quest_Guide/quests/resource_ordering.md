@@ -350,6 +350,23 @@ find these relationships in the [type reference](http://docs.puppetlabs.com/refe
 section of the Puppet Docs page, as well as the output of the `puppet describe`
 tool.
 
+For example,
+
+    puppet describe user | less
+
+Will include the following:
+
+    **Autorequires:** If Puppet is managing the user's primary group (as
+    provided in the `gid` attribute), the user resource will autorequire
+    that group. If Puppet is managing any role accounts corresponding to the
+    user's roles, the user resource will autorequire those role accounts.
+
+This means that if your catalog contains a resource declaration for a user
+and its primary group, Puppet will know to manage that group first, before
+moving on to the user. Note that these relationships between resource types
+are only documented in the type reference for the requiring resource type
+(e.g. `user`), not the required resource type (e.g. `group`).
+
 ## Review
 
 In this Quest, you learned how to specify relationships between resources. These
@@ -358,5 +375,5 @@ resources. You learned how to use the `--graph` flag and `dot` tool to visualize
 resource relationships, and how to use `notify` and `subscribe` to refresh
 a service when a related configuration file changes. Finally, you learned about
 chaining arrows, an alternate syntax for specifying resource relationships, and
-autorequires, Puppet's built-in knowledge about how some resources should be
+autorequires, Puppet's built-in knowledge about how some resource types should be
 ordered.
