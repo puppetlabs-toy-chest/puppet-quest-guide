@@ -232,7 +232,7 @@ One of these defaults, for instance, tells Puppet which time servers to include
 in the NTP configuration file. To see what servers were specified by default,
 you can check the configuration file directly. Enter the command:
 	
-    cat /etc/ntp.conf | grep server
+    grep server /etc/ntp.conf
 	
 You'll see a list of the default servers:
 
