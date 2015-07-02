@@ -363,9 +363,9 @@ Will include the following:
 
 This means that if your catalog contains a resource declaration for a user
 and its primary group, Puppet will know to manage that group first, before
-moving on to the user. Note that these relationships between resources are only
-documented in the type reference for the requiring resource (e.g. `user`),
-not the required resource (e.g. `group`).
+moving on to the user. Note that these relationships between resource types
+are only documented in the type reference for the requiring resource type
+(e.g. `user`), not the required resource type (e.g. `group`).
 
 ## Review
 
@@ -375,5 +375,5 @@ resources. You learned how to use the `--graph` flag and `dot` tool to visualize
 resource relationships, and how to use `notify` and `subscribe` to refresh
 a service when a related configuration file changes. Finally, you learned about
 chaining arrows, an alternate syntax for specifying resource relationships, and
-autorequires, Puppet's built-in knowledge about how some resources should be
+autorequires, Puppet's built-in knowledge about how some resource types should be
 ordered.
