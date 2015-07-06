@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe "Task 1:" do 
-  it 'Use puppet agent --configprint find the modulepath' do
-    file('/root/.bash_history').should contain "puppet agent --configprint modulepath"
+  it 'Use puppet master --configprint find the modulepath' do
+    file('/root/.bash_history').should contain "puppet master --configprint modulepath"
   end
 end
 
