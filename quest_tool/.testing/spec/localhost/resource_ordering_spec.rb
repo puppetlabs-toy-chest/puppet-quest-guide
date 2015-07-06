@@ -54,7 +54,7 @@ end
 
 describe "Task 8:" do
   it "Apply your test manifest with the `--noop` and `--graph` flags" do
-    file("/var/opt/bin/lib/pe-puppet/state/graphs/relationships.dot").should contain "sshd_config"
+    file("/var/opt/lib/pe-puppet/state/graphs/relationships.dot").should contain "sshd_config"
   end
 end
 
