@@ -252,7 +252,7 @@ that Puppet has made all the specified changes to the Learning VM.
 
 Now that Graphite is up and running, its API is available for generating graphs
 suitable for including in a dashboard. We've selected a few parameters as an
-example, which you can see [here.](/graphite/render/?width=586&height=308&_salt=1430506380.148&from=-30minutes&fontItalic=false&fontName=Courier&target=alias(carbon.agents.learning_puppetlabs_vm-a.cpuUsage%2C"CPU")&target=alias(secondYAxis(carbon.agents.learning_puppetlabs_vm-a.memUsage)%2C"Memory")&majorGridLineColor=C0C0C0&minorGridLineColor=C0C0C0)
+example, which you can see [here.](:90/render/?width=586&height=308&_salt=1430506380.148&from=-30minutes&fontItalic=false&fontName=Courier&target=alias(carbon.agents.learning_puppetlabs_vm-a.cpuUsage%2C"CPU")&target=alias(secondYAxis(carbon.agents.learning_puppetlabs_vm-a.memUsage)%2C"Memory")&majorGridLineColor=C0C0C0&minorGridLineColor=C0C0C0)
 Note that Graphite has only been running for a few minutes, so it may not yet
 have much data to chart. If you wait a minute and refresh the page in your
 browser, you will see the graph update with new data.
