@@ -78,7 +78,7 @@ task :test_all do
 end
 
 task :helper do
-  `/opt/puppet/bin/ruby /usr/src/courseware-lvm/update_helper.rb`
+  `/opt/puppetlabs/puppet/bin/ruby /usr/src/courseware-lvm/update_helper.rb`
 end
 
 # Helper Functions
