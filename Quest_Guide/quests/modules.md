@@ -110,9 +110,9 @@ You'll see a list of directories, something like this:
     │   ├── manifests
     │   └── tests
     └── graphite
-       ├── manifests
-       ├── spec
-       └── templates
+        ├── manifests
+        ├── spec
+        └── templates
     	
 Each of the standardized subdirectory names you see tells Puppet users and
 Puppet itself where to find each of the various components that come together to
