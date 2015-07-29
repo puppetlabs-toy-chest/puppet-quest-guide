@@ -5,7 +5,7 @@ require 'pathname'
 include Serverspec::Helper::Exec
 include Serverspec::Helper::DetectOS
 
-PROD_PATH = '/etc/puppetlabs/puppet/environments/production/'
+PROD_PATH = '/etc/puppetlabs/code/environments/production/'
 MODULE_PATH = "#{PROD_PATH}modules/"
 
 RSpec.configure do |c|
