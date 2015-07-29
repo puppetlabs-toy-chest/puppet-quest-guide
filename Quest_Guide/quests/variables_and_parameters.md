@@ -105,15 +105,15 @@ creating a simple `web` module that will put them to use.
 
 {% task 1 %}
 ---
-- execute: mkdir /etc/puppetlabs/puppet/environments/production/modules/web
-- execute: mkdir /etc/puppetlabs/puppet/environments/production/modules/web/{manifests,tests}
+- execute: mkdir /etc/puppetlabs/code/environments/production/modules/web
+- execute: mkdir /etc/puppetlabs/code/environments/production/modules/web/{manifests,tests}
 {% endtask %}
 
 First, you'll need to create the directory structure for your module.
 
 Make sure you're in the `modules` directory for Puppet's modulepath.
 
-    cd /etc/puppetlabs/puppet/environments/production/modules/
+    cd /etc/puppetlabs/code/environments/production/modules/
 
 Now create an `web` directory:
 
@@ -125,7 +125,7 @@ Now create an `web` directory:
 
 {% task 2 %}
 ---
-- file: /etc/puppetlabs/puppet/environments/production/modules/web/manifests/init.pp
+- file: /etc/puppetlabs/code/environments/production/modules/web/manifests/init.pp
   content: |
     class web {
     
@@ -180,7 +180,7 @@ difficult it will be to refactor when you have to make changes later.
 
 {% task 3 %}
 ---
-- file: /etc/puppetlabs/puppet/environments/production/modules/web/tests/init.pp
+- file: /etc/puppetlabs/code/environments/production/modules/web/tests/init.pp
   content: include web
 {% endtask %}
 
@@ -189,7 +189,7 @@ for your manifest with an `include` statement for the web class you created.
 
 {% task 4 %}
 ---
-- execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/web/tests/init.pp
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/web/tests/init.pp
 {% endtask %}
 
 Run the test, using the `--noop` flag for a dry run before triggering your real
@@ -234,7 +234,7 @@ to customize these values as the class is declared.
 
 {% task 5 %}
 ---
-- execute: vim /etc/puppetlabs/puppet/environments/production/modules/web/manifests/init.pp
+- execute: vim /etc/puppetlabs/code/environments/production/modules/web/manifests/init.pp
   input:
     - "/class web\r"
     - "2Wi"
@@ -270,7 +270,7 @@ file { "${doc_root}${page_name}.html":
 
 {% task 6 %}
 ---
-- execute: vim /etc/puppetlabs/puppet/environments/production/modules/web/tests/init.pp
+- execute: vim /etc/puppetlabs/code/environments/production/modules/web/tests/init.pp
   input:
     - "ddi"
     - "class {'web':\r"
@@ -295,7 +295,7 @@ class {'web':
 
 {% task 7 %}
 ---
-- execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/web/tests/init.pp
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/web/tests/init.pp
 {% endtask %}
 
 Now give it a try. Go ahead and do a `--noop` run, then apply the test.

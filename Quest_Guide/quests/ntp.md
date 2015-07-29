@@ -123,7 +123,7 @@ Use the puppet module tool to install the Puppet Labs `ntp` module.
 	
 This command tells the puppet module tool to fetch the module from the Puppet
 Forge and place it in Puppet's modulepath:
-`/etc/puppetlabs/puppet/environments/production/modules`.
+`/etc/puppetlabs/code/environments/production/modules`.
 
 ## Classification with the site.pp manifest
 
@@ -158,7 +158,7 @@ classifier you saw in the Power of Puppet quest.
 
 {% task 2 %}
 ---
-- execute: vim /etc/puppetlabs/puppet/environments/production/manifests/site.pp
+- execute: vim /etc/puppetlabs/code/environments/production/manifests/site.pp
   input:
     - "/default {\r"
     - o
@@ -170,7 +170,7 @@ classifier you saw in the Power of Puppet quest.
 
 Open the site.pp manifest in your text editor.
 
-    vim /etc/puppetlabs/puppet/environments/production/manifests/site.pp
+    vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 	
 Skip to the bottom of the file. (You can use the vim shortcut `G`)
 
@@ -272,7 +272,7 @@ values to a single variable or attribute.
 
 {% task 4 %}
 ---
-- execute: vim /etc/puppetlabs/puppet/environments/production/manifests/site.pp
+- execute: vim /etc/puppetlabs/code/environments/production/manifests/site.pp
   input:
     - "/include ntp\r"
     - dd

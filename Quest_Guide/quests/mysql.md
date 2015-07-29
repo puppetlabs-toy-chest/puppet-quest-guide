@@ -47,7 +47,7 @@ classes are available to classify nodes.
 
 {% task 2 %}
 ---
-- execute: vim /etc/puppetlabs/puppet/environments/production/manifests/site.pp
+- execute: vim /etc/puppetlabs/code/environments/production/manifests/site.pp
   input:
     - ":set paste\r"
     - "/default {\r"
@@ -60,7 +60,7 @@ classes are available to classify nodes.
     - ":wq\r"
 {% endtask %}
 
-Edit `/etc/puppetlabs/puppet/environments/production/manifests/site.pp` to classify the Learning VM with the
+Edit `/etc/puppetlabs/code/environments/production/manifests/site.pp` to classify the Learning VM with the
 MySQL server class. Using class parameters, specify a root password and set the
 server's max connections to '1024.'
 
@@ -119,11 +119,11 @@ conflicts between variables or classes with the same name.
 Take a look at the directories and manifests in the MySQL module. Use the `tree`
 command with a filter to include only `.pp` manifest files:
 
-    tree -P *.pp /etc/puppetlabs/puppet/environments/production/modules/mysql/manifests/ 
+    tree -P *.pp /etc/puppetlabs/code/environments/production/modules/mysql/manifests/ 
 
 You'll see something like the following:
 
-    /etc/puppetlabs/puppet/environments/production/modules/mysql/manifests/
+    /etc/puppetlabs/code/environments/production/modules/mysql/manifests/
     ├── backup.pp
     ├── bindings
     │   ├── java.pp
@@ -159,12 +159,12 @@ class name, Puppet knows to find the class definition in a manifest called
 
 So `mysql::server` corresponds to:
 
-    /etc/puppetlabs/puppet/environments/production/modules/mysql/manifests/server.pp
+    /etc/puppetlabs/code/environments/production/modules/mysql/manifests/server.pp
 
 To take an example one level deeper, the `mysql::server::account_security` class
 corresponds to:
 
-    /etc/puppetlabs/puppet/environments/production/modules/mysql/manifests/server/account_security.pp
+    /etc/puppetlabs/code/environments/production/modules/mysql/manifests/server/account_security.pp
 
 ## Account security
 
@@ -174,7 +174,7 @@ mentioned above does just this.
 
 {% task 4 %}
 ---
-- execute: vim /etc/puppetlabs/puppet/environments/production/manifests/site.pp
+- execute: vim /etc/puppetlabs/code/environments/production/manifests/site.pp
   input:
     - "/default {\r"
     - o
@@ -226,7 +226,7 @@ The MySQL module includes custom types and providers that make `mysql_user`,
 
 {% task 5 %}
 ---
-- execute: vim /etc/puppetlabs/puppet/environments/production/manifests/site.pp
+- execute: vim /etc/puppetlabs/code/environments/production/manifests/site.pp
   input:
     - "/default {\r"
     - o
