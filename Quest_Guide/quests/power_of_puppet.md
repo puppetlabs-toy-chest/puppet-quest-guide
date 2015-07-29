@@ -98,7 +98,7 @@ When you ran the `puppet module` command, Puppet retrieved the `graphite` module
 Forge and placed it in the puppet master's *modulepath*. The modulepath is where
 puppet will look to find puppet classes and other files and resources made available by any
 modules you download or create. For Puppet Enterprise, the default modulepath is
-`/etc/puppetlabs/puppet/environments/production/modules`.
+`/etc/puppetlabs/code/environments/production/modules`.
 
 ## Class and classification
 

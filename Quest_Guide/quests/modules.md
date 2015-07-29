@@ -76,12 +76,12 @@ You can find the modulepath on your puppet master by running the
     puppet master --configprint modulepath
 
 This will tell you that Puppet looks in the directories
-`/etc/puppetlabs/puppet/environments/production/modules`,
+`/etc/puppetlabs/code/environments/production/modules`,
 `/etc/puppetlabs/puppet/modules`, and then in
 `/opt/puppet/share/puppet/modules` to find available modules.
 
 Throughout the quests in the Learning VM, you will work in the
-`/etc/puppetlabs/puppet/environments/production/modules` directory. This
+`/etc/puppetlabs/code/environments/production/modules` directory. This
 is where you keep modules for your production environment. (Site specific
 modules you need to be available for all environments are kept in
 `/etc/puppetlabs/puppet/modules`, and modules required by Puppet Enterprise
@@ -101,11 +101,11 @@ To get clear picture of the directory structure of the modules here, you can use
 a couple flags with the `tree` command to limit the output to directories, and
 limit the depth to two directories.
 
-    tree -L 2 -d /etc/puppetlabs/puppet/environments/production/modules/
+    tree -L 2 -d /etc/puppetlabs/code/environments/production/modules/
 	
 You'll see a list of directories, something like this:
 
-    /etc/puppetlabs/puppet/environments/production/modules/
+    /etc/puppetlabs/code/environments/production/modules/
     ├── cowsayings
     │   ├── manifests
     │   └── tests
@@ -134,11 +134,11 @@ resource type can be very handy for managing these settings.
 
 Change your working directory to the modulepath if you're not already there.
 
-    cd /etc/puppetlabs/puppet/environments/production/modules
+    cd /etc/puppetlabs/code/environments/production/modules
 
 {% task 2 %}
 ---
-- execute: mkdir /etc/puppetlabs/puppet/environments/production/modules/vimrc
+- execute: mkdir /etc/puppetlabs/code/environments/production/modules/vimrc
 {% endtask %}
 
 The top directory will be the name you want for the module. In this case, let's
@@ -148,7 +148,7 @@ call it "vimrc." Use the `mkdir` command to create your module directory:
 
 {% task 3 %}
 ---
-- execute: mkdir /etc/puppetlabs/puppet/environments/production/modules/vimrc/{manifests,tests,files}
+- execute: mkdir /etc/puppetlabs/code/environments/production/modules/vimrc/{manifests,tests,files}
 {% endtask %}
 
 Now you need three more directories, one for manifests, one for tests, and one
@@ -176,7 +176,7 @@ Puppet's built-in fileserver.
 
 {% task 4 %}
 ---
-- execute: cp /root/.vimrc /etc/puppetlabs/puppet/environments/production/modules/vimrc/files/vimrc
+- execute: cp /root/.vimrc /etc/puppetlabs/code/environments/production/modules/vimrc/files/vimrc
 {% endtask %}
 
 Copy the existing `.vimrc` file to your module's `files` directory:
@@ -185,7 +185,7 @@ Copy the existing `.vimrc` file to your module's `files` directory:
 	
 {% task 5 %}
 ---
-- execute: vim /etc/puppetlabs/puppet/environments/production/modules/vimrc/files/vimrc
+- execute: vim /etc/puppetlabs/code/environments/production/modules/vimrc/files/vimrc
   input:
     - G
     - O
@@ -208,7 +208,7 @@ Save and exit.
 
 {% task 6 %}
 ---
-- file: /etc/puppetlabs/puppet/environments/production/modules/vimrc/manifests/init.pp
+- file: /etc/puppetlabs/code/environments/production/modules/vimrc/manifests/init.pp
   content: |
     class vimrc {
       file { '/root/.vimrc':
@@ -269,7 +269,7 @@ module's `files` directory, this directory is implicit and is left out of the
 URI.
 
 So while the full path to the vimrc source file is
-`/etc/puppetlabs/puppet/environments/production/modules/vimrc/files/vimrc`,
+`/etc/puppetlabs/code/environments/production/modules/vimrc/files/vimrc`,
 Puppet's URI abstraction shortens it to `/modules/vimrc/vimrc`. Combined with
 the implicit hostname, then, the attribute value pair for the source URI is:
 
@@ -298,7 +298,7 @@ class is, but you haven't told Puppet to actually do anything with it.
 
 {% task 7 %}
 ---
-- file: /etc/puppetlabs/puppet/environments/production/modules/vimrc/tests/init.pp
+- file: /etc/puppetlabs/code/environments/production/modules/vimrc/tests/init.pp
   content: include vimrc
 {% endtask %}
 
@@ -315,7 +315,7 @@ include vimrc
 
 {% task 8 %}
 ---
-- execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/vimrc/tests/init.pp
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/vimrc/tests/init.pp
 {% endtask %}
 
 Apply the new manifest with the `--noop` flag. If everything looks good, drop

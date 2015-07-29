@@ -139,12 +139,12 @@ adjustment is easy to automate with Puppet.
 Before you get started writing your module, make sure you're working in the
 `modules` directory:
 
-    cd /etc/puppetlabs/puppet/environments/production/modules
+    cd /etc/puppetlabs/code/environments/production/modules
 	
 {% task 1 %}
 ---
-- execute: mkdir /etc/puppetlabs/puppet/environments/production/modules/accounts
-- execute: mkdir /etc/puppetlabs/puppet/environments/production/modules/accounts/{manifests,tests}
+- execute: mkdir /etc/puppetlabs/code/environments/production/modules/accounts
+- execute: mkdir /etc/puppetlabs/code/environments/production/modules/accounts/{manifests,tests}
 {% endtask %}
 	
 Create an `accounts` directory:
@@ -157,7 +157,7 @@ And your `tests` and `manifests` directories:
 	
 {% task 2 %}
 ---
-- file: /etc/puppetlabs/puppet/environments/production/modules/accounts/manifests/init.pp
+- file: /etc/puppetlabs/code/environments/production/modules/accounts/manifests/init.pp
   content: |
     class accounts ($name) {
       
@@ -242,7 +242,7 @@ continuing on.
 
 {% task 3 %}
 ---
-- file: /etc/puppetlabs/puppet/environments/production/modules/accounts/tests/init.pp
+- file: /etc/puppetlabs/code/environments/production/modules/accounts/tests/init.pp
   content: |
     class {'accounts':
       name => 'dana',
@@ -262,7 +262,7 @@ class {'accounts':
 
 {% task 4 %}
 ---
-- execute: FACTER_operatingsystem=Debian puppet apply --noop /etc/puppetlabs/puppet/environments/production/modules/accounts/tests/init.pp
+- execute: FACTER_operatingsystem=Debian puppet apply --noop /etc/puppetlabs/code/environments/production/modules/accounts/tests/init.pp
 {% endtask %}
 
 The Learning VM is running CentOS, but to test our conditional logic,
@@ -281,7 +281,7 @@ applied.
 
 {% task 5 %}
 ---
-- execute: FACTER_operatingsystem=Darwin puppet apply --noop /etc/puppetlabs/puppet/environments/production/modules/accounts/tests/init.pp
+- execute: FACTER_operatingsystem=Darwin puppet apply --noop /etc/puppetlabs/code/environments/production/modules/accounts/tests/init.pp
 {% endtask %}
 
 Try one more time with an unsupported operating system to check the fail
@@ -291,7 +291,7 @@ condition:
 
 {% task 6 %}
 ---
-- execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/accounts/tests/init.pp
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/accounts/tests/init.pp
 {% endtask %}
 
 Now go ahead and run a `puppet apply --noop` on your test manifest without

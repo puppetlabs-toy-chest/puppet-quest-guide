@@ -86,7 +86,7 @@ We've already prepared a `cowsayings` module directory in Puppet's *modulepath*,
 and included two subdirectories: `manifests` and `tests`. Before getting started
 writing manifests, change directories to save yourself some typing:
 
-    cd /etc/puppetlabs/puppet/environments/production/modules
+    cd /etc/puppetlabs/code/environments/production/modules
 
 ### Cowsay
 
@@ -96,7 +96,7 @@ but you don't want to put that resource declaration just anywhere.
 
 {% task 1 %}
 ---
-- file: /etc/puppetlabs/puppet/environments/production/modules/cowsayings/manifests/cowsay.pp
+- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/manifests/cowsay.pp
   content: |
     class cowsayings::cowsay {
       package { 'cowsay':
@@ -138,7 +138,7 @@ anything with it.
 
 {% task 2 %}
 ---
-- file: /etc/puppetlabs/puppet/environments/production/modules/cowsayings/tests/cowsay.pp
+- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/tests/cowsay.pp
   content: include cowsayings::cowsay
 {% endtask %}
 
@@ -172,7 +172,7 @@ You should see an output like the following:
 
 {% task 3 %}
 ---
-- execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/cowsayings/tests/cowsay.pp
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/cowsayings/tests/cowsay.pp
 - execute: cowsay Puppet is awesome!
 {% endtask %}
 
@@ -200,7 +200,7 @@ fortune package, you can provide your cow with a whole database of wisdom.
 
 {% task 4 %}
 ---
-- file: /etc/puppetlabs/puppet/environments/production/modules/cowsayings/manifests/fortune.pp
+- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/manifests/fortune.pp
   content: |
     class cowsayings::fortune {
       package { 'fortune-mod':
@@ -225,7 +225,7 @@ class cowsayings::fortune {
 
 {% task 5 %}
 ---
-- file: /etc/puppetlabs/puppet/environments/production/modules/cowsayings/tests/fortune.pp
+- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/tests/fortune.pp
   content: include cowsayings::fortune
 {% endtask %}
 
@@ -239,7 +239,7 @@ As before, use `include` to declare your `cowsayings::fortune` class.
 
 {% task 6 %}
 ---
-- execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/cowsayings/tests/fortune.pp
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/cowsayings/tests/fortune.pp
 {% endtask %}
 
 Apply the `cowsayings/tests/fortune.pp` manifest with the `--noop` flag. If 
@@ -273,7 +273,7 @@ main class.
 
 {% task 7 %}
 ---
-- file: /etc/puppetlabs/puppet/environments/production/modules/cowsayings/manifests/init.pp
+- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/manifests/init.pp
   content: |
     class cowsayings {
       include cowsayings::cowsay
@@ -305,7 +305,7 @@ Save the manifest, and check your syntax with the `puppet parser` tool.
     puppet resource package fortune-mod ensure=absent
 - execute: |
     puppet resource package cowsay ensure=absent
-- file: /etc/puppetlabs/puppet/environments/production/modules/cowsayings/tests/init.pp
+- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/tests/init.pp
   content: include cowsayings
 {% endtask %}
 
@@ -327,7 +327,7 @@ Here, just declare the `cowsayings` class:
 
 {% task 9 %}
 ---
-- execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/cowsayings/tests/init.pp
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/cowsayings/tests/init.pp
 {% endtask %}
 
 Good. Now that the packages are gone, do a `--noop` first, then apply your

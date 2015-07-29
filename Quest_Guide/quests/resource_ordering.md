@@ -88,7 +88,7 @@ a simple SSH module to explore resource relationships?
 
 {% task 1 %}
 ---
-- execute: mkdir -p /etc/puppetlabs/puppet/environments/production/modules/sshd/{tests,manifests,files}
+- execute: mkdir -p /etc/puppetlabs/code/environments/production/modules/sshd/{tests,manifests,files}
 {% endtask %}
 
 To get started with your module, create an `sshd` directory with `tests`,
@@ -96,7 +96,7 @@ To get started with your module, create an `sshd` directory with `tests`,
 
 {% task 2 %}
 ---
-- file: /etc/puppetlabs/puppet/environments/production/modules/sshd/manifests/init.pp
+- file: /etc/puppetlabs/code/environments/production/modules/sshd/manifests/init.pp
   content: |
     class sshd {  
 
@@ -133,9 +133,9 @@ resource relationships.
 
 {% task 3 %}
 ---
-- file: /etc/puppetlabs/puppet/environments/production/modules/sshd/tests/init.pp
+- file: /etc/puppetlabs/code/environments/production/modules/sshd/tests/init.pp
   content: include sshd
-- execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/sshd/tests/init.pp --noop --graph
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/sshd/tests/init.pp --noop --graph
 {% endtask %}
 
 The quickest way to get Puppet to generate a graph for this kind of testing is to run a test
@@ -175,7 +175,7 @@ dependency relationship.
 
 {% task 5 %}
 ---
-- execute: cp /etc/ssh/sshd_config /etc/puppetlabs/puppet/environments/production/modules/sshd/files/sshd_config
+- execute: cp /etc/ssh/sshd_config /etc/puppetlabs/code/environments/production/modules/sshd/files/sshd_config
 {% endtask %}
 
 Now let's move on to the next step. We'll use a `file` resource to manage the `sshd`
@@ -187,7 +187,7 @@ the Modules quest, you can copy the existing configuration file into your module
 
 {% task 6 %}
 ---
-- execute: vim /etc/puppetlabs/puppet/environments/production/modules/sshd/files/sshd_config
+- execute: vim /etc/puppetlabs/code/environments/production/modules/sshd/files/sshd_config
   input:
     - ":%s/GSSAPIAuthentication yes/GSSAPIAuthentication no/g\r"
     - ":wq\r"
@@ -201,7 +201,7 @@ and find the `GSSAPIAuthentication` line. Change the setting to `no`, then save 
 file and exit your editor.
 
 {% task 7 %}
-- execute: vim /etc/puppetlabs/puppet/environments/production/modules/sshd/manifests/init.pp
+- execute: vim /etc/puppetlabs/code/environments/production/modules/sshd/manifests/init.pp
   input: 
     - "/class sshd {\r"
     - o
@@ -238,7 +238,7 @@ class sshd {
 
 {% task 8 %}
 ---
-  - execute: puppet apply /etc/puppetlabs/puppet/environments/production/modules/sshd/tests/init.pp --noop --graph
+  - execute: puppet apply /etc/puppetlabs/code/environments/production/modules/sshd/tests/init.pp --noop --graph
   - execute: dot -Tpng /var/opt/lib/pe-puppet/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
 {% endtask %}
 
@@ -274,7 +274,7 @@ Including a `notify` in your `file` resource has exactly the same result as incl
 `subscribe` in your `service` resource.
 
 {% task 9 %}
-- execute: vim /etc/puppetlabs/puppet/environments/production/modules/sshd/manifests/init.pp
+- execute: vim /etc/puppetlabs/code/environments/production/modules/sshd/manifests/init.pp
   input: 
     - "/service\r"
     - o
