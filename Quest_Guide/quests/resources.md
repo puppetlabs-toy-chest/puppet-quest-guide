@@ -41,9 +41,9 @@ the complexities and pitfalls doesn't just make those tasks themselves easier, i
 the stable, repeatable, and testable foundation you need to build something new.
 
 For Puppet, this foundation is a system called the *resource abstraction layer*.
-In Puppet, just about any aspect of your system configuration you want to manage
-(users, files, services, and packages, to give some common examples) is represented
-as a unit called a *resource*. Puppet knows how to translate back and forth between
+Puppet interprets any aspect of your system configuration you want to manage
+(users, files, services, and packages, to give some common examples) as a unit
+called a *resource*. Puppet knows how to translate back and forth between
 the resource syntax and the 'native' tools of the system it's running on. Ask Puppet
 about a user, for example, and it can represent all the information about that user
 as a resource of the *user* type. Of course, it's more useful to work in the opposite
@@ -53,24 +53,23 @@ description.
 
 The block of code that describes a resource is called a **resource declaration**.
 These resource declarations are written in Puppet code, a Domain Specific Language
-(DSL) based on Ruby. A good understanding of the Puppet DSL will be key to learning
-how to use Puppet effectively.
+(DSL) based on Ruby.
 
 ### Puppet's Domain Specific Language
 
 A good understanding of the Puppet DSL is a key first step in learning how to
-use Puppet effectively. Tools like the PE console give you quite a bit of power
-without asking you to write your own modules, but you'll be much better off
-with a solid understanding of the Puppet code under the hood.
+use Puppet effectively. While tools like the PE console give you quite a bit of power
+to make configuration changes at a level above the code implementation, it always
+helps to have a solid understanding of the Puppet code under the hood.
 
-The Puppet's DSL is a *declarative* language rather than an *imperative* one. This
+Puppet's DSL is a *declarative* language rather than an *imperative* one. This
 means that instead of defining a process or set of commands, Puppet code
-describes (or declares) only the desired end state, and relies on built-in
-*providers* to deal with implementation.
+describes (or declares) only the desired end state. With this desired state described,
+Puppet relies on built-in *providers* to handle with implementation.
 
 One of the points where there is a nice carry over from Ruby is the *hash*
 syntax. It provides a clean way to format this kind of declarative model, and is
-the basis for the *resource declarations* you'll be learning about in this
+the basis for the *resource declarations* you'll learn about in this
 quest.
 
 As we mentioned above, a key feature of Puppet's declarative model is that it
@@ -211,7 +210,7 @@ type {'title':
 {% endhighlight %}
 
 {% aside Trailing comma %}
-The comma at the end of the final attribute value pair isn't required, but it is
+The comma at the end of the final attribute value pair isn't required by the parser, but it is
 best practice to include it for the sake of consistency. Leave it out, and you'll
 inevitably forget to insert it when you add another attribute value pair on the
 following line!
