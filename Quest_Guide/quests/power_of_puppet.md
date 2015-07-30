@@ -197,20 +197,27 @@ of available classes, so you can quickly see if a class is available. If `graphi
 available, click the *Refresh* button near the top right of the classes interface and wait a
 moment before trying again.
 
- enter `graphite`
-in the *Class name* text box, then click the *Add class* button.
+Enter `graphite` in the *Class name* text box, then click the *Add class* button.
 
-One more thing before you're ready to apply your changes. We've already configured the
-Learning VM's Apache server, so to avoid conflicts we'll need to disable Graphite's
-default web server settings.
+Before you you apply your changes, let's adjust a few parameters for the `graphite` class.
 
-The PE console interface makes this kind of adjustment simple. Using the dropdown parameter
-menus under the **Class:** graphite section, set the `gr_web_server`
-parameter to `"none"`, and the `gr_disable_webapp_cache` parameter to `true`. (Note
-that because `"none"` is a string, it should be wrapped in double quotes, while the
-boolean `true` need not be quoted.)
+First, we aleady have an Apache server configured to our liking on the Learning VM, so we can
+tell the `graphite` class it doesn't need to bother setting up its own server. Use the dropdown
+parameter menus under the **Class:** graphite section to set the `gr_web_server` parameter to `none`.
 
-Finally, click the *Commit 2 changes* button in the bottom right of the console window
+Second, we found that there are some compatibility issues with the latest Django version. Puppet
+is a great tool for managing complex software stacks, so the ability to deal with these kinds
+of relationships between components is important. Luckily for us author of our `graphite` module
+has done a nice job of modeling good module design! By setting a few parameters, we can pick our
+own compatible Django version to use.
+
+Set three more parameters, as follows:
+
+1. gr_django_pkg      = django
+2. gr_django_provider = pip
+3. gr_django_ver      = 1.5
+
+Finally, click the *Commit 4 changes* button in the bottom right of the console window
 to commit your changes.
 
 ### Run puppet
@@ -230,17 +237,20 @@ catalog.
 {% task 4 %}
 ---
 - execute: |
-    curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -H "Content-Type: application/json" -X POST -d '{"name":"Learning VM", "environment":"production", "parent":"00000000-0000-4000-8000-000000000000", "classes":{"graphite" : {"gr_web_server" : "none"} },  "rule":["or", ["=", "name", "learning.puppetlabs.vm"]]}' https://localhost:4433/classifier-api/v1/groups
+    curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -H "Content-Type: application/json" -X POST -d '{"name":"Learning VM", "environment":"production", "parent":"00000000-0000-4000-8000-000000000000", "classes":{"graphite" : {"gr_web_server" : "none", "gr_django_pkg" : "django", "gr_django_provider" : "pip", "gr_django_ver" : "1.5"} },  "rule":["or", ["=", "name", "learning.puppetlabs.vm"]]}' https://localhost:4433/classifier-api/v1/groups
 - execute: puppet agent --test
 {% endtask %}
 
 To avoid surprises, however, we've disabled these scheduled runs on the Learning VM.
 Instead, we'll be using the `puppet agent` tool to trigger runs manually.
 
-Remember as you're working through this quest guide that the Learning VM is running both
-a puppet master *and* a puppet agent, which is a bit different than what you'd typically
-see with a puppet master node controlling a collection of agent nodes. Installing modules
-is a puppet *master* thing and puppet runs are a puppet *agent* thing.
+As you're working through this Quest Guide, keep in mind that the Learning VM is running *both*
+a puppet master *and* a puppet agent. This is a bit different than what you'd see in
+a typical architecture, where a single puppet master would serve a collection of
+puppet agent nodes. The puppet master is where you keep all your puppet code. Earlier
+when you used the `puppet module` tool to install the `graphite` module, that was a
+task for the puppet master. When you want to manually trigger a puppet run with the
+`puppet agent` tool, that's a command you would use on an agent node, not the master.
 
 So put on your agent hat and trigger a puppet run:
 
