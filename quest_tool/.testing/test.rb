@@ -1,4 +1,4 @@
-#!/opt/puppet/bin/ruby
+#!/opt/puppetlabs/puppet/bin/ruby
 
 class String
 def bold;           "\033[1m#{self}\033[22m" end 
@@ -25,8 +25,8 @@ json_formatter = RSpec::Core::Formatters::JsonFormatter.new(config.output_stream
 reporter  = RSpec::Core::Reporter.new(config)
 config.instance_variable_set(:@reporter, reporter)
 
-loader = config.sent(:formatter_loader)
-notifications = loader.send(:notifications_for, RSpec::Core::Formatter::JsonFormatter)
+loader = config.send(:formatter_loader)
+notifications = loader.send(:notifications_for, RSpec::Core::Formatters::JsonFormatter)
 
 reporter.register_listener(json_formatter, *notifications)
 
