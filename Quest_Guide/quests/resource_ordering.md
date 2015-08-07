@@ -42,8 +42,8 @@ needs another way to know how to order resources.
 This is where **resource relationships** come in. Puppet's resource relationship
 syntax lets you explicitly define the dependency relationships among your resources.
 
-Though there are a couple ways to define these relationships the simplest are
-the **relationship metaparameters**. A metaparameter is a kind of attribute value
+Though there are a couple ways to define these relationships, the simplest is to
+use **relationship metaparameters**. A metaparameter is a kind of attribute value
 pair that tells Puppet how you want it to implement a resource, rather than the
 details of the resource itself. Relationship metaparameters are set in a
 resource declaration along with the rest of a resource's attribute value pairs.
@@ -105,8 +105,9 @@ To get started with your module, create an `sshd` directory with `tests`,
       }
 
       service { 'sshd':
-        ensure => running,
-        enable => true,
+        ensure  => running,
+        enable  => true,
+        require => Package['openssh-server'],
       }
 
     }
@@ -153,7 +154,7 @@ flags:
 
 {% task 4 %}
 ---
-  - execute: dot -Tpng /var/opt/lib/pe-puppet/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
+  - execute: dot -Tpng /opt/puppetlabs/puppet/cache/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
 {% endtask %}
 
 Puppet outputs a `.dot` file to a location defined as the `graphdir`. You can find
@@ -165,7 +166,7 @@ Use the `dot` command to convert the `relationships.dot` file in the `graphdir` 
 a `.png` image. Set the location of the output to the root of the Quest Guide's web
 directory so that it will be easily viewable from your browser.
 
-    dot -Tpng /var/opt/lib/pe-puppet/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
+    dot -Tpng /opt/puppetlabs/puppet/cache/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
 
 Take a look at [the graph](/relationships.png). Notice that the `openssh-server`
 and `sshd` resources you defined are connected by an arrow to indicate the
@@ -239,13 +240,13 @@ class sshd {
 {% task 8 %}
 ---
   - execute: puppet apply /etc/puppetlabs/code/environments/production/modules/sshd/tests/init.pp --noop --graph
-  - execute: dot -Tpng /var/opt/lib/pe-puppet/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
+  - execute: dot -Tpng /opt/puppetlabs/puppet/cache/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
 {% endtask %}
 
 Apply your test manifest again with the `--graph` and `--noop` flags,
 then use the `dot` tool again to regenerate your graph image.
 
-    dot -Tpng /var/opt/lib/pe-puppet/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
+    dot -Tpng /opt/puppetlabs/puppet/cache/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
 
 Check [your graph](/relationships.png) again to see how your new `file` resource
 fits in.

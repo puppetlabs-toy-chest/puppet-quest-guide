@@ -21,7 +21,7 @@ end
 describe "Task 3:" do
   it "Create a test manifest, and apply it with `--noop` and `--graph` flags" do
     file("#{MODULE_PATH}sshd/tests/init.pp").should contain "include sshd"
-    file("/var/opt/lib/pe-puppet/state/graphs/relationships.dot").should contain "sshd"
+    file("/opt/puppetlabs/puppet/cache/state/graphs/relationships.dot").should contain "sshd"
   end
 end
 
@@ -54,7 +54,7 @@ end
 
 describe "Task 8:" do
   it "Apply your test manifest with the `--noop` and `--graph` flags" do
-    file("/var/opt/lib/pe-puppet/state/graphs/relationships.dot").should contain "sshd_config"
+    file("/opt/puppetlabs/puppet/cache/state/graphs/relationships.dot").should contain "sshd_config"
   end
 end
 
