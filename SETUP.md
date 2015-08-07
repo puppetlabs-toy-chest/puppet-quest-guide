@@ -77,7 +77,11 @@ for a puppet run to fail. Rather than troubleshooting individual services, the e
 way to address this is to restart the VM. Also note that on restarting the VM or
 restarting a service, it may take some time for all component services of puppet to
 fully come on line. If your puppet runs still fail after restarting, please wait a minute
-and try again.
+and try your puppet run again.
+
+You can debug check the status of puppet services specifically with the `systemctl`
+command. If you notice any stopped puppet-related services (e.g. pe-puppetdb),
+try starting them. (e.g. `service pe-puppetdb start`).
 
 If you get an error along the lines of `Error 400 on SERVER: Unknown function union...`
 it is likely because the `puppetlabs-stdlib` module has not been installed. This module
