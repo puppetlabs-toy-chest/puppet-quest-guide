@@ -159,7 +159,7 @@ And your `tests` and `manifests` directories:
 ---
 - file: /etc/puppetlabs/code/environments/production/modules/accounts/manifests/init.pp
   content: |
-    class accounts ($name) {
+    class accounts ($user_name) {
       
       if $::operatingsystem == 'centos' {
         $groups = 'wheel'
@@ -171,11 +171,11 @@ And your `tests` and `manifests` directories:
         fail( "This module doesn't support ${::operatingsystem}." )
       }
 
-      notice ( "Groups for user ${name} set to ${groups}" )
+      notice ( "Groups for user ${user_name} set to ${groups}" )
 
-      user { $name:
+      user { $user_name:
         ensure => present,
-        home => "/home/${name}",
+        home => "/home/${user_name}",
         groups => $groups,
       }
 
@@ -193,7 +193,7 @@ Puppet will ad the user to the `admin` group.
 The beginning of your class definition should look like this:
 
 {% highlight puppet %}
-class accounts ($name) {
+class accounts ($user_name) {
 
   if $::operatingsystem == 'centos' {
     $groups = 'wheel'
@@ -205,7 +205,7 @@ class accounts ($name) {
     fail( "This module doesn't support ${::operatingsystem}." )
   }
   
-  notice ( "Groups for user ${name} set to ${groups}" )
+  notice ( "Groups for user ${user_name} set to ${groups}" )
 
   ... 
 
@@ -217,18 +217,18 @@ just as well as 'centos'. Finally, in the `else` block, you'll raise an error
 if the module doesn't support the current OS.
 
 Once you've written the conditional logic to set the `$groups` variable, create
-a `user` resource declaration. Use the `$name` variable set by your class parameter
+a `user` resource declaration. Use the `$user_name` variable set by your class parameter
 to set the title and home of your user, and use the `$groups` variable to set the
 user's `groups` attribute.
 
 {% highlight puppet %}
-class accounts ($name) {
+class accounts ($user_name) {
 
   ...
   
-  user { $name:
+  user { $user_name:
     ensure => present,
-    home   => "/home/${name}",
+    home   => "/home/${user_name}",
     groups => $groups,
   }
 
@@ -245,7 +245,7 @@ continuing on.
 - file: /etc/puppetlabs/code/environments/production/modules/accounts/tests/init.pp
   content: |
     class {'accounts':
-      name => 'dana',
+      user_name => 'dana',
     }
 {% endtask %}
 
@@ -255,7 +255,7 @@ manifest with the name parameter set to `dana`.
 {% highlight puppet %}
 
 class {'accounts':
-  name => 'dana',
+  user_name => 'dana',
 }
 
 {% endhighlight %}
