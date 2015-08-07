@@ -101,6 +101,7 @@ but you don't want to put that resource declaration just anywhere.
     class cowsayings::cowsay {
       package { 'cowsay':
         ensure => 'present',
+        provider => 'gem',
       }
     }
 {% endtask %}
@@ -118,6 +119,7 @@ Enter the following class definition, then save and exit (`:wq`):
 class cowsayings::cowsay {
   package { 'cowsay':
     ensure => 'present',
+    ensure => 'gem',
   }
 }
 {% endhighlight %}
