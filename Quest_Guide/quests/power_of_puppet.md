@@ -213,11 +213,14 @@ own compatible Django version to use.
 
 Set three more parameters, as follows:
 
-1. gr_django_pkg      = django
-2. gr_django_provider = pip
-3. gr_django_ver      = 1.5
+1. `gr_django_pkg      = django`
+2. `gr_django_provider = pip`
+3. `gr_django_ver      = "1.5"`
 
-Finally, click the *Commit 4 changes* button in the bottom right of the console window
+Note that the gr_django_ver parameter takes a string, not float value, so it must
+be wrapped in quotes for puppet to parse it correctly.
+
+Finally, click the *Commit* button in the bottom right of the console window
 to commit your changes.
 
 ### Run puppet
