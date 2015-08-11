@@ -119,7 +119,7 @@ conflicts between variables or classes with the same name.
 Take a look at the directories and manifests in the MySQL module. Use the `tree`
 command with a filter to include only `.pp` manifest files:
 
-    tree -P *.pp /etc/puppetlabs/code/environments/production/modules/mysql/manifests/ 
+    tree -P "*.pp" /etc/puppetlabs/code/environments/production/modules/mysql/manifests/ 
 
 You'll see something like the following:
 
