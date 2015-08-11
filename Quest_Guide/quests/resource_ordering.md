@@ -307,7 +307,7 @@ apply your test manifest with the `--graph` and `--noop` flags, then use the `do
 tool again to regenerate your graph image again.
 
 Check [your graph](/relationships.png) one more time. Notice that the `sshd`
-resource now depends on the `/etc/ssh/sshf_config` file.
+resource now depends on the `/etc/ssh/sshd_config` file.
 
 {% figure '..//assets/relationships3.png' %}
 
