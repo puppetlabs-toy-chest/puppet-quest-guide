@@ -167,8 +167,8 @@ usually be titled with the name of the managed package, for example, and a file 
 will be titled with the full path of the file.
 
 Keep in mind, however, that when you're creating your own resources, you can set
-these values explicitly body of a resource declaration instead of letting them
-default to the resource title. For example, as long as you tell explicitly tell Puppet
+these values explicitly in the body of a resource declaration instead of letting them
+default to the resource title. For example, as long as you explicitly tell Puppet
 that a user resource's `name` is `'root'`, you can actually give the resource any
 title you like. (`'superuser'`, maybe, or even `'spaghetti'`) Just because you *can* do
 this, though, doesn't mean it's generally a good idea! Unless you have a good
