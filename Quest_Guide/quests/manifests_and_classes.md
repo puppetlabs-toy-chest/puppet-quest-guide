@@ -119,7 +119,7 @@ Enter the following class definition, then save and exit (`:wq`):
 class cowsayings::cowsay {
   package { 'cowsay':
     ensure => 'present',
-    ensure => 'gem',
+    provider => 'gem',
   }
 }
 {% endhighlight %}

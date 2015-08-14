@@ -41,6 +41,12 @@ For issues with Puppet Enterprise that are not specific to the Learning VM, see 
 Puppet Enterprise [Known Issues](https://docs.puppetlabs.com/pe/latest/release_notes_known_issues.html)
 page.
 
+### The cowsay package won't install!
+
+The Learning VM version 2.29 has an error in the instructions
+for this quest. The cowsay package declaration should include `provider => 'gem'`,
+rather than `ensure => 'gem'`.
+
 ### I completed a task, but the quest tool doesn't show it as complete
 
 The quest tool uses a series of [Serverspec](http://serverspec.org/) tests for each
