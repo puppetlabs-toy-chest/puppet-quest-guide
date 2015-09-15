@@ -217,7 +217,7 @@ Set three more parameters, as follows:
 2. `gr_django_provider = pip`
 3. `gr_django_ver      = "1.5"`
 
-Note that the gr_django_ver parameter takes a string, not float value, so it must
+Note that the gr\_django\_ver parameter takes a string, not float value, so it must
 be wrapped in quotes for puppet to parse it correctly.
 
 Finally, click the *Commit* button in the bottom right of the console window
