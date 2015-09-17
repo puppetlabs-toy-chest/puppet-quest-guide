@@ -62,7 +62,7 @@ classes are available to classify nodes.
 
 Edit `/etc/puppetlabs/code/environments/production/manifests/site.pp` to classify the Learning VM with the
 MySQL server class. Using class parameters, specify a root password and set the
-server's max connections to '1024.'
+server's max connections to '1024'. The text below should appear within the `node default` section of the `site.pp` file. It will be easier to copy-and-paste the text if you first type `:set paste` in vim.
 
 {% highlight puppet %}
   class { '::mysql::server':
