@@ -98,7 +98,7 @@ Use the the `puppet module list` command to see what modules are already
 installed. You'll probably recognize some familiar names from previous quests.
 
 To get clear picture of the directory structure of the modules here, you can use
-a couple flags with the `tree` command to limit the output to directories, and
+a couple of flags with the `tree` command to limit the output to directories, and
 limit the depth to two directories.
 
     tree -L 2 -d /etc/puppetlabs/code/environments/production/modules/
