@@ -252,8 +252,8 @@ The MySQL module includes custom types and providers that make `mysql_user`,
 These custom resource types make creating a new database with Puppet pretty
 simple. 
 
-Just add the following resource declaration to your node definition in the
-`site.pp` manifest.
+Just add the following resource declaration to your default node definition in the
+`site.pp` manifest (remember the `:set paste` command).
 
 {% highlight puppet %}
   mysql_database { 'lvm':
@@ -274,7 +274,8 @@ in your node definition as well.
 
 Now that you have a user and database, you can use a grant to define the
 privileges for that user. Note that the `*` character will match any table,
-meaning that the `lvm_user` has access to all tables in the `lvm` database.
+meaning that the `lvm_user` has access to all tables in the `lvm` database, so 
+add the following to the default node also.
 
 {% highlight puppet %}
   mysql_grant { 'lvm_user@localhost/lvm.*':
