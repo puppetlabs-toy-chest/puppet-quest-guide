@@ -184,11 +184,11 @@ mentioned above does just this.
 {% endtask %}
 
 Go back to your `site.pp` manifest and include the
-`mysql::server::account_security` class. Remember, you don't need to pass any
+`mysql::server::account_security` class in the default node. Remember, you don't need to pass any
 parameters to this class, so a simple `include` statement will work in place of
-a parameterized class declaration. 
+a parameterized class declaration. Also remember the `puppet parser validate` step to make sure that you have done that properly.
 
-Trigger a Puppet run, and you will see notices indicating that the test database
+Trigger a Puppet run, i.e. `puppet agent -t`, and you will see notices indicating that the test database
 and two users have been removed:
 
     Notice:
