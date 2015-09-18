@@ -147,7 +147,7 @@ where you'll define the `web` class. Create the file with vim:
 
     vim web/manifests/init.pp
 
-And then add the following contents:
+And then add the following contents (remember to use `:set paste` in vim):
 
 {% highlight puppet %}
 class web {
