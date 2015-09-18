@@ -143,9 +143,11 @@ Now create an `web` directory and your `manifests` and `tests` directories:
 {% endtask %}
 
 With this structure in place, you're ready to create your main manifest 
-where you'll define the `web` class.
+where you'll define the `web` class. Create the file with vim:
 
     vim web/manifests/init.pp
+
+And then add the following contents:
 
 {% highlight puppet %}
 class web {
