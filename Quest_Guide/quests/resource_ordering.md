@@ -94,6 +94,12 @@ a simple SSH module to explore resource relationships?
 To get started with your module, create an `sshd` directory with `tests`,
 `manifests`, and `files` subdirectories.
 
+
+{% tip %}
+  cd /etc/puppetlabs/code/environments/production/modules
+  mkdir -p sshd/{tests,manifests,files}
+{% endtip %}
+
 {% task 2 %}
 ---
 - file: /etc/puppetlabs/code/environments/production/modules/sshd/manifests/init.pp
