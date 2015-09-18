@@ -184,8 +184,14 @@ difficult it will be to refactor when you have to make changes later.
 
 Once you've validated your manifest with the `puppet parser` tool, create a test
 for your manifest with an `include` statement for the web class you created. 
-You covered testing in the "Modules" quest (hint: `vim web/tests/init.pp`, 
-`include web` and `puppet apply --noop web/tests/init.pp`).
+You covered testing in the "Modules" quest 
+
+{% tip %}
+
+Use `vim web/tests/init.pp`, insert `include web`, save and 
+then use `puppet apply --noop web/tests/init.pp`.
+
+{% endtip %}
 
 {% task 4 %}
 ---
