@@ -115,13 +115,9 @@ Make sure you're in the `modules` directory for Puppet's modulepath.
 
     cd /etc/puppetlabs/code/environments/production/modules/
 
-Now create an `web` directory:
+Now create an `web` directory and your `manifests` and `tests` directories:
 
-    mkdir web
-	
-...and your `manifests` and `tests` directories:
-
-    mkdir web/{manifests,tests}
+    mkdir -p web/{manifests,tests}
 
 {% task 2 %}
 ---
