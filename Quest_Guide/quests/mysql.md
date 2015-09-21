@@ -184,11 +184,11 @@ mentioned above does just this.
 {% endtask %}
 
 Go back to your `site.pp` manifest and include the
-`mysql::server::account_security` class. Remember, you don't need to pass any
+`mysql::server::account_security` class in the default node. Remember, you don't need to pass any
 parameters to this class, so a simple `include` statement will work in place of
-a parameterized class declaration. 
+a parameterized class declaration. Also remember the `puppet parser validate` step to make sure that you have done that properly.
 
-Trigger a Puppet run, and you will see notices indicating that the test database
+Trigger a Puppet run, i.e. `puppet agent -t`, and you will see notices indicating that the test database
 and two users have been removed:
 
     Notice:
@@ -252,8 +252,8 @@ The MySQL module includes custom types and providers that make `mysql_user`,
 These custom resource types make creating a new database with Puppet pretty
 simple. 
 
-Just add the following resource declaration to your node definition in the
-`site.pp` manifest.
+Just add the following resource declaration to your default node definition in the
+`site.pp` manifest (remember the `:set paste` command).
 
 {% highlight puppet %}
   mysql_database { 'lvm':
@@ -273,8 +273,11 @@ in your node definition as well.
 {% endhighlight %}
 
 Now that you have a user and database, you can use a grant to define the
-privileges for that user. Note that the `*` character will match any table,
-meaning that the `lvm_user` has access to all tables in the `lvm` database.
+privileges for that user. 
+
+Add the following to the default node to grant permissions. Note that the 
+`*` character will match any table. Thus, `table => 'lvm.*'` below means that 
+the `lvm_user` has `ALL` permissions to all tables in the `lvm` database. 
 
 {% highlight puppet %}
   mysql_grant { 'lvm_user@localhost/lvm.*':
@@ -288,7 +291,7 @@ meaning that the `lvm_user` has access to all tables in the `lvm` database.
 
 Once you've added declarations for these three custom resources, use the `puppet
 parser validate` command on the `site.pp` manifest to check your syntax, and
-trigger a puppet run with
+trigger a puppet run with:
 	
     puppet agent -t
 	

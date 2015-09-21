@@ -94,6 +94,9 @@ a simple SSH module to explore resource relationships?
 To get started with your module, create an `sshd` directory with `tests`,
 `manifests`, and `files` subdirectories.
 
+  cd /etc/puppetlabs/code/environments/production/modules
+  mkdir -p sshd/{tests,manifests,files}
+
 {% task 2 %}
 ---
 - file: /etc/puppetlabs/code/environments/production/modules/sshd/manifests/init.pp
@@ -294,6 +297,7 @@ class sshd {
   service { 'sshd':
     ensure    => running,
     enable    => true,
+    require => Package['openssh-server'],
     subscribe => File['/etc/ssh/sshd_config'],
   }
 

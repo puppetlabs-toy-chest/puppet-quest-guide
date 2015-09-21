@@ -115,13 +115,9 @@ Make sure you're in the `modules` directory for Puppet's modulepath.
 
     cd /etc/puppetlabs/code/environments/production/modules/
 
-Now create an `web` directory:
+Now create an `web` directory and your `manifests` and `tests` directories:
 
-    mkdir web
-	
-...and your `manifests` and `tests` directories:
-
-    mkdir web/{manifests,tests}
+    mkdir -p web/{manifests,tests}
 
 {% task 2 %}
 ---
@@ -147,9 +143,11 @@ Now create an `web` directory:
 {% endtask %}
 
 With this structure in place, you're ready to create your main manifest 
-where you'll define the `web` class.
+where you'll define the `web` class. Create the file with vim:
 
     vim web/manifests/init.pp
+
+And then add the following contents (remember to use `:set paste` in vim):
 
 {% highlight puppet %}
 class web {
@@ -185,15 +183,18 @@ difficult it will be to refactor when you have to make changes later.
 {% endtask %}
 
 Once you've validated your manifest with the `puppet parser` tool, create a test
-for your manifest with an `include` statement for the web class you created.
+for your manifest with an `include` statement for the web class you created 
+(you covered testing in the "Modules" quest).
+
+Create a `web/tests/init.pp` manifest 
+and insert `include web`. Save and exit the file, then apply it, using the `--noop` 
+flag (`puppet apply --noop web/tests/init.pp`). If your dry run looks good, run 
+puppet apply again without the flag:
+
+  puppet apply --noop web/tests/init.pp
 
 {% task 4 %}
 ---
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/web/tests/init.pp
-{% endtask %}
-
-Run the test, using the `--noop` flag for a dry run before triggering your real
-`puppet apply`.
 
 Take a look [here](/hello.html) and [here](/bonjour.html) to see your new pages.
 

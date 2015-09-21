@@ -147,13 +147,9 @@ Before you get started writing your module, make sure you're working in the
 - execute: mkdir /etc/puppetlabs/code/environments/production/modules/accounts/{manifests,tests}
 {% endtask %}
 	
-Create an `accounts` directory:
+Create an `accounts` directory and your `tests` and `manifests` directories:
 
-    mkdir accounts
-	
-And your `tests` and `manifests` directories:
-
-    mkdir accounts/{manifests,tests}
+    mkdir -p accounts/{manifests,tests}
 	
 {% task 2 %}
 ---
