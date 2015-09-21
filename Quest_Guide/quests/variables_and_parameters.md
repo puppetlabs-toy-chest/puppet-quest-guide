@@ -183,23 +183,18 @@ difficult it will be to refactor when you have to make changes later.
 {% endtask %}
 
 Once you've validated your manifest with the `puppet parser` tool, create a test
-for your manifest with an `include` statement for the web class you created. 
-You covered testing in the "Modules" quest 
+for your manifest with an `include` statement for the web class you created 
+(you covered testing in the "Modules" quest).
 
-{% tip %}
+Create a `web/tests/init.pp` manifest 
+and insert `include web`. Save and exit the file, then apply it, using the `--noop` 
+flag (`puppet apply --noop web/tests/init.pp`). If your dry run looks good, run 
+puppet apply again without the flag:
 
-Use `vim web/tests/init.pp`, insert `include web`, save and 
-then use `puppet apply --noop web/tests/init.pp`.
-
-{% endtip %}
+  puppet apply --noop web/tests/init.pp
 
 {% task 4 %}
 ---
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/web/tests/init.pp
-{% endtask %}
-
-Run the test, using the `--noop` flag for a dry run before triggering your real
-`puppet apply`.
 
 Take a look [here](/hello.html) and [here](/bonjour.html) to see your new pages.
 
