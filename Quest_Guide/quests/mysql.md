@@ -273,9 +273,11 @@ in your node definition as well.
 {% endhighlight %}
 
 Now that you have a user and database, you can use a grant to define the
-privileges for that user. Note that the `*` character will match any table,
-meaning that the `lvm_user` has access to all tables in the `lvm` database, so 
-add the following to the default node also.
+privileges for that user. 
+
+Add the following to the default node to grant permissions. Note that the 
+`*` character will match any table. Thus, `table => 'lvm.*'` below will mean that 
+the `lvm_user` has `ALL` permissions to all tables in the `lvm` database. 
 
 {% highlight puppet %}
   mysql_grant { 'lvm_user@localhost/lvm.*':
@@ -289,7 +291,7 @@ add the following to the default node also.
 
 Once you've added declarations for these three custom resources, use the `puppet
 parser validate` command on the `site.pp` manifest to check your syntax, and
-trigger a puppet run with
+trigger a puppet run with:
 	
     puppet agent -t
 	
