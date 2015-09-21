@@ -276,7 +276,7 @@ Now that you have a user and database, you can use a grant to define the
 privileges for that user. 
 
 Add the following to the default node to grant permissions. Note that the 
-`*` character will match any table. Thus, `table => 'lvm.*'` below will mean that 
+`*` character will match any table. Thus, `table => 'lvm.*'` below means that 
 the `lvm_user` has `ALL` permissions to all tables in the `lvm` database. 
 
 {% highlight puppet %}
