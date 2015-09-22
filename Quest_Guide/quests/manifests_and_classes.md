@@ -67,7 +67,7 @@ to declare these classes locally.
 One more note on the topic of classes: In Puppet, classes are *singleton*, which
 means that a class can only be declared *once* on a given node. In this sense,
 Puppet's classes are different than the kind of classes you may have encountered
-in Object Oriented programming, which are often instantiated multiple times.
+in object-oriented programming, which are often instantiated multiple times.
 Declaring a class multiple times could give Puppet conflicting instructions
 for how to manage resources on a system.
 
@@ -317,7 +317,7 @@ sake of testing, you can use the `puppet resource` tool to delete them so
 you can try out the functionality of your new `cowsayings` class:
 
     puppet resource package fortune-mod ensure=absent
-    puppet resource package cowsay ensure=absent
+    puppet resource package cowsay ensure=absent provider=gem
 
 Next, create a test for the `init.pp` manifest in the tests directory.
 
