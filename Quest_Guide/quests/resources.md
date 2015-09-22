@@ -307,10 +307,10 @@ the `puppet resource` tool again to inspect the result.
 ## Review
 
 So let's rehash what you learned in this quest. First, we covered two very
-important Puppet topics: the Resource Abstraction Layer and the anatomy of a
+important Puppet topics: the Resource Abstraction Layer (RAL) and the anatomy of a
 resource. To dive deeper into these topics, we showed you how to use the `puppet
 describe` and `puppet resource` tools, which also leads to a better
-understanding of Puppet's Language.
+understanding of Puppet's language.
 
 We also showed you how you can change the state of the system by declaring
 resources with the `puppet apply` and `puppet resource` tools. These tools
