@@ -295,9 +295,7 @@ class sshd {
   ...
   
   service { 'sshd':
-    ensure    => running,
-    enable    => true,
-    require => Package['openssh-server'],
+    ...
     subscribe => File['/etc/ssh/sshd_config'],
   }
 
