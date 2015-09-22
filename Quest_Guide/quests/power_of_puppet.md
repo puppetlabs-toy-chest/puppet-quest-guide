@@ -48,7 +48,7 @@ done the work for you?
 You're in luck! Puppet Labs operates a service called the [Puppet Forge](http://forge.puppetlabs.com),
 which serves as a repository for Puppet *modules*. A module nicely packages all the
 code and data Puppet needs to manage a given aspect in your infrastructure, which
-is expecially helpful when you're dealing with a complex application like Graphite.
+is especially helpful when you're dealing with a complex application like Graphite.
 
 {% task 1 %}
 ---
@@ -133,7 +133,7 @@ But before you can access the PE console you'll need the Learning VM's IP addres
 - execute: facter ipaddress
 {% endtask %}
 
-Of course, you could a command like `ifconfig` to find this, but let's do it the puppet
+Of course, you could use a command like `ifconfig` to find this, but let's do it the puppet
 way. Puppet uses a tool called `facter` to collect facts about a system and make them
 available at catalog compilation. This is how it knows, for example, whether it's on
 Ubuntu and needs to use `apt-get` or CentOS and needs `yum`. You'll learn more about
@@ -270,7 +270,7 @@ Note that Graphite has only been running for a few minutes, so it may not yet
 have much data to chart. If you wait a minute and refresh the page in your
 browser, you will see the graph update with new data.
 
-You can also check out the Graphite console running on port 90. (`<IPADDRESS>:90`)
+You can also check out the Graphite console running on port 90. (`http://<IPADDRESS>:90`)
 
 ## Review
 
