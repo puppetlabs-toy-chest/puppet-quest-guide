@@ -98,5 +98,4 @@ cached, with instructions to install them in the Power of Puppet quest. If that 
 fails, you may try adding the `--force` flag after the `--ignore-dependencies` flag.
 
 If your puppet runs still fail after trying the steps above, feel free to contact us at
-learningvm@puppetlabs.com or check the Puppet Enterprise [Known Issues](https://docs.puppetlabs.com/pe/latest/release_notes_known_issues.html)
-page.
+learningvm@puppetlabs.com or check the Puppet Enterprise [Known Issues](https://docs.puppetlabs.com/pe/latest/release_notes_known_issues.html) page.
