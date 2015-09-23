@@ -163,13 +163,13 @@ with the `graphite` class.
 
 First, create a **Learning VM** node group. Node groups allow you to 
 segment all the nodes in your infrastructure into separately configurable groups
-based on information collected by the `facter` tool.
+based on the node's certname and all information collected by the `facter` tool.
 
 Click on *Classification* in the console navigation bar. It may take a moment to load.
 
 {% figure '../assets/classification.png' %}
 
-From here, enter "Learning VM" as a new node group name, and click *Add group* to create
+From here, enter "Learning VM" as a new node group name and click *Add group* to create
 your new node group.
 
 {% figure '../assets/node_group.png' %}
@@ -177,6 +177,10 @@ your new node group.
 Click on the new group to set the rules for this group. You only want the Learning VM
 in this group, so create a rule that will match on the Learning VM's domain name:
 `learning.puppetlabs.vm`.
+
+You should see that there is one matching node. If no matching node apprears, trigger
+a puppet run (`puppet agent -t`) on the Learning VM. As part of the puppet run, the Learning VM
+will check in, making its information available to the console node classifier.
 
 {% figure '../assets/rule.png' %}
 
@@ -187,40 +191,38 @@ interface to commit your change.
 
 ### Add a class
 
-With the `graphite` class available from the module installed, you can use it
-to classify the node `learning.puppetlabs.vm`.
+When you installed the `dwerder-graphite` module from the forge, it made the `graphite`
+class available in the console.
 
 Under the *Classes* tab in the interface for the Learning VM node group, find the *Class name*
-text box. It may take a minute for Puppet to pick up on classes from the newly installed
-`graphite` module. Try entering `graphite` in the text box. Puppet autocompletes from the list
-of available classes, so you can quickly see if a class is available. If `graphite` is not yet
-available, click the *Refresh* button near the top right of the classes interface and wait a
-moment before trying again.
+text box. If `graphite` is not yet available, click the *Refresh* button near the top right
+of the classes interface and wait a moment before trying again. (If the class still does not
+appear, check the [troubleshooting guide](https://github.com/puppetlabs/courseware-lvm/blob/master/SETUP.md#troubleshooting) for more information.)
 
-Enter `graphite` in the *Class name* text box, then click the *Add class* button.
+Once you have entered `graphite` in the *Class name* text box, click the *Add class* button.
 
-Before you you apply your changes, let's adjust a few parameters for the `graphite` class.
+Before you run the puppet agent to apply this class, there are a few parameters for the
+`graphite` class you need to set.
 
-First, we aleady have an Apache server configured to our liking on the Learning VM, so we can
-tell the `graphite` class it doesn't need to bother setting up its own server. Use the dropdown
-parameter menus under the **Class:** graphite section to set the `gr_web_server` parameter to `none`.
+We aleady have an Apache server configured to our liking on the Learning VM, so we can
+tell the `graphite` class it doesn't need to bother setting up its own server.
 
-Second, we found that there are some compatibility issues with the latest Django version. Puppet
-is a great tool for managing complex software stacks, so the ability to deal with these kinds
-of relationships between components is important. Luckily for us author of our `graphite` module
-has done a nice job of modeling good module design! By setting a few parameters, we can pick our
-own compatible Django version to use.
+There are also some compatibility issues with the latest Django version. Puppet Luckily for us
+author of this `graphite` module has made it easy to get around this problem by picking our
+own compatible Django version to use. (Keep this in mind when you start writing your own modules!)
 
-Set three more parameters, as follows:
+Set the parameters, as follows:
 
+1. `gr_web_server      = none`
 1. `gr_django_pkg      = django`
-2. `gr_django_provider = pip`
-3. `gr_django_ver      = "1.5"`
+1. `gr_django_provider = pip`
+1. `gr_django_ver      = "1.5"`
 
-Note that the gr\_django\_ver parameter takes a string, not float value, so it must
+Note that the `gr_django_ver` parameter takes a string, not float value, so it must
 be wrapped in quotes for puppet to parse it correctly.
 
-Finally, click the *Commit* button in the bottom right of the console window
+Double check that you have clicked the *Add parameter* button for all of your parameters,
+then click the *Commit 5 changes* button in the bottom right of the console window
 to commit your changes.
 
 ### Run puppet
