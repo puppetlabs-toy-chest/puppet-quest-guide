@@ -85,7 +85,7 @@ restarting a service, it may take some time for all component services of puppet
 fully come on line. If your puppet runs still fail after restarting, please wait a minute
 and try your puppet run again.
 
-You can debug check the status of puppet services specifically with the `systemctl`
+You can check the status of puppet services specifically with the `systemctl`
 command. If you notice any stopped puppet-related services (e.g. pe-puppetdb),
 try starting them. (e.g. `service pe-puppetdb start`).
 
@@ -96,6 +96,43 @@ running the Learning VM offline, you cannot rely on the Puppet Forge's dependenc
 resolution. We have this module and all other modules required for the Learning VM
 cached, with instructions to install them in the Power of Puppet quest. If that installation
 fails, you may try adding the `--force` flag after the `--ignore-dependencies` flag.
+
+### I can't import the OVA
+
+First, ensure that you have an up-to-date version of your virtualization software installed.
+Note that the "check for updates" feature of VirtualBox may not always work as expected,
+so check the website for the most recent version.
+
+### The Learning VM has no IP address or the IP address will not respond.
+
+If your network connection has changed since you loaded the VM, it's possible that your
+IP address is different from that displayed on the Learning VM splash screen. Log
+in to the VM via the virtualization directly (rather than SSH) and use the `facter ipaddress`
+command the check the current address.
+
+Some network configurations may still prevent you from accessing the Learning VM.
+If this is the case, you can still access the Learning VM by configuring port forwarding.
+
+Your rules should be configured as follows:
+
+```
+Name - Protocol - HostIP -   HostPort - GuestIP - GuestPort
+SSH    TCP        127.0.0.1  2222                 22
+HTTP   TCP        127.0.0.1  8080                 80
+HTTPS  TCP        127.0.0.1  8443                 443
+```
+
+Once you have set up port forwarding, you can use those ports to access the VM
+via ssh (`ssh root@localhost:2222`) and access the Quest Guide and PE console
+by entering `http://localhost:80` and `https://localhost:443` in your browser address bar.
+
+### I can't scroll up in my terminal
+
+The Learning VM uses a tool called tmux to allow us to display the quest status. You
+can scroll in tmux by first hitting control-b, then [ (left bracket). You will then
+be able to use the arrow keys to scroll.
+
+### Still need help?
 
 If your puppet runs still fail after trying the steps above, feel free to contact us at
 learningvm@puppetlabs.com or check the Puppet Enterprise [Known Issues](https://docs.puppetlabs.com/pe/latest/release_notes_known_issues.html)
