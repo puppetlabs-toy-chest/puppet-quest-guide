@@ -89,16 +89,16 @@ provisioning tools.
 - execute: puppet -V
 {% endtask %}
 Now that you know what Puppet and Puppet Enterprise are, check and see what
-versions of Puppet are running on this Learning VM. Type the following command:
+version of Puppet is running on this Learning VM. Type the following command:
 
     puppet -V	# That's a capital 'V'
 
 
 You will see something like the following:
 
-_3.8.1 (Puppet Enterprise 3.8.1)_
+_4.2.2_
 
-This indicates that Puppet Version 3.8.1 Puppet Enterprise 3.8.1 are installed.
+This indicates that Puppet Version 4.2.2 is installed.
 
 ## What is a Quest?
 
