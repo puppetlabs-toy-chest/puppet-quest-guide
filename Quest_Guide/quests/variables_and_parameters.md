@@ -131,12 +131,12 @@ Now create an `web` directory and your `manifests` and `tests` directories:
       $french = 'Bonjour le monde!'
     
       file { "${doc_root}hello.html":
-        ensure => 'present',
+        ensure => present,
         content => "<em>${english}</em>",
       }
     
       file { "${doc_root}bonjour.html":
-        ensure => 'present',
+        ensure => present,
         content => "<em>${french}</em>",
       }
     }
@@ -158,12 +158,12 @@ class web {
   $french = 'Bonjour le monde!'
 
   file { "${doc_root}hello.html":
-    ensure => 'present',
+    ensure => present,
     content => "<em>${english}</em>",
   }
   
   file { "${doc_root}bonjour.html":
-    ensure => 'present',
+    ensure => present,
     content => "<em>${french}</em>",
   }
 
@@ -244,7 +244,7 @@ to customize these values as the class is declared.
     - "GO"
     - |
       file { "${doc_root}${page_name}.html":
-        ensure => 'present',
+        ensure => present,
         content => "<em>${message}</em>",
       }
     - "\e"
@@ -264,7 +264,7 @@ parameters:
 
 {% highlight puppet %}
 file { "${doc_root}${page_name}.html":
-  ensure => 'present',
+  ensure => present,
   content => "<em>${message}</em>",
 }
 {% endhighlight %}

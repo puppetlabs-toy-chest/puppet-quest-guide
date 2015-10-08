@@ -90,7 +90,7 @@ You'll see something like the following:
 
 {% highlight puppet %}
 user { 'root':
-  ensure           => 'present',
+  ensure           => present,
   comment          => 'root',
   gid              => '0',
   home             => '/root',
@@ -182,7 +182,7 @@ resource declaration.
 
 {% highlight puppet %}
 user { 'root':
-  ensure           => 'present',
+  ensure           => present,
   comment          => 'root',
   gid              => '0',
   home             => '/root',
@@ -249,7 +249,7 @@ a great tool for tests and exploration.
 {% task 3 %}
 ---
 - execute: |
-    puppet apply -e "user { 'galatea': ensure => 'present', }"
+    puppet apply -e "user { 'galatea': ensure => present, }"
 {% endtask %}
 
 In this task, you'll create a new user called *galatea*. Puppet uses reasonable
@@ -258,7 +258,7 @@ user is set the `ensure` attribute to `present`. This `present` value tells
 Puppet to check if the resource exists on the system, and to create the specified
 resource if it does not.
 
-    puppet apply -e "user { 'galatea': ensure => 'present', }"
+    puppet apply -e "user { 'galatea': ensure => present, }"
 
 Use the `puppet resource` tool to take a look at user `galatea`. Type the
 following command:
