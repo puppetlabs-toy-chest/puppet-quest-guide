@@ -83,7 +83,7 @@ works well as a simple example. You'll also install the *fortune* package, which
 will give you and your cow access to a database of sayings and quotations.
 
 We've already prepared a `cowsayings` module directory in Puppet's *modulepath*,
-and included two subdirectories: `manifests` and `tests`. Before getting started
+and included two subdirectories: `manifests` and `examples`. Before getting started
 writing manifests, change directories to save yourself some typing:
 
     cd /etc/puppetlabs/code/environments/production/modules
@@ -140,13 +140,13 @@ anything with it.
 
 {% task 2 %}
 ---
-- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/tests/cowsay.pp
+- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/examples/cowsay.pp
   content: include cowsayings::cowsay
 {% endtask %}
 
-To actually declare the class, create a `cowsay.pp` test in the tests directory.
+To actually declare the class, create a `cowsay.pp` test in the examples directory.
 
-    vim cowsayings/tests/cowsay.pp
+    vim cowsayings/examples/cowsay.pp
 
 In this manifest, *declare* the cowsay class with the `include` keyword.
 
@@ -159,7 +159,7 @@ Before applying any changes to your system, it's always a good idea to use the
 catalog and notify you of the changes that Puppet would have made without
 actually applying any of those changes to your system.
 
-    puppet apply --noop cowsayings/tests/cowsay.pp
+    puppet apply --noop cowsayings/examples/cowsay.pp
 
 You should see an output like the following:
 
@@ -174,7 +174,7 @@ You should see an output like the following:
 
 {% task 3 %}
 ---
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/cowsayings/tests/cowsay.pp
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/cowsayings/examples/cowsay.pp
 - execute: cowsay Puppet is awesome!
 {% endtask %}
 
@@ -227,7 +227,7 @@ class cowsayings::fortune {
 
 {% task 5 %}
 ---
-- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/tests/fortune.pp
+- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/examples/fortune.pp
   content: include cowsayings::fortune
 {% endtask %}
 
@@ -235,16 +235,16 @@ Again, you'll want to validate your new manifests syntax with the `puppet parser
 validate` command. When everything checks out, you're ready to make your test
 manifest:
 
-    vim cowsayings/tests/fortune.pp
+    vim cowsayings/examples/fortune.pp
 	
 As before, use `include` to declare your `cowsayings::fortune` class. 
 
 {% task 6 %}
 ---
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/cowsayings/tests/fortune.pp
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/cowsayings/examples/fortune.pp
 {% endtask %}
 
-Apply the `cowsayings/tests/fortune.pp` manifest with the `--noop` flag. If 
+Apply the `cowsayings/examples/fortune.pp` manifest with the `--noop` flag. If 
 everything looks good, apply again without the flag.
 
 Now that you have both packages installed, you can use them together. Try piping
@@ -307,7 +307,7 @@ Save the manifest, and check your syntax with the `puppet parser` tool.
     puppet resource package fortune-mod ensure=absent
 - execute: |
     puppet resource package cowsay ensure=absent
-- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/tests/init.pp
+- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/examples/init.pp
   content: include cowsayings
 {% endtask %}
 
@@ -319,9 +319,9 @@ you can try out the functionality of your new `cowsayings` class:
     puppet resource package fortune-mod ensure=absent
     puppet resource package cowsay ensure=absent provider=gem
 
-Next, create a test for the `init.pp` manifest in the tests directory.
+Next, create a test for the `init.pp` manifest in the examples directory.
 
-    vim cowsayings/tests/init.pp
+    vim cowsayings/examples/init.pp
 	
 Here, just declare the `cowsayings` class:
 
@@ -329,11 +329,11 @@ Here, just declare the `cowsayings` class:
 
 {% task 9 %}
 ---
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/cowsayings/tests/init.pp
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/cowsayings/examples/init.pp
 {% endtask %}
 
 Good. Now that the packages are gone, do a `--noop` first, then apply your
-`cowsayings/tests/init.pp` test.
+`cowsayings/examples/init.pp` test.
 
 ## Review
 
@@ -348,7 +348,7 @@ can only be declared a single time on a given node.
 A *manifest* is a file containing Puppet code, and appended with the `.pp`
 extension. In this quest, we used manifests in the `./manifests` directory each
 to define a single class, and used a corresponding test manifest in the
-`./tests` directory to declare each of those classes.
+`./examples` directory to declare each of those classes.
 
 There are also a few details about classes and manifests we haven't gotten to
 just yet. As we mentioned in the Power of Puppet quest, for example, classes
