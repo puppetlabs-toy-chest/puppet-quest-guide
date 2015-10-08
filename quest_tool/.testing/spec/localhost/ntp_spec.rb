@@ -8,7 +8,7 @@ describe "Task 1:" do
 end
 
 describe "Task 2:" do
-  it 'Include the ntp class in the default node definition' do
+  it "Include the ntp class in your 'learning.puppetlabs.vm' node definition" do
     file("#{PROD_PATH}manifests/site.pp").should contain 'ntp'
   end
 end

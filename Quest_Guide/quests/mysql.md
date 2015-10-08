@@ -60,24 +60,42 @@ classes are available to classify nodes.
     - ":wq\r"
 {% endtask %}
 
-Edit `/etc/puppetlabs/code/environments/production/manifests/site.pp` to classify the Learning VM with the
-MySQL server class. Using class parameters, specify a root password and set the
-server's max connections to '1024'. The text below should appear within the `node default` section of the `site.pp` file. It will be easier to copy-and-paste the text if you first type `:set paste` in vim.
+Now we'll edit the `site.pp` to classify the Learning VM with the MySQL server class.
+
+    vim /etc/puppetlabs/code/environments/production/manifests/site.pp
+
+If you completed the NTP quest, you will already have a node declaration for the
+`learning.puppetlabs.vm` certname. If not, create it now:
 
 {% highlight puppet %}
+node 'learning.puppetlabs.vm' {
+
+}
+{% endhighlight %}
+
+Within that node block, you can declare your `::mysql::server` class and set its
+parameters. For this example, we'll specify a root password and set the
+server's max connections to '1024'. (You may notice that the formatting in vim is a
+bit funky when typing or pasting nested hashes. You can disable this formatting with
+the `:set paste` command in vim.)
+
+{% highlight puppet %}
+node 'learning.puppetlabs.vm' {
   class { '::mysql::server':
     root_password    => 'strongpassword',
-    override_options => { 'mysqld' => { 'max_connections' => '1024' } },
+    override_options => {
+      'mysqld' => { 'max_connections' => '1024' }
+    },
   }
+}
 {% endhighlight %}
 	
-In addition to some standard parameters like the `root_password`, the class
-takes a hash of `override_options`, which you can use to address any
+Notice that in addition to standard parameters like the `root_password`, the class
+takes a `override_options` as a hash, which you can use to address any
 configuration options you would normally set in the `/etc/my.cnf` file. Using a
-hash lets you set any options you like in the MySQL configuration file without
-requiring each to be written into the class as a separate parameter. The
-structure of the `override_options` hash is analogous to the `[section]`,
-`var_name = value` syntax of a `my.cnf` file.
+hash lets you manage these settings without requiring each to be written
+into the class as a separate parameter. The structure of the `override_options`
+hash is analogous to the `[section]`, `var_name = value` syntax of a `my.cnf` file.
 
 {% task 3 %}
 ---
@@ -183,12 +201,27 @@ mentioned above does just this.
     - ":wq\r"
 {% endtask %}
 
-Go back to your `site.pp` manifest and include the
-`mysql::server::account_security` class in the default node. Remember, you don't need to pass any
-parameters to this class, so a simple `include` statement will work in place of
-a parameterized class declaration. Also remember the `puppet parser validate` step to make sure that you have done that properly.
+Go back to your `site.pp` manifest and include the `mysql::server::account_security`
+class in the `learning.puppetlabs.vm` node. Remember, you don't need to pass any
+parameters to this class, so a simple `include` statement will work in place
+of a parameterized class declaration.
 
-Trigger a Puppet run, i.e. `puppet agent -t`, and you will see notices indicating that the test database
+{% highlight puppet %}
+node 'learning.puppetlabs.vm' {
+  include ::mysql::server::account_security
+  ...
+}
+{% endhighlight %}
+
+Validate your site.pp
+
+    puppet parser validate /etc/puppetlabs/code/environments/production/manifests/site.pp
+
+When it checks out, trigger a puppet run:
+
+    puppet agent -t
+
+You will see notices indicating that the test database
 and two users have been removed:
 
     Notice:
@@ -200,6 +233,11 @@ and two users have been removed:
     Notice:
     /Stage[main]/Mysql::Server::Account_security/Mysql_user[root@127.0.0.1]/ensure:
     removed
+
+(Remember that though automation is a wonderful for maintaining security
+it isn't a substitute for a full understanding of the underlying systems and their
+potential vulnerabilities! If you're using an existing module to configure an important
+system, but sure to understand how and why it does what it does.)
 
 ## Types and providers
 
@@ -249,11 +287,11 @@ The MySQL module includes custom types and providers that make `mysql_user`,
 - execute: puppet agent -t
 {% endtask %}
 
-These custom resource types make creating a new database with Puppet pretty
-simple. 
+These custom resource types make it possible to manage a new database with a
+few lines of puppet code. 
 
-Just add the following resource declaration to your default node definition in the
-`site.pp` manifest (remember the `:set paste` command).
+Add the following resource declaration to your `site.pp` node definition.
+(Remember the `:set paste` command if you need it.)
 
 {% highlight puppet %}
   mysql_database { 'lvm':
@@ -275,9 +313,9 @@ in your node definition as well.
 Now that you have a user and database, you can use a grant to define the
 privileges for that user. 
 
-Add the following to the default node to grant permissions. Note that the 
-`*` character will match any table. Thus, `table => 'lvm.*'` below means that 
-the `lvm_user` has `ALL` permissions to all tables in the `lvm` database. 
+Note that the `*` character will match any table. Thus, `table => 'lvm.*'`
+below means that the `lvm_user` has `ALL` permissions to all tables in
+the `lvm` database. 
 
 {% highlight puppet %}
   mysql_grant { 'lvm_user@localhost/lvm.*':
@@ -290,8 +328,11 @@ the `lvm_user` has `ALL` permissions to all tables in the `lvm` database.
 {% endhighlight %}
 
 Once you've added declarations for these three custom resources, use the `puppet
-parser validate` command on the `site.pp` manifest to check your syntax, and
-trigger a puppet run with:
+parser validate` command on the `site.pp` manifest to check your syntax
+
+    puppet parser validate /etc/puppetlabs/code/environments/production/manifests/site.pp
+
+When your code looks good, trigger a puppet run:
 	
     puppet agent -t
 	

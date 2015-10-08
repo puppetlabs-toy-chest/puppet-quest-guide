@@ -105,12 +105,12 @@ But now, on to the installation!
 ## Installation
 
 Before you classify the Learning VM with the NTP class, you'll need to install
-the NTP module from the forge. While the module itself is called `ntp`, modules
-in the forge are prefixed by the account name of the uploader. So to get the
-Puppet Labs NTP module, you'll specify `puppetlabs-ntp`. When you look at the
-module saved to the modulepath on your Puppet master, however, it will be named
-`ntp`. Keep this in mind, as trying to install multiple modules of the same name
-can lead to conflicts!
+the NTP module from the Forge. While the module itself is called `ntp`, recall
+that modules in the Forge are prefixed by the account name of the associated user.
+So to get the Puppet Labs NTP module, you'll specify `puppetlabs-ntp`. When you
+look at the module saved to the modulepath on your Puppet master, however, it will
+be named `ntp`. Keep this in mind, as trying to install multiple modules of the
+same name can lead to conflicts!
 
 {% task 1 %}
 ---
@@ -137,24 +137,24 @@ Console. In this quest, we introduce another method of node classification: the
 `site.pp` is the first manifest the Puppet agent checks when it connects to the
 master. It defines global settings and resource defaults that will apply to all
 nodes in your infrastructure. It is also where you will put your *node
-definitions* (sometimes called `node statements`). A node definition is a block
-of Puppet code that specifies a set of nodes and declares the classes that Puppet
-will enforce on those nodes. You can think of it as a code-defined version of the
-node group you set up in the Power of Puppet quest.
+definitions* (sometimes called `node statements`).
 
-In a sense, this node definition is a bit like the test manifests you've been
-using so far. While classes are generally defined in separate manifests, the
-node definition, like a test manifest, is a place where you actually declare
-them. Of course tests are just that, tests, while the node definitions in your
-`site.pp` manifest describe what you actually want your infrastructure to look
-like.
+A node definition is the code-defined equivalent of the node group you saw in
+the Power of Puppet quest.
 
+{% highlight puppet %}
+node 'learning.puppetlabs.vm' {
+  ...
+}
+{% endhighlight %}
+
+{% aside PE console or site.pp? %}
 Because it's more amenable to monitoring with the Learning VM quest tool, we'll
 be primarily using this `site.pp` method of classification in this Quest Guide.
-Once you've learned the basic mechanics of node definitions and class
-declarations, however, much of this knowledge will be portable to whatever
+What you will learn about node definitions and class declarations applies to whatever
 methods of classification you decide to use later, including the PE Console node
-classifier you saw in the Power of Puppet quest.
+classifier.
+{% endaside %}
 
 {% task 2 %}
 ---
@@ -178,11 +178,12 @@ You'll see a `default` node definition. This is a special node definition that
 Puppet will apply to any node that's not specifically included in any other node
 definition.
 
-Use the `include` syntax to add the `ntp` class to your default node definition:
+We only want our changes to apply to the Learning VM, however, so we'll put our
+`ntp` class declaration in a new `learning.puppetlabs.vm` node block.
 
 {% highlight puppet %}
 
-node default {
+node 'learning.puppetlabs.vm' {
   include ntp
 }
 
