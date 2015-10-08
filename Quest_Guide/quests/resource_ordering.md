@@ -88,14 +88,14 @@ a simple SSH module to explore resource relationships?
 
 {% task 1 %}
 ---
-- execute: mkdir -p /etc/puppetlabs/code/environments/production/modules/sshd/{tests,manifests,files}
+- execute: mkdir -p /etc/puppetlabs/code/environments/production/modules/sshd/{examples,manifests,files}
 {% endtask %}
 
-To get started with your module, create an `sshd` directory with `tests`,
+To get started with your module, create an `sshd` directory with `examples`,
 `manifests`, and `files` subdirectories.
 
   cd /etc/puppetlabs/code/environments/production/modules
-  mkdir -p sshd/{tests,manifests,files}
+  mkdir -p sshd/{examples,manifests,files}
 
 {% task 2 %}
 ---
@@ -137,13 +137,13 @@ resource relationships.
 
 {% task 3 %}
 ---
-- file: /etc/puppetlabs/code/environments/production/modules/sshd/tests/init.pp
+- file: /etc/puppetlabs/code/environments/production/modules/sshd/examples/init.pp
   content: include sshd
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/sshd/tests/init.pp --noop --graph
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/sshd/examples/init.pp --noop --graph
 {% endtask %}
 
 The quickest way to get Puppet to generate a graph for this kind of testing is to run a test
-manifest with the `--noop` and `--graph` flags. Go ahead and set up a `sshd/tests/init.pp`
+manifest with the `--noop` and `--graph` flags. Go ahead and set up a `sshd/examples/init.pp`
 manifest. You don't have any parameters here, so you can use a simple:
 
 {% highlight puppet %}
@@ -153,7 +153,7 @@ include sshd
 With this done, run a `puppet apply` on your test manifest with the `--noop` and `--graph`
 flags:
 
-    puppet apply sshd/tests/init.pp --noop --graph
+    puppet apply sshd/examples/init.pp --noop --graph
 
 {% task 4 %}
 ---
@@ -242,7 +242,7 @@ class sshd {
 
 {% task 8 %}
 ---
-  - execute: puppet apply /etc/puppetlabs/code/environments/production/modules/sshd/tests/init.pp --noop --graph
+  - execute: puppet apply /etc/puppetlabs/code/environments/production/modules/sshd/examples/init.pp --noop --graph
   - execute: dot -Tpng /opt/puppetlabs/puppet/cache/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
 {% endtask %}
 

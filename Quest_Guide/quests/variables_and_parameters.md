@@ -106,7 +106,7 @@ creating a simple `web` module that will put them to use.
 {% task 1 %}
 ---
 - execute: mkdir /etc/puppetlabs/code/environments/production/modules/web
-- execute: mkdir /etc/puppetlabs/code/environments/production/modules/web/{manifests,tests}
+- execute: mkdir /etc/puppetlabs/code/environments/production/modules/web/{manifests,examples}
 {% endtask %}
 
 First, you'll need to create the directory structure for your module.
@@ -115,9 +115,9 @@ Make sure you're in the `modules` directory for Puppet's modulepath.
 
     cd /etc/puppetlabs/code/environments/production/modules/
 
-Now create an `web` directory and your `manifests` and `tests` directories:
+Now create an `web` directory and your `manifests` and `examples` directories:
 
-    mkdir -p web/{manifests,tests}
+    mkdir -p web/{manifests,examples}
 
 {% task 2 %}
 ---
@@ -178,7 +178,7 @@ difficult it will be to refactor when you have to make changes later.
 
 {% task 3 %}
 ---
-- file: /etc/puppetlabs/code/environments/production/modules/web/tests/init.pp
+- file: /etc/puppetlabs/code/environments/production/modules/web/examples/init.pp
   content: include web
 {% endtask %}
 
@@ -186,12 +186,12 @@ Once you've validated your manifest with the `puppet parser` tool, create a test
 for your manifest with an `include` statement for the web class you created 
 (you covered testing in the "Modules" quest).
 
-Create a `web/tests/init.pp` manifest 
+Create a `web/examples/init.pp` manifest 
 and insert `include web`. Save and exit the file, then apply it, using the `--noop` 
-flag (`puppet apply --noop web/tests/init.pp`). If your dry run looks good, run 
+flag (`puppet apply --noop web/examples/init.pp`). If your dry run looks good, run 
 puppet apply again without the flag:
 
-  puppet apply --noop web/tests/init.pp
+  puppet apply --noop web/examples/init.pp
 
 {% task 4 %}
 ---
@@ -271,7 +271,7 @@ file { "${doc_root}${page_name}.html":
 
 {% task 6 %}
 ---
-- execute: vim /etc/puppetlabs/code/environments/production/modules/web/tests/init.pp
+- execute: vim /etc/puppetlabs/code/environments/production/modules/web/examples/init.pp
   input:
     - "ddi"
     - "class {'web':\r"
@@ -284,7 +284,7 @@ file { "${doc_root}${page_name}.html":
 {% endtask %}
 
 As before, use the test manifest to declare the class. You'll open
-`web/tests/init.pp` and replace the simple `include` statement with the
+`web/examples/init.pp` and replace the simple `include` statement with the
 parameterized class declaration syntax to set each of the class parameters:
 
 {% highlight puppet %}
@@ -296,7 +296,7 @@ class {'web':
 
 {% task 7 %}
 ---
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/web/tests/init.pp
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/web/examples/init.pp
 {% endtask %}
 
 Now give it a try. Go ahead and do a `--noop` run, then apply the test.

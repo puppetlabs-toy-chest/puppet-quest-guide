@@ -108,7 +108,7 @@ You'll see a list of directories, something like this:
     /etc/puppetlabs/code/environments/production/modules/
     ├── cowsayings
     │   ├── manifests
-    │   └── tests
+    │   └── examples
     └── graphite
         ├── manifests
         ├── spec
@@ -148,13 +148,13 @@ call it "vimrc." Use the `mkdir` command to create your module directory:
 
 {% task 3 %}
 ---
-- execute: mkdir /etc/puppetlabs/code/environments/production/modules/vimrc/{manifests,tests,files}
+- execute: mkdir /etc/puppetlabs/code/environments/production/modules/vimrc/{manifests,examples,files}
 {% endtask %}
 
-Now you need three more directories, one for manifests, one for tests, and one
+Now you need three more directories, one for manifests, one for examples, and one
 for files.
 
-    mkdir vimrc/{manifests,tests,files}
+    mkdir vimrc/{manifests,examples,files}
 
 If you use the `tree vimrc` command to take a look at your new module, you
 should now see a structure like this:
@@ -162,7 +162,7 @@ should now see a structure like this:
     vimrc
     ├── files
     ├── manifests
-    └── tests
+    └── examples
   
     3 directories, 0 files
 
@@ -298,14 +298,14 @@ class is, but you haven't told Puppet to actually do anything with it.
 
 {% task 7 %}
 ---
-- file: /etc/puppetlabs/code/environments/production/modules/vimrc/tests/init.pp
+- file: /etc/puppetlabs/code/environments/production/modules/vimrc/examples/init.pp
   content: include vimrc
 {% endtask %}
 
 To test the `vimrc` class, create a manifest called `init.pp`  in the
-`vimrc/tests` directory.
+`vimrc/examples` directory.
 
-    vim vimrc/tests/init.pp
+    vim vimrc/examples/init.pp
 
 All you'll do here is *declare* the `vimrc` class with the `include` directive.
 
@@ -315,7 +315,7 @@ include vimrc
 
 {% task 8 %}
 ---
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/vimrc/tests/init.pp
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/vimrc/examples/init.pp
 {% endtask %}
 
 Apply the new manifest with the `--noop` flag. If everything looks good, drop

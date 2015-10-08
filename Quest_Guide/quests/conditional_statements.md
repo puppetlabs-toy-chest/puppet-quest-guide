@@ -144,12 +144,12 @@ Before you get started writing your module, make sure you're working in the
 {% task 1 %}
 ---
 - execute: mkdir /etc/puppetlabs/code/environments/production/modules/accounts
-- execute: mkdir /etc/puppetlabs/code/environments/production/modules/accounts/{manifests,tests}
+- execute: mkdir /etc/puppetlabs/code/environments/production/modules/accounts/{manifests,examples}
 {% endtask %}
 	
-Create an `accounts` directory and your `tests` and `manifests` directories:
+Create an `accounts` directory and your `examples` and `manifests` directories:
 
-    mkdir -p accounts/{manifests,tests}
+    mkdir -p accounts/{manifests,examples}
 	
 {% task 2 %}
 ---
@@ -238,14 +238,14 @@ continuing on.
 
 {% task 3 %}
 ---
-- file: /etc/puppetlabs/code/environments/production/modules/accounts/tests/init.pp
+- file: /etc/puppetlabs/code/environments/production/modules/accounts/examples/init.pp
   content: |
     class {'accounts':
       user_name => 'dana',
     }
 {% endtask %}
 
-Create a test manifest (`accounts/tests/init.pp`) and declare the accounts
+Create a test manifest (`accounts/examples/init.pp`) and declare the accounts
 manifest with the name parameter set to `dana`.
 
 {% highlight puppet %}
@@ -258,7 +258,7 @@ class {'accounts':
 
 {% task 4 %}
 ---
-- execute: FACTER_operatingsystem=Debian puppet apply --noop /etc/puppetlabs/code/environments/production/modules/accounts/tests/init.pp
+- execute: FACTER_operatingsystem=Debian puppet apply --noop /etc/puppetlabs/code/environments/production/modules/accounts/examples/init.pp
 {% endtask %}
 
 The Learning VM is running CentOS, but to test our conditional logic,
@@ -270,24 +270,24 @@ for a test run. To provide a custom value for any facter fact as you run a
 Combine this with the `--noop` flag, to do a quick test of how your
 manifest would run on a different system.
 
-    FACTER_operatingsystem=Debian puppet apply --noop accounts/tests/init.pp
+    FACTER_operatingsystem=Debian puppet apply --noop accounts/examples/init.pp
 	
 Look in the list of notices, and you'll see the changes that would have been
 applied.
 
 {% task 5 %}
 ---
-- execute: FACTER_operatingsystem=Darwin puppet apply --noop /etc/puppetlabs/code/environments/production/modules/accounts/tests/init.pp
+- execute: FACTER_operatingsystem=Darwin puppet apply --noop /etc/puppetlabs/code/environments/production/modules/accounts/examples/init.pp
 {% endtask %}
 
 Try one more time with an unsupported operating system to check the fail
 condition:
 
-    FACTER_operatingsystem=Darwin puppet apply --noop accounts/tests/init.pp
+    FACTER_operatingsystem=Darwin puppet apply --noop accounts/examples/init.pp
 
 {% task 6 %}
 ---
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/accounts/tests/init.pp
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/accounts/examples/init.pp
 {% endtask %}
 
 Now go ahead and run a `puppet apply --noop` on your test manifest without
