@@ -212,7 +212,7 @@ Save and exit.
   content: |
     class vimrc {
       file { '/root/.vimrc':
-        ensure => 'present',
+        ensure => present,
         source => 'puppet:///modules/vimrc/vimrc',
       }
     } 
@@ -239,7 +239,7 @@ In this case, the `.vimrc` file that defines your Vim settings lives in the
 This resource declaration will then need two attribute value pairs. 
 
 First, as with the other resource types you've encountered, `ensure =>
-'present',` tells Puppet to ensure that the entity described by the resource
+present,` tells Puppet to ensure that the entity described by the resource
 exists on the system. 
 
 Second, the `source` attribute tells Puppet what the managed file should
@@ -280,7 +280,7 @@ Putting this all together, your `init.pp` manifest should contain the following:
 {% highlight puppet %}
 class vimrc {
   file { '/root/.vimrc':
-    ensure => 'present',
+    ensure => present,
     source => 'puppet:///modules/vimrc/vimrc',
   }
 }

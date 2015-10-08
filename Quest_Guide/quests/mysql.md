@@ -231,14 +231,14 @@ The MySQL module includes custom types and providers that make `mysql_user`,
     - "/default {\r"
     - o
     - "mysql_database { 'lvm':\r"
-    - "ensure => 'present',\r"
+    - "ensure => present,\r"
     - "charset => 'utf8',\r"
     - "}\r"
     - "mysql_user { 'lvm_user@localhost':\r"
-    - "ensure => 'present',\r"
+    - "ensure => present,\r"
     - "}\r"
     - "mysql_grant { 'lvm_user@localhost/lvm.*':\r"
-    - "ensure => 'present',\r"
+    - "ensure => present,\r"
     - "options => ['GRANT'],\r"
     - "privileges => ['ALL'],\r"
     - "table => 'lvm.*',\r"
@@ -257,18 +257,18 @@ Just add the following resource declaration to your default node definition in t
 
 {% highlight puppet %}
   mysql_database { 'lvm':
-      ensure  => 'present',
+      ensure  => present,
       charset => 'utf8',
   }
 {% endhighlight %}
 
 Similarly, with a user, all you have to do is specify the name and host as the
-resource title, and set the ensure attribute to 'present'. Enter the following
+resource title, and set the ensure attribute to present. Enter the following
 in your node definition as well.
 
 {% highlight puppet %}
   mysql_user { 'lvm_user@localhost':
-    ensure => 'present',
+    ensure => present,
   }
 {% endhighlight %}
 
@@ -281,7 +281,7 @@ the `lvm_user` has `ALL` permissions to all tables in the `lvm` database.
 
 {% highlight puppet %}
   mysql_grant { 'lvm_user@localhost/lvm.*':
-    ensure      => 'present',
+    ensure      => present,
     options     => ['GRANT'],
     privileges  => ['ALL'],
     table       => 'lvm.*',

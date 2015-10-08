@@ -100,7 +100,7 @@ but you don't want to put that resource declaration just anywhere.
   content: |
     class cowsayings::cowsay {
       package { 'cowsay':
-        ensure => 'present',
+        ensure => present,
         provider => 'gem',
       }
     }
@@ -118,7 +118,7 @@ Enter the following class definition, then save and exit (`:wq`):
 {% highlight puppet %}
 class cowsayings::cowsay {
   package { 'cowsay':
-    ensure => 'present',
+    ensure => present,
     provider => 'gem',
   }
 }
@@ -206,7 +206,7 @@ fortune package, you can provide your cow with a whole database of wisdom.
   content: |
     class cowsayings::fortune {
       package { 'fortune-mod':
-        ensure => 'present',
+        ensure => present,
       }
     }
 {% endtask %}
@@ -220,7 +220,7 @@ Write your class definition here:
 {% highlight puppet %}
 class cowsayings::fortune {
   package { 'fortune-mod':
-    ensure => 'present',
+    ensure => present,
   }
 }
 {% endhighlight %}
