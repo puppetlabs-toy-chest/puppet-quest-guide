@@ -174,17 +174,16 @@ your new node group.
 
 {% figure '../assets/node_group.png' %}
 
-Click on the new group to set the rules for this group. You only want the Learning VM
-in this group, so create a rule that will match on the Learning VM's domain name:
-`learning.puppetlabs.vm`.
+Click on the new group to set the rules for this group. You only want the `learning.puppetlabs.vm` in
+this group, so instead of adding a rule, use the *Pin node* option to add the node individually.
 
-You should see that there is one matching node. If no matching node apprears, trigger
-a puppet run (`puppet agent -t`) on the Learning VM. As part of the puppet run, the Learning VM
-will check in, making its information available to the console node classifier.
+Click on the *Node name* field, and you should see the Learning VM's certname autofilled. If no matching
+certname apprears, trigger a puppet run (`puppet agent -t`) on the Learning VM. As part of the puppet
+run, the Learning VM will check in, making its information available to the console node classifier.
 
-{% figure '../assets/rule.png' %}
+{% figure '../assets/pin.png' %}
 
-Click *Add rule*, then click the *Commit 1 change* button in the bottom right of the console
+Click *Pin node*, then click the *Commit 1 change* button in the bottom right of the console
 interface to commit your change.
 
 {% figure '../assets/commit.png' %}
