@@ -200,14 +200,13 @@ appear, check the [troubleshooting guide](https://github.com/puppetlabs/coursewa
 
 Once you have entered `graphite` in the *Class name* text box, click the *Add class* button.
 
-Before you run the puppet agent to apply this class, there are a few parameters for the
-`graphite` class you need to set.
+Before you apply the class, there are a few parameters you'll want to set.
 
 We aleady have an Apache server configured to our liking on the Learning VM, so we can
 tell the `graphite` class it doesn't need to bother setting up its own server.
 
-There are also some compatibility issues with the latest Django version. Puppet Luckily for us
-author of this `graphite` module has made it easy to get around this problem by picking our
+There are also some compatibility issues with the latest Django version. The author of this
+`graphite` module has made it easy to get around this problem by picking our
 own compatible Django version to use. (Keep this in mind when you start writing your own modules!)
 
 Set the parameters, as follows:
