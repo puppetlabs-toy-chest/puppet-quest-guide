@@ -195,6 +195,8 @@ puppet apply again without the flag:
 
 {% task 4 %}
 ---
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/web/tests/init.pp
+{% endtask %}
 
 Take a look [here](/hello.html) and [here](/bonjour.html) to see your new pages.
 
