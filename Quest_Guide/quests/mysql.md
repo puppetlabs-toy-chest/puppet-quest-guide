@@ -234,10 +234,8 @@ and two users have been removed:
     /Stage[main]/Mysql::Server::Account_security/Mysql_user[root@127.0.0.1]/ensure:
     removed
 
-(Remember that though automation is a wonderful for maintaining security
-it isn't a substitute for a full understanding of the underlying systems and their
-potential vulnerabilities! If you're using an existing module to configure an important
-system, but sure to understand how and why it does what it does.)
+(Remember, though, that no automation tool is a substitute for a full understanding your
+system's security requirements!)
 
 ## Types and providers
 
