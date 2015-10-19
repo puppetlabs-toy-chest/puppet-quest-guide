@@ -21,7 +21,7 @@ end
 
 describe "Task 4:" do
   it "Set the servers parameter to specify non-default servers" do
-    file("#{PROD_PATH}manifests/site.pp").content.should match /\s*servers\s*=>\s*\[\'/
+    file("#{PROD_PATH}manifests/site.pp").content.should match /\s*servers\s*=>\s*\[/
   end
 end
 
