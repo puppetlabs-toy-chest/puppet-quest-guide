@@ -116,15 +116,16 @@ If this is the case, you can still access the Learning VM by configuring port fo
 Your rules should be configured as follows:
 
 ```
-Name - Protocol - HostIP -   HostPort - GuestIP - GuestPort
-SSH    TCP        127.0.0.1  2222                 22
-HTTP   TCP        127.0.0.1  8080                 80
-HTTPS  TCP        127.0.0.1  8443                 443
+Name   -   Protocol - HostIP -   HostPort - GuestIP - GuestPort
+SSH        TCP        127.0.0.1  2222                 22
+HTTP       TCP        127.0.0.1  8080                 80
+HTTPS      TCP        127.0.0.1  8443                 443
+GRAPHITE   TCP        127.0.0.1  8090                 90
 ```
 
 Once you have set up port forwarding, you can use those ports to access the VM
 via ssh (`ssh root@localhost:2222`) and access the Quest Guide and PE console
-by entering `http://localhost:80` and `https://localhost:443` in your browser address bar.
+by entering `http://localhost:8080` and `https://localhost:8443` in your browser address bar.
 
 ### I can't scroll up in my terminal
 
