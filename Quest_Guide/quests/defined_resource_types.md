@@ -303,6 +303,36 @@ through to the contained resources to customize them to our liking. Let's
 add some parameters that will allow us to set a password for the user
 and use some custom content for the default web page.
 
+
+{% task 7 %}
+---
+- file: puppet apply /etc/puppetlabs/code/environments/production/modules/web_user/manifests/user.pp
+  content: |
+    define web_user::user (
+      $content  = "<h1>Welcome to ${title}'s home page!</h1>",
+      $password = undef,
+    ) {
+      $home_dir    = "/home/${title}"
+      $public_html = "${home_dir}/public_html"
+      user { $title:
+        ensure   => present,
+        password => $password,
+      }
+      file { [$home_dir, $public_html]:
+        ensure => directory,
+        owner  => $title,
+        mode    => '0755',
+      }
+      file { "${public_html}/index.html":
+        ensure  => file,
+        owner   => $title,
+        replace => false,
+        content => $content,
+        mode    => '0644',
+      }
+    }
+{% endtask %}
+
 The syntax for adding parameters to defined resource types is just like that
 used for parameterized classes. Within a set of parentheses before the opening
 brace of the definition, include a comma separated list of the variables to be
@@ -364,6 +394,17 @@ define web_user::user (
 }
 {% endhighlight %}
 
+{% task 8 %}
+---
+- file: puppet apply /etc/puppetlabs/code/environments/production/modules/web_user/examples/user.pp
+  content: |
+    web_user::user { 'shelob': }
+    web_user::user { 'frodo':
+      content  => 'Custom Content!',
+      password => pw_hash('sting', 'SHA-512', 'mysalt'),
+    }
+{% endtask %}
+
 Edit your test manifest, and add a new user to try this out:
 
 {% highlight puppet %}
@@ -376,6 +417,11 @@ web_user::user { 'frodo':
 
 Note that we're using the `pw_hash` function to generate a SHA-512
 hash from the password 'sting' and salt 'mysalt'.
+
+{% task 6 %}
+---
+- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/web_user/examples/user.pp
+{% endtask %}
 
 Once you've made your changes, do a `--noop` run, then apply your test
 manifest:
