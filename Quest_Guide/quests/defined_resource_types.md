@@ -180,28 +180,19 @@ specified:
 
     drwxr-xr-x   4 shelob    shelob    4096 Nov  4 18:20 shelob
 
+### Public HTML homepages
+
 Now that you've seen a simple example of the syntax for a defined resource type,
-let's do something a little more useful with it. We've already configured the
-Nginx server hosting the Quest Guide to alias any location beginning with a ~
-to a `public_html` directory in the corresponding user's home directory.
+let's do something a little more useful with it.
 
-Check the `_.conf` file to see the configuration:
+We've already configured the Nginx server hosting the Quest Guide to alias any
+location beginning with a `~` to a `public_html` directory in the corresponding
+user's home directory.
 
-    cat /etc/nginx/sites-enabled/_.conf
-
-You'll see the following:
-
-```
-location ~ ^/~(.+?)(/.*)?$ {
-    alias /home/$1/public_html$2;
-    autoindex on;
-}
-```
-
-Because the Quest Guide itself relies on this server, we didn't want to mess with it
-too much during the quest itself; if you made a typo in your manifest and broke
-the server, you'd be left on your own! Fittingly, however, we've used a defined
-resource type from the `jfryman-nginx` module to pre-configure this location:
+You don't need to understand the details of this configuration for this quest. That said,
+the puppet code we used for this configuration is a real-world example of a defined
+resource type, so it's worth taking a quick look. The defined resource type we used
+comes from the `jfryman-nginx` module, and we declared it like this:
 
 {% highlight puppet %}
 nginx::resource::location { '~ ^/~(.+?)(/.*)?$':
@@ -210,6 +201,16 @@ nginx::resource::location { '~ ^/~(.+?)(/.*)?$':
   autoindex      => true,
 }
 {% endhighlight %}
+
+The regular expression in the title ('~ ^/~(.+?)(/.*)?$') captures any URL path segment
+preceded by a `~`, as a first capture group, then the remainder of the URL path as a second
+capture group. It then maps these to a user's home directory. So `/~username/index.html`
+will correspond to `/home/username/public_html/index.html`.
+
+If you're interested, you can check the `_.conf` file to see how this defined resource
+type is translated into a location block in our Nginx configuration file:
+
+    cat /etc/nginx/sites-enabled/_.conf
 
 {% task 5 %}
 ---
