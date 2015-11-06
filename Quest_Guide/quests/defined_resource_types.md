@@ -254,8 +254,8 @@ it over-written again on the next puppet run.
 
 Finally, we can use string interpolation to customize the default content
 of the user's home page. (Puppet also supports `.erb` and `.epp` style templates,
-which would give us a more powerful way to customize a page, but we haven't
-covered that, so string interpolation will have to do!)
+which would give us a more powerful way to customize a page. We haven't
+covered templates, though, so string interpolation will have to do!)
 
 {% highlight puppet %}
 define web_user::user {
@@ -374,6 +374,9 @@ web_user::user { 'frodo':
 }
 {% endhighlight %}
 
+Note that we're using the `pw_hash` function to generate a SHA-512
+hash from the password 'sting' and salt 'mysalt'.
+
 Once you've made your changes, do a `--noop` run, then apply your test
 manifest:
 
@@ -383,3 +386,22 @@ Once the puppet run completes, check your new user's page [/~frodo/index.html](h
 
 ## Review
 
+In this quest, we introduced defined resource types, a lightweight
+and repeatable way to bundle a group of resource declarations into a
+repeatable and configurable group.
+
+We covered a few key details you should keep in mind when you're working
+on a defined resource type:
+
+  * Defined resource type definitions use similar syntax to class declarations,
+    but use the `define` keyword instead of `class`.
+  * Use the `$title` variable in constituent resource titles to ensure
+    uniqueness.
+  * A resource with no parameters can be declared in the short `type { 'title': }`
+    form.
+  * Binding of parameter variables to values happens in parallel, meaning that
+    you cannot use the value of one parameter to set another. The exception
+    is the `$title` variable.
+  * Parameters without a default value are required when you declare a defined
+    resource type. However, you can use the `undef` value as a default if you
+    want to allow a value to remain unspecified.
