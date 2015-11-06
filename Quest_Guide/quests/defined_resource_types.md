@@ -15,7 +15,7 @@ layout: default
 In the quest on parameterized classes, you saw how you can use parameters to
 customize a class as it is declared. If you recall that classes, like resources,
 can only be realized a single time in a given catalog, you might be wondering
-what to do if you Puppet to repeat the same pattern multiple times, but with
+what to do if you want Puppet to repeat the same pattern multiple times, but with
 different parameters.
 
 In most cases, the simplest answer is the defined resource type. A defined resource
