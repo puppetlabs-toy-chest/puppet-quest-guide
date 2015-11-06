@@ -82,7 +82,7 @@ permissions of this home directory, so we'll do it ourselves.
 ---
 - file: /etc/puppetlabs/code/environments/production/modules/web_user/manifests/user.pp
   content: |
-    define web::user {
+    define web_user::user {
       $home_dir = "/home/${title}"
       user { $title:
         ensure => present,
@@ -90,6 +90,7 @@ permissions of this home directory, so we'll do it ourselves.
       file { $home_dir:
         ensure  => directory,
         owner   => $title,
+        group   => $title,
         mode    => '0755',
       }
     } 
@@ -419,7 +420,7 @@ web_user::user { 'frodo':
 Note that we're using the `pw_hash` function to generate a SHA-512
 hash from the password 'sting' and salt 'mysalt'.
 
-{% task 6 %}
+{% task 9 %}
 ---
 - execute: puppet apply /etc/puppetlabs/code/environments/production/modules/web_user/examples/user.pp
 {% endtask %}
