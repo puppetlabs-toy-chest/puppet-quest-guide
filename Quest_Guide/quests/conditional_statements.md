@@ -367,7 +367,7 @@ In this quest, you saw how you can use facts from the `facter` tool along with
 conditional logic to write Puppet code that will adapt to the environment where
 you're applying it.
 
-You used an `if` statement in conjunction with the `$::osfamily` variable from
+You used an `if` statement in conjunction with the `$::operatingsystem` variable from
 facter to determine how to set the group for an administrator user account.
 
 We also covered a few other forms of conditional statement: `unless`, the case
