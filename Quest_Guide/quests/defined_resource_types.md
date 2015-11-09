@@ -140,7 +140,12 @@ it! Also notice that this `$title` variable is used in the titles of both the
 {% endtask %}
 
 To understand the importance of this title variable in a defined resource type, go ahead and create
-a test manifest and declare a `web_user::user` resource.
+a test manifest:
+
+
+    vim web_user/examples/user.pp
+
+Declare a `web_user::user` resource
 
 {% highlight puppet %}
 web_user::user { 'shelob': }
@@ -203,9 +208,10 @@ nginx::resource::location { '~ ^/~(.+?)(/.*)?$':
 }
 {% endhighlight %}
 
-The regular expression in the title ('~ ^/~(.+?)(/.*)?$') captures any URL path segment
-preceded by a `~`, as a first capture group, then the remainder of the URL path as a second
-capture group. It then maps these to a user's home directory. So `/~username/index.html`
+The regular expression in the title (`~ ^/~(.+?)(/.*)?$`) captures any URL path segment
+preceded by a `~` as a first capture group, then the remainder of the URL path as a second
+capture group. It then maps that first group to to a user's home directory, and the rest
+to the contents of that user's `public_html` directory. So `/~username/index.html`
 will correspond to `/home/username/public_html/index.html`.
 
 If you're interested, you can check the `_.conf` file to see how this defined resource
@@ -259,13 +265,19 @@ of the user's home page. (Puppet also supports `.erb` and `.epp` style templates
 which would give us a more powerful way to customize a page. We haven't
 covered templates, though, so string interpolation will have to do!)
 
+Reopen your manifest:
+
+    vim web_user/manifests/user.pp
+
+And add code to configure your user's `public_html` directory and default
+`index.html` file:
+
 {% highlight puppet %}
 define web_user::user {
   $home_dir    = "/home/${title}"
   $public_html = "${home_dir}/public_html"
   user { $title:
     ensure     => present,
-    managehome => false,
   }
   file { [$home_dir, $public_html]:
     ensure  => directory,
@@ -292,7 +304,7 @@ define web_user::user {
 Use the `puppet parser validate` tool to check your manifest, then run a `--noop`
 before applying your test manifest again:
 
-    puppet apply /etc/puppetlabs/code/environments/production/modules/web_user/examples/user.pp
+    puppet apply web_user/examples/user.pp
 
 Once the puppet run completes, take a look at your user's new default
 [/~shelob/index.html](home page).
@@ -343,7 +355,7 @@ values.
 
 {% highlight puppet %}
   define web_user::user (
-    $content  = "Welcome to ${title}'s home page!",
+    $content  = "<h1>Welcome to ${title}'s home page!</h1>",
     $password = undef,
 ) {
 {% endhighlight %}
