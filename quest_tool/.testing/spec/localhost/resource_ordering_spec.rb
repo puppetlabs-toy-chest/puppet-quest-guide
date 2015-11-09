@@ -2,10 +2,10 @@ require 'spec_helper'
 
 
 describe "Task 1:" do
-  it 'Create the sshd module directory with manifests, tests, and files subdirectories' do
+  it 'Create the sshd module directory with manifests, examples, and files subdirectories' do
     file("#{MODULE_PATH}sshd").should be_directory
     file("#{MODULE_PATH}sshd/manifests").should be_directory
-    file("#{MODULE_PATH}sshd/tests").should be_directory
+    file("#{MODULE_PATH}sshd/examples").should be_directory
     file("#{MODULE_PATH}sshd/files").should be_directory
   end
 end
@@ -20,7 +20,7 @@ end
 
 describe "Task 3:" do
   it "Create a test manifest, and apply it with `--noop` and `--graph` flags" do
-    file("#{MODULE_PATH}sshd/tests/init.pp").should contain "include sshd"
+    file("#{MODULE_PATH}sshd/examples/init.pp").should contain "include sshd"
     file("/opt/puppetlabs/puppet/cache/state/graphs/relationships.dot").should contain "sshd"
   end
 end

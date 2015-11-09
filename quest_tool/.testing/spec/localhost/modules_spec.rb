@@ -13,9 +13,9 @@ describe "Task 2:" do
 end
 
 describe "Task 3:" do
-  it 'Create manifests, tests, and files subdirectories' do
+  it 'Create manifests, examples, and files subdirectories' do
     file("#{MODULE_PATH}vimrc/manifests").should be_directory
-    file("#{MODULE_PATH}vimrc/tests").should be_directory
+    file("#{MODULE_PATH}vimrc/examples").should be_directory
     file("#{MODULE_PATH}vimrc/files").should be_directory
   end
 end
@@ -40,7 +40,7 @@ end
 
 describe 'Task 7:' do
   it 'Include the vimrc class in a test manifest' do
-    file("#{MODULE_PATH}vimrc/tests/init.pp").should contain 'include vimrc'
+    file("#{MODULE_PATH}vimrc/examples/init.pp").should contain 'include vimrc'
   end
 end
 
