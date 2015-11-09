@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Task 1:" do
   it 'Create the directory structure for your web module' do
     file("#{MODULE_PATH}web").should be_directory
-    file("#{MODULE_PATH}web/tests").should be_directory
+    file("#{MODULE_PATH}web/examples").should be_directory
     file("#{MODULE_PATH}web/manifests").should be_directory
   end
 end
@@ -16,7 +16,7 @@ end
 
 describe "Task 3:" do
   it 'Include the web class in a test manifest' do
-    file("#{MODULE_PATH}web/tests/init.pp").should contain 'web'
+    file("#{MODULE_PATH}web/examples/init.pp").should contain 'web'
   end
 end
 
@@ -36,7 +36,7 @@ end
 
 describe "Task 6:" do
   it 'Declare the web class with parameters in your test manifest' do
-    file("#{MODULE_PATH}web/tests/init.pp").content.should match /class \{\s*\'web\':\s+(page_name\s+=>\s+\'\w+\'|message\s+=>\s+\'.+\'),\s+(\s+page_name\s+=>\s+\'\w+\'|message\s+=>\s+\'.+\'),\s}/
+    file("#{MODULE_PATH}web/examples/init.pp").content.should match /class \{\s*\'web\':\s+(page_name\s+=>\s+\'\w+\'|message\s+=>\s+\'.+\'),\s+(\s+page_name\s+=>\s+\'\w+\'|message\s+=>\s+\'.+\'),\s}/
   end
 end
 

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Task 1:" do
   it 'Create the directory structure for your accounts module' do
     file("#{MODULE_PATH}accounts").should be_directory
-    file("#{MODULE_PATH}accounts/tests").should be_directory
+    file("#{MODULE_PATH}accounts/examples").should be_directory
     file("#{MODULE_PATH}accounts/manifests").should be_directory
   end
 end
@@ -17,7 +17,7 @@ end
 
 describe "Task 3:" do
   it 'Declare the accounts class in a test manifest' do 
-    file("#{MODULE_PATH}accounts/tests/init.pp").content.should match /class\s+\{\s*\'?accounts\'?/
+    file("#{MODULE_PATH}accounts/examples/init.pp").content.should match /class\s+\{\s*\'?accounts\'?/
   end
 end
 
