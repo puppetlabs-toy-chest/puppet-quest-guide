@@ -55,6 +55,11 @@ the same power to define wholly new functionality, you may be surprised at how m
 achieved by bundling together Puppet's core resource types and those provided by existing
 modules from the community.
 
+{% task 1 %}
+---
+- execute: mkdir -p /etc/puppetlabs/code/environments/production/modules/web_user/{manifests,examples}
+{% endtask %}
+
 To get started, let's create the module structure where we'll put our defined resource type
 module.
 
@@ -66,11 +71,6 @@ And create the directories for your new module. We'll call it `web_user`.
 
     mkdir -p web_user/{manifests,examples}
 
-{% task 1 %}
----
-- execute: mkdir -p /etc/puppetlabs/code/environments/production/modules/web_user/{manifests,examples}
-{% endtask %}
-  
 Before we go into the details of what we're going to do with this module, though, let's write
 a simple defined resource type so you can see what the syntax looks like. For now, we'll create
 a user and a home directory for that user. Normally, you could use the `managehome` parameter
@@ -307,7 +307,7 @@ before applying your test manifest again:
     puppet apply web_user/examples/user.pp
 
 Once the puppet run completes, take a look at your user's new default
-[/~shelob/index.html](home page).
+[home page](/~shelob/index.html).
 
 ### Parameters
 
@@ -442,7 +442,7 @@ manifest:
 
     puppet apply web_user/examples/user.pp
 
-Once the puppet run completes, check your new user's page [/~frodo/index.html](here).
+Once the puppet run completes, check your new user's page [here](/~frodo/index.html).
 
 ## Review
 
