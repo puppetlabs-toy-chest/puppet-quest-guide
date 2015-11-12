@@ -124,7 +124,7 @@ GRAPHITE   TCP        127.0.0.1  8090                 90
 ```
 
 Once you have set up port forwarding, you can use those ports to access the VM
-via ssh (`ssh root@localhost:2222`) and access the Quest Guide and PE console
+via ssh (`ssh -p 2222 root@localhost`) and access the Quest Guide and PE console
 by entering `http://localhost:8080` and `https://localhost:8443` in your browser address bar.
 
 ### I can't scroll up in my terminal
