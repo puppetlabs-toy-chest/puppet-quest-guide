@@ -204,8 +204,11 @@ user's home directory.
 You don't need to understand the details of this configuration for this quest.
 That said, the puppet code we used for this configuration is a real-world
 example of a defined resource type, so it's worth taking a quick look. The
-defined resource type we used comes from the `jfryman-nginx` module, and we
-declared it like this:
+defined resource type we used comes from the `jfryman-nginx` module. We
+declared it with a few parameters to set up a location that will automatically
+deal with our special `~` pages. Don't worry about the scary-looking regular
+expression in the title. That's specific to how our Nginx configuration works,
+and nothing you need to understand to use defined resource types in general.
 
 {% highlight puppet %}
 nginx::resource::location { '~ ^/~(.+?)(/.*)?$':
@@ -215,7 +218,7 @@ nginx::resource::location { '~ ^/~(.+?)(/.*)?$':
 }
 {% endhighlight %}
 
-The regular expression in the title (`~ ^/~(.+?)(/.*)?$`) captures any URL path
+That regular expression in the title (`~ ^/~(.+?)(/.*)?$`) captures any URL path
 segment preceded by a `~` as a first capture group, then the remainder of the
 URL path as a second capture group. It then maps that first group to to a user's
 home directory, and the rest to the contents of that user's `public_html`
