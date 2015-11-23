@@ -67,9 +67,11 @@ easier if you actually have more than one node to work with.
 ### docker docker docker
 
 We've created a `multi_node` module that will set up a pair of docker containers
-to act as additional agent nodes in your infrastructure. (Keep in mind that while
-running a puppet agent on a docker container on a VM will work as a learning tool,
-it isn't a recommended way to set up your puppet infrastructure.)
+to act as additional agent nodes in your infrastructure. Note that docker is not
+a part of puppet; it's an open-source tool we're using to help build a multi-node
+learning environment. While running a puppet agent on a docker container on a
+VM gives us a convenient way to see how puppet works on multiple nodes, it isn't a
+recommended way to set up real-life puppet infrastructure!
 
 {% task 1 %}
 ---
@@ -93,7 +95,7 @@ node learning.puppetlabs.vm {
 {% endhighlight %}
 
 (Note that it's important that you don't put this in your `default` node
-declaration. If you did, you'd start creating docker containers on your
+declaration. If you did, puppet would try to create docker containers on your
 docker containers every time you did a puppet run!)
 
 {% task 2 %}
@@ -101,11 +103,219 @@ docker containers every time you did a puppet run!)
 - execute: puppet agent -t
 {% endtask %}
 
-Not trigger an agent run to apply the class:
+Now trigger an agent run to apply the class. Note that this might take a little
+while to run.
 
   puppet agent -t
 
+Once this run has completed, you can use the `docker ps` command to see your two
+new nodes. You should see one called `database` and one called `webserver`.
 
+### install the puppet agent
+
+Now you have two fresh nodes, but you don't have the puppet agent installed on
+either! Installing the agent will be the first step of getting these nodes into
+our puppet infrastructure.
+
+{% task 3 %}
+---
+- execute: puppet agent -t
+{% endtask %}
+
+Your puppet master hosts an agent installation script, so in most cases the
+simplest way to install an agent is to use the `curl` command to grab this
+script from the master and execute it.
+
+For easy reference, you can find this `curl` command on the PE console.
+Navigate to `https://<VM's IP address>` in your browser address bar.
+
+Remember, use the following credentials to connect to the console:
+
+* username: **admin**
+* password: **puppetlabs**
+
+Navigate to the *Node Management* > *Inventory* and look under the
+*Unsigned certificates* tab. You will see a section with the heading
+**Adding nodes to manage wtih Puppet Enterprise**. Beneath this, you will
+find a curl script that you can copy to any nodes you wish to manage with
+puppet.
+
+  curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | sudo bash
+
+Ordinarily, you would probably use `ssh` to connect to your agent nodes and
+run this command. Because we're using docker, however, the way we connect will
+be a little different. To connect to your `webserver` node, run the following
+command to execute an interactive bash session on the container.
+
+  docker exec -it webserver bash
+
+Then paste in the `curl` command from the PE console to install the puppet agent
+on the node. When the installation completes, end your bash process on the
+container:
+
+  exit
+
+And repeat the process with your database node:
+
+  docker exec -it database bash
+
+Great, now you have two new nodes with the puppet agent installed! With the agent
+installed, you will have access to all of the puppet commands and related tools
+we've covered so far, including `puppet resource`, `puppet agent`, `puppet apply`
+and `facter`.
+
+{% task 4 %}
+---
+- execute: puppet agent -t
+{% endtask %}
+
+We will have to sign each new node's certificate on the master before we will be
+able to trigger a puppet run with `puppet agent -t`. We will get to that in a moment
+but first, let's take a moment to see what we can do with just the agent installed
+and no interaction with the puppet master.
+
+Let's use facter to get some information about this node:
+
+  facter operatingsystem
+
+You can see that though the Learning VM itself is running CentOS, our new nodes
+run Ubuntu.
+
+  facter fqdn
+
+We can also see that this node's fqdn is `database.learning.puppetlabs.vm`. This
+is how we can identify the node in the PE console or the `site.pp` manifest on
+our master.
+
+{% task 5 %}
+---
+- execute: puppet agent -t
+{% endtask %}
+
+Next, let's try some basic puppet commands. We can use the puppet resource tool
+to easily create a new test file.
+
+  puppet resource file /tmp/test ensure=file
+
+You'll see your new file created.
+
+  Notice: /File[/tmp/test]/ensure: created
+  file { '/tmp/test':
+    ensure => 'file',
+  }
+
+{% task 6 %}
+---
+- execute: puppet agent -t
+{% endtask %}
+
+You can also use the `puppet apply` command to apply the contents of a manifest.
+Create a simple test manifest to give it a try.
+
+  vim /tmp/test.pp
+
+We'll define a simple message:
+
+{% highlight puppet %}
+  notify { "Hi, I'm a manifest applied locally on an agent node": }
+{% endhighlight %}
+
+And apply it:
+
+  puppet apply /tmp/test.pp
+
+You should see the following output:
+
+  Notice: Compiled catalog for database.learning.puppetlabs.vm in environment production in 0.32 seconds
+  Notice: Hi, I'm a manifest applied locally on an agent node!
+  Notice: /Stage[main]/Main/Notify[Hi, I'm a manifest applied locally on an agent node!]/message: defined 'message' as 'Hi, I'm a manifest applied locally on an agent node!'
+  Notice: Applied catalog in 0.02 seconds
+
+{% task 4 %}
+---
+- execute: puppet agent -t
+{% endtask %}
+
+So that's what you can do on an agent node, but what are the differences?
+First, let's take a look at the directory where you'd find all your puppet
+code on the master. Check:
+
+  ls /etc/puppetlabs/code/environments/production/manifests
+
+and
+
+  ls /etc/puppetlabs/code/environments/production/modules
+
+There's nothing there—no modules or `site.pp` manifest! This is because
+all the code in your puppet infrastructure should live on your puppet
+master, not your agent nodes. When a puppet run is triggered—either
+as scheduled or manually with the `puppet agent -t` command, it is the
+puppet master that compiles your puppet code into a manifest to be applied
+on your agent node.
+
+So let's give it a try. Go ahead and trigger a puppet run on your `database`
+node.
+
+  puppet agent -t
+
+You'll see that instead of completing a puppet run, puppet exits with the
+following message:
+
+  Exiting; no certificate found and waitforcert is disabled
+
+### certificates
+
+Though you've created your new nodes and installed the puppet agent, there's
+one more step before they can join your puppet infrastructure. The puppet master
+keeps a list of signed certificates for each node in your infrastructure. This
+helps keep your infrastructure secure and prevents puppet from making unintended changes
+to systems on your network.
+
+{% task 4 %}
+---
+- execute: puppet agent -t
+{% endtask %}
+
+Before we can run puppet on our new agent nodes, we'll need to sign their certificates
+on the puppet master. If you're still connected to your agent node, return to the master:
+
+  exit
+
+Use the `puppet cert list` command to list the unsigned certificates. (You could
+also view and sign these from the inventory page of the PE console.)
+
+  puppet cert list
+
+Now sign each of your nodes' certificates:
+
+  puppet cert sign webserver.learning.puppetlabs.vm
+
+and
+
+  puppet cert sign database.learning.puppetlabs.vm
+
+Now your certificates are signed, so your new nodes will be managed by puppet.
+To test this out, let's add a simple `notify` resource to the `site.pp` manifest
+on the master.
+
+  vim /etc/puppetlabs/code/environments/production/manifests/site.pp
+
+Find the `default` node declaration, and edit it to add a `notify` resource
+that will tell us some basic information about the node.
+
+{% highlight puppet %}
+node default {
+  notify { "This is ${::fqdn}, running the ${::operatingsystem} operating system": }
+} 
+{% endhighlight %}
+
+Now let's connect to our database node again.
+
+  docker exec -it database bash
+
+And try another puppet run:
+
+  puppet agent -t
 
 ## Review
 
