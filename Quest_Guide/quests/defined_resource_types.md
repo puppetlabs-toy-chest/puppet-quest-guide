@@ -415,6 +415,7 @@ define web_user::user (
   file { "${public_html}/index.html":
     ensure  => file,
     owner   => $title,
+    group   => $title,
     replace => false,
     content => $content,
     mode    => '0644',
