@@ -409,6 +409,7 @@ define web_user::user (
   file { [$home_dir, $public_html]:
     ensure => directory,
     owner  => $title,
+    group  => $title,
     mode    => '0755',
   }
   file { "${public_html}/index.html":
