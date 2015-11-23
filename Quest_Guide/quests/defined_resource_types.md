@@ -409,11 +409,13 @@ define web_user::user (
   file { [$home_dir, $public_html]:
     ensure => directory,
     owner  => $title,
+    group  => $title,
     mode    => '0755',
   }
   file { "${public_html}/index.html":
     ensure  => file,
     owner   => $title,
+    group   => $title,
     replace => false,
     content => $content,
     mode    => '0644',
