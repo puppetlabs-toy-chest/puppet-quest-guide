@@ -15,9 +15,10 @@ layout: default
 
 ## Getting Started
 
-So far, you've been running both the puppet agent and master on the Learning VM.
-Though you certainly can use puppet to configure your puppet master server,
-most of the work you'll be doing with puppet will be on separate nodes.
+So far, you've been managing one node, the Learning VM, which is running the
+puppet master server itself. Though you certainly would use puppet to configure
+the puppet master server, most of the nodes in your puppetized infrastructure will
+run only the puppet agent.
 
 In this quest, we'll use a tool called `docker` to simulate multiple nodes
 on the Learning VM. With these new nodes, you can learn how to install the puppet
@@ -181,9 +182,9 @@ Let's use facter to get some information about this node:
 You can see that though the Learning VM itself is running CentOS, our new nodes
 run Ubuntu.
 
-  facter fqdn
+  facter certname
 
-We can also see that this node's fqdn is `database.learning.puppetlabs.vm`. This
+We can also see that this node's certname is `database.learning.puppetlabs.vm`. This
 is how we can identify the node in the PE console or the `site.pp` manifest on
 our master.
 
@@ -305,7 +306,7 @@ that will tell us some basic information about the node.
 
 {% highlight puppet %}
 node default {
-  notify { "This is ${::fqdn}, running the ${::operatingsystem} operating system": }
+  notify { "This is ${::certname}, running the ${::operatingsystem} operating system": }
 } 
 {% endhighlight %}
 
