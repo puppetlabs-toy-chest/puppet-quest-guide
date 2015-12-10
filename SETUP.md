@@ -19,11 +19,11 @@ Use an *Autodetect* setting if available, or accept the default Network Adapter 
 (If you started the VM before making these changes, you may need to restart the VM
 before the settings will be applied correctly.)
 
-4. Start the VM. When it is started, make a note of the IP address displayed on the
-splash page. Rather than logging in directly, we highly recommend using SSH. On OS X,
+4. Start the VM. When it is started, make a note of the IP address and password displayed
+on the splash page. Rather than logging in directly, we highly recommend using SSH. On OS X,
 you can use the default Terminal application or a third-party application like iTerm.
 For Windows, we suggest the free SSH client [PuTTY](http://www.putty.org/).
-Connect to the Learning VM with the login `root` and password `puppet`.
+Connect to the Learning VM with the login `root` and password you noted from the splash page.
 (e.g. `ssh root@<IPADDRESS>`)
 
 5. To access the Quest Guide and get started, enter the Learning VM's IP address in
