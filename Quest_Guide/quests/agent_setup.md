@@ -25,9 +25,16 @@ agent, sign the certificates of your new nodes to allow them to join your puppet
 infrastructure, and finally use the `site.pp` manifest to apply some simple
 puppet code on these new nodes.
 
+**Please note:** In this quest we will be using docker to run multiple nodes
+on a single VM. Our goal is to give you a lightweight environment where you can
+learn how Puppet works in a multi-node environment, but we achieve this at a
+certain cost to stability. We hope to iterate on this process to make it as
+solid and clean as possible, but in the meantime, please forgive any issues
+that come up. Feel free to contact us at learningvm@puppetlabs.com.
+
 When you're ready to get started, type the following command:
 
-    quest --start agent_node_setup
+    quest --start agent_setup
 
 ## Get Some Nodes
 
@@ -138,6 +145,9 @@ puppet agent in the *Nodes* > *Unsigned Certificates* section of the PE console:
 
     curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | sudo bash
 
+{% task 4 %}
+{% endtask %}
+
 Ordinarily, you would probably use `ssh` to connect to your agent nodes and
 run this command. Because we're using docker, however, the way we connect will
 be a little different. To connect to your `webserver` node, run the following
@@ -146,8 +156,9 @@ command to execute an interactive bash session on the container.
     docker exec -it webserver bash
 
 Paste in the `curl` command from the PE console to install the puppet agent
-on the node. The installation may take a few minutes. When it completes, end your
-bash process on the container:
+on the node. The installation will take several minutes. (If you encounter an error
+at this point, you may need to restart your puppet master service: `service pe-puppetmaster
+restart`) When it completes, end your bash process on the container:
 
     exit
 
@@ -159,11 +170,6 @@ Now you have two new nodes with the puppet agent installed.
 
 While you're still in a bash session on the database node, you can try out
 a few commands.
-
-{% task 4 %}
----
-- execute: puppet agent -t
-{% endtask %}
 
 Let's use facter to get some information about this node:
 
@@ -179,8 +185,6 @@ is how we can identify the node in the PE console or the `site.pp` manifest on
 our master.
 
 {% task 5 %}
----
-- execute: puppet agent -t
 {% endtask %}
 
 We can use the puppet resource tool to easily create a new test file.
@@ -193,11 +197,6 @@ You'll see your new file created.
     file { '/tmp/test':
       ensure => 'file',
     }
-
-{% task 6 %}
----
-- execute: puppet agent -t
-{% endtask %}
 
 You can also use the `puppet apply` command to apply the contents of a manifest.
 Create a simple test manifest to give it a try.
@@ -220,11 +219,6 @@ You should see the following output:
     Notice: Hi, I'm a manifest applied locally on an agent node!
     Notice: /Stage[main]/Main/Notify[Hi, I'm a manifest applied locally on an agent node!]/message: defined 'message' as 'Hi, I'm a manifest applied locally on an agent node!'
     Notice: Applied catalog in 0.02 seconds
-
-{% task 4 %}
----
-- execute: puppet agent -t
-{% endtask %}
 
 To emphasize the difference between a master and agent node, let's take a look
 at the directories where you would find your puppet code on the master.
@@ -259,13 +253,13 @@ The puppet master keeps a list of signed certificates for each node in your
 infrastructure. This helps keep your infrastructure secure and prevents
 puppet from making unintended changes to systems on your network.
 
-{% task 4 %}
-{% endtask %}
-
 Before you can run puppet on your new agent nodes, you need to sign their certificates
 on the puppet master. If you're still connected to your agent node, return to the master:
 
     exit
+
+{% task 6 %}
+{% endtask %}
 
 Use the `puppet cert list` command to list the unsigned certificates. (You can
 also view and sign these from the inventory page of the PE console.)
@@ -280,7 +274,10 @@ and
 
     puppet cert sign database.learning.puppetlabs.vm
 
-Now your certificates are signed, so your new nodes will be managed by puppet.
+{% task 7 %}
+{% endtask %}
+
+Now your certificates are signed, so your new nodes can be managed by Puppet.
 To test this out, let's add a simple `notify` resource to the `site.pp` manifest
 on the master.
 
@@ -303,8 +300,19 @@ And try another puppet run:
 
     puppet agent -t
 
-Now that your certificate is signed, the agent on your node was able to
+With your certificate is signed, the agent on your node was able to
 properly request a catalog from the master and apply it to complete the
 puppet run.
 
 ## Review
+
+In this quest we reviewed the difference between using `puppet apply` to locally
+compile and apply a manifest and using the `puppet agent -t` command to trigger
+a puppet run.
+
+You created two new nodes, and explored the similarities and differences in Puppet
+on the agent and master. To get the puppet master to recognize the nodes, you used
+the `puppet cert` command to sign their certificates.
+
+Finally, you used a `notify` resource in the default node definition of your `site.pp`
+manifest and triggered a puppet run on an agent node to see its effect.
