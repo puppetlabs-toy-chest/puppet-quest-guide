@@ -147,6 +147,12 @@ The Learning VM uses a tool called tmux to allow us to display the quest status.
 can scroll in tmux by first hitting control-b, then [ (left bracket). You will then
 be able to use the arrow keys to scroll. Press q to exit scrolling.
 
+### Running the VM in VirtualBox, I encounter a series of "Rejecting I/O input from offline devices"
+
+Unfortunately we haven't been able to consistently reproduce this error to test fixes or workarounds.
+You may try reducing the VM's processors to 1 and disabling the "I/O APIC" option in the system
+section of the settings menu.
+
 ### Still need help?
 
 If your puppet runs still fail after trying the steps above, feel free to contact us at
