@@ -41,11 +41,14 @@ For issues with Puppet Enterprise that are not specific to the Learning VM, see 
 Puppet Enterprise [Known Issues](https://docs.puppetlabs.com/pe/latest/release_notes_known_issues.html)
 page.
 
-### The cowsay package won't install!
+### The cowsay package won't install
 
 The Learning VM version 2.29 has an error in the instructions
 for this quest. The cowsay package declaration should include `provider => 'gem'`,
 rather than `ensure => 'gem'`.
+
+If you continue to get puppet run failures related to the gem, you can install
+the cached version manually: `gem install /var/cache/rubygems/gems/cowsay-0.2.0.gem`
 
 ### I completed a task, but the quest tool doesn't show it as complete
 
@@ -68,26 +71,37 @@ will prompt you for a password, while no password is required for the Quest Guid
 (The Quest Guide includes a password for the PE console in the Power of Puppet quest:
 **admin/puppetlabs**)
 
+### I can't find the VM password
+
+The password to log in to the VM is generated randomly and will be displayed on the
+splash page displayed on the terminal of your virtualization software when you
+start the VM.
+
+If you are already logged in via your virtualization software's terminal, you can
+use the following command to view the password: `cat /var/local/password`.
+
 ### Does the Learning VM work on vSphere, ESXi, etc.?
 
 Possibly, but we don't currently have the resources to test or support the Learning VM
-on these platforms. If you do get it to work smoothly on a different platform and
-want to share, we're all ears!
+on these platforms.
 
-### My puppet run fails!
+### My puppet run fails and/or I cannot connect to the PE console
 
-The Learning VM generally runs the puppet master stack in an environment with less
-resources and less consistent network settings than a production installation. This
-means that components of the puppet master may crash. This is the most common reason
-for a puppet run to fail. Rather than troubleshooting individual services, the easiest
-way to address this is to restart the VM. Also note that on restarting the VM or
-restarting a service, it may take some time for all component services of puppet to
-fully come on line. If your puppet runs still fail after restarting, please wait a minute
-and try your puppet run again.
+It may take some time after the VM is started before all the Puppet services
+are fully started. If you recently started or restarted the VM, please wait a few
+minutes and try to access the console or trigger your puppet run again.
 
-You can check the status of puppet services specifically with the `systemctl`
-command. If you notice any stopped puppet-related services (e.g. pe-puppetdb),
-try starting them. (e.g. `service pe-puppetdb start`).
+Also, because the Learning VM's puppet services are configured to run in an environment
+with restricted resources, they are more prone to crashes than a default installation
+with dedicated resources.
+
+You can check the status of puppet services with the following command:
+
+    systemctl --all | grep pe-
+
+If you notice any stopped puppet-related services (e.g. pe-puppetdb), double check
+that you have sufficient memory allocated to the VM and available on your host
+before you try starting them (e.g. `service pe-puppetdb start`).
 
 If you get an error along the lines of `Error 400 on SERVER: Unknown function union...`
 it is likely because the `puppetlabs-stdlib` module has not been installed. This module
@@ -113,7 +127,7 @@ command the check the current address.
 Some network configurations may still prevent you from accessing the Learning VM.
 If this is the case, you can still access the Learning VM by configuring port forwarding.
 
-Your rules should be configured as follows:
+Change your VM's network adapter to NAT, and configure port forwarding as follows:
 
 ```
 Name   -   Protocol - HostIP -   HostPort - GuestIP - GuestPort
@@ -131,7 +145,13 @@ by entering `http://localhost:8080` and `https://localhost:8443` in your browser
 
 The Learning VM uses a tool called tmux to allow us to display the quest status. You
 can scroll in tmux by first hitting control-b, then [ (left bracket). You will then
-be able to use the arrow keys to scroll.
+be able to use the arrow keys to scroll. Press q to exit scrolling.
+
+### Running the VM in VirtualBox, I encounter a series of "Rejecting I/O input from offline devices"
+
+Unfortunately we haven't been able to consistently reproduce this error to test fixes or workarounds.
+You may try reducing the VM's processors to 1 and disabling the "I/O APIC" option in the system
+section of the settings menu.
 
 ### Still need help?
 
