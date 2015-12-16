@@ -14,8 +14,10 @@ cannot locate an *Import* option, please refer to your virtualization software's
 documentation.)
 
 3. *Before* starting the VM for the first time, you will need to adjust its settings.
-Allocate 2 CPUs and at least 2GB (2048 MB) of RAM. Set the *Network Adapter* to *Bridged*.
-Use an *Autodetect* setting if available, or accept the default Network Adapter name.
+Allocate 2 CPUs. We recommend allocating 4GB of memory for the best performance. If you
+don't have enough memory on your host machine, you leave the allocation at 2GB, though
+you may encounter stability and performance issues. Set the *Network Adapter* to
+*Bridged*. Use an *Autodetect* setting if available, or accept the default Network Adapter name.
 (If you started the VM before making these changes, you may need to restart the VM
 before the settings will be applied correctly.)
 
