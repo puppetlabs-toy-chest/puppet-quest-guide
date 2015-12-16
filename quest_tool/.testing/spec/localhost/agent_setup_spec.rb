@@ -27,7 +27,7 @@ end
 
 describe "Task 5:" do
   it "Use the puppet resourse file to create a test file on your agent node" do
-    command('docker exec database ls /tmp/test').stdout.should match /test/
+    command('docker exec database ls /tmp/test').exit_status.should eq 0
   end
 end
 
