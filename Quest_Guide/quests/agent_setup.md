@@ -102,6 +102,8 @@ declaration. If you did, puppet would try to create docker containers on your
 docker containers every time you did a puppet run!)
 
 {% task 2 %}
+---
+- execute: ls
 {% endtask %}
 
 Now trigger an agent run to apply the class. Note that this might take a little
@@ -119,6 +121,8 @@ either! Installing the agent will be the first step of getting these nodes into
 our puppet infrastructure.
 
 {% task 3 %}
+---
+- execute: ls
 {% endtask %}
 
 In most cases, the simplest way to install an agent is to use the `curl`
@@ -146,6 +150,8 @@ puppet agent in the *Nodes* > *Unsigned Certificates* section of the PE console:
     curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | sudo bash
 
 {% task 4 %}
+---
+- execute: ls
 {% endtask %}
 
 Ordinarily, you would probably use `ssh` to connect to your agent nodes and
@@ -185,6 +191,8 @@ is how we can identify the node in the PE console or the `site.pp` manifest on
 our master.
 
 {% task 5 %}
+---
+- execute: ls
 {% endtask %}
 
 We can use the puppet resource tool to easily create a new test file.
@@ -259,6 +267,8 @@ on the puppet master. If you're still connected to your agent node, return to th
     exit
 
 {% task 6 %}
+---
+- execute: ls
 {% endtask %}
 
 Use the `puppet cert list` command to list the unsigned certificates. (You can
@@ -275,6 +285,8 @@ and
     puppet cert sign database.learning.puppetlabs.vm
 
 {% task 7 %}
+---
+- execute: ls
 {% endtask %}
 
 Now your certificates are signed, so your new nodes can be managed by Puppet.

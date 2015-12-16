@@ -14,7 +14,7 @@ end
 
 describe "Task 3:" do
   it "Prepare your puppet master to provide the ubuntu agent installer" do
-    file("/opt/puppetlabs/puppet/modules/pe_repo/manifests/platform/ubuntu_1404_amd64.pp").should be_file
+    file("/opt/puppetlabs/server/data/packages/public/2015.3.0/ubuntu-14.04-amd64").should be_directory
   end
 end
 
@@ -27,7 +27,7 @@ end
 
 describe "Task 5:" do
   it "Use the puppet resourse file to create a test file on your agent node" do
-    command('docker exec database ls /tmp/test').stdout.should match /test/
+    command('docker exec database ls /tmp/test').exit_status.should eq 0
   end
 end
 
