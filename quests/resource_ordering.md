@@ -1,8 +1,3 @@
----
-title: Resource Ordering
-layout: default
----
-
 # Resource ordering
 
 ## Quest objectives

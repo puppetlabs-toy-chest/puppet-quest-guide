@@ -1,8 +1,3 @@
----
-title: Welcome
-layout: default
----
-
 # Welcome 
 
 ## Quest Objectives

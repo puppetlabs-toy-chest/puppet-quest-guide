@@ -1,8 +1,3 @@
----
-title: Defined Resource Types
-layout: default
----
-
 # Defined Resource Types
 
 ## Quest objectives

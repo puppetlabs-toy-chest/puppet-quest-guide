@@ -1,8 +1,3 @@
----
-title: Power of Puppet
-layout: default
----
-
 # The Power of Puppet
 
 ### Prerequisites

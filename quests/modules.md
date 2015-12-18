@@ -1,8 +1,3 @@
----
-title: Modules
-layout: default
----
-
 # Modules
 
 ## Quest objectives
