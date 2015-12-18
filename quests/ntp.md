@@ -142,11 +142,11 @@ definitions* (sometimes called `node statements`).
 A node definition is the code-defined equivalent of the node group you saw in
 the Power of Puppet quest.
 
-{% highlight puppet %}
+```puppet
 node 'learning.puppetlabs.vm' {
   ...
 }
-{% endhighlight %}
+```
 
 {% aside PE console or site.pp? %}
 Because it's more amenable to monitoring with the Learning VM quest tool, we'll
@@ -181,13 +181,13 @@ definition.
 We only want our changes to apply to the Learning VM, however, so we'll put our
 `ntp` class declaration in a new `learning.puppetlabs.vm` node block.
 
-{% highlight puppet %}
+```puppet
 
 node 'learning.puppetlabs.vm' {
   include ntp
 }
 
-{% endhighlight %}
+```
 
 {% task 3 %}
 ---
@@ -257,7 +257,7 @@ method to set variables in a class as it's declared. The syntax for
 parameterized classes looks similar to the syntax for resource declarations.
 Have a look at the following example:
 
-{% highlight puppet %}
+```puppet
 
 class { 'ntp':
   servers => [
@@ -267,7 +267,7 @@ class { 'ntp':
   ]
 }
 
-{% endhighlight %}
+```
 
 The `servers` parameter in our class declaration takes a list of servers as a
 value, not just one. This list of values, separated by commas (`,`) and wrapped

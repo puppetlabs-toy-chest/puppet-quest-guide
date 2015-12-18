@@ -91,11 +91,11 @@ To apply the `multi_node` class to the Learning VM, add it to the
 
 Insert `include multi_node` into the `learning.puppetlabs.vm` node declaration.
 
-{% highlight puppet %}
+```puppet
 node learning.puppetlabs.vm {
   include multi_node
 }
-{% endhighlight %}
+```
 
 (Note that it's important that you don't put this in your `default` node
 declaration. If you did, puppet would try to create docker containers on your
@@ -213,9 +213,9 @@ Create a simple test manifest to give it a try.
 
 We'll define a simple message:
 
-{% highlight puppet %}
+```puppet
   notify { "Hi, I'm a manifest applied locally on an agent node": }
-{% endhighlight %}
+```
 
 And apply it:
 
@@ -298,11 +298,11 @@ on the master.
 Find the `default` node declaration, and edit it to add a `notify` resource
 that will tell us some basic information about the node.
 
-{% highlight puppet %}
+```puppet
 node default {
   notify { "This is ${::fqdn}, running the ${::operatingsystem} operating system": }
 } 
-{% endhighlight %}
+```
 
 Now connect to our database node again.
 

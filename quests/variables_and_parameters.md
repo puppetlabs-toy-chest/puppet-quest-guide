@@ -41,9 +41,9 @@ In Puppet, variable names are prefixed with a `$`
 
 Assigning a short string to a variable, for example, would look like this:
 
-{% highlight puppet %}
+```puppet
 $myvariable = 'look, a string!'
-{% endhighlight %}
+```
 
 Once you have defined a variable you can use it anywhere in your manifest you
 would have used the assigned value.
@@ -71,23 +71,23 @@ across different systems in your infrastructure, but not within them.
 For instance, if you wanted Puppet to manage several files in the `/var/www/html/questguide`
 directory, you could assign this directory path to a variable:
 
-{% highlight puppet %}
+```puppet
 $doc_root = '/var/root/www/html/questguide/'
-{% endhighlight %}
+```
 
 Once the variable is set, you can avoid repeating the same directory path by
 inserting the `$doc_root` variable into the beginning of any string.
 
 For example, you might use it in the title of a few *file* resource declarations:
 
-{% highlight puppet %}
+```puppet
 file { "${doc_root}index.html":
   ...
 }
 file { "${doc_root}about.html":
   ...
 }
-{% endhighlight %}
+```
 
 Notice the different variable syntax here. The variable name is wrapped in curly
 braces, and the whole thing is preceded by the `$` (`${var_name}`).
@@ -149,7 +149,7 @@ where you'll define the `web` class. Create the file with vim:
 
 And then add the following contents (remember to use `:set paste` in vim):
 
-{% highlight puppet %}
+```puppet
 class web {
 
   $doc_root = '/var/www/html/questguide/'
@@ -168,7 +168,7 @@ class web {
   }
 
 }
-{% endhighlight %}
+```
 
 Note that if you wanted to make a change to the `$doc_root` directory, you'd
 only have to do this in one place. While there are more advanced forms of data
@@ -214,21 +214,21 @@ class as it's **declared** rather than hard-coding them into a class definition.
 When defining a class, include a list of parameters and optional default values
 between the class name and the opening curly brace:
 
-{% highlight puppet %}
+```puppet
 class classname ( $parameter = 'default' ) {
   ...
 }
-{% endhighlight %}
+```
 
 Once defined, a parameterized class can be **declared** with a syntax similar to
 that of resource declarations, including key value pairs for each parameter you
 want to set.
 
-{% highlight puppet %}
+```puppet
 class {'classname': 
   parameter => 'value',
 }
-{% endhighlight %}
+```
 
 Say you want to deploy your webpage to servers around the world, and want
 changes in content depending on the language in each region. Instead of rewriting
@@ -257,19 +257,19 @@ To get started re-writing your `web` class with parameters, reopen the
 `web/manifests/init.pp` manifest. To create a new regionalized page, you
 need to be able to set the message and page name as class parameters.
 
-{% highlight puppet %}
+```puppet
 class web ( $page_name, $message ) {
-{% endhighlight %}
+```
 
 Now create a third file resource declaration to use the variables set by your
 parameters:
 
-{% highlight puppet %}
+```puppet
 file { "${doc_root}${page_name}.html":
   ensure => present,
   content => "<em>${message}</em>",
 }
-{% endhighlight %}
+```
 
 {% task 6 %}
 ---
@@ -289,12 +289,12 @@ As before, use the test manifest to declare the class. You'll open
 `web/examples/init.pp` and replace the simple `include` statement with the
 parameterized class declaration syntax to set each of the class parameters:
 
-{% highlight puppet %}
+```puppet
 class {'web': 
   page_name => 'hola',
   message   => 'Hola mundo!',
 }
-{% endhighlight %}
+```
 
 {% task 7 %}
 ---

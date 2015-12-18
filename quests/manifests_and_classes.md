@@ -115,14 +115,14 @@ Use vim to create a `cowsay.pp` manifest:
 
 Enter the following class definition, then save and exit (`:wq`):
 
-{% highlight puppet %}
+```puppet
 class cowsayings::cowsay {
   package { 'cowsay':
     ensure => present,
     provider => 'gem',
   }
 }
-{% endhighlight %}
+```
 
 Now that you're working with manifests, you can validate your code before you apply
 it. Use the `puppet parser` tool to check the syntax of your new manifest:
@@ -217,13 +217,13 @@ Create a new manifest for your fortune class definition:
 	
 Write your class definition here:
 
-{% highlight puppet %}
+```puppet
 class cowsayings::fortune {
   package { 'fortune-mod':
     ensure => present,
   }
 }
-{% endhighlight %}
+```
 
 {% task 5 %}
 ---
@@ -292,12 +292,12 @@ Here, you'll define the `cowsayings` class. Within it, use the same
 `include` syntax you used in your tests to declare the `cowsayings::cowsay` and
 `cowsayings::fortune` classes.
 
-{% highlight puppet %}
+```puppet
 class cowsayings {
   include cowsayings::cowsay
   include cowsayings::fortune
 }
-{% endhighlight %}
+```
 
 Save the manifest, and check your syntax with the `puppet parser` tool.
 

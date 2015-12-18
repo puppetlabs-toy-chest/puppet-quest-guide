@@ -53,12 +53,12 @@ that the `openssh-server` package is installed *before* you try to manage the `s
 service. To achieve this, you include a `before` metaparameter with the value
 `Service['sshd']`:
 
-{% highlight puppet %}
+```puppet
 package { 'openssh-server':
   ensure => present,
   before => Service['sshd'],
 }
-{% endhighlight %}
+```
 
 You can also approach the problem from the other direction. The `require`
 metaparameter is the mirror image of `before`. `require` tells Puppet that the current
@@ -67,21 +67,21 @@ resource *requires* the one specified by the metaparameter.
 Using `before` in the `openssh-server` package resource is exactly equivalent to
 using `require` in the `sshd` service resource:
 
-{% highlight puppet %}
+```puppet
 service { 'sshd':
   ensure   => running,
   enable   => true,
   require  => Package['openssh-server'],
 }
-{% endhighlight %}
+```
 
 In both of these cases, take note of the way you refer to the target resource.
 The target's *type* is capitalized, and followed by an *array* (denoted by the 
 square brackets) of one or more resource titles:
 
-{% highlight puppet %}
+```puppet
 Type['title']
-{% endhighlight %}
+```
 
 We've already covered a couple of the resources you'll need, so why not make
 a simple SSH module to explore resource relationships?
@@ -146,9 +146,9 @@ The quickest way to get Puppet to generate a graph for this kind of testing is t
 manifest with the `--noop` and `--graph` flags. Go ahead and set up a `sshd/examples/init.pp`
 manifest. You don't have any parameters here, so you can use a simple:
 
-{% highlight puppet %}
+```puppet
 include sshd
-{% endhighlight %}
+```
 
 With this done, run a `puppet apply` on your test manifest with the `--noop` and `--graph`
 flags:
@@ -225,7 +225,7 @@ You want to ensure that this `file` resource is applied *after* the
 `openssh-server` package, so include a `require` metaparameter targeting
 that resource.
 
-{% highlight puppet %}
+```puppet
 class sshd {
 
   ...
@@ -237,7 +237,7 @@ class sshd {
   }
 
 }
-{% endhighlight %}
+```
 
 
 {% task 8 %}
@@ -289,7 +289,7 @@ Including a `notify` in your `file` resource has exactly the same result as incl
 Edit your `sshd/manifests/init.pp` manifest to add a `subscribe` metaparameter
 to the the `sshd` resource.
 
-{% highlight puppet %}
+```puppet
 class sshd {
 
   ...
@@ -302,7 +302,7 @@ class sshd {
   ...
 
 }
-{% endhighlight %}
+```
 
 Validate your syntax with the `puppet parser` tool. When your syntax looks good,
 apply your test manifest with the `--graph` and `--noop` flags, then use the `dot`

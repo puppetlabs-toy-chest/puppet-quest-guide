@@ -88,7 +88,7 @@ syntax of the command is: *puppet resource \<type\> \<name\>*.
 	
 You'll see something like the following:
 
-{% highlight puppet %}
+```puppet
 user { 'root':
   ensure           => present,
   comment          => 'root',
@@ -100,7 +100,7 @@ user { 'root':
   shell            => '/bin/bash',
   uid              => '0',
 }
-{% endhighlight %}
+```
 
 This resource declaration syntax is composed of three main components:
 
@@ -117,11 +117,11 @@ we'll go through the example point by point.
 
 We'll start with the first line first:
 
-{% highlight puppet %}
+```puppet
   user { 'root':
     ...
   }
-{% endhighlight %}
+```
 
 The word `user`, right _before_ the curly brace, is the **resource type**.
 The type represents the kind of thing that the resource describes. It tells
@@ -150,11 +150,11 @@ or try the command `puppet describe --list`.
 
 Take another look at the first line of the resource declaration. 
 
-{% highlight puppet %}
+```puppet
   user { 'root':
     ...
   }
-{% endhighlight %}
+```
 
 The single quoted word `'root'` just before the colon is the resource **title**.
 Puppet uses the resource title as its own internal unique identifier for that
@@ -180,7 +180,7 @@ will save you typing and make your puppet code more readable.
 Now that we've covered the *type* and *title*, take a look at the body of the
 resource declaration.
 
-{% highlight puppet %}
+```puppet
 user { 'root':
   ensure           => present,
   comment          => 'root',
@@ -192,7 +192,7 @@ user { 'root':
   shell            => '/bin/bash',
   uid              => '0',
 }
-{% endhighlight %}
+```
 
 After the colon in that first line comes a hash of **attributes** and their
 corresponding **values**. Each line consists of an attribute name, a `=>`
@@ -203,11 +203,11 @@ directory `/root`.
 So to bring this all together, a resource declaration will match the following
 pattern:
 
-{% highlight puppet %}
+```puppet
 type {'title':
     attribute => 'value',
 }
-{% endhighlight %}
+```
 
 {% aside Trailing comma %}
 The comma at the end of the final attribute value pair isn't required by the parser, but it is

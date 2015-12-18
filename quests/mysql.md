@@ -67,11 +67,11 @@ Now we'll edit the `site.pp` to classify the Learning VM with the MySQL server c
 If you completed the NTP quest, you will already have a node declaration for the
 `learning.puppetlabs.vm` certname. If not, create it now:
 
-{% highlight puppet %}
+```puppet
 node 'learning.puppetlabs.vm' {
 
 }
-{% endhighlight %}
+```
 
 Within that node block, you can declare your `::mysql::server` class and set its
 parameters. For this example, we'll specify a root password and set the
@@ -79,7 +79,7 @@ server's max connections to '1024'. (You may notice that the formatting in vim i
 bit funky when typing or pasting nested hashes. You can disable this formatting with
 the `:set paste` command in vim.)
 
-{% highlight puppet %}
+```puppet
 node 'learning.puppetlabs.vm' {
   class { '::mysql::server':
     root_password    => 'strongpassword',
@@ -88,7 +88,7 @@ node 'learning.puppetlabs.vm' {
     },
   }
 }
-{% endhighlight %}
+```
 	
 Notice that in addition to standard parameters like the `root_password`, the class
 takes a `override_options` as a hash, which you can use to address any
@@ -206,12 +206,12 @@ class in the `learning.puppetlabs.vm` node. Remember, you don't need to pass any
 parameters to this class, so a simple `include` statement will work in place
 of a parameterized class declaration.
 
-{% highlight puppet %}
+```puppet
 node 'learning.puppetlabs.vm' {
   include ::mysql::server::account_security
   ...
 }
-{% endhighlight %}
+```
 
 Validate your site.pp
 
@@ -291,22 +291,22 @@ few lines of puppet code.
 Add the following resource declaration to your `site.pp` node definition.
 (Remember the `:set paste` command if you need it.)
 
-{% highlight puppet %}
+```puppet
   mysql_database { 'lvm':
       ensure  => present,
       charset => 'utf8',
   }
-{% endhighlight %}
+```
 
 Similarly, with a user, all you have to do is specify the name and host as the
 resource title, and set the ensure attribute to present. Enter the following
 in your node definition as well.
 
-{% highlight puppet %}
+```puppet
   mysql_user { 'lvm_user@localhost':
     ensure => present,
   }
-{% endhighlight %}
+```
 
 Now that you have a user and database, you can use a grant to define the
 privileges for that user. 
@@ -315,7 +315,7 @@ Note that the `*` character will match any table. Thus, `table => 'lvm.*'`
 below means that the `lvm_user` has `ALL` permissions to all tables in
 the `lvm` database. 
 
-{% highlight puppet %}
+```puppet
   mysql_grant { 'lvm_user@localhost/lvm.*':
     ensure      => present,
     options     => ['GRANT'],
@@ -323,7 +323,7 @@ the `lvm` database.
     table       => 'lvm.*',
     user        => 'lvm_user@localhost',
   }
-{% endhighlight %}
+```
 
 Once you've added declarations for these three custom resources, use the `puppet
 parser validate` command on the `site.pp` manifest to check your syntax

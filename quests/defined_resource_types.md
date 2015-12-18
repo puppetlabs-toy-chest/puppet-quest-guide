@@ -109,7 +109,7 @@ type:
 We'll start simple. Enter the following code in your manifest, paying careful
 attention to the syntax and variables.
 
-{% highlight puppet %}
+```puppet
 define web_user::user {
   $home_dir = "/home/${title}"
   user { $title:
@@ -122,7 +122,7 @@ define web_user::user {
     mode    => '0755',
   }
 } 
-{% endhighlight %}
+```
 
 What did you notice? First, you probably realized that this syntax is nearly
 identical to that you would use for a class. The only difference is that you use
@@ -153,9 +153,9 @@ go ahead and create a test manifest:
 
 Declare a `web_user::user` resource
 
-{% highlight puppet %}
+```puppet
 web_user::user { 'shelob': }
-{% endhighlight %}
+```
 
 Here, we assign the title (in this case `shelob`), as we would for any other
 resource type. This title is passed through to our defined resource type as the
@@ -210,13 +210,13 @@ deal with our special `~` pages. Don't worry about the scary-looking regular
 expression in the title. That's specific to how our Nginx configuration works,
 and nothing you need to understand to use defined resource types in general.
 
-{% highlight puppet %}
+```puppet
 nginx::resource::location { '~ ^/~(.+?)(/.*)?$':
   vhost          => '_',
   location_alias => '/home/$1/public_html$2',
   autoindex      => true,
 }
-{% endhighlight %}
+```
 
 That regular expression in the title (`~ ^/~(.+?)(/.*)?$`) captures any URL path
 segment preceded by a `~` as a first capture group, then the remainder of the
@@ -285,7 +285,7 @@ Reopen your manifest:
 And add code to configure your user's `public_html` directory and default
 `index.html` file:
 
-{% highlight puppet %}
+```puppet
 define web_user::user {
   $home_dir    = "/home/${title}"
   $public_html = "${home_dir}/public_html"
@@ -307,7 +307,7 @@ define web_user::user {
     mode    => '0644',
   }
 }
-{% endhighlight %}
+```
 
 {% task 6 %}
 ---
@@ -366,12 +366,12 @@ brace of the definition, include a comma separated list of the variables to be
 defined by parameters. The `=` operator can optionally be used to assign default
 values.
 
-{% highlight puppet %}
+```puppet
   define web_user::user (
     $content  = "<h1>Welcome to ${title}'s home page!</h1>",
     $password = undef,
 ) {
-{% endhighlight %}
+```
 
 There are a couple of details you should be sure to notice here.
 
@@ -395,7 +395,7 @@ pairs for our `user` resource.
 Now that you have these parameters set up, go ahead and update the body
 of your defined resource type to make use of them.
 
-{% highlight puppet %}
+```puppet
 define web_user::user (
   $content  = "<h1>Welcome to ${title}'s home page!</h1>",
   $password = undef,
@@ -421,7 +421,7 @@ define web_user::user (
     mode    => '0644',
   }
 }
-{% endhighlight %}
+```
 
 {% task 8 %}
 ---
@@ -436,13 +436,13 @@ define web_user::user (
 
 Edit your test manifest, and add a new user to try this out:
 
-{% highlight puppet %}
+```puppet
 web_user::user { 'shelob': }
 web_user::user { 'frodo':
   content  => 'Custom Content!',
   password => pw_hash('sting', 'SHA-512', 'mysalt'),
 }
-{% endhighlight %}
+```
 
 Note that we're using the `pw_hash` function to generate a SHA-512
 hash from the password 'sting' and salt 'mysalt'.

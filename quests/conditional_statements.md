@@ -188,7 +188,7 @@ Puppet will ad the user to the `admin` group.
 
 The beginning of your class definition should look like this:
 
-{% highlight puppet %}
+```puppet
 class accounts ($user_name) {
 
   if $::operatingsystem == 'centos' {
@@ -206,7 +206,7 @@ class accounts ($user_name) {
   ... 
 
 }
-{% endhighlight %}
+```
 
 Note that the string matches are *not* case sensitive, so 'CENTOS' would work
 just as well as 'centos'. Finally, in the `else` block, you'll raise an error
@@ -217,7 +217,7 @@ a `user` resource declaration. Use the `$user_name` variable set by your class p
 to set the title and home of your user, and use the `$groups` variable to set the
 user's `groups` attribute.
 
-{% highlight puppet %}
+```puppet
 class accounts ($user_name) {
 
   ...
@@ -231,7 +231,7 @@ class accounts ($user_name) {
   ...
 
 }
-{% endhighlight %}
+```
 
 Make sure that your manifest can pass a `puppet parser validate` check before
 continuing on.
@@ -248,13 +248,13 @@ continuing on.
 Create a test manifest (`accounts/examples/init.pp`) and declare the accounts
 manifest with the name parameter set to `dana`.
 
-{% highlight puppet %}
+```puppet
 
 class {'accounts':
   user_name => 'dana',
 }
 
-{% endhighlight %}
+```
 
 {% task 4 %}
 ---
@@ -317,7 +317,7 @@ end of a case statement to catch anything that did not match an explicit case.
 For instance, if you were setting up an Apache webserver, you might use a case
 statement like the following:
 
-{% highlight puppet %}
+```puppet
 case $::operatingsystem {
   'CentOS': { $apache_pkg = 'httpd' }
   'Redhat': { $apache_pkg = 'httpd' }
@@ -329,7 +329,7 @@ case $::operatingsystem {
 package { $apache_pkg :
   ensure => present,
 }
-{% endhighlight %}
+```
 
 This would allow you to always install and manage the right Apache package for a
 machine's operating system. Accounting for the differences between various
@@ -341,14 +341,14 @@ Selector statements are similar to `case` statements, but instead of executing a
 block of code, a selector assigns a value directly. A selector might look
 something like this:
 
-{% highlight puppet %}
+```puppet
 $rootgroup = $::osfamily ? {
   'Solaris'  => 'wheel',
   'Darwin'   => 'wheel',
   'FreeBSD'  => 'wheel',
   'default'  => 'root',
 }
-{% endhighlight %}
+```
 
 Here, the value of the `$rootgroup` is determined based on the control variable
 `$::osfamily`. Following the control variable is a `?` (question mark) symbol.

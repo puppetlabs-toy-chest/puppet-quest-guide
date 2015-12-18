@@ -277,14 +277,14 @@ the implicit hostname, then, the attribute value pair for the source URI is:
 
 Putting this all together, your `init.pp` manifest should contain the following:
 
-{% highlight puppet %}
+```puppet
 class vimrc {
   file { '/root/.vimrc':
     ensure => present,
     source => 'puppet:///modules/vimrc/vimrc',
   }
 }
-{% endhighlight %}
+```
 
 Save the manifest, and use the `puppet parser` tool to validate your syntax:
 
@@ -309,9 +309,9 @@ To test the `vimrc` class, create a manifest called `init.pp`  in the
 
 All you'll do here is *declare* the `vimrc` class with the `include` directive.
 
-{% highlight puppet %}
+```puppet
 include vimrc
-{% endhighlight %}
+```
 
 {% task 8 %}
 ---
