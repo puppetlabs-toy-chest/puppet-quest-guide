@@ -112,10 +112,7 @@ look at the module saved to the modulepath on your Puppet master, however, it wi
 be named `ntp`. Keep this in mind, as trying to install multiple modules of the
 same name can lead to conflicts!
 
-{% task 1 %}
----
-- execute: puppet module install puppetlabs-ntp
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
 Use the puppet module tool to install the Puppet Labs `ntp` module.
 
@@ -156,17 +153,7 @@ methods of classification you decide to use later, including the PE Console node
 classifier.
 {% endaside %}
 
-{% task 2 %}
----
-- execute: vim /etc/puppetlabs/code/environments/production/manifests/site.pp
-  input:
-    - "/default {\r"
-    - o
-    - "include ntp"
-    - "\e"
-    - ":"
-    - "wq\r"
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 Open the site.pp manifest in your text editor.
 
@@ -189,10 +176,7 @@ node 'learning.puppetlabs.vm' {
 
 ```
 
-{% task 3 %}
----
-- execute: puppet agent -t
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 Note that triggering a puppet run with the `puppet agent` tool is useful for
 learning and testing, but that in a production environment you would want to
@@ -274,20 +258,7 @@ value, not just one. This list of values, separated by commas (`,`) and wrapped
 in brackets (`[]`), is called an *array*. Arrays allow you assign a list of
 values to a single variable or attribute.
 
-{% task 4 %}
----
-- execute: vim /etc/puppetlabs/code/environments/production/manifests/site.pp
-  input:
-    - "/include ntp\r"
-    - dd
-    - i
-    - "  class { 'ntp':\r"
-    - "servers => ['nist-time-server.eoni.com','nist1-lv.ustiming.org','ntp-nist.ldsbc.edu']\r"
-    - "}"
-    - "\e"
-    - ":"
-    - "wq\r"
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 In your `site.pp`, replace the `include ntp` line with a parameterized class
 declaration based on the example above. Use the servers from the example, or, if
@@ -295,10 +266,7 @@ you know of a nearer timeserver, include that. You should always specify at
 least *three* timeservers for NTP to function reliably. You might, for instance,
 include two from the ntp.org pool and one known nearby timeserver.
 
-{% task 5 %}
----
-- execute: puppet apply -t
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 Once you've made your changes to the `site.pp` manifest and used the puppet
 parser tool to validate your syntax, use the puppet agent tool to trigger a

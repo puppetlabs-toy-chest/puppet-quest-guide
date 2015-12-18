@@ -76,13 +76,7 @@ learning environment. Running a puppet agent on a docker container on a
 VM gives us a convenient way to see how Puppet works on multiple nodes, but
 keep in mind that it isn't a recommended way to set up your Puppet infrastructure!
 
-{% task 1 %}
----
-- execute:
-    - vim /etc/puppetlabs/code/environments/production/manifests/site.pp
-    - /node default {\rOnode learning.puppetlabs.vm {\r  include multi_node\r}
-    - :wq
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
 To apply the `multi_node` class to the Learning VM, add it to the
 `learning.puppetlabs.vm` node declaration in your master's `site.pp` manifest.
@@ -101,10 +95,7 @@ node learning.puppetlabs.vm {
 declaration. If you did, puppet would try to create docker containers on your
 docker containers every time you did a puppet run!)
 
-{% task 2 %}
----
-- execute: ls
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 Now trigger an agent run to apply the class. Note that this might take a little
 while to run.
@@ -120,10 +111,7 @@ Now you have two fresh nodes, but you don't have the puppet agent installed on
 either! Installing the agent will be the first step of getting these nodes into
 our puppet infrastructure.
 
-{% task 3 %}
----
-- execute: ls
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 In most cases, the simplest way to install an agent is to use the `curl`
 command to transfer an installation script from your puppet master and
@@ -149,10 +137,7 @@ puppet agent in the *Nodes* > *Unsigned Certificates* section of the PE console:
 
     curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | sudo bash
 
-{% task 4 %}
----
-- execute: ls
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Ordinarily, you would probably use `ssh` to connect to your agent nodes and
 run this command. Because we're using docker, however, the way we connect will
@@ -190,10 +175,7 @@ We can also see that this node's fqdn is `database.learning.puppetlabs.vm`. This
 is how we can identify the node in the PE console or the `site.pp` manifest on
 our master.
 
-{% task 5 %}
----
-- execute: ls
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 We can use the puppet resource tool to easily create a new test file.
 
@@ -266,10 +248,7 @@ on the puppet master. If you're still connected to your agent node, return to th
 
     exit
 
-{% task 6 %}
----
-- execute: ls
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Use the `puppet cert list` command to list the unsigned certificates. (You can
 also view and sign these from the inventory page of the PE console.)
@@ -284,10 +263,7 @@ and
 
     puppet cert sign database.learning.puppetlabs.vm
 
-{% task 7 %}
----
-- execute: ls
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 7:</p></div>
 
 Now your certificates are signed, so your new nodes can be managed by Puppet.
 To test this out, let's add a simple `notify` resource to the `site.pp` manifest

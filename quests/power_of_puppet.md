@@ -50,10 +50,7 @@ which serves as a repository for Puppet *modules*. A module nicely packages all 
 code and data Puppet needs to manage a given aspect in your infrastructure, which
 is especially helpful when you're dealing with a complex application like Graphite.
 
-{% task 1 %}
----
-- execute: puppet module search graphite
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
 The `puppet module` tool lets you search for modules directly from the command line.
 See what you can find for Graphite. (If you're offline and run into an error, look for
@@ -71,10 +68,7 @@ semantic versioning, along with other best practices standards. **Puppet Support
 rigorously tested for compatibility with Puppet Enterprise and are fully supported by Puppet Labs.
 {% endaside %}
 
-{% task 2 %}
----
-- execute: puppet module install dwerder-graphite
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 Now that you know what module you want, you'll need to install it to the puppet
 master to make it available for your infrastructure. The `puppet module` tool makes
@@ -128,10 +122,7 @@ a node group, adding the Learning VM to the group, and classifying the group wit
 
 But before you can access the PE console you'll need the Learning VM's IP address.
 
-{% task 3 %}
----
-- execute: facter ipaddress
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 Of course, you could use a command like `ifconfig` to find this, but let's do it the puppet
 way. Puppet uses a tool called `facter` to collect facts about a system and make them
@@ -167,12 +158,12 @@ based on the node's certname and all information collected by the `facter` tool.
 
 Click on *Classification* in the console navigation bar. It may take a moment to load.
 
-{% figure '../assets/classification.png' %}
+![image](../assets/classification.png)
 
 From here, enter "Learning VM" as a new node group name and click *Add group* to create
 your new node group.
 
-{% figure '../assets/node_group.png' %}
+![image](../assets/node_group.png)
 
 Click on the new group to set the rules for this group. You only want the `learning.puppetlabs.vm` in
 this group, so instead of adding a rule, use the *Pin node* option to add the node individually.
@@ -181,12 +172,12 @@ Click on the *Node name* field, and you should see the Learning VM's certname au
 certname apprears, trigger a puppet run (`puppet agent -t`) on the Learning VM. As part of the puppet
 run, the Learning VM will check in, making its information available to the console node classifier.
 
-{% figure '../assets/pin.png' %}
+![image](../assets/pin.png)
 
 Click *Pin node*, then click the *Commit 1 change* button in the bottom right of the console
 interface to commit your change.
 
-{% figure '../assets/commit.png' %}
+![image](../assets/commit.png)
 
 ### Add a class
 
@@ -237,12 +228,7 @@ returns this catalog to the node's puppet agent. The agent then applies any chan
 necessary to bring the node into the line with the state described by the
 catalog.
 
-{% task 4 %}
----
-- execute: |
-    curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -H "Content-Type: application/json" -X POST -d '{"name":"Learning VM", "environment":"production", "parent":"00000000-0000-4000-8000-000000000000", "classes":{"graphite" : {"gr_web_server" : "none", "gr_django_pkg" : "django", "gr_django_provider" : "pip", "gr_django_ver" : "1.5"} },  "rule":["or", ["=", "name", "learning.puppetlabs.vm"]]}' https://localhost:4433/classifier-api/v1/groups
-- execute: puppet agent --test
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 To avoid surprises, however, we've disabled these scheduled runs on the Learning VM.
 Instead, we'll be using the `puppet agent` tool to trigger runs manually.

@@ -141,42 +141,13 @@ Before you get started writing your module, make sure you're working in the
 
     cd /etc/puppetlabs/code/environments/production/modules
 	
-{% task 1 %}
----
-- execute: mkdir /etc/puppetlabs/code/environments/production/modules/accounts
-- execute: mkdir /etc/puppetlabs/code/environments/production/modules/accounts/{manifests,examples}
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 	
 Create an `accounts` directory and your `examples` and `manifests` directories:
 
     mkdir -p accounts/{manifests,examples}
 	
-{% task 2 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/accounts/manifests/init.pp
-  content: |
-    class accounts ($user_name) {
-      
-      if $::operatingsystem == 'centos' {
-        $groups = 'wheel'
-      }
-      elsif $::operatingsystem == 'debian' {
-        $groups = 'admin'
-      }
-      else {
-        fail( "This module doesn't support ${::operatingsystem}." )
-      }
-
-      notice ( "Groups for user ${user_name} set to ${groups}" )
-
-      user { $user_name:
-        ensure => present,
-        home => "/home/${user_name}",
-        groups => $groups,
-      }
-
-    }
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 	
 Open the `accounts/manifests/init.pp` manifest in Vim.
 
@@ -236,14 +207,7 @@ class accounts ($user_name) {
 Make sure that your manifest can pass a `puppet parser validate` check before
 continuing on.
 
-{% task 3 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/accounts/examples/init.pp
-  content: |
-    class {'accounts':
-      user_name => 'dana',
-    }
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 Create a test manifest (`accounts/examples/init.pp`) and declare the accounts
 manifest with the name parameter set to `dana`.
@@ -256,10 +220,7 @@ class {'accounts':
 
 ```
 
-{% task 4 %}
----
-- execute: FACTER_operatingsystem=Debian puppet apply --noop /etc/puppetlabs/code/environments/production/modules/accounts/examples/init.pp
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 The Learning VM is running CentOS, but to test our conditional logic,
 we want to see what would happen on a Debian system. Luckily, we can use
@@ -275,20 +236,14 @@ manifest would run on a different system.
 Look in the list of notices, and you'll see the changes that would have been
 applied.
 
-{% task 5 %}
----
-- execute: FACTER_operatingsystem=Darwin puppet apply --noop /etc/puppetlabs/code/environments/production/modules/accounts/examples/init.pp
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 Try one more time with an unsupported operating system to check the fail
 condition:
 
     FACTER_operatingsystem=Darwin puppet apply --noop accounts/examples/init.pp
 
-{% task 6 %}
----
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/accounts/examples/init.pp
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Now go ahead and run a `puppet apply --noop` on your test manifest without
 setting the environment variable. If this looks good, drop the `--noop` flag to

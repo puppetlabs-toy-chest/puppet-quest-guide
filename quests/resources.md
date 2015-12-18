@@ -76,10 +76,7 @@ As we mentioned above, a key feature of Puppet's declarative model is that it
 goes both ways; that is, you can inspect the current state of any existing resource
 in the same syntax you would use to declare a desired state.
 
-{% task 1 %}
----
-- execute: puppet resource user root
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
 Use the *puppet resource* tool to take a look at your root user account. The
 syntax of the command is: *puppet resource \<type\> \<name\>*.
@@ -216,12 +213,7 @@ inevitably forget to insert it when you add another attribute value pair on the
 following line!
 {% endaside %}
 
-{% task 2 %}
----
-- execute: "puppet describe user | less"
-  input:
-    - 'q'
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 Of course, the real meat of a resource is in these attribute value pairs. You
 can't do much with a resource without a good understanding of its attributes.
@@ -246,11 +238,7 @@ You can use the `puppet apply` tool with the `-e` (`--execute`) flag to execute
 a bit of Puppet code. Though `puppet apply -e` is limited to one-off changes, it's
 a great tool for tests and exploration.
 
-{% task 3 %}
----
-- execute: |
-    puppet apply -e "user { 'galatea': ensure => present, }"
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 In this task, you'll create a new user called *galatea*. Puppet uses reasonable
 defaults for unspecified user attributes, so all you need to do to create a new
@@ -270,16 +258,7 @@ created one for your new user. As you may have noticed looking over the *puppet
 describe* entry for the user type, this *comment* is generally the full name of
 the account's owner.
 
-{% task 4 %}
----
-- execute: "puppet resource -e user galatea"
-  input:
-    - "o"
-    - "  comment => 'Galatea of Cyprus',"
-    - "\e"
-    - ":"
-    - "wq\r"
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Though you could add a comment with the `puppet apply -e`, you'd have to cram
 the whole resource declaration into one line, and you wouldn't be able to see

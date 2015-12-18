@@ -59,10 +59,7 @@ don't have the same power to define wholly new functionality, you may be
 surprised at how much can be achieved by bundling together Puppet's core
 resource types and those provided by existing modules from the community.
 
-{% task 1 %}
----
-- execute: mkdir -p /etc/puppetlabs/code/environments/production/modules/web_user/{manifests,examples}
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
 To get started, let's create the module structure where we'll put our `web_user` 
 module.
@@ -83,23 +80,7 @@ manage the user's home directory, but we want a little more control over the
 permissions of this home directory, so we'll do it ourselves.
 
 
-{% task 2 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/web_user/manifests/user.pp
-  content: |
-    define web_user::user {
-      $home_dir = "/home/${title}"
-      user { $title:
-        ensure => present,
-      }
-      file { $home_dir:
-        ensure  => directory,
-        owner   => $title,
-        group   => $title,
-        mode    => '0755',
-      }
-    } 
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 Go ahead and create a `user.pp` manifest where we'll define our defined resource
 type:
@@ -138,12 +119,7 @@ the `$title` variable in several places, though we haven't explicitly assigned
 it! Also notice that this `$title` variable is used in the titles of both the
 `user` and `file` resources we're declaring. What's going on here?
 
-{% task 3 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/web_user/examples/user.pp
-  content: |
-    web_user::user { 'shelob': }
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 To understand the importance of this title variable in a defined resource type,
 go ahead and create a test manifest:
@@ -174,10 +150,7 @@ possible to declare it in this brief form without the list of parameter key valu
 pairs. (You will see this less often in the case of classes, as the idempotent
 `include` syntax is almost always preferred.) 
 
-{% task 4 %}
----
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/web_user/examples/user.pp
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Go ahead and run a `--noop`, then apply your test manifest:
 
@@ -231,33 +204,7 @@ file:
 
     cat /etc/nginx/sites-enabled/_.conf
 
-{% task 5 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/web_user/manifests/user.pp
-  content: |
-    define web_user::user {
-      $home_dir    = "/home/${title}"
-      $public_html = "${home_dir}/public_html"
-      user { $title:
-        ensure     => present,
-        managehome => false,
-      }
-      file { [$home_dir, $public_html]:
-        ensure  => directory,
-        owner   => $title,
-        group   => $title,
-        mode    => '0755',
-      }
-      file { "${public_html}/index.html":
-        ensure  => file,
-        owner   => $title,
-        group   => $title,
-        replace => false,
-        content => "<h1>Welcome to ${title}'s home page!</h1>",
-        mode    => '0644',
-      }
-    }
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 So let's see about giving our `web_user::user` resource a `public_html`
 directory and a default `index.html` page. We'll need to add a directory and a
@@ -309,10 +256,7 @@ define web_user::user {
 }
 ```
 
-{% task 6 %}
----
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/web_user/examples/user.pp
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Use the `puppet parser validate` tool to check your manifest, then run a `--noop`
 before applying your test manifest again:
@@ -331,34 +275,7 @@ add some parameters that will allow us to set a password for the user
 and use some custom content for the default web page.
 
 
-{% task 7 %}
----
-- file: puppet apply /etc/puppetlabs/code/environments/production/modules/web_user/manifests/user.pp
-  content: |
-    define web_user::user (
-      $content  = "<h1>Welcome to ${title}'s home page!</h1>",
-      $password = undef,
-    ) {
-      $home_dir    = "/home/${title}"
-      $public_html = "${home_dir}/public_html"
-      user { $title:
-        ensure   => present,
-        password => $password,
-      }
-      file { [$home_dir, $public_html]:
-        ensure => directory,
-        owner  => $title,
-        mode    => '0755',
-      }
-      file { "${public_html}/index.html":
-        ensure  => file,
-        owner   => $title,
-        replace => false,
-        content => $content,
-        mode    => '0644',
-      }
-    }
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 7:</p></div>
 
 The syntax for adding parameters to defined resource types is just like that
 used for parameterized classes. Within a set of parentheses before the opening
@@ -423,16 +340,7 @@ define web_user::user (
 }
 ```
 
-{% task 8 %}
----
-- file: puppet apply /etc/puppetlabs/code/environments/production/modules/web_user/examples/user.pp
-  content: |
-    web_user::user { 'shelob': }
-    web_user::user { 'frodo':
-      content  => 'Custom Content!',
-      password => pw_hash('sting', 'SHA-512', 'mysalt'),
-    }
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 8:</p></div>
 
 Edit your test manifest, and add a new user to try this out:
 
@@ -447,10 +355,7 @@ web_user::user { 'frodo':
 Note that we're using the `pw_hash` function to generate a SHA-512
 hash from the password 'sting' and salt 'mysalt'.
 
-{% task 9 %}
----
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/web_user/examples/user.pp
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 9:</p></div>
 
 Once you've made your changes, do a `--noop` run, then apply your test
 manifest:

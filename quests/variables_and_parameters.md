@@ -103,11 +103,7 @@ literally.
 To better understand how variables work in context, we'll walk you through
 creating a simple `web` module that will put them to use.
 
-{% task 1 %}
----
-- execute: mkdir /etc/puppetlabs/code/environments/production/modules/web
-- execute: mkdir /etc/puppetlabs/code/environments/production/modules/web/{manifests,examples}
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
 First, you'll need to create the directory structure for your module.
 
@@ -119,28 +115,7 @@ Now create an `web` directory and your `manifests` and `examples` directories:
 
     mkdir -p web/{manifests,examples}
 
-{% task 2 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/web/manifests/init.pp
-  content: |
-    class web {
-    
-      $doc_root = '/var/www/html/questguide/'
-    
-      $english = 'Hello world!'
-      $french = 'Bonjour le monde!'
-    
-      file { "${doc_root}hello.html":
-        ensure => present,
-        content => "<em>${english}</em>",
-      }
-    
-      file { "${doc_root}bonjour.html":
-        ensure => present,
-        content => "<em>${french}</em>",
-      }
-    }
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 With this structure in place, you're ready to create your main manifest 
 where you'll define the `web` class. Create the file with vim:
@@ -176,11 +151,7 @@ separation in Puppet, the basic principle is the same: The more distinct your
 code is from the underlying data, the more resuable it is, and the less
 difficult it will be to refactor when you have to make changes later.
 
-{% task 3 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/web/examples/init.pp
-  content: include web
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 Once you've validated your manifest with the `puppet parser` tool, create a test
 for your manifest with an `include` statement for the web class you created 
@@ -193,10 +164,7 @@ puppet apply again without the flag:
 
   puppet apply --noop web/examples/init.pp
 
-{% task 4 %}
----
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/web/tests/init.pp
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Take a look [here](/hello.html) and [here](/bonjour.html) to see your new pages.
 
@@ -235,23 +203,7 @@ changes in content depending on the language in each region. Instead of rewritin
 the whole class or module for each region, you can use class parameters
 to customize these values as the class is declared.
 
-{% task 5 %}
----
-- execute: vim /etc/puppetlabs/code/environments/production/modules/web/manifests/init.pp
-  input:
-    - "/class web\r"
-    - "2Wi"
-    - "( $page_name, $message ) "
-    - "\e"
-    - "GO"
-    - |
-      file { "${doc_root}${page_name}.html":
-        ensure => present,
-        content => "<em>${message}</em>",
-      }
-    - "\e"
-    - ":wq\r"
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 To get started re-writing your `web` class with parameters, reopen the
 `web/manifests/init.pp` manifest. To create a new regionalized page, you
@@ -271,19 +223,7 @@ file { "${doc_root}${page_name}.html":
 }
 ```
 
-{% task 6 %}
----
-- execute: vim /etc/puppetlabs/code/environments/production/modules/web/examples/init.pp
-  input:
-    - "ddi"
-    - "class {'web':\r"
-    - "  page_name => 'hola',\r"
-    - "  message => 'Hola mundo!',\r"
-    - "}"
-    - "\e"
-    - ":"
-    - "wq\r"
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 As before, use the test manifest to declare the class. You'll open
 `web/examples/init.pp` and replace the simple `include` statement with the
@@ -296,10 +236,7 @@ class {'web':
 }
 ```
 
-{% task 7 %}
----
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/web/examples/init.pp
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 7:</p></div>
 
 Now give it a try. Go ahead and do a `--noop` run, then apply the test.
 

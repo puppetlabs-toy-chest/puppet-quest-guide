@@ -84,10 +84,7 @@ applications running smoothly as you coordinate updates and maintenance, event
 inspection, role-based access control, certification management, and cloud
 provisioning tools.
 
-{% task 1 %}
----
-- execute: puppet -V
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 Now that you know what Puppet and Puppet Enterprise are, check and see what
 version of Puppet is running on this Learning VM. Type the following command:
 
@@ -123,10 +120,7 @@ quests and tasks you've completed successfully and which are still pending.
 We've written a couple of tasks in this quest to demonstrate the features of the
 quest tool itself.
 
-{% task 2 %}
----
-- execute: quest --help
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 To explore the command options for the quest tool, type the following command:
 
@@ -142,10 +136,7 @@ such as:
     quest --start <name> # Provide the name of a quest to start tracking
     progress
 	
-{% task 3 %}
----
-- execute: quest --progress
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 Find out how much progress you have made so far:
 
