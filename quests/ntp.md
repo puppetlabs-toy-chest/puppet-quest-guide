@@ -145,13 +145,11 @@ node 'learning.puppetlabs.vm' {
 }
 ```
 
-{% aside PE console or site.pp? %}
 Because it's more amenable to monitoring with the Learning VM quest tool, we'll
 be primarily using this `site.pp` method of classification in this Quest Guide.
 What you will learn about node definitions and class declarations applies to whatever
 methods of classification you decide to use later, including the PE Console node
 classifier.
-{% endaside %}
 
 <div class = "lvm-task-number"><p>Task 2:</p></div>
 

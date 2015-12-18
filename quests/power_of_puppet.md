@@ -61,12 +61,10 @@ instructions below on installing a locally cached copy of the module.)
 Cool, it looks like there are several matches for Graphite. For this quest, use 
 Daniel Werdermann's module: `dwerder-graphite`.
 
-{% aside Supported and Approved %}
 Among the available modules, the Forge includes two categories of reviewed modules.
 **Puppet Approved** modules adhere to a set of Puppet Labs specifications for style, documentation, and
 semantic versioning, along with other best practices standards. **Puppet Supported** modules are
 rigorously tested for compatibility with Puppet Enterprise and are fully supported by Puppet Labs.
-{% endaside %}
 
 <div class = "lvm-task-number"><p>Task 2:</p></div>
 
@@ -76,15 +74,13 @@ this installation easy. Go ahead and run:
 
     puppet module install dwerder-graphite
     
-{% aside Offline? %}
-If you don't have internet access, run the following terminal commands to use
+(If you don't have internet access, run the following terminal commands to use
 cached versions of all the modules reqiuired for quests in this guide:
 
     for m in /usr/src/forge/*; do puppet module install $m --ignore-dependencies; done
 
 This installs the modules for all of the quests in this guide. You can
-skip future instructions for installing modules.
-{% endaside %}
+skip future instructions for installing modules.)
 
 Easy enough, but what did we do, exactly?
 

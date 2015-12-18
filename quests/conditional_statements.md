@@ -65,11 +65,9 @@ be able to run facter from the command line, it really shows its worth on the
 back end, making information about a system available to use as variables
 in your manifests.
 
-{% fact %}
 While facter is an important component of Puppet and is bundled with Puppet
 Enterprise, it's actually one of the many separate open-source projects
 integrated into the Puppet ecosystem.
-{% endfact %}
 
 Combined with conditionals, which we'll get to in a moment, **facts** give you a
 huge amount of power to write portability into your modules.

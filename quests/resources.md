@@ -206,12 +206,10 @@ type {'title':
 }
 ```
 
-{% aside Trailing comma %}
-The comma at the end of the final attribute value pair isn't required by the parser, but it is
+Note that the comma at the end of the final attribute value pair isn't required by the parser, but it is
 best practice to include it for the sake of consistency. Leave it out, and you'll
 inevitably forget to insert it when you add another attribute value pair on the
 following line!
-{% endaside %}
 
 <div class = "lvm-task-number"><p>Task 2:</p></div>
 
