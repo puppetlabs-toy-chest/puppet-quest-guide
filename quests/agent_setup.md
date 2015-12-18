@@ -1,8 +1,3 @@
----
-title: Agent Node Setup
-layout: default
----
-
 # Agent Node Setup
 
 ## Quest objectives

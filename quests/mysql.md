@@ -1,8 +1,3 @@
----
-title: MySQL
-layout: default
----
-
 # MySQL
 
 ## Quest Objectives

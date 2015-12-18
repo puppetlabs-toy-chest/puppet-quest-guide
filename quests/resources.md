@@ -1,8 +1,3 @@
----
-title: Resources
-layout: default
----
-
 # Resources
 
 ## Quest objectives

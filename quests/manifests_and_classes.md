@@ -1,8 +1,3 @@
----
-title: Manifests and Classes
-layout: default
----
-
 # Manifests and classes
 
 ## Quest objectives

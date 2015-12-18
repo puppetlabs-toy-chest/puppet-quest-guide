@@ -1,8 +1,3 @@
----
-title: Variables and Parameters
-layout: default
----
-
 # Variables and Parameters
 
 ## Quest objectives

@@ -1,8 +1,3 @@
----
-title: NTP
-layout: default
----
-
 # NTP
 
 ## Quest objectives

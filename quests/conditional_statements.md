@@ -1,8 +1,3 @@
----
-title: Conditional Statements
-layout: default
----
-
 # Conditional statements
 
 ## Quest objectives
