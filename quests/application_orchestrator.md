@@ -354,7 +354,7 @@ Now let's go ahead and create our new `sql` resource type.
 
 The new type is defined by a block of Ruby code, like so:
 
-{% highlight ruby %}
+```ruby
 Puppet::Type.newtype :sql, :is_capability => true do
   newparam :name, :is_namevar => true
   newparam :user
