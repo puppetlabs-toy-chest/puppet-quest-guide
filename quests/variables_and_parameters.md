@@ -152,6 +152,8 @@ Once you've validated your manifest with the `puppet parser` tool, create a test
 for your manifest with an `include` statement for the web class you created 
 (you covered testing in the "Modules" quest).
 
+<div class = "lvm-task-number"><p>Task 4:</p></div>
+
 Create a `web/examples/init.pp` manifest 
 and insert `include web`. Save and exit the file, then apply it, using the `--noop` 
 flag (`puppet apply --noop web/examples/init.pp`). If your dry run looks good, run 
@@ -159,9 +161,7 @@ flag (`puppet apply --noop web/examples/init.pp`). If your dry run looks good, r
 
     puppet apply --noop web/examples/init.pp
 
-<div class = "lvm-task-number"><p>Task 4:</p></div>
-
-Take a look [here](/hello.html) and [here](/bonjour.html) to see your new pages.
+Take a look at `<VM'S IP>/hello.html` and `<VM'S IP>/bonjour.html` to see your new pages.
 
 ## Class parameters
 
@@ -235,7 +235,7 @@ class {'web':
 
 Now give it a try. Go ahead and do a `--noop` run, then apply the test.
 
-Your new page should now be available [here](/hola.html)!
+Your new page should now be available at `<VM'S IP>/hola.html`!
 
 ## Review
 

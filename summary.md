@@ -12,4 +12,5 @@
 * [Resource Ordering](quests/resource_ordering.md)
 * [Defined Resource Types](quests/defined_resource_types.md)
 * [Agent Setup](quests/agent_setup.md)
+* [Application Orchestrator](quests/application_orchestrator.md)
 * [Afterword](quests/afterword.md)

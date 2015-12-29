@@ -194,7 +194,7 @@ The file is formatted in JSON. (Remember that the while final commas in your
 hashes are a best practice in your Puppet code, they're invalid JSON!)
 Set the following options:
 
-{% highlight json %}
+```json
 {
   "options": {
     "url": "https://learning.puppetlabs.vm:8143",
@@ -354,7 +354,7 @@ Now let's go ahead and create our new `sql` resource type.
 
 The new type is defined by a block of Ruby code, like so:
 
-{% highlight ruby %}
+```ruby
 Puppet::Type.newtype :sql, :is_capability => true do
   newparam :name, :is_namevar => true
   newparam :user

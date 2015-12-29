@@ -137,7 +137,7 @@ directory so that it will be easily viewable from your browser.
 
     dot -Tpng /opt/puppetlabs/puppet/cache/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
 
-Take a look at [the graph](/relationships.png). Notice that the `openssh-server`
+Take a look at `<VM'S IP>/relationships.png`. Notice that the `openssh-server`
 and `sshd` resources you defined are connected by an arrow to indicate the
 dependency relationship.
 
@@ -191,7 +191,7 @@ then use the `dot` tool again to regenerate your graph image.
 
     dot -Tpng /opt/puppetlabs/puppet/cache/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
 
-Check [your graph](/relationships.png) again to see how your new `file` resource
+Check `<VM'S IP>/relationships.png` again to see how your new `file` resource
 fits in.
 
 ![image](../assets/relationships2.png)
@@ -241,7 +241,7 @@ Validate your syntax with the `puppet parser` tool. When your syntax looks good,
 apply your test manifest with the `--graph` and `--noop` flags, then use the `dot`
 tool again to regenerate your graph image again.
 
-Check [your graph](/relationships.png) one more time. Notice that the `sshd`
+Check `<VM'S IP>/relationships.png` one more time. Notice that the `sshd`
 resource now depends on the `/etc/ssh/sshd_config` file.
 
 ![image](..//assets/relationships3.png)
