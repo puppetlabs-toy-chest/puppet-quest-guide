@@ -194,7 +194,7 @@ The file is formatted in JSON. (Remember that the while final commas in your
 hashes are a best practice in your Puppet code, they're invalid JSON!)
 Set the following options:
 
-{% highlight json %}
+```json
 {
   "options": {
     "url": "https://learning.puppetlabs.vm:8143",
