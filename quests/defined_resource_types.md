@@ -1,8 +1,3 @@
----
-title: Defined Resource Types
-layout: default
----
-
 # Defined Resource Types
 
 ## Quest objectives
@@ -20,7 +15,7 @@ what to do if you want Puppet to repeat the same pattern multiple times, but
 with different parameters.
 
 In most cases, the simplest answer is the defined resource type. A defined
-resource type is a block of puppet code that can be declared multiple times with
+resource type is a block of Puppet code that can be declared multiple times with
 different parameter values. Once defined, a defined resource type looks and acts
 just like the core resource types you're already familiar with.
 
@@ -48,7 +43,7 @@ that defines the behavior of these custom resource *types* and the *providers*
 that implement them on a system. 
 
 Writing custom providers, however, is a significant commitment. When you start
-writing your own providers, you're taking on responsbility for all the
+writing your own providers, you're taking on responsibility for all the
 abstraction Puppet uses to handle the implementation of that resource on diverse
 operating systems and configurations. Though this kind of project can be a great
 contribution to the Puppet community, it's not generally appropriate for a
@@ -175,7 +170,7 @@ location beginning with a `~` to a `public_html` directory in the corresponding
 user's home directory.
 
 You don't need to understand the details of this configuration for this quest.
-That said, the puppet code we used for this configuration is a real-world
+That said, the Puppet code we used for this configuration is a real-world
 example of a defined resource type, so it's worth taking a quick look. The
 defined resource type we used comes from the `jfryman-nginx` module. We
 declared it with a few parameters to set up a location that will automatically
@@ -210,7 +205,7 @@ So let's see about giving our `web_user::user` resource a `public_html`
 directory and a default `index.html` page. We'll need to add a directory and a
 file.  Because the parameters for our `public_html` directory will be identical
 to those of the home directory, we can use an array to declare both at once.
-Note that puppet's autorequires will take care of the ordering in this case,
+Note that Puppet's autorequires will take care of the ordering in this case,
 ensuring that the home directory is created before the `public_html` directory
 it contains. 
 
@@ -218,7 +213,7 @@ We'll set the `replace` parameter for the `index.html` file to `false`.
 This means that Puppet will create that file if it doesn't exist, but won't
 replace an existing file. This will allow us to create a default page for the
 user, but will allow the user to replace that default content without having
-it over-written again on the next puppet run.
+it over-written again on the next Puppet run.
 
 Finally, we can use string interpolation to customize the default content of the
 user's home page. (Puppet also supports `.erb` and `.epp` style templates, which
@@ -263,7 +258,7 @@ before applying your test manifest again:
 
     puppet apply web_user/examples/user.pp
 
-Once the puppet run completes, take a look at your user's new default
+Once the Puppet run completes, take a look at your user's new default
 [home page](/~shelob/index.html).
 
 ### Parameters
@@ -287,7 +282,7 @@ values.
   define web_user::user (
     $content  = "<h1>Welcome to ${title}'s home page!</h1>",
     $password = undef,
-) {
+  ) {
 ```
 
 There are a couple of details you should be sure to notice here.
@@ -304,10 +299,10 @@ default. Any parameter without a default value specified will cause an error if
 you declare your defined resource type without specifying a value for that
 parameter. If we left the `$password` parameter without a default, you would
 always have to specify a password. For the underlying `user` resource type,
-however, the `password` parameter is actually optional. By using the special
-`undef` value as a default, we can explicitly tell Puppet to treat that value as
-undefined, and act as if we simply hadn't included it in our list of key value
-pairs for our `user` resource.
+however, the `password` parameter is actually optional on Linux systems. By
+using the special `undef` value as a default, we can explicitly tell Puppet
+to treat that value as undefined, and act as if we simply hadn't included it
+in our list of key value pairs for our `user` resource.
 
 Now that you have these parameters set up, go ahead and update the body
 of your defined resource type to make use of them.
@@ -362,7 +357,7 @@ manifest:
 
     puppet apply web_user/examples/user.pp
 
-Once the puppet run completes, check your new user's page [here](/~frodo/index.html).
+Once the Puppet run completes, check your new user's page [here](/~frodo/index.html).
 
 ## Review
 

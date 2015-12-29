@@ -1,8 +1,3 @@
----
-title: Manifests and Classes
-layout: default
----
-
 # Manifests and classes
 
 ## Quest objectives
@@ -170,8 +165,7 @@ Your bovine friend clearly knows what's up.
 
      ____________________
     < Puppet is awesome! >
-     --------------------
-            \   ^__^
+                \   ^__^
              \  (oo)\_______
                 (__)\       )\/\
                     ||----w |

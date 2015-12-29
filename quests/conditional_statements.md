@@ -1,8 +1,3 @@
----
-title: Conditional Statements
-layout: default
----
-
 # Conditional statements
 
 ## Quest objectives
@@ -15,7 +10,7 @@ layout: default
 Conditional statements allow you to write Puppet code that will return different
 values or execute different blocks of code depending on conditions you specify.
 In conjunction with Facter, which makes details of a machine available as 
-variables, this lets you write Puppet code that flexibly accomodates different
+variables, this lets you write Puppet code that flexibly accommodates different
 platforms, operating systems, and functional requirements.
 
 To start this quest enter the following command:
@@ -252,7 +247,7 @@ You can use the `puppet resource` tool to verify the results.
 ### Unless
 
 The `unless` statement works like a reversed `if` statement. An `unless`
-statements takes a condition and a block of Puppet code. It will only execute
+statement takes a condition and a block of Puppet code. It will only execute
 the block **if** the condition is **false**. If the condition is true, Puppet
 will do nothing and move on. Note that there is no equivalent of `elsif` or
 `else` clauses for `unless` statements.
@@ -266,6 +261,8 @@ execute the first block of code whose case value matches the control expression.
 
 A special `default` case matches anything. It should always be included at the
 end of a case statement to catch anything that did not match an explicit case.
+While your other cases will often be strings with surrounding quotation marks,
+the `default` case is a bare word without surrounding quotation marks.
 
 For instance, if you were setting up an Apache webserver, you might use a case
 statement like the following:
@@ -326,5 +323,5 @@ facter to determine how to set the group for an administrator user account.
 We also covered a few other forms of conditional statement: `unless`, the case
 statement, and the selector. Though there aren't any hard-and-fast rules for
 which conditional statement is best in a given situation, there will generally
-be one that results in the most concise and readible code. It's up to you to
+be one that results in the most concise and readable code. It's up to you to
 decide what works best.

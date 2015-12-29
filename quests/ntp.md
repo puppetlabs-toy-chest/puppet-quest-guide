@@ -1,8 +1,3 @@
----
-title: NTP
-layout: default
----
-
 # NTP
 
 ## Quest objectives
@@ -68,7 +63,7 @@ keep track of what Puppet changes and understand why the NTP module does what it
 does.
 
 To get the NTP service running, there are three key resources that Puppet will
-manage. The puppet resource tool can show you the current state of each of
+manage. The `puppet resource` tool can show you the current state of each of
 these resources.
 
 First, check the state of the NTP *package*:
@@ -89,7 +84,7 @@ configuration file exists, but that the ntpd service is 'stopped'.
 As you continue to work with Puppet, you'll find that this
 *package/file/service* pattern is very common. These three resource types
 correspond to the common sequence of installing a package, customizing that
-package's functionality with configuration file, and starting the service
+package's functionality with configuration files, and starting the service
 provided by that package.
 
 The *package/file/service* pattern also describes the typical relationships of
@@ -114,11 +109,11 @@ same name can lead to conflicts!
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
-Use the puppet module tool to install the Puppet Labs `ntp` module.
+Use the Puppet module tool to install the Puppet Labs `ntp` module.
 
     puppet module install puppetlabs-ntp
 	
-This command tells the puppet module tool to fetch the module from the Puppet
+This command tells the Puppet module tool to fetch the module from the Puppet
 Forge and place it in Puppet's modulepath:
 `/etc/puppetlabs/code/environments/production/modules`.
 
@@ -176,20 +171,20 @@ node 'learning.puppetlabs.vm' {
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
-Note that triggering a puppet run with the `puppet agent` tool is useful for
+Note that triggering a Puppet run with the `puppet agent` tool is useful for
 learning and testing, but that in a production environment you would want to
-let the puppet agent run as scheduled, every 30 minutes, by default. Because
-you'll be running puppet right after making changes to the `site.pp` manifest,
-puppet may not have a chance to refresh its cache. If your changes to the
-`site.pp` manifest aren't reflected in a puppet run triggered by the
+let the Puppet agent run as scheduled, every 30 minutes, by default. Because
+you'll be running Puppet right after making changes to the `site.pp` manifest,
+Puppet may not have a chance to refresh its cache. If your changes to the
+`site.pp` manifest aren't reflected in a Puppet run triggered by the
 `puppet agent -t` command, try running the command again.
 
 Test the `site.pp` manifest with the `puppet parser validate` command, and trigger
-a puppet run.
+a Puppet run.
 
     puppet agent -t
 
-Once the puppet run is complete, use the puppet resource tool to inspect the
+Once the Puppet run is complete, use the Puppet resource tool to inspect the
 `ntpd` service again. If the class has been successfully applied, you will see
 that the service is running.
 
@@ -266,9 +261,9 @@ include two from the ntp.org pool and one known nearby timeserver.
 
 <div class = "lvm-task-number"><p>Task 5:</p></div>
 
-Once you've made your changes to the `site.pp` manifest and used the puppet
-parser tool to validate your syntax, use the puppet agent tool to trigger a
-puppet run.
+Once you've made your changes to the `site.pp` manifest and used the `puppet parser`
+tool to validate your syntax, use the `puppet agent` tool to trigger a
+Puppet run.
 
 You will see in the output that Puppet has changed the `/etc/ntp.conf` file and
 triggered a refresh of the `ntpd` service.
