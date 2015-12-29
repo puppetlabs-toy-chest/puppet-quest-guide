@@ -69,7 +69,6 @@ this installation easy. Go ahead and run:
 
     puppet module install dwerder-graphite
     
-{% aside Offline? %}
 If you don't have internet access, run the following terminal commands to use
 cached versions of all the modules required for quests in this guide:
 
