@@ -1,8 +1,3 @@
----
-title: Conditional Statements
-layout: default
----
-
 # Conditional statements
 
 ## Quest objectives
@@ -15,7 +10,7 @@ layout: default
 Conditional statements allow you to write Puppet code that will return different
 values or execute different blocks of code depending on conditions you specify.
 In conjunction with Facter, which makes details of a machine available as 
-variables, this lets you write Puppet code that flexibly accomodates different
+variables, this lets you write Puppet code that flexibly accommodates different
 platforms, operating systems, and functional requirements.
 
 To start this quest enter the following command:
@@ -141,42 +136,13 @@ Before you get started writing your module, make sure you're working in the
 
     cd /etc/puppetlabs/code/environments/production/modules
 	
-{% task 1 %}
----
-- execute: mkdir /etc/puppetlabs/code/environments/production/modules/accounts
-- execute: mkdir /etc/puppetlabs/code/environments/production/modules/accounts/{manifests,examples}
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 	
 Create an `accounts` directory and your `examples` and `manifests` directories:
 
     mkdir -p accounts/{manifests,examples}
 	
-{% task 2 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/accounts/manifests/init.pp
-  content: |
-    class accounts ($user_name) {
-      
-      if $::operatingsystem == 'centos' {
-        $groups = 'wheel'
-      }
-      elsif $::operatingsystem == 'debian' {
-        $groups = 'admin'
-      }
-      else {
-        fail( "This module doesn't support ${::operatingsystem}." )
-      }
-
-      notice ( "Groups for user ${user_name} set to ${groups}" )
-
-      user { $user_name:
-        ensure => present,
-        home => "/home/${user_name}",
-        groups => $groups,
-      }
-
-    }
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 	
 Open the `accounts/manifests/init.pp` manifest in Vim.
 
@@ -188,7 +154,7 @@ Puppet will ad the user to the `admin` group.
 
 The beginning of your class definition should look like this:
 
-{% highlight puppet %}
+```puppet
 class accounts ($user_name) {
 
   if $::operatingsystem == 'centos' {
@@ -206,7 +172,7 @@ class accounts ($user_name) {
   ... 
 
 }
-{% endhighlight %}
+```
 
 Note that the string matches are *not* case sensitive, so 'CENTOS' would work
 just as well as 'centos'. Finally, in the `else` block, you'll raise an error
@@ -217,7 +183,7 @@ a `user` resource declaration. Use the `$user_name` variable set by your class p
 to set the title and home of your user, and use the `$groups` variable to set the
 user's `groups` attribute.
 
-{% highlight puppet %}
+```puppet
 class accounts ($user_name) {
 
   ...
@@ -231,35 +197,25 @@ class accounts ($user_name) {
   ...
 
 }
-{% endhighlight %}
+```
 
 Make sure that your manifest can pass a `puppet parser validate` check before
 continuing on.
 
-{% task 3 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/accounts/examples/init.pp
-  content: |
-    class {'accounts':
-      user_name => 'dana',
-    }
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 Create a test manifest (`accounts/examples/init.pp`) and declare the accounts
 manifest with the name parameter set to `dana`.
 
-{% highlight puppet %}
+```puppet
 
 class {'accounts':
   user_name => 'dana',
 }
 
-{% endhighlight %}
+```
 
-{% task 4 %}
----
-- execute: FACTER_operatingsystem=Debian puppet apply --noop /etc/puppetlabs/code/environments/production/modules/accounts/examples/init.pp
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 The Learning VM is running CentOS, but to test our conditional logic,
 we want to see what would happen on a Debian system. Luckily, we can use
@@ -275,20 +231,14 @@ manifest would run on a different system.
 Look in the list of notices, and you'll see the changes that would have been
 applied.
 
-{% task 5 %}
----
-- execute: FACTER_operatingsystem=Darwin puppet apply --noop /etc/puppetlabs/code/environments/production/modules/accounts/examples/init.pp
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 Try one more time with an unsupported operating system to check the fail
 condition:
 
     FACTER_operatingsystem=Darwin puppet apply --noop accounts/examples/init.pp
 
-{% task 6 %}
----
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/accounts/examples/init.pp
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Now go ahead and run a `puppet apply --noop` on your test manifest without
 setting the environment variable. If this looks good, drop the `--noop` flag to
@@ -299,7 +249,7 @@ You can use the `puppet resource` tool to verify the results.
 ### Unless
 
 The `unless` statement works like a reversed `if` statement. An `unless`
-statements takes a condition and a block of Puppet code. It will only execute
+statement takes a condition and a block of Puppet code. It will only execute
 the block **if** the condition is **false**. If the condition is true, Puppet
 will do nothing and move on. Note that there is no equivalent of `elsif` or
 `else` clauses for `unless` statements.
@@ -313,11 +263,13 @@ execute the first block of code whose case value matches the control expression.
 
 A special `default` case matches anything. It should always be included at the
 end of a case statement to catch anything that did not match an explicit case.
+While your other cases will often be strings with surrounding quotation marks,
+the `default` case is a bare word without surrounding quotation marks.
 
 For instance, if you were setting up an Apache webserver, you might use a case
 statement like the following:
 
-{% highlight puppet %}
+```puppet
 case $::operatingsystem {
   'CentOS': { $apache_pkg = 'httpd' }
   'Redhat': { $apache_pkg = 'httpd' }
@@ -329,7 +281,7 @@ case $::operatingsystem {
 package { $apache_pkg :
   ensure => present,
 }
-{% endhighlight %}
+```
 
 This would allow you to always install and manage the right Apache package for a
 machine's operating system. Accounting for the differences between various
@@ -341,14 +293,14 @@ Selector statements are similar to `case` statements, but instead of executing a
 block of code, a selector assigns a value directly. A selector might look
 something like this:
 
-{% highlight puppet %}
+```puppet
 $rootgroup = $::osfamily ? {
   'Solaris'  => 'wheel',
   'Darwin'   => 'wheel',
   'FreeBSD'  => 'wheel',
   'default'  => 'root',
 }
-{% endhighlight %}
+```
 
 Here, the value of the `$rootgroup` is determined based on the control variable
 `$::osfamily`. Following the control variable is a `?` (question mark) symbol.
@@ -373,5 +325,5 @@ facter to determine how to set the group for an administrator user account.
 We also covered a few other forms of conditional statement: `unless`, the case
 statement, and the selector. Though there aren't any hard-and-fast rules for
 which conditional statement is best in a given situation, there will generally
-be one that results in the most concise and readible code. It's up to you to
+be one that results in the most concise and readable code. It's up to you to
 decide what works best.

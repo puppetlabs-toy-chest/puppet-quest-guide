@@ -1,8 +1,3 @@
----
-title: Modules
-layout: default
----
-
 # Modules
 
 ## Quest objectives
@@ -64,10 +59,7 @@ developed and maintained by others.
 All modules accessible by your Puppet Master are located in the directories
 specified by the *modulepath* variable in Puppet's configuration file.
 
-{% task 1 %}
----
-- execute: puppet master --configprint modulepath
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
 You can find the modulepath on your puppet master by running the
 `puppet master` command with the `--configprint` flag and the
@@ -136,20 +128,14 @@ Change your working directory to the modulepath if you're not already there.
 
     cd /etc/puppetlabs/code/environments/production/modules
 
-{% task 2 %}
----
-- execute: mkdir /etc/puppetlabs/code/environments/production/modules/vimrc
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 The top directory will be the name you want for the module. In this case, let's
 call it "vimrc." Use the `mkdir` command to create your module directory:
 
     mkdir vimrc
 
-{% task 3 %}
----
-- execute: mkdir /etc/puppetlabs/code/environments/production/modules/vimrc/{manifests,examples,files}
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 Now you need three more directories, one for manifests, one for examples, and one
 for files.
@@ -174,26 +160,13 @@ directory of your new module. Any file in the `files` directory of a module in
 the Puppet master's modulepath will be available to client nodes through
 Puppet's built-in fileserver.
 
-{% task 4 %}
----
-- execute: cp /root/.vimrc /etc/puppetlabs/code/environments/production/modules/vimrc/files/vimrc
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Copy the existing `.vimrc` file to your module's `files` directory:
 
     cp ~/.vimrc vimrc/files/vimrc
 	
-{% task 5 %}
----
-- execute: vim /etc/puppetlabs/code/environments/production/modules/vimrc/files/vimrc
-  input:
-    - G
-    - O
-    - set number
-    - "\e"
-    - ":"
-    - "wq\r"
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 	
 Once you've copied the file, open so you can make an addition.
 
@@ -206,17 +179,7 @@ following line to the end of the file to tell Vim to turn on line numbering.
 	
 Save and exit.
 
-{% task 6 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/vimrc/manifests/init.pp
-  content: |
-    class vimrc {
-      file { '/root/.vimrc':
-        ensure => present,
-        source => 'puppet:///modules/vimrc/vimrc',
-      }
-    } 
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Now that your source file is ready, you need to write a manifest to tell puppet
 what to do with it.
@@ -277,14 +240,14 @@ the implicit hostname, then, the attribute value pair for the source URI is:
 
 Putting this all together, your `init.pp` manifest should contain the following:
 
-{% highlight puppet %}
+```puppet
 class vimrc {
   file { '/root/.vimrc':
     ensure => present,
     source => 'puppet:///modules/vimrc/vimrc',
   }
 }
-{% endhighlight %}
+```
 
 Save the manifest, and use the `puppet parser` tool to validate your syntax:
 
@@ -296,11 +259,7 @@ Remember, this manifest *defines* the `vimrc` class, but you'll need to
 *declare* it for it to have an effect. That is, we've described what the `vimrc`
 class is, but you haven't told Puppet to actually do anything with it.
 
-{% task 7 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/vimrc/examples/init.pp
-  content: include vimrc
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 7:</p></div>
 
 To test the `vimrc` class, create a manifest called `init.pp`  in the
 `vimrc/examples` directory.
@@ -309,14 +268,11 @@ To test the `vimrc` class, create a manifest called `init.pp`  in the
 
 All you'll do here is *declare* the `vimrc` class with the `include` directive.
 
-{% highlight puppet %}
+```puppet
 include vimrc
-{% endhighlight %}
+```
 
-{% task 8 %}
----
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/vimrc/examples/init.pp
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 8:</p></div>
 
 Apply the new manifest with the `--noop` flag. If everything looks good, drop
 the `--noop` and apply it for real.

@@ -1,8 +1,3 @@
----
-title: MySQL
-layout: default
----
-
 # MySQL
 
 ## Quest Objectives
@@ -32,10 +27,7 @@ instances, and extends Puppet's standard resource types to let you manage MySQL
 
 ## Server install
 
-{% task 1 %}
----
-- execute: puppet module install puppetlabs-mysql
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
 Before getting started configuring your MySQL server installation, fetch the
 `puppetlabs-mysql` module from the Puppet Forge with the `puppet module` tool.
@@ -45,20 +37,7 @@ Before getting started configuring your MySQL server installation, fetch the
 With this module installed in the Puppet master's module path, all the included
 classes are available to classify nodes.
 
-{% task 2 %}
----
-- execute: vim /etc/puppetlabs/code/environments/production/manifests/site.pp
-  input:
-    - ":set paste\r"
-    - "/default {\r"
-    - o
-    - "class { '::mysql::server':\r"
-    - "root_password => 'strongpassword',\r"
-    - "override_options => { 'mysqld' => { 'max_connections' => '1024' } },\r"
-    - "}"
-    - "\e"
-    - ":wq\r"
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 Now we'll edit the `site.pp` to classify the Learning VM with the MySQL server class.
 
@@ -67,11 +46,11 @@ Now we'll edit the `site.pp` to classify the Learning VM with the MySQL server c
 If you completed the NTP quest, you will already have a node declaration for the
 `learning.puppetlabs.vm` certname. If not, create it now:
 
-{% highlight puppet %}
+```puppet
 node 'learning.puppetlabs.vm' {
 
 }
-{% endhighlight %}
+```
 
 Within that node block, you can declare your `::mysql::server` class and set its
 parameters. For this example, we'll specify a root password and set the
@@ -79,7 +58,7 @@ server's max connections to '1024'. (You may notice that the formatting in vim i
 bit funky when typing or pasting nested hashes. You can disable this formatting with
 the `:set paste` command in vim.)
 
-{% highlight puppet %}
+```puppet
 node 'learning.puppetlabs.vm' {
   class { '::mysql::server':
     root_password    => 'strongpassword',
@@ -88,7 +67,7 @@ node 'learning.puppetlabs.vm' {
     },
   }
 }
-{% endhighlight %}
+```
 	
 Notice that in addition to standard parameters like the `root_password`, the class
 takes a `override_options` as a hash, which you can use to address any
@@ -97,10 +76,7 @@ hash lets you manage these settings without requiring each to be written
 into the class as a separate parameter. The structure of the `override_options`
 hash is analogous to the `[section]`, `var_name = value` syntax of a `my.cnf` file.
 
-{% task 3 %}
----
-- execute: puppet agent -t
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 Use the `puppet parser validate` tool to check your syntax, then trigger a
 puppet run:
@@ -190,28 +166,19 @@ For security reasons, you will generally want to remove the default users and
 the 'test' database from a new MySQL installation. The `account_security` class
 mentioned above does just this.
 
-{% task 4 %}
----
-- execute: vim /etc/puppetlabs/code/environments/production/manifests/site.pp
-  input:
-    - "/default {\r"
-    - o
-    - "include mysql::server::account_security"
-    - "\e"
-    - ":wq\r"
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Go back to your `site.pp` manifest and include the `mysql::server::account_security`
 class in the `learning.puppetlabs.vm` node. Remember, you don't need to pass any
 parameters to this class, so a simple `include` statement will work in place
 of a parameterized class declaration.
 
-{% highlight puppet %}
+```puppet
 node 'learning.puppetlabs.vm' {
   include ::mysql::server::account_security
   ...
 }
-{% endhighlight %}
+```
 
 Validate your site.pp
 
@@ -260,30 +227,7 @@ The MySQL module includes custom types and providers that make `mysql_user`,
 
 ## Database, user, grant:
 
-{% task 5 %}
----
-- execute: vim /etc/puppetlabs/code/environments/production/manifests/site.pp
-  input:
-    - "/default {\r"
-    - o
-    - "mysql_database { 'lvm':\r"
-    - "ensure => present,\r"
-    - "charset => 'utf8',\r"
-    - "}\r"
-    - "mysql_user { 'lvm_user@localhost':\r"
-    - "ensure => present,\r"
-    - "}\r"
-    - "mysql_grant { 'lvm_user@localhost/lvm.*':\r"
-    - "ensure => present,\r"
-    - "options => ['GRANT'],\r"
-    - "privileges => ['ALL'],\r"
-    - "table => 'lvm.*',\r"
-    - "user => 'lvm_user@localhost',\r"
-    - "}"
-    - "\e"
-    - ":wq\r"
-- execute: puppet agent -t
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 These custom resource types make it possible to manage a new database with a
 few lines of puppet code. 
@@ -291,22 +235,22 @@ few lines of puppet code.
 Add the following resource declaration to your `site.pp` node definition.
 (Remember the `:set paste` command if you need it.)
 
-{% highlight puppet %}
+```puppet
   mysql_database { 'lvm':
       ensure  => present,
       charset => 'utf8',
   }
-{% endhighlight %}
+```
 
 Similarly, with a user, all you have to do is specify the name and host as the
 resource title, and set the ensure attribute to present. Enter the following
 in your node definition as well.
 
-{% highlight puppet %}
+```puppet
   mysql_user { 'lvm_user@localhost':
     ensure => present,
   }
-{% endhighlight %}
+```
 
 Now that you have a user and database, you can use a grant to define the
 privileges for that user. 
@@ -315,7 +259,7 @@ Note that the `*` character will match any table. Thus, `table => 'lvm.*'`
 below means that the `lvm_user` has `ALL` permissions to all tables in
 the `lvm` database. 
 
-{% highlight puppet %}
+```puppet
   mysql_grant { 'lvm_user@localhost/lvm.*':
     ensure      => present,
     options     => ['GRANT'],
@@ -323,7 +267,7 @@ the `lvm` database.
     table       => 'lvm.*',
     user        => 'lvm_user@localhost',
   }
-{% endhighlight %}
+```
 
 Once you've added declarations for these three custom resources, use the `puppet
 parser validate` command on the `site.pp` manifest to check your syntax

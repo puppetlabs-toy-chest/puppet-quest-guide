@@ -1,8 +1,3 @@
----
-title: NTP
-layout: default
----
-
 # NTP
 
 ## Quest objectives
@@ -68,7 +63,7 @@ keep track of what Puppet changes and understand why the NTP module does what it
 does.
 
 To get the NTP service running, there are three key resources that Puppet will
-manage. The puppet resource tool can show you the current state of each of
+manage. The `puppet resource` tool can show you the current state of each of
 these resources.
 
 First, check the state of the NTP *package*:
@@ -89,7 +84,7 @@ configuration file exists, but that the ntpd service is 'stopped'.
 As you continue to work with Puppet, you'll find that this
 *package/file/service* pattern is very common. These three resource types
 correspond to the common sequence of installing a package, customizing that
-package's functionality with configuration file, and starting the service
+package's functionality with configuration files, and starting the service
 provided by that package.
 
 The *package/file/service* pattern also describes the typical relationships of
@@ -112,16 +107,13 @@ look at the module saved to the modulepath on your Puppet master, however, it wi
 be named `ntp`. Keep this in mind, as trying to install multiple modules of the
 same name can lead to conflicts!
 
-{% task 1 %}
----
-- execute: puppet module install puppetlabs-ntp
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
-Use the puppet module tool to install the Puppet Labs `ntp` module.
+Use the Puppet module tool to install the Puppet Labs `ntp` module.
 
     puppet module install puppetlabs-ntp
 	
-This command tells the puppet module tool to fetch the module from the Puppet
+This command tells the Puppet module tool to fetch the module from the Puppet
 Forge and place it in Puppet's modulepath:
 `/etc/puppetlabs/code/environments/production/modules`.
 
@@ -142,11 +134,11 @@ definitions* (sometimes called `node statements`).
 A node definition is the code-defined equivalent of the node group you saw in
 the Power of Puppet quest.
 
-{% highlight puppet %}
+```puppet
 node 'learning.puppetlabs.vm' {
   ...
 }
-{% endhighlight %}
+```
 
 {% aside PE console or site.pp? %}
 Because it's more amenable to monitoring with the Learning VM quest tool, we'll
@@ -156,17 +148,7 @@ methods of classification you decide to use later, including the PE Console node
 classifier.
 {% endaside %}
 
-{% task 2 %}
----
-- execute: vim /etc/puppetlabs/code/environments/production/manifests/site.pp
-  input:
-    - "/default {\r"
-    - o
-    - "include ntp"
-    - "\e"
-    - ":"
-    - "wq\r"
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 Open the site.pp manifest in your text editor.
 
@@ -181,33 +163,30 @@ definition.
 We only want our changes to apply to the Learning VM, however, so we'll put our
 `ntp` class declaration in a new `learning.puppetlabs.vm` node block.
 
-{% highlight puppet %}
+```puppet
 
 node 'learning.puppetlabs.vm' {
   include ntp
 }
 
-{% endhighlight %}
+```
 
-{% task 3 %}
----
-- execute: puppet agent -t
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
-Note that triggering a puppet run with the `puppet agent` tool is useful for
+Note that triggering a Puppet run with the `puppet agent` tool is useful for
 learning and testing, but that in a production environment you would want to
-let the puppet agent run as scheduled, every 30 minutes, by default. Because
-you'll be running puppet right after making changes to the `site.pp` manifest,
-puppet may not have a chance to refresh its cache. If your changes to the
-`site.pp` manifest aren't reflected in a puppet run triggered by the
+let the Puppet agent run as scheduled, every 30 minutes, by default. Because
+you'll be running Puppet right after making changes to the `site.pp` manifest,
+Puppet may not have a chance to refresh its cache. If your changes to the
+`site.pp` manifest aren't reflected in a Puppet run triggered by the
 `puppet agent -t` command, try running the command again.
 
 Test the `site.pp` manifest with the `puppet parser validate` command, and trigger
-a puppet run.
+a Puppet run.
 
     puppet agent -t
 
-Once the puppet run is complete, use the puppet resource tool to inspect the
+Once the Puppet run is complete, use the Puppet resource tool to inspect the
 `ntpd` service again. If the class has been successfully applied, you will see
 that the service is running.
 
@@ -257,7 +236,7 @@ method to set variables in a class as it's declared. The syntax for
 parameterized classes looks similar to the syntax for resource declarations.
 Have a look at the following example:
 
-{% highlight puppet %}
+```puppet
 
 class { 'ntp':
   servers => [
@@ -267,27 +246,14 @@ class { 'ntp':
   ]
 }
 
-{% endhighlight %}
+```
 
 The `servers` parameter in our class declaration takes a list of servers as a
 value, not just one. This list of values, separated by commas (`,`) and wrapped
 in brackets (`[]`), is called an *array*. Arrays allow you assign a list of
 values to a single variable or attribute.
 
-{% task 4 %}
----
-- execute: vim /etc/puppetlabs/code/environments/production/manifests/site.pp
-  input:
-    - "/include ntp\r"
-    - dd
-    - i
-    - "  class { 'ntp':\r"
-    - "servers => ['nist-time-server.eoni.com','nist1-lv.ustiming.org','ntp-nist.ldsbc.edu']\r"
-    - "}"
-    - "\e"
-    - ":"
-    - "wq\r"
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 In your `site.pp`, replace the `include ntp` line with a parameterized class
 declaration based on the example above. Use the servers from the example, or, if
@@ -295,14 +261,11 @@ you know of a nearer timeserver, include that. You should always specify at
 least *three* timeservers for NTP to function reliably. You might, for instance,
 include two from the ntp.org pool and one known nearby timeserver.
 
-{% task 5 %}
----
-- execute: puppet apply -t
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
-Once you've made your changes to the `site.pp` manifest and used the puppet
-parser tool to validate your syntax, use the puppet agent tool to trigger a
-puppet run.
+Once you've made your changes to the `site.pp` manifest and used the `puppet parser`
+tool to validate your syntax, use the `puppet agent` tool to trigger a
+Puppet run.
 
 You will see in the output that Puppet has changed the `/etc/ntp.conf` file and
 triggered a refresh of the `ntpd` service.

@@ -1,8 +1,3 @@
----
-title: Resources
-layout: default
----
-
 # Resources
 
 ## Quest objectives
@@ -65,7 +60,7 @@ helps to have a solid understanding of the Puppet code under the hood.
 Puppet's DSL is a *declarative* language rather than an *imperative* one. This
 means that instead of defining a process or set of commands, Puppet code
 describes (or declares) only the desired end state. With this desired state described,
-Puppet relies on built-in *providers* to handle with implementation.
+Puppet relies on built-in *providers* to handle implementation.
 
 One of the points where there is a nice carry over from Ruby is the *hash*
 syntax. It provides a clean way to format this kind of declarative model, and is
@@ -76,19 +71,16 @@ As we mentioned above, a key feature of Puppet's declarative model is that it
 goes both ways; that is, you can inspect the current state of any existing resource
 in the same syntax you would use to declare a desired state.
 
-{% task 1 %}
----
-- execute: puppet resource user root
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
-Use the *puppet resource* tool to take a look at your root user account. The
+Use the `puppet resource` tool to take a look at your root user account. The
 syntax of the command is: *puppet resource \<type\> \<name\>*.
 
     puppet resource user root 
 	
 You'll see something like the following:
 
-{% highlight puppet %}
+```puppet
 user { 'root':
   ensure           => present,
   comment          => 'root',
@@ -100,7 +92,7 @@ user { 'root':
   shell            => '/bin/bash',
   uid              => '0',
 }
-{% endhighlight %}
+```
 
 This resource declaration syntax is composed of three main components:
 
@@ -117,11 +109,11 @@ we'll go through the example point by point.
 
 We'll start with the first line first:
 
-{% highlight puppet %}
+```puppet
   user { 'root':
     ...
   }
-{% endhighlight %}
+```
 
 The word `user`, right _before_ the curly brace, is the **resource type**.
 The type represents the kind of thing that the resource describes. It tells
@@ -150,11 +142,11 @@ or try the command `puppet describe --list`.
 
 Take another look at the first line of the resource declaration. 
 
-{% highlight puppet %}
+```puppet
   user { 'root':
     ...
   }
-{% endhighlight %}
+```
 
 The single quoted word `'root'` just before the colon is the resource **title**.
 Puppet uses the resource title as its own internal unique identifier for that
@@ -172,15 +164,15 @@ default to the resource title. For example, as long as you explicitly tell Puppe
 that a user resource's `name` is `'root'`, you can actually give the resource any
 title you like. (`'superuser'`, maybe, or even `'spaghetti'`) Just because you *can* do
 this, though, doesn't mean it's generally a good idea! Unless you have a good
-reason to do otherwise, letting Puppet do it's defaulting magic with titles
-will save you typing and make your puppet code more readable.
+reason to do otherwise, letting Puppet do its defaulting magic with titles
+will save you typing and make your Puppet code more readable.
 
 ### Attribute Value Pairs
 
 Now that we've covered the *type* and *title*, take a look at the body of the
 resource declaration.
 
-{% highlight puppet %}
+```puppet
 user { 'root':
   ensure           => present,
   comment          => 'root',
@@ -192,7 +184,7 @@ user { 'root':
   shell            => '/bin/bash',
   uid              => '0',
 }
-{% endhighlight %}
+```
 
 After the colon in that first line comes a hash of **attributes** and their
 corresponding **values**. Each line consists of an attribute name, a `=>`
@@ -203,11 +195,11 @@ directory `/root`.
 So to bring this all together, a resource declaration will match the following
 pattern:
 
-{% highlight puppet %}
+```puppet
 type {'title':
     attribute => 'value',
 }
-{% endhighlight %}
+```
 
 {% aside Trailing comma %}
 The comma at the end of the final attribute value pair isn't required by the parser, but it is
@@ -216,19 +208,14 @@ inevitably forget to insert it when you add another attribute value pair on the
 following line!
 {% endaside %}
 
-{% task 2 %}
----
-- execute: "puppet describe user | less"
-  input:
-    - 'q'
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 Of course, the real meat of a resource is in these attribute value pairs. You
 can't do much with a resource without a good understanding of its attributes.
-The `puppet describe` makes this kind of information easily available from
+The `puppet describe` command makes this kind of information easily available from
 the command line.
 
-Use the *puppet describe* tool to get a description of the *user* type,
+Use the 'puppet describe' tool to get a description of the *user* type,
 including a list of its parameters.
 
     puppet describe user | less
@@ -246,11 +233,7 @@ You can use the `puppet apply` tool with the `-e` (`--execute`) flag to execute
 a bit of Puppet code. Though `puppet apply -e` is limited to one-off changes, it's
 a great tool for tests and exploration.
 
-{% task 3 %}
----
-- execute: |
-    puppet apply -e "user { 'galatea': ensure => present, }"
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 In this task, you'll create a new user called *galatea*. Puppet uses reasonable
 defaults for unspecified user attributes, so all you need to do to create a new
@@ -266,20 +249,11 @@ following command:
     puppet resource user galatea
 
 Notice that while the *root* user had a *comment* attribute, Puppet hasn't
-created one for your new user. As you may have noticed looking over the *puppet
-describe* entry for the user type, this *comment* is generally the full name of
+created one for your new user. As you may have noticed looking over the `puppet
+describe` entry for the user type, this *comment* is generally the full name of
 the account's owner.
 
-{% task 4 %}
----
-- execute: "puppet resource -e user galatea"
-  input:
-    - "o"
-    - "  comment => 'Galatea of Cyprus',"
-    - "\e"
-    - ":"
-    - "wq\r"
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Though you could add a comment with the `puppet apply -e`, you'd have to cram
 the whole resource declaration into one line, and you wouldn't be able to see

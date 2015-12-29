@@ -1,8 +1,3 @@
----
-title: Manifests and Classes
-layout: default
----
-
 # Manifests and classes
 
 ## Quest objectives
@@ -94,17 +89,7 @@ Let's start with cowsay. To use the `cowsay` command, you need to have the cowsa
 package installed. You can use a `package` resource to handle this installation,
 but you don't want to put that resource declaration just anywhere.
 
-{% task 1 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/manifests/cowsay.pp
-  content: |
-    class cowsayings::cowsay {
-      package { 'cowsay':
-        ensure => present,
-        provider => 'gem',
-      }
-    }
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
 To keep things tidy, we'll create a `cowsay.pp` manifest, and within that manifest
 we'll define a class that can manage the cowsay package.
@@ -115,14 +100,14 @@ Use vim to create a `cowsay.pp` manifest:
 
 Enter the following class definition, then save and exit (`:wq`):
 
-{% highlight puppet %}
+```puppet
 class cowsayings::cowsay {
   package { 'cowsay':
     ensure => present,
     provider => 'gem',
   }
 }
-{% endhighlight %}
+```
 
 Now that you're working with manifests, you can validate your code before you apply
 it. Use the `puppet parser` tool to check the syntax of your new manifest:
@@ -138,11 +123,7 @@ haven't *declared* it anywhere. Puppet knows that the cowsay class contains a
 resource declaration for the cowsay package, but hasn't yet been told to do
 anything with it.
 
-{% task 2 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/examples/cowsay.pp
-  content: include cowsayings::cowsay
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 To actually declare the class, create a `cowsay.pp` test in the examples directory.
 
@@ -172,11 +153,7 @@ You should see an output like the following:
     Notice: Stage[main]: Would have triggered 'refresh' from 1 events
     Notice: Finished catalog run in 1.08 seconds
 
-{% task 3 %}
----
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/cowsayings/examples/cowsay.pp
-- execute: cowsay Puppet is awesome!
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 If your dry run looks good, go ahead and run `puppet apply` again without the
 `--noop` flag. If everything went according to plan, the cowsay package is now
@@ -188,8 +165,7 @@ Your bovine friend clearly knows what's up.
 
      ____________________
     < Puppet is awesome! >
-     --------------------
-            \   ^__^
+                \   ^__^
              \  (oo)\_______
                 (__)\       )\/\
                     ||----w |
@@ -200,16 +176,7 @@ Your bovine friend clearly knows what's up.
 But this module isn't just about cowsay; it's about cow *sayings*. With the
 fortune package, you can provide your cow with a whole database of wisdom.
 
-{% task 4 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/manifests/fortune.pp
-  content: |
-    class cowsayings::fortune {
-      package { 'fortune-mod':
-        ensure => present,
-      }
-    }
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Create a new manifest for your fortune class definition:
 
@@ -217,19 +184,15 @@ Create a new manifest for your fortune class definition:
 	
 Write your class definition here:
 
-{% highlight puppet %}
+```puppet
 class cowsayings::fortune {
   package { 'fortune-mod':
     ensure => present,
   }
 }
-{% endhighlight %}
+```
 
-{% task 5 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/examples/fortune.pp
-  content: include cowsayings::fortune
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 Again, you'll want to validate your new manifests syntax with the `puppet parser
 validate` command. When everything checks out, you're ready to make your test
@@ -239,10 +202,7 @@ manifest:
 	
 As before, use `include` to declare your `cowsayings::fortune` class. 
 
-{% task 6 %}
----
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/cowsayings/examples/fortune.pp
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Apply the `cowsayings/examples/fortune.pp` manifest with the `--noop` flag. If 
 everything looks good, apply again without the flag.
@@ -273,15 +233,7 @@ naming the manifest for the class it contains, Puppet recognizes the special
 file name `init.pp` for the manifest that will contain a module's
 main class.
 
-{% task 7 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/manifests/init.pp
-  content: |
-    class cowsayings {
-      include cowsayings::cowsay
-      include cowsayings::fortune
-    }
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 7:</p></div>
 
 So to contain your main `cowsayings` class, create an `init.pp` manifest in the
 `cowsayings/manifests` directory:
@@ -292,24 +244,16 @@ Here, you'll define the `cowsayings` class. Within it, use the same
 `include` syntax you used in your tests to declare the `cowsayings::cowsay` and
 `cowsayings::fortune` classes.
 
-{% highlight puppet %}
+```puppet
 class cowsayings {
   include cowsayings::cowsay
   include cowsayings::fortune
 }
-{% endhighlight %}
+```
 
 Save the manifest, and check your syntax with the `puppet parser` tool.
 
-{% task 8 %}
----
-- execute: |
-    puppet resource package fortune-mod ensure=absent
-- execute: |
-    puppet resource package cowsay ensure=absent
-- file: /etc/puppetlabs/code/environments/production/modules/cowsayings/examples/init.pp
-  content: include cowsayings
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 8:</p></div>
 
 At this point, you already have both packages you want installed on the
 Learning VM. Applying the changes again wouldn't actually do anything. For the
@@ -327,10 +271,7 @@ Here, just declare the `cowsayings` class:
 
     include cowsayings
 
-{% task 9 %}
----
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/cowsayings/examples/init.pp
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 9:</p></div>
 
 Good. Now that the packages are gone, do a `--noop` first, then apply your
 `cowsayings/examples/init.pp` test.

@@ -1,8 +1,3 @@
----
-title: Resource Ordering
-layout: default
----
-
 # Resource ordering
 
 ## Quest objectives
@@ -53,12 +48,12 @@ that the `openssh-server` package is installed *before* you try to manage the `s
 service. To achieve this, you include a `before` metaparameter with the value
 `Service['sshd']`:
 
-{% highlight puppet %}
+```puppet
 package { 'openssh-server':
   ensure => present,
   before => Service['sshd'],
 }
-{% endhighlight %}
+```
 
 You can also approach the problem from the other direction. The `require`
 metaparameter is the mirror image of `before`. `require` tells Puppet that the current
@@ -67,55 +62,34 @@ resource *requires* the one specified by the metaparameter.
 Using `before` in the `openssh-server` package resource is exactly equivalent to
 using `require` in the `sshd` service resource:
 
-{% highlight puppet %}
+```puppet
 service { 'sshd':
   ensure   => running,
   enable   => true,
   require  => Package['openssh-server'],
 }
-{% endhighlight %}
+```
 
 In both of these cases, take note of the way you refer to the target resource.
 The target's *type* is capitalized, and followed by an *array* (denoted by the 
 square brackets) of one or more resource titles:
 
-{% highlight puppet %}
+```puppet
 Type['title']
-{% endhighlight %}
+```
 
 We've already covered a couple of the resources you'll need, so why not make
 a simple SSH module to explore resource relationships?
 
-{% task 1 %}
----
-- execute: mkdir -p /etc/puppetlabs/code/environments/production/modules/sshd/{examples,manifests,files}
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
 To get started with your module, create an `sshd` directory with `examples`,
 `manifests`, and `files` subdirectories.
 
-  cd /etc/puppetlabs/code/environments/production/modules
-  mkdir -p sshd/{examples,manifests,files}
+    cd /etc/puppetlabs/code/environments/production/modules
+    mkdir -p sshd/{examples,manifests,files}
 
-{% task 2 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/sshd/manifests/init.pp
-  content: |
-    class sshd {  
-
-      package { 'openssh-server':
-        ensure => present,
-      }
-
-      service { 'sshd':
-        ensure  => running,
-        enable  => true,
-        require => Package['openssh-server'],
-      }
-
-    }
-
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 Create an `sshd/manifests/init.pp` manifest and fill in your `sshd` class with the
 `openssh-server` package resource and `sshd` service resource. Don't forget to include
@@ -135,30 +109,22 @@ objects. Puppet uses a graph internally to determine a workable order for applyi
 resources, and you can access it yourself to visualize and better understand these
 resource relationships.
 
-{% task 3 %}
----
-- file: /etc/puppetlabs/code/environments/production/modules/sshd/examples/init.pp
-  content: include sshd
-- execute: puppet apply /etc/puppetlabs/code/environments/production/modules/sshd/examples/init.pp --noop --graph
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 The quickest way to get Puppet to generate a graph for this kind of testing is to run a test
-manifest with the `--noop` and `--graph` flags. Go ahead and set up a `sshd/examples/init.pp`
+manifest with the `--noop` and `--graph` flags. Go ahead and set up an `sshd/examples/init.pp`
 manifest. You don't have any parameters here, so you can use a simple:
 
-{% highlight puppet %}
+```puppet
 include sshd
-{% endhighlight %}
+```
 
 With this done, run a `puppet apply` on your test manifest with the `--noop` and `--graph`
 flags:
 
     puppet apply sshd/examples/init.pp --noop --graph
 
-{% task 4 %}
----
-  - execute: dot -Tpng /opt/puppetlabs/puppet/cache/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Puppet outputs a `.dot` file to a location defined as the `graphdir`. You can find
 the `graphdir` location with the `puppet config print` command:
@@ -175,12 +141,9 @@ Take a look at [the graph](/relationships.png). Notice that the `openssh-server`
 and `sshd` resources you defined are connected by an arrow to indicate the
 dependency relationship.
 
-{% figure '../assets/relationships1.png' %}
+![image](../assets/relationships1.png)
 
-{% task 5 %}
----
-- execute: cp /etc/ssh/sshd_config /etc/puppetlabs/code/environments/production/modules/sshd/files/sshd_config
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 Now let's move on to the next step. We'll use a `file` resource to manage the `sshd`
 configuration. First, we'll need a source file. As you did for the `vimrc` file in
@@ -189,13 +152,7 @@ the Modules quest, you can copy the existing configuration file into your module
 
     cp /etc/ssh/sshd_config sshd/files/sshd_config
 
-{% task 6 %}
----
-- execute: vim /etc/puppetlabs/code/environments/production/modules/sshd/files/sshd_config
-  input:
-    - ":%s/GSSAPIAuthentication yes/GSSAPIAuthentication no/g\r"
-    - ":wq\r"
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Of course, SSH is already reasonably configured on the Learning VM, but for the sake
 of example, let's make a change so you can see how Puppet handles it. We're not using
@@ -204,20 +161,7 @@ GSSAPIAuthentication setting to `no`. Open the `sshd/files/sshd_config` file
 and find the `GSSAPIAuthentication` line. Change the setting to `no`, then save the
 file and exit your editor.
 
-{% task 7 %}
-- execute: vim /etc/puppetlabs/code/environments/production/modules/sshd/manifests/init.pp
-  input: 
-    - "/class sshd {\r"
-    - o
-    - |
-        file { '/etc/ssh/sshd_config':
-          ensure     => present,
-          source     => 'puppet:///modules/sshd/sshd_config',
-          require    => Package['openssh-server'],
-        }
-    - "\e"
-    - ":wq\r"
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 7:</p></div>
 
 With the source file prepared, go back to your `sshd/manifests/init.pp`
 manifest and add a `file` resource to manage the `sshd_config` file.
@@ -225,7 +169,7 @@ You want to ensure that this `file` resource is applied *after* the
 `openssh-server` package, so include a `require` metaparameter targeting
 that resource.
 
-{% highlight puppet %}
+```puppet
 class sshd {
 
   ...
@@ -237,14 +181,10 @@ class sshd {
   }
 
 }
-{% endhighlight %}
+```
 
 
-{% task 8 %}
----
-  - execute: puppet apply /etc/puppetlabs/code/environments/production/modules/sshd/examples/init.pp --noop --graph
-  - execute: dot -Tpng /opt/puppetlabs/puppet/cache/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
-{% endtask %}
+<div class = "lvm-task-number"><p>Task 8:</p></div>
 
 Apply your test manifest again with the `--graph` and `--noop` flags,
 then use the `dot` tool again to regenerate your graph image.
@@ -254,7 +194,7 @@ then use the `dot` tool again to regenerate your graph image.
 Check [your graph](/relationships.png) again to see how your new `file` resource
 fits in.
 
-{% figure '../assets/relationships2.png' %}
+![image](../assets/relationships2.png)
 
 You can easily see from the graph diagram that both the `file` and `service` resources
 require the `package` resource. What's missing from the picture so far?
@@ -277,19 +217,12 @@ Like `before` and `require`, `notify` and `subscribe` are mirror images of each 
 Including a `notify` in your `file` resource has exactly the same result as including
 `subscribe` in your `service` resource.
 
-{% task 9 %}
-- execute: vim /etc/puppetlabs/code/environments/production/modules/sshd/manifests/init.pp
-  input: 
-    - "/service\r"
-    - o
-    - subscribe => File['/etc/ssh/sshd_config'],
-    - "\e:wq\r"
-{% endtask %} 
+<div class = "lvm-task-number"><p>Task 9:</p></div> 
 
 Edit your `sshd/manifests/init.pp` manifest to add a `subscribe` metaparameter
 to the the `sshd` resource.
 
-{% highlight puppet %}
+```puppet
 class sshd {
 
   ...
@@ -302,7 +235,7 @@ class sshd {
   ...
 
 }
-{% endhighlight %}
+```
 
 Validate your syntax with the `puppet parser` tool. When your syntax looks good,
 apply your test manifest with the `--graph` and `--noop` flags, then use the `dot`
@@ -311,7 +244,7 @@ tool again to regenerate your graph image again.
 Check [your graph](/relationships.png) one more time. Notice that the `sshd`
 resource now depends on the `/etc/ssh/sshd_config` file.
 
-{% figure '..//assets/relationships3.png' %}
+![image](..//assets/relationships3.png)
 
 Finally, drop the `--noop` flag to actually apply your changes. You'll see a notice
 that the content of the config file has changed, followed by a notice for the 'refresh'
