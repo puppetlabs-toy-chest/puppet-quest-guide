@@ -165,7 +165,8 @@ Your bovine friend clearly knows what's up.
 
      ____________________
     < Puppet is awesome! >
-                \   ^__^
+     --------------------
+            \   ^__^
              \  (oo)\_______
                 (__)\       )\/\
                     ||----w |
