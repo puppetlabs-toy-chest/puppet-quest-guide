@@ -60,7 +60,7 @@ helps to have a solid understanding of the Puppet code under the hood.
 Puppet's DSL is a *declarative* language rather than an *imperative* one. This
 means that instead of defining a process or set of commands, Puppet code
 describes (or declares) only the desired end state. With this desired state described,
-Puppet relies on built-in *providers* to handle with implementation.
+Puppet relies on built-in *providers* to handle implementation.
 
 One of the points where there is a nice carry over from Ruby is the *hash*
 syntax. It provides a clean way to format this kind of declarative model, and is
@@ -73,7 +73,7 @@ in the same syntax you would use to declare a desired state.
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
-Use the *puppet resource* tool to take a look at your root user account. The
+Use the `puppet resource` tool to take a look at your root user account. The
 syntax of the command is: *puppet resource \<type\> \<name\>*.
 
     puppet resource user root 
@@ -164,8 +164,8 @@ default to the resource title. For example, as long as you explicitly tell Puppe
 that a user resource's `name` is `'root'`, you can actually give the resource any
 title you like. (`'superuser'`, maybe, or even `'spaghetti'`) Just because you *can* do
 this, though, doesn't mean it's generally a good idea! Unless you have a good
-reason to do otherwise, letting Puppet do it's defaulting magic with titles
-will save you typing and make your puppet code more readable.
+reason to do otherwise, letting Puppet do its defaulting magic with titles
+will save you typing and make your Puppet code more readable.
 
 ### Attribute Value Pairs
 
@@ -210,10 +210,10 @@ following line!
 
 Of course, the real meat of a resource is in these attribute value pairs. You
 can't do much with a resource without a good understanding of its attributes.
-The `puppet describe` makes this kind of information easily available from
+The `puppet describe` command makes this kind of information easily available from
 the command line.
 
-Use the *puppet describe* tool to get a description of the *user* type,
+Use the 'puppet describe' tool to get a description of the *user* type,
 including a list of its parameters.
 
     puppet describe user | less
@@ -247,8 +247,8 @@ following command:
     puppet resource user galatea
 
 Notice that while the *root* user had a *comment* attribute, Puppet hasn't
-created one for your new user. As you may have noticed looking over the *puppet
-describe* entry for the user type, this *comment* is generally the full name of
+created one for your new user. As you may have noticed looking over the `puppet
+describe` entry for the user type, this *comment* is generally the full name of
 the account's owner.
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>

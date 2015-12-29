@@ -86,8 +86,8 @@ a simple SSH module to explore resource relationships?
 To get started with your module, create an `sshd` directory with `examples`,
 `manifests`, and `files` subdirectories.
 
-  cd /etc/puppetlabs/code/environments/production/modules
-  mkdir -p sshd/{examples,manifests,files}
+    cd /etc/puppetlabs/code/environments/production/modules
+    mkdir -p sshd/{examples,manifests,files}
 
 <div class = "lvm-task-number"><p>Task 2:</p></div>
 
@@ -112,7 +112,7 @@ resource relationships.
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
 The quickest way to get Puppet to generate a graph for this kind of testing is to run a test
-manifest with the `--noop` and `--graph` flags. Go ahead and set up a `sshd/examples/init.pp`
+manifest with the `--noop` and `--graph` flags. Go ahead and set up an `sshd/examples/init.pp`
 manifest. You don't have any parameters here, so you can use a simple:
 
 ```puppet

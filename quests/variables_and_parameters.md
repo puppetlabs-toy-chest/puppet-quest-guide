@@ -67,7 +67,7 @@ For instance, if you wanted Puppet to manage several files in the `/var/www/html
 directory, you could assign this directory path to a variable:
 
 ```puppet
-$doc_root = '/var/root/www/html/questguide/'
+$doc_root = '/var/www/html/questguide/'
 ```
 
 Once the variable is set, you can avoid repeating the same directory path by
@@ -143,7 +143,7 @@ class web {
 Note that if you wanted to make a change to the `$doc_root` directory, you'd
 only have to do this in one place. While there are more advanced forms of data
 separation in Puppet, the basic principle is the same: The more distinct your
-code is from the underlying data, the more resuable it is, and the less
+code is from the underlying data, the more reusable it is, and the less
 difficult it will be to refactor when you have to make changes later.
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
@@ -155,9 +155,9 @@ for your manifest with an `include` statement for the web class you created
 Create a `web/examples/init.pp` manifest 
 and insert `include web`. Save and exit the file, then apply it, using the `--noop` 
 flag (`puppet apply --noop web/examples/init.pp`). If your dry run looks good, run 
-puppet apply again without the flag:
+`puppet apply` again without the flag:
 
-  puppet apply --noop web/examples/init.pp
+    puppet apply --noop web/examples/init.pp
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 

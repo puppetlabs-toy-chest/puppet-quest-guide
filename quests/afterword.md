@@ -1,8 +1,3 @@
----
-title: Afterword
-layout: default
----
-
 # Afterword
 
 Thank you for embarking on the journey to learn Puppet. We hope that the
