@@ -259,7 +259,7 @@ before applying your test manifest again:
     puppet apply web_user/examples/user.pp
 
 Once the Puppet run completes, take a look at your user's new default
-[home page](/~shelob/index.html).
+at `<VM'S IP>/~shelob/index.html`.
 
 ### Parameters
 
@@ -357,7 +357,7 @@ manifest:
 
     puppet apply web_user/examples/user.pp
 
-Once the Puppet run completes, check your new user's page [here](/~frodo/index.html).
+Once the Puppet run completes, check your new user's page at `<VM'S IP>/~frodo/index.html`.
 
 ## Review
 
