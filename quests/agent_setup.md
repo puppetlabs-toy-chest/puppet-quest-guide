@@ -144,8 +144,8 @@ command to execute an interactive bash session on the container.
 
 Paste in the `curl` command from the PE console to install the Puppet agent
 on the node. The installation will take several minutes. (If you encounter an error
-at this point, you may need to restart your Puppet master service: `service pe-puppetmaster
-restart`) When it completes, end your bash process on the container:
+at this point, you may need to restart your Puppet master service: `service pe-puppetserver restart`)
+When it completes, end your bash process on the container:
 
     exit
 
