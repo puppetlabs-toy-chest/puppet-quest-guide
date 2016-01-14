@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Task 1:" do
   it 'Install the puppetlabs-mysql module' do
     file("#{MODULE_PATH}mysql").should be_directory

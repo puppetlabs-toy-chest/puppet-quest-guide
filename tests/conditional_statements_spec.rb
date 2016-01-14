@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Task 1:" do
   it 'Create the directory structure for your accounts module' do
     file("#{MODULE_PATH}accounts").should be_directory

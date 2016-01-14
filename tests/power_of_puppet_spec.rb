@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'Task 1:' do
   it 'Use the puppet module tool to search for graphite' do
     file('/root/.bash_history').should contain "puppet module search graphite"

@@ -1,6 +1,3 @@
-require 'spec_helper'
-
-
 describe "Task 1:" do
   it 'Create the sshd module directory with manifests, examples, and files subdirectories' do
     file("#{MODULE_PATH}sshd").should be_directory

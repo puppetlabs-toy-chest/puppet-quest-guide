@@ -1,0 +1,15 @@
+[
+  "welcome",
+  "power_of_puppet",
+  "resources",
+  "manifests_and_classes",
+  "modules",
+  "mysql",
+  "ntp",
+  "variables_and_parameters",
+  "conditional_statements",
+  "resource_ordering",
+  "defined_resource_types",
+  "agent_setup",
+  "application_orchestrator"
+]

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Task 1:" do
   it 'Create a node definition in your site.pp to configure your nodes for app deployment' do
     # Ugly! Pending direct method to test manifests

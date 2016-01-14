@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Task 1:" do
   it 'Define the cowsayings::cowsay class' do
     file("#{MODULE_PATH}cowsayings/manifests/cowsay.pp").should be_file

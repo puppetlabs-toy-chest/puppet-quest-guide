@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Task 1:" do
   it 'Create the web_user module directory with manifests and examples subdirectories' do
     file("#{MODULE_PATH}web_user").should be_directory
