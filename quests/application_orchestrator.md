@@ -166,7 +166,7 @@ The Puppet Orchestrator tool we'll use in this quest is a command-line interface
 that interacts with an Application Orchestration service on the Puppet
 master. We have enabled this service by default on the Learning VM, and it will
 be enabled by default in future versions of PE. (If you would like to enable it
-on your own puppet master, please see the [details in the documentation](https://docs.puppetlabs.com/pe/latest/orchestrator_install.html#enable-the-application-orchestration-service-and-orchestrator-client).)
+on your own Puppet master, please see the [details in the documentation](https://docs.puppetlabs.com/pe/latest/orchestrator_install.html#enable-the-application-orchestration-service-and-orchestrator-client).)
 
 ### Client Configuration and Permissions
 
@@ -460,7 +460,7 @@ define lamp::webapp (
 
   $indexphp = @("EOT"/)
     <?php
-    \$conn = mysql_connect($db_host, $db_user, $db_password);
+    \$conn = mysql_connect('$db_host', '$db_user', '$db_password');
     if (!\$conn) {
       echo "Connection to $db_host as $db_user failed";
     } else {
