@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Task 1:" do
   it 'Create the directory structure for your web module' do
     file("#{MODULE_PATH}web").should be_directory

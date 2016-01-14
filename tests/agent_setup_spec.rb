@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Task 1:" do
   it 'Insert include multi_node into your learning.puppetlabs.vm node declaration' do
     file("#{PROD_PATH}manifests/site.pp").should contain 'include multi_node'

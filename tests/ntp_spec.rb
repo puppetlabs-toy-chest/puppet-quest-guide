@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Task 1:" do
   it 'Install the puppetlabs-ntp module' do
     file("#{MODULE_PATH}ntp").should be_directory

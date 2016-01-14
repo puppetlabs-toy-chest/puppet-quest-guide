@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Task 1:" do
   it 'Inspect the root user resource' do
     file('/root/.bash_history').should contain 'puppet resource user root'

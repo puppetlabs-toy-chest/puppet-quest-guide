@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Task 1:" do
   it 'Use puppet -V to check the puppet version' do 
     file('/root/.bash_history').content.should match /puppet +(-V|--version)/
