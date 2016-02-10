@@ -115,7 +115,7 @@ that will let us make the necessary changes to the `use_cached_catalog` and
 Because we want to apply this configuration to both the
 `database.learning.puppetlabs.vm` and `webserver.learning.puppetlabs.vm` nodes,
 we can use a regular expression in the node definition name to match both. Create a
-new node group with the name `/^.+\.learning\.puppetlabs\.vm$/`, and include two
+new node group with the name `/^(webserver|database).*$/`, and include two
 `ini_setting` resources for the configuration changes we need to make:
 
 ```puppet
