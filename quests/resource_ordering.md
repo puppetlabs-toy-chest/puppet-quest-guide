@@ -152,6 +152,10 @@ the Modules quest, you can copy the existing configuration file into your module
 
     cp /etc/ssh/sshd_config sshd/files/sshd_config
 
+You will also need to ensure that the `pe-puppet` user has permissions to read this file.
+
+    chown pe-puppet:pe-puppet sshd/files/sshd_config
+
 <div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Of course, SSH is already reasonably configured on the Learning VM, but for the sake
