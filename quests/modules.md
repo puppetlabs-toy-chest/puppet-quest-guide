@@ -94,7 +94,7 @@ a couple of flags with the `tree` command to limit the output to directories, an
 limit the depth to two directories.
 
     tree -L 2 -d /etc/puppetlabs/code/environments/production/modules/
-	
+
 You'll see a list of directories, something like this:
 
     /etc/puppetlabs/code/environments/production/modules/
@@ -105,7 +105,7 @@ You'll see a list of directories, something like this:
         ├── manifests
         ├── spec
         └── templates
-    	
+
 Each of the standardized subdirectory names you see tells Puppet users and
 Puppet itself where to find each of the various components that come together to
 make a complete module.
@@ -165,9 +165,9 @@ Puppet's built-in fileserver.
 Copy the existing `.vimrc` file to your module's `files` directory:
 
     cp ~/.vimrc vimrc/files/vimrc
-	
+
 <div class = "lvm-task-number"><p>Task 5:</p></div>
-	
+
 Once you've copied the file, open so you can make an addition.
 
     vim vimrc/files/vimrc
@@ -176,7 +176,7 @@ We'll keep things simple. By default, line numbering is disabled. Add the
 following line to the end of the file to tell Vim to turn on line numbering.
 
     set number
-	
+
 Save and exit.
 
 <div class = "lvm-task-number"><p>Task 6:</p></div>
@@ -212,7 +212,7 @@ source file.
 All Puppet file server URIs are structured as follows:
 
     puppet://{server hostname (optional)}/{mount point}/{remainder of path}
-	
+
 However, there's some URI abstraction magic built in to Puppet that makes these
 URIs more concise.
 
@@ -282,7 +282,7 @@ You'll see something like the following:
     Notice: /Stage[main]/Vimrc/File[/root/.vimrc]/content: content changed
     '{md5}99430edcb284f9e83f4de1faa7ab85c8' to
     '{md5}f685bf9bc0c197f148f06704373dfbe5'
-	
+
 When you tell Puppet to manage a file, it compares the md5 hash of the target
 file against that of the specified source file to check if any changes need to
 be made. Because the hashes did not match, Puppet knew that the target file did
