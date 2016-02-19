@@ -9,7 +9,7 @@
 
 If you want to get things done efficiently in Puppet, the **module** will be
 your best friend. You got a little taste of module structure in the Manifests
-and Classes quest. In this quest, we'll take you deeper into the details. 
+and Classes quest. In this quest, we'll take you deeper into the details.
 
 In short, a Puppet module is a self-contained bundle of all the Puppet code and
 other data needed to manage some aspect of your configuration. In this quest,
@@ -81,20 +81,20 @@ itself are kept in the `/opt/puppetlabs/puppet/modules` directory.)
 
 ## Module structure
 Now that you have an idea of why modules are useful and where they're kept, it's
-time to delve a little deeper into the anatomy of a module. 
+time to delve a little deeper into the anatomy of a module.
 
 A module consists of a pre-defined structure of directories that help Puppet
 reliably locate the module's contents.
 
-Use the the `puppet module list` command to see what modules are already 
+Use the the `puppet module list` command to see what modules are already
 installed. You'll probably recognize some familiar names from previous quests.
 
-To get clear picture of the directory structure of the modules here, you can use
+To get a clear picture of the directory structure of the modules here, you can use
 a couple of flags with the `tree` command to limit the output to directories, and
 limit the depth to two directories.
 
     tree -L 2 -d /etc/puppetlabs/code/environments/production/modules/
-	
+
 You'll see a list of directories, something like this:
 
     /etc/puppetlabs/code/environments/production/modules/
@@ -105,19 +105,19 @@ You'll see a list of directories, something like this:
         ├── manifests
         ├── spec
         └── templates
-    	
+
 Each of the standardized subdirectory names you see tells Puppet users and
 Puppet itself where to find each of the various components that come together to
 make a complete module.
 
 Now that you have an idea of what a module is and what it looks like, you're
-ready to make your own. 
+ready to make your own.
 
 You've already had a chance to play with the *user* and *package* resources in
 previous quests, so this time we'll focus on the *file* resource type. The
 *file* resource type is also a nice example for this quest because Puppet uses
 some URI abstraction based on the module structure to locate the sources for
-files. 
+files.
 
 The module you'll make in this quest will manage some settings for Vim, the text
 editor you've been using to write your Puppet code. Because the settings for
@@ -165,9 +165,9 @@ Puppet's built-in fileserver.
 Copy the existing `.vimrc` file to your module's `files` directory:
 
     cp ~/.vimrc vimrc/files/vimrc
-	
+
 <div class = "lvm-task-number"><p>Task 5:</p></div>
-	
+
 Once you've copied the file, open so you can make an addition.
 
     vim vimrc/files/vimrc
@@ -176,7 +176,7 @@ We'll keep things simple. By default, line numbering is disabled. Add the
 following line to the end of the file to tell Vim to turn on line numbering.
 
     set number
-	
+
 Save and exit.
 
 <div class = "lvm-task-number"><p>Task 6:</p></div>
@@ -199,7 +199,7 @@ In this case, the `.vimrc` file that defines your Vim settings lives in the
 `/root` directory. This is the file you want Puppet to manage, so its full path
 (i.e. `/root/.vimrc`) will be the *title* of the file resource you're declaring.
 
-This resource declaration will then need two attribute value pairs. 
+This resource declaration will then need two attribute value pairs.
 
 First, as with the other resource types you've encountered, `ensure =>
 present,` tells Puppet to ensure that the entity described by the resource
@@ -212,7 +212,7 @@ source file.
 All Puppet file server URIs are structured as follows:
 
     puppet://{server hostname (optional)}/{mount point}/{remainder of path}
-	
+
 However, there's some URI abstraction magic built in to Puppet that makes these
 URIs more concise.
 
@@ -282,7 +282,7 @@ You'll see something like the following:
     Notice: /Stage[main]/Vimrc/File[/root/.vimrc]/content: content changed
     '{md5}99430edcb284f9e83f4de1faa7ab85c8' to
     '{md5}f685bf9bc0c197f148f06704373dfbe5'
-	
+
 When you tell Puppet to manage a file, it compares the md5 hash of the target
 file against that of the specified source file to check if any changes need to
 be made. Because the hashes did not match, Puppet knew that the target file did
@@ -297,7 +297,7 @@ Vim. You should see the number of each line listed to the left.
 In this quest, you learned about the structure and purpose of Puppet modules.
 You created a module directory structure, and wrote the class you need to manage
 a configuration file for Vim. You also saw how Puppet uses md5 hashes to
-determine whether a target file matches the specified source file. 
+determine whether a target file matches the specified source file.
 
 In the quests that follow, you'll learn more about installing and deploying
 pre-made modules from the Puppet Forge.
