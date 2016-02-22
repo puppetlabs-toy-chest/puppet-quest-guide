@@ -15,11 +15,13 @@ documentation.)
 
 3. *Before* starting the VM for the first time, you will need to adjust its settings.
 Allocate 2 CPUs. We recommend allocating 4GB of memory for the best performance. If you
-don't have enough memory on your host machine, you leave the allocation at 2GB, though
-you may encounter stability and performance issues. Set the *Network Adapter* to
+don't have enough memory on your host machine, you may leave the allocation at 3GB or lower
+it to 2GB, though you may encounter stability and performance issues. Set the *Network Adapter* to
 *Bridged*. Use an *Autodetect* setting if available, or accept the default Network Adapter name.
 (If you started the VM before making these changes, you may need to restart the VM
-before the settings will be applied correctly.)
+before the settings will be applied correctly.) **Note:** If you encounter
+errors starting the VM with VirtualBox, please set your CPUs to 1 and disable the I/O APIC
+option.
 
 4. Start the VM. When it is started, make a note of the IP address and password displayed
 on the splash page. Rather than logging in directly, we highly recommend using SSH. On OS X,
@@ -28,6 +30,7 @@ For Windows, we suggest the free SSH client [PuTTY](http://www.putty.org/).
 Connect to the Learning VM with the login `root` and password you noted from the splash page.
 (e.g. `ssh root@<IPADDRESS>`)
 
-5. To access the Quest Guide and get started, enter the Learning VM's IP address in
-your browser's address bar. (Be sure to use `http://<ADDRESS>` for the Quest Guide,
-as `https://<ADDRESS>` will take you to the PE console.)
+5. If you prefer, you can access this Quest Guide via a webserver running on the Learning VM
+itself. Open a web broswer on your host and enter the Learning VM's IP address in
+the address bar. (Be sure to use `http://<ADDRESS>` for the Quest Guide, as `https://<ADDRESS>`
+will take you to the PE console.)
