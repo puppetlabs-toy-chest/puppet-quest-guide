@@ -48,6 +48,11 @@ start the VM.
 If you are already logged in via your virtualization software's terminal, you can
 use the following command to view the password: `cat /var/local/password`.
 
+If the password is not displayed on the splash page on startup, it is possible
+that some error occured during the startup process. If you are using VirtualBox,
+please reimport the VM and set the allocated CPUs to one and disable the
+I/O APIC setting before starting the VM.
+
 ### Does the Learning VM work on vSphere, ESXi, etc.?
 
 Possibly, but we don't currently have the resources to test or support the Learning VM
