@@ -1,9 +1,5 @@
 # The Power of Puppet
 
-### Prerequisites
-
-- Welcome Quest
-
 ## Quest objectives
 
 - Use a Puppet module to set up a Graphite monitoring server on the Learning VM.
