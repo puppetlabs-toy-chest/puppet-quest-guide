@@ -3,52 +3,52 @@
     "watch_list" => ["/root/.bash_history"],
     "setup_command" => "puppet apply ./manifests/welcome.pp"
   },
-  "power_of_puppet",
+  "power_of_puppet" => {
     "watch_list" => ["/root/.bash_history"],
     "setup_command" => "puppet apply ./manifests/welcome.pp"
   },
-  "resources",
+  "resources" => {
     "watch_list" => ["/root/.bash_history"],
     "setup_command" => "puppet apply ./manifests/welcome.pp"
   },
-  "manifests_and_classes",
+  "manifests_and_classes" => {
     "watch_list" => ["/root/.bash_history"],
     "setup_command" => "puppet apply ./manifests/welcome.pp"
   },
-  "modules",
+  "modules" => {
     "watch_list" => ["/root/.bash_history"],
     "setup_command" => "puppet apply ./manifests/welcome.pp"
   },
-  "mysql",
+  "mysql" => {
     "watch_list" => ["/root/.bash_history"],
     "setup_command" => "puppet apply ./manifests/welcome.pp"
   },
-  "ntp",
+  "ntp" => {
     "watch_list" => ["/root/.bash_history"],
     "setup_command" => "puppet apply ./manifests/welcome.pp"
   },
-  "variables_and_parameters",
+  "variables_and_parameters" => {
     "watch_list" => ["/root/.bash_history"],
     "setup_command" => "puppet apply ./manifests/welcome.pp"
   },
-  "conditional_statements",
+  "conditional_statements" => {
     "watch_list" => ["/root/.bash_history"],
     "setup_command" => "puppet apply ./manifests/welcome.pp"
   },
-  "resource_ordering",
+  "resource_ordering" => {
     "watch_list" => ["/root/.bash_history"],
     "setup_command" => "puppet apply ./manifests/welcome.pp"
   },
-  "defined_resource_types",
+  "defined_resource_types" => {
     "watch_list" => ["/root/.bash_history"],
     "setup_command" => "puppet apply ./manifests/welcome.pp"
   },
-  "agent_setup",
+  "agent_setup" => {
     "watch_list" => ["/root/.bash_history"],
     "setup_command" => "puppet apply ./manifests/welcome.pp"
   },
-  "application_orchestrator"
+  "application_orchestrator" => {
     "watch_list" => ["/root/.bash_history"],
     "setup_command" => "puppet apply ./manifests/welcome.pp"
-  },
+  }
 }
