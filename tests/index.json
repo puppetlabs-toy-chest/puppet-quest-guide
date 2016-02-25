@@ -51,4 +51,4 @@
     "watch_list" => ["/root/.bash_history"],
     "setup_command" => "puppet apply ./manifests/welcome.pp"
   },
-{
+}
