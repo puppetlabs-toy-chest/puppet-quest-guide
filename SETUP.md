@@ -20,7 +20,8 @@ it to 2GB, though you may encounter stability and performance issues. Set the *N
 *Bridged*. Use an *Autodetect* setting if available, or accept the default Network Adapter name.
 (If you started the VM before making these changes, you may need to restart the VM
 before the settings will be applied correctly.) **Note:** If you encounter
-errors starting the VM with VirtualBox, please set your CPUs to 1 and disable the I/O APIC
+errors starting the VM with VirtualBox or do not see a password displayed on the 
+splash screen please set your CPUs to 1 and disable the I/O APIC
 option.
 
 4. Start the VM. When it is started, make a note of the IP address and password displayed
