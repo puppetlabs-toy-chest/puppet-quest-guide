@@ -26,7 +26,7 @@ resource declaration.
 
 When you're ready to get started, type the following command:
 
-    quest --start defined_resource_types
+    quest begin defined_resource_types
 
 ## Defined resource types
 

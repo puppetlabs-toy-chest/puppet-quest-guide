@@ -29,7 +29,7 @@ In this quest, you'll learn how you can use an existing
 module from the Puppet Forge to manage an important service on your
 machine: NTP.
 
-    quest --start ntp
+    quest begin ntp
 
 ## What's NTP
 

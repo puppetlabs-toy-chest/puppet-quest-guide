@@ -20,7 +20,7 @@ Puppet code.
 
 When you're ready to get started, enter the following command:
 
-    quest --start manifests_and_classes
+    quest begin manifests_and_classes
 
 ### Manifests
 

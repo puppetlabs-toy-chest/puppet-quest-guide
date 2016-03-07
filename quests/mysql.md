@@ -13,7 +13,7 @@ Labs' MySQL module to install and configure a server, then explore the custom
 resource types included with the module. To get started, enter the following
 command.
 
-    quest --start mysql
+    quest begin mysql
 
 ## WhySQL?
 

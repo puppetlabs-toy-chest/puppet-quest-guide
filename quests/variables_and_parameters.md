@@ -22,7 +22,7 @@ let you set the value of your class's variables as you declare it.
 
 When you're ready to get started, enter the following command:
 
-    quest --start variables_and_parameters
+    quest begin variables_and_parameters
 
 ## Variables
 

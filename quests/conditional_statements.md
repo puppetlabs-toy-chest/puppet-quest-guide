@@ -15,7 +15,7 @@ platforms, operating systems, and functional requirements.
 
 To start this quest enter the following command:
 
-    quest --start conditional_statements
+    quest begin conditional_statements
 
 ## Writing for flexibility
 

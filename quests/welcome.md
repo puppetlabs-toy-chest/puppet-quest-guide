@@ -39,7 +39,7 @@ The Learning VM includes a quest tool that will provide structure and feedback
 as you progress. You'll learn more about this tool below, but for now, type the
 following command to start your first quest: the "Welcome" quest.
 
-    quest --start welcome
+    quest begin welcome
 
 ## What is Puppet?
 

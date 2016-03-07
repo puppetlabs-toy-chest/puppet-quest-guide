@@ -29,7 +29,7 @@ that come up. Feel free to contact us at learningvm@puppetlabs.com.
 
 When you're ready to get started, type the following command:
 
-    quest --start agent_setup
+    quest begin agent_setup
 
 ## Get Some Nodes
 
