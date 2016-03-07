@@ -12,7 +12,7 @@ This quest will help you learn more about specifying the order in which Puppet
 should manage resources in a manifest. When you're ready to get started, type
 the following command:
 
-    quest --start resource_ordering
+    quest begin resource_ordering
 
 ## Resource order
 

@@ -25,7 +25,7 @@ right away; keep at it and we'll get there when the time is right!
 
 Ready to get started? Type the following command:
 
-    quest --start power_of_puppet 
+    quest begin power_of_puppet 
 
 ## Forge ahead
 

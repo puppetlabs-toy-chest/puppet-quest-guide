@@ -39,7 +39,7 @@ encounter any issues, please contact us at learningvm@puppetlabs.com.
 
 When you're ready to get started, type the following command:
 
-    quest --start application_orchestrator
+    quest begin application_orchestrator
 
 ## Application orchestrator
 

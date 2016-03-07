@@ -18,7 +18,7 @@ how to create your own.
 
 When you're ready, type the following command:
 
-    quest --start modules
+    quest begin modules
 
 ## Why meddle with modules?
 

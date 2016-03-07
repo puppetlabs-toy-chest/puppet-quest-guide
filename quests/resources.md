@@ -19,7 +19,7 @@ them with Puppet command-line tools.
 
 When you're ready to get started, type the following command:
 
-    quest --start resources
+    quest begin resources
 
 ## Resources
 
