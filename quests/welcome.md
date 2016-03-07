@@ -39,7 +39,7 @@ The Learning VM includes a quest tool that will provide structure and feedback
 as you progress. You'll learn more about this tool below, but for now, type the
 following command to start your first quest: the "Welcome" quest.
 
-    quest --start welcome
+    quest begin welcome
 
 ## What is Puppet?
 
@@ -92,7 +92,7 @@ You will see something like the following:
 
 _4.2.2_
 
-This indicates that Puppet Version 4.2.2 is installed.
+This would indicate that Puppet Version 4.2.2 is installed.
 
 ## What is a Quest?
 
@@ -127,17 +127,26 @@ The `quest --help` command provides you with a list of all the options for the
 `quest` command. You can invoke the quest command with each of those options,
 such as:
 
-    quest --progress     # Displays details of tasks completed
-    quest --completed    # Displays completed quests
-    quest --list         # Shows all available quests
-    quest --start <name> # Provide the name of a quest to start tracking
-    progress
+    NAME
+        quest - Track the status of quests and tasks.
+    
+    SYNOPSIS
+        quest [global options] command [command options] [arguments...]
+    
+    GLOBAL OPTIONS
+        --help - Show this message
+    
+    COMMANDS
+        begin  - Begin a quest
+        help   - Shows a list of commands or help for one command
+        list   - List available quests
+        status - Show status of the current quest
 	
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
 Find out how much progress you have made so far:
 
-    quest --progress
+    quest status
 
 While you can use the quest commands to find more detailed information about
 your progress through the quests, you can check the quest status display at the
@@ -165,12 +174,14 @@ quite a lot you can do with Puppet using modules from the Puppet Forge. After
 the foundations section, we've included some quests that will walk you through
 downloading, configuring, and deploying existing Puppet modules.
 
-Finally, we introduce you to the Puppet language constructs you'll need to get
+Next, we introduce you to the Puppet language constructs you'll need to get
 started writing and deploying your own modules: things like *variables*,
-*conditionals*, *class parameters*, and *resource ordering*. With these concepts
-under your belt, you'll be in a much better position not just to create your own
-Puppet code, but to understand what's going on under the hood of modules you
-want to deploy.
+*conditionals*, *class parameters*, *resource ordering*, and *defined resource types*.
+With these concepts under your belt, you'll be in a much better position not just
+to create your own Puppet code, but to understand what's going on under the hood
+of modules you want to deploy.
+
+
 
 ## Review
 
