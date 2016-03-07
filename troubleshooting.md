@@ -28,7 +28,7 @@ causing these tests to fail. Exiting the VM and logging in again will fix this i
 It is also possible that we have written the test for a task in a way that is too
 restrictive and doesn't correctly capture a valid syntactical variation in your
 Puppet code or another relevant file. You can check the specific matchers by looking
-at a quest's spec file in the `~/.testing/spec/localhost/` directory. If you find
+at a quest's spec file in the `/usr/src/puppet-quest-guide/tests` directory. If you find
 an issue here, please let us know by sending an email to learningvm@puppetlabs.com.
 
 ### Password Required for the Quest Guide
@@ -86,9 +86,12 @@ fails, you may try adding the `--force` flag after the `--ignore-dependencies` f
 
 ### I can't import the OVA
 
-First, ensure that you have an up-to-date version of your virtualization software installed.
+Ensure that you have an up-to-date version of your virtualization software installed.
 Note that the "check for updates" feature of VirtualBox may not always work as expected,
-so check the website for the most recent version.
+so check the website for the most recent version. If you are sure that your virtualization
+software is up to date and your host system is 64 bit and has virtualization extensions
+enabled in the BIOS, please let us know if you still cannot import the OVA.
+
 
 ### The Learning VM has no IP address or the IP address will not respond.
 
