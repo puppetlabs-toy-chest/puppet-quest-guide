@@ -128,10 +128,6 @@ Trigger a Puppet agent run on your Puppet master.
 
     puppet agent -t
 
-For easy reference, you can find the `curl` command needed to install the
-Puppet agent in the *Nodes* > *Unsigned Certificates* section of the PE console:
-
-    curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | sudo bash
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
@@ -142,8 +138,13 @@ command to execute an interactive bash session on the container.
 
     docker exec -it webserver bash
 
-Paste in the `curl` command from the PE console to install the Puppet agent
-on the node. The installation will take several minutes. (If you encounter an error
+Paste in the `curl` command from the PE console to install the Puppet agent on the node
+(For future reference, you can find the `curl` command needed to install the
+Puppet agent in the *Nodes* > *Unsigned Certificates* section of the PE console)
+
+    curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | sudo bash
+
+The installation may take several minutes. (If you encounter an error
 at this point, you may need to restart your Puppet master service: `service pe-puppetserver restart`)
 When it completes, end your bash process on the container:
 

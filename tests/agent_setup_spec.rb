@@ -12,7 +12,7 @@ end
 
 describe "Task 3:" do
   it "Prepare your puppet master to provide the ubuntu agent installer" do
-    file("/opt/puppetlabs/server/data/packages/public/2015.3.1/ubuntu-14.04-amd64").should be_directory
+    file("/opt/puppetlabs/server/data/packages/public/#{PE_VERSION}/ubuntu-14.04-amd64").should be_directory
   end
 end
 
