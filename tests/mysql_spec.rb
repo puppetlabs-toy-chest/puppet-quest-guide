@@ -22,14 +22,14 @@ end
 describe "Task 4:" do
   it "Apply the mysql::server::account_security class" do
     file('/usr/bin/mysql').should be_file
-    command("mysql -e 'show databases;'|grep test").exit_status.should_not be_zero
+    command("echo strongpassword | mysql -e 'show databases;' -u root -p").stdout.should_not match /test/
   end
 end
 
 describe "Task 5:" do
   it "Create a new database, user, and grant" do
-    command("mysql -e 'show databases;'|grep lvm").exit_status.should be_zero
-    command("mysql -e 'SELECT User FROM mysql.user;'|grep lvm_user").exit_status.should be_zero
-    command("mysql -e 'show grants for lvm_user@localhost;'|grep lvm.*").exit_status.should be_zero
+    command("echo strongpassword | mysql -e 'show databases;' -u root -p | grep lvm").exit_status.should be_zero
+    command("echo strongpassword | mysql -e 'SELECT User FROM mysql.user;' -u root -p | grep lvm_user").exit_status.should be_zero
+    command("echo strongpassword | mysql -e 'show grants for lvm_user@localhost;' -u root -p | grep lvm.*").exit_status.should be_zero
   end
 end
