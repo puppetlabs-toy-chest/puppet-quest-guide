@@ -63,11 +63,11 @@ across different systems in your infrastructure, but not within them.
 ### Variable interpolation
 
 **Variable interpolation** lets you insert the value of a variable into a string.
-For instance, if you wanted Puppet to manage several files in the `/var/www/html/questguide`
+For instance, if you wanted Puppet to manage several files in the `/var/www/quest`
 directory, you could assign this directory path to a variable:
 
 ```puppet
-$doc_root = '/var/www/html/questguide/'
+$doc_root = '/var/www/quest/'
 ```
 
 Once the variable is set, you can avoid repeating the same directory path by
@@ -122,7 +122,7 @@ And then add the following contents (remember to use `:set paste` in vim):
 ```puppet
 class web {
 
-  $doc_root = '/var/www/html/questguide/'
+  $doc_root = '/var/www/quest/'
   
   $english = 'Hello world!'
   $french = 'Bonjour le monde!'

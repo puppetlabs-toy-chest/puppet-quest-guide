@@ -135,7 +135,7 @@ Use the `dot` command to convert the `relationships.dot` file in the `graphdir` 
 a `.png` image. Set the location of the output to the root of the Quest Guide's web
 directory so that it will be easily viewable from your browser.
 
-    dot -Tpng /opt/puppetlabs/puppet/cache/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
+    dot -Tpng /opt/puppetlabs/puppet/cache/state/graphs/relationships.dot -o /var/www/quest/relationships.png
 
 Take a look at `<VM'S IP>/relationships.png`. Notice that the `openssh-server`
 and `sshd` resources you defined are connected by an arrow to indicate the
@@ -193,7 +193,7 @@ class sshd {
 Apply your test manifest again with the `--graph` and `--noop` flags,
 then use the `dot` tool again to regenerate your graph image.
 
-    dot -Tpng /opt/puppetlabs/puppet/cache/state/graphs/relationships.dot -o /var/www/html/questguide/relationships.png
+    dot -Tpng /opt/puppetlabs/puppet/cache/state/graphs/relationships.dot -o /var/www/quest/relationships.png
 
 Check `<VM'S IP>/relationships.png` again to see how your new `file` resource
 fits in.

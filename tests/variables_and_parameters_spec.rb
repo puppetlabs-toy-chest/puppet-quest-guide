@@ -20,8 +20,8 @@ end
 
 describe "Task 4:" do
   it 'Apply your test manifest to create your website files' do
-    file('/var/www/html/questguide/hello.html').should be_file
-    file('/var/www/html/questguide/bonjour.html').should be_file
+    file('/var/www/quest/hello.html').should be_file
+    file('/var/www/quest/bonjour.html').should be_file
   end
 end
 
@@ -40,6 +40,6 @@ end
 
 describe "Task 7:" do
   it 'Apply your test manifest to generate a new file with parameterized values' do
-    file('/var/www/html/questguide/hola.html').should be_file
+    file('/var/www/quest/hola.html').should be_file
   end
 end
