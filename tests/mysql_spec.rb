@@ -7,7 +7,7 @@ end
 
 describe "Task 2:" do
   it 'Define the mysql class' do
-    file("#{PROD_PATH}manifests/site.pp").content.should match /class\s*{\s*'(::)?mysql::server':/
+    file("#{PROD_PATH}manifests/site.pp").content.should match /class\s*{\s*'(::)?mysql::server'\s*:/
     file("#{PROD_PATH}manifests/site.pp").content.should match /\s*root_password\s+=>\s+/
     file("#{PROD_PATH}manifests/site.pp").content.should match /\s*override_options\s+=>\s+/
   end
