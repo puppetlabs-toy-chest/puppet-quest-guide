@@ -249,8 +249,7 @@ The `puppet access` tool helps manage authentication. Use the
 Add the `--lifetime=1d` flag so you won't have to keep generating new
 tokens as you work.
 
-    puppet access login --service-url \
-    https://learning.puppetlabs.vm:4433/rbac-api --lifetime=1d
+    puppet access login --service-url https://learning.puppetlabs.vm:4433/rbac-api --lifetime=1d
 
 When prompted, supply the username and password you set in the PE console's
 RBAC system: **orchestrator** and **puppet**.
