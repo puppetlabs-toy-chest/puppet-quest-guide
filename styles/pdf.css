@@ -20,3 +20,7 @@
     content: ' ';
     font-size: 1em;
 }
+
+.page .section pre{
+  word-wrap:break-word !important;
+}
