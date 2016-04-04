@@ -16,10 +16,10 @@ end
 
 describe "Task 3:" do
   it "Create a client configuration file" do
-    file("/root/.puppetlabs/etc/puppet/orchestrator.conf")
+    file("/root/.puppetlabs/client-tools/orchestrator.conf")
       .content
       .should match /"url": "https:\/\/learning.puppetlabs.vm:8143"/
-    file("/root/.puppetlabs/etc/puppet/orchestrator.conf")
+    file("/root/.puppetlabs/client-tools/orchestrator.conf")
       .content
       .should match /"environment": "production"/
   end

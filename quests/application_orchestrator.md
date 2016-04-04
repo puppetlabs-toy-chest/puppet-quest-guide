@@ -184,11 +184,11 @@ time.
 First, create the directory structure where this configuration file
 will be kept.
 
-    mkdir -p ~/.puppetlabs/etc/puppet
+    mkdir -p ~/.puppetlabs/client-tools
 
 Now create your orchestrator configuration file.
 
-    vim ~/.puppetlabs/etc/puppet/orchestrator.conf
+    vim ~/.puppetlabs/client-tools/orchestrator.conf
 
 The file is formatted in JSON. (Remember that the while final commas in your
 hashes are a best practice in your Puppet code, they're invalid JSON!)
