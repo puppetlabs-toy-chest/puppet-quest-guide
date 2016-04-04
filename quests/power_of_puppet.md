@@ -61,9 +61,10 @@ rigorously tested for compatibility with Puppet Enterprise and are fully support
 
 Now that you know what module you want, you'll need to install it to the Puppet
 master to make it available for your infrastructure. The `puppet module` tool makes
-this installation easy. Go ahead and run:
+this installation easy. Note that we're going to specify the version to ensure that
+it remains compatible with the instructions in this guide. Go ahead and run:
 
-    puppet module install dwerder-graphite
+    puppet module install dwerder-graphite -v 5.16.1
     
 If you don't have internet access, run the following terminal commands to use
 cached versions of all the modules required for quests in this guide:
