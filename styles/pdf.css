@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/fontawesome/fontawesome-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .lvm-task-number {
     color: #6c6d6d;
     font-family: 'PT Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -12,4 +19,8 @@
     font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     content: ' ';
     font-size: 1em;
+}
+
+.page .section pre{
+  word-wrap:break-word !important;
 }
