@@ -1,0 +1,15 @@
+.lvm-task-number {
+    color: #6c6d6d;
+    font-family: 'PT Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 1.625rem;
+    font-style: bold;
+    margin-left: -16px;
+}
+
+.lvm-task-number p:before {
+    color: #7C6AAB;
+    display: inline;
+    font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    content: ' ';
+    font-size: 1em;
+}
