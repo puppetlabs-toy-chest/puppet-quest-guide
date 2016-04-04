@@ -36,7 +36,7 @@ end
 
 describe "Task 6:" do
   it "Disable GSSAPIAuthentication in the module's sshd_config file" do
-    file("#{MODULE_PATH}sshd/files/sshd_config").content.should match /^GSSAPIAuthentication no/
+    file("#{MODULE_PATH}sshd/files/sshd_config").content.should match /^\s*GSSAPIAuthentication no/
     file("#{MODULE_PATH}sshd/files/sshd_config").content.should_not match /^GSSAPIAuthentication yes/
   end
 end
