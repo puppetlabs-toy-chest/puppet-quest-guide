@@ -24,7 +24,7 @@ end
 
 describe "Task 4:" do
   it "Use the `dot` tool to generate an image of your resource relationships graph" do
-    file("/var/www/html/questguide/relationships.png").should be_file
+    file("/var/www/quest/relationships.png").should be_file
   end
 end
 
