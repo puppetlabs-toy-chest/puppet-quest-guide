@@ -11,7 +11,7 @@ describe "Task 2:" do
 end
 
 describe "Task 3:" do
-  it 'Check the quest progress' do 
-    file('/root/.bash_history').content.should match /quest +(-p|--progress)/
+  it 'Check the quest status' do 
+    file('/root/.bash_history').content.should match /quest status/
   end
 end
