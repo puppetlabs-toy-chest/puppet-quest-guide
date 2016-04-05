@@ -82,17 +82,17 @@ applications running smoothly as you coordinate updates and maintenance, event
 inspection, role-based access control, certificate management.
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
+
 Now that you know what Puppet and Puppet Enterprise are, check and see what
 version of Puppet is running on this Learning VM. Type the following command:
 
-    puppet -V	# That's a capital 'V'
-
+    puppet -V
 
 You will see something like the following:
 
-_4.2.2_
+    4.4.1
 
-This would indicate that Puppet Version 4.2.2 is installed.
+This would indicate that Puppet Version 4.4.1 is installed.
 
 ## What is a Quest?
 
