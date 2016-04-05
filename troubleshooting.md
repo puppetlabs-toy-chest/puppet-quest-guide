@@ -28,7 +28,7 @@ causing these tests to fail. Exiting the VM and logging in again will fix this i
 It is also possible that we have written the test for a task in a way that is too
 restrictive and doesn't correctly capture a valid syntactical variation in your
 Puppet code or another relevant file. You can check the specific matchers by looking
-at a quest's spec file in the `~/.testing/spec/localhost/` directory. If you find
+at a quest's spec file in the `/usr/src/puppet-quest-guide/tests` directory. If you find
 an issue here, please let us know by sending an email to learningvm@puppetlabs.com.
 
 ### Password Required for the Quest Guide
@@ -86,20 +86,28 @@ fails, you may try adding the `--force` flag after the `--ignore-dependencies` f
 
 ### I can't import the OVA
 
-First, ensure that you have an up-to-date version of your virtualization software installed.
+Ensure that you have an up-to-date version of your virtualization software installed.
 Note that the "check for updates" feature of VirtualBox may not always work as expected,
-so check the website for the most recent version.
+so check the website for the most recent version. If you are sure that your virtualization
+software is up to date and your host system is 64 bit and has virtualization extensions
+enabled in the BIOS, please let us know if you still cannot import the OVA.
 
 ### The Learning VM has no IP address or the IP address will not respond.
 
 If your network connection has changed since you loaded the VM, it's possible that your
 IP address is different from that displayed on the Learning VM splash screen. Log
 in to the VM via the virtualization directly (rather than SSH) and use the `facter ipaddress`
-command the check the current address.
+command the check the current address. If you continue to get an no IP address or an invalid
+IP address, restarting the VM is generally the quickest way to ensure that the network
+services are correctly reset. (Unfortunately restarting the network service directly isn't
+always reliable.)
 
 Some network configurations may still prevent you from accessing the Learning VM.
-If this is the case, you can still access the Learning VM by configuring port forwarding.
+If this is the case, we recommend that you speak to your site network administrator to
+see if there are any firewall rules, proxies, or DHCP server setting that might be preventing
+you from accessing the VM.
 
+If networking continues to cause trouble, you can connect to the Learning VM via port forwarding.
 Change your VM's network adapter to NAT, and configure port forwarding as follows:
 
 ```
