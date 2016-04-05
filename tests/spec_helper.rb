@@ -4,4 +4,4 @@ require 'pathname'
 
 PROD_PATH = '/etc/puppetlabs/code/environments/production/'
 MODULE_PATH = "#{PROD_PATH}modules/"
-PE_VERSION = '2015.3.2'
+PE_VERSION = '2016.1.1'
