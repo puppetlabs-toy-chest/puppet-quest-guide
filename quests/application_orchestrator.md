@@ -190,7 +190,7 @@ Now create your orchestrator configuration file.
 
     vim ~/.puppetlabs/client-tools/orchestrator.conf
 
-The file is formatted in JSON. (Remember that the while final commas in your
+The file is formatted in JSON. (Remember that while final commas in your
 hashes are a best practice in your Puppet code, they're invalid JSON!)
 Set the following options:
 
@@ -231,7 +231,7 @@ Once this new role is created, click on its name to modify it. Select your
 "Orchestrator" user from the drop-down menu and add it to the role.
 
 Finally, go to the **Permissions** tab. Select "Orchestration" from the **Type**
-drop-down menu, and "Use orchestration" from the **Permission** drop-down.
+drop-down menu, and "Run Puppet form Orchestrator" from the **Permission** drop-down.
 Click **Add permission**. We also want to give this user permissions to modify
 the lifetime of the token so we don't have to regenerate it every five minutes.
 Select "Tokens" from the **Type** drop-down menu, and "Override default expiry"
@@ -494,7 +494,7 @@ in the `init.pp` manifest.
 
     vim lamp/manifests/init.pp
 
-We've already done the bulk of the work work in our components, so this one will be pretty
+We've already done the bulk of the work in our components, so this one will be pretty
 simple. The syntax for an application is similar to that of a class or defined resource type.
 The only difference is that we use the `application` keyword instead of `define` or
 `class`.
