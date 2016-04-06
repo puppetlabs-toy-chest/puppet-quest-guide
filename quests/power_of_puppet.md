@@ -52,7 +52,10 @@ instructions below on installing a locally cached copy of the module.)
 Cool, it looks like there are several matches for Graphite. For this quest, use 
 Daniel Werdermann's module: `dwerder-graphite`.
 
-Among the available modules, the Forge includes two categories of reviewed modules.
+It's also a good time to take a look at the [Puppet Forge](http://forge.puppetlabs.com)
+website. While the `puppet module serach` tool can be good to quickly locate a module, the
+Forge website makes it much easier to search, read documentation, and find a module's source
+code. Note that among the available modules, the Forge includes two categories of pre-reviewed modules.
 **Puppet Approved** modules adhere to a set of Puppet Labs specifications for style, documentation, and
 semantic versioning, along with other best practices standards. **Puppet Supported** modules are
 rigorously tested for compatibility with Puppet Enterprise and are fully supported by Puppet Labs.
@@ -212,7 +215,7 @@ Puppet. Every 30 minutes, the Puppet agent daemon requests a *catalog* from the
 Puppet master. The Puppet master parses all the classes applied to that node,
 builds the catalog to describe how the node is supposed to be configured, and
 returns this catalog to the node's Puppet agent. The agent then applies any changes
-necessary to bring the node into the line with the state described by the
+necessary to bring the node in line with the state described by the
 catalog.
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>

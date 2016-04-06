@@ -84,6 +84,7 @@ Insert `include multi_node` into the `learning.puppetlabs.vm` node declaration.
 ```puppet
 node learning.puppetlabs.vm {
   include multi_node
+  ...
 }
 ```
 

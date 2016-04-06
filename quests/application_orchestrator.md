@@ -190,7 +190,7 @@ Now create your orchestrator configuration file.
 
     vim ~/.puppetlabs/etc/puppet/orchestrator.conf
 
-The file is formatted in JSON. (Remember that the while final commas in your
+The file is formatted in JSON. (Remember that while final commas in your
 hashes are a best practice in your Puppet code, they're invalid JSON!)
 Set the following options:
 
@@ -495,7 +495,7 @@ in the `init.pp` manifest.
 
     vim lamp/manifests/init.pp
 
-We've already done the bulk of the work work in our components, so this one will be pretty
+We've already done the bulk of the work in our components, so this one will be pretty
 simple. The syntax for an application is similar to that of a class or defined resource type.
 The only difference is that we use the `application` keyword instead of `define` or
 `class`.
