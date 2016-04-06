@@ -584,11 +584,10 @@ manifest.
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
-Until now, declarations you've made in your `site.pp` manifest have been contained by
-the `learning.puppetlabs.vm` node block. An application, however, is applied to your
-environment independently of any classification defined in your node blocks or the PE
-console node classifier. To express this distinction, we declare our application instance
-in a special block called `site`.
+Until now, most of the configuration you've made in your `site.pp` has been in the context
+of node blocks. An application, however, is applied to your environment independently of
+any classification defined in your node blocks or the PE console node classifier. To express
+this distinction, we declare our application instance in a special block called `site`.
 
 ```puppet
 site { 
