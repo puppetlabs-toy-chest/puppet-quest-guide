@@ -1,15 +1,52 @@
+.book.font-family-1,
+.book .book-header,
+.book .book-summary {
+  font-family: 'Calibre',Helvetica,Tahoma,Arial,sans-serif;
+}
+
 .lvm-task-number {
     color: #6c6d6d;
-    font-family: 'PT Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
     font-size: 1.625rem;
     font-style: bold;
     margin-left: -8px;
 }
 
 .lvm-task-number p:before {
-    color: #7C6AAB;
+    color: #FFAE1A;
     display: inline;
     font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     content: ' ';
     font-size: 1em;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal a,
+.book .book-summary ul.summary li a:hover,
+.book .book-summary ul.summary li.active>a {
+    color: #FFAE1A;
+}
+
+.book .book-summary {
+  color: #FFF;
+  background-color: #2E2E2E;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.book .book-summary ul.summary li a,
+.book .book-summary ul.summary li span {
+  color: #FFF;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.book .book-summary ul.summary:before {
+    background-image: url('/assets/puppet-logo-amber-white-lg.png');
+    background-size: 150px;
+    display: inline-block;
+    width: 199px;
+    height: 70px;
+    content: "";
+    margin: 20px;
+    background-repeat: no-repeat;
+}
 }
