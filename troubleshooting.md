@@ -73,8 +73,10 @@ You can check the status of puppet services with the following command:
     systemctl --all | grep pe-
 
 If you notice any stopped puppet-related services (e.g. pe-puppetdb), double check
-that you have sufficient memory allocated to the VM and available on your host
-before you try starting them (e.g. `service pe-puppetdb start`).
+that you have sufficient memory allocated to the VM and available on your host.
+We've included a script that makes it easy to restart these services:
+
+    restart_pe_services.sh
 
 If you get an error along the lines of `Error 400 on SERVER: Unknown function union...`
 it is likely because the `puppetlabs-stdlib` module has not been installed. This module
