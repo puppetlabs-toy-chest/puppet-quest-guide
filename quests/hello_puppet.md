@@ -43,8 +43,8 @@ Ready to get started? Run the following command on your Learning VM:
 When you ran the `quest begin hello_puppet` command, you saw some text scroll
 by in your terminal. Each time you start a new quest, the `quest` tool uses
 Puppet to set up everything you'll need to complete that quest. In this case,
-it created new container that we will use to guide you through the Puppet agent
-installation.
+it created new containerized node that we will use to guide you through the
+Puppet agent installation.
 
 The `quest` tool has some other features that will help you keep on track as
 you work through this guide. You can use the `--help` flag to list the
@@ -68,7 +68,7 @@ To see a more detailed list of these tasks, use the `status` subcommand.
 
 The puppet agent is the piece of the Puppet setup that lives on the systems you
 want to manage. Whenever the Puppet agent runs, it asks the Puppet master for a
-catalog, a description of what its system should look like. It compares this
+catalog—a description of what its system should look like. It compares this
 catalog to the actual state of the system, then makes any changes needed to
 make the actual state match the state described in the catalog.
 
