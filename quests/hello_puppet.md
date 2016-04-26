@@ -1,87 +1,91 @@
-# Classify and Apply
+# Hello Puppet
 
 ## Quest objectives
 
-- Install the Puppet agent on a newly provisioned system.
-- Use Puppet and `facter` to inspect the state of your new system.
-- Use the PE console to classify your new system and define a state change.
-- Use a Puppet agent run to apply your changes.
+- Familiarize yourself with this guide and the `quest` tool.
+- Install the Puppet agent on a newly provisioned node.
+- Sign your new node's certificate to add it to your Puppet infrastructure.
+- Use `puppet resource` and `facter` to inspect the state of your new system.
 
 ## Get started
 
-In this quest you will use the Puppet Enterprise (PE) console to set up Graphite,
-an open-source graphing tool that lets you easily visualize the state of your
-infrastructure. Graphite, like Puppet, spans the gap between nuts-and-bolts and
-the big-picture, which makes it a good example to get you started on your path
-to Puppet mastery.
+> Any sufficiently advanced technology is indistinguishable from magic.
 
-One more note: as you go through this quest, remember that Puppet is a powerful
+> - Arthur C. Clarke
+
+Welcome to the Quest Guide for the Puppet Learning VM. This guide will be
+your companion as you make your way through a series of interactive quests,
+using the accompanying VM as a sandbox environment to exercise your Puppet
+skills.
+
+This first quest will introduce you to the integrated `quest` tool you will use
+to set up your environment on the VM prior to each quest and track your
+progress through each task covered in this guide.
+
+Once you're familiar with the quest tool, we'll move on to Puppet itself.
+You'll learn how to install the Puppet agent on a newly provisioned node and
+use `puppet resource` and `facter` to start exploring the state of that new
+system in the language of *resources* and *facts*, the fundamental units of
+information Puppet uses to understand and manage system infrastructure.
+
+As you get started with this guide, remember that Puppet is a powerful
 and complex tool. We will explain concepts as needed to complete and understand
-each task in this quest, but sometimes we'll hold off on a fuller explanation until
-a later quest. Don't worry if you don't feel like you're getting the whole story
-right away; keep at it and we'll get there when the time is right!
+each task in a quest, but will occasionally introduce a topic that needs to
+wait for a later quest for a full explanation. (We can avoid dependency cycles
+in code, but it's not always possible to keep them out of learning materials!)
 
-Ready to get started? Type the following command:
+Ready to get started? Run the following command on your Learning VM:
 
-    quest begin power_of_puppet 
+    quest begin hello_puppet
 
-## Forge ahead
+## An introduction to the quest tool
 
-Graphite is built from several components, including the Graphite Django webapp frontend,
-a storage application called Carbon, and Whisper, a lightweight database system. Each of
-these components has its own set of dependencies and requires its own installation, and
-configuration. You could probably get it up and running yourself if you set aside a little
-time to read through the documentation, but wouldn't it be nice if somebody had already
-done the work for you?
+When you ran the `quest begin hello_puppet` command, you saw some text scroll
+by in your terminal. Each time you start a new quest, the `quest` tool uses
+Puppet to set up everything you'll need to complete that quest. In this case,
+it created new container that we will use to guide you through the Puppet agent
+installation.
 
-You're in luck! Puppet Labs operates a service called the [Puppet Forge](http://forge.puppetlabs.com),
-which serves as a repository for Puppet *modules*. A module nicely packages all the
-code and data Puppet needs to manage a given aspect in your infrastructure, which
-is especially helpful when you're dealing with a complex application like Graphite.
+The `quest` tool has some other features that will help you keep on track as
+you work through this guide. You can use the `--help` flag to list the
+available subcommands.
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
-The `puppet module` tool lets you search for modules directly from the command line.
-See what you can find for Graphite. (If you're offline and run into an error, look for
-instructions below on installing a locally cached copy of the module.)
+    quest --help
 
-    puppet module search graphite
-
-Cool, it looks like there are several matches for Graphite. For this quest, use 
-Daniel Werdermann's module: `dwerder-graphite`.
-
-It's also a good time to take a look at the [Puppet Forge](http://forge.puppetlabs.com)
-website. While the `puppet module serach` tool can be good to quickly locate a module, the
-Forge website makes it much easier to search, read documentation, and find a module's source
-code. Note that among the available modules, the Forge includes two categories of pre-reviewed modules.
-**Puppet Approved** modules adhere to a set of Puppet Labs specifications for style, documentation, and
-semantic versioning, along with other best practices standards. **Puppet Supported** modules are
-rigorously tested for compatibility with Puppet Enterprise and are fully supported by Puppet Labs.
+As you entered that command, you might have noticed that the status line in the
+bottom right of your terminal changed. This status line helps you keep track of
+your progress through the tasks in each quest.
 
 <div class = "lvm-task-number"><p>Task 2:</p></div>
 
-Now that you know what module you want, you'll need to install it to the Puppet
-master to make it available for your infrastructure. The `puppet module` tool makes
-this installation easy. Note that we're going to specify the version to ensure that
-it remains compatible with the instructions in this guide. Go ahead and run:
+To see a more detailed list of these tasks, use the `status` subcommand. 
 
-    puppet module install dwerder-graphite -v 5.16.1
-    
-If you don't have internet access, run the following terminal commands to use
-cached versions of all the modules required for quests in this guide:
+    quest status
 
-    for m in /usr/src/forge/*; do puppet module install $m --ignore-dependencies; done
+## The Puppet agent
 
-This installs the modules for all of the quests in this guide. You can
-skip future instructions for installing modules.
+The puppet agent is the piece of the Puppet setup that lives on the systems you
+want to manage. Whenever the Puppet agent runs, it asks the Puppet master for a
+catalog, a description of what its system should look like. It compares this
+catalog to the actual state of the system, then makes any changes needed to
+make the actual state match the state described in the catalog.
 
-Easy enough, but what did we do, exactly?
+The Learning VM already has a Puppet master pre-installed. To complete the
+picture and try out a puppet run, we'll need to install the Puppet agent on the
+new node the we set up for this quest. The Puppet master hosts an install
+script you can easily grab and run from your agent nodes.
 
-When you ran the `puppet module` command, Puppet retrieved the `graphite` module from
-Forge and placed it in the Puppet master's *modulepath*. The modulepath is where
-Puppet will look to find Puppet classes and other files and resources made available by any
-modules you download or create. For Puppet Enterprise, the default modulepath is
-`/etc/puppetlabs/code/environments/production/modules`.
+<div class = "lvm-task-number"><p>Task 3:</p></div>
+
+First, use `ssh` to connect to your node:
+
+    ssh root@hello.learning.puppetlabs.vm
+
+Then paste in the following command to run the agent installer:
+
+    curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | sudo bash
 
 ## Class and classification
 
