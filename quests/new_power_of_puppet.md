@@ -1,11 +1,10 @@
-# Classify and Apply
+# Managing Change
 
 ## Quest objectives
 
-- Install the Puppet agent on a newly provisioned system.
-- Use Puppet and `facter` to inspect the state of your new system.
-- Use the PE console to classify your new system and define a state change.
+- Use the PE console to define a new state for your agent node.
 - Use a Puppet agent run to apply your changes.
+- Inspect the results of your agent run.
 
 ## Get started
 
