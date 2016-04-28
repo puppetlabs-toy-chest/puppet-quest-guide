@@ -4,8 +4,8 @@
 
 - Familiarize yourself with this guide and the `quest` tool.
 - Install the Puppet agent on a newly provisioned node.
-- Sign your new node's certificate to add it to your Puppet infrastructure.
-- Use `puppet resource` and `facter` to inspect the state of your new system.
+- Use `puppet resource` and `facter` to inspect the state of the Network Time
+  Protocol (NTP) package and service.
 
 ## Get started
 
@@ -18,15 +18,16 @@ your companion as you make your way through a series of interactive quests,
 using the accompanying VM as a sandbox environment to exercise your Puppet
 skills.
 
-This first quest will introduce you to the integrated `quest` tool you will use
+This first quest will start by introducing you to the `quest` tool you will use
 to set up your environment on the VM prior to each quest and track your
 progress through each task covered in this guide.
 
 Once you're familiar with the quest tool, we'll move on to Puppet itself.
 You'll learn how to install the Puppet agent on a newly provisioned node and
-use `puppet resource` and `facter` to start exploring the state of that new
-system in the language of *resources* and *facts*, the fundamental units of
-information Puppet uses to understand and manage system infrastructure.
+use `puppet resource` and `facter` to explore the state of that new system.
+These tools help you understand any server in your infrastructure in terms of
+*resources* and *facts*, the fundamental units of information Puppet uses to
+manage a system.
 
 As you get started with this guide, remember that Puppet is a powerful
 and complex tool. We will explain concepts as needed to complete and understand
@@ -66,16 +67,16 @@ To see a more detailed list of these tasks, use the `status` subcommand.
 
 ## The Puppet agent
 
-The puppet agent is the piece of the Puppet setup that lives on the systems you
+The Puppet agent is the piece of the Puppet setup that lives on the systems you
 want to manage. Whenever the Puppet agent runs, it asks the Puppet master for a
 catalog—a description of what its system should look like. It compares this
 catalog to the actual state of the system, then makes any changes needed to
 make the actual state match the state described in the catalog.
 
-The Learning VM already has a Puppet master pre-installed. To complete the
-picture and try out a puppet run, we'll need to install the Puppet agent on the
-new node the we set up for this quest. The Puppet master hosts an install
-script you can easily grab and run from your agent nodes.
+The Learning VM already has a Puppet master pre-installed. To try out a Puppet
+agent run, we'll need to install the Puppet agent on the new node the we set up
+for this quest. The Puppet master hosts an install script you can easily run
+from your agent node that can connect to it.
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
@@ -87,177 +88,184 @@ Then paste in the following command to run the agent installer:
 
     curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | sudo bash
 
-## Class and classification
+(Note that you can find full documentation of the agent installation process,
+including specific instructions for Windows and other operating systems on the
+[docs page](https://docs.puppet.com/pe/latest/install_agents.html))
 
-The `graphite` *module* includes Puppet code that defines a `graphite` *class*.
-In Puppet, a *class* is simply a named block of Puppet code that defines a set
-of associated system resources. A class might install a package, customize an
-associated configuration file for that package, and start a service provided by
-that package. These are related and interdependent processes, so it makes sense
-to organize them into a single configurable unit: a class.
+## Resources and Facts
 
-While a module can include many classes, it will generally have a main class that
-shares the name of the module. This main class will often handle the basic installation
-and configuration of the primary component the module is designed to manage.
+At the core of Puppet is something called the *resource abstraction layer*.
+for puppet, each bit of the system you want to manage (a user, file, service,
+or package, to give some common examples) can be represented in puppet code as
+a unit called a *resource*. puppet can translate back and forth between this
+puppet code reporesentation of a resource and the native tools and data of the
+system where it's running. This ability to use the same consistent language to
+handle resources with different tools and across different operating systems is
+the *abstraction* we're talking about in *resource abstraction layer*.
 
-The `graphite` class contains the instructions Puppet needs to set up Graphite,
-but you still need to tell Puppet where and how you want it to apply the class
-across your infrastructure. This process of matching classes to nodes is
-called *classification*.
+A program called `facter` is a key tool that makes this resource abstraction
+possible. As its name suggests, `facter` collects data about a system and makes
+them availale to Puppet (and you) as a set of structured facts. This lets
+Puppet reliably access the details of a system so it can use the correct
+*providers* to interface with the native tools it needs to manage resources on
+that system.
 
-### Access the PE console
-
-We're going to explore some alternative ways to classify nodes in future quests, but for
-the moment we'll opt for the simplicity of the the PE console's built-in node classifier.
-Now that you have the module installed, let's go through the steps of creating
-a node group, adding the Learning VM to the group, and classifying the group with the
-`graphite` class.
-
-But before you can access the PE console you'll need the Learning VM's IP address.
-
-<div class = "lvm-task-number"><p>Task 3:</p></div>
-
-Of course, you could use a command like `ifconfig` to find this, but let's do it the Puppet
-way. Puppet uses a tool called `facter` to collect facts about a system and make them
-available at catalog compilation. This is how it knows, for example, whether it's on
-Ubuntu and needs to use `apt-get` or CentOS and needs `yum`. You'll learn more about
-facts and conditionals in Puppet later. For now, we can use `facter` in the command-line
-to determine the Learning VM's IP address.
-
-    facter ipaddress
-
-Open a web browser on your host machine and go to `https://<IPADDRESS>`, where
-`<IPADDRESS>` is the Learning VM's IP address. (Be sure to include the `s` in
-`https`!)
-
-The PE console certificate is self-signed, so your browser may give you a security notice.
-Go ahead and bypass this notice to continue to the console.
-
-When prompted, use the following credentials to log in:
-
-  * username: **admin** 
-  
-  * password: **puppetlabs**
-
-### Create a node group
-
-Now that you have access to the PE console, we'll walk you through the steps
-to classify the "learning.puppetlabs.vm" node (i.e. the Learning VM)
-with the `graphite` class.
-
-First, create a **Learning VM** node group. Node groups allow you to 
-segment all the nodes in your infrastructure into separately configurable groups
-based on the node's certname and all information collected by the `facter` tool.
-
-Click on *Classification* in the console navigation bar. It may take a moment to load.
-
-![image](../assets/classification.png)
-
-From here, enter "Learning VM" as a new node group name and click *Add group* to create
-your new node group.
-
-![image](../assets/node_group.png)
-
-Click on the new group to set the rules for this group. You only want the `learning.puppetlabs.vm` in
-this group, so instead of adding a rule, use the *Pin node* option to add the node individually.
-
-Click on the *Node name* field, and you should see the Learning VM's certname autofilled. If no matching
-certname appears, trigger a Puppet run (`puppet agent -t`) on the Learning VM. As part of the Puppet
-run, the Learning VM will check in, making its information available to the console node classifier.
-
-![image](../assets/pin.png)
-
-Click *Pin node*, then click the *Commit 1 change* button in the bottom right of the console
-interface to commit your change.
-
-![image](../assets/commit.png)
-
-### Add a class
-
-When you installed the `dwerder-graphite` module from the forge, it made the `graphite`
-class available in the console.
-
-Under the *Classes* tab in the interface for the Learning VM node group, find the *Class name*
-text box. If `graphite` is not yet available, click the *Refresh* button near the top right
-of the classes interface and wait a moment before trying again. (If the class still does not
-appear, check the [troubleshooting guide](https://github.com/puppetlabs/courseware-lvm/blob/master/SETUP.md#troubleshooting) for more information.)
-
-Once you have entered `graphite` in the *Class name* text box, click the *Add class* button.
-
-Before you apply the class, there are a few parameters you'll want to set.
-
-We already have an Apache server configured to our liking on the Learning VM, so we can
-tell the `graphite` class it doesn't need to bother setting up its own server.
-
-There are also some compatibility issues with the latest Django version. The author of this
-`graphite` module has made it easy to get around this problem by picking our
-own compatible Django version to use. (Keep this in mind when you start writing your own modules!)
-
-Set the parameters, as follows:
-
-1. `gr_web_server      = none`
-1. `gr_django_pkg      = django`
-1. `gr_django_provider = pip`
-1. `gr_django_ver      = "1.5"`
-
-Note that the `gr_django_ver` parameter takes a string, not float value, so it must
-be wrapped in quotes for Puppet to parse it correctly.
-
-Double check that you have clicked the *Add parameter* button for all of your parameters,
-then click the *Commit 5 changes* button in the bottom right of the console window
-to commit your changes.
-
-### Run Puppet
-
-Now that you have classified the `learning.puppetlabs.vm` node with the
-`graphite` class, Puppet knows how the system should be configured, but it won't
-make any changes until a Puppet run occurs. 
-
-By default, the Puppet agent daemon runs in the background on all nodes you manage with
-Puppet. Every 30 minutes, the Puppet agent daemon requests a *catalog* from the
-Puppet master. The Puppet master parses all the classes applied to that node,
-builds the catalog to describe how the node is supposed to be configured, and
-returns this catalog to the node's Puppet agent. The agent then applies any changes
-necessary to bring the node in line with the state described by the
-catalog.
+(You can also explicitly specify which package manager Puppet should use. For
+example, on a Windows system you can choose to use Chocolatey instead of the
+native Windows tools to install from an MSI or EXE.)
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
-To avoid surprises, however, we've disabled these scheduled runs on the Learning VM.
-Instead, we'll be using the `puppet agent` tool to trigger runs manually.
+If you're not still connected to your agent node, SSH to it again
 
-As you're working through this Quest Guide, keep in mind that the Learning VM is running *both*
-a Puppet master *and* a Puppet agent. This is a bit different than what you'd see in
-a typical architecture, where a single Puppet master would serve a collection of
-Puppet agent nodes. The Puppet master is where you keep all your Puppet code. Earlier
-when you used the `puppet module` tool to install the `graphite` module, that was a
-task for the Puppet master. When you want to manually trigger a Puppet run with the
-`puppet agent` tool, that's a command you would use on an agent node, not the master.
+    ssh root@hello.learning.puppetlabs.vm
 
-So put on your agent hat and trigger a Puppet run:
+Use `facter` to find out the `os.name` fact on this node:
 
-    puppet agent --test
+    facter os.name
 
-Graphite is a complex piece of software with many dependencies, so this may take a while
-to run. After a brief delay, you will see text scroll by in your terminal indicating
-that Puppet has made all the specified changes to the Learning VM.
+You'll see that this is an Ubuntu system.
 
-You can also check out the Graphite console running on port 90. (`http://<IPADDRESS>:90`)
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
-We've selected a few parameters as an example. Paste the following path after the
-Graphite console URL to try it out:
+Configuring the Network Time Protocol (NTP) service is a common first step in
+managing your infrastructure. Let's check if the NTP package is installed.
+Because you're on an Ubuntu system, you can use `dpkg`:
 
-    /render/?width=586&height=308&_salt=1430506380.148&from=-30minutes&fontItalic=false&fontName=Courier&target=alias(carbon.agents.learning_puppetlabs_vm-a.cpuUsage%2C"CPU")&target=alias(secondYAxis(carbon.agents.learning_puppetlabs_vm-a.memUsage)%2C"Memory")&majorGridLineColor=C0C0C0&minorGridLineColor=C0C0C0
+    dpkg -s ntp
 
-Note that Graphite has only been running for a few minutes, so it may not yet
-have much data to chart. If you wait a minute and refresh the page in your
-browser, you will see the graph update with new data.
+Now that you have the Puppet agent installed, you can also use the `puppet
+resource` tool to do the same check wihout considering the operating system of
+the node you happen to be connected to:
 
+    puppet resource package ntp
+
+<div class = "lvm-task-number"><p>Task 5:</p></div>
+
+To set up NTP on your infrastructure, you'll likely want to configure a server
+that the `other nodes in your infrastructure will coordinate with. With the
+simple two-node network we're using for this quest, we might nominate the
+Puppet master node to run this service as well.
+
+Let's exit our SSH session and check the status of the NTP package on
+our Puppet master:
+
+    exit
+
+Again, use `facter` to find the `os.name` fact:
+
+    facter os.name
+
+You'll see that you're now on a CentOS system. This means that you need to use
+`rpm` instead of `dpkg`:
+
+    rpm -qa | grep ntp
+
+But you can also just use `puppet resource` again:
+
+    puppet resource package ntp
+
+## Modifying resources
+
+While using `facter` and `puppet resource` to get information about a system is
+convenient, the real power of Puppet's resource abstraction layer is that it
+can also make changes. Not only can it translate the state of your system into
+a Puppet resource, but it can also use a resource as a model for making changes
+on your system.
+
+You already saw that the NTP package was installed on your Puppet master, so
+let's take a look at the NTP daemon service.
+
+    puppet resource service ntpd
+
+You'll see that the service is stopped and not enabled.
+
+    service { 'ntpd':
+      ensure => 'stopped',
+      enable => 'false',
+    }
+
+Let's change that. Instead of using the full Puppet code syntax you see in the
+output of the `puppet resource` command, we can use a shorthand to directly
+set the key-value pairs of the resource and apply those changes to the system.
+
+    puppet resource service ntpd ensure='running' enable='true'
+
+Puppet will notify you of the changes it has made and show the new state of the
+`ntpd` resource.
+
+    Notice: /Service[ntpd]/ensure: ensure changed 'stopped' to 'running'
+    service: { 'ntpd':
+      ensure => 'running',
+      enable => 'true',
+    }
+
+Note that you didn't have to worry about implementation details here. Puppet
+knew to use Systemd commands to start the service because we're on CentOS 7. If
+we had been on Centos 6, it would have used SysVinit.
+
+There are some configuration details we would normally want to adjust in
+`/etc/ntp.conf`. When we get to the next quest, we'll address how you can
+easily manage this kind of configuration with Puppet. For now, though, we'll
+settle for directing our agent node to use the master as its NTP server.
+
+SSH to your agent node:
+
+    ssh root@hello.learning.puppetlabs.vm
+
+Take a look at the configuration file.
+
+    vim /etc/ntp.conf
+
+You'll see that there are several default servers already specified.
+
+    server 0.ubuntu.pool.ntp.org
+    server 1.ubuntu.pool.ntp.org
+    server 2.ubuntu.pool.ntp.org
+    server 3.ubuntu.pool.ntp.org
+
+NTP is more reliable if it can poll multiple servers, so we'll leave in those
+first three defaults, but we can replace the third with 
+`learning.puppetlabs.vm` and tell NTP to prefer this server. There are several
+ways to manage configuration files with Puppet that we'll address in a later
+quest, but for now, go ahead and edit the configuration by hand. (If you're not
+used to Vim, note that you'll need to type `i` to enter insert mode.) Replace
+the `server 3.ubuntu.pool.ntp.org` line with:
+
+    server learning.puppetlabs.vm prefer
+
+Once you've made your change, save and exit Vim. (To do this, you first exit
+insert mode with `ESC`, then type `:wq` and hit enter. That's `:` to get a
+command prompt within Vim, then `w` to write the file and `q` to quit.)
+
+With your configuration set, use the `puppet resource` tool to start the `ntp`
+service. Note that while the resource abstraction layer will figure out how to
+manage resources on different systems, you still have to be aware of variations
+in the names of things like services and packages. In this case, the service is
+called `ntp` on Ubuntu, and `ntpd` on CentOS. (You'll see in later quests how
+Puppet modules can still help you handle this kind of variation.)
+
+    puppet resource service ntp ensure='running'
+
+Now check to see the updated list of peers NTP is connected to:
+
+    ntpq -p
 
 ## Review
 
-Great job on completing the quest! You should now have a good idea of how to
-download existing modules from the Forge and use the PE console node classifier
-to apply them to a node. You also learned how to use the the `facter` command
-to retrieve system information, and the `puppet agent --test` command to manually
-trigger a Puppet run.
+Nice work, you've completed your first quest on your way to Puppet mastery!
+
+We reviewed the `quest begin` `quest --help` and `quest status` commands that
+you'll be using throughout this guide to keep your progress on the VM
+coordinated with the quests and tasks you read here.
+
+We also covered the the installation of the Puppet agent on a new node using an
+install script hosted on the Puppet master.
+
+With that new node set up, you learned about the *resource abstraction layer*,
+a key Puppet concept. You used `facter` to view system facts, and used the
+`puppet resource` tool to investigate and modify the state of the `ntp` package
+and `ntpd` serivce.
+
+In the next quest, you will build on this foundation by using the PE console
+to fully automate NTP on your infrastructure.
