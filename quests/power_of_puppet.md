@@ -53,7 +53,7 @@ Cool, it looks like there are several matches for Graphite. For this quest, use
 Daniel Werdermann's module: `dwerder-graphite`.
 
 It's also a good time to take a look at the [Puppet Forge](http://forge.puppetlabs.com)
-website. While the `puppet module serach` tool can be good to quickly locate a module, the
+website. While the `puppet module search` tool can be good to quickly locate a module, the
 Forge website makes it much easier to search, read documentation, and find a module's source
 code. Note that among the available modules, the Forge includes two categories of pre-reviewed modules.
 **Puppet Approved** modules adhere to a set of Puppet Labs specifications for style, documentation, and
