@@ -1,24 +1,22 @@
-# Managing Change
+# Automation
 
 ## Quest objectives
 
-- Use the PE console to define a new state for your agent node.
-- Use a Puppet agent run to apply your changes.
+- Sign your agent node's certificate to add it to your Puppet master's
+  inventory.
+- Use the PE console to classify your .
+- Use the Puppet agent to apply your changes.
 - Inspect the results of your agent run.
 
 ## Get started
 
-In this quest you will use the Puppet Enterprise (PE) console to set up Graphite,
-an open-source graphing tool that lets you easily visualize the state of your
-infrastructure. Graphite, like Puppet, spans the gap between nuts-and-bolts and
-the big-picture, which makes it a good example to get you started on your path
-to Puppet mastery.
-
-One more note: as you go through this quest, remember that Puppet is a powerful
-and complex tool. We will explain concepts as needed to complete and understand
-each task in this quest, but sometimes we'll hold off on a fuller explanation until
-a later quest. Don't worry if you don't feel like you're getting the whole story
-right away; keep at it and we'll get there when the time is right!
+In this quest you'll see how you can automate the management of resources on a
+system with the Node Classifier feature of the Puppet Enterprise console. We'll
+show you how to find a pre-made bundle of code called a *module* on Puppet's
+community Forge service to manage NTP. Once you have this module downloaded to
+your Puppet master, it will help you easily configure all the elements of your
+NTP system—the package, service, and configuration file—across on any node in
+your infrastructure from a single, centralized location.
 
 Ready to get started? Type the following command:
 
@@ -26,17 +24,16 @@ Ready to get started? Type the following command:
 
 ## Forge ahead
 
-Graphite is built from several components, including the Graphite Django webapp frontend,
-a storage application called Carbon, and Whisper, a lightweight database system. Each of
-these components has its own set of dependencies and requires its own installation, and
-configuration. You could probably get it up and running yourself if you set aside a little
-time to read through the documentation, but wouldn't it be nice if somebody had already
-done the work for you?
+You saw that you were able to , but wouldn't it be nice if somebody had
+already done the work for you?
 
-You're in luck! Puppet Labs operates a service called the [Puppet Forge](http://forge.puppetlabs.com),
-which serves as a repository for Puppet *modules*. A module nicely packages all the
-code and data Puppet needs to manage a given aspect in your infrastructure, which
-is especially helpful when you're dealing with a complex application like Graphite.
+Puppet Labs operates a service called the [Puppet
+Forge](http://forge.puppetlabs.com), which serves as a repository for Puppet
+*modules*. A module packages all the code and data Puppet needs to manage a
+given aspect in your infrastructure. This will always include some Puppet code
+to help define a desired state for resources on the syetem, things like the
+packages and services you encountered in the previous quest. You'll also often
+see files or templates included in a module to help manage configuration.
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
@@ -44,18 +41,21 @@ The `puppet module` tool lets you search for modules directly from the command l
 See what you can find for Graphite. (If you're offline and run into an error, look for
 instructions below on installing a locally cached copy of the module.)
 
-    puppet module search graphite
+    puppet module search ntp
 
-Cool, it looks like there are several matches for Graphite. For this quest, use 
-Daniel Werdermann's module: `dwerder-graphite`.
+Cool, it looks like there are several matches for modules that could help you
+manage NTP. For this quest, we'll use the 
 
-It's also a good time to take a look at the [Puppet Forge](http://forge.puppetlabs.com)
-website. While the `puppet module serach` tool can be good to quickly locate a module, the
-Forge website makes it much easier to search, read documentation, and find a module's source
-code. Note that among the available modules, the Forge includes two categories of pre-reviewed modules.
-**Puppet Approved** modules adhere to a set of Puppet Labs specifications for style, documentation, and
-semantic versioning, along with other best practices standards. **Puppet Supported** modules are
-rigorously tested for compatibility with Puppet Enterprise and are fully supported by Puppet Labs.
+It's also a good time to take a look at the [Puppet
+Forge](http://forge.puppetlabs.com) website. While the `puppet module search`
+tool can be good to quickly locate a module, the Forge website makes it much
+easier to search, read documentation, and find a module's source code. Note
+that among the available modules, the Forge includes two categories of
+pre-reviewed modules.  **Puppet Approved** modules adhere to a set of Puppet
+Labs specifications for style, documentation, and semantic versioning, along
+with other best practices standards. **Puppet Supported** modules are
+rigorously tested for compatibility with Puppet Enterprise and are fully
+supported by Puppet Labs.
 
 <div class = "lvm-task-number"><p>Task 2:</p></div>
 
