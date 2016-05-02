@@ -148,6 +148,12 @@ actually applying any of those changes to your system.
 
     puppet apply --noop cowsayings/examples/cowsay.pp
 
+(If you're running offline or have restrictive firewall rules, you may need to
+manually install the gems from the local cache on the VM. In a real
+infrastructure, you might consider setting up a local rubygems mirror with a
+tool such as [Stickler](https://github.com/copiousfreetime/stickler).
+`gem install --local --no-rdoc --no-ri /var/cache/rubygems/gems/cowsay-*.gem`)
+
 You should see an output like the following:
 
     Notice: Compiled catalog for learn.localdomain in environment production in
