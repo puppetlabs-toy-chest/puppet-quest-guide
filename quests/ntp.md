@@ -78,8 +78,8 @@ finally, see if the Network Time Protocol Daemon (NTPD) *service* is running:
 
     puppet resource service ntpd
 	
-You'll see that the NTP package is installed on the Learning VM, that the
-configuration file exists, but that the ntpd service is 'stopped'.
+You'll see that the NTP package is purged, that the configuration file is
+absent, and that the ntpd service is 'stopped'.
 
 As you continue to work with Puppet, you'll find that this
 *package/file/service* pattern is very common. These three resource types
