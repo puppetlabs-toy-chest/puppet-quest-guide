@@ -19,11 +19,11 @@ settings.  We recommend allocating 4GB of memory for the best performance. If
 you don't have enough memory on your host machine, you may leave the allocation
 at 3GB or lower it to 2GB, though you may encounter stability and performance
 issues. Set the *Network Adapter* to *Bridged*. Use an *Autodetect* setting if
-available, or accept the default Network Adapter name.  (If you started the VM
+available, or accept the default Network Adapter name. (If you started the VM
 before making these changes, you may need to restart the VM before the settings
-will be applied correctly.) If you are using VMware virtualization software,
-you may allocate 2 CPUs to the VM. If you are using VirtualBox, ensure that you
-have only 1 CPU allocated and that the I/O APIC option is disabled.
+will be applied correctly.) If you are unable to use a bridged network, we
+suggest using the port-forwarding instructions provided in the troubleshooting
+guide.
 
 4. Start the VM. When it is started, make a note of the IP address and password
 displayed on the splash page. Rather than logging in directly, we highly
@@ -32,7 +32,12 @@ third-party application like iTerm.  For Windows, we suggest the free SSH
 client [PuTTY](http://www.putty.org/).  Connect to the Learning VM with the
 login `root` and password you noted from the splash page.  (e.g. `ssh
 root@<IPADDRESS>`) Be aware that it might take several minutes for the services
-in the PE stack to fully start after the VM boots.
+in the PE stack to fully start after the VM boots. Once you're connected to the
+VM, we suggest updating the clock with `ntpdate`:
+
+    timedatectl list-timezones
+    timedatectl set-timezone <YOURTIMEZONE>
+    ntpdate time.apple.com
 
 5. You can access this Quest Guide via a webserver running on the Learning VM
 itself. Open a web broswer on your host and enter the Learning VM's IP address
