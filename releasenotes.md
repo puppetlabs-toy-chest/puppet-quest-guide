@@ -8,6 +8,7 @@
   * Build process has been modified to improve VirtualBox compatibility.
   * Increase suggested CPU allocation to 2.
   * Added test tests to test the quest tests.
+  * Update troubleshooting guide.
 
 ### v1.2.0
   * Added branded CSS styling.
