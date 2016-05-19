@@ -4,8 +4,8 @@
 
 - Familiarize yourself with this guide and the `quest` tool.
 - Install the Puppet agent on a newly provisioned node.
-- Use `puppet resource` and `facter` to inspect the state of the Network Time
-  Protocol (NTP) package and service.
+- Use `puppet resource` and `facter` to inspect and modify the user accounts
+  on your new node.
 
 ## Get started
 
@@ -41,11 +41,10 @@ Ready to get started? Run the following command on your Learning VM:
 
 ## An introduction to the quest tool
 
-When you ran the `quest begin hello_puppet` command, you saw some text scroll
-by in your terminal. Each time you start a new quest, the `quest` tool uses
-Puppet to set up everything you'll need to complete that quest. In this case,
-it created new containerized node that we will use to guide you through the
-Puppet agent installation.
+Each time you start a new quest, the `quest` tool uses Puppet to set up
+everything you'll need to complete that quest. In this case, it created new
+containerized node that we will use to guide you through the Puppet agent
+installation.
 
 The `quest` tool has some other features that will help you keep on track as
 you work through this guide. You can use the `--help` flag to list the
@@ -86,7 +85,7 @@ First, use `ssh` to connect to your node:
 
 Then paste in the following command to run the agent installer:
 
-    curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | sudo bash
+    curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | bash
 
 (Note that you can find full documentation of the agent installation process,
 including specific instructions for Windows and other operating systems on the
@@ -95,36 +94,63 @@ including specific instructions for Windows and other operating systems on the
 ## Resources and Facts
 
 At the core of Puppet is something called the *resource abstraction layer*.
-for puppet, each bit of the system you want to manage (a user, file, service,
-or package, to give some common examples) can be represented in puppet code as
-a unit called a *resource*. puppet can translate back and forth between this
-puppet code reporesentation of a resource and the native tools and data of the
+for Puppet, each bit of the system you want to manage (a user, file, service,
+or package, to give some common examples) can be represented in Puppet code as
+a unit called a *resource*. Puppet can translate back and forth between this
+Puppet code representation of a resource and the native tools and data of the
 system where it's running. This ability to use the same consistent language to
 handle resources with different tools and across different operating systems is
 the *abstraction* we're talking about in *resource abstraction layer*.
 
 A program called `facter` is a key tool that makes this resource abstraction
 possible. As its name suggests, `facter` collects data about a system and makes
-them availale to Puppet (and you) as a set of structured facts. This lets
-Puppet reliably access the details of a system so it can use the correct
-*providers* to interface with the native tools it needs to manage resources on
-that system.
+them availale to Puppet (and you) as a set of structured facts.
+
+<div class = "lvm-task-number"><p>Task 4:</p></div>
+
+Let's take a look at `facter`.
+
+If you're not connected to your agent node, use SSH to reconnect.
+
+    ssh root@hello.learning.puppetlabs.vm
+
+Now use `facter` to see the OS data available on this node:
+
+    facter os
+
+The data output will include everything `facter` knows about the OS and its
+architecture.
+
+    {
+      architecture => "x86_64",
+      family => "RedHat",
+      hardware => "x86_64",
+      name => "CentOS",
+      release => {
+        full => "7.1.1503",
+        major => "7",
+        minor => "1"
+      },
+      selinux => {
+        enabled => false
+      }
+    }
+
+<div class = "lvm-task-number"><p>Task 5:</p></div>
+
+You can also dig in to this data to pull out specific facts. Try getting the
+
+
+    facter os.name
+
+'facter' helps
+Puppet know which native tools it should use on the system and can be used with
+conditionals in Puppet code to select correct software and configuration
+options.
 
 (You can also explicitly specify which package manager Puppet should use. For
 example, on a Windows system you can choose to use Chocolatey instead of the
 native Windows tools to install from an MSI or EXE.)
-
-<div class = "lvm-task-number"><p>Task 4:</p></div>
-
-If you're not still connected to your agent node, SSH to it again
-
-    ssh root@hello.learning.puppetlabs.vm
-
-Use `facter` to find out the `os.name` fact on this node:
-
-    facter os.name
-
-You'll see that this is an Ubuntu system.
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
