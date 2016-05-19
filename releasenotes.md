@@ -2,6 +2,13 @@
 
 ## Release Notes
 
+### v1.2.1
+  * Added instructions for updating the timezone.
+  * Addressed clarity of instructions in Power of Puppet and NTP quests.
+  * Build process has been modified to improve VirtualBox compatibility.
+  * Increase suggested CPU allocation to 2.
+  * Added test tests to test the quest tests.
+
 ### v1.2.0
   * Added branded CSS styling.
   * Fixed incorrect offline module installation instructions.
