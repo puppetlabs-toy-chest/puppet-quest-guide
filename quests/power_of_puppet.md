@@ -172,13 +172,17 @@ interface to commit your change.
 
 ### Add a class
 
-When you installed the `dwerder-graphite` module from the forge, it made the `graphite`
-class available in the console.
+When you installed the `dwerder-graphite` module from the forge, it made the
+`graphite` class available in the console.
 
-Under the *Classes* tab in the interface for the Learning VM node group, find the *Class name*
-text box. If `graphite` is not yet available, click the *Refresh* button near the top right
-of the classes interface and wait a moment before trying again. (If the class still does not
-appear, check the [troubleshooting guide](https://github.com/puppetlabs/courseware-lvm/blob/master/SETUP.md#troubleshooting) for more information.)
+Under the *Classes* tab in the interface for the Learning VM node group, find
+the *Class name* text box. When you click in the classes textbox and begin
+typing, the `graphite` class should autofill. If it does not, click the
+*Refresh* button near the top right of the classes interface and wait a moment
+before trying again. (If the class still does not appear, check the
+[troubleshooting
+guide](https://github.com/puppetlabs/courseware-lvm/blob/master/SETUP.md#troubleshooting)
+for more information.)
 
 Once you have entered `graphite` in the *Class name* text box, click the *Add class* button.
 
