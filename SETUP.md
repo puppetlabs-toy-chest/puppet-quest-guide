@@ -36,7 +36,9 @@ in the PE stack to fully start after the VM boots. Once you're connected to the
 VM, we suggest updating the clock with `ntpdate`:
 
     timedatectl list-timezones
+    
     timedatectl set-timezone <YOURTIMEZONE>
+    
     ntpdate time.apple.com
 
 5. You can access this Quest Guide via a webserver running on the Learning VM
