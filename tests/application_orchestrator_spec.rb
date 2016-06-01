@@ -3,7 +3,7 @@ describe "Task 1:" do
     # Ugly! Pending direct method to test manifests
     file("#{PROD_PATH}manifests/site.pp")
       .content
-      .should match /pe_ini_setting { 'use_cached_catalog':.*setting => 'use_cached_catalog',.*pe_ini_setting { 'pluginsync':.*setting => 'pluginsync',/m
+      .should match /pe_ini_setting { 'use_cached_catalog':.*setting\s*=>\s*'use_cached_catalog',.*pe_ini_setting { 'pluginsync':.*setting\s*=>\s*'pluginsync',/m
   end
 end
 
@@ -68,7 +68,7 @@ end
 describe "Task 10:" do
   it "Declare an application instance in your site.pp manifest" do
     # Need a better test!
-    file("#{PROD_PATH}manifests/site.pp").content.should match /Node\['database\.learning\.puppetlabs\.vm'\] => Lamp::Mysql\['app1'\],/
+    file("#{PROD_PATH}manifests/site.pp").content.should match /Node\['database\.learning\.puppetlabs\.vm'\]\s*=>\s*Lamp::Mysql\['app1'\],/
   end
 end
 

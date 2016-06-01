@@ -34,7 +34,7 @@ end
 
 describe "Task 6:" do
   it 'Declare the web class with parameters in your test manifest' do
-    file("#{MODULE_PATH}web/examples/init.pp").content.should match /class \{\s*\'web\':\s+(page_name\s+=>\s+\'\w+\'|message\s+=>\s+\'.+\'),\s+(\s+page_name\s+=>\s+\'\w+\'|message\s+=>\s+\'.+\'),\s}/
+    file("#{MODULE_PATH}web/examples/init.pp").content.should match /class \{\s*\'web\':\s+(page_name\s*=>\s*\'\w+\'|message\s+=>\s+\'.+\'),\s+(\s+page_name\s*=>\s*\'\w+\'|message\s*=>\s*\'.+\'),\s}/
   end
 end
 
