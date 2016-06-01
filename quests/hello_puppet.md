@@ -18,22 +18,24 @@ your companion as you make your way through a series of interactive quests,
 using the accompanying VM as a sandbox environment to exercise your Puppet
 skills.
 
-This first quest will start by introducing you to the `quest` tool you will use
-to set up your environment on the VM prior to each quest and track your
-progress through each task covered in this guide.
+We'll begin by introducing you to the `quest` tool. This tool isn't a part of
+Puppet itself, but it's going to be an important part of your experience with
+the Learning VM. We'll give you a brief overview of how to use the tool and
+read the feedback it provides.
 
-Once you're familiar with the quest tool, we'll move on to Puppet itself.
-You'll learn how to install the Puppet agent on a newly provisioned node and
-use `puppet resource` and `facter` to explore the state of that new system.
-These tools help you understand any server in your infrastructure in terms of
-*resources* and *facts*, the fundamental units of information Puppet uses to
-manage a system.
+Once you're familiar with the quest tool, we'll move on to some of the
+most basic and important features of Puppet itself. You'll learn how to install
+the Puppet agent on a newly provisioned node and use `puppet resource` and
+`facter` to explore the state of that new system. Through these tools, you will
+learn about *resources* and *facts*, the fundamental units of information
+Puppet uses to manage a system.
 
-As you get started with this guide, remember that Puppet is a powerful
-and complex tool. We will explain concepts as needed to complete and understand
-each task in a quest, but will occasionally introduce a topic that needs to
-wait for a later quest for a full explanation. (We can avoid dependency cycles
-in code, but it's not always possible to keep them out of learning materials!)
+Just one more note before we dive in: as you get started with this guide,
+remember that Puppet is a powerful and complex tool. We do our best in this
+guide to explain concepts as you encounter then, but will occasionally
+introduce a topic that needs to wait for a later quest for a full explanation.
+(We'll show you how to avoid dependency cycles in your Puppet code, but it's
+not always possible to keep them out of learning materials!)
 
 Ready to get started? Run the following command on your Learning VM:
 
@@ -42,12 +44,15 @@ Ready to get started? Run the following command on your Learning VM:
 ## An introduction to the quest tool
 
 Each time you start a new quest, the `quest` tool uses Puppet to set up
-everything you'll need to complete that quest. In this case, it created new
-containerized node that we will use to guide you through the Puppet agent
-installation.
+everything you'll need to complete that quest. In this case, we're going to
+be teaching you about the Puppet agent and showing you how to install it on a
+new system, so the quest tool has prepared that system for you. (In the
+background, the quest tool uses a tool called Docker to quickly create and
+destroy lightweight containerized nodes as needed before each quest.) We'll
+move on to that installation in a moment, but first let's review a couple more
+features of the quest tool.
 
-The `quest` tool has some other features that will help you keep on track as
-you work through this guide. You can use the `--help` flag to list the
+First, go ahead and use the `--help` flag with the `quest` command to list the
 available subcommands.
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
@@ -56,30 +61,60 @@ available subcommands.
 
 As you entered that command, you might have noticed that the status line in the
 bottom right of your terminal changed. This status line helps you keep track of
-your progress through the tasks in each quest.
+your progress through the *tasks* in each quest.
 
 <div class = "lvm-task-number"><p>Task 2:</p></div>
 
-To see a more detailed list of these tasks, use the `status` subcommand. 
+To see a more detailed list of these tasks, use the `status` subcommand. Give
+it a try now. 
 
     quest status
 
+You'll see that `Task 2: View the list of available quests` is still
+incomplete (Unless you got ahead of yourself!). Go ahead and run the `list`
+subcommand:
+
+    quest list
+
+Now check the status again to see it marked as complete:
+
+    quest status
+
+If you're curious about how these tasks work, you're welcome to take a look at
+the set of tests they run locally at `/usr/src/puppet-quest-guide/tests/`. Or
+[in our repository](https://github.com/puppetlabs/puppet-quest-guide). The
+source code for the quest tool itself is [here](https://github.com/puppetlabs/quest).
+
 ## The Puppet agent
 
-The Puppet agent is the piece of the Puppet setup that lives on the systems you
-want to manage. Whenever the Puppet agent runs, it asks the Puppet master for a
-catalog—a description of what its system should look like. It compares this
-catalog to the actual state of the system, then makes any changes needed to
-make the actual state match the state described in the catalog.
+The Puppet agent is the piece of Puppet software that runs on each of the
+systems you want to manage and keeps it in line with how the central Puppet
+master thinks it should be configured.
 
-The Learning VM already has a Puppet master pre-installed. To try out a Puppet
-agent run, we'll need to install the Puppet agent on the new node the we set up
-for this quest. The Puppet master hosts an install script you can easily run
-from your agent node that can connect to it.
+If you want to stay specific, the term "Puppet agent" refers particularly to
+the `puppet-agent` daemon that communicates between the Puppet master and the
+tools used to enforce changes locally. When we install the Puppet agent,
+however, we're also installing a suite of tools that go along with it—including
+tools like `facter` and `puppet resource` that you'll see in this quest. (In
+fact, you can do quite a lot with these tools without ever touching the Puppet
+agent or connecting to a Puppet master.)
+
+You may also see "Puppet agent," "agent," or "agent node" used to refer to any
+system where the Puppet agent is running. To avoid confusion, we'll do our best
+to always use "Puppet agent" to refer to the application that communicates with
+the Puppet master and "agent node" to refer to a system where the Puppet agent
+is installed.
+
+The Puppet master hosts an install script you can easily run from your agent
+node that can connect to it. We've pre-installed the Puppet master on the
+Learning VM (we can call the Learning VM itself our "master node"), so this
+install script is ready to be loaded and run by our (soon-to-be) agent node.
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
-First, use `ssh` to connect to your node:
+First, use `ssh` to connect to the node where you're going to install the
+Puppet agent. (Remember, this node has already been set up for you by the quest
+tool.)
 
     ssh root@hello.learning.puppetlabs.vm
 
@@ -87,24 +122,65 @@ Then paste in the following command to run the agent installer:
 
     curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | bash
 
-(Note that you can find full documentation of the agent installation process,
-including specific instructions for Windows and other operating systems on the
-[docs page](https://docs.puppet.com/pe/latest/install_agents.html))
+(You can find full documentation of the agent installation process, including
+specific instructions for Windows and other operating systems on the [docs
+page](https://docs.puppet.com/pe/latest/install_agents.html))
 
 ## Resources and Facts
+
+Now that you have the Puppet agent installed, let's take some time to
+investigate this node from what you could call a Puppet's-eye-view.
 
 At the core of Puppet is something called the *resource abstraction layer*.
 for Puppet, each bit of the system you want to manage (a user, file, service,
 or package, to give some common examples) can be represented in Puppet code as
-a unit called a *resource*. Puppet can translate back and forth between this
-Puppet code representation of a resource and the native tools and data of the
-system where it's running. This ability to use the same consistent language to
-handle resources with different tools and across different operating systems is
-the *abstraction* we're talking about in *resource abstraction layer*.
+a unit called a *resource*.
 
-A program called `facter` is a key tool that makes this resource abstraction
-possible. As its name suggests, `facter` collects data about a system and makes
-them availale to Puppet (and you) as a set of structured facts.
+<div class = "lvm-task-number"><p>Task 4:</p></div>
+
+Take a quick look. Still connected to your agent node, enter:
+
+    puppet resource user root
+
+We'll get into the specifics of the syntax when you start writing your own
+resource declarations in a later quest. For now, what's important is that
+Puppet can translate back and forth between this Puppet code representation of
+a resource and the native tools and data of the system where it's running.
+
+<div class = "lvm-task-number"><p>Task 4:</p></div>
+
+First, let's create a new user with the native CentOS command. If you're
+familiar with a differnet operating system and don't know what this command is
+on CentOS, I'll give you a moment to google it now.
+
+Just kidding:
+
+    useradd galatea
+
+Now let's validate that that user exists:
+
+    cat /etc/passwd | grep galatea
+
+<div class = "lvm-task-number"><p>Task 5:</p></div>
+
+Now, let's see how you can do the same operations through the abstraction layer
+that Puppet provides. First, let's delete the user to give us a clean slate.
+You can use the Puppet resource tool with specific parameters to modify the
+state of a resources, including creating or destroying it.
+
+    puppet resource user galatea ensure=absent
+
+If you like, check `/etc/passwd` again to see that the user is really gone.
+
+
+This ability to use the same consistent language to handle resources with
+different tools and across different operating systems is the *abstraction*
+we're talking about in *resource abstraction layer*.
+
+A program called `facter` is another key tool that makes this resource
+abstraction possible. As its name suggests, `facter` collects data about a
+system and makes them availale to Puppet (and you) as a set of structured
+facts.
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
