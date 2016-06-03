@@ -4,8 +4,10 @@
 
 - Familiarize yourself with this guide and the `quest` tool.
 - Install the Puppet agent on a newly provisioned node.
-- Use `puppet resource` and `facter` to inspect and modify the user accounts
+- Use `puppet resource` to inspect and modify the user accounts
   on your new node.
+- Use `facter` to find and display system information.
+- Understand the idea of Puppet's resource abstraction layer (RAL).
 
 ## Get started
 
@@ -88,16 +90,16 @@ source code for the quest tool itself is [here](https://github.com/puppetlabs/qu
 ## The Puppet agent
 
 The Puppet agent is the piece of Puppet software that runs on each of the
-systems you want to manage and keeps it in line with how the central Puppet
-master thinks it should be configured.
+systems you want to manage. It keeps everything on that system in line with the
+desired state defined for it by the central Puppet master server.
 
 If you want to stay specific, the term "Puppet agent" refers particularly to
 the `puppet-agent` daemon that communicates between the Puppet master and the
 tools used to enforce changes locally. When we install the Puppet agent,
-however, we're also installing a suite of tools that go along with it—including
-tools like `facter` and `puppet resource` that you'll see in this quest. (In
-fact, you can do quite a lot with these tools without ever touching the Puppet
-agent or connecting to a Puppet master.)
+however, we're also installing a suite of tools that go along with it. This
+includes tools like `facter` and `puppet resource` that you'll see in this
+quest. (In fact, you can do quite a lot with these tools without ever touching
+the Puppet agent or connecting to a Puppet master.)
 
 You may also see "Puppet agent," "agent," or "agent node" used to refer to any
 system where the Puppet agent is running. To avoid confusion, we'll do our best
@@ -112,24 +114,25 @@ install script is ready to be loaded and run by our (soon-to-be) agent node.
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
-First, use `ssh` to connect to the node where you're going to install the
-Puppet agent. (Remember, this node has already been set up for you by the quest
-tool.)
+The quest tool has already set up a new node with the FQDN
+`hello.learning.puppetlabs.vm` where you can try out the agent installation. Go
+ahead and use `ssh` to connect to this node.
 
     ssh root@hello.learning.puppetlabs.vm
 
-Then paste in the following command to run the agent installer:
+Then paste in the following command to grab the the agent installer from the
+master and run it:
 
     curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | bash
 
 (You can find full documentation of the agent installation process, including
-specific instructions for Windows and other operating systems on the [docs
+specific instructions for Windows and other operating systems on our [docs
 page](https://docs.puppet.com/pe/latest/install_agents.html))
 
-## Resources and Facts
+## Resources
 
 Now that you have the Puppet agent installed, let's take some time to
-investigate this node from what you could call a Puppet's-eye-view.
+investigate this node Puppet's-eye-view.
 
 At the core of Puppet is something called the *resource abstraction layer*.
 for Puppet, each bit of the system you want to manage (a user, file, service,
@@ -143,39 +146,89 @@ Take a quick look. Still connected to your agent node, enter:
     puppet resource user root
 
 We'll get into the specifics of the syntax when you start writing your own
-resource declarations in a later quest. For now, what's important is that
-Puppet can translate back and forth between this Puppet code representation of
-a resource and the native tools and data of the system where it's running.
+resource declarations in a later quest. For now, what's important is to see
+that Puppet can translate back and forth between this Puppet code
+representation of a resource and the native tools and data of the system where
+it's running.
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
-First, let's create a new user with the native CentOS command. If you're
-familiar with a differnet operating system and don't know what this command is
-on CentOS, I'll give you a moment to google it now.
+To see how this works, we'll first create a new user and validate that that
+user exists with the native CentOS commands. If you're familiar with a
+different operating system and don't know what these commands on CentOS, I'll
+give you a moment to google it now.
 
 Just kidding:
 
     useradd galatea
 
-Now let's validate that that user exists:
+And to check that that the new user exists:
 
     cat /etc/passwd | grep galatea
 
+Now let's say you want to keep track of your new user's full name by adding a
+comment to the user account.
+
+    usermod galatea -c "Galatea of Cyprus"
+
 <div class = "lvm-task-number"><p>Task 5:</p></div>
 
-Now, let's see how you can do the same operations through the abstraction layer
-that Puppet provides. First, let's delete the user to give us a clean slate.
-You can use the Puppet resource tool with specific parameters to modify the
-state of a resources, including creating or destroying it.
+That's simple enough, but let's see how you can do the same operations through
+the abstraction layer that Puppet provides. First, let's delete the user to
+give us a clean slate. You can use the Puppet resource tool with specific
+parameters to modify the state of a resources, including creating or destroying
+it with the `ensure` parameter.
 
     puppet resource user galatea ensure=absent
 
 If you like, check `/etc/passwd` again to see that the user is really gone.
 
+Now to recreate the user, enter the same command with the `ensure` parameter
+changed from `absent` to `present`.
+
+    puppet resource user galatea ensure=present
+
+Puppet will go ahead and create that user for you. Note that there's nothing
+mysterious going on here. Behind the scenes, Puppet is using just the same
+`useradd` command you did to create this user.
+
+Similarly, we can change the comment. You could do it with the same
+`parameter=value` shorthand we used to create the user, but let's try it
+another way. You can pass the `--edit` or `-e` flag to the `puppet resource`
+command to drop the current state of a specified into a text editor. Any
+changes you make to this Puppet code representation of the resource will then
+be applied when you save and exit.
+
+    puppet resource -e user galatea
+
+Go ahead and edit the resource to add the comment line as below. (If you're new
+to the Vim text editor, you can use the `i` command to get into `insert` mode,
+and `ESC` to return to command mode followed by `:wq` to save quit.) 
+
+```puppet
+user { 'galatea':
+  ensure           => 'present',
+  comment          => 'Galatea of Cyprus',
+  gid              => '1004',
+  home             => '/home/galatea',
+  password         => '!!',
+  password_max_age => '99999',
+  password_min_age => '0',
+  shell            => '/bin/bash',
+  uid              => '1004',
+}
+```
+
+Again, Puppet knew to use the `usermod` command in the background to enforce
+the changes you specified when you edited the `galatea` user resource. If you
+had been on a Windows system, for example Puppet would have used the Active
+Directory Services Interface (ADSI) to set the user's description field.
 
 This ability to use the same consistent language to handle resources with
 different tools and across different operating systems is the *abstraction*
 we're talking about in *resource abstraction layer*.
+
+## Facter
 
 A program called `facter` is another key tool that makes this resource
 abstraction possible. As its name suggests, `facter` collects data about a
@@ -186,11 +239,7 @@ facts.
 
 Let's take a look at `facter`.
 
-If you're not connected to your agent node, use SSH to reconnect.
-
-    ssh root@hello.learning.puppetlabs.vm
-
-Now use `facter` to see the OS data available on this node:
+Still connected to your agent node, use `facter` to explore the `os` fact.
 
     facter os
 
@@ -214,144 +263,158 @@ architecture.
 
 <div class = "lvm-task-number"><p>Task 5:</p></div>
 
-You can also dig in to this data to pull out specific facts. Try getting the
+You can also dig in to this data to pull out specific facts. Try getting just
+the family of the OS:
 
+    facter os.family
 
-    facter os.name
+Behind the scenes, this the same tool Puppet was using to figure out how to
+handle the changes to the user resource.
 
-'facter' helps
-Puppet know which native tools it should use on the system and can be used with
-conditionals in Puppet code to select correct software and configuration
-options.
+As you'll see in the Puppet agent section below, these facts also help the
+central Puppet master decide what kind of configuration you want to apply to
+each agent node in your infrastructure. So facts from `facter` not only help
+Puppet figure out how to manage your resources, they also help Puppet determine
+which resources on a system it should be managing and what values those
+resources' parameters should have.
 
-(You can also explicitly specify which package manager Puppet should use. For
-example, on a Windows system you can choose to use Chocolatey instead of the
-native Windows tools to install from an MSI or EXE.)
+## Running the Puppet agent
 
-<div class = "lvm-task-number"><p>Task 4:</p></div>
+The `puppet resource` and `facter` commands we explored above show you how
+Puppet's resource abstraction works on your agent node, but how does this fit
+into the kind of master-agent architecture that lets you centralize control of
+your infrastructure? The best way to understand this system is to try it out.
 
-Configuring the Network Time Protocol (NTP) service is a common first step in
-managing your infrastructure. Let's check if the NTP package is installed.
-Because you're on an Ubuntu system, you can use `dpkg`:
+The agent installer already set up a configuration file that tells your agent
+node how to find and connect to the Puppet master, but the Puppet master
+doesn't yet know that you want to add this node to your infrastructure until
+you sign a certificate for that node. This certificate signing process is
+essential for keeping your Puppetized infrastructure secure and keeps you from
+accidentally adding nodes to your infrastructure (where they might pick up
+inintended configuration changes).
 
-    dpkg -s ntp
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
-Now that you have the Puppet agent installed, you can also use the `puppet
-resource` tool to do the same check wihout considering the operating system of
-the node you happen to be connected to:
+Just to see what happens, try to trigger a puppet agent run without your agent
+node's certificate signed.
 
-    puppet resource package ntp
+    puppet agent -t
 
-<div class = "lvm-task-number"><p>Task 5:</p></div>
+You'll see a notification like the following:
 
-To set up NTP on your infrastructure, you'll likely want to configure a server
-that the `other nodes in your infrastructure will coordinate with. With the
-simple two-node network we're using for this quest, we might nominate the
-Puppet master node to run this service as well.
+    Exiting; no certificate found and waitforcert is disabled
 
-Let's exit our SSH session and check the status of the NTP package on
-our Puppet master:
+No problem, we just have to sign the certificate. First, exit your SSH session
+to return to the your Puppet master node.
 
     exit
 
-Again, use `facter` to find the `os.name` fact:
+Use the `puppet cert` tool to list the unsigned certificates on your network.
 
-    facter os.name
+    puppet cert list
 
-You'll see that you're now on a CentOS system. This means that you need to use
-`rpm` instead of `dpkg`:
+Now go ahead and sign the cert for `hello.learning.puppetlabs.vm`.
 
-    rpm -qa | grep ntp
+    puppet cert sign hello.learning.puppetlabs.vm
 
-But you can also just use `puppet resource` again:
-
-    puppet resource package ntp
-
-## Modifying resources
-
-While using `facter` and `puppet resource` to get information about a system is
-convenient, the real power of Puppet's resource abstraction layer is that it
-can also make changes. Not only can it translate the state of your system into
-a Puppet resource, but it can also use a resource as a model for making changes
-on your system.
-
-You already saw that the NTP package was installed on your Puppet master, so
-let's take a look at the NTP daemon service.
-
-    puppet resource service ntpd
-
-You'll see that the service is stopped and not enabled.
-
-    service { 'ntpd':
-      ensure => 'stopped',
-      enable => 'false',
-    }
-
-Let's change that. Instead of using the full Puppet code syntax you see in the
-output of the `puppet resource` command, we can use a shorthand to directly
-set the key-value pairs of the resource and apply those changes to the system.
-
-    puppet resource service ntpd ensure='running' enable='true'
-
-Puppet will notify you of the changes it has made and show the new state of the
-`ntpd` resource.
-
-    Notice: /Service[ntpd]/ensure: ensure changed 'stopped' to 'running'
-    service: { 'ntpd':
-      ensure => 'running',
-      enable => 'true',
-    }
-
-Note that you didn't have to worry about implementation details here. Puppet
-knew to use Systemd commands to start the service because we're on CentOS 7. If
-we had been on Centos 6, it would have used SysVinit.
-
-There are some configuration details we would normally want to adjust in
-`/etc/ntp.conf`. When we get to the next quest, we'll address how you can
-easily manage this kind of configuration with Puppet. For now, though, we'll
-settle for directing our agent node to use the master as its NTP server.
-
-SSH to your agent node:
+With that taken care of, reconnect to your agent node and we'll go over the
+anatomy of a Puppet agent run.
 
     ssh root@hello.learning.puppetlabs.vm
 
-Take a look at the configuration file.
+Trigger another agent run. With your certificate signed, you'll see a bit more
+happen.
 
-    vim /etc/ntp.conf
+    puppet agent -t
 
-You'll see that there are several default servers already specified.
+Though we haven't yet told Puppet to manage any resources on the system, you'll
+see a lot of text scroll by. Because this is the node's first Puppet run, it
+has to grab the source code for all tools and extensions on the master. This
+ensures that an agent node has everything it needs to correctly enforce the
+desired state defined for it by the master.
 
-    server 0.ubuntu.pool.ntp.org
-    server 1.ubuntu.pool.ntp.org
-    server 2.ubuntu.pool.ntp.org
-    server 3.ubuntu.pool.ntp.org
+This pluginsync process adds a lot of clutter. Without it, you'd see something
+like the following. (Feel free to trigger another puppet run to get a cleaner
+output yourself. As we'll discuss later, Puppet is generally *idempotent* which
+means that running it multiple times won't change the outcome.)
 
-NTP is more reliable if it can poll multiple servers, so we'll leave in those
-first three defaults, but we can replace the third with 
-`learning.puppetlabs.vm` and tell NTP to prefer this server. There are several
-ways to manage configuration files with Puppet that we'll address in a later
-quest, but for now, go ahead and edit the configuration by hand. (If you're not
-used to Vim, note that you'll need to type `i` to enter insert mode.) Replace
-the `server 3.ubuntu.pool.ntp.org` line with:
+```
+Info: Using configured environment 'production'
+Info: Retrieving pluginfacts
+Info: Retrieving plugin
+Info: Loading facts
+Info: Caching catalog for hello.learning.puppetlabs.vm
+Info: Applying configuration version '1464919481'
+```
 
-    server learning.puppetlabs.vm prefer
+Though the Puppet agent isn't telling you everything it's doing here, this
+output gives you a few clues about the conversation between the agent and
+master. For now, we'll focus on two key steps in this conversation. First, the
+agent node sends a collection of facts to the Puppet master. These are the same
+facts you see when you run the `facter` tool yourself. The Puppet master takes
+these facts and uses them with your Puppet code to compile a catalog. While
+Puppet code can contain conditionals, variables, and other features that make
+it an expressive language, the catalog is the final parsed list of resources
+and parameters that the Puppet agent will apply to the node.
 
-Once you've made your change, save and exit Vim. (To do this, you first exit
-insert mode with `ESC`, then type `:wq` and hit enter. That's `:` to get a
-command prompt within Vim, then `w` to write the file and `q` to quit.)
+![image](../assets/SimpleDataFlow.png)
 
-With your configuration set, use the `puppet resource` tool to start the `ntp`
-service. Note that while the resource abstraction layer will figure out how to
-manage resources on different systems, you still have to be aware of variations
-in the names of things like services and packages. In this case, the service is
-called `ntp` on Ubuntu, and `ntpd` on CentOS. (You'll see in later quests how
-Puppet modules can still help you handle this kind of variation.)
+When you triggered a Puppet run, the Puppet master didn't find any Puppet code
+to apply to your agent node, so it didn't make any changes. Let's elaborate a
+little bit on the user resource you were looking at above by adding a home
+directory. Generally organize all your Puppet code into classes and modules,
+but just this once, we're going to make an exception and write some code
+directly into a special file called the `site.pp` manifest.
 
-    puppet resource service ntp ensure='running'
+First, end your SSH session to return to the Puppet master.
 
-Now check to see the updated list of peers NTP is connected to:
+    exit
 
-    ntpq -p
+Now open the `site.pp` manifest for the production environment.
+
+    vim /etc/puppetlabs/code/environments/production/manifests/site.pp
+
+First, we'll create block of code called a node delcaration.
+
+```puppet
+node hello.learning.puppetlabs.vm {
+}
+```
+
+After the Puppet agent sends the facts from a node to the Puppet master, one of
+the first step in compiling a catalog is to find a node block that matches the
+agent node's fqdn fact. (We'll get into some more elaborate ways you can do
+this step—such as using different facts and matching them against regular
+expressions—in a later quest.)
+
+Next, add resource declarations for the `galatea` user and her home directory.
+
+```puppet
+node hello.learning.puppetlabs.vm {
+  user { 'galatea':
+    ensure  => 'present',
+    comment => 'Galatea of Cyprus',
+  }
+  file { '/home/galatea':
+    ensure => 'present',
+    owner  => 'galatea',
+  }
+}
+```
+
+Remember, use `ESC` then `:wq` to save and exit.
+
+It's always a good idea to check your code before you run it. 
+
+    puppet parser validate /etc/puppetlabs/code/environments/production/manifests/site.pp
+
+Now SSH to your agent node:
+
+    ssh root@hello.learning.puppetlabs.vm
+
+And trigger another puppet run
+
+    puppet agent -t
 
 ## Review
 
