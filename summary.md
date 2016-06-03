@@ -4,6 +4,8 @@
 
 ### Quests
 
+=======
+* [Hello](quests/hello_puppet.md)
 * [Welcome](quests/welcome.md)
 * [Power of Puppet](quests/power_of_puppet.md)
 * [Resources](quests/resources.md)
