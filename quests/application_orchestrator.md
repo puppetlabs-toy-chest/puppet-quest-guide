@@ -307,7 +307,7 @@ needs to be passed among the components. What does this look like in the case of
 LAMP application?
 
 1. **Host**: Our webserver needs to know the hostname of the database server.
-1. **Database**: We need to know the name of the specific database to connect to.
+1. **Database**: We need to know the name of the specific database to which to connect.
 1. **User**: If we want to connect to the database, we'll the name of a database user.
 1. **Password**: We'll also need to know the password associated with that user.
 
