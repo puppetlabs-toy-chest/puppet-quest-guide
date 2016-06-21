@@ -67,7 +67,7 @@ For instance, if you wanted Puppet to manage several files in the `/var/www/ques
 directory, you could assign this directory path to a variable:
 
 ```puppet
-$doc_root = '/var/www/quest/'
+$doc_root = '/var/www/quest'
 ```
 
 Once the variable is set, you can avoid repeating the same directory path by
@@ -76,10 +76,10 @@ inserting the `$doc_root` variable into the beginning of any string.
 For example, you might use it in the title of a few *file* resource declarations:
 
 ```puppet
-file { "${doc_root}index.html":
+file { "${doc_root}/index.html":
   ...
 }
-file { "${doc_root}about.html":
+file { "${doc_root}/about.html":
   ...
 }
 ```
@@ -122,17 +122,17 @@ And then add the following contents (remember to use `:set paste` in vim):
 ```puppet
 class web {
 
-  $doc_root = '/var/www/quest/'
+  $doc_root = '/var/www/quest'
   
   $english = 'Hello world!'
   $french = 'Bonjour le monde!'
 
-  file { "${doc_root}hello.html":
+  file { "${doc_root}/hello.html":
     ensure => present,
     content => "<em>${english}</em>",
   }
   
-  file { "${doc_root}bonjour.html":
+  file { "${doc_root}/bonjour.html":
     ensure => present,
     content => "<em>${french}</em>",
   }
@@ -212,7 +212,7 @@ Now create a third file resource declaration to use the variables set by your
 parameters:
 
 ```puppet
-file { "${doc_root}${page_name}.html":
+file { "${doc_root}/${page_name}.html":
   ensure => present,
   content => "<em>${message}</em>",
 }
