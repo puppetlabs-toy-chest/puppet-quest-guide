@@ -15,13 +15,13 @@ describe "Task 2:" do
   it 'Define the sshd class' do
     file("#{MODULE_PATH}sshd/manifests/init.pp")
       .content
-      .should match /class sshd \{/
+      .should match /class\s+sshd\s*\{/
     file("#{MODULE_PATH}sshd/manifests/init.pp")
       .content
-      .should match /package { 'openssh-server':/
+      .should match /package\s*{\s*['"]openssh-server['"]\s*:/
     file("#{MODULE_PATH}sshd/manifests/init.pp")
       .content
-      .should match /service { 'sshd':/
+      .should match /service\s*{\s*['"]sshd['"]\s*:/
   end
 end
 
@@ -52,10 +52,10 @@ describe "Task 6:" do
   it "Disable GSSAPIAuthentication in the module's sshd_config file" do
     file("#{MODULE_PATH}sshd/files/sshd_config")
       .content
-      .should match /^\s*GSSAPIAuthentication no/
+      .should match /^\s*GSSAPIAuthentication\s+no/
     file("#{MODULE_PATH}sshd/files/sshd_config")
       .content
-      .should_not match /^GSSAPIAuthentication yes/
+      .should_not match /^GSSAPIAuthentication\s+yes/
   end
 end
 
@@ -63,13 +63,13 @@ describe "Task 7:" do
   it 'Add a `file` resource to manage the `sshd` configuration file' do
     file("#{MODULE_PATH}sshd/manifests/init.pp")
       .content
-      .should match /file\s+\{\s+'\/etc\/ssh\/sshd_config':/
+      .should match /file\s*\{\s*['"]\/etc\/ssh\/sshd_config['"]\s*:/
     file("#{MODULE_PATH}sshd/manifests/init.pp")
       .content
       .should match /source\s*=>\s*'puppet:\/\/\/modules\/sshd\/sshd_config',/
     file("#{MODULE_PATH}sshd/manifests/init.pp")
       .content
-      .should match /require\s*=>\s*Package\['openssh-server'\]/
+      .should match /require\s*=>\s*Package\[\s*['"]openssh-server['"]\s*,?\s*\]/
   end
 end
 
@@ -85,6 +85,6 @@ describe "Task 9:" do
   it 'Add a `subscribe` metaparameter to your `sshd` resource' do
     file("#{MODULE_PATH}sshd/manifests/init.pp")
       .content
-      .should match /subscribe\s*=>\s*File\['\/etc\/ssh\/sshd_config'\]/
+      .should match /subscribe\s*=>\s*File\[\s*['"]\/etc\/ssh\/sshd_config['"]\s*,?\s*\]/
   end
 end

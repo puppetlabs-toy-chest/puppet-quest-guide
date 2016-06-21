@@ -13,13 +13,13 @@ describe "Task 2:" do
   it 'Define a simple web_user::user resource type' do
     file("#{MODULE_PATH}web_user/manifests/user.pp")
       .content
-      .should match /define\s+web_user::user/
+      .should match /define\s*web_user::user/
     file("#{MODULE_PATH}web_user/manifests/user.pp")
       .content
-      .should match /user\s+{\s+\$title:/
+      .should match /user\s*{\s*\$title\s*:/
     file("#{MODULE_PATH}web_user/manifests/user.pp")
       .content
-      .should match /file\s+{\s+/
+      .should match /file\s*{/
   end
 end
 
@@ -27,7 +27,7 @@ describe "Task 3:" do
   it "Create a test manifest to apply your new defined resource type" do
     file("#{MODULE_PATH}web_user/examples/user.pp")
       .content
-      .should match /web_user::user\s+{\s*'shelob':\s*}/
+      .should match /web_user::user\s*{\s*['"]shelob['"]\s*:\s*}/
   end
 end
 
@@ -44,10 +44,10 @@ describe "Task 5:" do
   it "Extend your web_user::user resource type to create a public_html directory and an index.html document" do
     file("#{MODULE_PATH}web_user/manifests/user.pp")
       .content
-      .should match /user\s+{\s+\$title:/
+      .should match /user\s*{\s*\$title\s*:/
     file("#{MODULE_PATH}web_user/manifests/user.pp")
       .content
-      .should match /file\s+{\s+\"\${public_html}\/index\.html\":/
+      .should match /file\s*{\s*\"\${public_html}\/index\.html\"\s*:/
   end
 end
 
@@ -67,7 +67,7 @@ describe "Task 7:" do
       .should match /\$content\s+=\s+"<h1>Welcome to \${title}'s home page!<\/h1>",/
     file("#{MODULE_PATH}web_user/manifests/user.pp")
       .content
-      .should match /\$password\s+\=\s+undef,/
+      .should match /\$password\s*\=\s*undef,/
   end
 end
 
@@ -75,7 +75,7 @@ describe "Task 8:" do
   it "Declare a new web_user::user in your test manifest with parameters" do
     file("#{MODULE_PATH}web_user/examples/user.pp")
       .content
-      .should match "web_user::user\s+{\s*'frodo':"
+      .should match /web_user::user\s*{\s*['"]frodo['"]\s*:/
   end
 end
 

@@ -1,7 +1,8 @@
 describe "Task 1:" do 
   it 'Use puppet master --configprint find the modulepath' do
     file('/root/.bash_history')
-      .should contain "puppet master --configprint modulepath"
+      .content
+      .should match /puppet\s+master\s+--configprint\s+modulepath/
   end
 end
 
@@ -33,7 +34,8 @@ end
 describe "Task 5:" do
   it "Add the 'set nu' command to the vimrc file" do
     file("#{MODULE_PATH}vimrc/files/vimrc")
-      .should contain /set nu/
+      .content
+      .should match /set\s+nu/
   end
 end
 
@@ -54,6 +56,7 @@ end
 describe 'Task 8:' do
   it "Apply the test to add the 'set nu' command to your .vimrc" do
     file('/root/.vimrc')
-      .should contain /set nu/
+      .content
+      .should match /set\s+nu/
   end
 end

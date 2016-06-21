@@ -33,7 +33,7 @@ describe 'Task 5:' do
   it 'Trigger a puppet run to apply your server configuration changes' do
     file('/etc/ntp.conf')
       .content
-      .should_not match /(\s*server \d.centos.pool.ntp.org\s*){3}/
+      .should_not match /(\s*server\s+\d+.centos.pool.ntp.org\s*){3}/
     file('/etc/ntp.conf')
       .content
       .should match /(\s+.*\.\w{2,}$){3}/

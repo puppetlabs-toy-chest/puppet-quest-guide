@@ -13,10 +13,16 @@ describe "Task 2:" do
   it 'Define the accounts class' do
     file("#{MODULE_PATH}accounts/manifests/init.pp")
       .content
-      .should match /class accounts \(\s*\$user_name\s*\)\s*\{\s+if\s+\$::operatingsystem\s==\s\'\w+\'\s+\{/
+      .should match /class\s+accounts\s*\(\s*\$user_name\s*\)\s*\{\s+
+                       if\s+\$::operatingsystem\s==\s['"]\w+['"]\s+\{/x
     file("#{MODULE_PATH}accounts/manifests/init.pp")
       .content
-      .should match /user\s+\{\s*\$user_name:\s+ensure\s*=>\s*\'?present\'?,(.|\s)+(\$groups,)\s+\}/
+      .should match /user\s*\{\s*\$user_name\s*:\s+
+                       ensure\s*=>\s*['"]?present['"]?,
+                       .+
+                         (\$groups,)
+                       .*
+                     \}/mx
   end
 end
 
@@ -24,7 +30,7 @@ describe "Task 3:" do
   it 'Declare the accounts class in a test manifest' do 
     file("#{MODULE_PATH}accounts/examples/init.pp")
       .content
-      .should match /class\s+\{\s*\'?accounts\'?/
+      .should match /class\s*\{\s*['"]accounts['"]\s+/
   end
 end
 
@@ -32,7 +38,8 @@ describe "Task 4:" do
   it 'Run a noop with operatingsystem set to debian' do 
     file('/root/.bash_history')
       .content
-      .should match /FACTER_operatingsystem=debian\spuppet\sapply\s--noop\s(\w*\/)*init.pp/i
+      .should match /FACTER_operatingsystem=debian\s+puppet\s+apply\s+
+                     (--noop\s+(\w*\/)*init.pp|(\w*\/)*init.pp\s+--noop)/ix
   end
 end
 
@@ -40,7 +47,8 @@ describe "Task 5:" do
   it 'Run a noop with operatingsystem set to an unsupported value' do 
     file('/root/.bash_history')
       .content
-      .should match /FACTER_operatingsystem=((?!(centos|debian)).)*\spuppet\sapply\s--noop\s(\w*\/)*init.pp/i
+      .should match /FACTER_operatingsystem=((?!(centos|debian)).)*\s+puppet\s+apply\s+
+                     (--noop\s(\w*\/)*init.pp|(\w*\/)*init.pp\s+--noop)/ix
   end
 end
 

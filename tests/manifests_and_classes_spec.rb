@@ -3,7 +3,8 @@ describe "Task 1:" do
     file("#{MODULE_PATH}cowsayings/manifests/cowsay.pp")
       .should be_file
     file("#{MODULE_PATH}cowsayings/manifests/cowsay.pp")
-      .should contain /class cowsayings::cowsay {/
+      .content
+      .should match /class\s+cowsayings::cowsay\s*{/
   end
 end
 
@@ -12,7 +13,8 @@ describe "Task 2:" do
     file("#{MODULE_PATH}cowsayings/examples/cowsay.pp")
       .should be_file
     file("#{MODULE_PATH}cowsayings/examples/cowsay.pp")
-      .should contain /include cowsayings::cowsay/
+      .content
+      .should match /include\s+cowsayings::cowsay/
   end
 end
 
@@ -28,7 +30,8 @@ describe "Task 4:" do
     file("#{MODULE_PATH}cowsayings/manifests/fortune.pp")
       .should be_file
     file("#{MODULE_PATH}cowsayings/manifests/fortune.pp")
-      .should contain /class cowsayings::fortune/
+      .content
+      .should match /class\s+cowsayings::fortune\s*{/
   end
 end
 
@@ -37,7 +40,8 @@ describe "Task 5:" do
     file("#{MODULE_PATH}cowsayings/examples/fortune.pp")
       .should be_file
     file("#{MODULE_PATH}cowsayings/examples/fortune.pp")
-      .should contain /include cowsayings::fortune/
+      .content
+      .should match /include\s+cowsayings::fortune/
   end
 end
 
@@ -53,7 +57,8 @@ describe "Task 7:" do
     file("#{MODULE_PATH}cowsayings/manifests/init.pp")
       .should be_file
     file("#{MODULE_PATH}cowsayings/manifests/init.pp")
-      .should contain /class cowsayings {/
+      .content
+      .should match /class\s+cowsayings\s*{/
   end
 end
 
@@ -62,7 +67,8 @@ describe "Task 8:" do
     file("#{MODULE_PATH}cowsayings/examples/init.pp")
       .should be_file
     file("#{MODULE_PATH}cowsayings/examples/init.pp")
-      .should contain /include cowsayings/
+      .content
+      .should match /include\s+cowsayings/
   end
 end
 

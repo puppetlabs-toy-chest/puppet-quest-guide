@@ -15,7 +15,7 @@ end
 describe "Task 3:" do
   it "Prepare your puppet master to provide the ubuntu agent installer" do
     file("/opt/puppetlabs/server/data/packages/public/#{PE_VERSION}/ubuntu-14.04-amd64")
-      .should be_directory
+      .should be_symlink
   end
 end
 
@@ -51,6 +51,6 @@ describe "Task 7:" do
   it "Create a notify resource in your default node group" do
     file("#{PROD_PATH}manifests/site.pp")
       .content
-      .should match /notify\s+{\s+"This is \${::fqdn}, running the \${::operatingsystem} operating system":\s+}/
+      .should match /notify\s*{\s*"This is \${::fqdn}, running the \${::operatingsystem} operating system"\s*:\s*}/
   end
 end

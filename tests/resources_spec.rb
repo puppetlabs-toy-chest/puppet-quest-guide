@@ -1,14 +1,16 @@
 describe "Task 1:" do
   it 'Inspect the root user resource' do
     file('/root/.bash_history')
-      .should contain 'puppet resource user root'
+      .content
+      .should match /puppet\s+resource\s+user\s+root/
   end
 end
 
 describe "Task 2:" do
   it 'View the description of the user resource' do
     file('/root/.bash_history')
-      .should contain 'puppet describe user'
+      .content
+      .should match /puppet\s+describe\s+user/
   end
 end
 
@@ -22,6 +24,7 @@ end
 describe "Task 4:" do
   it 'Give the galatea user the comment Galatea of Cyprus' do
     file('/etc/passwd')
-      .should contain 'Galatea of Cyprus'
+      .content
+      .should match /Galatea\s+of\s+Cyprus/
   end
 end

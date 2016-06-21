@@ -1,7 +1,8 @@
 describe 'Task 1:' do
   it 'Use the puppet module tool to search for graphite' do
     file('/root/.bash_history')
-      .should contain "puppet module search graphite"
+      .content
+      .should match /puppet\s+module\s+search\s+graphite/
   end
 end
 
@@ -10,14 +11,16 @@ describe 'Task 2:' do
     file("#{MODULE_PATH}graphite")
       .should be_directory
     file("#{MODULE_PATH}graphite/metadata.json")
-      .should contain '"name": "dwerder-graphite"'
+      .content
+      .should match /"name"\s*:\s*"dwerder-graphite"/
   end
 end
 
 describe 'Task 3:' do
   it "Use facter to find the Learning VM's IP address" do
     file('/root/.bash_history')
-      .should contain "facter ipaddress"
+      .content
+      .should match /facter\s+ipaddress/
   end
 end
 

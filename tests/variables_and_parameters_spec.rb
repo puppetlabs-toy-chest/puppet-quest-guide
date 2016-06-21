@@ -13,7 +13,7 @@ describe "Task 2:" do
   it 'Define the web class' do
     file("#{MODULE_PATH}web/manifests/init.pp")
       .content
-      .should match /class\sweb/
+      .should match /class\s+web/
   end
 end
 
@@ -37,10 +37,10 @@ describe "Task 5:" do
   it 'Add $page_name and $message parameters and create a file using their values' do
     file("#{MODULE_PATH}web/manifests/init.pp")
       .content
-      .should match /class\s+web\s+\(\s*(\$page_name|\$message),\s+(\$page_name|\$message)\s*\)/
+      .should match /class\s+web\s+\(\s*(\$page_name|\$message)\s*,\s*(\$page_name|\$message)\s*\)/
     file("#{MODULE_PATH}web/manifests/init.pp")
       .content
-      .should match /file\s+\{\s+\"\$\{doc_root\}\$\{page_name\}\.html\":/
+      .should match /file\s*\{\s*\"\$\{doc_root\}\/?\$\{page_name\}\.html\"\s*:/
   end
 end
 
@@ -48,7 +48,12 @@ describe "Task 6:" do
   it 'Declare the web class with parameters in your test manifest' do
     file("#{MODULE_PATH}web/examples/init.pp")
       .content
-      .should match /class \{\s*\'web\':\s+(page_name\s*=>\s*\'\w+\'|message\s+=>\s+\'.+\'),\s+(\s+page_name\s*=>\s*\'\w+\'|message\s*=>\s*\'.+\'),\s}/
+      .should match /class\s* \{\s*['"]web['"]\s*:
+                       \s+
+                       (page_name\s*=>\s*['"]\w+['"]|message\s*=>\s*['"].+?['"]),
+                       \s+
+                       (page_name\s*=>\s*['"]\w+['"]|message\s*=>\s*['"].+?['"]),?
+                     \s*}/x
   end
 end
 

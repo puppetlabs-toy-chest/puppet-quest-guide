@@ -3,7 +3,13 @@ describe "Task 1:" do
     # Ugly! Pending direct method to test manifests
     file("#{PROD_PATH}manifests/site.pp")
       .content
-      .should match /pe_ini_setting { 'use_cached_catalog':.*setting\s*=>\s*'use_cached_catalog',.*pe_ini_setting { 'pluginsync':.*setting\s*=>\s*'pluginsync',/m
+      .should match /pe_ini_setting\s*{\s*['"]use_cached_catalog['"]\s*:
+                       .*
+                       setting\s*=>\s*['"]use_cached_catalog['"]/s*,
+                       .*
+                       pe_ini_setting\s*{\s*'pluginsync'\s*:
+                       .*
+                       setting\s*=>\s*'pluginsync',/mx
   end
 end
 
@@ -11,10 +17,12 @@ describe "Task 2:" do
   it "Run puppet on your nodes to apply your configuration changes" do
     command('docker exec database puppet config print pluginsync use_cached_catalog --section agent')
       .stdout
-      .should match /pluginsync = false\suse_cached_catalog = true/
+      .should match /pluginsync\ =\ false\n
+                     use_cached_catalog\ =\ true/x
     command('docker exec webserver puppet config print pluginsync use_cached_catalog --section agent')
       .stdout
-      .should match /pluginsync = false\suse_cached_catalog = true/
+      .should match /pluginsync\ =\ false\n
+                     use_cached_catalog\ =\ true/x
   end
 end
 
@@ -22,10 +30,10 @@ describe "Task 3:" do
   it "Create a client configuration file" do
     file("/root/.puppetlabs/client-tools/orchestrator.conf")
       .content
-      .should match /"url": "https:\/\/learning.puppetlabs.vm:8143"/
+      .should match /"url":\s*"https:\/\/learning.puppetlabs.vm:8143"/
     file("/root/.puppetlabs/client-tools/orchestrator.conf")
       .content
-      .should match /"environment": "production"/
+      .should match /"environment":\s*"production"/
   end
 end
 
@@ -49,7 +57,7 @@ describe "Task 6:" do
   it "Create a sql type" do
     file("#{MODULE_PATH}lamp/lib/puppet/type/sql.rb")
       .content
-      .should match /Puppet::Type\.newtype :sql, :is_capability => true do/
+      .should match /Puppet::Type\.newtype\s+:sql,\s+:is_capability\s+=>\s+true\s+do/
   end
 end
 
@@ -82,7 +90,7 @@ describe "Task 10:" do
     # Need a better test!
     file("#{PROD_PATH}manifests/site.pp")
       .content
-      .should match /Node\['database\.learning\.puppetlabs\.vm'\]\s*=>\s*Lamp::Mysql\['app1'\],/
+      .should match /Node\[\s*'database\.learning\.puppetlabs\.vm'\s*,?\s*\]\s*=>\s*Lamp::Mysql\[\s*'app1'\s*,?\s*\]\s*,/
   end
 end
 
