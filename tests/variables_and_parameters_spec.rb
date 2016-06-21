@@ -28,7 +28,9 @@ end
 describe "Task 5:" do
   it 'Add $page_name and $message parameters and create a file using their values' do
     file("#{MODULE_PATH}web/manifests/init.pp").content.should match /class\s+web\s+\(\s*(\$page_name|\$message),\s+(\$page_name|\$message)\s*\)/
-    file("#{MODULE_PATH}web/manifests/init.pp").content.should match /file\s+\{\s+\"\$\{doc_root\}\$\{page_name\}\.html\":/
+    file("#{MODULE_PATH}web/manifests/init.pp")
+      .content
+      .should match /file\s*\{\s*\"\$\{doc_root\}\/?\$\{page_name\}\.html\"\s*:/
   end
 end
 
