@@ -95,7 +95,7 @@ define web_user::user {
     ensure  => directory,
     owner   => $title,
     group   => $title,
-    mode    => '0755',
+    mode    => '0775',
   }
 } 
 ```
@@ -238,7 +238,7 @@ define web_user::user {
     ensure  => directory,
     owner   => $title,
     group   => $title,
-    mode    => '0755',
+    mode    => '0775',
   }
   file { "${public_html}/index.html":
     ensure  => file,
@@ -246,7 +246,7 @@ define web_user::user {
     group   => $title,
     replace => false,
     content => "<h1>Welcome to ${title}'s home page!</h1>",
-    mode    => '0644',
+    mode    => '0664',
   }
 }
 ```
@@ -322,7 +322,7 @@ define web_user::user (
     ensure => directory,
     owner  => $title,
     group  => $title,
-    mode    => '0755',
+    mode    => '0775',
   }
   file { "${public_html}/index.html":
     ensure  => file,
@@ -330,7 +330,7 @@ define web_user::user (
     group   => $title,
     replace => false,
     content => $content,
-    mode    => '0644',
+    mode    => '0664',
   }
 }
 ```

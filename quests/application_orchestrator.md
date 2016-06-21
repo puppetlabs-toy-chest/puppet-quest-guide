@@ -458,11 +458,11 @@ define lamp::webapp (
 
   $indexphp = @("EOT"/)
     <?php
-    \$conn = mysql_connect('$db_host', '$db_user', '$db_password');
+    \$conn = mysql_connect('${db_host}', '${db_user}', '${db_password}');
     if (!\$conn) {
-      echo "Connection to $db_host as $db_user failed";
+      echo 'Connection to ${db_host} as ${db_user failed}';
     } else {
-      echo "Connected successfully to $db_host as $db_user";
+      echo 'Connected successfully to ${db_host} as ${db_user}';
     }
     ?>
     | EOT

@@ -90,9 +90,9 @@ version of Puppet is running on this Learning VM. Type the following command:
 
 You will see something like the following:
 
-    4.4.1
+    4.4.2
 
-This would indicate that Puppet Version 4.4.1 is installed.
+This would indicate that Puppet Version 4.4.2 is installed.
 
 ## What is a Quest?
 

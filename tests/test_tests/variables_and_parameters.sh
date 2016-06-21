@@ -7,7 +7,7 @@ mkdir -p web/{manifests,examples}
 cat << "EOL" > web/manifests/init.pp
 class web {
 
-   $doc_root = '/var/www/quest/'
+   $doc_root = '/var/www/quest'
 
   $english = 'Hello world!'
   $french  = 'Bonjour le monde!'
@@ -32,7 +32,7 @@ puppet apply web/examples/init.pp
 cat << "EOL" > web/manifests/init.pp
 class web ( $page_name, $message ) {
 
-  $doc_root = '/var/www/quest/'
+  $doc_root = '/var/www/quest'
 
   $english = 'Hello world!'
   $french  = 'Bonjour le monde!'
