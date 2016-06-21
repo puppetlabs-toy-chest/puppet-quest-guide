@@ -7,17 +7,17 @@ mkdir -p web/{manifests,examples}
 cat << "EOL" > web/manifests/init.pp
 class web {
 
-   $doc_root = '/var/www/quest/'
+   $doc_root = '/var/www/quest'
 
   $english = 'Hello world!'
   $french = 'Bonjour le monde!'
 
-  file { "${doc_root}hello.html":
+  file { "${doc_root}/hello.html":
     ensure => present,
     content => "<em>${english}</em>",
   }
 
-  file { "${doc_root}bonjour.html":
+  file { "${doc_root}/bonjour.html":
     ensure => present,
     content => "<em>${french}</em>",
   }
@@ -32,22 +32,22 @@ puppet apply web/examples/init.pp
 cat << "EOL" > web/manifests/init.pp
 class web ( $page_name, $message ) {
 
-  $doc_root = '/var/www/quest/'
+  $doc_root = '/var/www/quest'
 
   $english = 'Hello world!'
   $french = 'Bonjour le monde!'
 
-  file { "${doc_root}hello.html":
+  file { "${doc_root}/hello.html":
     ensure => present,
     content => "<em>${english}</em>",
   }
 
-  file { "${doc_root}bonjour.html":
+  file { "${doc_root}/bonjour.html":
     ensure => present,
     content => "<em>${french}</em>",
   }
 
-  file { "${doc_root}${page_name}.html":
+  file { "${doc_root}/${page_name}.html":
     ensure => present,
     content => "<em>${message}</em>",
   }
