@@ -44,8 +44,8 @@ end
 describe "Task 7:" do
   it 'Add a `file` resource to manage the `sshd` configuration file' do
     file("#{MODULE_PATH}sshd/manifests/init.pp").content.should match /file\s+\{\s+'\/etc\/ssh\/sshd_config':/
-    file("#{MODULE_PATH}sshd/manifests/init.pp").content.should match /source\s+=>\s+'puppet:\/\/\/modules\/sshd\/sshd_config',/
-    file("#{MODULE_PATH}sshd/manifests/init.pp").content.should match /require\s+=>\s+Package\['openssh-server'\]/
+    file("#{MODULE_PATH}sshd/manifests/init.pp").content.should match /source\s*=>\s*'puppet:\/\/\/modules\/sshd\/sshd_config',/
+    file("#{MODULE_PATH}sshd/manifests/init.pp").content.should match /require\s*=>\s*Package\['openssh-server'\]/
   end
 end
 
@@ -58,6 +58,6 @@ end
 
 describe "Task 9:" do
   it 'Add a `subscribe` metaparameter to your `sshd` resource' do
-    file("#{MODULE_PATH}sshd/manifests/init.pp").content.should match /subscribe\s+=>\s+File\['\/etc\/ssh\/sshd_config'\]/
+    file("#{MODULE_PATH}sshd/manifests/init.pp").content.should match /subscribe\s*=>\s*File\['\/etc\/ssh\/sshd_config'\]/
   end
 end
