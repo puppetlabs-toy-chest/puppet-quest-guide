@@ -148,18 +148,21 @@ difficult it will be to refactor when you have to make changes later.
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
-Once you've validated your manifest with the `puppet parser` tool, create a test
-for your manifest with an `include` statement for the web class you created 
-(you covered testing in the "Modules" quest).
+Once you've validated your manifest with the `puppet parser` tool, you still
+need to create a test for your manifest with an `include` statement for the web
+class you created (you covered testing in the "Modules" quest).
+
+Create a `web/examples/init.pp` manifest and insert `include web`. Save and
+exit the file.
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
-Create a `web/examples/init.pp` manifest 
-and insert `include web`. Save and exit the file, then apply it, using the `--noop` 
-flag (`puppet apply --noop web/examples/init.pp`). If your dry run looks good, run 
-`puppet apply` again without the flag:
+Apply the newly created test using the `--noop` flag
+(`puppet apply --noop web/examples/init.pp`):
 
     puppet apply --noop web/examples/init.pp
+
+If your dry run looks good, run `puppet apply` again without the flag.
 
 Take a look at `<VM'S IP>/hello.html` and `<VM'S IP>/bonjour.html` to see your new pages.
 
