@@ -261,11 +261,11 @@ the `lvm` database.
 
 ```puppet
   mysql_grant { 'lvm_user@localhost/lvm.*':
-    ensure      => present,
-    options     => ['GRANT'],
-    privileges  => ['ALL'],
-    table       => 'lvm.*',
-    user        => 'lvm_user@localhost',
+    ensure     => present,
+    options    => ['GRANT'],
+    privileges => ['ALL'],
+    table      => 'lvm.*',
+    user       => 'lvm_user@localhost',
   }
 ```
 

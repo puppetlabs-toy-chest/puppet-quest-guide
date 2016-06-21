@@ -10,15 +10,15 @@ class web {
    $doc_root = '/var/www/quest/'
 
   $english = 'Hello world!'
-  $french = 'Bonjour le monde!'
+  $french  = 'Bonjour le monde!'
 
   file { "${doc_root}hello.html":
-    ensure => present,
+    ensure  => present,
     content => "<em>${english}</em>",
   }
 
   file { "${doc_root}bonjour.html":
-    ensure => present,
+    ensure  => present,
     content => "<em>${french}</em>",
   }
 
@@ -35,20 +35,20 @@ class web ( $page_name, $message ) {
   $doc_root = '/var/www/quest/'
 
   $english = 'Hello world!'
-  $french = 'Bonjour le monde!'
+  $french  = 'Bonjour le monde!'
 
   file { "${doc_root}hello.html":
-    ensure => present,
+    ensure  => present,
     content => "<em>${english}</em>",
   }
 
   file { "${doc_root}bonjour.html":
-    ensure => present,
+    ensure  => present,
     content => "<em>${french}</em>",
   }
 
   file { "${doc_root}${page_name}.html":
-    ensure => present,
+    ensure  => present,
     content => "<em>${message}</em>",
   }
 

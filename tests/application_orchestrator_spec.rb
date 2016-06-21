@@ -68,7 +68,7 @@ end
 describe "Task 10:" do
   it "Declare an application instance in your site.pp manifest" do
     # Need a better test!
-    file("#{PROD_PATH}manifests/site.pp").content.should match /Node\['database\.learning\.puppetlabs\.vm'\] => Lamp::Mysql\['app1'\],/
+    file("#{PROD_PATH}manifests/site.pp").content.should match /Node\[\s*['"]database\.learning\.puppetlabs\.vm['"],?\s*\]\s*=>\s*Lamp::Mysql\[\s*['"]app1['"],?\s*\],/
   end
 end
 

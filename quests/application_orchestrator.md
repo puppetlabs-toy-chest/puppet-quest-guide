@@ -380,11 +380,10 @@ and defines a configuration for a `MySQL` server, so we'll name it `lamp::mysql`
 It will look like this:
 
 ```puppet
-define lamp::mysql
-(
+define lamp::mysql (
   $db_user,
   $db_password,
-  $host = $::hostname,
+  $host     = $::hostname,
   $database = $name,
 ) {
 
@@ -396,7 +395,7 @@ define lamp::mysql
   }
 
   mysql::db { $name:
-    user     =>     $db_user,
+    user     => $db_user,
     password => $db_password,
     host     => '%',
     grant    => ['SELECT', 'INSERT', 'UPDATE', 'DELETE'],
@@ -595,7 +594,7 @@ site {
     db_user     => 'roland',
     db_password => '12345',
     nodes       => {
-      Node['database.learning.puppetlabs.vm'] => Lamp::Mysql['app1'],
+      Node['database.learning.puppetlabs.vm']  => Lamp::Mysql['app1'],
       Node['webserver.learning.puppetlabs.vm'] => Lamp::Webapp['app1'],
     }
   }
