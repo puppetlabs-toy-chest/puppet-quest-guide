@@ -9,7 +9,7 @@ end
 describe "Task 2:" do
   it 'Define the accounts class' do
     file("#{MODULE_PATH}accounts/manifests/init.pp").content.should match /class accounts \(\s*\$user_name\s*\)\s*\{\s+if\s+\$::operatingsystem\s==\s\'\w+\'\s+\{/
-    file("#{MODULE_PATH}accounts/manifests/init.pp").content.should match /user\s+\{\s*\$user_name:\s+ensure\s+=>\s+\'?present\'?,(.|\s)+(\$groups,)\s+\}/
+    file("#{MODULE_PATH}accounts/manifests/init.pp").content.should match /user\s+\{\s*\$user_name:\s+ensure\s*=>\s*\'?present\'?,(.|\s)+(\$groups,)\s+\}/
   end
 end
 
