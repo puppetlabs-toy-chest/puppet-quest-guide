@@ -87,7 +87,7 @@ If you want to check out your new database, you can connect to the MySQL monitor
 with the `mysql` command, and exit with the `\q` command.
 
 To see the result of the 'max_connections' override option you set, use `less` to
-open the `/etc/my.cnf.d/server.cnf` file:
+view the `/etc/my.cnf.d/server.cnf` file:
 
     less /etc/my.cnf.d/server.cnf
 
