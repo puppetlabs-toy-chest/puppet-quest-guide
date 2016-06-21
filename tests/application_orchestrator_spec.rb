@@ -3,7 +3,7 @@ describe "Task 1:" do
     # Ugly! Pending direct method to test manifests
     file("#{PROD_PATH}manifests/site.pp")
       .content
-      .should match /pe_ini_setting { 'use_cached_catalog':.*setting => 'use_cached_catalog',.*pe_ini_setting { 'pluginsync':.*setting => 'pluginsync',/m
+      .should match /pe_ini_setting { 'use_cached_catalog':.*setting\s*=>\s*'use_cached_catalog',.*pe_ini_setting { 'pluginsync':.*setting\s*=>\s*'pluginsync',/m
   end
 end
 
