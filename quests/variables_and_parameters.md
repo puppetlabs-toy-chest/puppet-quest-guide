@@ -128,12 +128,12 @@ class web {
   $french = 'Bonjour le monde!'
 
   file { "${doc_root}hello.html":
-    ensure => present,
+    ensure => file,
     content => "<em>${english}</em>",
   }
   
   file { "${doc_root}bonjour.html":
-    ensure => present,
+    ensure => file,
     content => "<em>${french}</em>",
   }
 
@@ -213,7 +213,7 @@ parameters:
 
 ```puppet
 file { "${doc_root}${page_name}.html":
-  ensure => present,
+  ensure => file,
   content => "<em>${message}</em>",
 }
 ```

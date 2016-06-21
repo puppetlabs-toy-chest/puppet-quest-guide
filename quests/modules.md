@@ -202,8 +202,9 @@ In this case, the `.vimrc` file that defines your Vim settings lives in the
 This resource declaration will then need two attribute value pairs.
 
 First, as with the other resource types you've encountered, `ensure =>
-present,` tells Puppet to ensure that the entity described by the resource
-exists on the system. 
+present,` would tell Puppet to ensure that the entity described by the resource
+exists on the system. However, because Linux uses files for both "normal" files
+and directories, we'll want to use the more explicit `ensure => file,` instead.
 
 Second, the `source` attribute tells Puppet what the managed file should
 actually contain. The value for the source attribute should be the URI of the
@@ -243,7 +244,7 @@ Putting this all together, your `init.pp` manifest should contain the following:
 ```puppet
 class vimrc {
   file { '/root/.vimrc':
-    ensure => present,
+    ensure => file,
     source => 'puppet:///modules/vimrc/vimrc',
   }
 }
