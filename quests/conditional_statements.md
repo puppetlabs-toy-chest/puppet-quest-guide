@@ -293,10 +293,10 @@ something like this:
 
 ```puppet
 $rootgroup = $::osfamily ? {
-  'Solaris'  => 'wheel',
-  'Darwin'   => 'wheel',
-  'FreeBSD'  => 'wheel',
-  'default'  => 'root',
+  'Solaris' => 'wheel',
+  'Darwin'  => 'wheel',
+  'FreeBSD' => 'wheel',
+  'default' => 'root',
 }
 ```
 

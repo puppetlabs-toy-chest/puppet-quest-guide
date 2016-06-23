@@ -13,8 +13,8 @@ class sshd {
   }
 
   service { 'sshd':
-    ensure   => running,
-    enable   => true,
+    ensure => running,
+    enable => true,
   }
 }
 EOL
@@ -50,14 +50,14 @@ class sshd {
   }
 
   service { 'sshd':
-    ensure   => running,
-    enable   => true,
+    ensure => running,
+    enable => true,
   }
 
   file { '/etc/ssh/sshd_config':
-    ensure     => file,
-    source     => 'puppet:///modules/sshd/sshd_config',
-    require    => Package['openssh-server'],
+    ensure  => present,
+    source  => 'puppet:///modules/sshd/sshd_config',
+    require => Package['openssh-server'],
   }
 }
 EOL
@@ -73,15 +73,15 @@ class sshd {
   }
 
   service { 'sshd':
-    ensure   => running,
-    enable   => true,
+    ensure    => running,
+    enable    => true,
     subscribe => File['/etc/ssh/sshd_config'],
   }
 
   file { '/etc/ssh/sshd_config':
-    ensure     => file,
-    source     => 'puppet:///modules/sshd/sshd_config',
-    require    => Package['openssh-server'],
+    ensure  => present,
+    source  => 'puppet:///modules/sshd/sshd_config',
+    require => Package['openssh-server'],
   }
 }
 EOL

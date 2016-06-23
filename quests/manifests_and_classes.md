@@ -103,7 +103,7 @@ Enter the following class definition, then save and exit (`:wq`):
 ```puppet
 class cowsayings::cowsay {
   package { 'cowsay':
-    ensure => present,
+    ensure   => present,
     provider => 'gem',
   }
 }

@@ -90,7 +90,7 @@ describe "Task 10:" do
     # Need a better test!
     file("#{PROD_PATH}manifests/site.pp")
       .content
-      .should match /Node\[\s*'database\.learning\.puppetlabs\.vm'\s*,?\s*\]\s*=>\s*Lamp::Mysql\[\s*'app1'\s*,?\s*\]\s*,/
+      .should match /Node\[\s*['"]database\.learning\.puppetlabs\.vm['"],?\s*\]\s*=>\s*Lamp::Mysql\[\s*['"]app1['"],?\s*\],/
   end
 end
 

@@ -10,7 +10,7 @@ class web {
    $doc_root = '/var/www/quest'
 
   $english = 'Hello world!'
-  $french = 'Bonjour le monde!'
+  $french  = 'Bonjour le monde!'
 
   file { "${doc_root}hello.html":
     ensure  => file,
@@ -35,7 +35,7 @@ class web ( $page_name, $message ) {
   $doc_root = '/var/www/quest'
 
   $english = 'Hello world!'
-  $french = 'Bonjour le monde!'
+  $french  = 'Bonjour le monde!'
 
   file { "${doc_root}hello.html":
     ensure  => file,
