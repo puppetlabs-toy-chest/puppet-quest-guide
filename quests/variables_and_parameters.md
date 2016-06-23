@@ -127,13 +127,13 @@ class web {
   $english = 'Hello world!'
   $french = 'Bonjour le monde!'
 
-  file { "${doc_root}/hello.html":
-    ensure => present,
+  file { "${doc_root}hello.html":
+    ensure => file,
     content => "<em>${english}</em>",
   }
   
-  file { "${doc_root}/bonjour.html":
-    ensure => present,
+  file { "${doc_root}bonjour.html":
+    ensure => file,
     content => "<em>${french}</em>",
   }
 
@@ -212,8 +212,8 @@ Now create a third file resource declaration to use the variables set by your
 parameters:
 
 ```puppet
-file { "${doc_root}/${page_name}.html":
-  ensure => present,
+file { "${doc_root}${page_name}.html":
+  ensure => file,
   content => "<em>${message}</em>",
 }
 ```

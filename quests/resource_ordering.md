@@ -179,7 +179,7 @@ class sshd {
   ...
 
   file { '/etc/ssh/sshd_config':
-    ensure     => present,
+    ensure     => file,
     source     => 'puppet:///modules/sshd/sshd_config',
     require    => Package['openssh-server'],
   }
