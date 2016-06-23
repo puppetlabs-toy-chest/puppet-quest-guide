@@ -14,7 +14,7 @@ end
 
 describe "Task 3:" do
   it "Prepare your puppet master to provide the ubuntu agent installer" do
-    file("/opt/puppetlabs/server/data/packages/public/#{PE_VERSION}/ubuntu-14.04-amd64")
+    file("/opt/puppetlabs/server/data/packages/public/current/ubuntu-14.04-amd64")
       .should be_symlink
   end
 end
