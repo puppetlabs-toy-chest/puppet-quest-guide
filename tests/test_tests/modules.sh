@@ -17,7 +17,7 @@ echo "set number" >> vimrc/files/vimrc
 cat << EOL > vimrc/manifests/init.pp
 class vimrc {
   file { '/root/.vimrc':
-    ensure => present,
+    ensure => file,
     source => 'puppet:///modules/vimrc/vimrc',
   }
 }

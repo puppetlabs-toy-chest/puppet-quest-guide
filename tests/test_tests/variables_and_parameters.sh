@@ -13,12 +13,12 @@ class web {
   $french  = 'Bonjour le monde!'
 
   file { "${doc_root}hello.html":
-    ensure  => present,
+    ensure  => file,
     content => "<em>${english}</em>",
   }
 
-  file { "${doc_root}bonjour.html":
-    ensure  => present,
+  file { "${doc_root}/bonjour.html":
+    ensure  => file,
     content => "<em>${french}</em>",
   }
 
@@ -38,17 +38,17 @@ class web ( $page_name, $message ) {
   $french  = 'Bonjour le monde!'
 
   file { "${doc_root}hello.html":
-    ensure  => present,
+    ensure  => file,
     content => "<em>${english}</em>",
   }
 
   file { "${doc_root}bonjour.html":
-    ensure  => present,
+    ensure  => file,
     content => "<em>${french}</em>",
   }
 
   file { "${doc_root}${page_name}.html":
-    ensure  => present,
+    ensure  => file,
     content => "<em>${message}</em>",
   }
 
