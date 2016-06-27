@@ -2,6 +2,11 @@
 
 ## Release Notes
 
+### v1.2.2
+  * Cleaned up formatting for task specs, generalized some tests to better match possible variations in Puppet code.
+  * Updated screenshots to match PE 2016.2 console style changes.
+  * Updated file resource declarations to better match best practices.
+
 ### v1.2.1
   * Added instructions for updating the timezone.
   * Addressed clarity of instructions in Power of Puppet and NTP quests.
