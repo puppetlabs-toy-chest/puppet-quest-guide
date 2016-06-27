@@ -5,7 +5,7 @@ describe "Task 1:" do
       .content
       .should match /pe_ini_setting\s*{\s*['"]use_cached_catalog['"]\s*:
                        .*
-                       setting\s*=>\s*['"]use_cached_catalog['"]/s*,
+                       setting\s*=>\s*['"]use_cached_catalog['"]\s*,
                        .*
                        pe_ini_setting\s*{\s*'pluginsync'\s*:
                        .*
