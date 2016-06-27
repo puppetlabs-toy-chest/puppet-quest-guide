@@ -30,7 +30,7 @@ describe "Task 3:" do
   it 'Declare the accounts class in a test manifest' do 
     file("#{MODULE_PATH}accounts/examples/init.pp")
       .content
-      .should match /class\s*\{\s*['"]accounts['"]\s+/
+      .should match /class\s*\{\s*['"]accounts['"]:\s+/
   end
 end
 
