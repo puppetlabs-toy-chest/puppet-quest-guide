@@ -109,7 +109,9 @@ same name can lead to conflicts!
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
-Use the Puppet module tool to install the Puppet Labs `ntp` module.
+Use the Puppet module tool to install the Puppet Labs `ntp` module. (If you've
+already installed the modules from the cache, this task should already be
+marked as complete and you can skip this step.)
 
     puppet module install puppetlabs-ntp
 	

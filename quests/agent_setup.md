@@ -21,13 +21,12 @@ infrastructure, and finally use the `site.pp` manifest to apply some simple
 Puppet code on these new nodes.
 
 **Please note:** In this quest we will be using docker to run multiple nodes on
-a single VM. Unfortunately the way this system currently works, this quest and
-the following Application Orchestrator quest require a working internet
-connection. Furthermore, our goal is to give you a lightweight environment
-where you can learn how Puppet works in a multi-node environment, but we
-achieve this at a certain cost to stability. We hope to iterate on this process
-to make it as solid and clean as possible, but in the meantime, please forgive
-any issues that come up. Feel free to contact us at learningvm@puppetlabs.com.
+a single VM. This quest and the following Application Orchestrator quest
+require a working internet connection. Our goal is to give you a
+lightweight environment where you can learn how Puppet works in a multi-node
+environment, but we achieve this at a certain cost to stability. We apologize
+for any issues that come up as we continue to iterate on this system. Feel free
+to contact us at learningvm@puppetlabs.com.
 
 When you're ready to get started, type the following command:
 
