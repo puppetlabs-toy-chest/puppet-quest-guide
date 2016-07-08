@@ -31,6 +31,8 @@ instances, and extends Puppet's standard resource types to let you manage MySQL
 
 Before getting started configuring your MySQL server installation, fetch the
 `puppetlabs-mysql` module from the Puppet Forge with the `puppet module` tool.
+(If you've already installed the modules from the cache, this task should
+already be marked as complete and you can skip this step.)
 
     puppet module install puppetlabs-mysql
 	

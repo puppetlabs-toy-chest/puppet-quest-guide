@@ -69,7 +69,7 @@ it remains compatible with the instructions in this guide. Go ahead and run:
 
     puppet module install dwerder-graphite -v 5.16.1
     
-If you don't have internet access, run the following terminal commands to use
+If you don't have internet access, run the following command to install
 cached versions of all the modules required for quests in this guide:
 
     mv /usr/src/forge/* /etc/puppetlabs/code/environments/production/modules

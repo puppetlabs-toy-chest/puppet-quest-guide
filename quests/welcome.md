@@ -1,6 +1,6 @@
 # Welcome 
 
-## Quest Objectives
+## Quest objectives
 
 - Learn about the value of Puppet and Puppet Enterprise
 - Familiarize yourself with the Quest structure and tool
