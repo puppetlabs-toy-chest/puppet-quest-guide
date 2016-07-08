@@ -16,3 +16,4 @@
 * [Application Orchestrator](quests/application_orchestrator.md)
 * [Learning VM Troubleshooting](troubleshooting.md)
 * [Afterword](quests/afterword.md)
+* [Privacy Policy](https://puppet.com/legal/privacy)
