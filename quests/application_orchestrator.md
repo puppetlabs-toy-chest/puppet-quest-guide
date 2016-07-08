@@ -1,3 +1,5 @@
+{% include '/version.md' %}
+
 # Application Orchestrator
 
 ## Quest objectives

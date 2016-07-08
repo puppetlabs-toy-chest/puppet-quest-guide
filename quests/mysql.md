@@ -1,3 +1,5 @@
+{% include '/version.md' %}
+
 # MySQL
 
 ## Quest Objectives

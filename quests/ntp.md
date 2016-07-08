@@ -1,3 +1,5 @@
+{% include '/version.md' %}
+
 # NTP
 
 ## Quest objectives

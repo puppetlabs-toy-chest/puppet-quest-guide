@@ -1,3 +1,5 @@
+{% include '/version.md' %}
+
 # Set up the Learning VM
 
 1. Before beginning, you may want to use the MD5 sum provided at the VM

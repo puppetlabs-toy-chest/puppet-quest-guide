@@ -1,3 +1,5 @@
+{% include '/version.md' %}
+
 # The Power of Puppet
 
 ## Quest objectives

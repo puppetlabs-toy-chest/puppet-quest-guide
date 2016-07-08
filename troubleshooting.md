@@ -1,3 +1,5 @@
+{% include '/version.md' %}
+
 # Learning VM Troubleshooting
 
 For the most up-to-date version of this troubleshooting information, [check the

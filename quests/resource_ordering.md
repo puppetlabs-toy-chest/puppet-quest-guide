@@ -1,3 +1,5 @@
+{% include '/version.md' %}
+
 # Resource ordering
 
 ## Quest objectives

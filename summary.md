@@ -1,6 +1,9 @@
 # Summary
 
 * [Setup](SETUP.md)
+
+### Quests
+
 * [Welcome](quests/welcome.md)
 * [Power of Puppet](quests/power_of_puppet.md)
 * [Resources](quests/resources.md)
@@ -14,6 +17,10 @@
 * [Defined Resource Types](quests/defined_resource_types.md)
 * [Agent Setup](quests/agent_setup.md)
 * [Application Orchestrator](quests/application_orchestrator.md)
-* [Learning VM Troubleshooting](troubleshooting.md)
+
+### Appendix
+
 * [Afterword](quests/afterword.md)
+* [Troubleshooting](troubleshooting.md)
+* [Release Notes](/releasenotes.md)
 * [Privacy Policy](https://puppet.com/legal/privacy)

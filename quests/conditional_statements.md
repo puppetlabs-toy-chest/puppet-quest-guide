@@ -1,3 +1,5 @@
+{% include '/version.md' %}
+
 # Conditional statements
 
 ## Quest objectives
