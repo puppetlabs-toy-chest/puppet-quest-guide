@@ -1,3 +1,5 @@
+{% include '/version.md' %}
+
 # Quest Guide for the Puppet Learning VM
 
 ## About the Learning VM and this Quest Guide

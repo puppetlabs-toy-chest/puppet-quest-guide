@@ -1,3 +1,5 @@
+{% include '/version.md' %}
+
 # Agent Node Setup
 
 ## Quest objectives

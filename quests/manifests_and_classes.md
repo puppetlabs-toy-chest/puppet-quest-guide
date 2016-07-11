@@ -1,3 +1,5 @@
+{% include '/version.md' %}
+
 # Manifests and classes
 
 ## Quest objectives

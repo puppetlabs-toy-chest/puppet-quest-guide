@@ -1,3 +1,5 @@
+{% include '/version.md' %}
+
 # Modules
 
 ## Quest objectives

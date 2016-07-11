@@ -1,3 +1,5 @@
+{% include '/version.md' %}
+
 # Defined Resource Types
 
 ## Quest objectives
