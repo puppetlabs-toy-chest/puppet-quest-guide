@@ -1,6 +1,15 @@
-# Puppet Quest Guide
+{% include '/version.md' %}
 
 ## Release Notes
+
+### v1.2.3
+  * Content tested for compatibility with puppet-2016.2.0-learning-5.4 VM build.
+  * Added privacy a link to Puppet's privacy policy.
+  * Fixed a CSS alignment issue with the task icons.
+  * Adjusted CSS for headers and sidebar.
+  * Fixed an issue with a missing / in the instruction code for the Variable and Parameters quest.
+  * Added a version header note with a link to this release notes page.
+  * Specified gitbook 3.1.1 in book.json.
 
 ### v1.2.2
   * Cleaned up formatting for task specs, generalized some tests to better match possible variations in Puppet code.
