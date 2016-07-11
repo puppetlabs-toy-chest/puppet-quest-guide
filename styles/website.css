@@ -4,11 +4,40 @@
   font-family: 'Calibre',Helvetica,Tahoma,Arial,sans-serif;
 }
 
+.markdown-section h1 {
+  margin-top: 0em;
+  font-size: 3.2em;
+}
+
+#book-search-input input, #book-search-input input:focus, #book-search-input input:hover {
+    width: 100%;
+    background: 0 0;
+    border: 1px solid transparent;
+    box-shadow: none;
+    outline: 0;
+    color: #000;
+    padding: 0px;
+}
+
+.book-summary {
+  width: 250px;
+  overflow-x: hidden;
+}
+
+.book-summary ul.summary li.header {
+  padding-top: 15px;
+  text-transform: uppercase;
+  color: #FFD86E;
+}
+
 .lvm-task-number {
-    color: #6c6d6d;
-    font-size: 1.625rem;
-    font-style: bold;
-    margin-left: -4px;
+  color: #6c6d6d;
+  font-size: 1.625rem;
+  font-style: bold;
+}
+
+.book-summary ul.summary li a:hover {
+  text-decoration: none;
 }
 
 .lvm-task-number p:before {
@@ -37,6 +66,7 @@
   color: #FFF;
   font-size: 1.1em;
   font-weight: 500;
+  padding: 5px 15px;
 }
 
 .book .book-summary ul.summary:before {
@@ -48,5 +78,4 @@
     content: "";
     margin: 20px;
     background-repeat: no-repeat;
-}
 }
