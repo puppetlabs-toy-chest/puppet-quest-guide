@@ -11,7 +11,7 @@ EOL
 #Task 2
 puppet agent -t
 #Task 3
-curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -H "Content-Type: application/json" -X POST -d '{"classes":{"pe_repo::platform::ubuntu_1404_amd64":{}}}' https://localhost:4433/classifier-api/v1/groups/86fabd41-3020-479e-a035-4c7b7974e151
+curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -H "Content-Type: application/json" -X POST -d '{"classes":{"pe_repo::platform::ubuntu_1404_amd64":{}}}' https://localhost:4433/classifier-api/v1/groups/2f587cb3-f961-4ad2-86aa-6abcbdc17843
 puppet agent -t
 #Task 4
 docker exec -it webserver sh -c "curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | sudo bash"
