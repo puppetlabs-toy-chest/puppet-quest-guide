@@ -1,5 +1,5 @@
-$container_name
-$container_alias
+$container_name = 'hello.learning.puppetlabs.vm'
+$container_alias = 'hello'
 
 class { "dockeragent":
   create_no_agent_image => true,
