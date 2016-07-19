@@ -1,5 +1,7 @@
 require 'serverspec'
 require 'pathname'
+require 'highline/import'
+require 'net/ssh'
 ### include requirements ###
 
 PROD_PATH = '/etc/puppetlabs/code/environments/production/'
@@ -11,5 +13,15 @@ set :backend, :exec
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = [:should, :expect]
+  end
+  config.before(:example, :host => :hello) do
+    set :backend, 'ssh'
+    set :host, 'hello.learning.puppetlabs.vm'
+    options = {password: 'puppet', user: 'root'}
+    set :ssh_options, options
+  end
+  config.before(:example, :host => :localhost) do
+    set :backend, 'exec'
+    set :host, 'localhost'
   end
 end
