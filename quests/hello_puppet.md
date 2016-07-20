@@ -124,7 +124,7 @@ agent node.
 
 The quest tool has already set up a new node with the FQDN
 `hello.learning.puppetlabs.vm` where you can try out the agent installation.
-Use `ssh` to connect to this node.
+Use `ssh` to connect to this node with the password `puppet`.
 
     ssh root@hello.learning.puppetlabs.vm
 
