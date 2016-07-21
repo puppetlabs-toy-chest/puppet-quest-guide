@@ -1,10 +1,10 @@
 {
+  "welcome": { 
+    "watch_list": ["/root/.bash_history"]
+  },
   "hello_puppet": {
     "watch_list": ["/root/.bash_history"],
     "setup_command": "puppet apply ./manifests/hello_puppet.pp && puppet apply ./manifests/docker_hosts.pp"
-  },
-  "welcome": { 
-    "watch_list": ["/root/.bash_history"]
   },
   "power_of_puppet": {
     "watch_list": ["/root/.bash_history"]
