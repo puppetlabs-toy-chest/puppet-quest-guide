@@ -4,7 +4,7 @@
   },
   "hello_puppet": {
     "watch_list": ["/root/.bash_history"],
-    "setup_command": "puppet apply ./manifests/hello_puppet.pp && puppet apply ./manifests/docker_hosts.pp"
+    "setup_command": "./scripts/hello_puppet.rb"
   },
   "power_of_puppet": {
     "watch_list": ["/root/.bash_history"]
