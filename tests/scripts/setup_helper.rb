@@ -2,6 +2,8 @@ require 'socket'
 
 SCRIPT_DIR = File.dirname(__FILE__)
 
+$stdout.sync = true
+
 def create_node(name, image='agent')
   puts "Creating #{name}..."
   `puppet apply -e "dockeragent::node { '#{name}': ensure => present, image => '#{image}' }"`
