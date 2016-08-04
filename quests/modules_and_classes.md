@@ -65,10 +65,12 @@ resource.
 
 Exit and re-connect to the node to verify that your message appears.
 
-That kind of one-off change is simple enough, but SSHing to a machine and
-running the `puppet resource` command won't scale very well.
+This kind of one-off change is simple enough, but SSHing to a machine and
+running the `puppet resource` command won't scale very well. By setting up some
+Puppet code on your Puppet master, you can manage this MOTD file across as many
+nodes as you have in your infrastructure.
 
-## Classes and Manifests
+## Manifests and classes
 
 The first step towards Puppetizing your infrastructure is to define the desired
 state of the resources you want to manage in a persistent format.
@@ -81,27 +83,60 @@ block of Puppet code that declares the set of related resources needed to
 manage something on a system. (In the case of the MOTD, we only need one
 resource, but you will often find a combination of `package`, `file`, and
 `service` resources used to install an applciation, modify its configuration
-files, and manage an assocaited service.) Once it's defined, a class can be
-declared as a single unit. This allows you to define a component once and
-re-use it as needed across multiple nodes in your infrastructure.
+files, and manage an associated service.) Once it's defined, a class becomes
+a portable and unit that can be re-used as needed across multiple nodes in your
+infrastructure.
+
+## Modules and autoloading
 
 For Puppet to find a class, it must be included in a directory structure
 defined by your Puppet master's `modulepath` configuration setting. Puppet
 loads any classes it finds, making them available to be declared in your
 `site.pp` manifest's node blocks or used in the PE console's node classifier.
+This process is called *autoloading*.
 
-First, end your SSH session to the `motd-dev` node if you're still connected.
-We'll be working from the master's production code environment, so cd to that
-directory. (We'll get into some of the details of this directory structure
-soon enough—for now, just follow along.)
+Puppet's autoloader matches the name of a class with it's place in the
+directory structure within the module path. This structure introduces one more
+layer of organization above the class level: the **module**. A module contains
+a group of related classes along with any other files, templates, plugins, or
+other data needed to support those classes. Modules provide a level of
+namespace scoping to prevent collisions among classes from different modules.
+A module will generally have one main class that shares the name of the module
+along with several supporting classes whose names follow the
+`modulename::classname` pattern. For example, an Apache module might define a
+main class called `apache` along with supporting classes such as `apache::ssl`, 
+and `apache::proxy`.
+
+## The `profile` module
+
+A common convention is to put the Puppet code specific to your site
+infrastructure in a `profile` module. The classes defined in your `profile`
+module let bundle resources and other classes into units related to a specific
+function you might want for a node. For example, you might bundle together a
+whole set of classes to manage Apache, PHP, and SSL into a
+`profile::lamp_webserver` class that you can easily assign to all the
+webservers in your infrastructure. Unlike other modules that generally manage
+a single aspect of a system, a single `profile` module contains all the
+profile classes you want to define for your infrastructure.
+
+While it might seem a little unwieldly to go through this process to manage a
+humble MOTD, reviewing this process in a simple case will make it easier to
+understand.
+
+Let's get started.
+
+We'll be working from the master's production code environment, so if you're
+still in a SSH session on your agent node, enter `exit` to disconnect. Back
+on your master, navigate to the directory for the production code environment.
 
     cd /etc/puppetlabs/code/environments/production/
 
-Now create a manifest to define a simple MOTD class.
+Create a new `motd.pp` manifest.
 
     vim site/profile/manifests/motd.pp
 
-Use
+Now define a your `profile::motd` class and include a file resource declaration
+to set the content of the `/etc/motd/` file to 'Hello Puppet'.
 
 ``` puppet
 class profile::motd {
@@ -112,71 +147,7 @@ class profile::motd {
 }
 ```
 
-You will see something similar to this:
 
-``` puppet
-file { '/etc/motd':
-  ensure  => 'file',
-  content => '{md5}d8e8fca2dc0f896fd7cb4cb0031ba249',
-  ctime   => '2016-07-30 08:08:04 +0000',
-  group   => '0',
-  mode    => '0644',
-  mtime   => '2016-07-30 08:08:04 +0000',
-  owner   => '0',
-  type    => 'file',
-}
-```
-
-There are a few differences in how Puppet represents a resource it reads from
-the system and how you'll want to define it when you write Puppet code.
-
-You might notice that the `content` parameter is set to an MD5 sum, and not
-the actual content of the file. Puppet uses these MD5 sums quicky compare
-file contents on the system to those defined in your Puppet code. This means
-that when it reads a file from the system into Puppet code, it will represent
-its content as an MD5, rather than displaying the full content.
-
-For now, all we'll worry about are the ensure and content attributes. Beca
-
-## Classes, modules
-
-Now that you've validated that the MOTD displays as expected, the next step
-is to get some Puppet code into a format that will make it easy to apply to any
-nodes in your infrastructure.
-
-
-Using a Puppet class requires two steps. First, you must define it by writing a
-class definition and saving it to a manifest file. Puppet will parse this
-manifest and remember your class definition. The class can then be declared to
-apply the resource declarations it contains to a node in your infrastructure.
-
-Classes can take **parameters** that allow you to customize the resources they
-contain. They can also contain conditional logic that lets them define
-different resources or set resource parameters to different values depending on
-class parameters, facts, or an external data source such as Hiera.
-
-There are three 
-
-some Puppet code to manage that `/etc/motd` file. You can use the `puppet
-resource` command for a quick look at what this code might look like.
-
-<div class = "lvm-task-number"><p>Task 1:</p></div>
-
-On the `test-01` agent node, write the output of `puppet resource` for
-`/etc/motd` to `/tmp/motd.pp`
-
-    puppet resource file /etc/motd > /tmp/motd.pp
-
-That `motd.pp` file you wrote to is called a **manifest**. Manifests are text
-files containing Puppet code and marked with the `.pp` extension.
-
-Use Vim to open the file and take a look.
-
-    vim /tmp/motd.pp
-
-``` puppet
-
-```
 
 Puppet's community We're going to take this opportunity the introduce concept of the **module**
 and the [Puppet Forge](https://forge.puppet.com/) community repository.
