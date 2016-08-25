@@ -118,10 +118,14 @@ restarting PE services.
 
 Ensure that you have an up-to-date version of your virtualization software
 installed.  Note that the "check for updates" feature of VirtualBox may not
-always work as expected, so check the website for the most recent version. If
-you are sure that your virtualization software is up to date and your host
-system is 64 bit and has virtualization extensions enabled in the BIOS, please
-let us know if you still cannot import the OVA.
+always work as expected, so check the website for the most recent version.
+
+Ensure that virtualization extensions enabled in the BIOS. The steps to do this
+will be specific to your system, will generally available online.
+
+If you are using Mac OS X and see `Unable to retrieve kernel symbols`,
+`Failed to initialize monitor device`, or `Internal error`, please refer to
+[this VMWare knowledge base page](https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2061791).
 
 ### The Learning VM has no IP address or the IP address will not respond.
 
