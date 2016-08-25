@@ -242,6 +242,14 @@ Now give it a try. Go ahead and do a `--noop` run, then apply the test.
 
 Your new page should now be available at `<VM'S IP>/hola.html`!
 
+Before moving on, it's important to note that there's a limitation here.
+Puppet classes are *singleton* which means that a class can only be applied
+once on a given node. In this case, you would only be able to configure each
+webserver to have a single parameter-specified language page in addition to the
+two hard coded pages. If you want to repeat the same resource or set of
+resources multiple times on the *same* node, you can use something called a
+*defined resource type*, which we will cover in a later quest.
+
 ## Review
 
 In this quest you've learned how to take your Puppet manifests to the next level
