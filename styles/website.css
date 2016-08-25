@@ -1,12 +1,56 @@
+@font-face {
+  font-family: Calibre Web Regular;
+  src: url('/gitbook/fonts/calibre/CalibreWeb-Regular.woff');
+}
+
+@font-face {
+  font-family: Calibre Web Regular;
+  src: url('/gitbook/fonts/calibre/CalibreWeb-bold.woff');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Calibre Web Semibold;
+  src: url('/gitbook/fonts/calibre/CalibreWeb-Semibold.woff');
+}
+
 .book.font-family-1,
 .book .book-header,
 .book .book-summary {
-  font-family: 'Calibre',Helvetica,Tahoma,Arial,sans-serif;
+  font-family: 'Calibre Web Regular',Helvetica,Tahoma,Arial,sans-serif;
+}
+
+.markdown-section p {
+  line-height: 1.5;  
+}
+
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section h4 {
+  font-family: 'Calibre Web Semibold',Helvetica,Tahoma,Arial,sans-serif;
+  font-weight: normal;
 }
 
 .markdown-section h1 {
   margin-top: 0em;
   font-size: 3.2em;
+  border-bottom: 1px solid lightgrey;
+}
+
+.markdown-section h2 {
+  font-size: 2.0em;
+  text-align: center;
+}
+
+.markdown-section h3 {
+  font-size: 1.2em;
+}
+
+.markdown-section pre {
+  border-left: 5px solid #ccc;
+  line-height: 1.375;
+  background: #f7f7f7;
 }
 
 #book-search-input input, #book-search-input input:focus, #book-search-input input:hover {
@@ -20,20 +64,20 @@
 }
 
 .book-summary {
-  width: 250px;
+  width: 240px;
   overflow-x: hidden;
 }
 
 .book-summary ul.summary li.header {
+  font-family: Calibre Web Semibold;
   padding-top: 15px;
-  text-transform: uppercase;
   color: #FFD86E;
+  text-transform: none;
 }
 
 .lvm-task-number {
-  color: #6c6d6d;
-  font-size: 1.625rem;
-  font-style: bold;
+  color: #222;
+  font-size: 1.2em;
 }
 
 .book-summary ul.summary li a:hover {
@@ -43,7 +87,7 @@
 .lvm-task-number p:before {
     color: #FFAE1A;
     display: inline;
-    font-family: 'FontAwesome', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'FontAwesome';
     content: ' ';
     font-size: 1em;
 }
@@ -66,7 +110,7 @@
   color: #FFF;
   font-size: 1.1em;
   font-weight: 500;
-  padding: 5px 15px;
+  padding: 1px 18px;
 }
 
 .book .book-summary ul.summary:before {
@@ -78,4 +122,12 @@
     content: "";
     margin: 20px;
     background-repeat: no-repeat;
+}
+
+a.gitbook-link {
+  font-size: .8em !important;
+}
+
+.book.with-summary .book-body {
+    left: 240px;
 }
