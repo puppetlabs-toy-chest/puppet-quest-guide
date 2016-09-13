@@ -38,7 +38,7 @@ configuration. You could probably get it up and running yourself if you set asid
 time to read through the documentation, but wouldn't it be nice if somebody had already
 done the work for you?
 
-You're in luck! Puppet Labs operates a service called the [Puppet Forge](http://forge.puppetlabs.com),
+You're in luck! Puppet operates a service called the [Puppet Forge](http://forge.puppetlabs.com),
 which serves as a repository for Puppet *modules*. A module nicely packages all the
 code and data Puppet needs to manage a given aspect in your infrastructure, which
 is especially helpful when you're dealing with a complex application like Graphite.
@@ -54,13 +54,16 @@ instructions below on installing a locally cached copy of the module.)
 Cool, it looks like there are several matches for Graphite. For this quest, use 
 Daniel Werdermann's module: `dwerder-graphite`.
 
-It's also a good time to take a look at the [Puppet Forge](http://forge.puppetlabs.com)
-website. While the `puppet module search` tool can be good to quickly locate a module, the
-Forge website makes it much easier to search, read documentation, and find a module's source
-code. Note that among the available modules, the Forge includes two categories of pre-reviewed modules.
-**Puppet Approved** modules adhere to a set of Puppet Labs specifications for style, documentation, and
-semantic versioning, along with other best practices standards. **Puppet Supported** modules are
-rigorously tested for compatibility with Puppet Enterprise and are fully supported by Puppet Labs.
+It's also a good time to take a look at the [Puppet
+Forge](http://forge.puppetlabs.com) website. While the `puppet module search`
+tool can be good to quickly locate a module, the Forge website makes it much
+easier to search, read documentation, and find a module's source code. Note
+that among the available modules, the Forge includes two categories of
+pre-reviewed modules.  **Puppet Approved** modules adhere to a set of Puppet
+specifications for style, documentation, and semantic versioning, along with
+other best practices standards. **Puppet Supported** modules are rigorously
+tested for compatibility with Puppet Enterprise and are fully covered by
+Puppet's support team.
 
 <div class = "lvm-task-number"><p>Task 2:</p></div>
 
