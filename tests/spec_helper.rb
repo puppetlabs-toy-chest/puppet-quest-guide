@@ -4,7 +4,8 @@ require 'pathname'
 
 PROD_PATH = '/etc/puppetlabs/code/environments/production/'
 MODULE_PATH = "#{PROD_PATH}modules/"
-PE_VERSION = '2016.1.2'
+
+set :backend, :exec
 
 ### enable both :should and :expect syntax ###
 RSpec.configure do |config|
