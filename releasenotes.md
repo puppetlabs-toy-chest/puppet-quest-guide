@@ -2,6 +2,12 @@
 
 ## Release Notes
 
+### v1.2.4
+  * Content tested for compatibility with puppet-2016.2.1-learning-5.5 VM build.
+  * Updated CSS styling.
+  * Minor changes to tests to be compatible with RESTful quest tool version. 
+  * Minor content fixes.
+
 ### v1.2.3
   * Content tested for compatibility with puppet-2016.2.0-learning-5.4 VM build.
   * Added privacy a link to Puppet's privacy policy.
