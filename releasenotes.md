@@ -2,6 +2,11 @@
 
 ## Release Notes
 
+### v1.2.5
+  * Content tested for compatibility with puppet-2016.2.1-learning-5.6 VM build.
+  * Updated [pltraining-bootstrap](https://github.com/puppetlabs/pltraining-bootstrap) module turn off default line-numbering in vim.
+  * Updated [pltraining-learning](https://github.com/puppetlabs/pltraining-learning) module to create module structure directories for cowsay module.
+
 ### v1.2.4
   * Content tested for compatibility with puppet-2016.2.1-learning-5.5 VM build.
   * Updated CSS styling.
