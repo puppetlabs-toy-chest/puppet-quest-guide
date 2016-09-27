@@ -96,6 +96,11 @@ but you don't want to put that resource declaration just anywhere.
 To keep things tidy, we'll create a `cowsay.pp` manifest, and within that manifest
 we'll define a class that can manage the cowsay package.
 
+First, create a simple module structure to contain your manifests. (We'll cover
+this structure in more depth in the next quest.)
+
+    mkdir -p cowsayings/{manifests,examples}
+
 Use vim to create a `cowsay.pp` manifest:
 
     vim cowsayings/manifests/cowsay.pp
