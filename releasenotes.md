@@ -2,6 +2,10 @@
 
 ## Release Notes
 
+### v1.2.6
+  * Add instructions to create cowsayings directory structure in the manifests
+    and classes quest instead of relying on it being pre-created in the build.
+
 ### v1.2.5
   * Content tested for compatibility with puppet-2016.2.1-learning-5.6 VM build.
   * Updated [pltraining-bootstrap](https://github.com/puppetlabs/pltraining-bootstrap) module turn off default line-numbering in vim.
