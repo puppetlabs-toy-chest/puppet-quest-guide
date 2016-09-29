@@ -14,6 +14,24 @@
   src: url('/gitbook/fonts/calibre/CalibreWeb-Semibold.woff');
 }
 
+/* For pinning terminal to the side of the window */
+.book {
+  float: left;
+  width: 60%;
+}
+
+.terminal_wrapper {
+  float: right;
+  width: 40%;
+  height: 100%;
+}
+
+.terminal_wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
 .book.font-family-1,
 .book .book-header,
 .book .book-summary {
