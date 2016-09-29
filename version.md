@@ -1,1 +1,1 @@
-Quest Guide <a href="/releasenotes.html">v1.2.5</a>
+Quest Guide <a href="/releasenotes.html">v1.2.6</a>
