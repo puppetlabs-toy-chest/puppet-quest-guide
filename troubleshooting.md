@@ -16,6 +16,13 @@ If you continue to get puppet run failures related to the gem, you can install
 the cached version manually: `gem install
 /var/cache/rubygems/gems/cowsay-0.2.0.gem`
 
+### Errors creating the cowsay.pp manifest in Manifests and Classes quest
+
+In version 1.2.5 of this guide, users are instructed to create manifests for the
+cowsayings module, but the module directory structure doesn't yet exist,
+leading to errors. This can be resolved by manually creating the module directory
+structure: `mkdir -p cowsayings/{manifests,examples}`.
+
 ### I completed a task, but the quest tool doesn't show it as complete
 
 The quest tool uses a series of [Serverspec](http://serverspec.org/) tests for
