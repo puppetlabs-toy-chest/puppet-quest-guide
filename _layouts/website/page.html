@@ -1,0 +1,15 @@
+{% extends template.self %}
+
+{% block body %}
+    {{ super() }}
+
+    <div class="terminal_wrapper">
+        <iframe id="terminal" src=""></iframe>
+    </div>
+
+    <script>
+        var src = "http://" + window.location.host.split(":", 1) + ":9090";
+        document.getElementById("terminal").setAttribute("src", src);
+    </script>
+
+{% endblock %}
