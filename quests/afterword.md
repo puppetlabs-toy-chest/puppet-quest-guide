@@ -10,14 +10,13 @@ well. This is just the beginning for us, too. We want to make the Learning VM th
 best possible first step in a beginner's journey to learning Puppet. With time,
 we will add more quests covering more concepts. 
 
-If you are interested in learning more about Puppet, please visit the [Puppet
-Labs Workshop](https://puppetlabs.com/learn).
+If you are interested in learning more about Puppet, please visit our training pages at [learn.puppet.com](https://learn.puppet.com).
 
 To get started with Puppet Enterprise [download it for
-free](http://info.puppetlabs.com/download-pe.html).
+free](https://puppet.com/download-puppet-enterprise).
 
 Please let us know about your experience with the Learning VM! Fill out our
 [feedback survey](http://puppetlabs.Learning-VM-Feedback.sgizmo.com/s3/) or
-reach us at [learningvm@puppetlabs.com](mailto:learningvm@puppetlabs.com). We
+reach us at [learningvm@puppet.com](mailto:learningvm@puppet.com). We
 look forward to hearing from you.
 
