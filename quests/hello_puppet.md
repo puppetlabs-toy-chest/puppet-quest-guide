@@ -24,93 +24,93 @@ resource` and `facter` to explore the state of that system. Through these
 tools, you will learn about *resources* and *facts*, the fundamental units of
 information Puppet uses to manage a system.
 
-As you get started with this guide, remember that Puppet is a powerful and
-complex tool. This guide will generally explain concepts as you encounter
-them. For the sake teaching to best practices, however, you will sometimes
-need to make use of a more advanced feature before it has been covered in
-depth.
+As you get started with this guide, remember that Puppet is a complex tool.
+While this guide will generally explain concepts as you encounter them, more
+advanced feature before it has been covered in depth.
 
 Ready to get started? Run the following command on your Learning VM:
 
     quest begin hello_puppet
 
-## Quest setup
+## Why Puppet?
 
-Each time you start a new quest, the `quest` tool uses Puppet to set up
-everything you'll need to complete that quest. In this case, we're going to
-be teaching you about the Puppet agent and showing you how to install it on a
-new system, so the quest tool has prepared that system for you. (In the
-background, the quest tool uses a tool called Docker to quickly create and
-destroy lightweight containerized nodes as needed before each quest.)
+Puppet is a configuration management tool that allows you to define changes and
+automate maintenance of the systems in your infrastructure.
 
-Be aware that each time you begin a new quest, any agent nodes you were using
-will be destroyed and a new environment will be created for the next quest.
-In most cases, the significant work of a quest will be completed on the
-Learning VM itself, which hosts your Puppet master and all your Puppet code.
-If you return to a partially complete quest
+### Portable
 
-## What is Puppet?
+Puppet's declarative language gives you a single powerful syntax for describing
+desired state across Windows and Unix-like systems.
 
-Puppet is a configuration management tool designed to manage the state of
-resources across your infrastructure. Puppet's declarative language provides a
-flexible way to specify the desired state for each node in your puppetized
-network. The Agent-Master architecture automates and centralizes the process of
-applying your Puppet code. The Puppet master server ensures that the correct
-configuration is securely and consistently applied to each Puppet agent node in
-your infrastructure.
+### Centralized
+
+With Puppet's master-agent architecture, there's no need to connect to systems
+individually to make changes. Once the Puppet agent service is running on a
+system, it will periodically establish a secure connection to the Puppet master
+to fetch any Puppet code you've applied to it and make any changes necessary to
+bring the system in line with the desired state you described.
+
+### Modular
+
+The Puppet Forge is a repository of community maintained modules that give you
+everything you need to manage common applicatons and services.
+
+### Cutting Edge
+
+With Puppet provides a stable platform for bringing new technologies into
+production. Puppet's integrations with technologies like Docker, Kubernetes,
+and Mesos let you engage with next generation software in a way that's simple,
+reliable, and consistent.
 
 ## The Puppet Agent
 
-In this quest, we'll be focusing on the Puppet agent.
+In this quest, we'll focus on the Puppet agent.
 
-The Puppet agent is the piece of Puppet software that runs on each of the
-systems you want Puppet to manage. It keeps everything on that system in line
-with the desired state defined for it by the central Puppet master server.
+The Puppet agent runs on each of the systems you want Puppet to manage. It
+handles communication with the central Puppet master server and manages any
+changes needed to keep its system in line with the desired state.
 
-To be precise, the term "Puppet agent" refers to the `puppet-agent` daemon that
-communicates between the Puppet master and the tools used to enforce changes
-locally. When we install the Puppet agent, however, we're also installing a
-suite of packages that support it. This includes tools like `facter` and
-`puppet resource` that you will use in this quest to explore the state of an
-agent node.
-
-You may see "Puppet agent," "agent," or "agent node" used to refer to any
-system where the Puppet agent is running. To avoid confusion, this guide will
-use "Puppet agent" to refer to the `puppet-agent` daemon itself, and "agent
-node" to refer to a system where the Puppet agent is installed.
+When you install the Puppet agent you also get a suite of packages that support
+it. This includes tools like `facter` and `puppet resource` that you can also
+use independently to view the state of the system in the same way Puppet does
+behnid the scenes.
 
 ## Installation
 
 The Puppet master hosts an install script you can easily run from any system
-that can connect to it. We've pre-installed the Puppet master on the Learning
+that can connect to it. There's already a Puppet master running on the Learning
 VM, so this install script is ready to be loaded and run by your (soon-to-be)
 agent node.
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
-The quest tool has already set up a new node with the FQDN
-`hello.learning.puppetlabs.vm` where you can try out the agent installation.
-Use `ssh` to connect to this node with the password `puppet`.
+To get you started quickly, we've done a little magic to provide you with a
+system you can use to try out the agent installation. Use `ssh` to connect to
+`hello.puppet.vm`. Your credentials are:
 
-    ssh root@hello.learning.puppetlabs.vm
+**username: learning**
+**password: puppet**
 
-Paste in the following command to grab the the agent installer from the
-master and run it. (If the script hangs due to an inability to access the
-required repositories, it may be due to changing networks or network settings
-since the agent node was created. The easiest way to address this is by
-rebooting the VM and running `quest begin hello_puppet` to re-create the agent
-node.)
+    ssh learning@hello.puppet.vm
+
+Copy in the command listed below to grab the the agent installer from the
+master and run it.
+
+(If the script hangs due to an inability to access the required repositories,
+it may be due to changing networks or network settings since the agent node was
+created. The easiest way to address this is by rebooting the VM and running
+`quest begin hello_puppet` to restart this quest and re-create the agent node.)
 
     curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | bash
 
-(You can find full documentation of the agent installation process, including
+You can find full documentation of the agent installation process, including
 specific instructions for Windows and other operating systems on our [docs
-page](https://docs.puppet.com/pe/latest/install_agents.html))
+page](https://docs.puppet.com/pe/latest/install_agents.html)
 
 ## Resources
 
-As noted above, the Puppet agent is installed with a set of supporting tools
-you can use to explore your system from a Puppet's-eye-view.
+The Puppet agent comes with a set of supporting tools you can use to explore
+your system from a Puppet's-eye-view.
 
 One of Puppet's core concepts is the *resource abstraction layer*. For Puppet,
 each aspect of the system you want to manage (users, files, services, and
@@ -119,162 +119,99 @@ as a unit called a *resource*.
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
-Take a look. Be sure you're ssh'd to your agent node, then enter:
+Take a look. Be sure you're connected your agent node, then enter:
 
-    puppet resource user root
+    puppet resource file /home/learning/www/hello_puppet.html
 
 What you see is the Puppet code representation of a resource with the type
 `user` that corresponds to the `root` user on the agent node:
 
 ``` puppet
-user { 'root':
-  ensure           => present,
-  comment          => 'root',
-  gid              => '0',
-  home             => '/root',
-  password         => '$1$jrm5tnjw$h8JJ9mCZLmJvIxvDLjw1M/',
-  password_max_age => '99999',
-  password_min_age => '0',
-  shell            => '/bin/bash',
-  uid              => '0',
+file { '/home/learning/www/index.html':
+  ensure => 'absent',
 }
 ```
 
-We'll get into the specifics of this syntax when you start writing your own
-resource declarations in a later quest. For now, let's explore how Puppet's
-resource abstraction layer allows it to translate back and forth between
-Puppet's code representation of a resource and the native tools and data of the
-system where it's running.
+Let's break down this resource syntax.
+
+``` puppet
+resource_type { 'resource_title':
+   parameter => 'value',
+}
+```
+
+The **resource type** tells Puppet what kind of thing the resource describes,
+whether it's one of the **core types** like a user, file, service, or package,
+or a custom type from a module, like an apache vhost or mysql database.
+Internally, this type tells Puppet which set of tools to use to manage the
+resource.
+
+The **resource title** is a unique name that Puppet uses to identify the
+resource internally. You probably noticed that the title, in this case, is
+actually the path of the file we want to manage. Most resources have a special
+parameter called a **namevar** that will use the value of the resource title if
+it isn't explicitly set. We could actually write the resource as below and it
+would refer to the same file:
+
+file { 'my_html_file':
+  ensure => 'absent',
+  path   => 'home/learning/www/index.html',
+} 
+
+Because a file's path parameter is required and specifies a unique place in the
+filesystem, this namevar default lets you save time of picking a unique title
+and writing out the path parameter explicitly. All resource types have a
+namevar, which you can find in the [Resource Type
+Reference](https://docs.puppet.com/puppet/latest/reference/type.html).
+
+The body of a resource is a list of **parameter value pairs** that follow the
+pattern `parameter => value`. The parameters and possible values vary from type
+to type. These specify the state of the resource on the system. Documentation
+for resource parameters is provided in the [Resource Type
+Reference](https://docs.puppet.com/puppet/latest/reference/type.html).
+
+You may have noticed that the `home/learning/www/index.html` resource had a
+single parameter value pair: `ensure => 'absent'`. The `ensure` parameter
+specifies the basic state of a resource. Most resources can have an `ensure`
+value of `absent` or `present` to specify whether or not the resource exists on
+the system.
+
+Because the `file` resource can be used to manage directories and symlinks as
+well as ordinary files, the ensure attribute can take the `file`, `directory`,
+and `link` values as well as the basic `present` and `absent`. (The `present`
+value will create an ordinary file if nothing exists at the specified path,
+but will not replace an existing directory or symlink. A more specific value
+will replace what's already there if it does not match that value.)
 
 <div class = "lvm-task-number"><p>Task 5:</p></div>
 
-To see how this works, we'll first use native CentOS commands to create a new
-user:
+To see how this works, we'll first use native CentOS commands to create the
+file:
 
-    useradd ollie
+    touch /home/learning/www/index.html
 
-To check that that the new user exists, we can look at the /etc/passwd file:
+To check that that the file exists, you can use the `ls` command:
 
-    cat /etc/passwd | grep ollie
+    ls /home/learning/www/index.html
 
-<div class = "lvm-task-number"><p>Task 6:</p></div>
+Now use the `puppet resource` tool to see how this change is represented in
+Puppet's resource syntax.
 
-Let's say you've decided you want to keep track of the full name of this user
-account's owner. Use the `usermod` tool to add a comment with this information.
+    puppet resource file /home/learning/www/index.html
 
-    usermod ollie -c "Oliver J. Dragon"
+Now that the file exists on the system, Puppet has more information to provide.
 
-Notice that while these operations are quite simple, they involve the use of
-several different tools. This isn't a problem if you're working on a system
-you're familiar with, but begins to be a significant impediment if you want to
-manage an infrastructure of many nodes that might run a variety of operating
-systems. Let's see how you can leverage Puppet's resource abstraction layer
-to do the same tasks with a single tool.
-
-In addition to letting you view the state of a resource, the Puppet resource
-tool allows you to modify, create, and remove resources on the system. The
-`ensure` attribute represents whether or not a resource exists on a system. You
-can remove a user account by setting the ensure attribute to `absent`, and add
-one by setting it to `present`.
-
-<div class = "lvm-task-number"><p>Task 7:</p></div>
-
-We'll create a user with the puppet resource tool, we'll specify the resource
-type `user` and the name of the user we want to create followed by the `ensure`
-parameter with its value set to `present`. Go ahead and create a new user
-account with the name `dolores`
-
-    puppet resource user dolores ensure=present
-
-There's nothing too mysterious happening here as Puppet creates this user
-account. In fact, Puppet is using just the same `useradd` command behind the
-scenes that you used to create the user yourself.
-
-<div class = "lvm-task-number"><p>Task 9:</p></div>
-
-Next, let's see about setting the comment. You could do have done it by
-including another `paramter=value` statement to the end of the initial puppet
-resource command, or running the command again with the comment parameter set,
-but we'll take the opportunity to demonstrate a different way of doing things.
-If you pass the `--edit` or `-e` flag to the `puppet resource` command, it will
-drop the current state of the specified resource in a text editor. Any changes
-you make to this Puppet code representation of the resource are applied when
-you save and exit.
-
-    puppet resource -e user galatea
-
-Edit the resource to add the comment line as shown in the code block below. (If
-you're new to the Vim text editor, you can use the `i` command to get into
-`insert` mode, and `ESC` to return to command mode followed by `:wq` to save
-quit.) 
-
-```puppet
-user { 'dolores':
-  ensure           => 'present',
-  comment          => 'Dolores Dragon',
-  gid              => '1004',
-  home             => '/home/galatea',
-  password         => '!!',
-  password_max_age => '99999',
-  password_min_age => '0',
-  shell            => '/bin/bash',
-  uid              => '1004',
+``` puppet
+file { '/home/learning/www/index.html':
+  ensure  => 'file',
+  content => '{md5}d41d8cd98f00b204e9800998ecf8427e',
+  ...
 }
 ```
 
-Again, Puppet knew to use the `usermod` command in the background to enforce
-the changes you specified when you edited the `dolores` user resource. If you
-were on a different system, it would use tools appriate for that system. For
-example, if you were working on a Windows system, Puppet would have used the
-Active Directory Services Interface (ADSI) to set the user's description field.
+The Puppet resource tool 
 
-This ability to use the same consistent language to handle resources with
-different tools and across different operating systems is the *abstraction*
-we're talking about in *resource abstraction layer*.
-
-## Facter
-
-When you installed the Puppet agent, you also installed a tool called `facter`.
-As its name suggests, `facter` collects data about a system and makes them
-availale to Puppet (and you) as a set of facts.
-
-<div class = "lvm-task-number"><p>Task 10:</p></div>
-
-On your agent node, use `facter` to inspect the `os` fact:
-
-    facter os
-
-The data output will include everything `facter` knows about the OS and its
-architecture.
-
-    {
-      architecture => "x86_64",
-      family => "RedHat",
-      hardware => "x86_64",
-      name => "CentOS",
-      release => {
-        full => "7.1.1503",
-        major => "7",
-        minor => "1"
-      },
-      selinux => {
-        enabled => false
-      }
-    }
-
-<div class = "lvm-task-number"><p>Task 11:</p></div>
-
-You can also dig in to this data to pull out specific facts. Try getting just
-the OS family:
-
-    facter os.family
-
-As you'll see in the section below, the Puppet master uses these facts to
-decide what kind of configuration you want to apply to each node in your
-infrastructure.
-
-In a later quest, you'll see how you can use facter along with conditional
-logic to write portable and flexible Pupet code.
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 ## Running the Puppet agent
 
