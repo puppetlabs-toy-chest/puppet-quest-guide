@@ -17,58 +17,63 @@
 
 > - Arthur C. Clarke
 
-In this quest, we cover the installation of the Puppet agent and some of the
-core ideas involved in managing infrastructure with Puppet.  You'll learn how
-to install the Puppet agent on a newly provisioned system and use `puppet
-resource` and `facter` to explore the state of that system. Through these
-tools, you will learn about *resources* and *facts*, the fundamental units of
-information Puppet uses to manage a system.
-
-As you get started with this guide, remember that Puppet is a complex tool.
-While this guide will generally explain concepts as you encounter them, more
-advanced feature before it has been covered in depth.
+In this quest, you'll begin your introduction to Puppet by installing the
+Puppet agent and learning some of the core ideas involved in managing
+infrastructure with Puppet. Once the Puppet agent is installed on a newly
+provisioned system, you will use the `puppet resource` and `facter` tools to
+explore the state of that system. Through these tools, you will learn about
+*resources* and *facts*, two of the fundamental units of information Puppet
+uses to manage a system.
 
 Ready to get started? Run the following command on your Learning VM:
 
     quest begin hello_puppet
 
-## Why Puppet?
+## What is Puppet?
 
-Puppet is a configuration management tool that allows you to define changes and
-automate maintenance of the systems in your infrastructure.
+Before diving in to your first lesson, let's take a moment to review what
+Puppet is and why it's worth learning.
 
-### Portable
+Put in the most general terms, Puppet is a configuration management tool that
+allows you to define changes and automate maintenance of the systems in your
+infrastructure. What really defines a tool, however, is what it's good for.
+Let's take a moment to review some of the features that distinguish Puppet from
+other approaches to configuration management.
 
-Puppet's declarative language gives you a single powerful syntax for describing
-desired state across Windows and Unix-like systems.
+**Puppet is portable.** It's declarative language gives you a single
+powerful syntax for describing desired state across Windows and Unix-like
+systems, network devices, and containers.
 
-### Centralized
+**Puppet is centralized.** With Puppet's master-agent architecture, there's no
+need to connect to systems individually to make changes. Once the Puppet agent
+service is running on a system, it will periodically establish a secure
+connection to the Puppet master to fetch any Puppet code you've applied to it
+and make any changes necessary to bring the system in line with the desired
+state you described.
 
-With Puppet's master-agent architecture, there's no need to connect to systems
-individually to make changes. Once the Puppet agent service is running on a
-system, it will periodically establish a secure connection to the Puppet master
-to fetch any Puppet code you've applied to it and make any changes necessary to
-bring the system in line with the desired state you described.
+**The Puppet Forge** is a repository of community maintained modules that give
+you everything you need to manage common applicatons and services.
 
-### Modular
-
-The Puppet Forge is a repository of community maintained modules that give you
-everything you need to manage common applicatons and services.
-
-### Cutting Edge
-
-With Puppet provides a stable platform for bringing new technologies into
-production. Puppet's integrations with technologies like Docker, Kubernetes,
-and Mesos let you engage with next generation software in a way that's simple,
-reliable, and consistent.
+**Puppet connects you to the cutting edge.** It provides a stable platform for
+bringing new technologies into production. Puppet's integrations with Docker,
+Kubernetes, Mesos and others let you engage with next generation software in a
+way that's simple, reliable, and consistent.
 
 ## The Puppet Agent
 
-In this quest, we'll focus on the Puppet agent.
+In just a moment, we'll walk you through the installation of your Puppet agent.
+First, however, let's take a moment to go over what the Puppet agent is and its
+role in your Puppet infrastructure.
 
 The Puppet agent runs on each of the systems you want Puppet to manage. It
-handles communication with the central Puppet master server and manages any
-changes needed to keep its system in line with the desired state.
+handles communication with the central Puppet master server and handles any
+changes needed to keep its system in line with the desired state. While the
+Puppet agent is generally used as part of a Master/Agent architecture, it can
+also be used to compile and apply code locally. While this is generally used
+during module development to test code, a masterless Puppet setup can be
+appropriate for a minimal infrastructure such as a home server. (In fact, I
+highly recommend trying out Puppet for personal project as a way to continue
+learning once you've completed this guide.)
 
 When you install the Puppet agent you also get a suite of packages that support
 it. This includes tools like `facter` and `puppet resource` that you can also
@@ -85,16 +90,17 @@ agent node.
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
 To get you started quickly, we've done a little magic to provide you with a
-system you can use to try out the agent installation. Use `ssh` to connect to
-`hello.puppet.vm`. Your credentials are:
+system you can use to try out the agent installation.
+
+Use `ssh` to connect to `hello.puppet.vm`. Your credentials are:
 
 **username: learning**
 **password: puppet**
 
     ssh learning@hello.puppet.vm
 
-Copy in the command listed below to grab the the agent installer from the
-master and run it.
+Now that you're connected to this system, copy in the command listed below to
+load the agent installer from the master and run it.
 
 (If the script hangs due to an inability to access the required repositories,
 it may be due to changing networks or network settings since the agent node was
@@ -103,28 +109,34 @@ created. The easiest way to address this is by rebooting the VM and running
 
     curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | bash
 
-You can find full documentation of the agent installation process, including
-specific instructions for Windows and other operating systems on our [docs
+Note that if your Agent node is running on a different operating system than
+the Master, you will have to take some steps to make the correct installation
+script available. You can find full documentation of the agent installation
+process, including specific instructions for Windows and other operating
+systems on our [docs
 page](https://docs.puppet.com/pe/latest/install_agents.html)
 
 ## Resources
 
 The Puppet agent comes with a set of supporting tools you can use to explore
-your system from a Puppet's-eye-view.
+your system from a Puppet's-eye-view. Now that the agent is installed, let's
+take a moment to explore these tools see what they can teach you about how
+Puppet works.
 
-One of Puppet's core concepts is the *resource abstraction layer*. For Puppet,
-each aspect of the system you want to manage (users, files, services, and
-packages, are some of the most common examples) is represented in Puppet code
-as a unit called a *resource*.
+One of Puppet's core concepts is something called the *resource abstraction
+layer*. For Puppet, each aspect of the system you want to manage (users, files,
+services, and packages are some of the most common examples) is represented in
+Puppet code as a unit called a *resource*.
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
-Take a look. Be sure you're connected your agent node, then enter:
+Take a look. Be sure you're still connected your agent node, then enter:
 
     puppet resource file /home/learning/www/hello_puppet.html
 
 What you see is the Puppet code representation of a resource with the type
-`user` that corresponds to the `root` user on the agent node:
+`file` that corresponds to the file on your system with the path
+`/home/learning/www/hello_puppet.html":
 
 ``` puppet
 file { '/home/learning/www/index.html':
@@ -132,19 +144,23 @@ file { '/home/learning/www/index.html':
 }
 ```
 
-Let's break down this resource syntax.
+Let's break down this resource syntax into its different components so we
+can see the anatomy of a resource a little more clearly.
 
 ``` puppet
-resource_type { 'resource_title':
+type { 'title':
    parameter => 'value',
 }
 ```
 
-The **resource type** tells Puppet what kind of thing the resource describes,
-whether it's one of the **core types** like a user, file, service, or package,
-or a custom type from a module, like an apache vhost or mysql database.
-Internally, this type tells Puppet which set of tools to use to manage the
-resource.
+The **type** tells Puppet what kind of thing the resource describes.  It can be
+a **core type** like a user, file, service, or package, or a **custom type**
+that you have implemented yourself or installed from a module. Custom types are
+often implemented to let you use the same resource syntax to describe resources
+that might be specific to a service or application (for example, an apache
+vhost or mysql database) rather than native aspects of your system to manage.
+Internally, a resource's type is what tells the Puppet agent which set of tools
+to use to manage the resource.
 
 The **resource title** is a unique name that Puppet uses to identify the
 resource internally. You probably noticed that the title, in this case, is
@@ -162,7 +178,11 @@ Because a file's path parameter is required and specifies a unique place in the
 filesystem, this namevar default lets you save time of picking a unique title
 and writing out the path parameter explicitly. All resource types have a
 namevar, which you can find in the [Resource Type
-Reference](https://docs.puppet.com/puppet/latest/reference/type.html).
+Reference](https://docs.puppet.com/puppet/latest/reference/type.html). This can
+be a little confusing, so let's reiterate: technically, the *title* is just
+a unique identifier that let's Puppet keep track of the resource. For
+convenience, however, the title will automatically be used as the default for
+a key unique parameter such as the *path* in the case of a file resource.
 
 The body of a resource is a list of **parameter value pairs** that follow the
 pattern `parameter => value`. The parameters and possible values vary from type
@@ -170,18 +190,23 @@ to type. These specify the state of the resource on the system. Documentation
 for resource parameters is provided in the [Resource Type
 Reference](https://docs.puppet.com/puppet/latest/reference/type.html).
 
+Now that you have a bit of a better idea of what resource syntax looks like,
+let's take another look at that file resource.
+
 You may have noticed that the `home/learning/www/index.html` resource had a
 single parameter value pair: `ensure => 'absent'`. The `ensure` parameter
 specifies the basic state of a resource. Most resources can have an `ensure`
 value of `absent` or `present` to specify whether or not the resource exists on
 the system.
 
-Because the `file` resource can be used to manage directories and symlinks as
-well as ordinary files, the ensure attribute can take the `file`, `directory`,
-and `link` values as well as the basic `present` and `absent`. (The `present`
-value will create an ordinary file if nothing exists at the specified path,
-but will not replace an existing directory or symlink. A more specific value
-will replace what's already there if it does not match that value.)
+Many resources will can have sevaral other values set of the `ensure`
+attribute. Because the `file` resource can be used to manage directories and
+symlinks as well as ordinary files, for example, its ensure attribute can take
+the `file`, `directory`, and `link` values as well as the basic `present` and
+`absent`. (The `present` value will create an ordinary file if nothing exists at
+the specified path, but will not replace an existing directory or symlink. A
+more specific value will replace what's already there if it does not match that
+value.)
 
 <div class = "lvm-task-number"><p>Task 5:</p></div>
 
@@ -209,9 +234,42 @@ file { '/home/learning/www/index.html':
 }
 ```
 
-The Puppet resource tool 
+Notice that the Puppet resource tool represents the a file's content as an md5
+hash. Hashing the content allows Puppet to efficiently track changes to a file
+without directly comparing the contents.
+
+Because you used the `touch` command to create the file, it is currently empty.
+The `puppet resource` isn't just good for inspecting resources. We can also use
+it to make changes to our system using the Puppet resource syntax. Let's use
+the `puppet resource` tool to add some content to our file.
 
 <div class = "lvm-task-number"><p>Task 6:</p></div>
+
+Running `puppet resource` with a `parameter=value` argument will tell Puppet to
+modify the resource on the system to match the value you set. (Note that while
+this is a great way to experiment with Puppet or even test out changes in a
+development environment, it's not a good way to manage production
+infrastructure.  Don't worry, though, we'll get to that soon enough.)
+
+    puppet resource file /home/learning/www/index.html content='Hello Puppet!'
+
+When the file opens in the Vim text editor, use the `i` key to enter edit mode.
+In edit mode, you can use the arrow keys to navigate. Change the value for the
+**content** parameter to **'Hello Puppet!'**, then type `ESC` to exit insert mode
+followed by `:wq` to write your file and quit Vim. (We'll be using Vim as our
+default text editor throughout this guide. While you can do basic editing with
+the commands mentioned here, you may find it valuable to refer to a Vim
+introduction or tutorial, such as [this
+one](https://blog.interlinked.org/tutorials/vim_tutorial.html).)
+
+```puppet
+file { '/home/learning/www/index.html':
+  ensure  => 'file',
+  content => 'Hello Puppet!',
+  ...
+```
+
+You will see some text
 
 ## Running the Puppet agent
 
