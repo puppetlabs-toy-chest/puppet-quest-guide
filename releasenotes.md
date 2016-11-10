@@ -2,6 +2,14 @@
 
 ## Release Notes
 
+### v1.2.7
+  * Content tested for compatibility with puppet-2016.4.2-learning-5.7 VM
+build.
+  * Add helpful error message for quest tool service failure.
+  * Fixed sytling issue for bold text.
+  * Fixed some issues with the task completion checks in the MySQL quest.
+  * Update troubleshooting to fix reference to PE service restart script.
+
 ### v1.2.6
   * Add instructions to create cowsayings directory structure in the manifests
     and classes quest instead of relying on it being pre-created in the build.
