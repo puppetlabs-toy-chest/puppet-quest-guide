@@ -91,7 +91,12 @@ double check that you have sufficient memory allocated to the VM and available
 on your host, then use the following script to restart these services in the
 correct order:
 
-    restart_pe_services.sh
+    /usr/local/bin/restart_classroom_services.rb all -f
+
+If you continue to have issues starting the PE services stack, please
+contact us at learningvm@puppet.com and include your host system details, your
+virtualization software and version, and the version of the Learning VM you're
+running.
 
 ### My Puppet run fails!
 
