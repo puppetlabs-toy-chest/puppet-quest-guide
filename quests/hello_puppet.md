@@ -22,8 +22,8 @@ Puppet agent and learning some of the core ideas involved in managing
 infrastructure with Puppet. Once the Puppet agent is installed on a newly
 provisioned system, you will use the `puppet resource` and `facter` tools to
 explore the state of that system. Through these tools, you will learn about
-*resources* and *facts*, two of the fundamental units of information Puppet
-uses to manage a system.
+*resources* and the fundamental units of information Puppet uses to manage a
+system.
 
 Ready to get started? Run the following command on your Learning VM:
 
@@ -31,56 +31,57 @@ Ready to get started? Run the following command on your Learning VM:
 
 ## What is Puppet?
 
-Before diving in to your first lesson, let's take a moment to review what
-Puppet is and why it's worth learning.
+Before getting into the details of how Puppet works and how to correctly use
+it, let's take a moment to review what Puppet is and why it's worth learning.
 
 Put in the most general terms, Puppet is a configuration management tool that
-allows you to define changes and automate maintenance of the systems in your
-infrastructure. What really defines a tool, however, is what it's good for.
-Let's take a moment to review some of the features that distinguish Puppet from
-other approaches to configuration management.
+allows you to define changes and automate the maintenance of the systems in
+your infrastructure. What defines a tool, however, is how it helps you. Let's
+take a moment to review some of the ways Puppet can make your life easier.
 
-**Puppet is portable.** It's declarative language gives you a single
-powerful syntax for describing desired state across Windows and Unix-like
-systems, network devices, and containers.
+**Puppet is portable.** Its declarative language gives you a single syntax for
+describing desired state across Windows and Unix-like systems, network devices,
+and containers. This means you don't have to switch language and toolset every
+time you start work on a new system.
 
 **Puppet is centralized.** With Puppet's master-agent architecture, there's no
 need to connect to systems individually to make changes. Once the Puppet agent
 service is running on a system, it will periodically establish a secure
-connection to the Puppet master to fetch any Puppet code you've applied to it
+connection to the Puppet master, fetch any Puppet code you've applied to it
 and make any changes necessary to bring the system in line with the desired
 state you described.
 
-**The Puppet Forge** is a repository of community maintained modules that give
-you everything you need to manage common applicatons and services.
+[**The Puppet Forge**](forge.puppet.com) is a repository of modules maintained
+by Puppet and the Puppet community that give you everything you need to manage
+common applicatons and services. The Forge has a wide range of modules to help
+you manage everything from NTP and SQL Server to Minecraft. 
 
 **Puppet connects you to the cutting edge.** It provides a stable platform for
 bringing new technologies into production. Puppet's integrations with Docker,
 Kubernetes, Mesos and others let you engage with next generation software in a
 way that's simple, reliable, and consistent.
 
-## The Puppet Agent
+## The Puppet agent
 
 In just a moment, we'll walk you through the installation of your Puppet agent.
 First, however, let's take a moment to go over what the Puppet agent is and its
 role in your Puppet infrastructure.
 
 The Puppet agent runs on each of the systems you want Puppet to manage. It
-handles communication with the central Puppet master server and handles any
-changes needed to keep its system in line with the desired state. While the
-Puppet agent is generally used as part of a Master/Agent architecture, it can
-also be used to compile and apply code locally. While this is generally used
-during module development to test code, a masterless Puppet setup can be
-appropriate for a minimal infrastructure such as a home server. (In fact, I
-highly recommend trying out Puppet for personal project as a way to continue
-learning once you've completed this guide.)
+communicates with the central Puppet master server and handles any changes
+needed to keep its system in line with the desired state. While the Puppet
+agent is generally used as part of a Master/Agent architecture, it can also be
+used to apply Puppet code locally. This independent use of the agent is often
+used to quickly test code on a development system. We take advantage of it
+here to demonstrate some of the core concepts of Puppet before moving on to a
+more complete master/agent architecture and workflow.
 
 When you install the Puppet agent you also get a suite of packages that support
-it. This includes tools like `facter` and `puppet resource` that you can also
-use independently to view the state of the system in the same way Puppet does
-behnid the scenes.
+it. This includes tools like `facter` and `puppet resource`, which you can use
+from the command-line to view the state of the system in the same way Puppet
+does behnid the scenes.
 
-## Installation
+## Agent installation
 
 The Puppet master hosts an install script you can easily run from any system
 that can connect to it. There's already a Puppet master running on the Learning
@@ -89,8 +90,8 @@ agent node.
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
-To get you started quickly, we've done a little magic to provide you with a
-system you can use to try out the agent installation.
+To get you started, the quest tool has provided you with a system you can use
+to try out the agent installation.
 
 Use `ssh` to connect to `hello.puppet.vm`. Your credentials are:
 
@@ -107,21 +108,21 @@ it may be due to changing networks or network settings since the agent node was
 created. The easiest way to address this is by rebooting the VM and running
 `quest begin hello_puppet` to restart this quest and re-create the agent node.)
 
-    curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | bash
+    sudo curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | bash
 
 Note that if your Agent node is running on a different operating system than
-the Master, you will have to take some steps to make the correct installation
-script available. You can find full documentation of the agent installation
-process, including specific instructions for Windows and other operating
-systems on our [docs
+the Master, you will have to take some steps to ensure that the correct
+installation script available. You can find full documentation of the agent
+installation process, including specific instructions for Windows and other
+operating systems on our [docs
 page](https://docs.puppet.com/pe/latest/install_agents.html)
 
 ## Resources
 
-The Puppet agent comes with a set of supporting tools you can use to explore
-your system from a Puppet's-eye-view. Now that the agent is installed, let's
-take a moment to explore these tools see what they can teach you about how
-Puppet works.
+As we noted above, the Puppet agent comes with a set of supporting tools you
+can use to explore your system from a Puppet's-eye-view. Now that the agent is
+installed, we'll take a moment to explore these tools and see what they can
+teach you about how Puppet works.
 
 One of Puppet's core concepts is something called the *resource abstraction
 layer*. For Puppet, each aspect of the system you want to manage (users, files,
@@ -130,12 +131,13 @@ Puppet code as a unit called a *resource*.
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
-Take a look. Be sure you're still connected your agent node, then enter:
+Take a look. (Be sure you're still connected your agent node.) Run the
+following command to ask Puppet to describe a file resource:
 
     puppet resource file /home/learning/www/hello_puppet.html
 
-What you see is the Puppet code representation of a resource with the type
-`file` that corresponds to the file on your system with the path
+What you see is the Puppet code representation of a resource. In this case,
+the resource's type is `file`, and its path is
 `/home/learning/www/hello_puppet.html":
 
 ``` puppet
@@ -155,34 +157,11 @@ type { 'title':
 
 The **type** tells Puppet what kind of thing the resource describes.  It can be
 a **core type** like a user, file, service, or package, or a **custom type**
-that you have implemented yourself or installed from a module. Custom types are
-often implemented to let you use the same resource syntax to describe resources
-that might be specific to a service or application (for example, an apache
-vhost or mysql database) rather than native aspects of your system to manage.
-Internally, a resource's type is what tells the Puppet agent which set of tools
-to use to manage the resource.
-
-The **resource title** is a unique name that Puppet uses to identify the
-resource internally. You probably noticed that the title, in this case, is
-actually the path of the file we want to manage. Most resources have a special
-parameter called a **namevar** that will use the value of the resource title if
-it isn't explicitly set. We could actually write the resource as below and it
-would refer to the same file:
-
-file { 'my_html_file':
-  ensure => 'absent',
-  path   => 'home/learning/www/index.html',
-} 
-
-Because a file's path parameter is required and specifies a unique place in the
-filesystem, this namevar default lets you save time of picking a unique title
-and writing out the path parameter explicitly. All resource types have a
-namevar, which you can find in the [Resource Type
-Reference](https://docs.puppet.com/puppet/latest/reference/type.html). This can
-be a little confusing, so let's reiterate: technically, the *title* is just
-a unique identifier that let's Puppet keep track of the resource. For
-convenience, however, the title will automatically be used as the default for
-a key unique parameter such as the *path* in the case of a file resource.
+that you have implemented yourself or installed from a module. Custom types let
+you use describe resources that might be specific to a service or application
+(for example, an Apache vhost or MySQL database) that Puppet doesn't know about
+out of the box. Internally, a resource's type is what points Puppet to the set
+of tools it will use to manage the resource on your system.
 
 The body of a resource is a list of **parameter value pairs** that follow the
 pattern `parameter => value`. The parameters and possible values vary from type
@@ -190,41 +169,63 @@ to type. These specify the state of the resource on the system. Documentation
 for resource parameters is provided in the [Resource Type
 Reference](https://docs.puppet.com/puppet/latest/reference/type.html).
 
-Now that you have a bit of a better idea of what resource syntax looks like,
-let's take another look at that file resource.
+The **resource title** is a unique name that Puppet uses to identify the
+resource internally. You probably noticed that the title, in the case of our
+file resource, is actually the file's path. All resources have a special
+parameter that will default to the value of the resource's title.  In the case
+of the file resource, this special parameter is the `path`. We could actually
+use a different title for the resource as long as we then set the path
+explicitly:
 
-You may have noticed that the `home/learning/www/index.html` resource had a
-single parameter value pair: `ensure => 'absent'`. The `ensure` parameter
-specifies the basic state of a resource. Most resources can have an `ensure`
-value of `absent` or `present` to specify whether or not the resource exists on
-the system.
+file { 'my_html_file':
+  ensure => 'absent',
+  path   => 'home/learning/www/index.html',
+} 
 
-Many resources will can have sevaral other values set of the `ensure`
-attribute. Because the `file` resource can be used to manage directories and
-symlinks as well as ordinary files, for example, its ensure attribute can take
-the `file`, `directory`, and `link` values as well as the basic `present` and
-`absent`. (The `present` value will create an ordinary file if nothing exists at
-the specified path, but will not replace an existing directory or symlink. A
-more specific value will replace what's already there if it does not match that
-value.)
+Because a file's path parameter must be specify a unique path on the
+filesystem, letting it do double-duty as a title will save you time and make
+your Puppet code easier to read. All resource types have a similar special
+parameter that lets the title do double-duty. This special parameter is called
+a **namevar**. You can find more information about the **namevar** for
+different resource types in the [Resource Type
+Reference](https://docs.puppet.com/puppet/latest/reference/type.html).
+
+This can be a little confusing, so let's reiterate: technically, the *title* is
+just a unique identifier that let's Puppet keep track of the resource. For
+convenience, however, the title will automatically be used as the default for a
+key unique parameter such as the *path* in the case of a file resource or the
+*package* you want to install with a *package* resource.
+
+Now that you're more familiar with the resource syntax, let's take another look
+at that file resource.
+
+``` puppet
+file { '/home/learning/www/index.html':
+  ensure => 'absent',
+}
+```
+
+Notice that it has a single parameter value pair: `ensure => 'absent'`. The
+`ensure` parameter tells us the basic state of a resource. For the *file* type,
+this parameter will tell us if the file exists on the system and whether it's a
+normal file, a directory, or link.
 
 <div class = "lvm-task-number"><p>Task 5:</p></div>
 
-To see how this works, we'll first use native CentOS commands to create the
-file:
+So Puppet is telling us that this file doesn't exist. Let's see what happens
+when you use the `touch` command to create a new empty file at that path.
 
     touch /home/learning/www/index.html
-
-To check that that the file exists, you can use the `ls` command:
-
-    ls /home/learning/www/index.html
 
 Now use the `puppet resource` tool to see how this change is represented in
 Puppet's resource syntax.
 
     puppet resource file /home/learning/www/index.html
 
-Now that the file exists on the system, Puppet has more information to provide.
+Now that the file exists on the system, Puppet has more to say about it. The
+resource Puppet shows will include the first two parameter value pairs shown
+below as well as some information about the file's owner and when it was
+created and last modified.
 
 ``` puppet
 file { '/home/learning/www/index.html':
@@ -234,42 +235,119 @@ file { '/home/learning/www/index.html':
 }
 ```
 
-Notice that the Puppet resource tool represents the a file's content as an md5
-hash. Hashing the content allows Puppet to efficiently track changes to a file
-without directly comparing the contents.
-
-Because you used the `touch` command to create the file, it is currently empty.
-The `puppet resource` isn't just good for inspecting resources. We can also use
-it to make changes to our system using the Puppet resource syntax. Let's use
-the `puppet resource` tool to add some content to our file.
+When the `puppet resource` tool interprets a file in this resource declaration
+syntax, it converts the content to an MD5 hash. This hashing lets Puppet
+quickly compare the actual content of a file on your system against the
+expected content to see if any change is necessary.
 
 <div class = "lvm-task-number"><p>Task 6:</p></div>
 
+Let's use the `puppet resource` tool to add some content to our file.
+
 Running `puppet resource` with a `parameter=value` argument will tell Puppet to
 modify the resource on the system to match the value you set. (Note that while
-this is a great way to experiment with Puppet or even test out changes in a
-development environment, it's not a good way to manage production
-infrastructure.  Don't worry, though, we'll get to that soon enough.)
+this is a great way to test out changes in a development environment, it's not
+a good way to manage production infrastructure.  Don't worry, though, we'll get
+to that soon enough.) We can use this to set the content of your file resource.
 
     puppet resource file /home/learning/www/index.html content='Hello Puppet!'
 
-When the file opens in the Vim text editor, use the `i` key to enter edit mode.
-In edit mode, you can use the arrow keys to navigate. Change the value for the
-**content** parameter to **'Hello Puppet!'**, then type `ESC` to exit insert mode
-followed by `:wq` to write your file and quit Vim. (We'll be using Vim as our
-default text editor throughout this guide. While you can do basic editing with
-the commands mentioned here, you may find it valuable to refer to a Vim
-introduction or tutorial, such as [this
-one](https://blog.interlinked.org/tutorials/vim_tutorial.html).)
+Puppet will display some output as it checks the hash of the existing content
+against the new content you provided and modifies the content to match the new
+value.
+
+<div class = "lvm-task-number"><p>Task 6:</p></div>
+
+Take another look at the file to see the modified content:
+
+    cat /home/learning/www/index.html
+
+### Types and Providers
+
+This translation back and forth between the state of the system and Puppet's
+resource syntax is the heart of Puppet's **Resource Abstraction Layer**. To get
+a better understanding of how this works, let's take a look at another resource
+type, the `package`. Since we were playing with an `index.html` file earlier,
+let's stay with that theme and have a look at the package resource for the
+Nginx server.
+
+    puppet resource package nginx 
+
+Again, because this package doesn't exist on the system, Puppet shows you the
+`ensure => absent` parameter value pair.
 
 ```puppet
-file { '/home/learning/www/index.html':
-  ensure  => 'file',
-  content => 'Hello Puppet!',
-  ...
+package { 'nginx':
+  ensure => 'absent',
+}
 ```
 
-You will see some text
+As we mentioned above, each resource **type** has a set of **providers**. A
+**provider** is the translation layer that sits between Puppet's resource
+representation and the native system tools it uses to discover and modify the
+underlying system state.
+
+In most cases, these providers seem invisible when everything is working
+correctly. Understanding how these providers interact with other tools on your
+system, however, can be an important part of troubleshooting when things don't
+work as expected.
+
+As an example, let's tell Puppet to install a non-existant package named
+`bogus-nginx`.
+
+    puppet resource package bogus-nginx ensure=present
+
+You'll see an error message telling you that yum wasn't able to find the
+specified package, including the command that Puppet's yum provider tried to
+run.
+
+```
+Error: Execution of '/bin/yum -d 0 -e 0 -y install bogus-nginx' returned 1:
+Error Nothing to do
+```
+
+Puppet will always do its best to find the correct provider to use based on
+a node's operating system and whether the commands associated with that
+provider are available on the system. However, you can also specify which
+provider you want to use by setting a resource's `provider` parameter.
+
+Let's try installing the same fake package again, this time with the pip
+provider.
+
+     puppet resource package bogus-nginx ensure=present provider=pip
+
+You'll see a similar error with a failed pip command instead of the yum
+command.
+
+Now that you know what's happening in the background, run the command again
+with the correct package name, and allowing Puppet to use the default yum
+provider.
+
+    puppet resource package nginx ensure=present
+
+This time, Puppet will show you the specific version of the package installed.
+
+```puppet
+package { 'nginx':
+  ensure => '1:1.10.2-1.el7.ngx',
+}
+```
+
+Now that you've learned some of the core concepts behind Puppet, you're ready
+to use these ideas in a more realistic workflow. As we noted above, the `puppet
+resource` command is a great way to explore a system or test Puppet code, but
+it's not the tool you'll be using to automate your configuration management.
+
+In the next quest, we'll show you how the Puppet agent communicates with your
+Puppet master to fetch a **catalog**, a compiled list of resources, and apply
+that catalog to your system.
+
+You'll learn how to save your Puppet code to a file called a **manifest** and
+organize it into a **module** within your Puppet master's **codedir**. This
+structure lets Puppet keep track of where to find all the resources it needs
+to manage your infrastructure.
+
+### Review
 
 ## Running the Puppet agent
 
@@ -316,9 +394,9 @@ Use the `puppet cert` tool to list the unsigned certificates on your network.
 
     puppet cert list
 
-Sign the cert for `hello.learning.puppetlabs.vm`.
+Sign the cert for `hello.puppet.vm`.
 
-    puppet cert sign hello.learning.puppetlabs.vm
+    puppet cert sign hello.puppet.vm
 
 <div class = "lvm-task-number"><p>Task 14:</p></div>
 
@@ -332,12 +410,12 @@ puppet runs so you can observe their effects.
 
 Go ahead and reconnect to your agent node:
 
-    ssh root@hello.learning.puppetlabs.vm
+    ssh learning@hello.puppet.vm
 
 Trigger another agent run. With your certificate signed, you'll see some
 action.
 
-    puppet agent -t
+    sudo puppet agent -t
 
 While you haven't told Puppet to manage any resources on the system, you'll see
 a lot of text scroll by. This process is called pluginsync. During pluginsync,
@@ -353,7 +431,7 @@ Info: Using configured environment 'production'
 Info: Retrieving pluginfacts
 Info: Retrieving plugin
 Info: Loading facts
-Info: Caching catalog for hello.learning.puppetlabs.vm
+Info: Caching catalog for hello.puppet.vm
 Info: Applying configuration version '1464919481'
 ```
 

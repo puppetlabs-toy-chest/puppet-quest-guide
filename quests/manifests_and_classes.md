@@ -4,21 +4,28 @@
 
 ## Quest objectives
 
-- Understand the concept of a Puppet manifest
-- Construct and apply manifests to manage resources
-- Understand what a *class* means in Puppet's Language
-- Learn how to use a class definition
-- Understand the difference between defining and declaring a class
+- 
 
 ## Getting started
 
-In the Resources quest you learned about resources and the syntax used to
-declare them. You used the `puppet resource`, `puppet describe`, and `puppet apply`
-tools to inspect, learn about, and change resources on the system. In this quest,
-we're going to cover two key Puppet concepts that will help you organize and
-implement your resource declarations: *classes* and *manifests*. Proper use
-of classes and manifests is the first step towards writing testable and reusable
-Puppet code.
+So far you've learned about the basics of Puppet's **Resource Abstraction
+Layer** and the the relationship between the Puppet agent and master. Puppet
+is all about defining a desired state for your infrastructure, but you may have
+noticed that other than modifying a few basic resources, we haven't written
+much Puppet code.
+
+As you get started learning Puppet, you may notice that the patterns and
+workflows used to organize, maintain and deploy Puppet code are often more
+challenging than writing the code itself. Though getting code to do cool things
+is more satisfying than learning best-practices, it's worth taking some time
+now to set up a solid foundation on which you'll be able to build more compelx
+projects.
+
+In this quest, you'll learn how Puppet code is organized into **manifests**,
+**classes** and **modules**. Because these concepts all rely on one-another,
+we'll cover a lot of ground in this quest to introduce them all. Don't worry if
+you feel like you're missing some details—we'll do a deeper dive into some of
+these concepts in a later quest.
 
 When you're ready to get started, enter the following command:
 
@@ -30,76 +37,93 @@ When you're ready to get started, enter the following command:
 
 > -James Cameron
 
-At its simplest, a **manifest** is nothing more than some puppet code
-saved to a file with the `.pp` extension. It's the same stuff you saw using
-the `puppet resource` tool and applied with the `puppet apply` tool. Easy
-enough, but it's where you put a manifest and what you put in it that really
-matter.
+At its simplest, a **manifest** is nothing more than some puppet code saved to
+a file with the `.pp` extension. The contents include the same resource
+declarations you saw with the `puppet resource` tool as well as some additional
+syntax to define logic and variables.
 
-Much of this organizational structure, both in terms of a manifest's content and
-its location on the puppet master's filesystem, is related to Puppet *classes*. 
+Let's go ahead and create a throw-away manifest in our `/tmp/` directory to see
+how this works. 
 
-### Classes
+    vim /tmp/hello.pp
 
-In Puppet's DSL a **class** is a named block of Puppet code. The class is the
-next level of abstraction above a resource. A class declares a set of resources
-related to a single system component. As you saw when you applied the `graphite`
-class in the Power of Puppet quest, class parameters allow you to adapt a class
-to suit your needs. We'll cover class parameters in depth in a later quest.
-For now, we'll focus on how the abstraction provided by classes allows you
-to manage complex sets of resources in terms of a single function they serve.
+Enter the following resoure declaration:
 
-Using a Puppet class requires two steps. First, you must *define* it by
-writing a class definition and saving it to a manifest file. Puppet will
-parse this manifest and remember your class definition. The class can then
-be *declared* to apply the resource declarations it contains to a node
-in your infrastructure.
+```puppet
+notify { 'Hello Puppet!':
+  message => 'Hello Puppet!',
+}
+```
 
-There are several ways to tell Puppet where and how to apply classes to
-nodes. You already saw the PE Console's node classifier in the Power of Puppet
-quest, and we'll discuss other methods of node classification in a later quest.
-For now we'll show you how to write class definitions and use *test* manifests
-to declare these classes locally.
+(Remember, use `ESC` then `:wq` to save and exit.)
 
-One more note on the topic of classes: In Puppet, classes are *singleton*, which
-means that a class can only be declared *once* on a given node. In this sense,
-Puppet's classes are different than the kind of classes you may have encountered
-in object-oriented programming, which are often instantiated multiple times.
-Declaring a class multiple times could give Puppet conflicting instructions
-for how to manage resources on a system.
+Now we can apply this manifest directly with the `puppet apply` tool. (Like the
+`puppet resource` tool, `puppet apply` can be very useful for testing and
+experimentation, but isn't typically be part of a production workflow.)
 
-## Cowsayings
+    puppet apply /tmp/hello.pp 
 
-You had a taste of how Puppet can manage users in the Resources quest. In this
-quest we'll use the *package* resource as our example. 
+As we discuss **classes** and **modules** below, you'll see that saving Puppet
+code to a file lets you keep things organized in a way Puppet can recognize.
 
-First, you'll use Puppet to manage the *cowsay* package. Cowsay lets you print a
-message in the speech bubble of an ASCII cow. It may not be mission
-critical software (unless your mission involves lots of ASCII cows!), but it
-works well as a simple example. You'll also install the *fortune* package, which
-will give you and your cow access to a database of sayings and quotations.
+### Classes and modules
 
-We've already prepared a `cowsayings` module directory in Puppet's *modulepath*,
-and included two subdirectories: `manifests` and `examples`. Before getting started
-writing manifests, change directories to save yourself some typing:
+For Puppet, a **class** is a named block of Puppet code. **Defining** a class
+combines a group of resources into single reusable and configurable unit. Once
+**defined**, a class can then be **declared** to tell Puppet to apply the
+resources it contains.
 
-    cd /etc/puppetlabs/code/environments/production/modules
+This difference between defining and declaring classes allows you to build up a
+library of Puppet code on your master (ideally synchronized with a control
+repository—more on this later), then use a classifier such as the node block in
+your `site.pp` manifest or the PE console to selectively apply that code across
+the nodes on your infrastructure.
 
-### Cowsay
+To organize all of your classes (and any other bits of data and code they
+might rely on), Puppet uses a directory structure called a module. When Puppet
+runs, it looks through any modules kept in a directory on the master called the
+**modulepath** and makes all the classes defined there available to be used.
 
-Let's start with cowsay. To use the `cowsay` command, you need to have the cowsay
-package installed. You can use a `package` resource to handle this installation,
-but you don't want to put that resource declaration just anywhere.
+All this will be much easier to understand with an example in front of you, so
+let's dive in and write a simple module.
+
+## Write a cowsay module
+
+Note that instead of logging in to an agent node, we're working directly on
+the Puppet master.
+
+First, use `cd` to navigate to Puppet's **modulepath** directory.
+
+    cd /etc/puppetlabs/code/environment/production/modules
+
+Create a simple directory structure for a module called `cowsay`. (The `-p`
+flag allows you to create the `cowsay` parent directory and `manifests`
+subdirectory at once.)
+
+    mkdir -p cowsay/manifests
+
+A module is simply a top level directory named for the module itself, and a set
+of subdirectories to keep your manifests, files, templates, test examples, and
+plugins. Published modules also include a `metadata.json` file that lists the
+module's author, dependencies, and some other information about the project.
+
+In this case, all you need is a manifest, so the module structure is very
+simple. 
+
+First, you'll use Puppet to manage the *cowsay* package. Cowsay lets you print
+a message in the speech bubble of an ASCII cow. It may not be critical software
+(unless you're founding a Cowsay as a Service [CaaS] startup!), but it works
+well as a simple example. You'll also install the *fortune* package, which will
+give you and your cow access to a database of sayings and quotations.
+
+To use the `cowsay` command, you need to have the cowsay package installed. You
+can use a `package` resource to handle this installation, but you don't want to
+put that resource declaration just anywhere.
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
-To keep things tidy, we'll create a `cowsay.pp` manifest, and within that manifest
-we'll define a class that can manage the cowsay package.
-
-First, create a simple module structure to contain your manifests. (We'll cover
-this structure in more depth in the next quest.)
-
-    mkdir -p cowsayings/{manifests,examples}
+We'll create a `cowsay.pp` manifest, and within that manifest we'll define a
+class that can manage the cowsay package.
 
 Use vim to create a `cowsay.pp` manifest:
 
@@ -108,7 +132,7 @@ Use vim to create a `cowsay.pp` manifest:
 Enter the following class definition, then save and exit (`:wq`):
 
 ```puppet
-class cowsayings::cowsay {
+class cowsay {
   package { 'cowsay':
     ensure   => present,
     provider => 'gem',
@@ -116,35 +140,26 @@ class cowsayings::cowsay {
 }
 ```
 
-Now that you're working with manifests, you can validate your code before you apply
-it. Use the `puppet parser` tool to check the syntax of your new manifest:
+Validate your code before you apply it. Use the `puppet parser` tool to check
+the syntax of your new manifest:
 
     puppet parser validate cowsayings/manifests/cowsay.pp
 	
 The parser will return nothing if there are no errors. If it does detect a
 syntax error, open the file again and fix the problem before continuing.
 
-If you try to directly apply your new manifest, nothing on the system will change.
-(Give it a shot if you like.) This is because you have *defined* a cowsay class, but
-haven't *declared* it anywhere. Puppet knows that the cowsay class contains a
-resource declaration for the cowsay package, but hasn't yet been told to do
-anything with it.
+If you try to directly apply your new manifest, nothing on the system will
+change. (If you like, use the `puppet apply` command to give it a try.) This is
+because your manifest has *defined* a cowsay class, but haven't *declared* it
+anywhere. Puppet knows that the cowsay class exists, but it hasn't been told
+to do anything with it.
 
-<div class = "lvm-task-number"><p>Task 2:</p></div>
+First, open your `site.pp` manifest.
 
-If you were going to apply this code to your production infrastructure, you would use
-the console's node classifier to classify any nodes that needed cowsay installed with
-the cowsay with your cowsay class. As you're working on a module, however, it's useful
-to apply a class directly. By convention, these test manifests are kept in an `examples`
-directory. (You may also sometimes see these manifests in the `tests` directory.)
+    vim /etc/puppetlabs/code/environment/production/manifests/site.pp
 
-To actually declare the class, create a `cowsay.pp` test in the examples directory.
+To classify your `hello.puppet.vm` node with the `cowsay` class.
 
-    vim cowsayings/examples/cowsay.pp
-
-In this manifest, *declare* the cowsay class with the `include` keyword.
-
-    include cowsayings::cowsay
 	
 Save and exit.
 
