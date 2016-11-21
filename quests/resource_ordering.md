@@ -142,9 +142,9 @@ directory so that it will be easily viewable from your browser.
 
     dot -Tpng /opt/puppetlabs/puppet/cache/state/graphs/relationships.dot -o /var/www/quest/relationships.png
 
-Take a look at `<VM'S IP>/relationships.png`. Notice that the `openssh-server`
-and `sshd` resources you defined are connected by an arrow to indicate the
-dependency relationship.
+Using your web browser, take a look at `http://<VM'S IP>/relationships.png`. Notice
+that the `openssh-server` and `sshd` resources you defined are connected by an
+arrow to indicate the dependency relationship.
 
 ![image](../assets/relationships1.png)
 
