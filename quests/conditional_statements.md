@@ -150,7 +150,7 @@ At the beginning of the `accounts` class definition, you'll include
 conditional logic to set the `$groups` variable based on the value of the
 `$::operatingsystem` fact. If the operating system is CentOS, Puppet will
 add the user to the `wheel` group, and if the operating system is Debian,
-Puppet will ad the user to the `admin` group.
+Puppet will add the user to the `admin` group.
 
 The beginning of your class definition should look like this:
 
