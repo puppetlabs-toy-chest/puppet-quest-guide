@@ -97,9 +97,9 @@ Create an `sshd/manifests/init.pp` manifest and fill in your `sshd` class with t
 `openssh-server` package resource and `sshd` service resource. Don't forget to include
 either a `require` or `before` to specify the relationship between these two resources.
 Within your class, if you include a `before` for the package, you don't need to include
-a `require` for the service, as both of these specify the same dependency relationship
-between the two resources. (If you need a hint as to how to complete the class, refer
-back to the examples above.)
+a `require` for the service, and vice versa, as both of these specify the same dependency
+relationship between the two resources. (If you need a hint as to how to complete the
+class, refer back to the examples above.)
 
 When you're done, use the `puppet parser validate` command to check your manifest.
 
