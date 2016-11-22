@@ -54,7 +54,7 @@ We have a single load balancer that distributes requests among three webservers,
 all connect to the same database server.
 
 Each of the nodes involved in this application will have some configuration for things
-not directly involved in the application. Things like sshd, and ntp will likely
+not directly involved in the application. Things like sshd and ntp will likely
 be common to many nodes in your infrastructure, and Puppet won't require specific
 information about the application the node is involved in to configure them correctly.
 In addition to these classes and resources that are independent of the application,
