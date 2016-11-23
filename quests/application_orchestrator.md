@@ -634,7 +634,7 @@ Use the `puppet job` command to deploy the application.
     puppet job run Lamp['app1']
 
 You can check on the status of any running or completed jobs with the
-`puppet job list` command.
+`puppet job show` command.
 
 Now that your nodes are configured with your new application, let's take a moment
 to check out the result. First, we can log in to the database server and have a
@@ -683,4 +683,4 @@ Defining an application generally requires several distinct manifests and ruby e
 
 Once an application is defined, you can use the `puppet app show` command to see it,
 and the `puppet job run` command to run it. You can see running and completed jobs with
-the `puppet job list` command.
+the `puppet job show` command.
