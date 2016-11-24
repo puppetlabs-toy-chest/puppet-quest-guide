@@ -28,7 +28,7 @@ require a working internet connection. Our goal is to give you a
 lightweight environment where you can learn how Puppet works in a multi-node
 environment, but we achieve this at a certain cost to stability. We apologize
 for any issues that come up as we continue to iterate on this system. Feel free
-to contact us at [learningvm@puppet.com](mailto:learningvm@puppet.com).
+to contact us at learningvm@puppetlabs.com.
 
 When you're ready to get started, type the following command:
 
