@@ -186,7 +186,7 @@ typing, the `graphite` class should autofill. If it does not, click the
 *Refresh* button near the top right of the classes interface and wait a moment
 before trying again. (If the class still does not appear, check the
 [troubleshooting
-guide](../troubleshooting.html)
+guide](https://github.com/puppetlabs/courseware-lvm/blob/master/SETUP.md#troubleshooting)
 for more information.)
 
 Once you have entered `graphite` in the *Class name* text box, click the *Add class* button.
