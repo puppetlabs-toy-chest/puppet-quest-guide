@@ -45,6 +45,6 @@ in the PE stack to fully start after the VM boots. Once you're connected to the
 VM, we suggest updating the clock with `ntpdate pool.ntp.org`.
 
 1. You can access this Quest Guide via a webserver running on the Learning VM
-itself. Open a web broswer on your host and enter the Learning VM's IP address
+itself. Open a web browser on your host and enter the Learning VM's IP address
 in the address bar. (Be sure to use `http://<ADDRESS>` for the Quest Guide, as
 `https://<ADDRESS>` will take you to the PE console.)
