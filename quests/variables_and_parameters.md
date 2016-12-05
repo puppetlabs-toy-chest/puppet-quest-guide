@@ -4,23 +4,12 @@
 
 ## Quest objectives
 
-- Learn how to assign and evaluate variables in a manifest.
-- Use the string interpolation syntax to mix variables into strings.
-- Set variable values with class parameters.
+- TBD
 
 ## Getting started
 
-If you completed the NTP and MySQL quests, you've already seen how class
-parameters let you adjust classes from a module to suit your specific needs.
-In this quest, we'll show you how to integrate variables into your classes
-and make those variables accessible to be set through parameters.
-
-To explore these concepts, you'll write a module to manage a static HTML website.
-First, you'll create a simple web class with `file` resource declarations to manage
-your website's HTML documents. By assigning repeated values like filepaths to
-variables, you will make your class more concise and easier to refactor later.
-Once this basic class structure is complete, you'll add parameters. This will
-let you set the value of your class's variables as you declare it.
+In this quest, you'll learn how to use variables and class parameters to add
+flexibility to your Puppet code.
 
 When you're ready to get started, enter the following command:
 
@@ -32,26 +21,23 @@ When you're ready to get started, enter the following command:
 
 > -Douglas Horton
 
+In Puppet, variable names are prefixed with a `$` (dollar sign), and a value is
+assigned with the `=` operator.
 
-In Puppet, variable names are prefixed with a `$`
-(dollar sign), and a value is assigned with the `=` operator.
-
-Assigning a short string to a variable, for example, would look like this:
+Assigning a short string to a variable, for example, looks like this:
 
 ```puppet
 $myvariable = 'look, a string!'
 ```
 
-Once you have defined a variable you can use it anywhere in your manifest you
-would have used the assigned value.
+Once you have defined a variable you can use it anywhere in your manifest where
+you want to use the assigned value.
 
-The basics of variables will seem familiar if you know another scripting or
-programming language. However, there are a few caveats you should be aware of
-when using variables in Puppet:
+There are a few caveats you should be aware of when using variables in Puppet:
 
-1. Unlike resource declarations, variable assignments are parse-order dependent.
-This means that you must assign a variable in your manifest *before* you can use
-it.
+1. Unlike resource declarations, variable assignments are parse-order
+dependent.  This means that you must assign a variable in your manifest
+*before* you can use it.
 
 2. If you try to use a variable that has not been defined, the Puppet parser
 won't complain. Instead, Puppet will treat the variable as having the special
@@ -59,41 +45,94 @@ won't complain. Instead, Puppet will treat the variable as having the special
 in some cases it will pass through and cause unexpected results.
 
 3. You can only assign a variable once within a single scope. Once it's
-assigned, the value cannot be changed. The value of a Puppet variable may vary
-across different systems in your infrastructure, but not within them.
+assigned, the value cannot be changed. The value of a Puppet variable may
+change across Puppet runs or vary across different systems in your
+infrastructure, but on a single run of the Puppet agent on a single system it
+can only be set once..
 
 ### Variable interpolation
 
-**Variable interpolation** lets you insert the value of a variable into a string.
-For instance, if you wanted Puppet to manage several files in the `/var/www/quest`
-directory, you could assign this directory path to a variable:
+**Variable interpolation** lets you insert the value of a variable into a
+string.
+
+For instance, if your webserver is serving files from the `/var/www/html`
+directory, you can assign this directory path to a variable:
 
 ```puppet
-$doc_root = '/var/www/quest'
+$docroot = '/var/www/html'
 ```
 
 Once the variable is set, you can avoid repeating the same directory path by
-inserting the `$doc_root` variable into the beginning of any string.
+inserting the `$docroot` variable into the beginning of any string.
 
-For example, you might use it in the title of a few *file* resource declarations:
+For example, you can use it in the title of a resource declaration:
 
 ```puppet
-file { "${doc_root}/index.html":
-  ...
-}
-file { "${doc_root}/about.html":
+file { "${docroot}/index.php":
   ...
 }
 ```
 
-Notice the different variable syntax here. The variable name is wrapped in curly
-braces, and the whole thing is preceded by the `$` (`${var_name}`).
+Notice the different variable syntax here. The variable name is wrapped in
+curly braces, and the whole thing is preceded by the `$` (`${var_name}`).
 
-Also note that a string that includes an interpolated variable must be wrapped in
-double quotation marks (`"..."`), rather than the single quotation marks that
-surround an ordinary string. These double quotation marks tell Puppet to find
-and parse special syntax within the string, rather than interpreting it
+Also note that a string that includes an interpolated variable must be wrapped
+in double quotation marks (`"..."`), rather than the single quotation marks
+that surround an ordinary string. These double quotation marks tell Puppet to
+find and parse special syntax within the string, rather than interpreting it
 literally.
+
+Now that you know how variable interpolation works, return to your `cowsay`
+module and use what you learned to make some refinements.
+
+First, navigate to your **modulepath** directory. (If you're getting tired of
+typing this out, you can use the 'tab' key to autocomplete each directory name
+as you begin typing, or use `CTRL-R` and begin typing to search your bash
+history for the previous time you entered the full command.)
+
+    cd /etc/puppetlabs/code/environments/production/modules
+
+Open the `init.pp` of your 'cowsay' module.
+
+    vim cowsay/init.pp
+
+Edit the manifest to set a `$docroot` variable and interpolate it into the
+title of your file resource.
+
+```puppet
+class cowsay {
+
+  $docroot = '/var/www/html/'
+
+  include cowsay::fortune
+  include cowsay::webserver
+
+  package { 'cowsay':
+    ensure   => present,
+    provider => 'gem',
+  }
+
+  file { "${docroot}index.php":
+    source => 'puppet:///modules/cowsay/index.php',
+  }
+}
+```
+
+Notice that we're still setting using `/var/ww/html/` as our `$docroot`
+because this is the default for the `apache` module. If we want to change where
+our file is kept, we'll also need a way to change the Apache configuration to
+point to that new location. To do this, we can use a **class parameter**.
+
+Let's revisit your `cowsay::webserver` class. The directory Apache serves is
+specified by something called a virtual host or 'vhost' for short. Configuring
+virtual hosts allows you to associate a specific URL used to access your
+server with a web directory or application on your system.  
+
+The `apache` module uses a default vhost configured to serve `/var/www/html` to
+any incoming connections.
+
+To override this default, you need to set the `default_vhost` parameter to
+`false`
 
 ## Manage web content with variables
 
