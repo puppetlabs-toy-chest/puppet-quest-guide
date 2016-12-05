@@ -143,7 +143,7 @@ Here, create a new `cowsay::webserver` class. This will wrap the main Apache
 class along with the Apache PHP module class that will configure your server to
 handle PHP content. (If you're wondering how you would have known to include
 this `apache::mod::php` class, take a look back at the
-(documentation)[https://forge.puppet.com/puppetlabs/apache#classes-apachemodmodule-name]
+[documentation](https://forge.puppet.com/puppetlabs/apache#classes-apachemodmodule-name)
 on the Forge page.)
 
 ```puppet
