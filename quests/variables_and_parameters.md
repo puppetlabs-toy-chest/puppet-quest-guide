@@ -112,7 +112,7 @@ class cowsay {
     provider => 'gem',
   }
 
-  file { "${docroot}index.php":
+  file { "${docroot}/index.php":
     source => 'puppet:///modules/cowsay/index.php',
   }
 }
@@ -129,169 +129,181 @@ virtual hosts allows you to associate a specific URL used to access your
 server with a web directory or application on your system.  
 
 The `apache` module uses a default vhost configured to serve `/var/www/html` to
-any incoming connections.
+all incoming connections on port 80. To specify our own directory, we'll need
+to override this default and use the `apache` module to define a custom
+`vhost`. We'll be walking you through this process step-by-step, but this is a
+good time to take a look at the [module documentation](https://forge.puppet.com/puppetlabs/apache#apache) on the Forge. See if you can figure out what steps you'll
+need to take and check yourself against the instructions below.
 
-To override this default, you need to set the `default_vhost` parameter to
-`false`
-
-## Manage web content with variables
-
-To better understand how variables work in context, we'll walk you through
-creating a simple `web` module that will put them to use.
-
-<div class = "lvm-task-number"><p>Task 1:</p></div>
-
-First, you'll need to create the directory structure for your module.
-
-Make sure you're in the `modules` directory for Puppet's modulepath.
-
-    cd /etc/puppetlabs/code/environments/production/modules/
-
-Now create an `web` directory and your `manifests` and `examples` directories:
-
-    mkdir -p web/{manifests,examples}
-
-<div class = "lvm-task-number"><p>Task 2:</p></div>
-
-With this structure in place, you're ready to create your main manifest 
-where you'll define the `web` class. Create the file with vim:
-
-    vim web/manifests/init.pp
-
-And then add the following contents (remember to use `:set paste` in vim):
+If you took a minute to look through the documentation, you may have noticed
+the following code block:
 
 ```puppet
-class web {
+class { 'apache':
+  default_vhost => false,
+}
 
-  $doc_root = '/var/www/quest'
-  
-  $english = 'Hello world!'
-  $french  = 'Bonjour le monde!'
+This is an example of a **parameterized** class declaration. It looks a lot
+like the resource declarations you've already worked with. In fact, this is
+often referred to as a **resource-like** method of class declaration, as
+opposed to the **include** syntax you've been using up to this point. The
+parameters you set are passed through to the class as variables, where they
+are used (often in conjunction with conditional logic, which we'll cover
+in a later quest) to customize the class.
 
-  file { "${doc_root}/hello.html":
-    ensure  => file,
-    content => "<em>${english}</em>",
+A key difference between this *parameterized* or *resource-like* class
+declaration and the *include* is that a class can be *included* multiple times
+on the same system, but only declared once in the *resource-like* form. This
+is because an include statement tells Puppet to use all the class defaults, so
+multiple declarations can't conflict. When Puppet sees an include for the
+second time, it can say "got that already, let's move on." There's no guarantee
+that two parameterized declarations will lead to the same outcome, however, so
+when Puppet sees a second parameterized declaration for the same class, it will
+give you an error that the class has already been declared.
+
+Open your `webserver.pp` manifest:
+
+    vim cowsay/manifests/webserver.pp
+
+Remove your `include apache` line and add a parameterized class declaration,
+setting the value of the `default_vhost` parameter to `false`.
+
+At this point, your manifest should look like this:
+
+```puppet
+class cowsay::webserver {
+
+  include apache::mod::php
+
+  class { 'apache':
+    default_vhost => false,
   }
-  
-  file { "${doc_root}/bonjour.html":
-    ensure  => file,
-    content => "<em>${french}</em>",
+}
+```
+
+Now that you've disabled the default vhost, you need to define your own. You
+also need a way to pass in your custom `$docroot` variable.
+
+Our first step will be to add a `$docroot` parameter to the `cowsay::webserver`
+class. We'll provide a default value of `/var/www/html/` for this parameter so
+our class will use that value if the parameter isn't set. A class's list of
+parameters and defaults is set in a pair of parentheses between the class name
+and opening curly bracket (`{`) of the class definition. The pairs take a
+`$parametername = default_value` format, and are separated by commas. (Note
+that it's best practice to include a trailing comma at the end of this list of
+parameters, even if it only includes a single item. This consistency means you
+don't have to remember to add a comma to the previous item if you extend the
+list later.)
+
+Your class definition with the `$docroot` parameter should look like the
+following:
+
+```puppet
+class cowsay::webserver(
+  $docroot = '/var/www/html/',
+){
+
+  include apache::mod::php
+
+  class { 'apache':
+    default_vhost => false,
+  }
+}
+```
+
+You can access its value of this parameter with the `$docroot` variable within
+your class. In this case, you'll use it to declare your vhost.  The `apache`
+module makes customizing a vhost easy by providing an `apache::vhost` resource
+type.
+
+Declare an `apache::vhost` with the title `'webserver.puppet.vm'`, the
+`port` parameter set to `80` and the `docroot` set to the `$docroot` variable.
+
+```puppet
+class cowsay::webserver(
+  $docroot = '/var/www/html/',
+){
+
+  include apache::mod::php
+
+  class { 'apache':
+
+    default_vhost => false,
   }
 
+  apache::vhost { 'webserver.puppet.vm':
+    port    => '80',
+    docroot => $docroot,
+  }
 }
 ```
 
-Note that if you wanted to make a change to the `$doc_root` directory, you'd
-only have to do this in one place. While there are more advanced forms of data
-separation in Puppet, the basic principle is the same: The more distinct your
-code is from the underlying data, the more reusable it is, and the less
-difficult it will be to refactor when you have to make changes later.
+When you're done, save your manifest and exit Vim. (Remember, `ESC` to exit
+insert mode and `:wq` to save and exit.)
 
-<div class = "lvm-task-number"><p>Task 3:</p></div>
+Now your `cowsay::webserver` class is good to go, but remember, it's called
+from your module's main `cowsay` class. This means that we have a final layer
+of parameterization left. Just like you're passing your `$docroot` value
+through your `cowsay::webserver` class to the `apache::vhost` resource, you'll
+need to pass it through from the the `cowsay` class to `cowsay::webserver`.
+This will let you set the value as you like when you classify your node.
 
-Once you've validated your manifest with the `puppet parser` tool, you still
-need to create a test for your manifest with an `include` statement for the web
-class you created (you covered testing in the "Modules" quest).
+Open your `init.pp` manifest.
 
-Create a `web/examples/init.pp` manifest and insert `include web`. Save and
-exit the file.
+    vim cowsay/manifests/init.pp
 
-<div class = "lvm-task-number"><p>Task 4:</p></div>
-
-Apply the newly created test using the `--noop` flag
-(`puppet apply --noop web/examples/init.pp`):
-
-    puppet apply --noop web/examples/init.pp
-
-If your dry run looks good, run `puppet apply` again without the flag.
-
-Take a look at `<VM'S IP>/hello.html` and `<VM'S IP>/bonjour.html` to see your new pages.
-
-## Class parameters
-
-> Freedom is not the absence of obligation or restraint, but the freedom of
-> movement within healthy, chosen parameters.
-
-> -Kristin Armstrong
-
-Now that you have a basic `web` class done, we'll move on to **class
-parameters**. Class parameters give you a way to set the variables within a
-class as it's **declared** rather than hard-coding them into a class definition.
-
-When defining a class, include a list of parameters and optional default values
-between the class name and the opening curly brace:
+Add the same `$docroot` parameter to this class, and replace your `include
+cowsay::webserver` line with a parameterized class declaration that sets the
+`docroot` parameter to the `$docroot` variable.
 
 ```puppet
-class classname ( $parameter = 'default' ) {
-  ...
+class cowsay(
+  $docroot = '/var/www/html/',
+){
+  include cowsay::fortune
+
+  class { 'cowsay::webserver':
+    docroot => $docroot,
+  }
+
+  package { 'cowsay':
+    ensure   => present,
+    provider => 'gem',
+  }
+
+  file { '${docroot}/index.php':
+    source => 'puppet:///modules/cowsay/index.php',
+  }
 }
 ```
 
-Once defined, a parameterized class can be **declared** with a syntax similar to
-that of resource declarations, including key value pairs for each parameter you
-want to set.
+Take a moment to validate your classes with the `puppet parser validate` tool
+and make any corrections necessary.
+
+    puppet parser validate cowasy/manifests/*.pp
+
+Now open your `site.pp` manfest.
+
+    vim /etc/puppetlabs/code/environments/production/manifests/init.pp
+
+And replace the `include cowsay` line with a parameterized declaration. Let's
+set the `docroot` parameter to `/var/www/cowsay/`.
 
 ```puppet
-class {'classname': 
-  parameter => 'value',
+node 'webserver.puppet.vm' {
+  class { 'cowsay':
+    docroot => 'var/www/cowsay/',
+  }
 }
 ```
 
-Say you want to deploy your webpage to servers around the world, and want
-changes in content depending on the language in each region. Instead of rewriting
-the whole class or module for each region, you can use class parameters
-to customize these values as the class is declared.
+Now connect to your webserver node:
 
-<div class = "lvm-task-number"><p>Task 5:</p></div>
+    ssh learning@webserver.puppet.vm
 
-To get started re-writing your `web` class with parameters, reopen the
-`web/manifests/init.pp` manifest. To create a new regionalized page, you
-need to be able to set the message and page name as class parameters.
+And trigger a puppet run:
 
-```puppet
-class web ( $page_name, $message ) {
-```
-
-Now create a third file resource declaration to use the variables set by your
-parameters:
-
-```puppet
-file { "${doc_root}/${page_name}.html":
-  ensure  => file,
-  content => "<em>${message}</em>",
-}
-```
-
-<div class = "lvm-task-number"><p>Task 6:</p></div>
-
-As before, use the test manifest to declare the class. You'll open
-`web/examples/init.pp` and replace the simple `include` statement with the
-parameterized class declaration syntax to set each of the class parameters:
-
-```puppet
-class {'web': 
-  page_name => 'hola',
-  message   => 'Hola mundo!',
-}
-```
-
-<div class = "lvm-task-number"><p>Task 7:</p></div>
-
-Now give it a try. Go ahead and do a `--noop` run, then apply the test.
-
-Your new page should now be available at `<VM'S IP>/hola.html`!
-
-Before moving on, it's important to note that there's a limitation here.
-Puppet classes are *singleton* which means that a class can only be applied
-once on a given node. In this case, you would only be able to configure each
-webserver to have a single parameter-specified language page in addition to the
-two hard coded pages. If you want to repeat the same resource or set of
-resources multiple times on the *same* node, you can use something called a
-*defined resource type*, which we will cover in a later quest.
+    sudo puppet agent -t
 
 ## Review
 
-In this quest you've learned how to take your Puppet manifests to the next level
-by using variables. You learned how to assign a value to a variable and then
-reference the variable by name whenever you need its content. You also learned
-how to interpolate variables and add parameters to a class.
