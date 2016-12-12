@@ -178,7 +178,8 @@ our master.
 
 <div class = "lvm-task-number"><p>Task 5:</p></div>
 
-We can use the Puppet resource tool to easily create a new test file.
+We can use the Puppet resource tool to easily create a new test file on your
+database node. Still connected to that system, run the following command:
 
     puppet resource file /tmp/test ensure=file
 
