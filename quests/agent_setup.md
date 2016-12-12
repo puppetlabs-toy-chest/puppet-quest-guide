@@ -124,9 +124,10 @@ following credentials to connect to the console:
 * username: **admin**
 * password: **puppetlabs**
 
-In the **Nodes** > **Classification** section, click on the **PE Master** node
-group. Under the **Classes** tab, enter `pe_repo::platform::ubuntu_1404_amd64`.
-Click the **Add class** button and commit the change.
+In the **Nodes** > **Classification** section, click on the **PE
+Infrastructure** section and select the **PE Master** node group. Under the
+**Classes** tab, enter `pe_repo::platform::ubuntu_1404_amd64`.  Click the **Add
+class** button and commit the change.
 
 Trigger a Puppet agent run on your Puppet master.
 
