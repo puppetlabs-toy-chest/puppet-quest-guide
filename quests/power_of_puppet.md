@@ -265,6 +265,6 @@ browser, you will see the graph update with new data.
 
 Great job on completing the quest! You should now have a good idea of how to
 download existing modules from the Forge and use the PE console node classifier
-to apply them to a node. You also learned how to use the the `facter` command
+to apply them to a node. You also learned how to use the `facter` command
 to retrieve system information, and the `puppet agent --test` command to manually
 trigger a Puppet run.
