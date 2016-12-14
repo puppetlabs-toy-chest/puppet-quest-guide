@@ -2,6 +2,10 @@
 
 ## Release Notes
 
+### v1.2.8
+  * Content tested for compatibility with puppet-2016.5.1-learning-5.9 VM
+  * Various minor typo fixes and content clarifications.
+
 ### v1.2.7
   * Content tested for compatibility with puppet-2016.4.2-learning-5.7 VM
 build.
