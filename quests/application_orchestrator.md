@@ -232,12 +232,9 @@ Go to the **User Roles** section and create a new role with the name
 Once this new role is created, click on its name to modify it. Select your
 "Orchestrator" user from the drop-down menu and add it to the role.
 
-Finally, go to the **Permissions** tab. Select "Orchestration" from the **Type**
-drop-down menu, and "Run Puppet from Orchestrator" from the **Permission** drop-down.
-Click **Add permission**. We also want to give this user permissions to modify
-the lifetime of the token so we don't have to regenerate it every five minutes.
-Select "Tokens" from the **Type** drop-down menu, and "Override default expiry"
-from the **Permission** drop-down menu. Add the permission, and commit your changes. 
+Finally, go to the **Permissions** tab. Select "Puppet agent" from the **Type**
+drop-down menu, and "Run Puppet on agent nodes" from the **Permission** drop-down.
+Click **Add permission** and commit the change.
 
 ### Client token
 
