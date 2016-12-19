@@ -173,7 +173,7 @@ mentioned above does just this.
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Go back to your `site.pp` manifest and include the `mysql::server::account_security`
-class in the `learning.puppetlabs.vm` node (after the class definition for ::mysql::server). 
+class in the `learning.puppetlabs.vm` node after the class definition for `::mysql::server`. 
 Remember, you don't need to pass any
 parameters to this class, so a simple `include` statement will work in place
 of a parameterized class declaration.
