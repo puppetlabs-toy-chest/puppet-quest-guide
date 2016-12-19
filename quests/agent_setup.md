@@ -199,7 +199,7 @@ Create a simple test manifest to give it a try.
 We'll define a simple message:
 
 ```puppet
-  notify { "Hi, I'm a manifest applied locally on an agent node": }
+  notify { "Hi, I'm a manifest applied locally on an agent node!": }
 ```
 
 And apply it:
