@@ -142,6 +142,7 @@ the following code block:
 class { 'apache':
   default_vhost => false,
 }
+```
 
 This is an example of a **parameterized** class declaration. It looks a lot
 like the resource declarations you've already worked with. In fact, this is
