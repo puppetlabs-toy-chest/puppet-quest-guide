@@ -4,12 +4,8 @@
 
 ## Quest objectives
 
-- Familiarize yourself with this guide and the `quest` tool.
 - Install the Puppet agent on a newly provisioned node.
-- Use `puppet resource` to inspect and modify the user accounts
-  on your new node.
-- Use `facter` to find and display system information.
-- Understand the idea of Puppet's resource abstraction layer (RAL).
+- Understand the Puppet's resource abstraction layer (RAL).
 
 ## Get started
 
@@ -134,11 +130,11 @@ Puppet code as a unit called a *resource*.
 Take a look. (Be sure you're still connected your agent node.) Run the
 following command to ask Puppet to describe a file resource:
 
-    puppet resource file /home/learning/www/hello_puppet.html
+    puppet resource file /home/learning/www/index.html
 
 What you see is the Puppet code representation of a resource. In this case,
 the resource's type is `file`, and its path is
-`/home/learning/www/hello_puppet.html":
+`/home/learning/www/index.html":
 
 ``` puppet
 file { '/home/learning/www/index.html':
@@ -193,8 +189,9 @@ Reference](https://docs.puppet.com/puppet/latest/reference/type.html).
 This can be a little confusing, so let's reiterate: technically, the *title* is
 just a unique identifier that let's Puppet keep track of the resource. For
 convenience, however, the title will automatically be used as the default for a
-key unique parameter such as the *path* in the case of a file resource or the
-*package* you want to install with a *package* resource.
+parameter called the namevar. The namevar is the *path* in the case of a file
+resource, for example, or the *package* you want to install with a *package*
+resource.
 
 Now that you're more familiar with the resource syntax, let's take another look
 at that file resource.
@@ -285,53 +282,62 @@ package { 'nginx':
 As we mentioned above, each resource **type** has a set of **providers**. A
 **provider** is the translation layer that sits between Puppet's resource
 representation and the native system tools it uses to discover and modify the
-underlying system state.
+underlying system state. Each resource type generally has a variety of
+different providers.
 
-In most cases, these providers seem invisible when everything is working
-correctly. Understanding how these providers interact with other tools on your
-system, however, can be an important part of troubleshooting when things don't
-work as expected.
+These providers can seem invisible when everything is working correctly, but
+it's important to understand how they interact with the underlying tools.
 
-As an example, let's tell Puppet to install a non-existant package named
-`bogus-nginx`.
+As it turns out, the quickest way to see the inner workings of a provider
+is to break it. Let's tell Puppet to install a non-existant package named
+`bogus-package` and take a look at the error message.
 
-    puppet resource package bogus-nginx ensure=present
+    puppet resource package bogus-package ensure=present
 
 You'll see an error message telling you that yum wasn't able to find the
 specified package, including the command that Puppet's yum provider tried to
-run.
+run when it saw that the package wasn't already installed.
 
 ```
-Error: Execution of '/bin/yum -d 0 -e 0 -y install bogus-nginx' returned 1:
+Error: Execution of '/bin/yum -d 0 -e 0 -y install bogus-package' returned 1:
 Error Nothing to do
 ```
 
-Puppet will always do its best to find the correct provider to use based on
-a node's operating system and whether the commands associated with that
-provider are available on the system. However, you can also specify which
-provider you want to use by setting a resource's `provider` parameter.
+Puppet selects a default provider based on a node's operating system and
+whether the commands associated with that provider are available. You
+can override this default by setting a resource's `provider` parameter.
 
 Let's try installing the same fake package again, this time with the pip
 provider.
 
-     puppet resource package bogus-nginx ensure=present provider=pip
+     puppet resource package bogus-package ensure=present provider=pip
 
 You'll see a similar error with a failed pip command instead of the yum
 command.
 
-Now that you know what's happening in the background, run the command again
-with the correct package name, and allowing Puppet to use the default yum
-provider.
+```
+Error: Execution of '/bin/pip install -q bogus-package' returned 1: Could not
+find a version that satisfies the requirement bogus-package (from versions: )
+No matching distribution found for bogus-package
+```
 
-    puppet resource package nginx ensure=present
+Now that you know what's happening in the background, let's try installing
+a real package with the default provider.
+
+    puppet resource package httpd ensure=present
 
 This time, Puppet will show you the specific version of the package installed.
 
 ```puppet
-package { 'nginx':
-  ensure => '1:1.10.2-1.el7.ngx',
+package { 'httpd':
+  ensure => '2.4.6-45.el7.centos',
 }
 ```
+
+## Review
+
+We covered the the installation of the Puppet agent on a new node using an
+install script hosted on the Puppet master.
 
 Now that you've learned some of the core concepts behind Puppet, you're ready
 to use these ideas in a more realistic workflow. As we noted above, the `puppet
@@ -346,22 +352,3 @@ You'll learn how to save your Puppet code to a file called a **manifest** and
 organize it into a **module** within your Puppet master's **codedir**. This
 structure lets Puppet keep track of where to find all the resources it needs
 to manage your infrastructure.
-
-## Review
-
-Nice work, you've finished the first quest on your way to Puppet mastery. At
-this point you should have a general understanding of what Puppet is and some
-of its core concepts and tools.
-
-We covered the the installation of the Puppet agent on a new node using an
-install script hosted on the Puppet master.
-
-With that new node set up, you learned about the *resource abstraction layer*,
-a key Puppet concept. You used `facter` to view system facts, and used the
-`puppet resource` tool to investigate and modify the state of a `user`
-resource.
-
-We introduced the role of certificates in the master/agent relationship, and
-the communication that takes place during a puppet agent run. Finally, you
-defined a `notify` resource in the master's `site.pp` manifest and triggered
-a puppet agent run on the agent node to enforce that configuration.
