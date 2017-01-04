@@ -9,24 +9,26 @@
 ## Getting started
 
 So far you've learned about the basics of Puppet's **Resource Abstraction
-Layer** and the the relationship between the Puppet agent and master. Puppet
-is all about defining a desired state for your infrastructure, but you may have
-noticed that other than modifying a few basic resources, we haven't written
+Layer**, the relationship between the Puppet agent and master, and the
+communication between the agent and master involved in a Puppet agent run.
+Other than modifying a few basic resources, however, you haven't yet written
 much Puppet code.
 
 As you get started learning Puppet, you'll likely notice that the patterns and
-workflows used to organize, maintain and deploy Puppet code can be more
-challenging than writing the code itself. Getting started with good design
-patterns early helps you keep everything working smoothly as you start managing
-a more complex Puppet infrastructure down the line. 
+workflows used to organize, maintain and deploy Puppet code can be just as
+involved as writing the code itself. Getting started with good design patterns
+early will help keep everything working smoothly as you start managing a more
+complex Puppet infrastructure. This means that this guide puts early
+emphasis on learning structure and organization, even if some of these
+patterns may seem unnecessary for the simple applications we use as examples.
 
-In this quest, we'll cover some of the basics of how Puppet code is managed and
+In this quest, we cover some of the basics of how Puppet code is managed and
 applied across your infrastructure. You'll learn how Puppet code is organized
 into **manifests**, **classes** and **modules**, and how to apply classes to
 nodes with the `site.pp` manifest.
 
-These basics will set you up for a more complete Puppet workflow that we'll
-cover later in this guide, including a git control repository, module
+These basics will put you on a solid footing later in this guide as we discuss
+more advanced workflow topics such as a git control repository, module
 management with a Puppetfile, deployment with code manager, and the roles and
 profiles classification pattern.
 
@@ -40,38 +42,47 @@ When you're ready to get started, enter the following command:
 
 > -James Cameron
 
-At its simplest, a Puppet **manifest** is nothing more than some Puppet code
-saved to a file with the `.pp` extension. This code is written in the Puppet
-**Domain Specific Language** (DSL). You already saw some examples of this DSL
-as you learned about the resource declarations Puppet uses to represent the
-state of a system. The Puppet DSL includes these resource declarations along
-with a set of other language features that let you control which resources
-are applied on a system and what values are set for those resourses'
-parameters.
+At its simplest, a Puppet **manifest** is Puppet code saved to a file with the
+`.pp` extension. This code is written in the Puppet **Domain Specific
+Language** (DSL). You already saw some examples of this DSL as you learned
+about the resource declarations Puppet uses to represent the state of a system.
+The Puppet DSL includes these resource declarations along with a set of other
+language features that let you control which resources are applied on a system
+and what values are set for those resourses' parameters.
 
-Let's go ahead and create a throw-away manifest in our `/tmp/` directory to see
-how this works. 
+Go ahead and ssh to the node we've created for this quest:
+
+    ssh learning@cowsay.puppet.vm
+
+Create a throw-away manifest in our `/tmp/` directory to see how this works. 
 
     vim /tmp/hello.pp
 
-Enter the following resoure declaration:
+Use the same notify resource declaration you included in your `site.pp` in the
+previous quest:
 
 ```puppet
-notify { 'Hello Puppet!':
-  message => 'Hello Puppet!',
-}
+notify { 'Hello Puppet!': }
 ```
 
 (Remember, use `ESC` then `:wq` to save and exit.)
 
-Now apply this manifest directly with the `puppet apply` tool. (Like the
-`puppet resource` tool, `puppet apply` can be very useful for testing and
-experimentation, but isn't typically be part of a production workflow.)
+Rather than classifying this node on the master and triggering a Puppet agent
+run, apply this manifest directly with the `puppet apply` tool. Like the
+`puppet resource` tool, `puppet apply` isn't part of a typical agent/master
+architecture, but it can be very useful for this kind of testing and
+experimentation.
 
     puppet apply /tmp/hello.pp 
 
-Now that you know how to save Puppet code to a file, the next step is to
-organize this code in a way the Puppet master can recognize.
+Note that even though your Puppet code should ultimately be run from the
+master, we're using an agent node for testing. You wouldn't want to get in the
+habit of testing code on your Puppet master itself.
+
+Now you know how to save Puppet code to a file, but how to you bridge the gap
+between this saved Puppet code and the `site.pp` manifest where you define
+node classification? The first step is to organize your Puppet code into
+**classes** and **modules**.
 
 ### Classes and modules
 
@@ -91,51 +102,68 @@ A **module** is a directory structure that lets Puppet keep track of where to
 find the manifests that contain your classes. (A module is also where you keep
 other data a class might rely on, such as the templates you would use to manage
 configuration files, but for now, we'll focus the classes themselves.) When you
-apply a class to a node, the Puppet master will look in its **modulepath** for
-a module directory matching the class name, then look in that module's
-`manifests` subdirectory to find the manifest containing the class definition.
-It then reads the Puppet code contained in that class definition and uses it
-to compile a catalog defining a desired state for the node.
+apply a class to a node, the Puppet master will check in a list of directories
+called a **modulepath** for a module directory matching the class name, then
+look in that module's `manifests` subdirectory to find the manifest containing
+the class definition.  It then reads the Puppet code contained in that class
+definition and uses it to compile a catalog defining a desired state for the
+node.
 
 All this will be much easier to understand with an example in front of you.
 Let's dive in and write a simple module.
 
 ## Write a cowsay module
 
-While editing Puppet code directly on a production Puppet master wouldn't be a
-good, we'll be working directly on the Master (that is, the Learning VM
-itself) to help you understand the basic concepts before moving on to cover
-the more complex workflow you would use to develop and test code before
-deploying it to production.
+By way of example, we'll walk you through the steps involved in writing a
+module to manage a small program called cowsay. Cowsay lets you print a message
+inside a speech bubble coming from the mouth of an ASCII cow.
 
-Use `cd` to navigate to Puppet's **modulepath** directory.
+While you would normally write your Puppet code on a development system before
+testing it and promoting it to your Puppet master, we'll be working directly on
+the master (that is, the Learning VM itself) to help you understand how Puppet
+organizes and accesses code. We'll cover a more complete workflow in a later
+quest.
+
+Before you create a new manifest, you need to know where to keep it. For Puppet
+to find your code, you need to place it in a module directory in Puppet's
+**modulepath**.
+
+To see what your configured modulepath is, run the following command:
+
+    puppet config print modulepath
+
+The output is a list of directories separated by the colon (`:`) character.
+
+```
+/etc/puppetlabs/code/environments/production/modules:/etc/puppetlabs/code/modules:/opt/puppetlabs/puppet/modules
+``` 
+
+For now, we'll work in the first directory listed in the modulepath. This
+directory includes modules specific to the production environment. (The second
+contains modules used across all environments, and the third is modules that PE
+uses to configure itself). Use `cd` to navigate to that directory.
 
     cd /etc/puppetlabs/code/environment/production/modules
 
-Create a simple directory structure for a new module we'll call `cowsay`. (The
-`-p` flag allows you to create the `cowsay` parent directory and `manifests`
+Create a directory structure for a new module called `cowsay`. (The `-p`
+flag allows you to create the `cowsay` parent directory and `manifests`
 subdirectory at once.)
 
     mkdir -p cowsay/manifests
 
-In this case, all you need is a `manifests` directory, so the module structure
-is very simple. 
-
-First, we'll write a class to manage the *cowsay* package. Cowsay lets you
-print a message a the speech bubble coming from the mouth of an ASCII cow.
-
-To use the `cowsay` command, you need to have the cowsay package installed. You
-can use a `package` resource to handle this installation, but you don't want to
-put that resource declaration just anywhere.
+With this directory strucure in place, it's time to create the manifest where
+we'll write the `cowsay` class.
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
-The main class with a name matching the name of the module itself is always
-kept in a manifest with the special name `init.pp`.
-
 Use vim to create an `init.pp` manifest in your module's `manifests` directory:
 
-    vim cowsayings/manifests/init.pp
+    vim cowsay/manifests/init.pp
+
+If this manifest is going to contain the `cowsay` class, you might be wondering
+why we're calling it `init.pp` instead of `cowsay.pp`. Most modules contain a
+main class like this whose name corresponds with the name of the module itself.
+This main class is always kept in a manifest with the special name `init.pp`.
 
 Enter the following class definition, then save and exit (`:wq`):
 
@@ -156,19 +184,19 @@ version of the package written in Ruby and published on RubyGems.)
 It's always good practice to validate your code before you try to apply it. Use
 the `puppet parser` tool to check the syntax of your new manifest:
 
-    puppet parser validate cowsayings/manifests/cowsay.pp
+    puppet parser validate cowsay/manifests/init.pp
 	
 The parser will return nothing if there are no errors. If it does detect a
 syntax error, open the file again and fix the problem before continuing. Be
 aware that this validataion can only catch simple syntax errors, and won't let
-you know about other possible issues in your manifests.
+you know about other possible errors in your manifests.
 
-Now that the `cowsay` class is defined in the `init.pp` manifest in your cowsay
-module, your Puppet master will know exactly what you do when you tell it to
-apply the `cowsay` class to a node.
+Now that the `cowsay` class is defined in your module's `init.pp` manifest,
+your Puppet master knows exactly where to find the appropriate Puppet code when
+you apply the `cowsay` class to a node.
 
-In the setup for this quest, the quest tool created a `cowsay.puppet.vm` node.
-Let's apply the `cowsay` class to this node. First, open your `site.pp`
+In the setup for this quest, the quest tool prepared a `cowsay.puppet.vm`
+node. Let's apply the `cowsay` class to this node. First, open your `site.pp`
 manifest.
 
     vim /etc/puppetlabs/code/environment/production/manifests/site.pp
@@ -183,17 +211,12 @@ node 'cowsay.puppet.vm' {
 
 Save and exit.
 
-The `include cowsay` line simply tells the Puppet master to include your
-`cowsay` class when it compiles a catalog for the `cowsay.puppet.vm` node. This
-is one of two ways to declare a class. The other is called a resource-like
-class declaration, and allows you to pass in parameters to customize the
-details of a class as you declare it. We'll go into more details on the
-differences between the **include** syntax and the **resource-like** class
-declaration when we discuss class parameters in a later quest.
+This `include cowsay` line tells the Puppet master to parse the contents of the
+`cowsay` class when it compiles a catalog for the `cowsay.puppet.vm` node.
 
-Now that you've classified your `cowsay.puppet.vm` node with the `cowsay`
-class, let's connect to that node and trigger a Puppet agent run to see the
-changes applied.
+Now that you've added the `cowsay` class to your classification for the
+`cowsay.puppet.vm` node, let's connect to that node and trigger a Puppet agent
+run to see the changes applied.
 
     ssh learning@cowsay.puppet.vm
 
@@ -201,8 +224,8 @@ Before applying any changes to your system, it's always a good idea to use the
 `--noop` flag to do a 'dry run' of the Puppet agent. This will compile the
 catalog and notify you of the changes that Puppet would have made without
 actually applying any of those changes to your system. It's a good way to catch
-any issues the `puppet parser validate` command can't detect, and gives you a
-chance to check that you're actually applying the changes you expect.
+issues the `puppet parser validate` command can't detect, and gives you a
+chance to validate that Puppet will be making the changes you expect.
 
     sudo puppet agent -t --noop
 

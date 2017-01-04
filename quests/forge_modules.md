@@ -63,16 +63,13 @@ For this quest, we'll select the first result, the
 To give the Puppet master access to the classes defined by this module, we'll
 need to install it into the **modulepath**. If you take a look at the Forge
 page for the module, you'll see there there are two methods of installation
-listed.
+listed, the `puppet module` tool and a Puppetfile.
 
 ![results](../assets/forge_results.png)
 
-Though managing modules with a Puppetfile is the preferred workflow, we'll save
-discussion of this method for a later quest where we can cover the reasons for
-it in more detail.  For now, look at the second instruction for installation
-with the `puppet module` tool. This tool will simply download the module from
-the Forge and place the full module directory into your Puppet master's
-modulepath.
+For now, look at the second instruction for installation with the `puppet
+module` tool. This tool will simply download the module from the Forge and
+place the full module directory into your Puppet master's modulepath.
 
 It's important to be aware of what version of a module you install. This
 ensures that the Puppet code you apply in production, for example, actually
@@ -83,10 +80,11 @@ module tool to install this version:
     puppet module install puppetlabs-apache --version 1.10.0
 
 Now that this module is installed, the `apache` class is available to be used
-in node classification. When you started this quest, the quest tool created a
-`webserver.puppet.vm` node for you. Open your `site.pp` manifest and create a
-new node declaration to classify this node with the `apache` class. We want to
-use the class defaults for now, so we'll use the simple `include` syntax.
+in node classification.
+
+When you started this quest, the quest tool created a `webserver.puppet.vm`
+node for you. Open your `site.pp` manifest and create a new node declaration to
+classify this node with the `apache` class.
 
 ```puppet
 node webserver.puppet.vm {
@@ -98,13 +96,7 @@ Now connect to `webserver.puppet.vm`.
 
     ssh root@webserver.puppet.vm
 
-Trigger a Puppet agent run on this node. The Puppet agent will contacts the
-Puppet master and presents it with some information about the system where it's
-running, including the domain name specified in your `site.pp` manifest's node
-block.  The Puppet master uses this information build a catalog that defines
-the desired state for the node. It sends this catalog back to the Puppet agent
-on the node, which makes any changes necessary to bring the node's state in
-line with that defined by the catalog.
+Trigger a Puppet agent run on this node.
 
     puppet agent -t
 
@@ -117,14 +109,29 @@ the default port 80 for localhost.
     curl localhost
 
 Because you haven't created an `index.html` file, Apache returns an empty index
-of its `docroot` directory.
+of a default `docroot` directory.
 
 ## Writing a wrapper class
 
-To help provide content, let's integrate a webserver into the `cowsay` module
-you created in the previous quest. We'll give you a simple PHP script to serve
-the output of the `cowsay` command, and show you how to manage it with a `file`
-resource.
+There's not much reason to set up a webserver unless you have some content or
+an application you want to host. In the previous quest, you created a simple
+module to manage the cowsay package. No doubt you want to share your cowsay
+experience with the world by creating your own a cowsay as a service (CaaS)
+server.
+
+To help out, we've created a simple Ruby application called Pasture that
+provides a RESTful API for cowsay.
+
+In this quest, you'll create a module that will make use of the `apache` module
+you already installed to deploy this module.
+
+Before diving in, let's take a moment to go over what we'll need to deploy the
+Pasture application:
+
+  1. A package resource to manage the Pasture gem.
+  2. An Apache server provided by the `puppetlabs-apache` module.
+  3. A file resource to manage an `index.php` file.
+  4. A file resource to create 
 
 First, disconnect from the `webserver.puppet.vm` node to return to the Puppet
 master node.
@@ -141,7 +148,7 @@ Create a new `webserver.pp` manifest in your `cowsay/manifests/` directory.
 
 Here, create a new `cowsay::webserver` class. This will wrap the main Apache
 class along with the Apache PHP module class that will configure your server to
-handle PHP content. (If you're wondering how you would have known to include
+handle PHP content. (If you're wondering how you could have known to include
 this `apache::mod::php` class, take a look back at the
 [documentation](https://forge.puppet.com/puppetlabs/apache#classes-apachemodmodule-name)
 on the Forge page.)

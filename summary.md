@@ -8,8 +8,9 @@
 * [Hello](quests/hello_puppet.md)
 * [Agent Run](quests/agent_run.md)
 * [Manifests and Classes](quests/manifests_and_classes.md)
-* [Forge Modules](quests/forge_modules.md)
-* [Variables and Parameters](quests/variables_and_parameters.md)
+* [Package File Service](quests/package_file_service.md)
+* [Parameters and Templates](quests/variables_and_parameters.md)
+* [Facter and Conditional Statements](quests/facter_and_conditional_statements.md)
 
 ### Appendix
 
