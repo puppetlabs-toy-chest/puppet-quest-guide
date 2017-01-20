@@ -52,14 +52,15 @@ Let's modify the main `pasture` class to use class parameters. Open your
 Your parameters will have the same names and values as the variable assignments
 already set in the body of the class. With values assigned to these variables
 set by your parameters, you will no longer need the variable assignments in the
-body of the class, so you can simply move those lines up and reformat them to
-be parameters for your class.
+body of the class. Move those lines up and reformat them to be parameters for
+your class.
 
 ```puppet
 class pasture (
-  $pasture_port        = '80',
-  $default_character   = 'sheep',
-  $pasture_config_file = '/etc/pasture_config.yaml',
+  $port              = '80',
+  $default_character = 'sheep',
+  $default_message   = '',
+  $config_file       = '/etc/pasture_config.yaml',
 ){
 
   package {'pasture':
@@ -69,8 +70,9 @@ class pasture (
   }
 
   $pasture_config_hash = {
-    'pasture_port'      => $pasture_port,
+    'port'              => $port,
     'default_character' => $default_character,
+    'default_message'   => $default_message,
   }
 
   file { $pasture_config_file:
@@ -87,7 +89,7 @@ class pasture (
     notify  => Service['pasture'],
   }
 
-  servive { 'pasture':
+  service { 'pasture':
     ensure    => running.
   }
 
@@ -156,7 +158,28 @@ node pasture.puppet.vm {
 }
 ```
 
+Notice that with your class parameters set up, all the necessary configuration
+for all the components of the Pasture application can be handled with a single
+resource-like class declaration. The diverse commands and file formats that
+would ordinarily be involved in managing this application are reduced to this
+single set of parameters and values.
 
+Let's connect to the `pasture.puppet.vm` node.
+
+    ssh learning@pasture.puppet.vm
+
+And trigger a Puppet agent run to apply this parameterized class.
+
+    puppet agent -t
+
+When the run is complete, return to the master.
+
+    exit
+
+And check that your configuration changes have taken effect:
+
+    curl 'pasture.puppet.vm:4567?string=Hello!'
 
 ## Review
 
+TBD

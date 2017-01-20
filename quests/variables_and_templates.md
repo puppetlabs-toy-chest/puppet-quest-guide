@@ -188,11 +188,14 @@ configuration options:
 ```
 <%- | $pasture_port      = '80',
       $default_character = 'sheep',
+      $default_message   = '',
 | -%>
 # This file is managed by Puppet. Please do not make manual changes.
 ---
-  character: <%= $default_character %>
-  port:      <%= $pasture_port %>
+  :default_character: <%= $default_character %>
+  :default_message:   <%= $default_message %>
+  :sinatra_settings:
+    :port: <%= $pasture_port %>
 ```
 
 The `<%= ... %>` tags we use to insert our variables into the file are called
