@@ -79,7 +79,7 @@ has gotten us.
 
 Open your `site.pp` manifest:
 
-  vim /etc/puppetlabs/code/environments/production/manifests/site.pp
+    vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 Create a new node definition for the `pasture.puppet.vm` node we've set up for
 this quest. Include the `pasture` class you just wrote.
@@ -120,7 +120,7 @@ in another parameter to change this:
 Feel free to experiemnt with other parameters. When you're done, foreground the
 process:
 
-    `fg`
+    fg
 
 And use `CTRL-C` to end the process, and disconnect from the agent node.
 

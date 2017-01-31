@@ -38,6 +38,7 @@ class class_name (
 ){
  ...
 }
+```
 
 Notice that this list of parameters must be comma-separated, while variables
 set within the body of the class itself are not. This is because the Puppet

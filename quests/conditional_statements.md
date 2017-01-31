@@ -271,17 +271,60 @@ node 'pasture-prod.puppet.vm' {
 }
 ```
 
-Now connect to each node and trigger a Puppet agent run.
+## The puppet job tool
 
-    ssh learning@pasture-dev.puppet.vm
+Now that you're working across multiple nodes, connecting manually with SSH to
+trigger Puppet runs may be a bit unwieldly. The `puppet job` tool lets you
+trigger Puppet runs across multiple nodes remotely. 
 
-    sudo puppet agent -t
+Before using this tool, we'll have take a few steps via the PE console to set
+up authentication through PE's role-based access control system (RBAC).
 
-And
+To log in to the console, bring up a web browser on the host system you're
+using to run the Learning VM and navigate to `https://<VM's IPADDRESS>`. (Note
+that using `https` will take you to the console, while `http` will take you to
+this quest guide.)
 
-    ssh learning@pasture-prod.puppet.vm
+You may see a warning from your browser that the PE console is using a
+self-signed certificate. You can safely ignore this warning and proceed to the
+PE console login page. (You may have to click on an **advanced** option for the
+option to proceed.)
 
-    sudo puppet agent -t
+Use the following credentials to log in:
+
+Username: **admin**
+Password: **puppetlabs**
+
+Once you're connected, click the **access control** menu option in the
+navigation bar at near the bottom left of the screen, then select **Users**
+in the *Access Control* navigation menu.
+
+Create a new user with the **Full name** `Learning` and **Login** `learning`.
+
+Click on the name of the new user, then click the **Generate password reset**
+link. Copy the given link to a new browser tab and set the password to:
+**puppet**.
+
+Under the **Access Control** navigation bar, click the **User Roles** menu
+option. Click on the link for the **Operators** role. Select the **Learning**
+user from the dropdown menu, click the **Add user** button, and finally click
+the **Commit 1 change** botton near the bottom right of the console screen.
+
+With this user configured, you can use the `puppet access` command to generate
+a token that will allow you to use the `puppet job` tool. We'll set the
+lifetime for this token to one day so you won't have to worry about
+re-authenticating as you work.
+
+    puppet access login --lifetime 1d
+
+When prompted, supply the username **learning** and password **puppet**.
+
+Now you can trigger Puppet agent runs on `pasture-dev.puppet.vm` and
+`pasture-prod.puppet.vm` with the `puppet job` tool. We provide the names of
+the two nodes in a comma-separated list after the `--nodes` flag. (Note that
+there is no space between the node names!)
+
+    puppet job run --nodes pasture-dev.puppet.vm,pasture-prod.puppet.vm
 
 TODO: Add specific instructions to confirm that the correct server is running
 on each.

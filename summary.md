@@ -12,15 +12,16 @@
 * [Variables and Templates](quests/variables_and_templates.md)
 * [Class Parameters](quests/class_parameters.md)
 * [Facts](quests/facts.md)
+* [Conditional Statements](quests/conditional_statements.md)
+* [The Forge](quests/the_forge.md)
+* [Defined Resource Types](quests/defined_resource_types.md)
 
 ### TODO V1
-* [Conditional Statements](quests/conditional_statements.md) Change character based on OS Family
-* [The Forge](quests/the_forge.md) Add Apache server to Pasture
-* [Defined Resource Types](quests/defined_resource_types.md)
-* [Application Orchestrator](quests/application_orchestrator.md)
+* [Application Orchestrator](quests/_application_orchestrator.md)
 
 ### TODO V2
 * [Code Management](quests/code_management.md)
+* [Profiles]
 * [Environments and Testing](quests/environments_and_testing.md)
 * [Hiera](quests/hiera.md)
 * [Params Class](quests/params_class.md)

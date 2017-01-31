@@ -9,35 +9,18 @@
   client.
 - Use Puppet code to define components and compose them into an application
   stack.
-- Use the `puppet job run` command to apply your application across
-  a group of nodes.
 
 ## Getting Started
 
-If you manage applications comprised of multiple services distributed across multiple
-nodes, you'll know that the orchestration of multiple nodes can pose some special
-challenges. Your applications likely need to share information among the nodes involved
-and configuration changes need to be made in the right order to keep your application's
-components from getting out of sync.
+If you manage applications comprised of multiple services distributed across
+multiple nodes, orchestrating changes across these nodes can pose some special
+challenges. Your applications likely need to share information among the nodes
+involved and configuration changes must be made in the right order to keep
+your components from getting out of sync.
 
-Puppet's Application Orchestrator extends Puppet's powerful declarative model
-from the level of the single node to that of the complex application. Describe your app
+Puppet's Application Orchestrator extends Puppet's declarative model from the
+level of the single node to the multi-node application. Describe your app
 in Puppet code, and let the Application Orchestrator handle the implementation.
-
-**Please note:** Before getting started, you should know that this quest will be a significant
-step up in complexity from the ones that have come before it, both in terms of the concepts
-involved and the varieties of tools and configurations you'll be working with. Keep
-in mind that the Puppet Application Orchestrator is a new feature, and though it is already
-a powerful tool, it will continue to be extended, refined, and integrated with the rest
-of the Puppet ecosystem. In the meantime, please be patient with any issues you encounter.
-You may find it useful to refer to the
-[documentation for the Application Orchestrator](https://docs.puppetlabs.com/pe/latest/app_orchestration_overview.html)
-to supplement the information in this quest.
-
-Also, be aware that the multi-node setup from the previous quest is a prerequisite to
-this quest. As noted in that quest, the docker technology we're using to provide multiple
-nodes on a single VM does come at a certain cost to performance and stability. If you
-encounter any issues, please contact us at learningvm@puppetlabs.com.
 
 When you're ready to get started, type the following command:
 
@@ -45,22 +28,23 @@ When you're ready to get started, type the following command:
 
 ## Application orchestrator
 
-To understand how the Application Orchestrator works, let's imagine a simple two tier
-web application with a load balancer.
+To understand how the Application Orchestrator works, let's picture a simple
+two tier web application with a load balancer.
 
 ![image](../assets/orchestrator1.png)
 
-We have a single load balancer that distributes requests among three webservers, which
-all connect to the same database server.
+We have a single load balancer that distributes requests among three
+webservers, which all connect to the same database server.
 
-Each of the nodes involved in this application will have some configuration for things
-not directly involved in the application. Things like sshd, and ntp will likely
-be common to many nodes in your infrastructure, and Puppet won't require specific
-information about the application the node is involved in to configure them correctly.
-In addition to these classes and resources that are independent of the application,
-each node in this example contains some components of the application: the webserver,
-database, and load balancer along with whatever other resources are necessary to
-support and configure their application-specific content and services.
+Each of the nodes involved in this application will have some configuration for
+things not directly involved in the application. Things like SSHD, and NTP will
+likely be common to many nodes in your infrastructure, and Puppet won't require
+specific information about the application the node is involved in to configure
+them correctly.  In addition to these classes and resources that are
+independent of the application, each node in this example contains some
+components of the application: the webserver, database, and load balancer along
+with whatever other resources are necessary to support and configure their
+application-specific content and services.
 
 ![image](../assets/orchestrator2.png)
 

@@ -136,7 +136,7 @@ What you see is the Puppet code representation of a resource. In this case,
 the resource's type is `file`, and its path is
 `/home/learning/www/index.html":
 
-``` puppet
+```puppet
 file { '/home/learning/www/index.html':
   ensure => 'absent',
 }
@@ -145,7 +145,7 @@ file { '/home/learning/www/index.html':
 Let's break down this resource syntax into its different components so we
 can see the anatomy of a resource a little more clearly.
 
-``` puppet
+```puppet
 type { 'title':
    parameter => 'value',
 }
@@ -173,10 +173,12 @@ of the file resource, this special parameter is the `path`. We could actually
 use a different title for the resource as long as we then set the path
 explicitly:
 
+```puppet
 file { 'my_html_file':
   ensure => 'absent',
   path   => 'home/learning/www/index.html',
-} 
+}
+```
 
 Because a file's path parameter must be specify a unique path on the
 filesystem, letting it do double-duty as a title will save you time and make

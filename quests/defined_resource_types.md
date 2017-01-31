@@ -10,21 +10,25 @@
 
 ## Getting Started
 
-In the quest on parameterized classes, you saw how you can use parameters to
-customize a class as it is declared. If you recall that classes, like resources,
-can only be realized a single time in a given catalog, you might be wondering
-what to do if you want Puppet to repeat the same pattern multiple times, but
-with different parameters.
+Classes allow you to group resources together and manage them as a configurable
+unit, but a classes in Puppet are **singleton**. This means that a given class
+can only be declared once in your node's catalog.
 
-In most cases, the simplest answer is the defined resource type. A defined
-resource type is a block of Puppet code that can be declared multiple times with
-different parameter values. Once defined, a defined resource type looks and acts
-just like the core resource types you're already familiar with.
+A class is generally intended to manage something like an application or
+service that exists only once on your system. In some cases, however, you'll
+want to bundle resources together into a group that can be repeated multiple
+times within the same node's catalog. It's quite common, for example, to manage
+a group of related resources such as SSH keys and configuration files along
+with each corresponding user account on a system.
 
-In this quest, you will create a defined resource type for a `web_user`. This
-will let you bundle together the resources you need to create a user along with
-their personal web homepage. This way you can handle everything with a single
-resource declaration.
+A defined resource type is a block of Puppet code similar in syntax to a class.
+It can take parameters and contain a collection of resources along with other
+Puppet code such as variables and conditionals to control how those resources
+will be defined in a node's catalog. Unlike a class, a defined resource type
+is not singleton—it can be declared multiple times on the same node.
+
+In this quest, we'll explore the defined resource type by writing a module to
+manage user accounts.
 
 When you're ready to get started, type the following command:
 
@@ -36,64 +40,149 @@ When you're ready to get started, type the following command:
 
 > -Søren Kierkegaard
 
-While you can do quite a bit with Puppet's core resource types, you're sure to
-find sooner or later that you need to do things that don't fit well into
-Puppet's existing set of core resource types. In the MySQL quest, you
-encountered a few custom resource types that allowed you to configure MySQL
-grants, users, and databases. The `puppetlabs-mysql` module includes Ruby code
-that defines the behavior of these custom resource *types* and the *providers*
-that implement them on a system. 
+A [defined resource type](https://docs.puppet.com/puppet/latest/lang_defined_types.html)
+is a block of Puppet code that can be evaluated multiple times with different
+parameters within a single node's catalog. Once it's defined, you can use
+a defined resource type in the same way you would any other resource.
 
-Writing custom providers, however, is a significant commitment. When you start
-writing your own providers, you're taking on responsibility for all the
-abstraction Puppet uses to handle the implementation of that resource on diverse
-operating systems and configurations. Though this kind of project can be a great
-contribution to the Puppet community, it's not generally appropriate for a
-one-off solution.
+The syntax to create a defined resource type is very similar to that you would
+use to define a class. Rather than using the `class` keyword, however, you use
+`define` to begin the code block.
 
-Puppet's **defined resource types** are a lightweight alternative. Though they
-don't have the same power to define wholly new functionality, you may be
-surprised at how much can be achieved by bundling together Puppet's core
-resource types and those provided by existing modules from the community.
+When creating a defined resource type, keep in mind that resources contained
+within it must be differentiated to avoid resource conflicts when the type is
+instantiated multiple times. Remember, Puppet uses a resource's **title** to
+identify resources internally, and resource's **namevar**, which can be a
+different parameter depending on the resource type, to specify a unique aspect
+of the system the resource manages. Both the title and namevar must be unique
+to avoid resource conflicts. Often, both of these requirements can be addressed
+at once by leaving the namevar unset and allowing it to default to the value
+of the title.
 
-<div class = "lvm-task-number"><p>Task 1:</p></div>
-
-To get started, let's create the module structure where we'll put our `web_user` 
-module.
-
-Make sure you're in your modules directory:
-
-    cd /etc/puppetlabs/code/environments/production/modules
-
-And create the directories for your new module. We'll call it `web_user`.
-
-    mkdir -p web_user/{manifests,examples}
-
-Before we go into the details of what we're going to do with this module,
-though, let's write a simple defined resource type so you can see what the
-syntax looks like. For now, we'll create a user and a home directory for that
-user. Normally, you could use the `managehome` parameter to tell Puppet to
-manage the user's home directory, but we want a little more control over the
-permissions of this home directory, so we'll do it ourselves.
-
-
-<div class = "lvm-task-number"><p>Task 2:</p></div>
-
-Go ahead and create a `user.pp` manifest where we'll define our defined resource
-type:
-
-    vim web_user/manifests/user.pp
-
-We'll start simple. Enter the following code in your manifest, paying careful
-attention to the syntax and variables.
+For example, the following pair of `user` resources leads to an error because
+their namevars—in this case, `name`—conflict, though their titles are
+different. The second resource's `name` parameter defaults to the value of its
+title, `root`, which is the same as the first resource's explicitly set `name`
+parameter:
 
 ```puppet
-define web_user::user {
-  $home_dir = "/home/${title}"
-  user { $title:
-    ensure => present,
+user { 'super-user':
+  ensure => present,
+  name   => 'root',
+}
+
+user { 'root':
+  ensure => present,
+}
+```
+
+Similarly, resources with a distinct value for their namevar will still
+conflict if the resource title is the same:
+
+```puppet
+user { 'admin':
+  ensure => present,
+  name   => 'wheel',
+}
+
+user { 'admin':
+  ensure => present,
+  name   => 'root',
+}
+```
+
+These conflicts are easy to spot here, but as you start using variables to set
+these values, it can take a little more care to ensure that your resources
+remain unique.
+
+To ensure resources contained within your defined resource type are unique, you
+can pass the title of defined resource type itself through to be used in the
+titles of the resources it contains. This ensures that as long as the you use
+when you declare an instance of the defined resource type is unique, all the
+resources within it will be unique as well. The defined resource type's title
+is automatically available as the `$title` variable within its code block.
+
+Let's get started on our `user_accounts` module to see an example of how this
+works.
+
+Begin by creating the directory structure for your module.
+
+    mkdir -p user_accounts/manifests
+
+We'll start with a `user_account.pp` manifest where we'll write our
+`ssh_users::user_account` defined resource type.
+
+    vim user_accounts/manifests/ssh_user.pp
+
+We want to manage the user account itself along with the user's public key for
+SSH, so we'll expose a few basic parameters for the user resource as well as a
+`pub_key` parameter for the user's public key.
+
+```puppet
+define user_accounts::ssh_user (
+  $key     = undef,
+  $group   = undef,
+  $shell   = undef,
+  $comment = undef,
+){
+  ...
+}
+```
+
+Note that we've set the defaults for these parameters to the special value
+`undef`. Passing `undef` as the value of a resource parameter is just like
+leaving it unset. When we pass these parameters on to the actual `user`
+resource within the defined resource type block, it will allow the `user` type
+to use its own defaults if the parameters aren't explicitly set.
+
+To handle the `$key` parameter, we'll use a conditional to tell our defined
+resource type to skip managing the `ssh_authorized_key` resource for the user's
+authorized key if the parameter isn't set. This works because the `undef` value
+is evaluated as `false` in a conditional statement.
+
+Now there's just one more tool you need to finish your defined resource type,
+one we skimmed over in our earlier discussion of variables. As noted above,
+to ensure that all the resources in a defined resource type are unique, you
+should incorporate the title of the defined resource type itself into the
+titles (and namevars if they're set explicitly) of the resoruces it contains.
+
+Often, however, you'll need to insert this `$title` into a string to create
+the full title for a resource. The title for our `ssh_authorized_key` resource, for
+example, will look like `"${title}@puppet.vm"`. This is called
+[string interpolation](https://docs.puppet.com/puppet/latest/lang_variables.html#interpolation).
+Puppet will only interpolate variables inside a double-quoted string (`"..."`).
+To avoid ambiguity, the name of a variable (the portion after the `$`) within a
+string should be wrapped in curly braces: `${var_name}`.
+
+Now go ahead and finish writing out the rest of your `user_accounts::ssh_user`
+defined resource type:
+
+```puppet
+define user_accounts::ssh_user (
+  $key     = undef,
+  $group   = undef,
+  $shell   = undef,
+  $comment = undef,
+){
+
+  if $key {
+    ssh_authorized_key { "${title}@puppet.vm"
+      ensure => present,
+      user   => $title,
+      type   => 'ssh-rsa',
+      key    => $key,
+    }
   }
-  file { $home_dir:
+
+  user { $title:
+    ensure  => present,
+    group   => $group,
+    shell   => $shell,
+    home    => "/home/${title}",
+    comment => $comment,
+  }
+
+  file { "/home/${title}":
     ensure  => directory,
     owner   => $title,
     group   => $title,
@@ -102,270 +191,89 @@ define web_user::user {
 } 
 ```
 
-What did you notice? First, you probably realized that this syntax is nearly
-identical to that you would use for a class. The only difference is that you use
-the `define` keyword instead of `class`.
+Normally you would ask the users who needed accounts on this system to provide
+their own public keys. In this we'll just generate a new key to use as an
+example. We'll keep the private half of the key pair in your learning user's
+`~/.ssh` directory so you can test these example accounts.
 
-Like a class, a **defined resource type** brings together a collection of
-resources into a configurable unit. The key difference is that, as we mentioned,
-a defined resource type can be realized multiple times on a single system, while
-classes are always singleton.
+    ssh-keygen -t rsa
 
-This brings us to the second feature of the code you may have noticed. We use
-the `$title` variable in several places, though we haven't explicitly assigned
-it! Also notice that this `$title` variable is used in the titles of both the
-`user` and `file` resources we're declaring. What's going on here?
+Accept the default location and supply the password **puppet**.
 
-<div class = "lvm-task-number"><p>Task 3:</p></div>
+With this key set up, we're ready to write the Puppet code to actually declare
+which users we want on a system. Rather than put the class that defines these
+users into the same `user_accounts` module, we'll follow the same pattern we
+used for our database wrapper class and create a `pasture_dev_users` profile
+class where we'll actually define the set of users we want to manage on our
+systems.
 
-To understand the importance of this title variable in a defined resource type,
-go ahead and create a test manifest:
+Before creating a `pasture_dev_users.pp` manifest, open the the public key file
+you generated and copy it so you'll be able to paste it into your manifest.
 
+    vim ~/.ssh/id_rsa.pub
 
-    vim web_user/examples/user.pp
+Copy only the actual key. Don't include the `ssh-rsa` and `learning@puppet.vm`.
+Be careful not to include any leading or trailing whitespace.
 
-Declare a `web_user::user` resource
+Now go ahead and open your `pasture_users.pp` manifest.
 
-```puppet
-web_user::user { 'shelob': }
-```
+    vim profile/manifests/pasture_dev_users.pp
 
-Here, we assign the title (in this case `shelob`), as we would for any other
-resource type. This title is passed through to our defined resource type as the
-`$title` variable. You may recall from the Resources quest that the title of a
-resource must be unique, as it's the key Puppet uses to refer to a resource
-internally.  When you create a defined resource type, you must ensure that all
-the included resources are given a title unique to their type. The best way to
-do that is to pass the `$title` variable into the title of each resource. Though 
-the title of the file resource you declared for your user's home directory is 
-set to the `$home_dir` variable, this variable is assigned a string that 
-includes the `$title` variable: `"/home/${title}"`
-
-You might also be wondering about the lack of parameters. If a resource or class
-has no parameters or has acceptable defaults for all of its parameters, it is
-possible to declare it in this brief form without the list of parameter key value
-pairs. (You will see this less often in the case of classes, as the idempotent
-`include` syntax is almost always preferred.) 
-
-<div class = "lvm-task-number"><p>Task 4:</p></div>
-
-Go ahead and run a `--noop`, then apply your test manifest:
-
-    puppet apply web_user/examples/user.pp
-
-Now take a look at the `/home` directory:
-
-    ls -la /home
-
-You should now see a home directory for `shelob` with the permissions you
-specified:
-
-    drwxr-xr-x   4 shelob    shelob    4096 Nov  4 18:20 shelob
-
-### Public HTML homepages
-
-Now that you've seen a simple example of the syntax for a defined resource type,
-let's do something a little more useful with it.
-
-We've already configured the Nginx server hosting the Quest Guide to alias any
-location beginning with a `~` to a `public_html` directory in the corresponding
-user's home directory.
-
-You don't need to understand the details of this configuration for this quest.
-That said, the Puppet code we used for this configuration is a real-world
-example of a defined resource type, so it's worth taking a quick look. The
-defined resource type we used comes from the `jfryman-nginx` module. We
-declared it with a few parameters to set up a location that will automatically
-deal with our special `~` pages. Don't worry about the scary-looking regular
-expression in the title. That's specific to how our Nginx configuration works,
-and nothing you need to understand to use defined resource types in general.
+Here, we'll create user accounts for Bert and Ernie, the two imaginary friends
+who need to access the server:
 
 ```puppet
-nginx::resource::location { '~ ^/~(.+?)(/.*)?$':
-  vhost          => '_',
-  location_alias => '/home/$1/public_html$2',
-  autoindex      => true,
-}
-```
-
-That regular expression in the title (`~ ^/~(.+?)(/.*)?$`) captures any URL path
-segment preceded by a `~` as a first capture group, then the remainder of the
-URL path as a second capture group. It then maps that first group to to a user's
-home directory, and the rest to the contents of that user's `public_html`
-directory. So `/~username/index.html` will correspond to
-`/home/username/public_html/index.html`.
-
-If you're interested, you can check the `_.conf` file to see how this defined
-resource type is translated into a location block in our Nginx configuration
-file:
-
-    cat /etc/nginx/sites-enabled/_.conf
-
-<div class = "lvm-task-number"><p>Task 5:</p></div>
-
-So let's see about giving our `web_user::user` resource a `public_html`
-directory and a default `index.html` page. We'll need to add a directory and a
-file.  Because the parameters for our `public_html` directory will be identical
-to those of the home directory, we can use an array to declare both at once.
-Note that Puppet's autorequires will take care of the ordering in this case,
-ensuring that the home directory is created before the `public_html` directory
-it contains. 
-
-We'll set the `replace` parameter for the `index.html` file to `false`.
-This means that Puppet will create that file if it doesn't exist, but won't
-replace an existing file. This will allow us to create a default page for the
-user, but will allow the user to replace that default content without having
-it over-written again on the next Puppet run.
-
-Finally, we can use string interpolation to customize the default content of the
-user's home page. (Puppet also supports `.erb` and `.epp` style templates, which
-would give us a more powerful way to customize a page. We haven't covered
-templates, though, so string interpolation will have to do!)
-
-Reopen your manifest:
-
-    vim web_user/manifests/user.pp
-
-And add code to configure your user's `public_html` directory and default
-`index.html` file:
-
-```puppet
-define web_user::user {
-  $home_dir    = "/home/${title}"
-  $public_html = "${home_dir}/public_html"
-  user { $title:
-    ensure     => present,
+class profile::pasture_dev_users {
+  user_accounts::ssh_user { 'bert':
+    comment => 'Bert',
+    key => '<PASTE KEY HERE>',
   }
-  file { [$home_dir, $public_html]:
-    ensure  => directory,
-    owner   => $title,
-    group   => $title,
-    mode    => '0775',
-  }
-  file { "${public_html}/index.html":
-    ensure  => file,
-    owner   => $title,
-    group   => $title,
-    replace => false,
-    content => "<h1>Welcome to ${title}'s home page!</h1>",
-    mode    => '0664',
+  user_accounts::ssh_user { 'ernie':
+    comment => 'Ernie',
+    key => '<PASTE KEY HERE>',
   }
 }
 ```
 
-<div class = "lvm-task-number"><p>Task 6:</p></div>
+Now that this `profile::pasture_dev_users` class is set up, you can easily drop
+it into any of your node definitions to add these user accounts and configure
+their SSH keys.
 
-Use the `puppet parser validate` tool to check your manifest, then run a `--noop`
-before applying your test manifest again:
+Let's add these users to our `pasture-dev.puppet.vm` node.
 
-    puppet apply web_user/examples/user.pp
+    vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
-Once the Puppet run completes, take a look at your user's new default
-at `<VM'S IP>/~shelob/index.html`.
-
-### Parameters
-
-As it is, your defined resource type doesn't give you any way to specify anything
-other than the resource title. Using parameters, we can pass some more information
-through to the contained resources to customize them to our liking. Let's
-add some parameters that will allow us to set a password for the user
-and use some custom content for the default web page.
-
-
-<div class = "lvm-task-number"><p>Task 7:</p></div>
-
-The syntax for adding parameters to defined resource types is just like that
-used for parameterized classes. Within a set of parentheses before the opening
-brace of the definition, include a comma separated list of the variables to be
-defined by parameters. The `=` operator can optionally be used to assign default
-values.
-
-```puppet
-  define web_user::user (
-    $content  = "<h1>Welcome to ${title}'s home page!</h1>",
-    $password = undef,
-  ) {
-```
-
-There are a couple of details you should be sure to notice here.
-
-First, though we're using the `$title` variable to set the default for content,
-we cannot use the value of one parameter to set the default for another.
-Binding of these parameters to their values happens in parallel, not
-sequentially.  Any assignment that relies on the values of other parameters must
-be handled within the body of the defined resource type. The `$title` variable
-is assigned prior to the binding of other parameters, so it is an exception.
-
-Second, we've given the `$password` parameter the special value of `undef` as a
-default. Any parameter without a default value specified will cause an error if
-you declare your defined resource type without specifying a value for that
-parameter. If we left the `$password` parameter without a default, you would
-always have to specify a password. For the underlying `user` resource type,
-however, the `password` parameter is actually optional on Linux systems. By
-using the special `undef` value as a default, we can explicitly tell Puppet
-to treat that value as undefined, and act as if we simply hadn't included it
-in our list of key value pairs for our `user` resource.
-
-Now that you have these parameters set up, go ahead and update the body
-of your defined resource type to make use of them.
-
-```puppet
-define web_user::user (
-  $content  = "<h1>Welcome to ${title}'s home page!</h1>",
-  $password = undef,
-) {
-  $home_dir    = "/home/${title}"
-  $public_html = "${home_dir}/public_html"
-  user { $title:
-    ensure   => present,
-    password => $password,
-  }
-  file { [$home_dir, $public_html]:
-    ensure => directory,
-    owner  => $title,
-    group  => $title,
-    mode    => '0775',
-  }
-  file { "${public_html}/index.html":
-    ensure  => file,
-    owner   => $title,
-    group   => $title,
-    replace => false,
-    content => $content,
-    mode    => '0664',
-  }
+node 'pasture-dev.puppet.vm' {
+  include pasture
+  include profile::pasture_dev_users
 }
-```
 
-<div class = "lvm-task-number"><p>Task 8:</p></div>
+Now use the `pupept job` tool to trigger a Puppet agent run. (If your token
+has expired, run the `puppet access login --lifetime 1d` and use the credentials
+**learning** and **puppet** to generate a new access token.)
 
-Edit your test manifest, and add a new user to try this out:
+    puppet job run --nodes pasture-dev.puppet.vm
 
-```puppet
-web_user::user { 'shelob': }
-web_user::user { 'frodo':
-  content  => 'Custom Content!',
-  password => pw_hash('sting', 'SHA-512', 'mysalt'),
-}
-```
+When the Puppet run completes, try connecting to `pasture-dev.puppet.vm` as the
+user `bert`.
 
-Note that we're using the `pw_hash` function to generate a SHA-512
-hash from the password 'sting' and salt 'mysalt'.
+    ssh bert@pasture-dev.puppet.vm
 
-<div class = "lvm-task-number"><p>Task 9:</p></div>
+We're just connecting to check that the SSH key and account works, so go ahead
+and disconnect.
 
-Once you've made your changes, do a `--noop` run, then apply your test
-manifest:
+    exit
 
-    puppet apply web_user/examples/user.pp
-
-Once the Puppet run completes, check your new user's page at `<VM'S IP>/~frodo/index.html`.
+If you've ever managed a site with a large number of user accounts, you might
+be wondering how this kind of setup would scale. The example we've given is
+enough to demonstrate the use of the defined resource type, but maintaining
+different lists of users for each node in your system in this way would quickly
+become unwieldy.
 
 ## Review
 
-In this quest, we introduced defined resource types, a lightweight
-and repeatable way to bundle a group of resource declarations into a
-repeatable and configurable group.
+In this quest, we introduced defined resource types, a way to bundle a group of
+resource declarations into a repeatable and configurable group.
 
 We covered a few key details you should keep in mind when you're working
 on a defined resource type:
@@ -374,11 +282,5 @@ on a defined resource type:
     but use the `define` keyword instead of `class`.
   * Use the `$title` variable in constituent resource titles to ensure
     uniqueness.
-  * A resource with no parameters can be declared in the short `type { 'title': }`
-    form.
-  * Binding of parameter variables to values happens in parallel, meaning that
-    you cannot use the value of one parameter to set another. The exception
-    is the `$title` variable.
-  * Parameters without a default value are required when you declare a defined
-    resource type. However, you can use the `undef` value as a default if you
-    want to allow a value to remain unspecified.
+  * You can use the `undef` value as a default if you want to allow a parameter
+    to remain unspecified when the defined type is declared.
