@@ -6,7 +6,7 @@ $stdout.sync = true
 
 def create_node(name, image='agent', sign_cert=true, run_puppet=true)
   puts "Creating #{name}..."
-  `puppet apply -e "dockeragent::node { '#{name}': ensure => present, image => '#{image}', privileged => true }"`
+  `puppet apply -e "dockeragent::node { '#{name}': ensure => present, image => '#{image}', }"`
   if sign_cert
     wait_for_container(name)
     `puppet cert sign #{name}`
