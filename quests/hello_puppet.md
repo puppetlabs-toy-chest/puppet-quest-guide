@@ -4,8 +4,9 @@
 
 ## Quest objectives
 
-- Install the Puppet agent on a newly provisioned node.
-- Understand the Puppet's resource abstraction layer (RAL).
+- Get started with the basics: what is Puppet and what does it do?
+- Install the Puppet agent on a new system.
+- Understand Puppet's resources and the resource abstraction layer (RAL).
 
 ## Get started
 
@@ -15,11 +16,10 @@
 
 In this quest, you'll begin your introduction to Puppet by installing the
 Puppet agent and learning some of the core ideas involved in managing
-infrastructure with Puppet. Once the Puppet agent is installed on a newly
-provisioned system, you will use the `puppet resource` and `facter` tools to
-explore the state of that system. Through these tools, you will learn about
-*resources* and the fundamental units of information Puppet uses to manage a
-system.
+infrastructure with Puppet. Once the Puppet agent is installed on a new system,
+you will use the `puppet resource` and `facter` tools to explore the state of
+that system. Through these tools, you will learn about *resources* and the
+fundamental units of information Puppet uses to manage a system.
 
 Ready to get started? Run the following command on your Learning VM:
 
@@ -27,13 +27,18 @@ Ready to get started? Run the following command on your Learning VM:
 
 ## What is Puppet?
 
-Before getting into the details of how Puppet works and how to correctly use
-it, let's take a moment to review what Puppet is and why it's worth learning.
+Before getting into the details of how Puppet works and to use it, let's take a
+moment to review what Puppet is and why it's worth learning.
 
-Put in the most general terms, Puppet is a configuration management tool that
-allows you to define changes and automate the maintenance of the systems in
-your infrastructure. What defines a tool, however, is how it helps you. Let's
-take a moment to review some of the ways Puppet can make your life easier.
+Put in the most general terms, Puppet is allows you to define a desired state
+for all the systems in your infrastructure. Once that state is defined, Puppet
+automates the process of getting your systems into that state and keeping them
+there.
+
+Of course, there are already a broad array of tools available to help manage
+systems. So what makes Puppet different? The details of Puppet's approach will
+be made clear as you continue with this guide, but let's take a moment now
+to review some of the key points up front.
 
 **Puppet is portable.** Its declarative language gives you a single syntax for
 describing desired state across Windows and Unix-like systems, network devices,
@@ -50,7 +55,7 @@ state you described.
 [**The Puppet Forge**](forge.puppet.com) is a repository of modules maintained
 by Puppet and the Puppet community that give you everything you need to manage
 common applicatons and services. The Forge has a wide range of modules to help
-you manage everything from NTP and SQL Server to Minecraft. 
+you manage everything from NTP and SQL Server to Minecraft.
 
 **Puppet connects you to the cutting edge.** It provides a stable platform for
 bringing new technologies into production. Puppet's integrations with Docker,
@@ -59,9 +64,16 @@ way that's simple, reliable, and consistent.
 
 ## The Puppet agent
 
-In just a moment, we'll walk you through the installation of your Puppet agent.
-First, however, let's take a moment to go over what the Puppet agent is and its
-role in your Puppet infrastructure.
+What we call "Puppet" is actually a variety of tools and services that work
+together, both on an individual master or agent node on your infrastructure, or
+communicating with other components across the network. Though the collection
+of tools that make up the Puppet ecosystem gives you a great degree of power
+and control, the complexity can be a bit daunting for a new user.
+
+So the first question we had to answer as we were putting together this guide
+was: "where do we begin?" By beginning with the Puppet agent, we hope to get you
+started in a way that gives you a bit of the architectural top-down as well
+as the Puppet-code bottom-up.
 
 The Puppet agent runs on each of the systems you want Puppet to manage. It
 communicates with the central Puppet master server and handles any changes
@@ -72,10 +84,10 @@ used to quickly test code on a development system. We take advantage of it
 here to demonstrate some of the core concepts of Puppet before moving on to a
 more complete master/agent architecture and workflow.
 
-When you install the Puppet agent you also get a suite of packages that support
-it. This includes tools like `facter` and `puppet resource`, which you can use
-from the command-line to view the state of the system in the same way Puppet
-does behnid the scenes.
+When you install the Puppet agent you also get a set of supporting tools. This
+includes software like `facter` and the `puppet resource` command, which you
+can use from the command-line to view the state of the system in the same way
+Puppet does behnid the scenes.
 
 ## Agent installation
 
@@ -91,7 +103,7 @@ to try out the agent installation.
 
 Use `ssh` to connect to `hello.puppet.vm`. Your credentials are:
 
-**username: learning**
+**username: learning**  
 **password: puppet**
 
     ssh learning@hello.puppet.vm
@@ -108,16 +120,17 @@ created. The easiest way to address this is by rebooting the VM and running
 
 Note that if your Agent node is running on a different operating system than
 the Master, you will have to take some steps to ensure that the correct
-installation script available. You can find full documentation of the agent
-installation process, including specific instructions for Windows and other
-operating systems on our [docs
+installation script available. In this case, our master and agent are both
+running CentOS 7, so we don't have to worry about this difference. You can find
+full documentation of the agent installation process, including specific
+instructions for Windows and other operating systems on our [docs
 page](https://docs.puppet.com/pe/latest/install_agents.html)
 
 ## Resources
 
 As we noted above, the Puppet agent comes with a set of supporting tools you
 can use to explore your system from a Puppet's-eye-view. Now that the agent is
-installed, we'll take a moment to explore these tools and see what they can
+installed, let's take a moment to explore these tools and see what they can
 teach you about how Puppet works.
 
 One of Puppet's core concepts is something called the *resource abstraction
@@ -127,17 +140,17 @@ Puppet code as a unit called a *resource*.
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
-Take a look. (Be sure you're still connected your agent node.) Run the
+Be sure you're still connected your agent node, and run the
 following command to ask Puppet to describe a file resource:
 
-    puppet resource file /home/learning/www/index.html
+    puppet resource file /tmp/test
 
 What you see is the Puppet code representation of a resource. In this case,
 the resource's type is `file`, and its path is
-`/home/learning/www/index.html":
+`/tmp/test":
 
 ```puppet
-file { '/home/learning/www/index.html':
+file { '/tmp/test':
   ensure => 'absent',
 }
 ```
@@ -174,9 +187,9 @@ use a different title for the resource as long as we then set the path
 explicitly:
 
 ```puppet
-file { 'my_html_file':
+file { 'my_file':
   ensure => 'absent',
-  path   => 'home/learning/www/index.html',
+  path   => '/tmp/test',
 }
 ```
 
@@ -199,7 +212,7 @@ Now that you're more familiar with the resource syntax, let's take another look
 at that file resource.
 
 ``` puppet
-file { '/home/learning/www/index.html':
+file { '/tmp/test':
   ensure => 'absent',
 }
 ```
@@ -214,12 +227,12 @@ normal file, a directory, or link.
 So Puppet is telling us that this file doesn't exist. Let's see what happens
 when you use the `touch` command to create a new empty file at that path.
 
-    touch /home/learning/www/index.html
+    touch /tmp/test
 
 Now use the `puppet resource` tool to see how this change is represented in
 Puppet's resource syntax.
 
-    puppet resource file /home/learning/www/index.html
+    puppet resource file /tmp/test
 
 Now that the file exists on the system, Puppet has more to say about it. The
 resource Puppet shows will include the first two parameter value pairs shown
@@ -227,7 +240,7 @@ below as well as some information about the file's owner and when it was
 created and last modified.
 
 ``` puppet
-file { '/home/learning/www/index.html':
+file { '/tmp/test':
   ensure  => 'file',
   content => '{md5}d41d8cd98f00b204e9800998ecf8427e',
   ...
@@ -249,7 +262,7 @@ this is a great way to test out changes in a development environment, it's not
 a good way to manage production infrastructure.  Don't worry, though, we'll get
 to that soon enough.) We can use this to set the content of your file resource.
 
-    puppet resource file /home/learning/www/index.html content='Hello Puppet!'
+    puppet resource file /tmp/test content='Hello Puppet!'
 
 Puppet will display some output as it checks the hash of the existing content
 against the new content you provided and modifies the content to match the new
@@ -259,7 +272,7 @@ value.
 
 Take another look at the file to see the modified content:
 
-    cat /home/learning/www/index.html
+    cat /tmp/test
 
 ### Types and Providers
 
@@ -270,13 +283,13 @@ type, the `package`. Since we were playing with an `index.html` file earlier,
 let's stay with that theme and have a look at the package resource for the
 Nginx server.
 
-    puppet resource package nginx 
+    puppet resource package httpd
 
 Again, because this package doesn't exist on the system, Puppet shows you the
 `ensure => absent` parameter value pair.
 
 ```puppet
-package { 'nginx':
+package { 'httpd':
   ensure => 'absent',
 }
 ```
@@ -328,7 +341,8 @@ a real package with the default provider.
 
     puppet resource package httpd ensure=present
 
-This time, Puppet will show you the specific version of the package installed.
+This time, Puppet will be able to install the package, and the value of the
+`ensure` parameter will show you the specific version of the package installed.
 
 ```puppet
 package { 'httpd':
