@@ -160,7 +160,7 @@ Now take a look at the `/home` directory:
 You should now see a home directory for `shelob` with the permissions you
 specified:
 
-    drwxr-xr-x   4 shelob    shelob    4096 Nov  4 18:20 shelob
+    drwxrwxr-x   4 shelob    shelob    4096 Nov  4 18:20 shelob
 
 ### Public HTML homepages
 
