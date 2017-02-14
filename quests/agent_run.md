@@ -310,6 +310,10 @@ The output will include something like this:
     Notice: /Stage[main]/Main/Node[learning.puppet.vm]/Notify[Hello Puppet!]/message: defined 'message' as 'Hello Puppet!'
     Notice: Applied catalog in 0.45 seconds
 
+Now go ahead and disconnect from your agent node.
+
+    exit
+
 ## Review
 
 We introduced the role of certificates in the master/agent relationship, and
