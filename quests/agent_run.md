@@ -62,13 +62,13 @@ provided by a tool called **facter**. (We'll cover facter in detail in a later
 quest.)
 
 Your Puppet master keeps a copy of the Puppet codebase you've created to define
-the desired state for systems in your infrastructure. This Puppet code is made
-up of resource declarations like the ones you saw in the previous quest as well
-as structural elements like classes to help organize related sets of resources
-and language features such as conditionals that determine which resources are
-applied and how their parameters are set depending on the values of the system
-facts the agent includes in its request. The master parses this code to create
-a **catalog**. The catalog is the final list of resource declarations that
+the desired state for systems in your infrastructure. This Puppet code is
+primarily made up of resource declarations like the ones you saw in the
+previous quest. While your Puppet code's final purpose is to define resources,
+it also includes some language features such as variables, classes, and
+conditionals that can give you control over which resources you want on a
+system and how their parameters are set. The master parses this code to create
+a **catalog**. The catalog is the final list of system resources that
 define the desired state for an Agent node.
 
 The Puppet master sends this catalog back to the Puppet agent, which then uses
@@ -78,10 +78,10 @@ differences are found, the providers will make whatever changes are necessary
 to bring the actual state of the system into line with the desired state
 defined in the catalog.
 
-Finally the Puppet agent will generate a report including information about
+Finally the Puppet agent generates a report including information about
 unchanged resources, successful changes, and any errors it may have encountered
-during the run. It will send this report back to the Puppet master, which will
-store it in PuppetDB and make it available via the PE console's web GUI.
+during the run. It sends this report back to the Puppet master, which stores
+it in PuppetDB and makes it available via the PE console's web GUI.
 
 ## Certificates
 
@@ -106,6 +106,17 @@ security and the certification system on the [docs
 page](https://docs.puppet.com/background/ssl/index.html))
 
 <div class = "lvm-task-number"><p>Task 12:</p></div>
+
+Before getting started, go ahead and connect to your agent node. When you began
+this quest, the node you used in the last quest was destroyed and a new one was
+created. This new node has the Puppet agent pre-installed, so there's no need to
+repeat the installation process. Go ahead and connect to the new agent node
+with the same credentials you used in the last quest.
+
+**username: learning**  
+**password: puppet**
+
+    ssh learning@learning.puppet.vm
 
 First, try to trigger a Puppet agent run without your agent node's certificate
 signed. The agent will attempt to contact the Puppet master, but its request
@@ -151,7 +162,7 @@ to trigger a run manually.
 
 Go ahead and connect to your agent node:
 
-    ssh learning@hello.puppet.vm
+    ssh learning@learning.puppet.vm
 
 Trigger an agent run. Now that the agent's certificate is signed, it will
 receive a catalog from the Puppet master.
@@ -246,11 +257,11 @@ go ahead and open your `site.pp` manifest.
 
 Go ahead and scroll past the comments and default node definition to the bottom
 of the file. This is where you'll create a new node definition for the
-`hello.puppet.vm` node. The outline of the node definition should look like
+`learning.puppet.vm` node. The outline of the node definition should look like
 this:
 
 ```puppet
-node hello.puppet.vm {
+node learning.puppet.vm {
 
 }
 ```
@@ -287,7 +298,7 @@ Remember, use `ESC` then `:wq` to save and exit.
 
 Now SSH to your agent node:
 
-    ssh learningt@hello.puppet.vm
+    ssh learningt@learning.puppet.vm
 
 And trigger another puppet run
 
@@ -296,7 +307,7 @@ And trigger another puppet run
 The output will include something like this:
 
     Notice: Hello Puppet!
-    Notice: /Stage[main]/Main/Node[hello.learning.puppetlabs.vm]/Notify[Hello Puppet!]/message: defined 'message' as 'Hello Puppet!'
+    Notice: /Stage[main]/Main/Node[learning.puppet.vm]/Notify[Hello Puppet!]/message: defined 'message' as 'Hello Puppet!'
     Notice: Applied catalog in 0.45 seconds
 
 ## Review
