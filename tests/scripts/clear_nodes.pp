@@ -1,3 +1,3 @@
-dockeragent::node { ['hello.learning.puppetlabs.vm']:
+dockeragent::node { ['hello.puppet.vm']:
   ensure => absent,
 }
