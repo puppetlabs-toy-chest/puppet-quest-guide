@@ -82,7 +82,7 @@ Each manifest will generally contain a single class. A **class** is a named
 block of Puppet code that declares the set of related resources needed to
 manage something on a system. (In the case of the MOTD, we only need one
 resource, but you will often find a combination of `package`, `file`, and
-`service` resources used to install an applciation, modify its configuration
+`service` resources used to install an application, modify its configuration
 files, and manage an associated service.) Once it's defined, a class becomes
 a portable and unit that can be re-used as needed across multiple nodes in your
 infrastructure.
