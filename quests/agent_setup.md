@@ -113,29 +113,6 @@ our Puppet infrastructure.
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
-In most cases, the simplest way to install an agent is to use the `curl`
-command to transfer an installation script from your Puppet master and
-execute it. Because our agents are running an Ubuntu system, we'll first
-need to make sure that our Puppet master has the correct script to provide.
-
-Navigate to `https://<VM's IP address>` in your browser address bar. Use the
-following credentials to connect to the console:
-
-* username: **admin**
-* password: **puppetlabs**
-
-In the **Nodes** > **Classification** section, click on the **PE
-Infrastructure** section and select the **PE Master** node group. Under the
-**Classes** tab, enter `pe_repo::platform::ubuntu_1404_amd64`.  Click the **Add
-class** button and commit the change.
-
-Trigger a Puppet agent run on your Puppet master.
-
-    puppet agent -t
-
-
-<div class = "lvm-task-number"><p>Task 4:</p></div>
-
 Ordinarily, you would probably use `ssh` to connect to your agent nodes and
 run this command. Because we're using docker, however, the way we connect will
 be a little different. To connect to your `webserver` node, run the following
@@ -177,7 +154,7 @@ We can also see that this node's fqdn is `database.learning.puppetlabs.vm`. This
 is how we can identify the node in the PE console or the `site.pp` manifest on
 our master.
 
-<div class = "lvm-task-number"><p>Task 5:</p></div>
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 We can use the Puppet resource tool to easily create a new test file on your
 database node. Still connected to that system, run the following command:
@@ -251,7 +228,7 @@ on the Puppet master. If you're still connected to your agent node, return to th
 
     exit
 
-<div class = "lvm-task-number"><p>Task 6:</p></div>
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 Use the `puppet cert list` command to list the unsigned certificates. (You can
 also view and sign these from the inventory page of the PE console.)
