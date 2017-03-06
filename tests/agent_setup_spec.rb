@@ -13,13 +13,6 @@ describe "Task 2:" do
 end
 
 describe "Task 3:" do
-  it "Prepare your puppet master to provide the ubuntu agent installer" do
-    file("/opt/puppetlabs/server/data/packages/public/current/ubuntu-14.04-amd64")
-      .should be_symlink
-  end
-end
-
-describe "Task 4:" do
   it "Install the Puppet agent on your database and webserver nodes" do
     command('docker exec webserver puppet')
       .stdout
@@ -30,7 +23,7 @@ describe "Task 4:" do
   end
 end
 
-describe "Task 5:" do
+describe "Task 4:" do
   it "Use the puppet resourse file to create a test file on your agent node" do
     command('docker exec database ls /tmp/test')
       .exit_status
@@ -38,7 +31,7 @@ describe "Task 5:" do
   end
 end
 
-describe "Task 6:" do
+describe "Task 5:" do
   it "Sign the certs for your new nodes" do
     file('/etc/puppetlabs/puppet/ssl/ca/signed/database.learning.puppetlabs.vm.pem')
       .should be_file
@@ -47,7 +40,7 @@ describe "Task 6:" do
   end
 end
 
-describe "Task 7:" do
+describe "Task 6:" do
   it "Create a notify resource in your default node group" do
     file("#{PROD_PATH}manifests/site.pp")
       .content
