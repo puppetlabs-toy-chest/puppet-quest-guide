@@ -238,14 +238,18 @@ The MySQL module includes custom types and providers that make `mysql_user`,
 These custom resource types make it possible to manage a new database with a
 few lines of puppet code. 
 
-Add the following resource declaration to your `site.pp` node definition.
-(Remember the `:set paste` command if you need it.)
+Add the following resource declaration to the `learning.puppetlabs.vm` node
+definition in your your `site.pp` manifest.  (Remember the `:set paste` command
+if you need it.)
 
 ```puppet
+node 'learning.puppetlabs.vm' {
   mysql_database { 'lvm':
       ensure  => present,
       charset => 'utf8',
   }
+  ...
+}
 ```
 
 Similarly, with a user, all you have to do is specify the name and host as the
@@ -253,9 +257,12 @@ resource title, and set the ensure attribute to present. Enter the following
 in your node definition as well.
 
 ```puppet
+node 'learning.puppetlabs.vm' {
   mysql_user { 'lvm_user@localhost':
     ensure => present,
   }
+  ...
+}
 ```
 
 Now that you have a user and database, you can use a grant to define the
@@ -266,6 +273,7 @@ below means that the `lvm_user` has `ALL` permissions to all tables in
 the `lvm` database. 
 
 ```puppet
+node 'learning.puppetlabs.vm' {
   mysql_grant { 'lvm_user@localhost/lvm.*':
     ensure     => present,
     options    => ['GRANT'],
@@ -273,6 +281,8 @@ the `lvm` database.
     table      => 'lvm.*',
     user       => 'lvm_user@localhost',
   }
+  ...
+}
 ```
 
 Once you've added declarations for these three custom resources, use the `puppet
