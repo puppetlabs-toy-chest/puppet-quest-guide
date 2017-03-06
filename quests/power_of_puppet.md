@@ -127,7 +127,7 @@ Ubuntu and needs to use `apt-get` or CentOS and needs `yum`. You'll learn more a
 facts and conditionals in Puppet later. For now, we can use `facter` in the command-line
 to determine the Learning VM's IP address.
 
-    facter ipaddress
+    facter networking.interfaces.enp0s3.ip
 
 Open a web browser on your host machine and go to `https://<IPADDRESS>`, where
 `<IPADDRESS>` is the Learning VM's IP address. (Be sure to include the `s` in
