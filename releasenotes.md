@@ -2,6 +2,16 @@
 
 ## Release Notes
 
+### v1.3.0
+  * Content tested for compatibility with puppet-2016.5.2-learning-5.12 VM
+  * Added puppet-forge-server to provide local Forge service.
+  * Added browser-based terminal on port 9091.
+  * Added stickler gem server to provide local rubygems service.
+  * Various content clarifications.
+  * Changed offline instructions to use host-only network adapter.
+  * Resolved some issues with module dependency conflicts.
+  * Updated troubleshooting section.
+
 ### v1.2.8
   * Content tested for compatibility with puppet-2016.5.1-learning-5.9 VM
   * Various minor typo fixes and content clarifications.

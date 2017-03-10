@@ -46,13 +46,13 @@ is especially helpful when you're dealing with a complex application like Graphi
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
 The `puppet module` tool lets you search for modules directly from the command line.
-See what you can find for Graphite. (If you're offline and run into an error, look for
-instructions below on installing a locally cached copy of the module.)
+See what you can find for Graphite.
 
     puppet module search graphite
 
-Cool, it looks like there are several matches for Graphite. For this quest, use 
-Daniel Werdermann's module: `dwerder-graphite`.
+Cool there's a match for Graphite. Normally, you'd see a longer list, but we've
+configured Puppet to only use a set of modules we've pre-cached on the Learning
+VM.
 
 It's also a good time to take a look at the [Puppet
 Forge](http://forge.puppetlabs.com) website. While the `puppet module search`
@@ -73,16 +73,15 @@ this installation easy. Note that we're going to specify the version to ensure t
 it remains compatible with the instructions in this guide. Go ahead and run:
 
     puppet module install dwerder-graphite -v 5.16.1
-    
-If you don't have internet access, run the following command to install
-cached versions of all the modules required for quests in this guide:
 
-    mv /usr/src/forge/* /etc/puppetlabs/code/environments/production/modules
-
-This installs the modules for all of the quests in this guide. You can
-skip future instructions for installing modules.
-
-Easy enough, but what did we do, exactly?
+We're actually running our own Forge service on the Learning VM to provide all
+the modules you need to complete the quests in the Quest Guide. This lets us
+ensure that the VM will work offline and that all the modules are the versions
+we've tested. If you're running the VM with internet access and you'd like to
+explore a module outside of what we're using in the Quest Guide, you can bypass
+our local Forge service by adding the
+`--module_repository=https://forge.puppet.com` flag to the `puppet module
+install` command.
 
 When you ran the `puppet module` command, Puppet retrieved the `graphite` module from
 Forge and placed it in the Puppet master's *modulepath*. The modulepath is where

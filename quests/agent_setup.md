@@ -22,13 +22,17 @@ agent, sign the certificates of your new nodes to allow them to join your Puppet
 infrastructure, and finally use the `site.pp` manifest to apply some simple
 Puppet code on these new nodes.
 
-**Please note:** In this quest we will be using docker to run multiple nodes on
-a single VM. This quest and the following Application Orchestrator quest
-require a working internet connection. Our goal is to give you a
-lightweight environment where you can learn how Puppet works in a multi-node
-environment, but we achieve this at a certain cost to stability. We apologize
-for any issues that come up as we continue to iterate on this system. Feel free
-to contact us at [learningvm@puppet.com](mailto:learningvm@puppet.com).
+**Please note:** This quest and the following Application Orchestrator quest
+require a working internet connection. If you're running the VM offline, please
+check the setup instructions to see how to configure the VM to access the
+the internet.
+
+We understand that some users will prefer to use the VM in an environment
+without an internet connection or on a network configured with proxy settings
+or firewall rules that may make it difficult to complete this quest and the
+following quest. We are working on a solution that will allow the full content
+of the Learning VM to be run offline, and we appreciate your patience in the
+mean time!
 
 When you're ready to get started, type the following command:
 
@@ -77,7 +81,14 @@ keep in mind that it isn't a recommended way to set up your Puppet infrastructur
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
-To apply the `multi_node` class to the Learning VM, add it to the
+First, we need to install a dependency for this module. Normally the Puppet
+module tool would handle this kind of dependency, but because the multi_node
+module is specific to this quest and isn't published to the Forge, we'll do it
+manually.
+
+  puppet module install puppetlabs-concat
+
+Now to apply the `multi_node` class to the Learning VM, add it to the
 `learning.puppetlabs.vm` node declaration in your master's `site.pp` manifest.
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
