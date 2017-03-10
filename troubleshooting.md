@@ -6,23 +6,6 @@ For the most up-to-date version of this troubleshooting information, [check the
 GitHub
 repository](https://github.com/puppetlabs/puppet-quest-guide/blob/master/troubleshooting.md).
 
-### The cowsay package won't install
-
-The Learning VM version 2.29 has an error in the instructions for this quest.
-The cowsay package declaration should include `provider => 'gem'`, rather than
-`ensure => 'gem'`.
-
-If you continue to get puppet run failures related to the gem, you can install
-the cached version manually: `gem install
-/var/cache/rubygems/gems/cowsay-0.2.0.gem`
-
-### Errors creating the cowsay.pp manifest in Manifests and Classes quest
-
-In version 1.2.5 of this guide, users are instructed to create manifests for the
-cowsayings module, but the module directory structure doesn't yet exist,
-leading to errors. This can be resolved by manually creating the module directory
-structure: `mkdir -p cowsayings/{manifests,examples}`.
-
 ### I completed a task, but the quest tool doesn't show it as complete
 
 The quest tool uses a series of [Serverspec](http://serverspec.org/) tests for
@@ -155,22 +138,10 @@ VM. If this is the case, we recommend that you speak to your site network
 administrator to see if there are any firewall rules, proxies, or DHCP server
 setting that might be preventing you from accessing the VM.
 
-If networking continues to cause trouble, you can connect to the Learning VM
-via port forwarding. Change your VM's network adapter to NAT, and configure
-port forwarding as follows:
-
-```
-Name   -   Protocol - HostIP -   HostPort - GuestIP - GuestPort
-SSH        TCP        127.0.0.1  2222                 22
-HTTP       TCP        127.0.0.1  8080                 80
-HTTPS      TCP        127.0.0.1  8443                 443
-GRAPHITE   TCP        127.0.0.1  8090                 90
-```
-
-Once you have set up port forwarding, you can use those ports to access the VM
-via ssh (`ssh -p 2222 root@localhost`) and access the Quest Guide and PE
-console by entering `http://localhost:8080` and `https://localhost:8443` in
-your browser address bar.
+If you are unable to resolve your network issues, we suggest following the
+instructions in the setup guide to run the Learning VM offline. You will be
+able to complete all content offline with the exception of the final two
+quests which require internet access.
 
 ### I can't scroll up in my terminal
 
@@ -184,6 +155,19 @@ exit scrolling.
 You may try reducing the VM's processors to 1 and disabling the "I/O APIC"
 option in the system section of the settings menu. Be aware, however, that
 this might result in *very* slow start times for services in the PE stack.
+
+### PE services will not start or take too long to start
+
+Please ensure that your host machine matches the following minimum
+requirements:
+
+1. 4GB free memory (8GB is recommended)
+1. 2 Core 2.5 Ghz (or better) CPU with 64-bit architecture Up-to-date VirtualBox
+or VMware desktop virtualization software
+
+Check that your host system actually has the available resources to allocate to
+the VM. If another running process demanding CPU or memory resources, the VM
+may not have enough available resources to run the PE stack.
 
 ### Still need help?
 
