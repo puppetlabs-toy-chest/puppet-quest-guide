@@ -20,7 +20,7 @@ describe 'Task 3:' do
   it "Use facter to find the Learning VM's IP address" do
     file('/root/.bash_history')
       .content
-      .should match /facter\s+networking\.interfaces\.enp0s3\.ip/
+      .should match /facter\s+ipaddress/
   end
 end
 
