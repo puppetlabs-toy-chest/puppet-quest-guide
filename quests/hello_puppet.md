@@ -14,12 +14,12 @@
 
 > - Arthur C. Clarke
 
-In this quest, you'll begin your introduction to Puppet by installing the
-Puppet agent and learning some of the core ideas involved in managing
-infrastructure with Puppet. Once the Puppet agent is installed on a new system,
-you will use the `puppet resource` and `facter` tools to explore the state of
-that system. Through these tools, you will learn about *resources* and the
-fundamental units of information Puppet uses to manage a system.
+This quest will begin your hands-on introduction to Puppet. We'll start by
+installing the Puppet agent and learning some of the core ideas involved in
+managing infrastructure with Puppet. Once the Puppet agent is installed on a
+new system, you will use the `puppet resource` and `facter` tools to explore
+the state of that system. Through these tools, you will learn about *resources*
+and the fundamental units of information Puppet uses to manage a system.
 
 Ready to get started? Run the following command on your Learning VM:
 
@@ -27,74 +27,87 @@ Ready to get started? Run the following command on your Learning VM:
 
 ## What is Puppet?
 
-Before getting into the details of how Puppet works and to use it, let's take a
-moment to review what Puppet is and why it's worth learning.
+Before getting into the details of how Puppet works and how to use it, let's
+take a moment to review what Puppet is and why it's worth learning. When we
+talk about Puppet, we're often using a short-hand to refer to an ecosystem of
+tools and services you can use in concert to manage your infrastructure. The
+rest of this guide will take a deeper dive into many of these components, but
+for now, let's take a moment to review some of the key points that distinguish
+Puppet's approach from the other tools you might use to manage your systems.
 
 Put in the most general terms, Puppet is allows you to define a desired state
 for all the systems in your infrastructure. Once that state is defined, Puppet
 automates the process of getting your systems into that state and keeping them
 there.
 
-Of course, there are already a broad array of tools available to help manage
-systems. So what makes Puppet different? The details of Puppet's approach will
-be made clear as you continue with this guide, but let's take a moment now
-to review some of the key points up front.
-
 **Puppet is portable.** Its declarative language gives you a single syntax for
 describing desired state across Windows and Unix-like systems, network devices,
 and containers. This means you don't have to switch language and toolset every
-time you start work on a new system.
+time you start work on a new system. This also means that learning Puppet gives
+you a skillset that can be carried over across projects and roles.
 
-**Puppet is centralized.** With Puppet's master-agent architecture, there's no
+**Puppet is centralized.** With Puppet's master/agent architecture, there's no
 need to connect to systems individually to make changes. Once the Puppet agent
 service is running on a system, it will periodically establish a secure
-connection to the Puppet master, fetch any Puppet code you've applied to it
-and make any changes necessary to bring the system in line with the desired
-state you described.
+connection to the Puppet master, fetch any Puppet code you've applied to it and
+make any changes necessary to bring the system in line with the desired state
+you described. The fact that centralized control is built in from Puppet's
+foundations makes monitoring and compliance that much easier.
 
 [**The Puppet Forge**](forge.puppet.com) is a repository of modules maintained
 by Puppet and the Puppet community that give you everything you need to manage
 common applicatons and services. The Forge has a wide range of modules to help
-you manage everything from NTP and SQL Server to Minecraft.
+you manage everything from NTP and SQL Server to Minecraft. The base of well tested
+and reviewed code means that you can get started puppetizing key aspects of your
+infrastructure right out of the gate.
 
-**Puppet connects you to the cutting edge.** It provides a stable platform for
-bringing new technologies into production. Puppet's integrations with Docker,
+**Puppet connects you to the cutting edge.** Puppet provides a stable platform
+for bringing new technologies into production. Integrations with Docker,
 Kubernetes, Mesos and others let you engage with next generation software in a
 way that's simple, reliable, and consistent.
 
 ## The Puppet agent
 
-What we call "Puppet" is actually a variety of tools and services that work
-together, both on an individual master or agent node on your infrastructure, or
-communicating with other components across the network. Though the collection
-of tools that make up the Puppet ecosystem gives you a great degree of power
-and control, the complexity can be a bit daunting for a new user.
+As we noted above, what we call "Puppet" is actually a variety of tools and
+services that work together to help you manage and coordinate the systems in
+your infrastructure. Though this ecosystem gives you a great degree of power
+and control, the complexity can leave a new user wondering where to start. So
+this was the first question we had to answer as we were putting together this
+guide: "where do we begin?"
 
-So the first question we had to answer as we were putting together this guide
-was: "where do we begin?" By beginning with the Puppet agent, we hope to get you
-started in a way that gives you a bit of the architectural top-down as well
-as the Puppet-code bottom-up.
+By introducing the Puppet agent and some of the command line tools included in
+the agent installation, we hope to strike the right balance between the big
+picture view of Puppet and the the bottom-up fundamentals. You'll be able to
+understand the agent's role in the broader Puppet architecture, as well as the
+details of how interacts with the system where it's installed.
 
 The Puppet agent runs on each of the systems you want Puppet to manage. It
-communicates with the central Puppet master server and handles any changes
-needed to keep its system in line with the desired state. While the Puppet
-agent is generally used as part of a Master/Agent architecture, it can also be
-used to apply Puppet code locally. This independent use of the agent is often
-used to quickly test code on a development system. We take advantage of it
-here to demonstrate some of the core concepts of Puppet before moving on to a
-more complete master/agent architecture and workflow.
+communicates with the central Puppet master server and makes any changes needed
+to keep its system in line with the desired state. While the Puppet agent is
+generally used as part of a master/agent architecture, it can also be used to
+apply Puppet code locally. This independent use of the agent is often used to
+quickly test code on a development system. We'll use it here to demonstrate
+some of the core concepts of Puppet before moving on to a more complete
+master/agent architecture and workflow in the next quest.
 
 When you install the Puppet agent you also get a set of supporting tools. This
-includes software like `facter` and the `puppet resource` command, which you
-can use from the command-line to view the state of the system in the same way
-Puppet does behnid the scenes.
+includes software like `facter` and the `puppet resource` command. We'll use
+these tools from the command-line to view the state of the system in the same
+way Puppet does. Understanding how the Puppet agent sees and modifies the state
+of the system where it's running will be the foundation for everything else you
+learn about Puppet.
 
 ## Agent installation
 
-The Puppet master hosts an install script you can easily run from any system
-that can connect to it. There's already a Puppet master running on the Learning
-VM, so this install script is ready to be loaded and run by your (soon-to-be)
-agent node.
+Though we're focusing on the Puppet agent in this quest, we'll be using it in
+the context of the master/agent architecture we've set up on the Learning VM.
+The Learning VM itself has the Puppet master pre-installed. For each quest, the
+quest tool we created to guide you through these lessons will provide one or
+more agent systems that will connect to the master.
+
+For this quest, we've prepared a fresh system where you can install the Puppet
+agent and explore some of the tools it provides. The Puppet master hosts an
+install script you can easily run from any system that can connect to it.
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
