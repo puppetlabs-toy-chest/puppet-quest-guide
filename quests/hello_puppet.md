@@ -154,14 +154,14 @@ load the agent installer from the master and run it.
 If the script hangs due to an inability to access the required repositories,
 it may be due to changing networks or network settings since the agent was
 created. The easiest way to address this is by rebooting the VM and running
-`quest begin hello_puppet` to restart this quest and re-create the Agent
+`quest begin hello_puppet` to restart this quest and re-create the agent
 system.
 
     sudo curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | bash
 
 You will see some text stream across the screen as the installation runs.
 
-Note that if your Agent is running on a different operating system than
+Note that if your agent is running on a different operating system than
 the Master, you will have to take some steps to ensure that the correct
 installation script available. In this case, our master and agent are both
 running CentOS 7, so we don't have to worry about this difference. You can find
@@ -184,7 +184,7 @@ resources directly.
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
-Be sure you're still connected your Agent system, and run the following command
+Be sure you're still connected your agent system, and run the following command
 to ask Puppet to describe a file resource:
 
     puppet resource file /tmp/test
