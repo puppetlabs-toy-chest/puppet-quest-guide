@@ -4,33 +4,29 @@
 
 ## Quest objectives
 
-- TBD 
+- Understand how Puppet code is organized in **classes**, contained within **manifest** files.
+- Learn how the module structure keeps your Puppet code organized in a way the Puppet master understands
+- Use your knowledge to create a new Puppet module to manage the `cowsay` and `fortune` packages. 
 
 ## Getting started
 
-So far you've learned about the basics of Puppet's **Resource Abstraction
-Layer**, the relationship between the Puppet agent and master, and the
+So far you've learned about the basics of Puppet's **resource abstraction
+layer**, the relationship between the Puppet agent and master, and the
 communication between the agent and master involved in a Puppet agent run.
 Other than modifying a few basic resources, however, you haven't yet written
 much Puppet code.
 
-As you get started learning Puppet, you'll likely notice that the patterns and
-workflows used to organize, maintain and deploy Puppet code can be just as
-involved as writing the code itself. Getting started with good design patterns
-early will help keep everything working smoothly as you start managing a more
-complex Puppet infrastructure. This means that this guide puts early
-emphasis on learning structure and organization, even if some of these
-patterns may seem unnecessary for the simple applications we use as examples.
+The patterns and workflows used to organize, maintain and deploy Puppet code
+are just as important as the code itself. Though some of the examples we give
+here may seem overly complex given the simplicity of what we're managing,
+started with good design will keep everything working smoothly as you start
+managing a more complex Puppet infrastructure.
 
-In this quest, we cover some of the basics of how Puppet code is managed and
-applied across your infrastructure. You'll learn how Puppet code is organized
-into **manifests**, **classes** and **modules**, and how to apply classes to
-nodes with the `site.pp` manifest.
-
-These basics will put you on a solid footing later in this guide as we discuss
-more advanced workflow topics such as a git control repository, module
-management with a Puppetfile, deployment with code manager, and the roles and
-profiles classification pattern.
+In this quest, you'll learn how Puppet code is organized into **manifests**,
+**classes** and **modules**, and how to apply classes to nodes with the
+`site.pp` manifest. These basics will put you on a solid footing later on when
+you begin to work with more complex code management methods for your Puppet
+code.
 
 When you're ready to get started, enter the following command:
 
@@ -43,12 +39,13 @@ When you're ready to get started, enter the following command:
 > -James Cameron
 
 At its simplest, a Puppet **manifest** is Puppet code saved to a file with the
-`.pp` extension. This code is written in the Puppet **Domain Specific
-Language** (DSL). You already saw some examples of this DSL as you learned
-about the resource declarations Puppet uses to represent the state of a system.
-The Puppet DSL includes these resource declarations along with a set of other
-language features that let you control which resources are applied on a system
-and what values are set for those resourses' parameters.
+`.pp` extension. This code is written in the Puppet **domain specific
+language** (DSL). You already saw some examples of this DSL as you learned
+about resource.  The Puppet DSL includes resource declarations along with a set
+of other language features that let you control which resources are applied on
+a system and what values are set for those resourses' parameters.
+
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
 Go ahead and ssh to the node we've created for this quest:
 
@@ -68,16 +65,11 @@ notify { 'Hello Puppet!': }
 (Remember, use `ESC` then `:wq` to save and exit.)
 
 Rather than classifying this node on the master and triggering a Puppet agent
-run, apply this manifest directly with the `puppet apply` tool. Like the
-`puppet resource` tool, `puppet apply` isn't part of a typical agent/master
-architecture, but it can be very useful for this kind of testing and
-experimentation.
+run, apply this manifest directly with the `puppet apply` tool. You can use the
+`puppet apply` tool to test Puppet code in a manifest just like you can use the 
+`puppet resource` tool to explore and modify resources directly.
 
     puppet apply /tmp/hello.pp 
-
-Note that even though your Puppet code should ultimately be run from the
-master, we're using an agent node for testing. You wouldn't want to get in the
-habit of testing code on your Puppet master itself.
 
 Now you know how to save Puppet code to a file, but how to you bridge the gap
 between this saved Puppet code and the `site.pp` manifest where you define
@@ -86,25 +78,24 @@ node classification? The first step is to organize your Puppet code into
 
 ### Classes and modules
 
-For Puppet, a **class** is named block of Puppet code. **Defining** a class
+A **class** is named block of Puppet code. **Defining** a class
 combines a group of resources into single reusable and configurable unit. Once
 **defined**, a class can then be **declared** to tell Puppet to apply the
 resources it contains.
 
-A useful class brings together a set of resources that manage one logical
+A class should bring together a set of resources that manage one logical
 component of a system. For example, a class written to manage a MS SQL Server
 might include resources to manage the package, configuration files, and service
 for the MS SQL Server instance. Because each of these components relies on the
-others, it makes sense to combine them—you're not likely to want a server, for
-example, with *only* the configuration files, but no package installed.
+others, it makes sense to combine them—you're not likely to want a server with
+the configuration files set up but without the application package itself.
 
 A **module** is a directory structure that lets Puppet keep track of where to
-find the manifests that contain your classes. (A module is also where you keep
-other data a class might rely on, such as the templates you would use to manage
-configuration files, but for now, we'll focus the classes themselves.) When you
-apply a class to a node, the Puppet master will check in a list of directories
+find the manifests that contain your classes. A module also contains other data
+a class might rely on, such as the templates for configuration files. When you
+apply a class to a node, the Puppet master checks in a list of directories
 called a **modulepath** for a module directory matching the class name, then
-look in that module's `manifests` subdirectory to find the manifest containing
+looks in that module's `manifests` subdirectory to find the manifest containing
 the class definition.  It then reads the Puppet code contained in that class
 definition and uses it to compile a catalog defining a desired state for the
 node.
@@ -114,15 +105,9 @@ Let's dive in and write a simple module.
 
 ## Write a cowsay module
 
-By way of example, we'll walk you through the steps involved in writing a
-module to manage a small program called cowsay. Cowsay lets you print a message
-inside a speech bubble coming from the mouth of an ASCII cow.
-
-While you would normally write your Puppet code on a development system before
-testing it and promoting it to your Puppet master, we'll be working directly on
-the master (that is, the Learning VM itself) to help you understand how Puppet
-organizes and accesses code. We'll cover a more complete workflow in a later
-quest.
+By way of example, we'll write a module to manage a small program called
+cowsay. Cowsay lets you print a message inside a speech bubble coming from the
+mouth of an ASCII cow.
 
 Before you create a new manifest, you need to know where to keep it. For Puppet
 to find your code, you need to place it in a module directory in Puppet's
@@ -141,7 +126,18 @@ The output is a list of directories separated by the colon (`:`) character.
 For now, we'll work in the first directory listed in the modulepath. This
 directory includes modules specific to the production environment. (The second
 contains modules used across all environments, and the third is modules that PE
-uses to configure itself). Use `cd` to navigate to that directory.
+uses to configure itself).
+
+Because we're focusing on the structure of your module and class, we'll be
+writing our code directly to the modulepath on the master. In a real production
+environment, however, you would likely want to keep your Puppet code in a
+version control repostiory such as Git and use Puppet's code manager tool to
+deploy it to your master. Because we don't have any critical infrastructure
+relying on the VM, we can safely skip this step and dive right into the code.
+
+<div class = "lvm-task-number"><p>Task 2:</p></div>
+
+Use `cd` to navigate to the `modules` directory.
 
     cd /etc/puppetlabs/code/environment/production/modules
 
@@ -154,7 +150,7 @@ subdirectory at once.)
 With this directory strucure in place, it's time to create the manifest where
 we'll write the `cowsay` class.
 
-<div class = "lvm-task-number"><p>Task 1:</p></div>
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 Use vim to create an `init.pp` manifest in your module's `manifests` directory:
 
@@ -195,6 +191,8 @@ Now that the `cowsay` class is defined in your module's `init.pp` manifest,
 your Puppet master knows exactly where to find the appropriate Puppet code when
 you apply the `cowsay` class to a node.
 
+<div class = "lvm-task-number"><p>Task 4:</p></div>
+
 In the setup for this quest, the quest tool prepared a `cowsay.puppet.vm`
 node. Let's apply the `cowsay` class to this node. First, open your `site.pp`
 manifest.
@@ -213,6 +211,8 @@ Save and exit.
 
 This `include cowsay` line tells the Puppet master to parse the contents of the
 `cowsay` class when it compiles a catalog for the `cowsay.puppet.vm` node.
+
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 Now that you've added the `cowsay` class to your classification for the
 `cowsay.puppet.vm` node, let's connect to that node and trigger a Puppet agent
@@ -240,8 +240,6 @@ You should see an output like the following:
     Notice: Stage[main]: Would have triggered 'refresh' from 1 events
     Notice: Finished catalog run in 1.08 seconds
 
-<div class = "lvm-task-number"><p>Task 3:</p></div>
-
 If your dry run looks good, go ahead and run the Puppet agent again without the
 `--noop` flag.
 
@@ -262,16 +260,16 @@ Your bovine friend clearly knows what's up.
                     ||----w |
                     ||     ||
 
-### Nested classes and class scope
+### Composed classes and class scope
 
-A module will often include multiple components that work together to serve a
+A module often includes multiple components that work together to serve a
 single function. Cowsay alone is great, but many users don't have the time to
 write out a custom high-quality message on each execution of the command. For
 this reason, cowsay is often used in conjunction with the `fortune` command,
 which provides you and your cow with a database of sayings and wisdom to draw
 on.
 
-<div class = "lvm-task-number"><p>Task 4:</p></div>
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Disconnect from the `cowsay.puppet.vm` node to return to your master:
 
@@ -294,13 +292,14 @@ class cowsay::fortune {
 Note that unlike the main `init.pp` manifest, the filename of the manifest
 shows us the name of the class it defines. In fact, because this class is
 contained in the `cowsay` module, its full name is `cowsay::fortune`.  The two
-colons that connect `cowsay` and `fortune` are pronounced "scope scope". Notice
-how the fully scoped name of the class tells Puppet exactly where to find it in
-your module path: the `fortune.pp` manifest in the `cowsay` module. This naming
-pattern also helps avoid conflicts among similarly named classes provided by
-different modules.
+colons that connect `cowsay` and `fortune` are pronounced "scope scope" and
+indicate that this `fortune` class is contained in the cowsay module scope.
+Notice how the fully scoped name of the class tells Puppet exactly where to
+find it in your module path: the `fortune.pp` manifest in the `cowsay` module's
+`manifests` directory. This naming pattern also helps avoid conflicts among
+similarly named classes provided by different modules.
 
-<div class = "lvm-task-number"><p>Task 5:</p></div>
+<div class = "lvm-task-number"><p>Task 7:</p></div>
 
 Again, validate your new manifest's syntax with the `puppet parser validate`
 command.
@@ -311,8 +310,8 @@ We could use another include statement in the `site.pp` manifest to classify
 `cowsay.puppet.vm` with this `cowsay::fortune` class. In general, however, it's
 best to keep your classification as simple as possible.
 
-In this case, we'll use a nested class declaration to pull the
-`cowsay::fortune` class into our main `cowsay` class.
+In this case, we'll use a class declaration to pull the `cowsay::fortune` class
+into our main `cowsay` class.
 
     vim cowsay/manifests/init.pp
 
@@ -331,6 +330,8 @@ class cowsay {
 Use the `puppet parser validate` command to check your syntax:
 
     `puppet parser validate cowsay/manifests/init.pp`
+
+<div class = "lvm-task-number"><p>Task 8:</p></div>
 
 Return to your `cowsay.puppet.vm` node so we can test out these changes.
 
@@ -358,4 +359,15 @@ piping the output of the `fortune` command to `cowsay`:
 	
 ## Review
 
-TBD
+We began this quest with a discussion of the importance of keeping your Puppet
+code well organized. This structure of **classes**, **manifests**, and **modules**
+keeps your code organized in logical, reusable units. Keeping your modules within
+Puppet's **modulepath** allows the Puppet master to find the classes contained
+within them.
+
+Using what you learned, you created a new module to manage the `cowsay`
+package, then extended this module by creating a new class to manage the
+`fortune-mod` package.
+
+As you move ahead in this guide, you will continue to use this organization
+scheme to structure the Puppet code you write.
