@@ -10,37 +10,44 @@
 
 When you're ready to get started, enter the following command:
 
-    quest begin file_package_service
+    quest begin package_file_service
 
 ## The package, file, resource pattern 
 
-In the previous quest, you created a simple module to manage the cowsay
-package. Often, however, you'll need Puppet to manage several related resources
-in concert in order to get your managed node to a desired state. These groups
-of resources often follow a "package, file, service" pattern. A package
-resource manages the software package itself, a file resource allows you to
-customize a related configuration file, and a service resource starts the
-service provided by the software you've just installed and configured.
+In the previous quest, you created a simple module to manage the `cowsay` and
+`fortune-mod` packages. Often, however, you'll need Puppet to manage several
+related resource types to get your managed system to its desired state. The
+`package`, `file`, and `service` resource types are used in concert often
+enough that we talk about them together as the "package, file, service"
+pattern. A package resource manages the software package itself, a file
+resource allows you to customize a related configuration file, and a service
+resource starts the service provided by the software you've just installed and
+configured.
 
-To build on your existing cowsay module, we've created a simple Ruby
-application called Pasture. Pasture extends cowsay to provide a simple RESTful
-API so that your cows can be accessible over HTTP—we call this cowsay as a
-service (CaaS). If you're curious, you can find the source code
-[here](https://github.com/puppetlabs/pltraining-pasture).
+To give you an example to work with in this and the following quests, we've
+created a simple Ruby application called Pasture. Pasture provides cowsay's
+functionality over RESTful API so that your cows can be accessible over HTTP—we
+might call this cowsay as a service (CaaS). (You can find the source code
+[here](https://github.com/puppetlabs/pltraining-pasture).) Though this Pasture
+application is whimsical, its simplicity lets us focus on Puppet itself
+without taking detours to cover the features and caveats of a more complex
+application.
 
-Just like the cowsay command line tool, we'll use a package resource with the
+Just like the cowsay command line tool, we'll use a `package` resource with the
 `gem` provider to install Pasture.
 
 Next, because Pasture reads from a configuration file, we're going to use a
-file resource to manage its settings.
+`file` resource to manage its settings.
 
 Finally, we want Pasture to run as a persistent background process, rather than
-running once like the Cowsay command line tool. It needs to listen for incoming
+running once like the cowsay command line tool. It needs to listen for incoming
 requests and serve out cows as needed. To set this up, we'll first have to
-create a file resource to define the service, then use a service resource to
-ensure that it's running.
+create a `file` resource to define the service, then use a `service` resource
+to ensure that it's running.
 
 ## Package
+
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
 Before getting started, be sure you're in your Puppet master's `modules`
 directory.
@@ -51,6 +58,8 @@ Create a new directory structure for your `pasture` module. This time, the
 module will include two subdirectories: `manifests`, and `files`.
 
     mkdir -p pasture/{manifests, files}
+
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 Open a new `init.pp` manifest to begin your definition of the main `pasture`
 class. 
@@ -74,6 +83,8 @@ necessary:
 
     puppet parser validate pasture/manifests/init.pp
 
+<div class = "lvm-task-number"><p>Task 3:</p></div>
+
 Before continuing on, let's apply this class to see where this file resource
 has gotten us.
 
@@ -89,6 +100,7 @@ node pasture.puppet.vm {
   include pasture
 }
 ```
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Now connect to the `pasture.puppet.vm` node:
 
@@ -98,12 +110,16 @@ And trigger a Puppet agent run:
 
     puppet agent -t
 
+<div class = "lvm-task-number"><p>Task 5:</p></div>
+
 With the `pasture` gem installed, you can use the `pasture start` command
 to start the pasture process. We haven't set up a service to manage this
 process yet, but you can add an ampersand (`&`) after the command to start
 it in the background.
 
     pasture start &
+
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Use the `curl` command to test the Pasture API. The request takes two
 parameters, `string`, which defines the message to be returned, and
@@ -117,6 +133,8 @@ in another parameter to change this:
 
     curl 'localhost:4567?string=Hello!&character=elephant'
 
+<div class = "lvm-task-number"><p>Task 7:</p></div>
+
 Feel free to experiemnt with other parameters. When you're done, foreground the
 process:
 
@@ -129,16 +147,18 @@ And use `CTRL-C` to end the process, and disconnect from the agent node.
 ## File
 
 Packages you install with Puppet often have configuration files that let you
-customize their behavior. We've written the Pasture gem to use a very simple
-configuration file, but once you understand the basic concept, it will be very
-easy to extend to more complex configurations.
+customize their behavior. We've written the Pasture gem to use a simple
+configuration file. Once you understand the basic concept, it will be easy to
+extend to more complex configurations.
 
 You already created a `files` directory inside the `pasture` module directory.
 Just like placing manifests inside a module's `manifests` directory lets Puppet
-find the classes they define, you can make any files your module needs
-available to Puppet by placing them in the module's `files` directory.
+find the classes they define, placing files in the module's `files` directory
+makes them available to Puppet.
 
-Go ahead and create a file called `pasture_config.yaml`.
+<div class = "lvm-task-number"><p>Task 8:</p></div>
+
+Create a `pasture_config.yaml` file in your module's `files` directory.
 
     vim pasture/files/pasture_config.yaml
 
@@ -149,20 +169,27 @@ Include a line here to set the default character to `elephant`.
   character: elephant
 ```
 
-With this source file in place, you can now create a `file` resource to manage
-it on your agent node.
+With this source file in place, you can now use it to define the content of a
+`file` resource.
 
 The `file` resource takes a `source` parameter, which allows you to specify a
 source file that will define the content of the managed file. As its value,
 this parameter takes a URI. While it's possible to point to other locations,
 you'll typically use this to specify a file in your module's `files` directory.
-Puppet uses a shortened `puppet:` URI format to refer to these module files
-kept on your Puppet master. This format follows the pattern
-`puppet:///modules/<MODULE NAME>/<FILE PATH>`.  (Notice the triple forward
-slash just after `puppet:`. This stands in for the implied path to the modules
-on your Puppet master. You can always refer back to the
+Puppet uses a shortened URI format that begins with the `puppet:` prefix to
+refer to these module files kept on your Puppet master. This format follows the
+pattern `puppet:///modules/<MODULE NAME>/<FILE PATH>`. Notice the triple
+forward slash just after `puppet:`. This stands in for the implied path to the
+modules on your Puppet master.
+
+Don't worry if this URI syntax seems complex. It's pretty rare that you'll need
+to use it for anything other than referring to files within your modules, so
+the patern above is likely all you'll need to learn. You can always refer back
+to the
 [docs](https://docs.puppet.com/puppet/latest/reference/types/file.html#file-attribute-source)
-for a reminder if you have trouble remembering the precise URI format.)
+for a reminder.
+
+<div class = "lvm-task-number"><p>Task 9:</p></div>
 
 Return to your `init.pp` manifest.
 
@@ -190,9 +217,17 @@ Check your syntax with the `puppet parser` tool:
 
 ## Service
 
-While some packages set up their own service unit files, Pasture does not.
-It's easy enough to use the file resource to create your own. First, create a
-file called `pasture.service`.
+While the cowsay command you installed in the previous quest runs once and
+exits, Pasture is intended to be run as a service. A Pasture process will run
+in the background and listem for any incoming requests on its designated port.
+Because our agent node is running CentOS 7, we'll use the [systemd](https://www.freedesktop.org/wiki/Software/systemd/) service manager to handle our Pasture process.
+Although some packages set up their own service unit files, Pasture does not.
+It's easy enough to use a `file` resource to create your own. This service unit
+file will tell systemd how and when to start our Pasture application.
+
+<div class = "lvm-task-number"><p>Task 10:</p></div>
+
+First, create a file called `pasture.service`.
 
     vim pasture/files/pasture.service
 
@@ -208,6 +243,13 @@ Include the following contents:
     [Install]
     WantedBy=multi-user.target
 ```
+
+If you're not familiar with the format of a systemd unit file, don't worry
+about the details here. The beauty of Puppet is that the basic principles you
+learn with this example will be easily portable to whatever system you work
+with.
+
+<div class = "lvm-task-number"><p>Task 11:</p></div>
 
 Now open your `init.pp` manifest again:
 
@@ -234,7 +276,8 @@ class pasture {
 }
 ```
 
-Next, add the service resource itself:
+Next, add the `service` resource itself. This resource will have the title
+`pasture` and a single parameter to set the state of the service to `running`.
 
 ```puppet
 class pasture {
@@ -273,27 +316,33 @@ Though Puppet code will default to managing resources in the order they're
 written in a manifest, we strongly recommend that you make dependencies among
 resources explicit through [relationship
 metaparameters](https://docs.puppet.com/puppet/latest/lang_relationships.html#syntax-relationship-metaparameters).
-(A metaparameter looks just like any other parameter, but it affects *how*
-Puppet handles a resource rather than directly defining its desired state.)
+A metaparameter is a parameter, that affects *how* Puppet handles a resource
+rather than directly defining its desired state. Relationship metaparameters
+tell Puppet about ordering relationships among your resources.
 
 For our class, we'll use two relationship metaparameters: `before` and
 `notify`. `before` tells Puppet that the current resource must come before the
-target resource. Like `before`, notify tells Puppet that the current resource
-must come before the target resource, but if the target resource is a service,
-it will also restart the service whenever the current resource is changed.
+target resource. The `notify` metaparameter is like `before`, but if the target
+resource is a service, it has the additional effect of restarting the service
+whenever Puppet modifies the resource with the metaparameter set. This is
+useful when you need to Puppet to restart a service to pick up changes in a
+configuration file.
 
-The value of a relationship metaparameter is a [resource
+Relationship metaparameters take a [resource
 reference](https://docs.puppet.com/puppet/latest/lang_data_resource_reference.html)
-that specifies the target resource. The syntax for a resource reference is the
-capitalized resource type, followed by square brackets containing the resource
-title: `Type['title']`. 
+as a value. This resource reference points to another resource in your Puppet
+code. The syntax for a resource reference is the capitalized resource type,
+followed by square brackets containing the resource title: `Type['title']`. 
+
+<div class = "lvm-task-number"><p>Task 12:</p></div>
 
 If your `init.pp` manifest isn't already open, go ahead and open it again.
 
     vim pasture/manifests/init.pp
 
 Add relationship metaparameters to define the dependencies among your
-`package`, `file`, and `service` resources.
+`package`, `file`, and `service` resources. Take a moment to think through
+what each of these relationship metaparameters does and why.
 
 ```puppet
 class pasture {
@@ -331,6 +380,8 @@ When you return to the node and do another puppet agent run, the master will
 pick up these added file and service resources and include them in the catalog
 it returns to the node.
 
+<div class = "lvm-task-number"><p>Task 13:</p></div>
+
 Go ahead and connect to `pasture.puppet.vm`.
 
     ssh learning@pasture.puppet.vm
@@ -350,3 +401,19 @@ port 4567 of the `pasture.puppet.vm` node:
     curl 'pasture.puppet.vm:4567?string=Hello!'
 
 ## Review
+
+In this quest, we got into some of the specifics of writing Puppet code.
+You used the common "package, file, service" pattern to configure the Pasture
+application and set up a service unit to run its process on your server.
+
+You learned how to make a file available to Puppet by placing it in your
+module's `files` directory. With that file in place, you learned how to use it
+in a `file` resource with the `source` parameter and a URI.
+
+Finally, we went over resource ordering. You used the `before` and `notify`
+metaparameters to define relationships among the resources in your class to
+ensure that Puppet will manage the resources in the correct order and refresh
+the service when its configuration file is modified.
+
+In the next quest, you'll learn to make this class more flexible by adding
+variables and replacing your static files with templates.
