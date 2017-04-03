@@ -3,11 +3,13 @@
 # Conditional Statements
 
 ## Quest objectives
- - TBD
+ - Learn about the role of conditional statements in writing flexible Puppet code
+ - Learn the syntax of the `if` statement.
+ - Use an `if` statement to intelligently manage a package dependency.
 
 ## Getting started
 
-In this quest, we'll discuss conditional statements. Conditional statements let
+In this quest, we'll discuss **conditional statements.** Conditional statements let
 you write Puppet code to will behave differently in different contexts.
 
 To start this quest enter the following command:
@@ -35,7 +37,8 @@ For example, your Puppet code doesn't need to directly address **how** an
 Apache package is installed, but depending on whether you're managing a RedHat
 or Debian system, your Puppet code will need to tell Puppet to manage either
 the `httpd` or `apache2` package. If you look at the `puppetlabs-apache` module
-on the [Forge](forge.puppet.com), you'll [this package name and numerous other
+on the [Forge](forge.puppet.com), you'll see [this package name and numerous
+other
 variables](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/params.pp#L59)
 set based on an `if` statement using the `osfamily` fact. (You may notice that
 this module uses an un-structured `$::osfamily` format for this fact to
@@ -43,7 +46,8 @@ preserve backwards compatibility. You can read more about this form of
 reference on [the docs
 page](https://docs.puppet.com/puppet/latest/lang_facts_and_builtin_vars.html#classic-factname-facts))
 
-Simplified, the conditional statement looks like this:
+Simplified to show only the values we're concerned with, the conditional
+statement looks like this:
 
 ```puppet
 if $::osfamily == 'RedHat' {
@@ -57,7 +61,11 @@ if $::osfamily == 'RedHat' {
 }
 ```
 
-Elsewhere in the module, you'll find a [package resource](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/package.pp#L32) uses this variable to set its `name` parameter.
+Here, the `$apache_name` variable is set to either `httpd` or `apache2`
+depending on the value of the `$::osfamily` fact. Elsewhere in the module,
+you'll find a [package
+resource](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/package.pp#L32)
+that uses this `$apache_name` variable to set its `name` parameter.
 
 ```puppet
 package { 'httpd':
@@ -121,22 +129,33 @@ clause.
 Let's return to our Pasture example module. The application is build on the
 [Sinatra](http://www.sinatrarb.com/) framework. Out of the box, Sinatra
 supports a few different options for the server the service will run: WEBrick,
-Thin, or Mongrel. In production, you would likely use a more robust option such
-as [Passenger](https://www.phusionpassenger.com/) or
+Thin, or Mongrel. In production, you would likely use Sinatra wiht a more
+robust option such as [Passenger](https://www.phusionpassenger.com/) or
 [Unicorn](http://bogomips.org/unicorn/), but these built-in options will be
-more than adequate for the sake of this lesson.
+adequate for this lesson.
 
-We can select which server is used with the application's configuration file,
-but the options other than the default WEBrick must be installed separately.
-Using the `if` statement discussed above, we'll configure the module to manage
-the necessary Thin or Mongrel package resource if one of these servers is
-selected.
+We can easily select which server will be used in the Pasture application's
+configuration file, However, options other than the default WEBrick are not
+included as pre-requisites when we install the Pasture package. To use these
+other options, we'll need our module to manage them as separate `package`
+resources.  However, we don't want to install these extra packages if we don't
+plan on using them. Using the `if` statement discussed above, we'll configure
+the `pasture` class to manage the necessary Thin or Mongrel package resource
+only if one of these servers is selected.
+
+By using a class parameter to specify the preferred server for Sinatra to use,
+we can use the same value to pass on to our configuration file template and to
+decide which additional packages need to be installed. Using parameters in this
+way helps keep configuration coordinated across all the components of the
+system your module is written to manage.
+
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
 Open the module's `init.pp` manifest.
 
     vim pasture/manifests/init.pp
 
-First, create a class parameter to manage the server configuration option. The
+First, add a `$sinatra_server` parameter with a default value of `webrick`. The
 beginning of your class should look like the following example:
 
 ```puppet
@@ -149,8 +168,8 @@ class pasture (
 ){
 ```
 
-Next we'll add the `$sinatra_server` variable to the `$pasture_config_hash` so
-that it can be passed through to the configuration file template.
+Next add the `$sinatra_server` variable to the `$pasture_config_hash` so that
+it can be passed through to the configuration file template.
 
 ```puppet
   $pasture_config_hash = {
@@ -161,13 +180,15 @@ that it can be passed through to the configuration file template.
   }
 ```
 
+<div class = "lvm-task-number"><p>Task 2:</p></div>
+
 Once that's complete, open the `pasture_config.yaml.epp` template.
 
     vim pasture/templates/pasture_config.yaml.epp
 
 Add the `$sinatra_server` variable to the params block at the beginning of the
-template. The application will pass any key value pairs under the
-`:sinatra_settings:` key to the configuration of Sinatra itself.
+template with the same `webrick` default. The Pasture appication passes any
+settings under the `:sinatra_settings:` key to Sinatra itself.
 
 ```yaml
 <%- | $pasture_port      = '80',
@@ -184,8 +205,10 @@ template. The application will pass any key value pairs under the
     :server: <%= $sinatra_server %>
 ```
 
-Now that your module is able to manage this setting, we'll add a conditional
-statement to manage the required packages for our Thin and Mongrel webservers.
+Now that your module is able to manage this setting, add a conditional
+statement to manage the required packages for the Thin and Mongrel webservers.
+
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 Return to your `init.pp` manifest.
 
@@ -199,7 +222,9 @@ provider for the package.
 
 Finally, we will add a `notify` parameter pointing to our service resource.
 This will ensure that the server package is managed before the service, and
-that any updates to the package will trigger a restart of the service.
+that any updates to the package will trigger a restart of the service. Your
+class should look like the example below, with the conditional statement to
+manage your server packages included at the end.
 
 ```puppet
 class pasture (
@@ -251,12 +276,19 @@ class pasture (
 }
 ```
 
-With these changes to your class, we easily accomidate different servers for
-different agent nodes in your infrastructure. For example, we may want to use
-the default WEBrick server on a development node and the Thin server on your
-production node. There are more robust ways to manage this kind of environment
-configuration, but for now, we will classify each node in a distinct node
-definition in the `site.pp` manifest.
+With these changes to your class, you can easily accomidate different servers
+for different agent nodes in your infrastructure. For example, you may want to
+use the default WEBrick server on a development system and the Thin server on
+for production.
+
+We created two new systems for this quest: `pasture-dev.puppet.vm` and
+`pasture-prod.puppet,vm`. For a more complex infrastructure, you would likely
+manage your development, test, and production segments of your infrastructure
+by creating a distinct [envionrment](https://docs.puppet.com/puppet/latest/environments.html)
+for each. For now, however, we can easily demonstrate our conditional statement
+by setting up two different node definition in the `site.pp` manifest.
+
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
@@ -274,8 +306,8 @@ node 'pasture-prod.puppet.vm' {
 ## The puppet job tool
 
 Now that you're working across multiple nodes, connecting manually with SSH to
-trigger Puppet runs may be a bit unwieldly. The `puppet job` tool lets you
-trigger Puppet runs across multiple nodes remotely. 
+trigger Puppet runs may start to seem a little tedious. The `puppet job` tool
+lets you trigger Puppet runs across multiple nodes remotely. 
 
 Before using this tool, we'll have take a few steps via the PE console to set
 up authentication through PE's role-based access control system (RBAC).
@@ -292,7 +324,7 @@ option to proceed.)
 
 Use the following credentials to log in:
 
-Username: **admin**
+Username: **admin**  
 Password: **puppetlabs**
 
 Once you're connected, click the **access control** menu option in the
@@ -322,12 +354,13 @@ When prompted, supply the username **learning** and password **puppet**.
 Now you can trigger Puppet agent runs on `pasture-dev.puppet.vm` and
 `pasture-prod.puppet.vm` with the `puppet job` tool. We provide the names of
 the two nodes in a comma-separated list after the `--nodes` flag. (Note that
-there is no space between the node names!)
+there is no space between the node names, which can make it a little hard to
+tell the difference between a comma that separates node names and the dots in
+the node names themselves.)
 
     puppet job run --nodes pasture-dev.puppet.vm,pasture-prod.puppet.vm
 
-TODO: Add specific instructions to confirm that the correct server is running
-on each.
+TODO: Add instructions to validate the changes that have taken place.
 
 ## Review
 
