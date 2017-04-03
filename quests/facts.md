@@ -43,7 +43,9 @@ Before we get into integrating facts into your Puppet code, let's use the
 `facter` tool from the command line to see what kinds of facts are available
 and how they're structured.
 
-First, go connect to the agent node we've set up for this quest.
+<div class = "lvm-task-number"><p>Task 1:</p></div>
+
+First, connect to the agent node prepared for this quest.
 
     ssh learning@pasture01.puppet.vm
 
@@ -88,11 +90,15 @@ display some basic information about the system.
 Creating a new module will also help review some of the concepts you've learned
 so far.
 
+<div class = "lvm-task-number"><p>Task 2:</p></div>
+
 From your `modules` directory, create the directory structure for a module
 called `motd`. You'll need two subdirectories called `manifests` and
 `templates`.
 
     mkdir -p motd/{manifests,templates}
+
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 Begin by creating an `init.pp` manifest to contain the main `motd` class.
 
@@ -119,16 +125,19 @@ class motd {
 }
 ```
 
-NOTE: The `$facts` hash and top-level (unstructured) facts are automatically
-loaded as variables into any template. To improve readibility and reliability,
-we strongly suggest suggest using the method shown here. Just be aware that you
-might encounter templates in the wild with direct references to facts.
+The `$facts` hash and top-level (unstructured) facts are automatically loaded
+as variables into any template. To improve readibility and reliability, we
+strongly suggest suggest using the method shown here. Be aware, however, that
+you will likely encounter templates that refer directly to facts using the
+gemeral variable syntax rather than the `$facts` hash syntax we suggest here.
 
-Now we'll create the `motd.epp` template.
+<div class = "lvm-task-number"><p>Task 3:</p></div>
+
+Now create the `motd.epp` template.
 
     vim motd/templates/motd.epp
 
-We'll begin with a parameters tag to make the set of variable we're using
+Begin with a parameters tag to make the set of variable used in the template
 explicit. Note that the MOTD is a plaintext file without any commenting syntax,
 so we'll leave out the conventional "managed by Puppet" note.
 
@@ -140,8 +149,8 @@ so we'll leave out the conventional "managed by Puppet" note.
 | -%>
 ```
 
-Next, we'll add a simple welcome message and use our Puppet facts to provide
-some basic information about the system.
+Next, add a simple welcome message and use the variables assigned from our fact
+values to provide some basic information about the system.
 
 ```
 <%- | $fqdn,
@@ -154,6 +163,8 @@ Welcome to <%= $fqdn %>
 This is a <%= $os_family %> system running <%= $os_name %> <%= os_release %>
 
 ```
+
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 With this template set, your simple MOTD module is complete. Open your
 `site.pp` manifest to assign it to the `pasture.puppet.vm` node. 
@@ -171,6 +182,8 @@ node 'pasture.puppet.vm` {
   }
 }
 ```
+
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 Once this is complete, connect again to the `pasture.puppet.vm` node.
 
@@ -190,4 +203,14 @@ Now reconnect.
 
 ## Review
 
-TBD
+In this quest, we introduced the `facter` tool, and provided an overview of how
+this tool can be used to access a structured set of system data.
+
+We then showed you how to access facts from within a Puppet manifest and assign
+the values of these facts to variables. Using data from facter, you created a
+template to manage a MOTD (Message of the Day) file.
+
+In the next quest, we'll show you how you can further add flexibility to your
+Puppet code with **conditional statements**. We'll give you an example of how
+these facts can be used in conjunction with these conditional statements to
+create intelligent defaults based on system information.
