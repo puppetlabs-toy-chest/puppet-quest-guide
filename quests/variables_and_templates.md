@@ -4,7 +4,9 @@
 
 ## Quest objectives
 
-- TBD
+- Learn about variables assignment and use.
+- Learn how to create an EPP template.
+- Use the hash syntax to pass variables to an EPP template.
 
 ## Getting started
 
