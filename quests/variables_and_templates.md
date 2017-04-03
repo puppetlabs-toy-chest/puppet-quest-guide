@@ -8,14 +8,22 @@
 
 ## Getting started
 
-In the last quest, we set up a module to mange the Pasture application. So far,
-however, that module is very static. All the values used to define your
-resources are hard-coded into the resource declarations, and the configuration
-file and service unit file are both managed by static source files in the
-module's `files` directory.
+In the last quest, we set up a module to manage the Pasture application. So
+far, however, that module is static. All the values used to define the state of
+the system are hard-coded into the module's resource declarations. The
+configuration file and service unit file are both managed by static source
+files in the module's `files` directory.
 
-In this quest, we'll introduce parameters and templates, both of which use
-variables to make your code much more adaptable.
+In this quest, we introduce **variables** and **templates**. Variables and
+templates, let separate data from the resources and files you use to define
+system state. Using variables in place of hard-coded values is an important
+prerequisite to the topic of the next quest, **parameterized classes**.
+Class parameters give you an interface to customize all the important variables
+in your class without editing the module code itself.
+
+As you work through the rest of this quest guide, you'll see that variables
+(and templates, though to a lesser extent) are a key concept in many of the
+techniques you can use to write adaptable Puppet code.
 
 When you're ready to get started, enter the following command:
 
@@ -27,9 +35,8 @@ When you're ready to get started, enter the following command:
 
 > -Douglas Horton
 
-Variables allow a value to be stored and accessed by name later in your
-manifest. This is one of the core Puppet language features that allows you
-to write flexibility into your code.
+Variables allow a value to be bound to a name, which can then be used later
+in your manifest
 
 A variable name is prefixed with a `$` (dollar sign), and a value is assigned
 with the `=` operator. Assigning a short string to a variable, for example,
@@ -52,6 +59,8 @@ variable is assigned, the value is fixed and cannot be changed. The
 *variability*, here, refers to the fact that a variable can have a different
 value set across different Puppet runs or across different systems in your
 infrastructure.
+
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
 Let's start by setting up a few variables. We'll define the default
 character the cowsay application will use, the port we want to service to
@@ -99,30 +108,21 @@ We haven't yet done anything with the `$pasture_port` or `$default_character`
 variables. To use these, we need a way to pass them into our configuration
 file. We'll also need to pass the `$pasture_config_file` variable to our
 service unit file so the service will start our Pasture process with the
-configuration file we specify.
+configuration file we specify if we change it something other than the default.
 
 ## Templates
 
 Many of the tasks involved in system configuration and administration come down
-to managing the content of text files. Some of these tasks are commonly managed
-by tools that offer a level of abstraction above this level of the text file.
-To manage users on a *nix system, for example, you use a command like `useradd`
-rather than directly edit the contents of `/etc/passwd` and `/etc/shadow`. In
-these cases, Puppet's providers will use these higher-level commands to
-interact with the underlying system state.
+to managing the content of text files. The most direct way to handle this is
+through a templating language. A template is similar to a text file, but offers
+a syntax for inserting variables as well as some more advanced language
+features like conditionals and iteration. This flexibility lets you manage a
+wide variety of file formats with a single tool.
 
-In many cases, however, editing a text file directly remains the best (or only)
-way to configure some component of your system. This means that Puppet needs a
-flexible way manage these files.
-
-The most direct way to handle this is through a templating language. A template
-is similar to a text file, but offers a syntax for inserting variables as well
-as some more advanced language features like conditionals and iteration. This
-flexibility lets you manage a wide variety of file formats with a single tool.
-
-The main limitation of templates is that they're all-or-nothing. The template
-must define the entire file you want to manage. If you need to manage only a
-single line or value in a file, you may want to investigate
+The limitation of templates is that they're all-or-nothing. The template must
+define the entire file you want to manage. If you need to manage only a single
+line or value in a file because another process or Puppet module will manage a
+different part of the file, you may want to investigate
 [Augeas](https://docs.puppet.com/guides/augeas.html),
 [concat](https://forge.puppet.com/puppetlabs/concat), or the
 [file_line](https://forge.puppet.com/puppetlabs/stdlib#file_line) resource
@@ -145,6 +145,8 @@ documentation.
 An EPP template is a plain-text document interspersed with tags that allow
 you to customize the content.
 
+<div class = "lvm-task-number"><p>Task 2:</p></div>
+
 It will be easier to explain the syntax with a concrete exampl, so let's create
 a template to help manage Pasture's configuration file.
 
@@ -156,16 +158,20 @@ Next, create a `pasture_config.yaml.epp` template file.
 
     vim pasture/templates/pasture_config.yaml.epp
 
-The first element of an EPP template should always be a **parameter tag**. This
+Best practice is to begin your EPP template with a **parameter tag**. This
 declares which parameters your template will accept and allows you to set their
-default values. Though this tag isn't technically required for an EPP template
-to work, explicitly declaring your variables here will make your template more
-readable and easier to maintain. It's also generally good practice to add a
-comment to the beginning of the file to let people who might come across it
-know that it's managed by Puppet so they don't attempt to make manual changes,
-only to have them reverted the next time Puppet runs. This comment is intended
-to be included directly in the final file, so remember to use the comment
-syntax native to the file format you're working with.
+default values. A template will work without this tag, but explicitly declaring
+your variables here will make your template more readable and easier to
+maintain.
+
+It's also good practice to add a comment to the beginning of the file to let
+people who might come across it know that it's managed by Puppet and any manual
+changes they make will be reverted the next time Puppet runs. This comment is
+intended to be included directly in the final file, so remember to use the
+comment syntax native to the file format you're working with.
+
+The beginning of your template should look like the following. We'll explain
+the details of the syntax below.
 
 ```
 <%- | $pasture_port      = '80',
@@ -182,8 +188,8 @@ before and after the tag. This allows you to put this parameter tag at the
 beginning of the file, for example, without the newline character after the
 tag creating an empty line at the beginning of the output file.
 
-Next, we'll use these variables to set values for the port and character
-configuration options:
+Next, we'll use the variables we set up to define values for the port and
+character configuration options:
 
 ```
 <%- | $pasture_port      = '80',
@@ -207,6 +213,8 @@ and see how to use it to define the content of a `file` resource.
 
 First, save your template file and exit Vim.
 
+<div class = "lvm-task-number"><p>Task 3:</p></div>
+
 Now open your `init.pp` manifest.
 
     vim pasture/manifests/init.pp 
@@ -223,9 +231,9 @@ To set a file's content with a template, we'll use Puppet's built-in `epp()`
 function to parse our EPP template file and use the resulting string as the
 value for the `content` parameter.
 
-This `epp()` function takes two arguments: first, a file reference in the
-format `'<MODULE>/<TEMPLATE_NAME>'` that specifies the template file you want
-to use.  Second a hash of variable names and values you want to pass to the
+This `epp()` function takes two arguments: First, a file reference in the
+format `'<MODULE>/<TEMPLATE_NAME>'` that specifies the template file
+to use. Second a hash of variable names and values to pass to the
 template.
 
 To avoid cramming all our variables into the `epp()` function, we'll put them
@@ -270,6 +278,8 @@ Now that that's set, we can repeat the process for the service unit file.
 
 Save and exit your `init.pp` file.
 
+<div class = "lvm-task-number"><p>Task 4:</p></div>
+
 Rather than start from scratch, let's copy the existing file to use as a base
 for our template:
 
@@ -296,6 +306,8 @@ Add your parameters tag and comment to the beginning of the file. Set the
     WantedBy=multi-user.target
 ```
 
+<div class = "lvm-task-number"><p>Task 5:</p></div>
+
 Now return to your `init.pp` manifest:
 
     vim /pasture/manifests/init.pp
@@ -308,6 +320,7 @@ class pasture {
 
   $pasture_port        = '80'
   $default_character   = 'sheep'
+  $default_message     = ''
   $pasture_config_file = '/etc/pasture_config.yaml'
 
   package {'pasture':
@@ -319,6 +332,7 @@ class pasture {
   $pasture_config_hash = {
     'pasture_port'      => $pasture_port,
     'default_character' => $default_character,
+    'default_message'   => $default_message,
   }
 
   file { $pasture_config_file:
@@ -346,5 +360,50 @@ When you're finished, use the `puppet parser` tool to check your syntax.
 
     puppet parser validate pasture/manifests/init.pp
 
+<div class = "lvm-task-number"><p>Task 6:</p></div>
+
+Connect to `pasture.puppet.vm` to trigger a Puppet run and test your changes.
+The quest tool created a new node with that name for this quest, added that
+system to the Learning VM's `/etc/hosts`, and and handled the cert signing
+process for you. Though this is a new system, it has the same name as the one
+you working on in the previous quest, so the classification in your `site.pp`
+manifest will still apply.
+
+    ssh learning@pasture.puppet.vm
+
+Trigger a Puppet agent run:
+
+    sudo puppet agent -t
+
+If the run throws any errors, go back and review your code. Remember that the
+`puppet parser` tool can check for syntax errors, but it does not guarantee
+that your Puppet code can be correctly compiled into a catalog and define the
+state you intend.
+
+Once the Puppet run has successfully completed, disconnect to return to your
+session on the Learning VM itself.
+
+Use the `curl` command again to see that your changes to the defaults have
+taken effect.
+
+    curl 'pasture.puppet.vm:4567?string=Hello!'
+
 ## Review
+
+In this quest, we introduced **variables** and **templates**. You re-worked the
+`pasture` module to replace hard-coded values in your resources and
+configuration files with variables.
+
+With variables set in your manifest, you saw how to use the hash syntax and
+EPP template function to pass those variables into a template. Within an `.epp`
+template, we covered the **parameter tag**, which is used at the beginning of
+a template to specify which variables are available within the template, and
+**expression-printing tags**, which are used to insert variable values into the
+content of your templatized file.
+
+We mentioned that variables are an important part of the concepts we'll
+introduce in the following quests. In the next quest, you'll see how to create
+a **parameterized class**, which will allow you to set important variables
+in your class as you declare it. Parameters allow you to customize how a class
+is configured without editing code in the module where the class is defined.
 
