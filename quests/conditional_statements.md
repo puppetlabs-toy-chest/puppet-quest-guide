@@ -360,8 +360,53 @@ the node names themselves.)
 
     puppet job run --nodes pasture-dev.puppet.vm,pasture-prod.puppet.vm
 
-TODO: Add instructions to validate the changes that have taken place.
+When the jobs complete, take a moment to check each with a `curl` command.
+
+    curl 'pasture-dev.puppet.vm/api/v1/cowsay?message=Hello!'
+
+and 
+
+    curl 'pasture-prod.puppet.vm/api/v1/cowsay?message=Hello!'
+
+To verify that each system is running the server you specified, you can log
+in and use the `journalctl` command to check the service's startup log.
+
+    ssh learning@pasture-dev.puppet.vm
+
+And run
+
+    journalctl -u pasture
+
+Disconnect from `pasture-dev`
+
+    exit
+
+And connect to the next system:
+
+    ssh learning@pasture-prod.puppet.vm
+
+Check the log here as well:
+
+    journalctl -u pasture
+
+Now that you've verified that each node is running the expected server,
+disconnect to retunr to the Learning VM.
+
+    exit
 
 ## Review
 
-TBD
+In this quest, you learned how conditional statements can help make the code
+you write for a Puppet module adaptable to cover different conditions. You saw
+an example of how the `puppetlabs-apache` module uses a conditional statement
+to install a different package depending on the node's operating system. After
+learning about the syntax of the `if` statement, you incorporated a conditional
+statement into your `pasture` module to help manage the package dependencies
+for the different server options available to the Sinatra framework.
+
+So far, the `pasture` and `motd` modules you've used have been written from
+scratch. This is great for the sake of learning, but one of Puppet's strengths
+lies in the Puppet community and the Puppet Forge—the repository of pre-written
+modules you can easily incorporate into your own Puppet codebase. In the next
+quest, you'll see how to make use of an existing module to set up a database
+backend for the Pasture application.
