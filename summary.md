@@ -15,9 +15,7 @@
 * [Conditional Statements](quests/conditional_statements.md)
 * [The Forge](quests/the_forge.md)
 * [Defined Resource Types](quests/defined_resource_types.md)
-
-### TODO V1
-* [Application Orchestrator](quests/_application_orchestrator.md)
+* [Application Orchestrator](quests/application_orchestrator.md)
 
 ### TODO V2
 * [Code Management](quests/code_management.md)
