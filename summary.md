@@ -14,12 +14,12 @@
 * [Facts](quests/facts.md)
 * [Conditional Statements](quests/conditional_statements.md)
 * [The Forge](quests/the_forge.md)
+* [Roles and Profiles](quests/roles_and_profiles.md)
 * [Defined Resource Types](quests/defined_resource_types.md)
 * [Application Orchestrator](quests/application_orchestrator.md)
 
 ### TODO V2
 * [Code Management](quests/code_management.md)
-* [Profiles]
 * [Environments and Testing](quests/environments_and_testing.md)
 * [Hiera](quests/hiera.md)
 * [Params Class](quests/params_class.md)
