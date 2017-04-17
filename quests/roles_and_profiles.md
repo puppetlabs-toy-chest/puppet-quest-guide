@@ -4,11 +4,13 @@
 
 ## Quest objectives
 
-- Learn how to organize your code into **profile** classes specific to your
-  site's infrastructure.
-- Bring multiple profile classes together to define a **role** class that will
-  allow you to fully specify the role of a server in your infrastructure with a
-  single class.
+- Understand the roles and profiles pattern.
+- Create **profile** classes that wrap component classes and set parameters
+  specific to your site infrastructure.
+- Create **role** classes to define the full configuration for a system through
+  a combination of profile classes.
+- Learn how to use regular expressions to create more flexible node
+  definitions.
 
 ## Getting started
 
@@ -70,12 +72,12 @@ directory in your modulepath:
 
     mkdir -p profile/manifests
 
-We'll begin by creating a set of profiles related to the Pasture application.
-The profiles for the application server will manage two different
-configurations: a 'large' deployment that connects to an external database, and
-a 'small' deployment that makes use of the default SQLite database. In addition
-to these two application server profiles, we'll create a profile to manage the
-supporting PostgreSQL database.
+We'll begin by creating a pair of profiles related to the Pasture application.
+The profile for the application server will use a conditional statement manage
+two different configurations: a 'large' deployment that connects to an external
+database, and a 'small' deployment that makes use of the default SQLite
+database. A second profile will manage the PostgreSQL database that backs the
+'large' instance of the app server.
 
 To make it clear that all of these profiles relate to the Pasture application,
 we'll place them in a `pasture` subdirectory within `profile/manifests`.
@@ -84,45 +86,49 @@ Create that subdirectory:
 
     mkdir profile/manifests/pasture
 
-Next, create a profile for the development instance of the Pasture application.
+Next, create a profile for the Pasture application.
 
-    vim profile/manifests/pasture/app_large.pp
+    vim profile/manifests/pasture/app.pp
 
-Here, you'll define the `profile::pasture::app_large` class.
+Here, you'll define the `profile::pasture::app` class.
+
+
+The quest tool created a `pasture-app-small.puppet.vm` and
+`pasture-app-large.puppet,vm` node for this quest, so we can determine the
+appropriate profile based on the node name. We'll use a conditional statement
+to set the `$default_character` and `$db_uri` parameters based on whether the
+node's `name` fact contains the string 'large' or 'small'. In the 'small' case,
+we'll use the special `undef` value to leave these parameters unset and use the
+defaults set in the `pasture` component class. We'll also add an `else` block
+to fail with an appropriate error message if the `name` variable doesn't match
+'small' or 'large'.
 
 ```puppet
-class profile::pasture::app_large {
+class profile::pasture::app {
+  if 'large' in $facts['name'] {
+    $default_character = 'elephant'
+    $db_uri            = 'postgres://pasture_user:m00!@pasture_db.puppet.vm/pasture'
+  } elsif 'small' in $facts['name'] {
+    $default_character = undef
+    $db_uri            = undef
+  } else {
+    fail("The #{$facts['name'] node name must match 'large' or 'small'.}")
+  }
   class { 'pasture':
     default_message   => 'Hello Puppet!',
     sinatra_server    => 'thin',
-    default_character => 'elephant',
-    db_uri            => 'postgres://pasture_user:m00!@pasture_db.puppet.vm/pasture',
+    default_character => $default_character,
+    db_uri            => $db_uri,
   }
 }
 ```
 
-Next, create a profile for the small instance of your application.
-
-    vim profile/manifests/pasture/app_small.pp
-
-Here, we'll leave the `default_character` and `db_uri` parameters unset to use
-the component module defaults.
-
-```puppet
-class profile::pasture::app_small {
-  class { 'pasture':
-    default_message   => 'Hello Puppet!',
-    sinatra_server    => 'thin',
-  }
-}
-```
-
-Next, we'll use our `pasture::pasture_db` component class to create a profile
-for the Pasture database:
+Next, create a profile for the Pasture database using the `pasture::pasture_db`
+component class:
 
     vim profile/manifests/pasture/db.pp
 
-We don't need to customize any parameters here, so you can use the `include`
+You don't need to customize any parameters here, so you can use the `include`
 syntax to declare the `pasture::pasture_db` class.
 
 ```puppet
@@ -132,23 +138,25 @@ class profile::pasture::db
 ```
 
 While these profiles define the configuration of components directly related to
-the Pasture application, you'll likely want to manage some other details of
-your application and database servers that aren't directly related to these
-functions.
+the Pasture application, you'll typically need to manage aspects of these
+systems that aren't directly related to their business role. A profile module
+may include profile classes to manage things like user accounts, DHCP
+configuration, firewall rules, and NTP. Because these classes are applied
+across many or all of the systems in your infrastructure, the convention is to
+keep them in a `base` subdirectory. To give an example of a base profile, we'll
+create a `profile::base::motd` profile class to wrap the `motd` component class
+you created earlier.
 
-In a real infrastructure, you might want to create profiles to manage things
-like user accounts, DHCP configuration, firewall rules, and NTP. We're not
-going to go into these topics here, but by way of example, we'll create an
-`motd` profile to wrap the `motd` class you created earlier. This can stand in
-for the variety of components you might want to manage on a system that
-aren't directly tied to its business role.
+Create a `base` subdirectory in your `profile` module's `manifests` directory.
 
-Create a manifest to define your `profile::motd` profile.
+    mkdir profile/manifests/base
 
-    vim profile/manifests/motd.pp
+Next, create a manifest to define your `profile::base::motd` profile.
 
-Like the `profile::pasture::db` profile class, the `profile::motd` class is
-simply be a wrapper class with an `include` statement for the `motd` class.
+    vim profile/manifests/base/motd.pp
+
+Like the `profile::pasture::db` profile class, the `profile::base::motd` class
+is a wrapper class with an `include` statement for the `motd` class.
 
 ```puppet
 class profile::motd {
@@ -156,52 +164,50 @@ class profile::motd {
 }
 ```
 
-## Writing roles
+Writing these wrapper classes may initially seem like unnecessary complexity,
+especially in the case of simple component classes like `motd` and
+`pasture::pasture_db`. The value of consistency, however, outweighs the effort
+of creating these wrapper classes.
+
+A profile class is the single source of truth to define how a component
+is configured in your site infrastructure. This ensures that you have a single
+clear place to make any changes to how that component is configured. If you
+ever decide to add parameters to your MOTD module, for example, you will be
+able to easily set those parameters in a single profile class and see the
+changes take effect across any nodes whose role includes that profile. If you
+had set parameters specifically on a role or node level, on the other hand,
+any changes would have to be duplicated across every system.
 
 Now you have a few profiles available. Each of these profiles defines how a
-component on a system should be configured. A role combines one or more
-profiles to define the entire stack of technology you want Puppet to manage on
-a system.
+component on a system should be configured. The next step is to combine them
+into roles.
 
-While profiles define specific technologies, roles are always generic. For
-example, `role::webserver` and `role::database` are appropriate roles, while
-`role::apache_server` and `role::mysql_database` are not.
+## Writing roles
 
-You may have a wide variety of webservers in your infrastructure. Rather than
-creating a different role for each of these types of webserver, create a single
-`role::webserver` class and use conditional logic to determine which profiles
-it includes.
+A role combines profiles to define the full set of components you want Puppet
+to manage on a system. A role should consist of only `include` statements to
+pull in the list of profile classes that make up the role. A role should not
+directly declare non-profile classes or individual resources.
 
-In this case, we'll need two roles to define the systems involved in the
-Pasture application: `role::app_server` and `role::database`. First, create the
-directory structure for your `role` module.
+A role's name should be a simple description of the business purpose of the
+system it describes. Specific implementation details related to the technology
+stack are left to the profiles. For example, `role::myapp_webserver` and
+`role::myapp_database` are appropriate names for role classes, while
+`role::postgres_db` or `role::apache_server` are not.
+
+In this case, we need two roles to define the systems involved in the Pasture
+application: `role::pasture_app` and `role::pasture_database`. First, create
+the directory structure for your `role` module.
 
     mkdir -p role/manifests
 
-Create a manifest to define your `role::app_server` role.
+Create a manifest to define your `role::pasture_app` role.
 
-    vim role/manifests/app_server.pp
-
-Here, we'll use conditional logic to decide whether to apply the large or small
-version of our application.  With facts and conditionals, you can use any
-system information to determine the stack of profiles that will fulfill the
-role.  In this case, we'll base this decision on the node name. The quest tool
-created a `pasture-app-small.puppet.vm` and `pasture-app-large.puppet,vm` node
-for this quest, so we can determine the appropriate profile based on whether
-the node name includes the string "small" or "large".
-
-Regardless of the application profile we choose, we'll want to include
-`profile::motd`, so we'll put this after the conditional.
+    vim role/manifests/pasture_app.pp
 
 ```puppet
-class role::app_server {
-  if 'large' in $facts['name'] {
-    include profile::pasture::app_large
-  } elsif 'small' in $facts['name'] {
-    include profile::pasture::app_small
-  } else {
-    fail("The #{$facts['name'] node name must match 'large' or 'small' to determine an appropriate profile.}")
-  }
+class role::pasture_app {
+  include profile::pasture::app
   include profile::motd
 }
 ```
@@ -210,19 +216,77 @@ Next, create a role for your database server:
 
     vim role/manifests/database.pp
 
-We're only using one database profile, so this role won't require any
-conditional logic.
-
 ```puppet
-class role::database {
+class role::pasture_db {
   include profile::pasture::db
   include profile::motd
 }
 ```
 
-## Classification with the PE console
+## Classification
 
-  
+With your roles clearly defined, classification is very simple. Each node in
+your infrastructure can be classified with a single role class.
+
+We can make use of another feature of Puppet's node definition syntax to make
+our classification model even more concise. So far, you've used simple strings
+as titles for the node definition blocks in your `site.pp` manifest. Instead of
+a string, you can use a [regular expression](http://www.regular-expressions.info/)
+as a node definition's title. This lets you apply the node definition to any
+node whose title matches the pattern the regular expression specifies.
+
+We'll use the following regular expression to match the two nodes we want to
+classify as Pasture application servers: `/^pasture-app/`. The `/` characters
+here are delimiters that indicate that we're using a regular expression rather
+than an ordinary string. The `^` character marks the beginning of the string.
+The rest of the characters are the ones we want to match in our node name.
+
+If you would like to learn more about regular expressions, you can use
+[rubular.com](http://rubular.com/) as a quick reference and testing tool. You
+might test the regular expression given above against your node names to
+validate the match. You can also refer to
+[regular-expressions.info](http://www.regular-expressions.info/) for a more
+in-depth guide on regular expressions. Generally, the kinds of regular expressions
+needed for node definitions are quite simple.
+
+Be aware that there are some special characters in regular expressions that you
+will need to escape if you want to use them as literal characters to match in
+your node name. For example, the dot (`.`) is a special character that will
+match any single character.  If you want to match a name that includes a dot or
+any other special character, you will need to escape it with a backslash
+(`\.`). If the regular expressions in your node definitions start getting
+overly complex, it may be a sign that you need to revisit your node naming
+scheme or look into an alternate classification method such as the PE console
+[node
+classifier](https://docs.puppet.com/pe/latest/console_classes_groups.html) or
+an [external node
+classifier](https://docs.puppet.com/puppet/4.10/nodes_external.html).
+
+To get started creating your node definitions, open your `site.pp` manifest.
+
+    vim /etc/puppetlabs/code/environments/production/manifests/init.pp
+
+Create a node definition block for your application server nodes.  Use the
+`/^pasture-app/` regular expression as the title of your node definition and
+include the `role::pasture_app` role class.
+
+```puppet
+node /^pasture-app/ {
+  include role::pasture_app
+}
+```
+
+Add a second node definition block for your database role. We only have one
+database node, but using a regular expression here as well will make it easy
+to scale in the future.
+
+```puppet
+node /^pasture-db/ {
+  include role::pasture_db
+}
+```
+
+Apply your changes.
 
 ## Review
 
