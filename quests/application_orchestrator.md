@@ -151,8 +151,8 @@ don't worry if you're not familiar with the language.
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
-As before, the first step is to create your module directory structure. Make sure
-you're in your modules directory:
+As before, the first step is to create your module directory structure. Make
+sure you're in your modules directory:
 
     cd /etc/puppetlabs/code/environments/production/modules
 
@@ -183,30 +183,45 @@ Puppet::Type.newtype :sql, :is_capability => true do
 end
 ```
 
-It's the `is_capability => true` part that lets this resource live on the
-environment level, rather than being applied to a specific node. Because this
-resource won't directly define any system state, all you have to do is specify
-its list of parameters.
+The `is_capability => true` setting tells Puppet that this is an *environment
+resource*. While ordinary resources are restricted to the catalog for an
+individual node, environment resources are accessible by all nodes involved in
+an application orchestrator job run. This means that an environment resource
+can pass information across nodes involved in an orchestration job.
+
+The second distinguishing feature is that this `sql` resource doesn't have any
+associated *providers*. While most resources are intended to manage some aspect
+of a system, this `sql` resource's only function is to pass its parameter
+values from a database node where they're defined to a webserver node that
+needs to consume them. In this sense, you can think of it as a sort of dummy
+resource—it uses Puppet's resource syntax to provide a set of key-value pairs
+at the environment level, but doesn't directly specify any system state.
+
+As we move on to the other components involved in the application, you will see
+how this `sql` resource is produced and consumed.
 
 <div class = "lvm-task-number"><p>Task 7:</p></div>
 
 Now that you have this new `sql` resource type, let's move on to the database
 component. This component will consist of a defined resource type similar to
-the `profile::pasture_db` profile class you created in the Forge quest. We'll
-include parameters to allow us to define the key configuration details for
-the database. In the same manifest, but after we've closed out the defined
-resource type, we'll also include a `produces` statement to define the
-relationship between our `pasture_app::postgres` defined resource type and
-the `sql` custom resource we defined in Ruby.
+the `profile::pasture_db` profile class you created in the roles and profiles
+quest.
 
-    vim pasture_app/manifests/postgres.pp
+In the same manifest, but after we've closed out the defined resource type,
+we'll also include a `produces` statement to define the relationship between
+our `pasture_app::db` defined resource type and the `sql` custom resource we
+defined above. This `produces` statement will use the parameters set for the
+`pasture_app::db` defined resource type to create an environment-level `sql`
+resource that the application server will be able to consume.
+
+    vim pasture_app/manifests/db.pp
 
 It will look like this:
 
 ```puppet
-define pasture_app::postgres (
-  $db_user,
-  $db_password,
+define pasture_app::db (
+  $user,
+  $password,
   $host     = $::hostname,
   $database = $name,
 ){
@@ -214,21 +229,22 @@ define pasture_app::postgres (
   include postgres::server
 
   postgres::server::db { $name:
-    user     => $db_user,
-    password => postgresql_password($db_user, $db_password),
+    user     => $user,
+    password => postgresql_password($user, $password),
   }
 
 }
 Pasture_App::Postgres produces Sql {
-  user     => $db_user,
-  password => $db_password,
+  user     => $user,
+  password => $password,
   host     => $host,
   database => $database,
 }
 ```
 
-Check the the manifest with the `puppet parser` tool. Because orchestration
-uses some new syntax, include the `--app_management` flag.
+Check the the manifest with the `puppet parser` tool. Use the
+`--app_management` flag to enable the parser's checks for the application
+orchestration syntax.
 
     puppet parser validate --app_management pasture_db/manifests/postgres.pp
 
@@ -269,11 +285,11 @@ Again, check the syntax of your manifest.
 
 <div class = "lvm-task-number"><p>Task 9:</p></div>
 
-Now that we have all of our components ready to go, we can define the
+Now that these defined resource types are complete, define the
 application itself. Because the application is the main thing provided by the
-`pasture_db` module, it goes in the `init.pp` manifest.
+`pasture_app` module, it goes in the `init.pp` manifest.
 
-    vim pasture_db/manifests/init.pp
+    vim pasture_app/manifests/init.pp
 
 We've already done the bulk of the work in our components, so this one will be pretty
 simple. The syntax for an application is similar to that of a class or defined resource type.
@@ -286,9 +302,9 @@ application pasture_app (
   $db_password,
 ) {
 
-  pasture_app::postgres { $name:
-    db_user     => $db_user,
-    db_password => $db_password,
+  pasture_app::db { $name:
+    user     => $db_user,
+    password => $db_password,
     export      => Sql[$name],
   }
 
@@ -300,40 +316,13 @@ application pasture_app (
 ```
 
 The application has two parameters, `db_user` and `db_password`. The body of
-the application declares the `pasture_app::postgres` and `pasture_app::app`
+the application declares the `pasture_app::db` and `pasture_app::app`
 components. We pass our `db_user` and `db_password` parameters through to the
-`pasture_app::postgres` component. This is also where we use the special
+`pasture_app::db` component. This is also where we use the special
 `export` metaparameter to tell Puppet we want this component to create a `sql`
-environment resource, which can then be consumed by the `pasture_app::app`
-component. Remember that `Pasture_App::Postgres produces Sql` block we put
-after the component definition?
-
-```puppet
-Pasture_App::Postgres produces Sql {
-  user     => $db_user,
-  password => $db_password,
-  host     => $host,
-  database => $database,
-}
-```
-
-This tells Puppet how to map variables parameters in our `lamp::mysql` component into
-a `sql` environment resource when we use this `export` metaparameter. Note that even
-though we're only explicitly setting the `db_user` and `db_password` parameters in this
-component declaration, the parameter defaults from the component will pass through as well. 
-
-The matching `Lamp::Webapp consumes Sql` block in the `webapp.pp` manifest tells Puppet
-how to map the parameters of the `sql` environment resource to our `lamp::webapp` component
-when we include the `consume => Sql[$name]` metaparameter.
-
-```puppet
-Lamp::Webapp consumes Sql {
-  db_name     => $name,
-  db_user     => $user,
-  db_host     => $host,
-  db_password => $password,
-}
-```
+environment resource. The `pasture_app::app`
+component includes a corresponding `comsume` metaparameter to indicate that it
+will consume that resource.
 
 Once you've finished your application definition, validate your syntax and make
 any necessary corrections.
@@ -343,57 +332,59 @@ any necessary corrections.
 At this point, use the `tree` command to check that all the components of your
 module are in place.
 
-    tree lamp
+    tree pasture_app
 
 Your module should look like the following:
 
-    modules/lamp/
+    modules/pasture_app/
     ├── lib
     │   └── puppet
     │       └── type
     │           └── sql.rb
     └── manifests
         ├── init.pp
-        ├── mysql.pp
-        └── webapp.pp
+        ├── db.pp
+        └── app.pp
 
     4 directories, 4 files
 
 <div class = "lvm-task-number"><p>Task 10:</p></div>
 
-Now that your application is defined, the final step is to declare it in your `site.pp`
-manifest.
+Now that your application is defined, the final step is to declare it in your
+`site.pp` manifest.
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
-Until now, most of the configuration you've made in your `site.pp` has been in the context
-of node blocks. An application, however, is applied to your environment independently of
-any classification defined in your node blocks or the PE console node classifier. To express
-this distinction, we declare our application instance in a special block called `site`.
+Until now, most of the configuration you've made in your `site.pp` has been in
+the context of node blocks. An application, however, is applied to your
+environment independently of any classification defined in your node blocks or
+the PE console node classifier. To express this distinction, we declare our
+application instance in a special block called `site`.
 
 ```puppet
 site { 
-  lamp { 'app1':
-    db_user     => 'roland',
-    db_password => '12345',
+  pasture { 'pasture_01':
+    db_user     => 'pasture',
+    db_password => 'm00!',
     nodes       => {
-      Node['database.learning.puppetlabs.vm']  => Lamp::Mysql['app1'],
-      Node['webserver.learning.puppetlabs.vm'] => Lamp::Webapp['app1'],
+      Node['pasture_app.puppet.vm']  => Pasture::App['pasture_app_01'],
+      Node['pasture_db.puppet.vm'] => Pasture::Db['pasture_db_01'],
     }
   }
 }
 ```
 
-The syntax for declaring an application is similar to that of a class or resource.
-The `db_user` and `db_password` parameters are set as usual.
+The syntax for declaring an application is similar to that of a class or
+resource.  The `db_user` and `db_password` parameters are set as usual.
 
-The `nodes` parameter is where the orchestration magic happens. This parameter takes
-a hash of nodes paired with one or more components. In this case, we've assigned the
-`Lamp::Mysql['app1']` component to `database.learning.puppetlabs.vm` and the
-`Lamp::Webapp['app1']` component to `webserver.learning.puppetlabs.vm`. When the
-Application Orchestrator runs, it uses the `exports` and `consumes` metaparameters
-in your application definition (in your `lamp/manifests/init.pp` manifest, for example)
-to determine the correct order of Puppet runs across the nodes in the application.
+The `nodes` parameter is where the orchestration magic happens. This parameter
+takes a hash of nodes paired with one or more components. In this case, we've
+assigned the `Lamp::Mysql['app1']` component to
+`database.learning.puppetlabs.vm` and the `Lamp::Webapp['app1']` component to
+`webserver.learning.puppetlabs.vm`. When the Application Orchestrator runs, it
+uses the `exports` and `consumes` metaparameters in your application definition
+(in your `lamp/manifests/init.pp` manifest, for example) to determine the
+correct order of Puppet runs across the nodes in the application.
 
 Now that the application is declared in our `site.pp` manifest, we can use the
 `puppet app` tool to view it.
@@ -402,44 +393,20 @@ Now that the application is declared in our `site.pp` manifest, we can use the
 
 You should see a result like the following:
 
-    Lamp['app1']
-      Lamp::Mysql['app1'] => database.learning.puppetlabs.vm
-          - produces Sql['app1']
-      Lamp::Webapp['app1'] => webserver.learning.puppetlabs.vm
-          - consumes Sql['app1']
+    Pasture['pasture_01']
+      Pasture::Db['pasture_db_01'] => database.learning.puppetlabs.vm
+          - produces Sql['pasture_db_01']
+      Pasture::App['pasture_app_01'] => webserver.learning.puppetlabs.vm
+          - consumes Sql['pasture_db_01']
 
 <div class = "lvm-task-number"><p>Task 11:</p></div>
 
 Use the `puppet job` command to deploy the application.
 
-    puppet job run Lamp['app1']
+    puppet job run Pasture['pasture_01']
 
 You can check on the status of any running or completed jobs with the
 `puppet job list` command.
-
-Now that your nodes are configured with your new application, let's take a moment
-to check out the result. First, we can log in to the database server and have a
-look our MySQL instance.
-
-    docker exec -it database bash
-
-Remember, no matter what OS you're on, you can use the `puppet resource` command
-to check the status of a service. Let's see if the MySQL server is running:
-
-    puppet resource service mysql
-
-You should see that the service is running. If you like, you can also open the client
-with the `mysql` command. When you're done, use `\q` to exit.
-
-Now go ahead and disconnect from the database node.
-
-    exit
-
-Instead of logging in to our webserver node, let's just check if the server is running.
-In the pre-configured docker setup for this quest, we mapped port 80 on the
-`webserver.learning.puppetlabs.vm` container to port 10080 on `learning.puppetlabs.vm`.
-In a web browser on your host machine, go to `http://<IP_ADDRESS>:10080/index.php` to see your
-PHP website.
 
 ## Review
 
