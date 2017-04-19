@@ -5,8 +5,8 @@
 ## Quest objectives
 
 - Understand how Puppet code is organized in **classes**, contained within **manifest** files.
-- Learn how the module structure keeps your Puppet code organized in a way the Puppet master understands
-- Use your knowledge to create a new Puppet module to manage the `cowsay` and `fortune` packages. 
+- Learn how the module structure keeps your Puppet code organized in a way the Puppet master understands.
+- Create a new Puppet module to manage the `cowsay` and `fortune` packages. 
 
 ## Getting started
 
@@ -16,14 +16,14 @@ communication between the agent and master involved in a Puppet agent run.
 Other than modifying a few basic resources, however, you haven't yet written
 much Puppet code.
 
-The patterns and workflows used to organize, maintain and deploy Puppet code
+The patterns and workflows used to organize, maintain, and deploy Puppet code
 are just as important as the code itself. Though some of the examples we give
 here may seem overly complex given the simplicity of what we're managing,
-started with good design will keep everything working smoothly as you start
+starting with good design will keep everything working smoothly as you start
 managing a more complex Puppet infrastructure.
 
 In this quest, you'll learn how Puppet code is organized into **manifests**,
-**classes** and **modules**, and how to apply classes to nodes with the
+**classes**, and **modules**, and how to apply classes to nodes with the
 `site.pp` manifest. These basics will put you on a solid footing later on when
 you begin to work with more complex code management methods for your Puppet
 code.
@@ -41,8 +41,8 @@ When you're ready to get started, enter the following command:
 At its simplest, a Puppet **manifest** is Puppet code saved to a file with the
 `.pp` extension. This code is written in the Puppet **domain specific
 language** (DSL). You already saw some examples of this DSL as you learned
-about resource.  The Puppet DSL includes resource declarations along with a set
-of other language features that let you control which resources are applied on
+about resources. The Puppet DSL includes resource declarations, along with a set
+of other language features, that let you control which resources are applied on
 a system and what values are set for those resourses' parameters.
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
@@ -88,15 +88,15 @@ component of a system. For example, a class written to manage a MS SQL Server
 might include resources to manage the package, configuration files, and service
 for the MS SQL Server instance. Because each of these components relies on the
 others, it makes sense to combine them—you're not likely to want a server with
-the configuration files set up but without the application package itself.
+the configuration files setup but without the application package itself.
 
 A **module** is a directory structure that lets Puppet keep track of where to
 find the manifests that contain your classes. A module also contains other data
 a class might rely on, such as the templates for configuration files. When you
 apply a class to a node, the Puppet master checks in a list of directories
-called a **modulepath** for a module directory matching the class name, then
+called a **modulepath** for a module directory matching the class name. The master then
 looks in that module's `manifests` subdirectory to find the manifest containing
-the class definition.  It then reads the Puppet code contained in that class
+the class definition. It reads the Puppet code contained in that class
 definition and uses it to compile a catalog defining a desired state for the
 node.
 
@@ -124,7 +124,7 @@ The output is a list of directories separated by the colon (`:`) character.
 ``` 
 
 For now, we'll work in the first directory listed in the modulepath. This
-directory includes modules specific to the production environment. (The second
+directory includes modules specific to the production environment. (The second directory
 contains modules used across all environments, and the third is modules that PE
 uses to configure itself).
 
@@ -184,7 +184,7 @@ the `puppet parser` tool to check the syntax of your new manifest:
 	
 The parser will return nothing if there are no errors. If it does detect a
 syntax error, open the file again and fix the problem before continuing. Be
-aware that this validataion can only catch simple syntax errors, and won't let
+aware that this validataion can only catch simple syntax errors and won't let
 you know about other possible errors in your manifests.
 
 Now that the `cowsay` class is defined in your module's `init.pp` manifest,
@@ -221,7 +221,7 @@ run to see the changes applied.
     ssh learning@cowsay.puppet.vm
 
 Before applying any changes to your system, it's always a good idea to use the
-`--noop` flag to do a 'dry run' of the Puppet agent. This will compile the
+`--noop` flag to do a practice run of the Puppet agent. This will compile the
 catalog and notify you of the changes that Puppet would have made without
 actually applying any of those changes to your system. It's a good way to catch
 issues the `puppet parser validate` command can't detect, and gives you a
@@ -310,7 +310,7 @@ We could use another include statement in the `site.pp` manifest to classify
 `cowsay.puppet.vm` with this `cowsay::fortune` class. In general, however, it's
 best to keep your classification as simple as possible.
 
-In this case, we'll use a class declaration to pull the `cowsay::fortune` class
+In this case, use a class declaration to pull the `cowsay::fortune` class
 into our main `cowsay` class.
 
     vim cowsay/manifests/init.pp
@@ -344,7 +344,7 @@ will make.
 
 Notice that because the cowsay package is already installed, Puppet
 won't make any changes to this package. Now that you've included the
-`cowsay::fortune` package, however, Puppet knows that it needs to install the
+`cowsay::fortune` package, Puppet knows that it needs to install the
 `fortune-mod` package to bring your node into the desired state you defined for
 it.
 
@@ -369,5 +369,5 @@ Using what you learned, you created a new module to manage the `cowsay`
 package, then extended this module by creating a new class to manage the
 `fortune-mod` package.
 
-As you move ahead in this guide, you will continue to use this organization
+As you move ahead in this guide, you will continue to use this organizational
 scheme to structure the Puppet code you write.
