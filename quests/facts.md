@@ -17,7 +17,7 @@ In this quest, we'll discuss `facter`. The
 `facter` tool allows Puppet to automatically access information about the
 system where an agent is running as variables within your Puppet manifest.
 
-As you'll see in this quest, these facts can be quite useful on your own. In
+As you'll see in this quest, these facts can be quite useful on their own. In
 the next quest, you will see how they can be used along with **conditional
 statements** to let you write Puppet code that will behave differently in
 different contexts.
@@ -32,9 +32,9 @@ To start this quest enter the following command:
 
 > -Mark Twain
 
-You already encountered `facter` tool when we asked you to run `facter
+You already encountered the `facter` tool when we asked you to run `facter
 ipaddress` in the setup section of this Quest Guide. We briefly discussed
-the tool's role in a Puppet run—the Puppet agent runs `facter` to get a list
+the tool's role in a Puppet run: the Puppet agent runs `facter` to get a list
 of facts about the system to send to the Puppet master as it requests a
 catalog. The Puppet master then uses these facts to help compile that catalog
 before sending it back to the Puppet agent to be applied.
@@ -83,7 +83,7 @@ you accessed above is available within a manifest as `$facts['os']['family']`.
 
 Let's take a break from the Pasture module you've been working on. Instead,
 we'll create a new module to manage an MOTD (Message of the Day) file. This
-file is commonly used on *nix systems to display information about a host when
+file is commonly used on \*nix\ systems to display information about a host when
 a user connects. Using facts will allow you to create a dynamic MOTD that can
 display some basic information about the system.
 
@@ -127,9 +127,9 @@ class motd {
 
 The `$facts` hash and top-level (unstructured) facts are automatically loaded
 as variables into any template. To improve readibility and reliability, we
-strongly suggest suggest using the method shown here. Be aware, however, that
+strongly suggest using the method shown here. Be aware, however, that
 you will likely encounter templates that refer directly to facts using the
-gemeral variable syntax rather than the `$facts` hash syntax we suggest here.
+general variable syntax rather than the `$facts` hash syntax we suggest here.
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
@@ -137,7 +137,7 @@ Now create the `motd.epp` template.
 
     vim motd/templates/motd.epp
 
-Begin with a parameters tag to make the set of variable used in the template
+Begin with a parameters tag to make the set of variables used in the template
 explicit. Note that the MOTD is a plaintext file without any commenting syntax,
 so we'll leave out the conventional "managed by Puppet" note.
 
@@ -193,7 +193,7 @@ And trigger a Puppet agent run:
 
     puppet agent -t
 
-To see the MOTD, first, disconnect from `pasture.puppet.vm`.
+To see the MOTD, first disconnect from `pasture.puppet.vm`.
 
     exit
 
@@ -203,14 +203,14 @@ Now reconnect.
 
 ## Review
 
-In this quest, we introduced the `facter` tool, and provided an overview of how
+In this quest, we introduced the `facter` tool and provided an overview of how
 this tool can be used to access a structured set of system data.
 
 We then showed you how to access facts from within a Puppet manifest and assign
-the values of these facts to variables. Using data from facter, you created a
-template to manage a MOTD (Message of the Day) file.
+the values of these facts to variables. Using data from Facter, you created a
+template to manage a MOTD file.
 
-In the next quest, we'll show you how you can further add flexibility to your
+In the next quest, we'll show you how you can add further flexibility to your
 Puppet code with **conditional statements**. We'll give you an example of how
 these facts can be used in conjunction with these conditional statements to
 create intelligent defaults based on system information.
