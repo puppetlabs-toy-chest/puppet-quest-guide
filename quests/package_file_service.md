@@ -28,8 +28,8 @@ To give you an example to work with in this and the following quests, we've
 created a simple Ruby application called Pasture. Pasture provides cowsay's
 functionality over RESTful API so that your cows can be accessible over HTTP—we
 might call this cowsay as a service (CaaS). (You can find the source code
-[here](https://github.com/puppetlabs/pltraining-pasture).) Though this Pasture
-application is whimsical, its simplicity lets us focus on Puppet itself
+[here](https://github.com/puppetlabs/pltraining-pasture)). Though this Pasture
+application is whimsical, its simplicity allows us to focus on Puppet itself
 without taking detours to cover the features and caveats of a more complex
 application.
 
@@ -55,7 +55,7 @@ directory.
     cd /etc/puppetlabs/code/environments/production/modules
 
 Create a new directory structure for your `pasture` module. This time, the
-module will include two subdirectories: `manifests`, and `files`.
+module will include two subdirectories: `manifests` and `files`.
 
     mkdir -p pasture/{manifests, files}
 
@@ -85,7 +85,7 @@ necessary:
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
-Before continuing on, let's apply this class to see where this file resource
+Before continuing, let's apply this class to see where this file resource
 has gotten us.
 
 Open your `site.pp` manifest:
@@ -112,8 +112,7 @@ And trigger a Puppet agent run:
 
 <div class = "lvm-task-number"><p>Task 5:</p></div>
 
-With the `pasture` gem installed, you can use the `pasture start` command
-to start the pasture process. We haven't set up a service to manage this
+With the `pasture` gem installed, you can use the `pasture start` command. We haven't set up a service to manage this
 process yet, but you can add an ampersand (`&`) after the command to start
 it in the background.
 
@@ -152,7 +151,7 @@ configuration file. Once you understand the basic concept, it will be easy to
 extend to more complex configurations.
 
 You already created a `files` directory inside the `pasture` module directory.
-Just like placing manifests inside a module's `manifests` directory lets Puppet
+Just like placing manifests inside a module's `manifests` directory allows Puppet
 find the classes they define, placing files in the module's `files` directory
 makes them available to Puppet.
 
@@ -219,7 +218,7 @@ Check your syntax with the `puppet parser` tool:
 
 While the cowsay command you installed in the previous quest runs once and
 exits, Pasture is intended to be run as a service. A Pasture process will run
-in the background and listem for any incoming requests on its designated port.
+in the background and listen for any incoming requests on its designated port.
 Because our agent node is running CentOS 7, we'll use the [systemd](https://www.freedesktop.org/wiki/Software/systemd/) service manager to handle our Pasture process.
 Although some packages set up their own service unit files, Pasture does not.
 It's easy enough to use a `file` resource to create your own. This service unit
@@ -325,7 +324,7 @@ For our class, we'll use two relationship metaparameters: `before` and
 target resource. The `notify` metaparameter is like `before`, but if the target
 resource is a service, it has the additional effect of restarting the service
 whenever Puppet modifies the resource with the metaparameter set. This is
-useful when you need to Puppet to restart a service to pick up changes in a
+useful when you need Puppet to restart a service to pick up changes in a
 configuration file.
 
 Relationship metaparameters take a [resource
