@@ -1,6 +1,6 @@
 {% include '/version.md' %}
 
-# Class Parameters
+# Class parameters
 
 ## Quest objectives
 
@@ -15,7 +15,7 @@ In the last quest, you used variables to introduce some flexibility to your
 `pasture` module. So far, however, all of the variables are assigned within the
 class itself.
 
-A well-written module in Puppet should let customize all its important
+A well-written module in Puppet should let you customize all its 
 important variables without editing the module itself. This is done with
 **class parameters**. Writing parameters into a class allows you to declare
 that class with a set of parameter-value pairs similar to the resource
@@ -123,7 +123,7 @@ the class to use their default values. Any parameters without defaults take the
 special `undef` value.
 
 To declare a class with specific parameters, use the **resource-like class
-declaration**.  As the name suggests, the syntax for a resource-like class
+declaration**. As the name suggests, the syntax for a resource-like class
 declaration is very similar to a resource declaration. It consists of the
 keyword `class` followed by a set of curly braces (`{...}`) containing the
 class name with a colon (`:`) and a list of parameters and values. Any values
@@ -141,8 +141,8 @@ Unlike the `include` function, which can be used for the same class in multiple
 places, resource-like class declarations can only be used once per class.
 Because a class declared with the `include` uses defaults, it will always be
 parsed into the same set of resources in your catalog. This means that Puppet
-can safely handle multiple `include` calls for the same class. Because a
-multiple resource-like class declaration are not guaranteed to lead to the same
+can safely handle multiple `include` calls for the same class. Because 
+multiple resource-like class declarations are not guaranteed to lead to the same
 set of resources, Puppet has no unambiguous way to handle multiple
 resource-like declarations of the same class. Attempting to make multiple
 resource-like declarations of the same class will cause the Puppet parser to
@@ -209,9 +209,9 @@ In this quest, we introduced **class parameters**, a way to customize a class
 as it's declared. These parameters let you set up a single interface for you
 to customize any aspect of the system your Puppet module manages.
 
-We also revisited the `include` function, and covered the **resource-like class
-declaration**, the syntax for specifying values for a class's parameters as it
-is declared.
+We also revisited the `include` function and covered the **resource-like class
+declaration**, the syntax for specifying values for a class's parameters as they
+are declared.
 
 In the next quest, we'll introduce **facts**, which can be used to easily
 introduce data about your agent system into your Puppet code.
