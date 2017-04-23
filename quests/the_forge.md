@@ -20,24 +20,24 @@ When you're ready to get started, enter the following command:
 ## What is the Forge?
 
 The [Puppet Forge](forge.puppet.com) is a public repository for Puppet modules.
-The Forge gives you access to community maintained modules.  Using existing
-modules from the Forge lets manage a wide variety of applications and systems
+The Forge gives you access to community maintained modules. Using existing
+modules from the Forge allows you to manage a wide variety of applications and systems
 without spending extensive time on custom module development. Furthermore,
 because many Forge modules are actively used and maintained by the Puppet
 community, you'll be working with code that's already well reviewed and tested.
 The more other users are involved with a module, the less maintenance and
 testing burden you and your team will have to take on.
 
-For those who put a high premium on vetted code and active maintenance, The
+For those who put a high premium on vetted code and active maintenance, the
 Forge maintains lists of modules that have been checked against standards set
 by Puppet's Forge team. Modules in the [Puppet
 Approved](https://forge.puppet.com/approved) category are audited to ensure
-quality, reliability, and active development.  Modules in the [Puppet
+quality, reliability, and active development. Modules in the [Puppet
 Supported](https://forge.puppet.com/supported) list are covered by Puppet
 Enterprise [support](https://puppet.com/support-services/customer-support)
 contracts and are maintained across multiple platforms and versions
-over the course of the Puppet Enterprise (release
-lifecycle)[https://puppet.com/misc/puppet-enterprise-lifecycle].
+over the course of the [Puppet Enterprise release
+lifecycle](https://puppet.com/misc/puppet-enterprise-lifecycle).
 
 So far, you've been using the Pasture application's API to return an ASCII cow
 character with a message in her speech bubble. The application has another
@@ -63,7 +63,7 @@ IMAGE
 The Forge will show several hits that match your query, including version and
 release data information, downloads, a composite rating score, and a supported
 or approved banner where relevant. This information can give you a quick idea
-of which modules in your search result you may want to investigate further.
+of which modules in your search results you may want to investigate further.
 
 IMAGE
 
@@ -73,7 +73,7 @@ module title to see more information and documentation.
 To set up a database for the Pasture application, you will need to set up a
 database server and create and configure a database instance with the correct
 user and permissions. and database and configure user permissions. We'll walk
-you through the specifics below, but you should take a moment now to look
+you through the specifics below, but take a moment to look
 through the module's documentation to see if you can discover how this module
 can be used to define the desired state for your database server. Can you
 figure out which class or classes you will use and how their parameters should
@@ -83,7 +83,7 @@ be set?
 
 Recall that a module is just a directory structure containing Puppet manifests
 and any other code or data needed to manage whatever it is the module helps
-you manage on a system. The Puppet master finds any modules in its *modulepath*
+you manage on a system. The Puppet master finds any modules in its **modulepath**
 directories and uses the module directory structure to find the classes, files,
 templates, and whatever else the module provides.
 
@@ -115,7 +115,7 @@ Notice that when you saw the module on the Forge, it was listed as
 `postgresql`. The `puppetlabs` corresponds to the name of the Forge user
 account that uploaded the module to the Forge. This distinguishes different
 users' versions of a module when you're browsing the Forge and during
-installation. When a module is installed, however, this account name is not
+installation. When a module is installed, this account name is not
 included in the module directory name. If you aren't aware of this, it could
 cause some confusion; identically named modules will conflict if you try to
 install them on the same master.
@@ -128,7 +128,7 @@ the `puppet module` tool's `list` subcommand:
 ## Writing a wrapper class
 
 Using the existing `postgresql` module, you can add a database component to the
-Pasture module without having to re-invent the Puppet code needed to manage
+Pasture module without having to reinvent the Puppet code needed to manage
 a PostgreSQL server and database instance. Instead, we'll create what's called
 a *wrapper class* to declare classes from the `postgresql` module with
 the parameters needed by the Pasture application.
@@ -139,7 +139,7 @@ in the `pasture` module's `manifests` directory.
     vim pasture/manifests/db.pp
 
 Within this `pasture::db` class, we'll use the classes provided by the
-`postgresql` module to set up a database server, the `pasture` database that
+`postgresql` module to set up the `pasture` database that
 will keep track of our cow sayings.
 
 ```puppet
@@ -161,7 +161,7 @@ things simple and created a class without parameters. As needed, you might add
 parameters to this wrapper class in order to pass values through to the
 postgresql classes it contains.
 
-Go ahead and open your `site.pp` manifest.
+Go ahead and open your `site.pp` manifest:
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
@@ -183,7 +183,7 @@ Now that this database server is set up, let's add a parameter to our main
 pasture class to specify a database URI and pass this through to the
 configuration file.
 
-Open your module's `init.pp` manifest.
+Open your module's `init.pp` manifest:
 
     vim pasture/manifests/init.pp
 
