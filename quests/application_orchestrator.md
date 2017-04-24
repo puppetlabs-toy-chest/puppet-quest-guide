@@ -1,11 +1,11 @@
 {% include '/version.md' %}
 
-# Application Orchestrator
+# Puppet Application Orchestrator
 
 ## Quest objectives
 
 - Understand the role of orchestration in managing your infrastructure.
-- Configure the Puppet Application Orchestration service and the Orchestrator
+- Configure the Puppet Application Orchestration service and the orchestrator
   client.
 - Use Puppet code to define components and compose them into an application
   stack.
@@ -20,7 +20,7 @@ your components from getting out of sync.
 
 Puppet's Application Orchestrator extends Puppet's declarative model from the
 level of the single node to the multi-node application. Describe your
-application in Puppet code, and let the Application Orchestrator handle the
+application in Puppet code, and let the orchestrator handle the
 implementation.
 
 When you're ready to get started, type the following command:
@@ -29,7 +29,7 @@ When you're ready to get started, type the following command:
 
 ## Application orchestrator
 
-To understand how the Application Orchestrator works, let's picture a simple
+To understand how the Puppet Application Orchestrator works, let's picture a simple
 two tier web application with a load balancer.
 
 ![image](../assets/orchestrator1.png)
@@ -41,7 +41,7 @@ Each of the nodes involved in this application will have some configuration for
 things not directly involved in the application. Things like SSHD, and NTP will
 likely be common to many nodes in your infrastructure, and Puppet won't require
 specific information about the application the node is involved in to configure
-them correctly.  In addition to these classes and resources that are
+them correctly. In addition to these classes and resources that are
 independent of the application, each node in this example contains some
 components of the application: the webserver, database, and load balancer along
 with whatever other resources are necessary to support and configure their
@@ -71,27 +71,27 @@ manifest.
 ![image](../assets/orchestrator4.png)
 
 The application definition tells these components how they'll communicate with
-one another and allows the Puppet Application Orchestrator determine the order
+one another and allows the Puppet Application Orchestrator to determine the order
 of Puppet runs needed to correctly deploy the application to nodes in your
 infrastructure.
 
-This ordering of Puppet runs is a big part of how the tools in the Application
-Orchestrator work. It requires a little more direct control over when and how
+This ordering of Puppet runs is a big part of how the tools in the
+orchestrator work. It requires a little more direct control over when and how
 the Puppet agent runs on the nodes involved in your application. If Puppet runs
 occurred at the default scheduled interval of half an hour, we'd have no way of
 ensuring that the components of our application would be configured in the
 correct order. If, for example, the Puppet run on our webserver happened to
-trigger before that on the database server, a change to the database name would
+trigger before that of the database server, a change to the database name would
 break our application. Our webserver would still try to connect to the database
-from a previous configuration, and would result in an error when that database
+from a previous configuration resulting in an error when that database
 wasn't available.
 
-## Puppetized Applications
+## Puppetized applications
 
 Before we dive into the code, let's take a moment to review the plan for this
 application. What we do here will be a bit simpler than the load-balanced
-application we discussed above. We can save you a little typing, and still
-demonstrate the key features of the Application Orchestrator.
+application we discussed above. We can save you a little typing and still
+demonstrate the key features of the Puppet Orchestrator.
 
 ![image](../assets/orchestrator5.png)
 
@@ -109,14 +109,14 @@ So for these two nodes to be deployed correctly, what needs to happen?
 
 First, we also need a method for passing information among our nodes. Because the
 information our webserver needs to connect to our database may be based on
-facter facts, conditional logic, or functions in the Puppet manifest that
-defines the component, Puppet won't know what it is until it actually generates
+Facter facts, conditional logic, or functions in the Puppet manifest that
+define the component, Puppet won't know what it is until it actually generates
 the catalog for the database node. Once Puppet has this information, it needs a
 way to pass it on as parameters for our webserver component.
 
 Second, the Puppet runs on these nodes must occur in the correct order.
 Because the application server node relies on the database server, Puppet must
-run on the database server first the webserver second.
+run on the database server first and the webserver second.
 
 Both of these requirements are met through something called an environment
 resource. Unlike the node-specific resources (like `user` or `file`) that tell
@@ -130,7 +130,7 @@ in the case of our application?
 
 1. **Host**: Our webserver needs to know the hostname of the database server.
 1. **Database**: We need to know the name of the specific database to which to connect.
-1. **User**: If we want to connect to the database, we'll the name of a database user.
+1. **User**: If we want to connect to the database, we'll need the name of a database user.
 1. **Password**: We'll also need to know the password associated with that user.
 
 This list specifies what our database server *produces* and what our webserver
@@ -138,8 +138,8 @@ This list specifies what our database server *produces* and what our webserver
 everything it needs to connect to the database hosted on the database server.
 
 To allow all this information to be produced when we run Puppet on our database
-server and consumed by our webserver, we'll create a custom resource type
-called `sql`. Unlike a typical node resource our `sql` resource won't directly
+server and be consumed by our webserver, we'll create a custom resource type
+called `sql`. Unlike a typical node resource, our `sql` resource won't directly
 specify any changes on our nodes. You can think of it as a sort of dummy
 resource. Once its parameters are set by the database component, it remains in
 the site level catalog where those parameters can be consumed by the
@@ -167,7 +167,7 @@ you'll define with Ruby code.
 
 <div class = "lvm-task-number"><p>Task 6:</p></div>
 
-Go ahead and create this new `sql` resource type.
+Go ahead and create this new `sql` resource type:
 
     vim pasture_app/lib/puppet/type/sql.rb
 
@@ -183,14 +183,14 @@ Puppet::Type.newtype :sql, :is_capability => true do
 end
 ```
 
-The `is_capability => true` setting tells Puppet that this is an *environment
-resource*. While ordinary resources are restricted to the catalog for an
+The `is_capability => true` setting tells Puppet that this is an **environment
+resource**. While ordinary resources are restricted to the catalog for an
 individual node, environment resources are accessible by all nodes involved in
 an application orchestrator job run. This means that an environment resource
 can pass information across nodes involved in an orchestration job.
 
 The second distinguishing feature is that this `sql` resource doesn't have any
-associated *providers*. While most resources are intended to manage some aspect
+associated **providers**. While most resources are intended to manage some aspect
 of a system, this `sql` resource's only function is to pass its parameter
 values from a database node where they're defined to a webserver node that
 needs to consume them. In this sense, you can think of it as a sort of dummy
@@ -244,14 +244,14 @@ Pasture_App::Postgres produces Sql {
 
 Check the the manifest with the `puppet parser` tool. Use the
 `--app_management` flag to enable the parser's checks for the application
-orchestration syntax.
+orchestration syntax:
 
     puppet parser validate --app_management pasture_db/manifests/postgres.pp
 
 <div class = "lvm-task-number"><p>Task 8:</p></div>
 
 Next, create an `app` component to set up the Pasture application server
-itself.
+itself:
 
     vim pasture_app/manifests/app.pp
 
@@ -325,12 +325,12 @@ component includes a corresponding `comsume` metaparameter to indicate that it
 will consume that resource.
 
 Once you've finished your application definition, validate your syntax and make
-any necessary corrections.
+any necessary corrections:
 
     puppet parser validate --app_management lamp/manifests/init.pp
 
 At this point, use the `tree` command to check that all the components of your
-module are in place.
+module are in place:
 
     tree pasture_app
 
@@ -357,7 +357,7 @@ Now that your application is defined, the final step is to declare it in your
 
 Until now, most of the configuration you've made in your `site.pp` has been in
 the context of node blocks. An application, however, is applied to your
-environment independently of any classification defined in your node blocks or
+environment independent of any classification defined in your node blocks or
 the PE console node classifier. To express this distinction, we declare our
 application instance in a special block called `site`.
 
@@ -375,19 +375,19 @@ site {
 ```
 
 The syntax for declaring an application is similar to that of a class or
-resource.  The `db_user` and `db_password` parameters are set as usual.
+resource. The `db_user` and `db_password` parameters are set as usual.
 
 The `nodes` parameter is where the orchestration magic happens. This parameter
 takes a hash of nodes paired with one or more components. In this case, we've
 assigned the `Lamp::Mysql['app1']` component to
 `database.learning.puppetlabs.vm` and the `Lamp::Webapp['app1']` component to
-`webserver.learning.puppetlabs.vm`. When the Application Orchestrator runs, it
+`webserver.learning.puppetlabs.vm`. When the orchestrator runs, it
 uses the `exports` and `consumes` metaparameters in your application definition
 (in your `lamp/manifests/init.pp` manifest, for example) to determine the
 correct order of Puppet runs across the nodes in the application.
 
 Now that the application is declared in our `site.pp` manifest, we can use the
-`puppet app` tool to view it.
+`puppet app` tool to view it:
 
     puppet app show
 
@@ -401,7 +401,7 @@ You should see a result like the following:
 
 <div class = "lvm-task-number"><p>Task 11:</p></div>
 
-Use the `puppet job` command to deploy the application.
+Use the `puppet job` command to deploy the application:
 
     puppet job run Pasture['pasture_01']
 
@@ -419,11 +419,11 @@ Application Orchestrator client. You can review these steps and find further inf
 at the [Puppet Documentation](https://docs.puppetlabs.com/pe/latest/app_orchestration_overview.html)
 website.
 
-Defining an application generally requires several distinct manifests and ruby extensions:
+Defining an application generally requires several distinct manifests and Ruby extensions:
 
-*  Application components, which are typically written as defined resource types
+*  Application components, which are typically written as defined resource types.
 *  New type definitions for any environment resources needed to pass parameters among
-   your components
+   your components.
 *  An application definition to declare your application components and specify their
    relationships to one another.
 *  A declaration of your application in the `site` block of your `site.pp` manifest
