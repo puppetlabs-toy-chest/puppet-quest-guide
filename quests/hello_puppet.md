@@ -48,7 +48,7 @@ concerned with version control, compliance, continuous integration and deploymen
 and testing can easily fold infrastructure into their development and release workflow.
 
 Puppet code is a **declarative** language, which means that you 
-describe the only desired state for your systems, not the steps
+describe only the desired state for your systems, not the steps
 needed to get there. Once you've specified in Puppet code those aspects of a
 system you want Puppet to manage, a Puppet agent service running in the
 background makes any changes needed to bring the system into compliance with
@@ -140,14 +140,14 @@ system that can access the master.
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
-To get started, use `ssh` to connect to `hello.puppet.vm` by running:
-
-    ssh learning@hello.puppet.vm
-
 Your credentials are:
 
 **username:** learning  
 **password:** puppet
+
+To get started, use `ssh` to connect to `hello.puppet.vm` by running:
+
+    ssh learning@hello.puppet.vm
 
 Now that you're connected to this system, copy and run the following command to
 load the agent installer from the master and run it on the agent system:
