@@ -1,6 +1,6 @@
 {% include '/version.md' %}
 
-# Defined Resource Types
+# Defined resource types
 
 ## Quest objectives
 
@@ -8,21 +8,21 @@
 - Understand the difference between a defined resource type and class.
 - Learn how to handle the uniqueness constraints of resources contained within
   a defined resource type.
-- Use a defined resource type to manage users' accounts and ssh keys.
+- Use a defined resource type to manage user accounts and ssh keys.
 
-## Getting Started
+## Getting started
 
 In this quest, you'll create a module to help manage user accounts and their
 SSH keys. For each user, you'll manage the user account itself, the
 user's ssh key, and the user's home directory. If you only wanted to manage
 this set of resources for a single user, you could create a class. However,
-you're likely to need to manage multiple these resources for multiple users who
+you're more likely to manage multiple resources for multiple users who
 need access to a system. In this case, a class will not be sufficient. Classes
 in Puppet are **singleton**, which means they can only be declared once within
 a node's catalog.
 
 Instead, you will use a **defined resource type**. A defined resource type is a
-block of Puppet code similar in syntax to a class.  It can take parameters and
+block of Puppet code similar in syntax to a class. It can take parameters and
 contain a collection of resources along with other Puppet code such as
 variables and conditionals to control how those resources will be defined in a
 node's catalog. Unlike a class, a defined resource type is not singleton—it can
@@ -75,7 +75,7 @@ resource's title is a unique identifier for that resource within Puppet, while
 the namevar specifies a unique aspect of the system that the resource will
 manage. 
 
-So how do you guarantee that that these resources are unique? Within the block
+So how do you guarantee that these resources are unique? Within the block
 of code that defines your defined resource, you get a "free" `$title`. This
 `$title` variable is set to the title of your defined resource instance when
 you declare it. By incorporating this `$title` variable into the titles of each
@@ -91,12 +91,12 @@ the functionality provided by that module's class or classes. For example, the
 types to help manage things like databases, users, and grants. In this case,
 however, we'll create a standalone module for our defined resource type.
 
-Begin by creating the module's directory structure.
+Begin by creating the module's directory structure:
 
     mkdir -p user_accounts/manifests
 
 We'll start with a `user_account.pp` manifest where we'll write an
-`ssh_users::user_account` defined resource type.
+`ssh_users::user_account` defined resource type:
 
     vim user_accounts/manifests/ssh_user.pp
 
@@ -190,16 +190,16 @@ which users we want on a system. Rather than place this directly in your
 will use your defined resource type to specify the set of users you want to
 manage on a system. 
 
-Before creating the manifest where you will define this class, open the the
+Before creating the manifest where you will define this class, open the
 public key file you generated and copy the contents so you'll be able to paste
-it into your manifest.
+it into your manifest:
 
     vim ~/.ssh/id_rsa.pub
 
 Copy only the actual key. Don't include the `ssh-rsa` and `learning@puppet.vm`.
 Be careful not to include any leading or trailing whitespace.
 
-Now create a `pasture_users.pp` profile manifest.
+Now create a `pasture_users.pp` profile manifest:
 
     vim profile/manifests/pasture_dev_users.pp
 
@@ -234,19 +234,19 @@ node 'pasture-dev.puppet.vm' {
 }
 ```
 
-Use the `pupept job` tool to trigger a Puppet agent run. (If your token has
+Use the `puppet job` tool to trigger a Puppet agent run. (If your token has
 expired, run the `puppet access login --lifetime 1d` and use the credentials
 **learning** and **puppet** to generate a new access token.)
 
     puppet job run --nodes pasture-dev.puppet.vm
 
 When the Puppet run completes, try connecting to `pasture-dev.puppet.vm` as the
-user `bert`.
+user `bert`:
 
     ssh bert@pasture-dev.puppet.vm
 
 We're just connecting to check that the SSH key and account works, so go ahead
-and disconnect.
+and disconnect:
 
     exit
 
