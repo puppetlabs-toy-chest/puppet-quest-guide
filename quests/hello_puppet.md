@@ -157,7 +157,7 @@ created. The easiest way to address this is by rebooting the VM and running
 `quest begin hello_puppet` to restart this quest and re-create the agent
 system.
 
-    sudo curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | bash
+    curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | sudo bash
 
 You will see some text stream across the screen as the installation runs.
 
