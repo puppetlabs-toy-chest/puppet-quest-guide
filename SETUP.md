@@ -19,7 +19,7 @@ virtualization software's documentation.
 1. *Before* starting the VM for the first time, adjust its
 settings.  Allocate 4GB of memory for the best performance. If
 you don't have enough memory on your host machine, you can leave the allocation
-at 3GB or lower it to 2GB, but you might encounter stability and performance
+at 3GB, but you might encounter stability and performance
 issues. Set the **Network Adapter** to **Bridged**. Use an autodetect setting if
 available, or accept the default network adapter name. If you are unable to use 
 a bridged network, use the port-forwarding instructions provided in the Troubleshooting
