@@ -286,6 +286,15 @@ node /^pasture-db/ {
 }
 ```
 
+Use the `puppet job` tool to trigger a Puppet agent run on this
+`pasture-db.puppet.vm` node.
+
+    puppet job run --nodes pasture-db.puppet.vm
+
+When this run is complete, trigger runs on your two application server nodes.
+
+    puppet job run --nodes pasture-app-small.puppet.vm,pasture-app-large.puppet.vm
+
 Apply your changes.
 
 ## Review
