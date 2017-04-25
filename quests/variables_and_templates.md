@@ -25,7 +25,7 @@ in your class without editing the module code itself.
 
 As you work through the rest of this quest guide, you'll see that variables
 (and templates to a lesser extent) are a key concept in many of the
-techniques o write adaptable Puppet code.
+techniques to write adaptable Puppet code.
 
 When you're ready to get started, enter the following command:
 
