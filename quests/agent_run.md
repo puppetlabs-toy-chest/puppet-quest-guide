@@ -6,7 +6,7 @@
 
 - Understand the process of a Puppet agent run.
 - Learn how to list and sign agent certificates.
-- Use the **site.pp** manifest to classify a node.
+- Use the *site.pp* manifest to classify a node.
 
 ## Get started
 
@@ -34,10 +34,10 @@ Ready to get started? Run the following command on your Learning VM:
 As we mentioned in the previous quest, Puppet is typically used in what's
 called an agent/master (client/server) architecture.
 
-In this architecture, each managed node in your infrastructure runs a **Puppet
-agent** service. One or more servers (depending on the size and complexity of
-your infrastructure) act as **Puppet master(s)** and run the Puppet server
-service to handle communication with your agents. In a default **monolithic**
+In this architecture, each managed node in your infrastructure runs a *Puppet
+agent* service. One or more servers (depending on the size and complexity of
+your infrastructure) act as *Puppet master(s)* and run the Puppet server
+service to handle communication with your agents. In a default *monolithic*
 master installation, the Puppet master server also hosts several supporting
 services such as the PE console services and PuppetDB. In larger deployments
 these services may be distributed across other servers to improve performance
@@ -54,9 +54,9 @@ learn how Puppet works.
 
 ![image](../assets/SimpleDataFlow.png)
 
-The Puppet agent begins a Puppet run by sending a **catalog request** to the
+The Puppet agent begins a Puppet run by sending a *catalog request* to the
 Puppet master. This request includes some information about the agent system
-provided by a tool called **Facter**.
+provided by a tool called *Facter*.
 
 The Puppet master uses this information from Facter along with your Puppet code
 to compile a catalog that tells the agent exactly how the resources on its
@@ -69,11 +69,11 @@ previous quest. While your Puppet code's final purpose is to define resources,
 it also includes some language features such as variables, classes, and
 conditionals that can give you control over which resources you want on a
 system and how their parameters are set. The master parses this code to create
-a **catalog**. The catalog is the final list of system resources that
+a *catalog*. The catalog is the final list of system resources that
 define the desired state for an agent node.
 
 The Puppet master sends this catalog back to the Puppet agent, which then uses
-its **providers** to check if the desired state of each resource defined in the
+its *providers* to check if the desired state of each resource defined in the
 catalog matches the actual state of the resource on the system. If any
 differences are found, the providers help Puppet implement whatever changes are
 necessary to bring the actual state of the system into line with the desired
@@ -100,7 +100,7 @@ first place.
 
 Puppet requires any system contacting the Puppet master to
 authenticate with a signed certificate. The first time a Puppet agent contacts
-the Puppet master, it will submit a **certificate signing request (CSR)**. A
+the Puppet master, it will submit a *certificate signing request (CSR)*. A
 Puppet administrator can then validate that the system sending the CSR should
 be allowed to request catalogs from the master before deciding to sign the
 certificate. (You can read more about the details of Puppet's cryptographic
@@ -113,7 +113,7 @@ Start by connecting to your agent system. When you
 began this quest, the system you used in the last quest was destroyed and a new
 one was created. This new system has the Puppet agent pre-installed, so there's
 no need to repeat the installation process. Go ahead and connect to the new
-agent system with the same credentials you used in the last quest.
+agent system with the same credentials you used in the last quest:
 
 **username: learning**  
 **password: puppet**
@@ -137,15 +137,15 @@ management](https://docs.puppet.com/pe/latest/console_cert_mgmt.html).
 
 <div class = "lvm-task-number"><p>Task 13:</p></div>
 
-First, exit your SSH session to return to the your Puppet master.
+First, exit your SSH session to return to the your Puppet master:
 
     exit
 
-Use the `puppet cert` tool to list unsigned certificates.
+Use the `puppet cert` tool to list unsigned certificates:
 
     puppet cert list
 
-Sign the cert for `hello.puppet.vm`.
+Sign the cert for `hello.puppet.vm`:
 
     puppet cert sign hello.puppet.vm
 
@@ -223,8 +223,8 @@ help you understand exactly what you're doing as you write code to apply to
 your agent.
 
 When the Puppet server service on the Puppet master receives a catalog
-request with a valid certificate, it begins a process called **node
-classification** to determine what Puppet code will be compiled to generate
+request with a valid certificate, it begins a process called *node
+classification* to determine what Puppet code will be compiled to generate
 a catalog for the agent making the request.
 
 There are three different ways to handle node classification.
@@ -254,7 +254,7 @@ infrastructure, so a node definition defines how Puppet should manage a given
 system.
 
 It will help to understand what a node definition looks like with an example.
-Go ahead and open your `site.pp` manifest.
+Go ahead and open your `site.pp` manifest:
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
@@ -280,7 +280,7 @@ of your Puppet run without making any changes to the system.
 Add the following `notify` resource to your node definition. (You'll probably
 learn Puppet code syntax more quickly if you type out your code manually, but
 if you prefer to paste content into Vim, you can hit `ESC` to enter command
-mode and type `:set paste` to disable the automatic formatting.  Press `i` to
+mode and type `:set paste` to disable the automatic formatting. Press `i` to
 return to insert mode before pasting your text.)
 
 ```puppet
@@ -315,7 +315,7 @@ SSH to your agent node:
 
     ssh learningt@learning.puppet.vm
 
-And use the `puppet agent` tool to trigger a Puppet run.
+And use the `puppet agent` tool to trigger a Puppet run:
 
     sudo puppet agent -t
 
@@ -331,12 +331,12 @@ Now go ahead and disconnect from your agent node.
 
 ## Review
 
-We began this quest with a discussion of Puppet's **agent/master architecture**
+We began this quest with a discussion of Puppet's *agent/master architecture*
 and the communication between the Puppet master and an agent. The agent begins
-this process by sending a **catalog request** to the master. The master first
-checks to see if the agent has a valid **certificate**. If the certificate is
-valid, the master consults several methods of **classification** to begin the
-process of catalog compilation. In this quest, we used a **node definition**
+this process by sending a *catalog request* to the master. The master first
+checks to see if the agent has a valid *certificate*. If the certificate is
+valid, the master consults several methods of *classification* to begin the
+process of catalog compilation. In this quest, we used a *node definition*
 in the `site.pp` manifest to classify our node. The master then compiles a
 catalog that it returns to the agent. The agent checks if the current state
 of its system matches the desired state described in the catalog and makes
