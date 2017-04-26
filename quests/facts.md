@@ -18,8 +18,8 @@ In this quest, we'll discuss `facter`. The
 system where an agent is running as variables within your Puppet manifest.
 
 As you'll see in this quest, these facts can be quite useful on their own. In
-the next quest, you will see how they can be used along with **conditional
-statements** to let you write Puppet code that will behave differently in
+the next quest, you will see how they can be used along with *conditional
+statements* to let you write Puppet code that will behave differently in
 different contexts.
 
 To start this quest enter the following command:
@@ -172,7 +172,7 @@ With this template set, your simple MOTD module is complete. Open your
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 We're not using any parameters, so we'll use the `include` function to add the
-`motd` class to the `pasture.puppet.vm` node definition:
+`motd` class to the `pasture.puppet.vm` node definition.
 
 ```puppet
 node 'pasture.puppet.vm` {
@@ -189,7 +189,7 @@ Once this is complete, connect again to the `pasture.puppet.vm` node.
 
     ssh learning@pasture.puppet.vm
 
-And trigger a Puppet agent run:
+And trigger a Puppet agent run.
 
     puppet agent -t
 
@@ -211,6 +211,6 @@ the values of these facts to variables. Using data from Facter, you created a
 template to manage a MOTD file.
 
 In the next quest, we'll show you how you can add further flexibility to your
-Puppet code with **conditional statements**. We'll give you an example of how
+Puppet code with *conditional statements*. We'll give you an example of how
 these facts can be used in conjunction with these conditional statements to
 create intelligent defaults based on system information.
