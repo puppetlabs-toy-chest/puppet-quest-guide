@@ -87,8 +87,8 @@ A class should bring together a set of resources that manage one logical
 component of a system. For example, a class written to manage a MS SQL Server
 might include resources to manage the package, configuration files, and service
 for the MS SQL Server instance. Because each of these components relies on the
-others, it makes sense to combine them—you're not likely to want a server with
-the configuration files setup but without the application package itself.
+others, it makes sense to manage them together. You're not likely to want a server with
+MS SQL configuration files without the MS SQL application package itself.
 
 A *module* is a directory structure that lets Puppet keep track of where to
 find the manifests that contain your classes. A module also contains other data
