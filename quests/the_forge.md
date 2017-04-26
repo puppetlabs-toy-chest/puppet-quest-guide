@@ -72,12 +72,11 @@ module title to see more information and documentation.
 
 To set up a database for the Pasture application, you will need to set up a
 database server and create and configure a database instance with the correct
-user and permissions. and database and configure user permissions. We'll walk
-you through the specifics below, but take a moment to look
-through the module's documentation to see if you can discover how this module
-can be used to define the desired state for your database server. Can you
-figure out which class or classes you will use and how their parameters should
-be set?
+user and permissions. We'll walk you through the specifics below, but take a
+moment to look through the module's documentation to see if you can discover
+how this module can be used to define the desired state for your database
+server. Can you figure out which class or classes you will use and how their
+parameters should be set?
 
 ## Installation
 
