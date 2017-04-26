@@ -24,7 +24,7 @@ managing a more complex Puppet infrastructure.
 
 In this quest, you'll learn how Puppet code is organized into *manifests*,
 *classes*, and *modules*, and how to apply classes to nodes with the
-`site.pp` manifest. These basics will put you on a solid footing later on when
+`site.pp` manifest. These basics will give you a solid foundation when
 you begin to work with more complex code management methods for your Puppet
 code.
 
