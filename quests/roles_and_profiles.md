@@ -170,12 +170,12 @@ especially in the case of simple component classes like `motd` and
 of creating these wrapper classes.
 
 A profile class is the single source of truth for how a component
-is configured in your site infrastructure. This ensures that you have one
-clear place to make any changes to how that component is configured. If you
-ever decide to add parameters to your MOTD module, for example, you can easily set those parameters in a single profile class and see the
-changes take effect across any nodes whose role includes that profile. If you
-had set parameters specifically on a role or node level, on the other hand,
-any changes would have to be duplicated across every system.
+is configured in your site infrastructure. If you ever decide to add
+parameters to your MOTD module, for example, you can easily set those parameters
+in a single profile class and see the changes take effect across any nodes
+whose role includes that profile. If you had set parameters specifically on
+a role or node level, on the other hand, any changes would have to be
+duplicated across every system.
 
 Now you have a few profiles available. Each of these profiles defines how a
 component on a system should be configured. The next step is to combine them
