@@ -5,9 +5,9 @@
 ## Quest objectives
 
 - Understand the roles and profiles pattern.
-- Create **profile** classes that wrap component classes and set parameters
+- Create *profile* classes that wrap component classes and set parameters
   specific to your site infrastructure.
-- Create **role** classes to define the full configuration for a system through
+- Create *role* classes to define the full configuration for a system through
   a combination of profile classes.
 - Learn how to use regular expressions to create more flexible node
   definitions.
@@ -23,7 +23,7 @@ different classification in Puppet.
 As your Puppetized infrastructure grows in scale and complexity, you'll need to
 manage more and more kinds of systems. Defining all the classes and parameters
 for these systems directly in your `site.pp` manifest doesn't scale well. The
-**roles and profiles** pattern gives you a consistent and modular way to define
+*roles and profiles* pattern gives you a consistent and modular way to define
 how the components provided in your Puppet modules come together to define each
 different kind of system you need to manage.
 
@@ -33,13 +33,13 @@ When you're ready to get started, enter the following command:
 
 ## What are roles and profiles?
 
-The **roles and profiles** pattern we cover in this quest isn't a new tool or
+The *roles and profiles* pattern we cover in this quest isn't a new tool or
 feature in the Puppet ecosystem. Rather, it's a way of using the tools we've
 already introduced to create something you can maintain and expand as your
 Puppetized infrastructure evolves.
 
-The explanation of roles and profiles begins with what we call **component
-modules**. Component modules—like your Pasture module and the PostgreSQL module
+The explanation of roles and profiles begins with what we call *component
+modules*. Component modules—like your Pasture module and the PostgreSQL module
 you downloaded from the Forge—are designed to configure a specific piece of
 technology on a system. The classes these modules provide are written to be
 flexible. Their parameters provide an API you can use to specify precisely how
@@ -49,16 +49,16 @@ The roles and profiles pattern gives you a consistent way to organize these
 component modules according to the specific applications in your
 infrastructure.
 
-A **profile** is a class that declares one or more related component
+A *profile* is a class that declares one or more related component
 modules and sets their paramaters as needed. The set of profiles on a system
 defines and configures the technology stack it needs to fulfull its
 business role.
 
-A **role** is a class that combines one or more profiles to define the desired
+A *role* is a class that combines one or more profiles to define the desired
 state for a whole system. A role should correspond to the business purpose of a
 server. If your CTO asks what a system is for, the role should fit that
 high-level answer: something like "a database server for the Pasture
-application." A role itself should *only* compose profiles and set their
+application." A role itself should **only** compose profiles and set their
 parameters—it should not have any parameters itself.
 
 ## Writing profiles
@@ -82,11 +82,11 @@ database. A second profile will manage the PostgreSQL database that backs the
 To make it clear that all of these profiles relate to the Pasture application,
 we'll place them in a `pasture` subdirectory within `profile/manifests`.
 
-Create that subdirectory:
+Create that subdirectory.
 
     mkdir profile/manifests/pasture
 
-Next, create a profile for the Pasture application:
+Next, create a profile for the Pasture application.
 
     vim profile/manifests/pasture/app.pp
 
@@ -124,7 +124,7 @@ class profile::pasture::app {
 ```
 
 Next, create a profile for the Pasture database using the `pasture::pasture_db`
-component class:
+component class.
 
     vim profile/manifests/pasture/db.pp
 
@@ -147,11 +147,11 @@ keep them in a `base` subdirectory. To give an example of a base profile, we'll
 create a `profile::base::motd` profile class to wrap the `motd` component class
 you created earlier.
 
-Create a `base` subdirectory in your `profile` module's `manifests` directory:
+Create a `base` subdirectory in your `profile` module's `manifests` directory.
 
     mkdir profile/manifests/base
 
-Next, create a manifest to define your `profile::base::motd` profile:
+Next, create a manifest to define your `profile::base::motd` profile.
 
     vim profile/manifests/base/motd.pp
 
@@ -200,7 +200,7 @@ the directory structure for your `role` module:
 
     mkdir -p role/manifests
 
-Create a manifest to define your `role::pasture_app` role:
+Create a manifest to define your `role::pasture_app` role.
 
     vim role/manifests/pasture_app.pp
 
@@ -211,7 +211,7 @@ class role::pasture_app {
 }
 ```
 
-Next, create a role for your database server:
+Next, create a role for your database server.
 
     vim role/manifests/database.pp
 
