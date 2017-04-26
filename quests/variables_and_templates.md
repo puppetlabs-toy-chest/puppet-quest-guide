@@ -10,22 +10,16 @@
 
 ## Getting started
 
-In the last quest, we set up a module to manage the Pasture application. So
-far, however, that module is static. All the values used to define the state of
-the system are hard-coded into the module's resource declarations. The
-configuration file and service unit file are both managed by static source
-files in the module's `files` directory.
+In this quest, we introduce variables and templates. Once you assign a
+value to a variable in a Puppet manifest, you can use that variable throughout
+the manifest to yield the assigned value. Through templates, you can
+incorporate these variables into the content of any files your Puppet
+manifest manages.
 
-In this quest, we introduce *variables* and *templates*. Variables and
-templates allow separate data from the resources and files you use define
-system state. Using variables in place of hard-coded values is an important
-prerequisite to the topic of the next quest, *parameterized classes*.
-Class parameters give you an interface to customize all the important variables
-in your class without editing the module code itself.
-
-As you work through the rest of this quest guide, you'll see that variables
-(and templates to a lesser extent) are a key concept in many of the
-techniques to write adaptable Puppet code.
+While it's convenient to introduce variables and templates here as a pair,
+as you work through the rest of this quest guide, you'll see that variables
+are used along with many of Puppet's other features to help write adaptable
+Puppet code.
 
 When you're ready to get started, enter the following command:
 
