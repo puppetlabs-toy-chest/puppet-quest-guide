@@ -91,7 +91,7 @@ wasn't available.
 Before we dive into the code, let's take a moment to review the plan for this
 application. What we do here will be a bit simpler than the load-balanced
 application we discussed above. We can save you a little typing and still
-demonstrate the key features of the Puppet Orchestrator.
+demonstrate the key features of the Puppet Application Orchestrator.
 
 ![image](../assets/orchestrator5.png)
 
@@ -183,14 +183,14 @@ Puppet::Type.newtype :sql, :is_capability => true do
 end
 ```
 
-The `is_capability => true` setting tells Puppet that this is an **environment
-resource**. While ordinary resources are restricted to the catalog for an
+The `is_capability => true` setting tells Puppet that this is an *environment
+resource*. While ordinary resources are restricted to the catalog for an
 individual node, environment resources are accessible by all nodes involved in
 an application orchestrator job run. This means that an environment resource
 can pass information across nodes involved in an orchestration job.
 
 The second distinguishing feature is that this `sql` resource doesn't have any
-associated **providers**. While most resources are intended to manage some aspect
+associated *providers*. While most resources are intended to manage some aspect
 of a system, this `sql` resource's only function is to pass its parameter
 values from a database node where they're defined to a webserver node that
 needs to consume them. In this sense, you can think of it as a sort of dummy
