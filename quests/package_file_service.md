@@ -1,6 +1,6 @@
 {% include '/version.md' %}
 
-# Package File Service
+# Package file service
 
 ## Quest objectives
 
@@ -79,7 +79,7 @@ class pasture {
 ```
 
 Use the `puppet parser` tool to validate your syntax and make any changes
-necessary:
+necessary.
 
     puppet parser validate pasture/manifests/init.pp
 
@@ -88,7 +88,7 @@ necessary:
 Before continuing, let's apply this class to see where this file resource
 has gotten us.
 
-Open your `site.pp` manifest:
+Open your `site.pp` manifest.
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
@@ -102,11 +102,11 @@ node pasture.puppet.vm {
 ```
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
-Now connect to the `pasture.puppet.vm` node:
+Now connect to the `pasture.puppet.vm` node.
 
     ssh learning@pasture.puppet.vm 
 
-And trigger a Puppet agent run:
+And trigger a Puppet agent run.
 
     puppet agent -t
 
@@ -128,7 +128,7 @@ default, the process listens on port 4567. Try the following command:
     curl 'localhost:4567?string=Hello!'
 
 By default, your message will be spoken by the cow character. Let's try passing
-in another parameter to change this:
+in another parameter to change this.
 
     curl 'localhost:4567?string=Hello!&character=elephant'
 
@@ -210,7 +210,7 @@ class pasture {
 }
 ```
 
-Check your syntax with the `puppet parser` tool:
+Check your syntax with the `puppet parser` tool.
 
     puppet parser validate pasture/manifests/init.pp
 
@@ -250,11 +250,11 @@ with.
 
 <div class = "lvm-task-number"><p>Task 11:</p></div>
 
-Now open your `init.pp` manifest again:
+Now open your `init.pp` manifest again.
 
     vim pasture/manifests/init.pp
 
-First, add a file resource to manage your service unit file:
+First, add a file resource to manage your service unit file.
 
 ```puppet
 class pasture {
@@ -370,7 +370,7 @@ class pasture {
 ```
 
 When you're finished, check your syntax one more time with the `puppet parser`
-tool:
+tool.
 
     puppet parser validate pasture/manifests/init.pp
 
@@ -395,7 +395,7 @@ agent node.
     exit
 
 From the master, use the `curl` command to retrieve an ASCII elephant from
-port 4567 of the `pasture.puppet.vm` node:
+port 4567 of the `pasture.puppet.vm` node.
 
     curl 'pasture.puppet.vm:4567?string=Hello!'
 
