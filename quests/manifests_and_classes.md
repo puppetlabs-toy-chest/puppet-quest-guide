@@ -304,7 +304,7 @@ similarly named classes provided by different modules.
 Again, validate your new manifest's syntax with the `puppet parser validate`
 command.
 
-  puppet parser validate cowsay/manifests/fortune.pp
+    puppet parser validate cowsay/manifests/fortune.pp
 
 We could use another include statement in the `site.pp` manifest to classify
 `cowsay.puppet.vm` with this `cowsay::fortune` class. In general, however, it's
