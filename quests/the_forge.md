@@ -83,7 +83,7 @@ be set?
 
 Recall that a module is just a directory structure containing Puppet manifests
 and any other code or data needed to manage whatever it is the module helps
-you manage on a system. The Puppet master finds any modules in its **modulepath**
+you manage on a system. The Puppet master finds any modules in its *modulepath*
 directories and uses the module directory structure to find the classes, files,
 templates, and whatever else the module provides.
 
@@ -100,7 +100,7 @@ the Puppetfile and code management workflow
 [here](https://docs.puppet.com/pe/latest/cmgmt_managing_code.html).)
 
 On your master, go ahead and use the `puppet module` tool to install this
-module:
+module.
 
     puppet module install puppetlabs-postgresql --version 4.8.0
 
@@ -121,7 +121,7 @@ cause some confusion; identically named modules will conflict if you try to
 install them on the same master.
 
 To see a full list of modules installed in all modulepaths on your master, use
-the `puppet module` tool's `list` subcommand:
+the `puppet module` tool's `list` subcommand.
 
     puppet module list
 
@@ -161,7 +161,7 @@ things simple and created a class without parameters. As needed, you might add
 parameters to this wrapper class in order to pass values through to the
 postgresql classes it contains.
 
-Go ahead and open your `site.pp` manifest:
+Go ahead and open your `site.pp` manifest.
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
@@ -183,7 +183,7 @@ Now that this database server is set up, let's add a parameter to our main
 pasture class to specify a database URI and pass this through to the
 configuration file.
 
-Open your module's `init.pp` manifest:
+Open your module's `init.pp` manifest.
 
     vim pasture/manifests/init.pp
 
