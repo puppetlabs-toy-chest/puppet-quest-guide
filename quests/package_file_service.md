@@ -12,7 +12,7 @@ When you're ready to get started, enter the following command:
 
     quest begin package_file_service
 
-## The package, file, resource pattern 
+## The package, file, service pattern 
 
 In the previous quest, you created a simple module to manage the `cowsay` and
 `fortune-mod` packages. Often, however, you'll need Puppet to manage several
@@ -168,8 +168,8 @@ Include a line here to set the default character to `elephant`.
   character: elephant
 ```
 
-With this source file in place, you can now use it to define the content of a
-`file` resource.
+With this source file saved to your module's `files` directory, you can use
+it to define the content of a `file` resource.
 
 The `file` resource takes a `source` parameter, which allows you to specify a
 source file that will define the content of the managed file. As its value,
@@ -234,13 +234,13 @@ Include the following contents:
 
 ```
 [Unit]
-    Description=Run the pasture service
-   
-    [Service]
-    ExecStart=/usr/local/bin/pasture start
-   
-    [Install]
-    WantedBy=multi-user.target
+Description=Run the pasture service
+
+[Service]
+ExecStart=/usr/local/bin/pasture start
+
+[Install]
+WantedBy=multi-user.target
 ```
 
 If you're not familiar with the format of a systemd unit file, don't worry
