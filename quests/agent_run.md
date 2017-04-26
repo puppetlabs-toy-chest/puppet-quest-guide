@@ -43,7 +43,7 @@ services such as the PE console services and PuppetDB. In larger deployments
 these services may be distributed across other servers to improve performance
 and provide redundancy.
 
-By default, the Puppet agent service on your agent system and initiates a
+By default, the Puppet agent service initiates a
 Puppet run every half-hour. This periodic run ensures that your system stays in
 the desired state you described in your Puppet code. Any configuration drift
 that occurs between runs is remediated the next time the agent runs.
