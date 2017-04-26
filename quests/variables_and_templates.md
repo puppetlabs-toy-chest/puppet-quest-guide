@@ -16,10 +16,10 @@ the system are hard-coded into the module's resource declarations. The
 configuration file and service unit file are both managed by static source
 files in the module's `files` directory.
 
-In this quest, we introduce **variables** and **templates**. Variables and
+In this quest, we introduce *variables* and *templates*. Variables and
 templates allow separate data from the resources and files you use define
 system state. Using variables in place of hard-coded values is an important
-prerequisite to the topic of the next quest, **parameterized classes**.
+prerequisite to the topic of the next quest, *parameterized classes*.
 Class parameters give you an interface to customize all the important variables
 in your class without editing the module code itself.
 
@@ -68,7 +68,7 @@ Let's start by setting up a few variables. We'll define the default
 character the cowsay application will use, the port we want to service to
 run on, and path of the configuration file.
 
-Open your `init.pp` manifest:
+Open your `init.pp` manifest.
 
     vim pasture/manifests/init.pp
 
@@ -160,7 +160,7 @@ Next, create a `pasture_config.yaml.epp` template file.
 
     vim pasture/templates/pasture_config.yaml.epp
 
-Best practice is to begin your EPP template with a **parameter tag**. This
+Best practice is to begin your EPP template with a *parameter tag*. This
 declares which parameters your template will accept and allows you to set their
 default values. A template will work without this tag, but explicitly declaring
 your variables here makes your template more readable and easier to
@@ -191,7 +191,7 @@ beginning of the file, for example, without the newline character after the
 tag creating an empty line at the beginning of the output file.
 
 Next, we'll use the variables we set up to define values for the port and
-character configuration options:
+character configuration options.
 
 ```
 <%- | $pasture_port      = '80',
@@ -207,7 +207,7 @@ character configuration options:
 ```
 
 The `<%= ... %>` tags we use to insert our variables into the file are called
-**expression-printing tags**. These tags insert the content of a Puppet
+*expression-printing tags*. These tags insert the content of a Puppet
 expression, in this case the string values assigned to our variables.
 
 Now that this template is set up, let's return to our `init.pp` manifest
@@ -283,11 +283,11 @@ Save and exit your `init.pp` file.
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Rather than start from scratch, let's copy the existing file to use as a base
-for our template:
+for our template.
 
     cp pasture/files/pasture.service pasture/templates/pasture.service.epp
 
-Now open the file with Vim to templatize it:
+Now open the file with Vim to templatize it.
 
     vim pasture/templates/pasture.service.epp
 
@@ -310,7 +310,7 @@ Add your parameters tag and comment to the beginning of the file. Set the
 
 <div class = "lvm-task-number"><p>Task 5:</p></div>
 
-Now return to your `init.pp` manifest:
+Now return to your `init.pp` manifest.
 
     vim /pasture/manifests/init.pp
 
@@ -373,7 +373,7 @@ manifest will still apply.
 
     ssh learning@pasture.puppet.vm
 
-Trigger a Puppet agent run:
+Trigger a Puppet agent run.
 
     sudo puppet agent -t
 
@@ -386,26 +386,26 @@ Once the Puppet run has successfully completed, disconnect to return to your
 session on the Learning VM itself.
 
 Use the `curl` command again to see that your changes to the defaults have
-taken effect:
+taken effect.
 
     curl 'pasture.puppet.vm:4567?string=Hello!'
 
 ## Review
 
-In this quest, we introduced **variables** and **templates**. You reworked the
+In this quest, we introduced *variables* and *templates*. You reworked the
 `pasture` module to replace hard-coded values in your resources and
 configuration files with variables.
 
 With variables set in your manifest, you saw how to use the hash syntax and
 EPP template function to pass those variables into a template. Within an `.epp`
-template, we covered the **parameter tag**, which is used at the beginning of
+template, we covered the *parameter tag*, which is used at the beginning of
 a template to specify which variables are available within the template, and
-**expression-printing tags**, which are used to insert variable values into the
+*expression-printing tags*, which are used to insert variable values into the
 content of your templatized file.
 
 We mentioned that variables are an important part of the concepts we'll
 introduce in the following quests. In the next quest, you'll see how to create
-a **parameterized class**, which will allow you to set important variables
+a *parameterized class*, which will allow you to set important variables
 in your class as you declare it. Parameters allow you to customize how a class
 is configured without editing code in the module where the class is defined.
 
