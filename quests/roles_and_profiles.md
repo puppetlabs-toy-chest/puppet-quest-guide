@@ -1,13 +1,13 @@
 {% include '/version.md' %}
 
-# Roles and Profiles
+# Roles and profiles
 
 ## Quest objectives
 
 - Understand the roles and profiles pattern.
-- Create **profile** classes that wrap component classes and set parameters
+- Create *profile* classes that wrap component classes and set parameters
   specific to your site infrastructure.
-- Create **role** classes to define the full configuration for a system through
+- Create *role* classes to define the full configuration for a system through
   a combination of profile classes.
 - Learn how to use regular expressions to create more flexible node
   definitions.
@@ -21,10 +21,10 @@ configured each play a different role in your infrastructure and have a
 different classification in Puppet.
 
 As your Puppetized infrastructure grows in scale and complexity, you'll need to
-manage more and more kinds of systems.  Defining all the classes and parameters
+manage more and more kinds of systems. Defining all the classes and parameters
 for these systems directly in your `site.pp` manifest doesn't scale well. The
-**roles and profiles** pattern gives you a consistent and modular way to define
-how the components provided your Puppet modules come together to define each
+*roles and profiles* pattern gives you a consistent and modular way to define
+how the components provided in your Puppet modules come together to define each
 different kind of system you need to manage.
 
 When you're ready to get started, enter the following command:
@@ -33,13 +33,13 @@ When you're ready to get started, enter the following command:
 
 ## What are roles and profiles?
 
-The **roles and profiles** pattern we cover in this quest isn't a new tool or
+The *roles and profiles* pattern we cover in this quest isn't a new tool or
 feature in the Puppet ecosystem. Rather, it's a way of using the tools we've
 already introduced to create something you can maintain and expand as your
 Puppetized infrastructure evolves.
 
-The explanation of roles and profiles begins with what we call **component
-modules**. Component modules—like your Pasture module and the PostgreSQL module
+The explanation of roles and profiles begins with what we call *component
+modules*. Component modules—like your Pasture module and the PostgreSQL module
 you downloaded from the Forge—are designed to configure a specific piece of
 technology on a system. The classes these modules provide are written to be
 flexible. Their parameters provide an API you can use to specify precisely how
@@ -49,12 +49,12 @@ The roles and profiles pattern gives you a consistent way to organize these
 component modules according to the specific applications in your
 infrastructure.
 
-A **profile** is a class that calls declares one or more related component
+A *profile* is a class that declares one or more related component
 modules and sets their paramaters as needed. The set of profiles on a system
-defines and configures the the technology stack it needs to fulfull its
+defines and configures the technology stack it needs to fulfull its
 business role.
 
-A **role** is a class that combines one or more profiles to define the desired
+A *role* is a class that combines one or more profiles to define the desired
 state for a whole system. A role should correspond to the business purpose of a
 server. If your CTO asks what a system is for, the role should fit that
 high-level answer: something like "a database server for the Pasture
@@ -73,7 +73,7 @@ directory in your modulepath:
     mkdir -p profile/manifests
 
 We'll begin by creating a pair of profiles related to the Pasture application.
-The profile for the application server will use a conditional statement manage
+The profile for the application server will use a conditional statement to manage
 two different configurations: a 'large' deployment that connects to an external
 database, and a 'small' deployment that makes use of the default SQLite
 database. A second profile will manage the PostgreSQL database that backs the
@@ -82,7 +82,7 @@ database. A second profile will manage the PostgreSQL database that backs the
 To make it clear that all of these profiles relate to the Pasture application,
 we'll place them in a `pasture` subdirectory within `profile/manifests`.
 
-Create that subdirectory:
+Create that subdirectory.
 
     mkdir profile/manifests/pasture
 
@@ -124,7 +124,7 @@ class profile::pasture::app {
 ```
 
 Next, create a profile for the Pasture database using the `pasture::pasture_db`
-component class:
+component class.
 
     vim profile/manifests/pasture/db.pp
 
@@ -169,14 +169,13 @@ especially in the case of simple component classes like `motd` and
 `pasture::pasture_db`. The value of consistency, however, outweighs the effort
 of creating these wrapper classes.
 
-A profile class is the single source of truth to define how a component
-is configured in your site infrastructure. This ensures that you have a single
-clear place to make any changes to how that component is configured. If you
-ever decide to add parameters to your MOTD module, for example, you will be
-able to easily set those parameters in a single profile class and see the
-changes take effect across any nodes whose role includes that profile. If you
-had set parameters specifically on a role or node level, on the other hand,
-any changes would have to be duplicated across every system.
+A profile class is the single source of truth for how a component
+is configured in your site infrastructure. If you ever decide to add
+parameters to your MOTD module, for example, you can easily set those parameters
+in a single profile class and see the changes take effect across any nodes
+whose role includes that profile. If you had set parameters specifically on
+a role or node level, on the other hand, any changes would have to be
+duplicated across every system.
 
 Now you have a few profiles available. Each of these profiles defines how a
 component on a system should be configured. The next step is to combine them
@@ -197,7 +196,7 @@ stack are left to the profiles. For example, `role::myapp_webserver` and
 
 In this case, we need two roles to define the systems involved in the Pasture
 application: `role::pasture_app` and `role::pasture_database`. First, create
-the directory structure for your `role` module.
+the directory structure for your `role` module:
 
     mkdir -p role/manifests
 
@@ -212,7 +211,7 @@ class role::pasture_app {
 }
 ```
 
-Next, create a role for your database server:
+Next, create a role for your database server.
 
     vim role/manifests/database.pp
 
@@ -252,7 +251,7 @@ needed for node definitions are quite simple.
 Be aware that there are some special characters in regular expressions that you
 will need to escape if you want to use them as literal characters to match in
 your node name. For example, the dot (`.`) is a special character that will
-match any single character.  If you want to match a name that includes a dot or
+match any single character. If you want to match a name that includes a dot or
 any other special character, you will need to escape it with a backslash
 (`\.`). If the regular expressions in your node definitions start getting
 overly complex, it may be a sign that you need to revisit your node naming
@@ -262,11 +261,11 @@ classifier](https://docs.puppet.com/pe/latest/console_classes_groups.html) or
 an [external node
 classifier](https://docs.puppet.com/puppet/4.10/nodes_external.html).
 
-To get started creating your node definitions, open your `site.pp` manifest.
+To get started creating your node definitions, open your `site.pp` manifest:
 
     vim /etc/puppetlabs/code/environments/production/manifests/init.pp
 
-Create a node definition block for your application server nodes.  Use the
+Create a node definition block for your application server nodes. Use the
 `/^pasture-app/` regular expression as the title of your node definition and
 include the `role::pasture_app` role class.
 
@@ -277,7 +276,7 @@ node /^pasture-app/ {
 ```
 
 Add a second node definition block for your database role. We only have one
-database node, but using a regular expression here as well will make it easy
+database node, but using a regular expression here will make it easy
 to scale in the future.
 
 ```puppet
