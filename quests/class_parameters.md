@@ -30,10 +30,10 @@ When you're ready to get started, enter the following command:
 ## Writing a parameterized class
 
 A class's parameters are defined as a comma-separated list of parameter name
-and default value pairs (`$parameter_name = default_value,`) enclosed in
-parentheses (`(...)`) between the class name and the opening curly bracket
-(`{`) that begins the body of the class. For readability, multiple parameters
-should be listed one per line, for example:
+and default value pairs (`$parameter_name = default_value,`). These parameter
+value pairs are enclosed in parentheses (`(...)`) between the class name and
+the opening curly bracket (`{`) that begins the body of the class. For
+readability, multiple parameters should be listed one per line, for example:
 
 ```puppet
 class class_name (
