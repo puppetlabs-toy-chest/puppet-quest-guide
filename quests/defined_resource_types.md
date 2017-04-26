@@ -4,7 +4,7 @@
 
 ## Quest objectives
 
-- Manage a group of resources with a **defined resource type**.
+- Manage a group of resources with a *defined resource type*.
 - Understand the difference between a defined resource type and class.
 - Learn how to handle the uniqueness constraints of resources contained within
   a defined resource type.
@@ -18,10 +18,10 @@ user's ssh key, and the user's home directory. If you only wanted to manage
 this set of resources for a single user, you could create a class. However,
 you're more likely to manage multiple resources for multiple users who
 need access to a system. In this case, a class will not be sufficient. Classes
-in Puppet are **singleton**, which means they can only be declared once within
+in Puppet are *singleton*, which means they can only be declared once within
 a node's catalog.
 
-Instead, you will use a **defined resource type**. A defined resource type is a
+Instead, you will use a *defined resource type*. A defined resource type is a
 block of Puppet code similar in syntax to a class. It can take parameters and
 contain a collection of resources along with other Puppet code such as
 variables and conditionals to control how those resources will be defined in a
@@ -70,7 +70,7 @@ Because a defined resource type is not singleton, it's up to you to ensure that
 none of the resources it contains violate resource uniqueness constraints when
 the defined resource type is declared multiple times.
 
-Each resource must have a unique **title** and **namevar**. Recall that a
+Each resource must have a unique *title* and *namevar*. Recall that a
 resource's title is a unique identifier for that resource within Puppet, while
 the namevar specifies a unique aspect of the system that the resource will
 manage. 
@@ -91,12 +91,12 @@ the functionality provided by that module's class or classes. For example, the
 types to help manage things like databases, users, and grants. In this case,
 however, we'll create a standalone module for our defined resource type.
 
-Begin by creating the module's directory structure:
+Begin by creating the module's directory structure.
 
     mkdir -p user_accounts/manifests
 
 We'll start with a `user_account.pp` manifest where we'll write an
-`ssh_users::user_account` defined resource type:
+`ssh_users::user_account` defined resource type.
 
     vim user_accounts/manifests/ssh_user.pp
 
@@ -139,7 +139,7 @@ example, will look like `"${title}@puppet.vm"`. This is called
 Puppet will only interpolate variables inside a double-quoted string (`"..."`).
 
 Add `ssh_authorized_key`, `user`, and `file` resources to the body of the
-defined type:
+defined type.
 
 ```puppet
 define user_accounts::ssh_user (
@@ -182,7 +182,7 @@ key. The private half of the key pair will stay in your learning user's
 
     ssh-keygen -t rsa
 
-Accept the default location and supply the password **puppet**.
+Accept the default location and supply the password *puppet*.
 
 With this key set up, you're ready to write the Puppet code to actually declare
 which users we want on a system. Rather than place this directly in your
@@ -192,19 +192,19 @@ manage on a system.
 
 Before creating the manifest where you will define this class, open the
 public key file you generated and copy the contents so you'll be able to paste
-it into your manifest:
+it into your manifest.
 
     vim ~/.ssh/id_rsa.pub
 
 Copy only the actual key. Don't include the `ssh-rsa` and `learning@puppet.vm`.
 Be careful not to include any leading or trailing whitespace.
 
-Now create a `pasture_users.pp` profile manifest:
+Now create a `pasture_users.pp` profile manifest.
 
     vim profile/manifests/pasture_dev_users.pp
 
 Here, we'll create user accounts for Bert and Ernie, the two imaginary
-colleagues who need to access the server:
+colleagues who need to access the server.
 
 ```puppet
 class profile::pasture_dev_users {
@@ -240,13 +240,13 @@ expired, run the `puppet access login --lifetime 1d` and use the credentials
 
     puppet job run --nodes pasture-dev.puppet.vm
 
-When the Puppet run completes, try connecting to `pasture-dev.puppet.vm` as the
-user `bert`:
+When the Puppet run completes, connect to `pasture-dev.puppet.vm` as the
+user `bert`.
 
     ssh bert@pasture-dev.puppet.vm
 
 We're just connecting to check that the SSH key and account works, so go ahead
-and disconnect:
+and disconnect.
 
     exit
 
