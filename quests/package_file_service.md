@@ -1,6 +1,6 @@
 {% include '/version.md' %}
 
-# Package File Service
+# Package file service
 
 ## Quest objectives
 
@@ -12,7 +12,7 @@ When you're ready to get started, enter the following command:
 
     quest begin package_file_service
 
-## The package, file, resource pattern 
+## The package, file, service pattern 
 
 In the previous quest, you created a simple module to manage the `cowsay` and
 `fortune-mod` packages. Often, however, you'll need Puppet to manage several
@@ -28,8 +28,8 @@ To give you an example to work with in this and the following quests, we've
 created a simple Ruby application called Pasture. Pasture provides cowsay's
 functionality over RESTful API so that your cows can be accessible over HTTP—we
 might call this cowsay as a service (CaaS). (You can find the source code
-[here](https://github.com/puppetlabs/pltraining-pasture).) Though this Pasture
-application is whimsical, its simplicity lets us focus on Puppet itself
+[here](https://github.com/puppetlabs/pltraining-pasture)). Though this Pasture
+application is whimsical, its simplicity allows us to focus on Puppet itself
 without taking detours to cover the features and caveats of a more complex
 application.
 
@@ -55,7 +55,7 @@ directory.
     cd /etc/puppetlabs/code/environments/production/modules
 
 Create a new directory structure for your `pasture` module. This time, the
-module will include two subdirectories: `manifests`, and `files`.
+module will include two subdirectories: `manifests` and `files`.
 
     mkdir -p pasture/{manifests, files}
 
@@ -79,16 +79,16 @@ class pasture {
 ```
 
 Use the `puppet parser` tool to validate your syntax and make any changes
-necessary:
+necessary.
 
     puppet parser validate pasture/manifests/init.pp
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
-Before continuing on, let's apply this class to see where this file resource
+Before continuing, let's apply this class to see where this file resource
 has gotten us.
 
-Open your `site.pp` manifest:
+Open your `site.pp` manifest.
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
@@ -102,18 +102,17 @@ node pasture.puppet.vm {
 ```
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
-Now connect to the `pasture.puppet.vm` node:
+Now connect to the `pasture.puppet.vm` node.
 
     ssh learning@pasture.puppet.vm 
 
-And trigger a Puppet agent run:
+And trigger a Puppet agent run.
 
     puppet agent -t
 
 <div class = "lvm-task-number"><p>Task 5:</p></div>
 
-With the `pasture` gem installed, you can use the `pasture start` command
-to start the pasture process. We haven't set up a service to manage this
+With the `pasture` gem installed, you can use the `pasture start` command. We haven't set up a service to manage this
 process yet, but you can add an ampersand (`&`) after the command to start
 it in the background.
 
@@ -129,7 +128,7 @@ default, the process listens on port 4567. Try the following command:
     curl 'localhost:4567?string=Hello!'
 
 By default, your message will be spoken by the cow character. Let's try passing
-in another parameter to change this:
+in another parameter to change this.
 
     curl 'localhost:4567?string=Hello!&character=elephant'
 
@@ -152,7 +151,7 @@ configuration file. Once you understand the basic concept, it will be easy to
 extend to more complex configurations.
 
 You already created a `files` directory inside the `pasture` module directory.
-Just like placing manifests inside a module's `manifests` directory lets Puppet
+Just like placing manifests inside a module's `manifests` directory allows Puppet
 find the classes they define, placing files in the module's `files` directory
 makes them available to Puppet.
 
@@ -169,8 +168,8 @@ Include a line here to set the default character to `elephant`.
   character: elephant
 ```
 
-With this source file in place, you can now use it to define the content of a
-`file` resource.
+With this source file saved to your module's `files` directory, you can use
+it to define the content of a `file` resource.
 
 The `file` resource takes a `source` parameter, which allows you to specify a
 source file that will define the content of the managed file. As its value,
@@ -211,7 +210,7 @@ class pasture {
 }
 ```
 
-Check your syntax with the `puppet parser` tool:
+Check your syntax with the `puppet parser` tool.
 
     puppet parser validate pasture/manifests/init.pp
 
@@ -219,7 +218,7 @@ Check your syntax with the `puppet parser` tool:
 
 While the cowsay command you installed in the previous quest runs once and
 exits, Pasture is intended to be run as a service. A Pasture process will run
-in the background and listem for any incoming requests on its designated port.
+in the background and listen for any incoming requests on its designated port.
 Because our agent node is running CentOS 7, we'll use the [systemd](https://www.freedesktop.org/wiki/Software/systemd/) service manager to handle our Pasture process.
 Although some packages set up their own service unit files, Pasture does not.
 It's easy enough to use a `file` resource to create your own. This service unit
@@ -235,13 +234,13 @@ Include the following contents:
 
 ```
 [Unit]
-    Description=Run the pasture service
-   
-    [Service]
-    ExecStart=/usr/local/bin/pasture start
-   
-    [Install]
-    WantedBy=multi-user.target
+Description=Run the pasture service
+
+[Service]
+ExecStart=/usr/local/bin/pasture start
+
+[Install]
+WantedBy=multi-user.target
 ```
 
 If you're not familiar with the format of a systemd unit file, don't worry
@@ -251,11 +250,11 @@ with.
 
 <div class = "lvm-task-number"><p>Task 11:</p></div>
 
-Now open your `init.pp` manifest again:
+Now open your `init.pp` manifest again.
 
     vim pasture/manifests/init.pp
 
-First, add a file resource to manage your service unit file:
+First, add a file resource to manage your service unit file.
 
 ```puppet
 class pasture {
@@ -325,7 +324,7 @@ For our class, we'll use two relationship metaparameters: `before` and
 target resource. The `notify` metaparameter is like `before`, but if the target
 resource is a service, it has the additional effect of restarting the service
 whenever Puppet modifies the resource with the metaparameter set. This is
-useful when you need to Puppet to restart a service to pick up changes in a
+useful when you need Puppet to restart a service to pick up changes in a
 configuration file.
 
 Relationship metaparameters take a [resource
@@ -371,7 +370,7 @@ class pasture {
 ```
 
 When you're finished, check your syntax one more time with the `puppet parser`
-tool:
+tool.
 
     puppet parser validate pasture/manifests/init.pp
 
@@ -396,7 +395,7 @@ agent node.
     exit
 
 From the master, use the `curl` command to retrieve an ASCII elephant from
-port 4567 of the `pasture.puppet.vm` node:
+port 4567 of the `pasture.puppet.vm` node.
 
     curl 'pasture.puppet.vm:4567?string=Hello!'
 

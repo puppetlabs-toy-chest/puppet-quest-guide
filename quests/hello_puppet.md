@@ -141,8 +141,8 @@ system that can access the master.
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
-To get started, use `ssh` to connect to `hello.puppet.vm` by running the following
-command and entering the password `puppet`:
+To get started, use `ssh` to connect to `hello.puppet.vm` by running the command
+below. When prompted, enter the password `puppet`.
 
     ssh learning@hello.puppet.vm
 
@@ -153,16 +153,10 @@ load the agent installer from the master and run it on the agent system:
 
 You will see text stream across the screen as the installation runs.
 
-If the script hangs due to an inability to access the required repositories,
-it may be because network settings were changed after the agent was
-created. Fix this by rebooting the VM and running
-`quest begin hello_puppet` to restart this quest and re-create the agent
-system.
-
-In real life, if your agent is running on a different operating system than
-the master, there are some additional steps to make the correct
-installation script available. In this VM, our master and agent are both
-running CentOS, so we don't have to worry about it. You can find
+Note that if your agent is running on a different operating system than
+the Master, you will have to take some steps to ensure that the correct
+installation script available. In this case, our master and agent are both
+running CentOS 7, so we don't have to worry about this difference. You can find
 full documentation of the agent installation process, including specific
 instructions for Windows and other operating systems in the [installation
 documentation](https://docs.puppet.com/pe/latest/install_agents.html).

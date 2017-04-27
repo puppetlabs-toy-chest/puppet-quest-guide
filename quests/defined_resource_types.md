@@ -1,28 +1,28 @@
 {% include '/version.md' %}
 
-# Defined Resource Types
+# Defined resource types
 
 ## Quest objectives
 
-- Manage a group of resources with a **defined resource type**.
+- Manage a group of resources with a *defined resource type*.
 - Understand the difference between a defined resource type and class.
 - Learn how to handle the uniqueness constraints of resources contained within
   a defined resource type.
-- Use a defined resource type to manage users' accounts and ssh keys.
+- Use a defined resource type to manage user accounts and ssh keys.
 
-## Getting Started
+## Getting started
 
 In this quest, you'll create a module to help manage user accounts and their
 SSH keys. For each user, you'll manage the user account itself, the
 user's ssh key, and the user's home directory. If you only wanted to manage
 this set of resources for a single user, you could create a class. However,
-you're likely to need to manage multiple these resources for multiple users who
+you're more likely to manage multiple resources for multiple users who
 need access to a system. In this case, a class will not be sufficient. Classes
-in Puppet are **singleton**, which means they can only be declared once within
+in Puppet are *singleton*, which means they can only be declared once within
 a node's catalog.
 
-Instead, you will use a **defined resource type**. A defined resource type is a
-block of Puppet code similar in syntax to a class.  It can take parameters and
+Instead, you will use a *defined resource type*. A defined resource type is a
+block of Puppet code similar in syntax to a class. It can take parameters and
 contain a collection of resources along with other Puppet code such as
 variables and conditionals to control how those resources will be defined in a
 node's catalog. Unlike a class, a defined resource type is not singleton—it can
@@ -70,12 +70,12 @@ Because a defined resource type is not singleton, it's up to you to ensure that
 none of the resources it contains violate resource uniqueness constraints when
 the defined resource type is declared multiple times.
 
-Each resource must have a unique **title** and **namevar**. Recall that a
+Each resource must have a unique *title* and *namevar*. Recall that a
 resource's title is a unique identifier for that resource within Puppet, while
 the namevar specifies a unique aspect of the system that the resource will
 manage. 
 
-So how do you guarantee that that these resources are unique? Within the block
+So how do you guarantee that these resources are unique? Within the block
 of code that defines your defined resource, you get a "free" `$title`. This
 `$title` variable is set to the title of your defined resource instance when
 you declare it. By incorporating this `$title` variable into the titles of each
@@ -139,7 +139,7 @@ example, will look like `"${title}@puppet.vm"`. This is called
 Puppet will only interpolate variables inside a double-quoted string (`"..."`).
 
 Add `ssh_authorized_key`, `user`, and `file` resources to the body of the
-defined type:
+defined type.
 
 ```puppet
 define user_accounts::ssh_user (
@@ -182,7 +182,7 @@ key. The private half of the key pair will stay in your learning user's
 
     ssh-keygen -t rsa
 
-Accept the default location and supply the password **puppet**.
+Accept the default location and supply the password *puppet*.
 
 With this key set up, you're ready to write the Puppet code to actually declare
 which users we want on a system. Rather than place this directly in your
@@ -190,7 +190,7 @@ which users we want on a system. Rather than place this directly in your
 will use your defined resource type to specify the set of users you want to
 manage on a system. 
 
-Before creating the manifest where you will define this class, open the the
+Before creating the manifest where you will define this class, open the
 public key file you generated and copy the contents so you'll be able to paste
 it into your manifest.
 
@@ -204,7 +204,7 @@ Now create a `pasture_users.pp` profile manifest.
     vim profile/manifests/pasture_dev_users.pp
 
 Here, we'll create user accounts for Bert and Ernie, the two imaginary
-colleagues who need to access the server:
+colleagues who need to access the server.
 
 ```puppet
 class profile::pasture_dev_users {
@@ -234,13 +234,13 @@ node 'pasture-dev.puppet.vm' {
 }
 ```
 
-Use the `pupept job` tool to trigger a Puppet agent run. (If your token has
+Use the `puppet job` tool to trigger a Puppet agent run. (If your token has
 expired, run the `puppet access login --lifetime 1d` and use the credentials
 **learning** and **puppet** to generate a new access token.)
 
     puppet job run --nodes pasture-dev.puppet.vm
 
-When the Puppet run completes, try connecting to `pasture-dev.puppet.vm` as the
+When the Puppet run completes, connect to `pasture-dev.puppet.vm` as the
 user `bert`.
 
     ssh bert@pasture-dev.puppet.vm
