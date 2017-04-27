@@ -21,7 +21,7 @@ new system, you will use the `puppet resource` tool to explore the state of
 that system. Through this tool, you will learn about *resources*, the
 basic units that Puppet uses to describe and manage a system.
 
-Ready to get started? Run the following command on your Learning VM:
+Ready to get started? Run the following command on your Learning VM to begin this quest:
 
     quest begin hello_puppet
 
@@ -73,7 +73,8 @@ connection to the Puppet master, fetch any Puppet code you've applied to it, and
 make the changes necessary to bring the system in line with the desired state
 you described. The fact that centralized control is built in from Puppet's
 foundations makes monitoring and compliance much easier. Puppet also
-offers orchestration features that allow you to coordinate changes across 
+offers orchestration features that allow you to coordinate changes across
+multiple systems involved in an application.
 
 **Puppet is community driven.** Joining the [Puppet
 community](https://puppet.com/community) means you can benefit from the
@@ -140,12 +141,8 @@ system that can access the master.
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
-Your credentials are:
-
-**username:** learning  
-**password:** puppet
-
-To get started, use `ssh` to connect to `hello.puppet.vm` by running:
+To get started, use `ssh` to connect to `hello.puppet.vm` by running the following
+command and entering the password `puppet`:
 
     ssh learning@hello.puppet.vm
 
