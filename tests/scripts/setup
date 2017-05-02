@@ -8,7 +8,7 @@ $stdout.sync = true
 
 def create_node(name, image='agent', sign_cert=true, run_puppet=true)
   puts "Creating #{name}..."
-  `puppet apply -e "dockeragent::node { '#{name}': ensure => present, image => '#{image}' require_dockeragent => false, }"`
+  `puppet apply -e "dockeragent::node { '#{name}': ensure => present, image => '#{image}', require_dockeragent => false, }"`
   if sign_cert
     wait_for_container(name)
     `puppet cert sign #{name}`
@@ -54,7 +54,7 @@ end
 
 def node_setup(quest)
   case quest
-  when 'hello'
+  when 'hello_puppet'
     create_node('hello.puppet.vm', image='no_agent', sign_cert=false, run_puppet=false)
     update_docker_hosts
     wait_for_ssh(['hello.puppet.vm'])

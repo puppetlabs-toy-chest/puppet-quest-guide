@@ -42,7 +42,7 @@
   "roles_and_profiles": {
     "watch_list": ["/root/.bash_history"],
     "setup_command": "ruby ./scripts/setup roles_and_profiles"
-  }
+  },
   "defined_resource_types": {
     "watch_list": ["/root/.bash_history"],
     "setup_command": "ruby ./scripts/setup defined_resource_types"
