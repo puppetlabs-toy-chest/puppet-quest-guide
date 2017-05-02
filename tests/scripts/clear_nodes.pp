@@ -1,3 +1,5 @@
-dockeragent::node { ['hello.puppet.vm']:
-  ensure => absent,
+$facts['docker_hosts'].each |$name, $ip| {
+  dockeragent::node { $name:
+    ensure => absent,
+  }
 }
