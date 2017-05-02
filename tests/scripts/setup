@@ -2,15 +2,13 @@
 
 require 'socket'
 
-quest = ARGV[0]
-
 SCRIPT_DIR = File.dirname(__FILE__)
 
 $stdout.sync = true
 
 def create_node(name, image='agent', sign_cert=true, run_puppet=true)
   puts "Creating #{name}..."
-  `puppet apply -e "dockeragent::node { '#{name}': ensure => present, image => '#{image}', }"`
+  `puppet apply -e "dockeragent::node { '#{name}': ensure => present, image => '#{image}' require_dockeragent => false, }"`
   if sign_cert
     wait_for_container(name)
     `puppet cert sign #{name}`
