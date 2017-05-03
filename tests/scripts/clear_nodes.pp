@@ -3,4 +3,5 @@ $facts['docker_hosts'].each |$name, $ip| {
     ensure              => absent,
     require_dockeragent => false,
   }
+  exec { "/opt/puppetlabs/bin/puppet cert clean ${name}": }
 }
