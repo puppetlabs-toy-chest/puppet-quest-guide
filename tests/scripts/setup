@@ -11,7 +11,10 @@ def create_node(name, image='agent', sign_cert=true, run_puppet=true)
   `puppet apply -e "dockeragent::node { '#{name}': ensure => present, image => '#{image}', require_dockeragent => false, }"`
   if sign_cert
     wait_for_container(name)
-    `puppet cert sign #{name}`
+    `docker exec #{name} puppet agent -t`
+    sleep 3
+    `puppet cert sign --all`
+    sleep 3
   end
   if run_puppet
     `docker exec #{name} puppet agent -t`
@@ -41,7 +44,7 @@ def wait_for_ssh(hosts)
     retries = 0
     begin
       Socket.tcp(host, 22, connect_timeout: 5)
-    rescue Errno::ECONNREFUSED
+    rescue
       retries +=1
       if retries > 5
         puts "Timed out waiting for node SSH services to become available. Please refer the the Learning VM troubleshooting guide."
