@@ -1,7 +1,6 @@
 $facts['docker_hosts'].each |$name, $ip| {
-  dockeragent::node { $name:
-    ensure              => absent,
-    require_dockeragent => false,
+  service { "docker-${name}.service":
+    ensure => stopped,
   }
   exec { "/opt/puppetlabs/bin/puppet cert clean ${name}": }
 }
