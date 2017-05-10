@@ -4,7 +4,9 @@
 
 ## Quest objectives
 
-- TBD 
+- Learn how to use the `package`, `file` and `service` resources together to
+  manage an application.
+- Use resource ordering metaparameters to define dependencies among resources. 
 
 ## Getting started
 
