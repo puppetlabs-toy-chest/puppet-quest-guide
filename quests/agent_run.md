@@ -43,10 +43,10 @@ services such as the PE console services and PuppetDB. In larger deployments
 these services may be distributed across other servers to improve performance
 and provide redundancy.
 
-By default, the Puppet agent service initiates a
-Puppet run every half-hour. This periodic run ensures that your system stays in
-the desired state you described in your Puppet code. Any configuration drift
-that occurs between runs is remediated the next time the agent runs.
+By default, the Puppet agent service initiates a Puppet run every half-hour.
+This periodic run ensures that your system stays in the desired state you
+described in your Puppet code. Any configuration drift that occurs between runs
+is remediated the next time the agent runs.
 
 We've disabled these automatic runs on the Learning VM's agent systems.
 Instead, you'll manually trigger runs to get more control and visibility as you
@@ -273,9 +273,10 @@ Normally you would include one or more class declarations in this node block. A
 class defines a group of related resources, allowing them to be declared as a
 single unit. Using classes in your node definitions keeps them simple and well
 organized and encourages the reuse of code. We'll cover the details of classes
-in the next quest. For now, however, we'll take a shortcut and write a
-resource declaration directly into your node definition. In this case, use a resource type called `notify` that will display a message in the output
-of your Puppet run without making any changes to the system.
+in the next quest. For now, however, we'll take a shortcut and write a resource
+declaration directly into your node definition. In this case, use a resource
+type called `notify` that will display a message in the output of your Puppet
+run without making any changes to the system.
 
 Add the following `notify` resource to your node definition. (You'll probably
 learn Puppet code syntax more quickly if you type out your code manually, but
@@ -292,19 +293,24 @@ node learning.puppet.vm {
 Remember, use `ESC` then `:wq` to save your file and exit Vim.
 
 You may notice that this resource declaration doesn't include any parameters.
-The only parameter we care about in this case is `message`. Because `message`
-is the notify resource's namevar, it will default to the resource title.
+The only feature of this `notify` resource we care about is the message it
+displays. If it's not set explicitly by the `message` parameter, this message
+will default to the resource title. This lets us save some time by leaving out
+the parameter value pairs and using the title to define the message we want the
+resource to display. (This parameter that uses the resource title as its
+default is called a **namevar**. You can read more about the role of the
+namevar in the [Puppet docs](https://docs.puppet.com/puppet/latest/lang_resources.html))
 
 Now that you have a concrete example of a node declaration, let's return to our
 review of the agent run process from the master's perspective. When the agent
-contacts the master, the master finds the matching node definition you just
-created. It will then include the Puppet code within that node definition as it
-generates a catalog to send back to the agent.
+contacts the master, the master finds a matching node definition in the
+`site.pp` manifest and uses the Puppet code contained in that node definition
+to compile a catalog.
 
-When the agent receives that catalog, it applies it. If we had included
-any resources that would require changes to the system, it would make those
-changes. In this case, however, it will simply output the message of our notify
-resource.
+The master sends that compiled catalog to the agent, which then applies the
+catalog to the system where it's running. In this case, the catalog only
+includes a `notify` resource, so the agent will display the specified message
+as it applies the catalog, but no changes will be made to the system.
 
 <div class = "lvm-task-number"><p>Task 17:</p></div>
 
@@ -315,7 +321,7 @@ SSH to your agent node:
 
     ssh learningt@learning.puppet.vm
 
-And use the `puppet agent` tool to trigger a Puppet run:
+Use the `puppet agent` tool to trigger a Puppet run:
 
     sudo puppet agent -t
 
@@ -325,7 +331,7 @@ The output will include something like this:
     Notice: /Stage[main]/Main/Node[learning.puppet.vm]/Notify[Hello Puppet!]/message: defined 'message' as 'Hello Puppet!'
     Notice: Applied catalog in 0.45 seconds
 
-Now go ahead and disconnect from your agent node.
+Now disconnect from your agent node.
 
     exit
 
