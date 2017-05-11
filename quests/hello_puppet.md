@@ -179,7 +179,7 @@ resources directly.
 Be sure you're still connected your agent system, and run the following command
 to ask Puppet to describe a file resource:
 
-    puppet resource file /tmp/test
+    sudo puppet resource file /tmp/test
 
 What you see is the Puppet code representation of a resource. In this case,
 the resource's type is `file`, and its path is
@@ -263,7 +263,7 @@ you use the `touch` command to create a new empty file at that path. Run:
 Now use the `puppet resource` tool to see how this change is represented in
 Puppet's resource syntax:
 
-    puppet resource file /tmp/test
+    sudo puppet resource file /tmp/test
 
 Now that the file exists on the system, Puppet has more to say about it. It
 shows the `ensure` and `content` parameters and their values,
@@ -298,7 +298,7 @@ a good way to manage production infrastructure. Don't worry, though, we'll get
 to that soon enough.) We can use this to set the content of your file resource.
 Run the following command:
 
-    puppet resource file /tmp/test content='Hello Puppet!'
+    sudo puppet resource file /tmp/test content='Hello Puppet!'
 
 Puppet will display some output as it checks the hash of the existing content
 against the new content you provided. When it sees that the hashes don't match,
@@ -316,7 +316,7 @@ a better understanding of how this works, let's take a look at another resource
 type, the `package`. As an example, we'll look at the package for the Apache
 webserver `httpd`. Run:
 
-    puppet resource package httpd
+    sudo puppet resource package httpd
 
 Because this package doesn't exist on the system, Puppet shows you the
 `ensure => purged` parameter value pair. This `purged` value is similar to the
@@ -343,7 +343,7 @@ The quickest way to see the inner workings of a provider
 is to break it. Tell Puppet to install a nonexistent package named
 `bogus-package` by running:
 
-    puppet resource package bogus-package ensure=present
+    sudo puppet resource package bogus-package ensure=present
 
 The error message tells you that yum wasn't able to find the
 specified package, and lists the command that Puppet's yum provider tried to
@@ -358,24 +358,26 @@ Puppet selects a default provider based on the agent's operating system and
 whether the commands associated with that provider are available. You
 can override this default by setting a resource's `provider` parameter.
 
-Try installing the same fake package again, this time with the pip
+Try installing the same fake package again, this time with the gem
 provider:
 
-     puppet resource package bogus-package ensure=present provider=pip
+     sudo puppet resource package bogus-package ensure=present provider=gem
 
-You'll see a similar error with a failed pip command instead of the yum
+You'll see a similar error with a failed gem command instead of the yum
 command:
 
 ```
-Error: Execution of '/bin/pip install -q bogus-package' returned 1: Could not
-find a version that satisfies the requirement bogus-package (from versions: )
-No matching distribution found for bogus-package
+Error: Execution of '/bin/gem install --no-rdoc --no-ri bogus-package'
+returned 2: ERROR:  Could not find a valid gem 'bogus-package' (>= 0) in any repository
+Error: /Package[bogus-package]/ensure: change from absent to present failed: 
+Execution of '/bin/gem install --no-rdoc --no-ri bogus-package' returned 2: 
+ERROR:  Could not find a valid gem 'bogus-package' (>= 0) in any repository
 ```
 
 Now that you know what's happening in the background, try installing
 a real package with the default provider:
 
-    puppet resource package httpd ensure=present
+    sudo puppet resource package httpd ensure=present
 
 This time, Puppet installs the package. The value of the
 `ensure` parameter shows you the specific version of the installed package:
@@ -387,7 +389,8 @@ package { 'httpd':
 ```
 
 When you don't specify a version of the package to install, Puppet
-defaults to installing the latest available version.
+defaults to installing the latest available version and displays this version
+number as the value of the `ensure` attribute.
 
 ## Review
 
