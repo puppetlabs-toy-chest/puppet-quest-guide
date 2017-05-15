@@ -59,7 +59,7 @@ directory.
 Create a new directory structure for your `pasture` module. This time, the
 module will include two subdirectories: `manifests` and `files`.
 
-    mkdir -p pasture/{manifests, files}
+    mkdir -p pasture/{manifests,files}
 
 <div class = "lvm-task-number"><p>Task 2:</p></div>
 
@@ -98,7 +98,7 @@ Create a new node definition for the `pasture.puppet.vm` node we've set up for
 this quest. Include the `pasture` class you just wrote.
 
 ```puppet
-node pasture.puppet.vm {
+node 'pasture.puppet.vm' {
   include pasture
 }
 ```

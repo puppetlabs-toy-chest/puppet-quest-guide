@@ -264,7 +264,7 @@ you'll create a new node definition for the `learning.puppet.vm` system. The
 outline of the node definition should look like this:
 
 ```puppet
-node learning.puppet.vm {
+node 'learning.puppet.vm' {
 
 }
 ```
@@ -285,7 +285,7 @@ mode and type `:set paste` to disable the automatic formatting. Press `i` to
 return to insert mode before pasting your text.)
 
 ```puppet
-node learning.puppet.vm {
+node 'learning.puppet.vm' {
   notify { 'Hello Puppet!': }
 }
 ```

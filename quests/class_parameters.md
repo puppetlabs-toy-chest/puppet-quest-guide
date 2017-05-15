@@ -172,7 +172,7 @@ to the string `'cow'`, and leave the other two parameters unset, letting them
 take their default values.
 
 ```puppet
-node pasture.puppet.vm {
+node 'pasture.puppet.vm' {
   class { 'pasture':
     default_character => 'cow',
   }

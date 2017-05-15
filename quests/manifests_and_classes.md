@@ -69,7 +69,7 @@ run, apply this manifest directly with the `puppet apply` tool. You can use the
 `puppet apply` tool to test Puppet code in a manifest just like you can use the 
 `puppet resource` tool to explore and modify resources directly.
 
-    puppet apply /tmp/hello.pp 
+    sudo puppet apply /tmp/hello.pp 
 
 Now you know how to save Puppet code to a file, but how to you bridge the gap
 between this saved Puppet code and the `site.pp` manifest where you define
@@ -112,6 +112,11 @@ mouth of an ASCII cow.
 Before you create a new manifest, you need to know where to keep it. For Puppet
 to find your code, you need to place it in a module directory in Puppet's
 *modulepath*.
+
+If you're still connected to `cowsay.puppet.vm` disconnect to return to your
+master system.
+
+    exit
 
 To see what your configured modulepath is, run the following command:
 
@@ -329,7 +334,7 @@ class cowsay {
 
 Use the `puppet parser validate` command to check your syntax.
 
-    `puppet parser validate cowsay/manifests/init.pp`
+    puppet parser validate cowsay/manifests/init.pp
 
 <div class = "lvm-task-number"><p>Task 8:</p></div>
 
