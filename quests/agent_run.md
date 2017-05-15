@@ -16,9 +16,10 @@
 
 The `puppet resource` command you explored in the previous quest let you see a
 system the way Puppet does—through the resource abstraction layer. While
-exploring and manipulating resources through Puppet's command line tools are useful, the real value of the resource 
-abstraction layer is to provide a single common language for your Puppet master to manage all the systems
-in your infrastructure.
+exploring and manipulating resources through Puppet's command line tools are
+useful, the real value of the resource abstraction layer is to provide a single
+common language for your Puppet master to manage all the systems in your
+infrastructure.
 
 In this quest, we'll walk through a Puppet agent run to demonstrate how the
 Puppet agent communicates with the Puppet master server. We'll then write some
@@ -118,7 +119,7 @@ agent system with the same credentials you used in the last quest:
 **username: learning**  
 **password: puppet**
 
-    ssh learning@learning.puppet.vm
+    ssh learning@agent.puppet.vm
 
 First, try to trigger a Puppet agent run without your agent system's certificate
 signed. The agent will attempt to contact the Puppet master, but its request
@@ -145,9 +146,9 @@ Use the `puppet cert` tool to list unsigned certificates:
 
     puppet cert list
 
-Sign the cert for `hello.puppet.vm`:
+Sign the cert for `agent.puppet.vm`:
 
-    puppet cert sign hello.puppet.vm
+    puppet cert sign agent.puppet.vm
 
 <div class = "lvm-task-number"><p>Task 14:</p></div>
 
@@ -184,7 +185,7 @@ that look like the following:
 
 ```
 Info: Loading facts
-Info: Caching catalog for hello.puppet.vm
+Info: Caching catalog for agent.puppet.vm
 Info: Applying configuration version '1464919481'
 ```
 
@@ -207,13 +208,13 @@ during this run.
 ## Classification
 
 To make something more interesting happen, you'll have to specify a desired
-state for some resources on the `hello.puppet.vm` system.
+state for some resources on the `agent.puppet.vm` system.
 
 <div class = "lvm-task-number"><p>Task 15:</p></div>
 
 Remember, the Puppet code you use to describe how you want a node to be
 configured is kept on the Puppet master. End your SSH session on the
-`hello.puppet.vm` agent node to return to the Puppet master:
+`agent.puppet.vm` agent node to return to the Puppet master:
 
     exit
 

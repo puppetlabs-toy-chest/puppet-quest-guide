@@ -62,9 +62,9 @@ def node_setup(quest)
     update_docker_hosts
     wait_for_ssh(['hello.puppet.vm'])
   when 'agent_run'
-    create_node('hello.puppet.vm', image='agent', sign_cert=false, run_puppet=false)
+    create_node('agent.puppet.vm', image='agent', sign_cert=false, run_puppet=false)
     update_docker_hosts
-    wait_for_ssh(['hello.puppet.vm'])
+    wait_for_ssh(['agent.puppet.vm'])
   when 'manifests_and_classes'
     create_node('cowsay.puppet.vm')
     update_docker_hosts
