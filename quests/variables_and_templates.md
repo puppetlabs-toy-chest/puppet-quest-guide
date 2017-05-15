@@ -296,6 +296,7 @@ Add your parameters tag and comment to the beginning of the file. Set the
     Description=Run the pasture service
 
     [Service]
+    Environment=RACK_ENV=production
     ExecStart=/usr/local/bin/pasture start --config_file <%= $pasture_config_file %>
 
     [Install]
