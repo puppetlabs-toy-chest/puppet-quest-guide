@@ -73,7 +73,7 @@ variable.
 ```puppet
 class pasture {
 
-  $pasture_port        = '80'
+  $port                = '80'
   $default_character   = 'sheep'
   $pasture_config_file = '/etc/pasture_config.yaml'
 
@@ -93,8 +93,8 @@ class pasture {
     notify  => Service['pasture'],
   }
 
-  servive { 'pasture':
-    ensure    => running.
+  service { 'pasture':
+    ensure => running,
   }
 
 }
@@ -170,7 +170,7 @@ The beginning of your template should look like the following. We'll explain
 the details of the syntax below.
 
 ```
-<%- | $pasture_port      = '80',
+<%- | $port              = '80',
       $default_character = 'sheep',
 | -%>
 # This file is managed by Puppet. Please do not make manual changes.
@@ -188,7 +188,7 @@ Next, we'll use the variables we set up to define values for the port and
 character configuration options.
 
 ```
-<%- | $pasture_port      = '80',
+<%- | $port              = '80',
       $default_character = 'sheep',
       $default_message   = '',
 | -%>
@@ -197,7 +197,7 @@ character configuration options.
   :default_character: <%= $default_character %>
   :default_message:   <%= $default_message %>
   :sinatra_settings:
-    :port: <%= $pasture_port %>
+    :port: <%= $port %>
 ```
 
 The `<%= ... %>` tags we use to insert our variables into the file are called
@@ -238,7 +238,7 @@ in a variable called `$pasture_config_hash` just before the file resource.
 ```puppet
 class pasture {
 
-  $pasture_port        = '80'
+  $port                = '80'
   $default_character   = 'sheep'
   $pasture_config_file = '/etc/pasture_config.yaml'
 
@@ -249,7 +249,7 @@ class pasture {
   }
 
   $pasture_config_hash = { 
-    'pasture_port'      => $pasture_port,
+    'port'              => $port,
     'default_character' => $default_character,
   }
 
@@ -346,8 +346,8 @@ class pasture {
     notify  => Service['pasture'],
   }
 
-  servive { 'pasture':
-    ensure    => running.
+  service { 'pasture':
+    ensure    => running,
   }
 
 }
@@ -383,7 +383,7 @@ session on the Learning VM itself.
 Use the `curl` command again to see that your changes to the defaults have
 taken effect.
 
-    curl 'pasture.puppet.vm:4567?string=Hello!'
+    curl 'pasture.puppet.vm/api/v1/cowsay?message=Hello!'
 
 ## Review
 

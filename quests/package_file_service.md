@@ -110,7 +110,7 @@ Now connect to the `pasture.puppet.vm` node.
 
 And trigger a Puppet agent run.
 
-    puppet agent -t
+    sudo puppet agent -t
 
 <div class = "lvm-task-number"><p>Task 5:</p></div>
 
@@ -127,12 +127,12 @@ parameters, `string`, which defines the message to be returned, and
 `character`, which sets the character you want to speak the message. By
 default, the process listens on port 4567. Try the following command:
 
-    curl 'localhost:4567?string=Hello!'
+    curl 'localhost:4567/api/v1/cowsay?message=Hello!'
 
 By default, your message will be spoken by the cow character. Let's try passing
 in another parameter to change this.
 
-    curl 'localhost:4567?string=Hello!&character=elephant'
+    curl 'localhost:4567/api/v1/cowsay?message=Hello!&character=elephant'
 
 <div class = "lvm-task-number"><p>Task 7:</p></div>
 
@@ -167,7 +167,7 @@ Include a line here to set the default character to `elephant`.
 
 ```yaml
 ---
-  character: elephant
+  :default_character: elephant
 ```
 
 With this source file saved to your module's `files` directory, you can use
@@ -239,6 +239,7 @@ Include the following contents:
 Description=Run the pasture service
 
 [Service]
+Environment=RACK_ENV=production
 ExecStart=/usr/local/bin/pasture start
 
 [Install]
@@ -296,8 +297,8 @@ class pasture {
     source => 'puppet:///modules/pasture/pasture.service',
   }
 
-  servive { 'pasture':
-    ensure => running.
+  service { 'pasture':
+    ensure => running,
   }
 
 }
@@ -360,12 +361,12 @@ class pasture {
   }
 
   file { '/etc/systemd/system/pasture.service':
-    source => 'puppet:///modules/pasture/pasture.service',
+    source  => 'puppet:///modules/pasture/pasture.service',
     notify  => Service['pasture'],
   }
 
-  servive { 'pasture':
-    ensure    => running.
+  service { 'pasture':
+    ensure => running,
   }
 
 }
@@ -389,7 +390,7 @@ Go ahead and connect to `pasture.puppet.vm`.
 
 And trigger another Puppet agent run.
 
-    puppet agent -t
+    sudo puppet agent -t
 
 Now that the `pasture` service is configured and running, disconnect from the
 agent node.
@@ -399,7 +400,7 @@ agent node.
 From the master, use the `curl` command to retrieve an ASCII elephant from
 port 4567 of the `pasture.puppet.vm` node.
 
-    curl 'pasture.puppet.vm:4567?string=Hello!'
+    curl 'pasture.puppet.vm:4567/api/v1/cowsay?string=Hello!'
 
 ## Review
 

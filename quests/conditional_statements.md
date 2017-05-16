@@ -25,20 +25,25 @@ To start this quest enter the following command:
 
 Because Puppet manages configurations on a variety of systems fulfilling a
 variety of roles, great Puppet code means flexible and portable Puppet code.
-While the *types* and *providers* that form the core of Puppet's *resource
-abstraction layer* can translate your Puppet code into the native tools on
-a wide variety of systems, there is still quite a bit of variation that you
-must account for on the level of Puppet code itself.
+Though Puppet's *types* and *providers* can translate between Puppet's resource
+syntax and the native tools on a wide variety of systems, there are still a lot
+questions that you as a Puppet module developer will need to answer yourself.
 
 A good rule of thumb is that the resource abstraction layer answers **how**
 questions, while the Puppet code itself answers **what** questions.
 
-For example, your Puppet code doesn't need to directly address **how** an
-Apache package is installed, but depending on whether you're managing a RedHat
-or Debian system, your Puppet code will need to tell Puppet to manage either
-the `httpd` or `apache2` package. If you look at the `puppetlabs-apache` module
-on the [Forge](forge.puppet.com), you'll see [this package name and numerous
-other
+As an example, let's take a look at the `puppetlabs-apache` module. While this
+module's developers rely on Puppet's providers to determine how the Apache
+package is installed—whether it's handled by `yum`, `apt-get` or another
+package manager—Puppet doesn't have any way of automatically determining the
+name of the package that needs to be installed. Depending on whether the module
+is used to manage Apache on a RedHat or Debian system, it will need to manage
+either the `httpd` or `apache2` package.
+
+This kind of **what** question is often addressed through a combination of
+conditional statements and facts or parameters.  If you look at the
+`puppetlabs-apache` module on the [Forge](forge.puppet.com), you'll see [this
+package name and numerous other
 variables](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/params.pp#L59)
 set based on an `if` statement using the `osfamily` fact. (You may notice that
 this module uses an un-structured `$::osfamily` format for this fact to
@@ -79,12 +84,6 @@ Remember that because the `name` parameter is being explicitly set here, the
 resource *title* (`httpd`) only serves as an internal identifier for the
 resource—it doesn't actually determine the name of the package that will be
 installed.
-
-You may also notice that this `$::apache::apache_name` variable name is a
-little more complex than the simple `$apache_name` that was set by the
-conditional. You don't need to worry about the details for the moment, but
-the `::apache::` part is a way of telling Puppet exactly where to find a
-variable that was assigned in a different class.
 
 ## Conditions
 
@@ -191,7 +190,7 @@ template with the same `webrick` default. The Pasture appication passes any
 settings under the `:sinatra_settings:` key to Sinatra itself.
 
 ```yaml
-<%- | $pasture_port      = '80',
+<%- | $port              = '80',
       $default_character = 'sheep',
       $default_message   = '',
       $sinatra_server    = 'webrick',
@@ -201,7 +200,7 @@ settings under the `:sinatra_settings:` key to Sinatra itself.
   :default_character: <%= $default_character %>
   :default_message:   <%= $default_message %>
   :sinatra_settings:
-    :port:   <%= $pasture_port %>
+    :port:   <%= $port %>
     :server: <%= $sinatra_server %>
 ```
 
@@ -228,11 +227,11 @@ manage your server packages included at the end.
 
 ```puppet
 class pasture (
-  $port              = '80',
-  $default_character = 'sheep',
-  $default_message   = '',
-  $config_file       = '/etc/pasture_config.yaml',
-  $sinatra_server    = 'webrick',
+  $port                = '80',
+  $default_character   = 'sheep',
+  $default_message     = '',
+  $pasture_config_file = '/etc/pasture_config.yaml',
+  $sinatra_server      = 'webrick',
 ){
 
   package { 'pasture':
@@ -263,7 +262,7 @@ class pasture (
   }
 
   service { 'pasture':
-    ensure    => running.
+    ensure    => running,
   }
 
   if $sinatra_server == 'thin' or 'mongrel'  {

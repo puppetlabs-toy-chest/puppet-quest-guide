@@ -3,7 +3,9 @@
 # Facts
 
 ## Quest objectives
- - TBD
+
+ - Learn how to use the `facter` tool to access system information.
+ - Use the `facts` hash to incorporate system information into your Puppet code.
 
 ## Getting started
 
@@ -47,7 +49,7 @@ and how they're structured.
 
 First, connect to the agent node prepared for this quest.
 
-    ssh learning@pasture01.puppet.vm
+    ssh learning@pasture.puppet.vm
 
 You can access a standard set of facts with the `facter` command. Adding the
 `-p` flag will include any custom facts that may you may have installed on the
@@ -191,7 +193,7 @@ Once this is complete, connect again to the `pasture.puppet.vm` node.
 
 And trigger a Puppet agent run.
 
-    puppet agent -t
+    sudo puppet agent -t
 
 To see the MOTD, first disconnect from `pasture.puppet.vm`.
 

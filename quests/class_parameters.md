@@ -68,10 +68,10 @@ example.
 
 ```puppet
 class pasture (
-  $port              = '80',
-  $default_character = 'sheep',
-  $default_message   = '',
-  $config_file       = '/etc/pasture_config.yaml',
+  $port                = '80',
+  $default_character   = 'sheep',
+  $default_message     = '',
+  $pasture_config_file = '/etc/pasture_config.yaml',
 ){
 
   package {'pasture':
@@ -101,7 +101,7 @@ class pasture (
   }
 
   service { 'pasture':
-    ensure    => running.
+    ensure    => running,
   }
 
 }
@@ -193,7 +193,7 @@ Let's connect to the `pasture.puppet.vm` node.
 
 And trigger a Puppet agent run to apply this parameterized class.
 
-    puppet agent -t
+    sudo puppet agent -t
 
 When the run is complete, return to the master.
 
@@ -201,7 +201,7 @@ When the run is complete, return to the master.
 
 And check that your configuration changes have taken effect.
 
-    curl 'pasture.puppet.vm:4567?string=Hello!'
+    curl 'pasture.puppet.vm/api/v1/cowsay?string=Hello!'
 
 ## Review
 
