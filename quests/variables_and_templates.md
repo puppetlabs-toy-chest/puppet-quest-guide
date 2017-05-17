@@ -307,7 +307,7 @@ Add your parameters tag and comment to the beginning of the file. Set the
 
 Now return to your `init.pp` manifest.
 
-    vim /pasture/manifests/init.pp
+    vim pasture/manifests/init.pp
 
 And modify the file resouce for your service unit file to use the template you
 just created.
