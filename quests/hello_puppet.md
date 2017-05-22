@@ -313,8 +313,11 @@ Look at the file to see the modified content by running:
 This translation back and forth between the state of the system and Puppet's
 resource syntax is the heart of Puppet's resource abstraction layer. To get
 a better understanding of how this works, let's take a look at another resource
-type, the `package`. As an example, we'll look at the package for the Apache
-webserver `httpd`. Run:
+type, the `package`.
+
+<div class = "lvm-task-number"><p>Task 7:</p></div>
+
+As an example, we'll look at the package for the Apache webserver `httpd`. Run:
 
     sudo puppet resource package httpd
 
