@@ -1,84 +1,78 @@
-describe "Task 1:" do
-  it 'Define the cowsayings::cowsay class' do
-    file("#{MODULE_PATH}cowsayings/manifests/cowsay.pp")
-      .should be_file
-    file("#{MODULE_PATH}cowsayings/manifests/cowsay.pp")
+describe "Task 1:", host: :localhost do
+  it 'Display the module path' do
+    file('/root/.bash_history')
       .content
-      .should match /class\s+cowsayings::cowsay\s*{/
+      .should match /puppet config print modulepath/
   end
 end
 
-describe "Task 2:" do
-  it 'Include the cowsayings::cowsay class in a test manifest' do
-    file("#{MODULE_PATH}cowsayings/examples/cowsay.pp")
-      .should be_file
-    file("#{MODULE_PATH}cowsayings/examples/cowsay.pp")
+describe "Task 2:", host: :localhost do
+  it 'Make the cowsay module directory' do
+    file('/root/.bash_history')
       .content
-      .should match /include\s+cowsayings::cowsay/
+      .should match /mkdir \-p cowsay\/manifests/
   end
 end
 
-describe "Task 3:" do
-  it 'Apply the test manifest to install the cowsay package' do
-    file('/usr/local/bin/cowsay')
+describe "Task 3:", host: :localhost do
+  it 'Create the cowsay default manifest' do
+    file('/etc/puppetlabs/code/environments/production/modules/cowsay/manifests/init.pp')
       .should be_file
+    command('puppet parser validate /etc/puppetlabs/code/environments/production/modules/cowsay/manifests/init.pp')
+      .exit_status
+      .should be_zero
   end
 end
 
-describe "Task 4:" do
-  it 'Define the cowsayings::fortune class' do
-    file("#{MODULE_PATH}cowsayings/manifests/fortune.pp")
-      .should be_file
-    file("#{MODULE_PATH}cowsayings/manifests/fortune.pp")
+describe "Task 4:", host: :localhost do
+  it 'Update site.pp with classification for cowsay.puppet.vm' do
+    file('/etc/puppetlabs/code/environments/production/manifests/site.pp')
       .content
-      .should match /class\s+cowsayings::fortune\s*{/
+      .should match /node\s+(['"])?cowsay\.puppet\.vm\1\s+\{.*?include\s+cowsay.*?\}/mi
   end
 end
 
-describe "Task 5:" do
-  it 'Include the cowsayings::fortune class in a test manifest' do
-    file("#{MODULE_PATH}cowsayings/examples/fortune.pp")
-      .should be_file
-    file("#{MODULE_PATH}cowsayings/examples/fortune.pp")
+describe "Task 5:", host: :cowsay do
+  it 'Run the agent and test cowsay' do
+    file('/home/learning/.bash_history')
       .content
-      .should match /include\s+cowsayings::fortune/
-  end
-end
-
-describe "Task 6:" do
-  it 'Apply the test manifest to install the fortune package' do
-    file('/usr/bin/fortune')
-      .should be_file
-  end
-end
-
-describe "Task 7:" do
-  it 'Define the cowsayings class' do
-    file("#{MODULE_PATH}cowsayings/manifests/init.pp")
-      .should be_file
-    file("#{MODULE_PATH}cowsayings/manifests/init.pp")
+      .should match /sudo puppet agent -t --noop/
+    package('cowsay')
+      .should be_installed
+      .by('gem')
+    file('/home/learning/.bash_history')
       .content
-      .should match /class\s+cowsayings\s*{/
+      .should match /^cowsay/
   end
 end
 
-describe "Task 8:" do
-  it 'Include the cowsayings class in a test manifest' do
-    file("#{MODULE_PATH}cowsayings/examples/init.pp")
+describe "Task 6:", host: :localhost do
+  it 'Create the cowsay::fortune class' do
+    file('/etc/puppetlabs/code/environments/production/modules/cowsay/manifests/fortune.pp')
       .should be_file
-    file("#{MODULE_PATH}cowsayings/examples/init.pp")
+  end
+end
+
+describe "Task 7:", host: :localhost do
+  it 'Include the cowsay::fortune class into the default class' do
+    command('puppet parser validate /etc/puppetlabs/code/environments/production/modules/cowsay/manifests/fortune.pp')
+      .exit_status
+      .should be_zero
+    file('/etc/puppetlabs/code/environments/production/modules/cowsay/manifests/init.pp')
       .content
-      .should match /include\s+cowsayings/
+      .should match /include\s+cowsay::fortune/
+    command('puppet parser validate /etc/puppetlabs/code/environments/production/modules/cowsay/manifests/init.pp')
+      .exit_status
+      .should be_zero
   end
 end
 
-describe "Task 9:" do
-  it "Apply the test manifest to install the fortune and cowsay packages" do
-    file("#{MODULE_PATH}cowsayings/examples/init.pp")
-      .should be_file
-    file('/usr/local/bin/cowsay')
-      .should be_file
-    file('/usr/bin/fortune')
-      .should be_file
+describe "Task 8:", host: :cowsay do
+  it 'Run the agent and test cowsay with fortune' do
+    package('fortune-mod')
+      .should be_installed
+    file('/home/learning/.bash_history')
+      .content
+      .should match /^fortune\s+\|\s+cowsay/
   end
 end
