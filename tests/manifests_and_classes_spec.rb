@@ -17,6 +17,9 @@ describe "Task 3:", host: :localhost do
   it 'Create the cowsay default manifest' do
     file('/etc/puppetlabs/code/environments/production/modules/cowsay/manifests/init.pp')
       .should be_file
+    file('/etc/puppetlabs/code/environments/production/modules/cowsay/manifests/init.pp')
+      .content
+      .should match /^class\s+cowsay\s+{.*?package\s+{\s+(['"])cowsay\1:/m
     command('puppet parser validate /etc/puppetlabs/code/environments/production/modules/cowsay/manifests/init.pp')
       .exit_status
       .should be_zero
@@ -46,6 +49,9 @@ describe "Task 6:", host: :localhost do
   it 'Create the cowsay::fortune class' do
     file('/etc/puppetlabs/code/environments/production/modules/cowsay/manifests/fortune.pp')
       .should be_file
+    file('/etc/puppetlabs/code/environments/production/modules/cowsay/manifests/fortune.pp')
+      .content
+      .should match /^class\s+cowsay::fortune\s+{.*?package\s+{\s+(['"])fortune\-mod\1:/m
   end
 end
 
