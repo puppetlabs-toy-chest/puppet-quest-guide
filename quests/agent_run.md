@@ -108,7 +108,7 @@ certificate. (You can read more about the details of Puppet's cryptographic
 security and the certification system on the [docs
 page](https://docs.puppet.com/background/ssl/index.html))
 
-<div class = "lvm-task-number"><p>Task 8:</p></div>
+<div class = "lvm-task-number"><p>Task 12:</p></div>
 
 Start by connecting to your agent system. When you
 began this quest, the system you used in the last quest was destroyed and a new
@@ -136,7 +136,7 @@ to do it from the command line. If you prefer a GUI, the PE console includes
 [tools for certificate
 management](https://docs.puppet.com/pe/latest/console_cert_mgmt.html).
 
-<div class = "lvm-task-number"><p>Task 9:</p></div>
+<div class = "lvm-task-number"><p>Task 13:</p></div>
 
 First, exit your SSH session to return to the your Puppet master:
 
@@ -150,7 +150,7 @@ Sign the cert for `agent.puppet.vm`:
 
     puppet cert sign agent.puppet.vm
 
-<div class = "lvm-task-number"><p>Task 10:</p></div>
+<div class = "lvm-task-number"><p>Task 14:</p></div>
 
 With that taken care of, your Puppet agent is authorized to make catalog
 requests.
@@ -165,7 +165,7 @@ command to manually trigger a run.
 
 Go ahead and connect to your agent node:
 
-    ssh learning@learning.puppet.vm
+    ssh learning@agent.puppet.vm
 
 Trigger an agent run. Now that the agent's certificate is signed, it will
 receive a catalog from the Puppet master.
@@ -210,7 +210,7 @@ during this run.
 To make something more interesting happen, you'll have to specify a desired
 state for some resources on the `agent.puppet.vm` system.
 
-<div class = "lvm-task-number"><p>Task 11:</p></div>
+<div class = "lvm-task-number"><p>Task 15:</p></div>
 
 Remember, the Puppet code you use to describe how you want a node to be
 configured is kept on the Puppet master. End your SSH session on the
@@ -261,11 +261,11 @@ Go ahead and open your `site.pp` manifest:
 
 Scroll past the comments and default node definition to the bottom of the file.
 (In Vim, you can type `G` to jump the the bottom of a file) This is where
-you'll create a new node definition for the `learning.puppet.vm` system. The
+you'll create a new node definition for the `agent.puppet.vm` system. The
 outline of the node definition should look like this:
 
 ```puppet
-node 'learning.puppet.vm' {
+node 'agent.puppet.vm' {
 
 }
 ```
@@ -286,7 +286,7 @@ mode and type `:set paste` to disable the automatic formatting. Press `i` to
 return to insert mode before pasting your text.)
 
 ```puppet
-node 'learning.puppet.vm' {
+node 'agent.puppet.vm' {
   notify { 'Hello Puppet!': }
 }
 ```
@@ -313,14 +313,14 @@ catalog to the system where it's running. In this case, the catalog only
 includes a `notify` resource, so the agent will display the specified message
 as it applies the catalog, but no changes will be made to the system.
 
-<div class = "lvm-task-number"><p>Task 12:</p></div>
+<div class = "lvm-task-number"><p>Task 17:</p></div>
 
 Now that you have some Puppet code for the master to parse and return to the
 agent, trigger another Puppet run.
 
 SSH to your agent node:
 
-    ssh learningt@learning.puppet.vm
+    ssh learningt@agent.puppet.vm
 
 Use the `puppet agent` tool to trigger a Puppet run:
 
@@ -329,7 +329,7 @@ Use the `puppet agent` tool to trigger a Puppet run:
 The output will include something like this:
 
     Notice: Hello Puppet!
-    Notice: /Stage[main]/Main/Node[learning.puppet.vm]/Notify[Hello Puppet!]/message: defined 'message' as 'Hello Puppet!'
+    Notice: /Stage[main]/Main/Node[agent.puppet.vm]/Notify[Hello Puppet!]/message: defined 'message' as 'Hello Puppet!'
     Notice: Applied catalog in 0.45 seconds
 
 Now disconnect from your agent node.
