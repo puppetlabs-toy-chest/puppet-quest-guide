@@ -162,7 +162,7 @@ values to provide some basic information about the system.
 | -%>
 Welcome to <%= $fqdn %>
 
-This is a <%= $os_family %> system running <%= $os_name %> <%= os_release %>
+This is a <%= $os_family %> system running <%= $os_name %> <%= $os_release %>
 
 ```
 

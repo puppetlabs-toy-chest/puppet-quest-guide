@@ -400,7 +400,7 @@ agent node.
 From the master, use the `curl` command to retrieve an ASCII elephant from
 port 4567 of the `pasture.puppet.vm` node.
 
-    curl 'pasture.puppet.vm:4567/api/v1/cowsay?string=Hello!'
+    curl 'pasture.puppet.vm:4567/api/v1/cowsay?message=Hello!'
 
 ## Review
 

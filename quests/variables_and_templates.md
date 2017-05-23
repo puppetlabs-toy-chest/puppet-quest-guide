@@ -315,7 +315,7 @@ just created.
 ```puppet
 class pasture {
 
-  $pasture_port        = '80'
+  $port                = '80'
   $default_character   = 'sheep'
   $default_message     = ''
   $pasture_config_file = '/etc/pasture_config.yaml'
@@ -327,7 +327,7 @@ class pasture {
   }
 
   $pasture_config_hash = {
-    'pasture_port'      => $pasture_port,
+    'port'              => $port,
     'default_character' => $default_character,
     'default_message'   => $default_message,
   }

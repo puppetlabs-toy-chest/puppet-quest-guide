@@ -201,7 +201,7 @@ When the run is complete, return to the master.
 
 And check that your configuration changes have taken effect.
 
-    curl 'pasture.puppet.vm/api/v1/cowsay?string=Hello!'
+    curl 'pasture.puppet.vm/api/v1/cowsay?message=Hello!'
 
 ## Review
 
