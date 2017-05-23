@@ -20,6 +20,12 @@ RSpec.configure do |config|
     options = {password: 'puppet', user: 'root'}
     set :ssh_options, options
   end
+  config.before(:example, :host => :cowsay) do
+    set :backend, 'ssh'
+    set :host, 'cowsay.puppet.vm'
+    options = {password: 'puppet', user: 'root'}
+    set :ssh_options, options
+  end
   config.before(:example, :host => :hello) do
     set :backend, 'ssh'
     set :host, 'hello.puppet.vm'
