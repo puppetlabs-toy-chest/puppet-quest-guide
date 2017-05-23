@@ -8,12 +8,8 @@ end
 
 describe "Task 2:", host: :localhost do
   it 'Sign the agent certificate' do
-    file('/root/.bash_history')
-      .content
-      .should match /puppet cert list/
-    file('/root/.bash_history')
-      .content
-      .should match /puppet cert sign agent.puppet.vm/
+    file('/etc/puppetlabs/puppet/ssl/ca/signed/agent.puppet.vm.pem')
+      .should be_file
   end
 end
 
