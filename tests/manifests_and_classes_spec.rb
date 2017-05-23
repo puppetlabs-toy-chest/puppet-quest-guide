@@ -8,9 +8,8 @@ end
 
 describe "Task 2:", host: :localhost do
   it 'Make the cowsay module directory' do
-    file('/root/.bash_history')
-      .content
-      .should match /mkdir \-p cowsay\/manifests/
+    file('/etc/puppetlabs/code/environments/production/modules/cowsay/manifests')
+      .should be_directory
   end
 end
 
