@@ -33,9 +33,6 @@ end
 
 describe "Task 5:", host: :cowsay do
   it 'Run the agent and test cowsay' do
-    file('/home/learning/.bash_history')
-      .content
-      .should match /sudo puppet agent -t --noop/
     package('cowsay')
       .should be_installed
       .by('gem')
