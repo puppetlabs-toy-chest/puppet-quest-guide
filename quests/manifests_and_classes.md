@@ -144,7 +144,7 @@ relying on the VM, we can safely skip this step and dive right into the code.
 
 Use `cd` to navigate to the `modules` directory.
 
-    cd /etc/puppetlabs/code/environment/production/modules
+    cd /etc/puppetlabs/code/environments/production/modules
 
 Create a directory structure for a new module called `cowsay`. (The `-p`
 flag allows you to create the `cowsay` parent directory and `manifests`
@@ -202,7 +202,7 @@ In the setup for this quest, the quest tool prepared a `cowsay.puppet.vm`
 node. Let's apply the `cowsay` class to this node. First, open your `site.pp`
 manifest.
 
-    vim /etc/puppetlabs/code/environment/production/manifests/site.pp
+    vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 At the end of the `site.pp` manifest, insert the following code:
 
