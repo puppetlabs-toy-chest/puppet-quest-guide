@@ -24,7 +24,7 @@ describe "Task 4:", host: :localhost do
   it 'Check for site.pp classification' do
     file('/etc/puppetlabs/code/environments/production/manifests/site.pp')
       .content
-      .should match /node\s+'agent\.puppet\.vm'\s+\{.*?notify\s+\{\s+'Hello\s+Puppet!':\s+\}.*?\}/mi
+      .should match /node\s+(['"])?agent\.puppet\.vm\1\s+\{.*?notify\s+\{\s+'Hello\s+Puppet!':\s+\}.*?\}/mi
   end
 end
 
