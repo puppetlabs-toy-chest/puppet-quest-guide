@@ -108,7 +108,7 @@ certificate. (You can read more about the details of Puppet's cryptographic
 security and the certification system on the [docs
 page](https://docs.puppet.com/background/ssl/index.html))
 
-<div class = "lvm-task-number"><p>Task 12:</p></div>
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
 Start by connecting to your agent system. When you
 began this quest, the system you used in the last quest was destroyed and a new
@@ -136,7 +136,7 @@ to do it from the command line. If you prefer a GUI, the PE console includes
 [tools for certificate
 management](https://docs.puppet.com/pe/latest/console_cert_mgmt.html).
 
-<div class = "lvm-task-number"><p>Task 13:</p></div>
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 First, exit your SSH session to return to the your Puppet master:
 
@@ -150,7 +150,7 @@ Sign the cert for `agent.puppet.vm`:
 
     puppet cert sign agent.puppet.vm
 
-<div class = "lvm-task-number"><p>Task 14:</p></div>
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 With that taken care of, your Puppet agent is authorized to make catalog
 requests.
@@ -210,7 +210,7 @@ during this run.
 To make something more interesting happen, you'll have to specify a desired
 state for some resources on the `agent.puppet.vm` system.
 
-<div class = "lvm-task-number"><p>Task 15:</p></div>
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Remember, the Puppet code you use to describe how you want a node to be
 configured is kept on the Puppet master. End your SSH session on the
@@ -313,7 +313,7 @@ catalog to the system where it's running. In this case, the catalog only
 includes a `notify` resource, so the agent will display the specified message
 as it applies the catalog, but no changes will be made to the system.
 
-<div class = "lvm-task-number"><p>Task 17:</p></div>
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 Now that you have some Puppet code for the master to parse and return to the
 agent, trigger another Puppet run.
