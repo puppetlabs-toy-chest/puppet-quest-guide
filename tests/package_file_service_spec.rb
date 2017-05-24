@@ -8,12 +8,9 @@ describe "Task 1:", host: :localhost do
 end
 
 describe "Task 2:", host: :localhost do
-  it 'Create the pasture default manifest' do
+  it 'Create the pasture main manifest' do
     file('/etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
       .should be_file
-    file('/etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
-      .content
-      .should match /^class\s+pasture\s+{.*?package\s+{\s+(['"])pasture\1:/m
     command('puppet parser validate /etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
       .exit_status
       .should be_zero
@@ -74,9 +71,61 @@ describe "Task 8:", host: :localhost do
 end
 
 describe "Task 9:", host: :localhost do
-  it 'Create the pasture configuration file' do
+  it 'Manage the pasture configuration file' do
     file('/etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
       .content
       .should match /file\s+{\s+(['"])\/etc\/pasture_config\.yaml\1:/
+    command('puppet parser validate /etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
+      .exit_status
+      .should be_zero
+  end
+end
+
+describe "Task 10:", host: :localhost do
+  it 'Create the pasture service unit file' do
+    file('/etc/puppetlabs/code/environments/production/modules/pasture/files/pasture.service')
+      .should be_file
+    file('/etc/puppetlabs/code/environments/production/modules/pasture/files/pasture.service')
+      .content
+      .should match /\[Unit\].*?Description=Run the pasture service/m
+  end
+end
+
+describe "Task 11:", host: :localhost do
+  it 'Manage the pasture configuration file and service' do
+    file('/etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
+      .content
+      .should match /file\s+{\s+(['"])\/etc\/systemd\/system\/pasture.service\1:/
+    file('/etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
+      .content
+      .should match /service\s+{\s+(['"])pasture\1:/
+    command('puppet parser validate /etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
+      .exit_status
+      .should be_zero
+  end
+end
+
+describe "Task 12:", host: :localhost do
+  it 'Add relationship metaparameters to the pasture main manifest' do
+    file('/etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
+      .content
+      .should match /^class\s+pasture\s+{.*?package\s+{\s+(['"])pasture\1:.*?before\s+=>\s+File\[(['"])\/etc\/pasture_config\.yaml\1\],/m
+    file('/etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
+      .content
+      .should match /file\s+{\s+(['"])\/etc\/pasture_config\.yaml\1:.*?notify\s+=>\s+Service\[(['"])pasture\1\],/m
+  end
+end
+
+describe "Task 13:", host: :pasture do
+  it '' do
+    file('/etc/pasture_config.yaml')
+      .should be_file
+    file('/etc/systemd/system/pasture.service')
+      .should be_file
+    process('pasture')
+      .should be_running
+    file('/root/.bash_history')
+      .content
+      .match /curl 'pasture.puppet.vm:4567\/api\/v1\/cowsay\?message=Hello!'/
   end
 end
