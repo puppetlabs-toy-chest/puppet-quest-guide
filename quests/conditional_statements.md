@@ -244,7 +244,7 @@ class pasture (
     'port'              => $port,
     'default_character' => $default_character,
     'default_message'   => $default_message,
-    'sinatra_server'    => $webrick,
+    'sinatra_server'    => $sinatra_server,
   }
 
   file { $pasture_config_file:
