@@ -133,7 +133,7 @@ strongly suggest using the method shown here. Be aware, however, that
 you will likely encounter templates that refer directly to facts using the
 general variable syntax rather than the `$facts` hash syntax we suggest here.
 
-<div class = "lvm-task-number"><p>Task 3:</p></div>
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Now create the `motd.epp` template.
 
@@ -166,7 +166,7 @@ This is a <%= $os_family %> system running <%= $os_name %> <%= $os_release %>
 
 ```
 
-<div class = "lvm-task-number"><p>Task 4:</p></div>
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 With this template set, your simple MOTD module is complete. Open your
 `site.pp` manifest to assign it to the `pasture.puppet.vm` node. 
@@ -185,7 +185,7 @@ node 'pasture.puppet.vm` {
 }
 ```
 
-<div class = "lvm-task-number"><p>Task 5:</p></div>
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Once this is complete, connect again to the `pasture.puppet.vm` node.
 
