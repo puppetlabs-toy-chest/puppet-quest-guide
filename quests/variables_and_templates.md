@@ -77,7 +77,7 @@ class pasture {
   $default_character   = 'sheep'
   $pasture_config_file = '/etc/pasture_config.yaml'
 
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => 'gem',
     before   => File[$pasture_config_file],
