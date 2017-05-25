@@ -31,11 +31,8 @@ end
 
 describe "Task 3:", host: :pasture do
   it 'Run the agent and test the changes' do
-    file('/home/learning/.bash_history')
+    file('/etc/pasture_config.yaml')
       .content
-      .should match /sudo puppet agent -t/
-    file('/home/learning/.bash_history')
-      .content
-      .should match /curl \'pasture\.puppet\.vm\/api\/v1\/cowsay\?message=Hello!\'/
+      .should match /:default_character:\s+cow/
   end
 end
