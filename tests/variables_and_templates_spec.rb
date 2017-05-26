@@ -1,9 +1,9 @@
 describe "Task 1:", host: :localhost do
   it 'Add variables to the pasture main manifest' do
-    file('/etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
+    file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /^class\s+pasture\s+{.*?\$port\s+=\s+(['"])80\1.*?\$default_character\s+=\s+(['"])sheep\1.*?\$pasture_config_file\s+=\s+(['"])\/etc\/pasture_config\.yaml\1.*?package\s+{\s+(['"])pasture\1:.*?before\s+=>\s+File\[\$pasture_config_file\],/m
-    file('/etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
+    file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /file\s+{\s+\$pasture_config_file:.*?notify\s+=>\s+Service\[(['"])pasture\1\],/m
   end
@@ -11,20 +11,20 @@ end
 
 describe "Task 2:", host: :localhost do
   it 'Create pasture configuration file template' do
-    file('/etc/puppetlabs/code/environments/production/modules/pasture/templates')
+    file("#{MODULE_PATH}pasture/templates")
       .should be_directory
-    file('/etc/puppetlabs/code/environments/production/modules/pasture/templates/pasture_config.yaml.epp')
+    file("#{MODULE_PATH}pasture/templates/pasture_config.yaml.epp")
       .should be_file
-    file('/etc/puppetlabs/code/environments/production/modules/pasture/templates/pasture_config.yaml.epp')
+    file("#{MODULE_PATH}pasture/templates/pasture_config.yaml.epp")
       .content
       .should match /:default_character:\s+<%=\s+\$default_character\s+%>/
-    file('/etc/puppetlabs/code/environments/production/modules/pasture/templates/pasture_config.yaml.epp')
+    file("#{MODULE_PATH}pasture/templates/pasture_config.yaml.epp")
       .content
       .should match /:default_message:\s+<%=\s+\$default_message\s+%>/
-    file('/etc/puppetlabs/code/environments/production/modules/pasture/templates/pasture_config.yaml.epp')
+    file("#{MODULE_PATH}pasture/templates/pasture_config.yaml.epp")
       .content
       .should match /:sinatra_settings:.*?:port:\s+<%=\s+\$port\s+%>/m
-    command('puppet epp validate /etc/puppetlabs/code/environments/production/modules/pasture/templates/pasture_config.yaml.epp')
+    command("puppet epp validate #{MODULE_PATH}pasture/templates/pasture_config.yaml.epp")
       .exit_status
       .should be_zero
   end
@@ -32,13 +32,13 @@ end
 
 describe "Task 3:", host: :localhost do
   it 'Use pasture configuration file template' do
-    file('/etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
+    file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /\$pasture_config_hash\s+=\s+{.*?(['"])port\1\s+=>\s+\$port,/m
-    file('/etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
+    file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /content\s+=>\s+epp\((['"])pasture\/pasture_config\.yaml\.epp\1,\s+\$pasture_config_hash\),/
-    command('puppet parser validate /etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
+    command("puppet parser validate #{MODULE_PATH}pasture/manifests/init.pp")
       .exit_status
       .should be_zero
   end
@@ -46,15 +46,15 @@ end
 
 describe "Task 4:", host: :localhost do
   it 'Create pasture service unit file template' do
-    file('/etc/puppetlabs/code/environments/production/modules/pasture/templates/pasture.service.epp')
+    file("#{MODULE_PATH}pasture/templates/pasture.service.epp")
       .should be_file
-    file('/etc/puppetlabs/code/environments/production/modules/pasture/templates/pasture.service.epp')
+    file("#{MODULE_PATH}pasture/templates/pasture.service.epp")
       .content
       .should match /<%-\s+\|\s+\$pasture_config_file\s+=\s+(['"])\/etc\/pasture_config.yaml\1\s+\|\s+\-%>/
-    file('/etc/puppetlabs/code/environments/production/modules/pasture/templates/pasture.service.epp')
+    file("#{MODULE_PATH}pasture/templates/pasture.service.epp")
       .content
       .should match /ExecStart=\/usr\/local\/bin\/pasture\s+start\s+\-\-config_file\s+<%=\s+\$pasture_config_file\s+%>/
-    command('puppet epp validate /etc/puppetlabs/code/environments/production/modules/pasture/templates/pasture.service.epp')
+    command("puppet epp validate #{MODULE_PATH}pasture/templates/pasture.service.epp")
       .exit_status
       .should be_zero
   end
@@ -62,13 +62,13 @@ end
 
 describe "Task 5:", host: :localhost do
   it 'Use pasture service unit file template' do
-    file('/etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
+    file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /\$pasture_service_hash\s+=\s+{.*?(['"])pasture_config_file\1\s+=>\s+\$pasture_config_file,/m
-    file('/etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
+    file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /content\s+=>\s+epp\((['"])pasture\/pasture\.service\.epp\1,\s+\$pasture_service_hash\),/
-    command('puppet parser validate /etc/puppetlabs/code/environments/production/modules/pasture/manifests/init.pp')
+    command("puppet parser validate #{MODULE_PATH}pasture/manifests/init.pp")
       .exit_status
       .should be_zero
   end

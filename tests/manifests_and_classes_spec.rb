@@ -8,19 +8,19 @@ end
 
 describe "Task 2:", host: :localhost do
   it 'Make the cowsay module directory' do
-    file('/etc/puppetlabs/code/environments/production/modules/cowsay/manifests')
+    file("#{MODULE_PATH}cowsay/manifests")
       .should be_directory
   end
 end
 
 describe "Task 3:", host: :localhost do
   it 'Create the cowsay default manifest' do
-    file('/etc/puppetlabs/code/environments/production/modules/cowsay/manifests/init.pp')
+    file("#{MODULE_PATH}cowsay/manifests/init.pp")
       .should be_file
-    file('/etc/puppetlabs/code/environments/production/modules/cowsay/manifests/init.pp')
+    file("#{MODULE_PATH}cowsay/manifests/init.pp")
       .content
       .should match /^class\s+cowsay\s+{.*?package\s+{\s+(['"])cowsay\1:/m
-    command('puppet parser validate /etc/puppetlabs/code/environments/production/modules/cowsay/manifests/init.pp')
+    command("puppet parser validate #{MODULE_PATH}cowsay/manifests/init.pp")
       .exit_status
       .should be_zero
   end
@@ -28,9 +28,12 @@ end
 
 describe "Task 4:", host: :localhost do
   it 'Update site.pp with classification for cowsay.puppet.vm' do
-    file('/etc/puppetlabs/code/environments/production/manifests/site.pp')
+    file("#{PROD_PATH}manifests/site.pp")
       .content
       .should match /node\s+(['"])?cowsay\.puppet\.vm\1\s+\{.*?include\s+cowsay.*?\}/mi
+    command("puppet parser validate #{PROD_PATH}manifests/site.pp")
+      .exit_status
+      .should be_zero
   end
 end
 
@@ -47,9 +50,9 @@ end
 
 describe "Task 6:", host: :localhost do
   it 'Create the cowsay::fortune class' do
-    file('/etc/puppetlabs/code/environments/production/modules/cowsay/manifests/fortune.pp')
+    file("#{MODULE_PATH}cowsay/manifests/fortune.pp")
       .should be_file
-    file('/etc/puppetlabs/code/environments/production/modules/cowsay/manifests/fortune.pp')
+    file("#{MODULE_PATH}cowsay/manifests/fortune.pp")
       .content
       .should match /^class\s+cowsay::fortune\s+{.*?package\s+{\s+(['"])fortune\-mod\1:/m
   end
@@ -57,13 +60,13 @@ end
 
 describe "Task 7:", host: :localhost do
   it 'Include the cowsay::fortune class into the default class' do
-    command('puppet parser validate /etc/puppetlabs/code/environments/production/modules/cowsay/manifests/fortune.pp')
+    command("puppet parser validate #{MODULE_PATH}cowsay/manifests/fortune.pp")
       .exit_status
       .should be_zero
-    file('/etc/puppetlabs/code/environments/production/modules/cowsay/manifests/init.pp')
+    file("#{MODULE_PATH}cowsay/manifests/init.pp")
       .content
       .should match /include\s+cowsay::fortune/
-    command('puppet parser validate /etc/puppetlabs/code/environments/production/modules/cowsay/manifests/init.pp')
+    command("puppet parser validate #{MODULE_PATH}cowsay/manifests/init.pp")
       .exit_status
       .should be_zero
   end
