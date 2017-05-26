@@ -58,14 +58,10 @@ the section below to familiarize yourself with the Forge. All the resources
 necessary to complete the quest are already cached on the VM, so no external
 connection is necessary to complete the actual installation of the module.)
 
-IMAGE
-
 The Forge will show several hits that match your query, including version and
 release data information, downloads, a composite rating score, and a supported
 or approved banner where relevant. This information can give you a quick idea
 of which modules in your search results you may want to investigate further.
-
-IMAGE
 
 For this quest, we'll use the `puppetlabs/postgresql` module. Click on that
 module title to see more information and documentation.
@@ -144,11 +140,21 @@ will keep track of our cow sayings.
 ```puppet
 class pasture::db {
 
-  include postgres::server
+  class { 'postgresql::server':
+    listen_addresses => '*',
+  }
 
   postgresql::server::db { 'pasture':
-    user     => 'pasture_user',
-    password => postgresql_password('pasture_user', 'm00!'),
+    user     => 'pasture',
+    password => postgresql_password('pasture', 'm00m00'),
+  }
+
+  postgresql::server::pg_hba_rule { 'allow pasture app access':
+    type        => 'host',
+    database    => 'pasture',
+    user        => 'pasture',
+    address     => '172.18.0.2/24',
+    auth_method => 'password',
   }
 
 }
@@ -186,7 +192,7 @@ Open your module's `init.pp` manifest.
 
     vim pasture/manifests/init.pp
 
-Add a `$db_uri` parameter with a default value of `undef`. We can use this
+Add a `$db` parameter with a default value of `undef`. We can use this
 `undef` with a conditional in the template to say "only manage this parameter
 if there's something set here". Next, add this variable to your
 `$pasture_config_hash` so it will be passed through to your template. When
@@ -194,12 +200,12 @@ you've made these two additions, your class will look like the example below.
 
 ```puppet
 class pasture (
-  $port              = '80',
-  $default_character = 'sheep',
-  $default_message   = '',
-  $config_file       = '/etc/pasture_config.yaml',
-  $sinatra_server    = 'webrick',
-  $db_uri            = undef,
+  $port                = '80',
+  $default_character   = 'sheep',
+  $default_message     = '',
+  $pasture_config_file = '/etc/pasture_config.yaml',
+  $sinatra_server      = 'webrick',
+  $db                  = undef,
 ){
 
   package { 'pasture':
@@ -212,8 +218,8 @@ class pasture (
     'port'              => $port,
     'default_character' => $default_character,
     'default_message'   => $default_message,
-    'sinatra_server'    => $webrick,
-    'db_uri'            => $db_uri,
+    'sinatra_server'    => $sinatra_server,
+    'db'                => $db,
   }
 
   file { $pasture_config_file:
@@ -231,7 +237,7 @@ class pasture (
   }
 
   service { 'pasture':
-    ensure    => running.
+    ensure    => running,
   }
 
   if $sinatra_server == 'thin' or 'mongrel'  {
@@ -251,7 +257,7 @@ the Pasture application's own default if we haven't explicitly set the
 `pasture` class's `db_uri` parameter.
 
 ```puppet
-<%- | $pasture_port,
+<%- | $port,
       $default_character,
       $default_message,
       $sinatra_server,
@@ -261,38 +267,61 @@ the Pasture application's own default if we haven't explicitly set the
 ---
   :default_character: <%= $default_character %>
   :default_message: <%= $default_message %>
-  <% if $db_uri { -%>
-  :db_uri: <%= $db_uri %>
-  <% -%>
-  :default_message: <%= $default_message %>
+  <% if $db { -%>
+  :db: <%= $db %>
+  <% } -%>
   :sinatra_settings:
-    :port:   <%= $pasture_port %>
+    :port:   <%= $port %>
     :server: <%= $sinatra_server %>
 ```
 
 Now that you've set up this `db_uri` parameter, edit your
-`pasture-prod,puppet.vm` node definition.
+`pasture-app,puppet.vm` node definition.
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
-Declare the `pasture` class and set the `db_uri` parameter to the URI of the
+Declare the `pasture` class and set the `db` parameter to the URI of the
 `pasture` database you're running on `pasture-db.puppet.vm`. 
 
 ```puppet
-node 'pasture-prod.puppet.vm' {
+node 'pasture-app.puppet.vm' {
   class { 'pasture':
     sinatra_server => 'thin',
-    db_uri         => 'postgres://pasture_user:m00!@pasture-db.puppet.vm/pasture'
+    db             => 'postgres://pasture:m00m00@pasture-db.puppet.vm/pasture'
   }
 }
 ```
 
 Use the `puppet job` tool to trigger an agent run on this node.
 
-    puppet job run --nodes pasture-prod.puppet.vm
+    puppet job run --nodes pasture-app.puppet.vm
 
-TODO: Add specific instructions to test out the database functionality.
+With your database server set up and your application server connected to it,
+you can now add sayings to the application's database and retrieve them by
+ID. Let's give it a try.
+
+First, post the message 'Hello!' to your database.
+
+    curl -X POST 'pasture-app.puppet.vm/api/v1/cowsay/sayings?message=Hello!'
+
+Now let's take a look at the list of available messages:
+
+    curl 'pasture-app.puppet.vm/api/v1/cowsay/sayings'
+
+Finally, we retrieve a message by ID:
+
+    curl 'pasture-app.puppet.vm/api/v1/cowsay/sayings/1'
 
 ## Review
 
-TBD
+In this quest, you learned how to incorporate a module from the Forge into your
+module to allow it to manage database. We began by covering the Forge website
+and its search features that help you find the right module for your project.
+
+After finding a good module, you used the `puppet module` tool to install it
+into your `modules` directory. With the module installed, you created a
+`pasture::db` class to define the specific database functionality you needed
+for the Pasture application, and updated the main `pasture` class to define
+the URI needed to connect to the database.
+
+We covered using the 
