@@ -94,6 +94,8 @@ repository, however, using a Puppetfile is recommended. You can read more about
 the Puppetfile and code management workflow
 [here](https://docs.puppet.com/pe/latest/cmgmt_managing_code.html).)
 
+<div class = "lvm-task-number"><p>Task 1:</p></div>
+
 On your master, go ahead and use the `puppet module` tool to install this
 module.
 
@@ -102,7 +104,7 @@ module.
 To confirm that this command placed the module in your modulepath, take a look
 at the contents of your modules directory.
 
-    ls /etc/puppetlabs/code/environments/prodcution/modules
+    ls /etc/puppetlabs/code/environments/production/modules
 
 Notice that when you saw the module on the Forge, it was listed as
 `puppetlabs/postgresql`, and when you installed it, you called it
@@ -127,6 +129,8 @@ Pasture module without having to reinvent the Puppet code needed to manage
 a PostgreSQL server and database instance. Instead, we'll create what's called
 a *wrapper class* to declare classes from the `postgresql` module with
 the parameters needed by the Pasture application.
+
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 We'll call this wrapper class `pasture::db` and define it in a `db.pp` manifest
 in the `pasture` module's `manifests` directory.
@@ -166,6 +170,8 @@ things simple and created a class without parameters. As needed, you might add
 parameters to this wrapper class in order to pass values through to the
 postgresql classes it contains.
 
+<div class = "lvm-task-number"><p>Task 3:</p></div>
+
 Go ahead and open your `site.pp` manifest.
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
@@ -187,6 +193,8 @@ Use the `puppet job` tool to trigger a Puppet agent run on this
 Now that this database server is set up, let's add a parameter to our main
 pasture class to specify a database URI and pass this through to the
 configuration file.
+
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Open your module's `init.pp` manifest.
 
@@ -250,6 +258,8 @@ class pasture (
 }
 ```
 
+<div class = "lvm-task-number"><p>Task 5:</p></div>
+
 Next, edit the `pasture_config.yaml.epp` template. We'll use a conditional
 statement to only include the `:db_uri:` setting if there is a value set for
 the `$db_uri` variable. This will allow us to leave this option unset and use
@@ -291,6 +301,8 @@ node 'pasture-app.puppet.vm' {
   }
 }
 ```
+
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Use the `puppet job` tool to trigger an agent run on this node.
 
