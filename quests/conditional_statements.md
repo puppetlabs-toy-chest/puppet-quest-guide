@@ -275,7 +275,7 @@ class pasture (
 }
 ```
 
-With these changes to your class, you can easily accomidate different servers
+With these changes to your class, you can easily accommodate different servers
 for different agent nodes in your infrastructure. For example, you may want to
 use the default WEBrick server on a development system and the Thin server on
 for production.
@@ -306,7 +306,9 @@ node 'pasture-prod.puppet.vm' {
 
 Now that you're working across multiple nodes, connecting manually with SSH to
 trigger Puppet runs may start to seem a little tedious. The `puppet job` tool
-lets you trigger Puppet runs across multiple nodes remotely. 
+lets you trigger Puppet runs across multiple nodes remotely.
+
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 Before using this tool, we'll have take a few steps via the PE console to set
 up authentication through PE's role-based access control system (RBAC).
