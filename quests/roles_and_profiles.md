@@ -73,11 +73,11 @@ directory in your modulepath:
     mkdir -p profile/manifests
 
 We'll begin by creating a pair of profiles related to the Pasture application.
-The profile for the application server will use a conditional statement to manage
-two different configurations: a 'large' deployment that connects to an external
-database, and a 'small' deployment that makes use of the default SQLite
-database. A second profile will manage the PostgreSQL database that backs the
-'large' instance of the app server.
+The profile for the application server will use a conditional statement to
+manage two different configurations: a 'large' deployment that connects to an
+external database, and a 'small' deployment that only provides the basic
+'cowsay' endpoint. A second profile will manage the PostgreSQL database that
+backs the 'large' instance of the app server.
 
 To make it clear that all of these profiles relate to the Pasture application,
 we'll place them in a `pasture` subdirectory within `profile/manifests`.
@@ -92,48 +92,47 @@ Next, create a profile for the Pasture application.
 
 Here, you'll define the `profile::pasture::app` class.
 
-
 The quest tool created a `pasture-app-small.puppet.vm` and
 `pasture-app-large.puppet,vm` node for this quest, so we can determine the
 appropriate profile based on the node name. We'll use a conditional statement
-to set the `$default_character` and `$db_uri` parameters based on whether the
-node's `name` fact contains the string 'large' or 'small'. In the 'small' case,
+to set the `$default_character` and `$db` parameters based on whether the
+node's `fqdn` fact contains the string 'large' or 'small'. In the 'small' case,
 we'll use the special `undef` value to leave these parameters unset and use the
 defaults set in the `pasture` component class. We'll also add an `else` block
-to fail with an appropriate error message if the `name` variable doesn't match
+to fail with an appropriate error message if the `fqdn` variable doesn't match
 'small' or 'large'.
 
 ```puppet
 class profile::pasture::app {
-  if 'large' in $facts['name'] {
+  if $facts['fqdn'] =~ 'large' {
     $default_character = 'elephant'
-    $db_uri            = 'postgres://pasture_user:m00!@pasture_db.puppet.vm/pasture'
-  } elsif 'small' in $facts['name'] {
+    $db                = 'postgres://pasture:m00m00@pasture-db.puppet.vm/pasture'
+  } elsif $facts['fqdn'] =~ 'small' {
     $default_character = undef
-    $db_uri            = undef
+    $db                = undef
   } else {
-    fail("The #{$facts['name'] node name must match 'large' or 'small'.}")
+    fail("The ${facts['fqdn]} node name must match 'large' or 'small'.")
   }
   class { 'pasture':
     default_message   => 'Hello Puppet!',
     sinatra_server    => 'thin',
     default_character => $default_character,
-    db_uri            => $db_uri,
+    db                => $db,
   }
 }
 ```
 
-Next, create a profile for the Pasture database using the `pasture::pasture_db`
+Next, create a profile for the Pasture database using the `pasture::db`
 component class.
 
     vim profile/manifests/pasture/db.pp
 
 You don't need to customize any parameters here, so you can use the `include`
-syntax to declare the `pasture::pasture_db` class.
+syntax to declare the `pasture::db` class.
 
 ```puppet
-class profile::pasture::db
-  include pasture::pasture_db
+class profile::pasture::db {
+  include pasture::db
 }
 ```
 
@@ -159,14 +158,14 @@ Like the `profile::pasture::db` profile class, the `profile::base::motd` class
 is a wrapper class with an `include` statement for the `motd` class.
 
 ```puppet
-class profile::motd {
-  include 'motd'
+class profile::base::motd {
+  include motd
 }
 ```
 
 Writing these wrapper classes may initially seem like unnecessary complexity,
 especially in the case of simple component classes like `motd` and
-`pasture::pasture_db`. The value of consistency, however, outweighs the effort
+`pasture::db`. The value of consistency, however, outweighs the effort
 of creating these wrapper classes.
 
 A profile class is the single source of truth for how a component
@@ -195,7 +194,7 @@ stack are left to the profiles. For example, `role::myapp_webserver` and
 `role::postgres_db` or `role::apache_server` are not.
 
 In this case, we need two roles to define the systems involved in the Pasture
-application: `role::pasture_app` and `role::pasture_database`. First, create
+application: `role::pasture_app` and `role::pasture_db`. First, create
 the directory structure for your `role` module:
 
     mkdir -p role/manifests
@@ -207,18 +206,18 @@ Create a manifest to define your `role::pasture_app` role.
 ```puppet
 class role::pasture_app {
   include profile::pasture::app
-  include profile::motd
+  include profile::base::motd
 }
 ```
 
 Next, create a role for your database server.
 
-    vim role/manifests/database.pp
+    vim role/manifests/pasture_db.pp
 
 ```puppet
 class role::pasture_db {
   include profile::pasture::db
-  include profile::motd
+  include profile::base::motd
 }
 ```
 
@@ -263,7 +262,7 @@ classifier](https://docs.puppet.com/puppet/4.10/nodes_external.html).
 
 To get started creating your node definitions, open your `site.pp` manifest:
 
-    vim /etc/puppetlabs/code/environments/production/manifests/init.pp
+    vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 Create a node definition block for your application server nodes. Use the
 `/^pasture-app/` regular expression as the title of your node definition and
@@ -285,7 +284,11 @@ node /^pasture-db/ {
 }
 ```
 
-Use the `puppet job` tool to trigger a Puppet agent run on this
+Now that we're using the roles and profiles pattern, you should remove the
+previous node definitions for the `pasture-app.puppet.vm` and
+`pasture-db.puppet.vm` nodes.
+
+Use the `puppet job` tool to trigger a Puppet agent run on the
 `pasture-db.puppet.vm` node.
 
     puppet job run --nodes pasture-db.puppet.vm
@@ -294,9 +297,28 @@ When this run is complete, trigger runs on your two application server nodes.
 
     puppet job run --nodes pasture-app-small.puppet.vm,pasture-app-large.puppet.vm
 
-Apply your changes.
+Once these Puppet runs have completed, you can use the `curl` command to test
+the functionality of your application on the two different servers.
+
+    curl 'pasture-app-small.puppet.vm/api/v1/cowsay?message="hello"'
+    curl 'pasture-app-large.puppet.vm/api/v1/cowsay?message="HELLO!"'
+
+Note that the database functionality we introduced in the previous quest will
+work on the 'large' instance of our application, while the 'small' instance
+will return a 501 error:
+
+    curl 'pasture-app-small.puppet.vm/api/v1/cowsay/sayings'
 
 ## Review
 
-TBD
-More resources!
+In this quest, we introduce the roles and profiles pattern, a way to organize
+the functionality provided by your component modules according to the role of
+each system in your infrastructure.
+
+You created profile classes to wrap your component modules and specify their
+parameters, then brought these profile classes together into roles.
+
+Finally, you used regular expressions in your `site.pp` manifest to create
+flexible node definitions that assign the correct role to each system in your
+infrastructure.
+
