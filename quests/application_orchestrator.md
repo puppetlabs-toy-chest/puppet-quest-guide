@@ -225,16 +225,22 @@ define pasture_app::db (
   $host     = $::hostname,
   $database = $name,
 ){
-
-  include postgres::server
-
-  postgres::server::db { $name:
+  class { 'postgresql::server':
+    listen_addresses => '*',
+  }
+  postgresql::server::db { $name:
     user     => $user,
     password => postgresql_password($user, $password),
   }
-
+  postgresql::server::pg_hba_rule { 'allow pasture app access':
+    type        => 'host',
+    database    => $database,
+    user        => $user,
+    address     => '172.18.0.2/24',
+    auth_method => 'password',
+  }
 }
-Pasture_App::Postgres produces Sql {
+Pasture_App::Db produces Sql {
   user     => $user,
   password => $password,
   host     => $host,
@@ -246,7 +252,7 @@ Check the the manifest with the `puppet parser` tool. Use the
 `--app_management` flag to enable the parser's checks for the application
 orchestration syntax:
 
-    puppet parser validate --app_management pasture_db/manifests/postgres.pp
+    puppet parser validate --app_management pasture_app/manifests/db.pp
 
 <div class = "lvm-task-number"><p>Task 8:</p></div>
 
@@ -267,7 +273,7 @@ define pasture_app::app (
 
   class { 'pasture':
     sinatra_server => 'thin',
-    db_uri         => "postgres:://${db_user}:${db_password}@${db_host}/${db_name}",
+    db             => "postgres:://${db_user}:${db_password}@${db_host}/${db_name}",
   }
 
 }
@@ -305,7 +311,7 @@ application pasture_app (
   pasture_app::db { $name:
     user     => $db_user,
     password => $db_password,
-    export      => Sql[$name],
+    export   => Sql[$name],
   }
 
   pasture_app::app { $name:
@@ -365,14 +371,17 @@ application instance in a special block called `site`.
 site { 
   pasture { 'pasture_01':
     db_user     => 'pasture',
-    db_password => 'm00!',
+    db_password => 'm00m00',
     nodes       => {
-      Node['pasture_app.puppet.vm']  => Pasture::App['pasture_app_01'],
-      Node['pasture_db.puppet.vm'] => Pasture::Db['pasture_db_01'],
+      Node['pasture-app-large.puppet.vm'] => Pasture::App['pasture_app_01'],
+      Node['pasture-db.puppet.vm']        => Pasture::Db['pasture_db_01'],
     }
   }
 }
 ```
+
+To prevent conflicts between the application already specified in your role,
+remove the existing node definition blocks for
 
 The syntax for declaring an application is similar to that of a class or
 resource. The `db_user` and `db_password` parameters are set as usual.
@@ -387,16 +396,16 @@ uses the `exports` and `consumes` metaparameters in your application definition
 correct order of Puppet runs across the nodes in the application.
 
 Now that the application is declared in our `site.pp` manifest, we can use the
-`puppet app` tool to view it:
+`puppet job` tool to view it:
 
-    puppet app show
+    puppet job plan --application Pasture_app
 
 You should see a result like the following:
 
     Pasture['pasture_01']
-      Pasture::Db['pasture_db_01'] => database.learning.puppetlabs.vm
+      Pasture::Db['pasture_db_01'] => pasture-db.puppet.vm
           - produces Sql['pasture_db_01']
-      Pasture::App['pasture_app_01'] => webserver.learning.puppetlabs.vm
+      Pasture::App['pasture_app_01'] => pasture-app-large.puppet.vm
           - consumes Sql['pasture_db_01']
 
 <div class = "lvm-task-number"><p>Task 11:</p></div>
