@@ -222,7 +222,7 @@ It will look like this:
 define pasture_app::db (
   $user,
   $password,
-  $host     = $::hostname,
+  $host     = $::fqdn,
   $database = $name,
 ){
   class { 'postgresql::server':
@@ -272,8 +272,9 @@ define pasture_app::app (
 ) {
 
   class { 'pasture':
-    sinatra_server => 'thin',
-    db             => "postgres://${db_user}:${db_password}@${db_host}/${db_name}",
+    sinatra_server  => 'thin',
+    db              => "postgres://${db_user}:${db_password}@${db_host}/${db_name}",
+    default_message => "Hi! I'm connected to ${db_host}!",
   }
 
 }
@@ -416,6 +417,11 @@ Use the `puppet job` command to deploy the application:
 
 You can check on the status of any running or completed jobs with the
 `puppet job list` command.
+
+Now that you've deployed your application, use the `curl` command to check the
+default message configured for Pasture on `pasture-app-large.puppet.vm`:
+
+    curl 'pasture-app-large.puppet.vm/api/v1/cowsay'
 
 ## Review
 
