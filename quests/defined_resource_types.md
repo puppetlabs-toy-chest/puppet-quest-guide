@@ -197,17 +197,19 @@ it into your manifest.
     vim ~/.ssh/id_rsa.pub
 
 Copy only the actual key. Don't include the `ssh-rsa` and `learning@puppet.vm`.
-Be careful not to include any leading or trailing whitespace.
+Be careful not to include any leading or trailing whitespace. Depending on how
+line-breaks appear in your console, you may have to manually delete newline
+characters or whitespace after you paste in this key.
 
-Now create a `pasture_users.pp` profile manifest.
+Now create a `dev_users.pp` profile manifest.
 
-    vim profile/manifests/pasture_dev_users.pp
+    vim profile/manifests/pasture/dev_users.pp
 
 Here, we'll create user accounts for Bert and Ernie, the two imaginary
 colleagues who need to access the server.
 
 ```puppet
-class profile::pasture_dev_users {
+class profile::pasture::dev_users {
   user_accounts::ssh_user { 'bert':
     comment => 'Bert',
     key => '<PASTE KEY HERE>',
@@ -219,18 +221,19 @@ class profile::pasture_dev_users {
 }
 ```
 
-Now that this `profile::pasture_dev_users` class is set up, you can easily drop
-it into any of your node definitions to add these user accounts and configure
-their SSH keys.
+Now that this `profile::pasture::dev_users` class is set up, you can easily
+drop it into the `role::pasture_app` class to add these user accounts and
+configure their SSH keys.
 
 Add this class to the `pasture-dev.puppet.vm` node.
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 ```puppet
-node 'pasture-dev.puppet.vm' {
-  include pasture
-  include profile::pasture_dev_users
+class role::pasture_app {
+  include profile::pasture::app
+  include profile::pasture::dev_users
+  include profile::base::motd
 }
 ```
 
@@ -238,23 +241,17 @@ Use the `puppet job` tool to trigger a Puppet agent run. (If your token has
 expired, run the `puppet access login --lifetime 1d` and use the credentials
 **learning** and **puppet** to generate a new access token.)
 
-    puppet job run --nodes pasture-dev.puppet.vm
+    puppet job run --nodes pasture-app-small.puppet.vm
 
-When the Puppet run completes, connect to `pasture-dev.puppet.vm` as the
+When the Puppet run completes, connect to `pasture-app-small.puppet.vm` as the
 user `bert`.
 
     ssh bert@pasture-dev.puppet.vm
 
-We're just connecting to check that the SSH key and account works, so go ahead
-and disconnect.
+Once you've verified that the you can connect as this user, go ahead and
+disconnect.
 
     exit
-
-If you've ever managed a site with a large number of user accounts, you might
-be wondering how this kind of setup would scale. The example we've given is
-enough to demonstrate the use of the defined resource type, but maintaining
-different lists of users for each node in your system in this way would quickly
-become unwieldy.
 
 ## Review
 
