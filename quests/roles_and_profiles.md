@@ -94,7 +94,7 @@ Here, you'll define the `profile::pasture::app` class.
 
 
 The quest tool created a `pasture-app-small.puppet.vm` and
-`pasture-app-large.puppet,vm` node for this quest, so we can determine the
+`pasture-app-large.puppet.vm` node for this quest, so we can determine the
 appropriate profile based on the node name. We'll use a conditional statement
 to set the `$default_character` and `$db_uri` parameters based on whether the
 node's `name` fact contains the string 'large' or 'small'. In the 'small' case,
