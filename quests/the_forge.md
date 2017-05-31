@@ -336,4 +336,6 @@ into your `modules` directory. With the module installed, you created a
 for the Pasture application, and updated the main `pasture` class to define
 the URI needed to connect to the database.
 
-We covered using the
+With this new `pasture::db` class set up and the `db` parameter added to the
+main pasture class, a few changes to your `site.pp` classification let you
+create a database server and connect it to your application server.

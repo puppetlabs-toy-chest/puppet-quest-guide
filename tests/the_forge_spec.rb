@@ -36,12 +36,12 @@ describe "Task 3:", host: :localhost do
 end
 
 describe "Task 4:", host: :localhost do
-  it 'Update the pasture main manifest with db_uri parameter' do
+  it 'Update the pasture main manifest with a db parameter' do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
-      .should match /class\s+pasture\s+\(.*?\$db_uri\s+=\s+undef,/m
+      .should match /class\s+pasture\s+\(.*?\$db\s+=\s+undef,/m
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
-      .should match /\$pasture_config_hash\s+=\s+\{.*?(['"])db_uri\1\s+=>\s+\$db_uri,/m
+      .should match /\$pasture_config_hash\s+=\s+\{.*?(['"])db\1\s+=>\s+\$db,/m
   end
 end
