@@ -17,13 +17,13 @@ checking your bash history for an entered command. It's possible that you have
 entered a valid alternate version of the command that wasn't anticipated in our
 tests.
 
-For tasks that relate to Puppet code or the contents of other files, it's
-we have written the test for a task in a way that is doesn't capture a valid
+For tasks that relate to Puppet code or the contents of other files,
+we have written the test for a task in a way that doesn't capture a valid
 syntactical variation.
 
 You can check the specific matchers by looking at a quest's spec file in the
 `/usr/src/puppet-quest-guide/tests` directory. If you find an issue with the
-tests, please let us know by sending an email to learningvm@puppetlabs.com.
+tests, please let us know by sending an email to learningvm@puppet.com.
 
 ### Password Required for the Quest Guide
 
@@ -35,7 +35,7 @@ the Power of Puppet quest: **admin/puppetlabs**)
 
 ### I can't find the VM password
 
-The Learning VM's password is generated randomly and will be displayed on
+The Learning VM's password is generated randomly and will be shown on
 the splash page displayed on the terminal of your virtualization software when
 you start the VM.
 
@@ -66,7 +66,7 @@ you try to access the PE console. See the section on PE services below.
 
 ### One of the PE services hasn't started or has crashed
 
-Because the Learning VM's puppet services are configured to run in an
+Because the Learning VM's Puppet services are configured to run in an
 environment with restricted resources, they may have a longer restart time and
 may be less stable than is typical of a production installation.
 
@@ -75,11 +75,11 @@ start. If you have restarted the VM and immediately try to connect to the PE
 console or trigger a Puppet agent run, you may encounter errors until these
 services have had time to fully start.
 
-You can check the status of puppet services with the following command:
+You can check the status of Puppet services with the following command:
 
     systemctl --all | grep pe-
 
-If still observe stopped puppet-related services (e.g. pe-console-services)
+If still observe stopped Puppet-related services (e.g. pe-console-services)
 several minutes after the VM has started, double check that you have sufficient
 memory allocated to the VM and available on your host, then use the following
 script to restart these services in the correct order:
