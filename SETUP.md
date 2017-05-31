@@ -20,12 +20,9 @@ Launch your virtualization software and find an **Import** or **Import
 Appliance** option in the **File** menu. If you cannot locate an **Import**
 option, refer to your virtualization software's documentation.
 
-*Before* starting the VM for the first time, adjust its settings.  For best
-performance, allocate 4GB of memory. The default allocation of 3GB, but you
-might encounter stability and performance issues. Set the **Network Adapter**
-to **Bridged**.  Use an autodetect setting if available, or accept the default
-network adapter name. If you are unable to use a bridged network, use the
-port-forwarding instructions provided in the Troubleshooting chapter.
+If you have enough available memory on your host machine, increasing the memory
+allocation for the VM from the default 3GB to 4GB may improve performance and
+stability.
 
 ## Networking configuration
 
@@ -90,7 +87,7 @@ web terminal or SSH.
 
 To access the web terminal, open your web browser and navigate to
 `http://<VM's IP ADDRESS>:9091`. Follow the instructions show on the
-splash-page to log in.
+splash page to log in.
 
 On Mac systems, you can use the default Terminal application or a third-party
 application like iTerm. For Windows, we suggest the free SSH client
