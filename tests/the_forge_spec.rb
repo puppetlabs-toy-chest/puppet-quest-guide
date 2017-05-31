@@ -34,3 +34,14 @@ describe "Task 3:", host: :localhost do
       .should eq 0
   end
 end
+
+describe "Task 4:", host: :localhost do
+  it 'Update the pasture main manifest with db_uri parameter' do
+    file("#{MODULE_PATH}pasture/manifests/init.pp")
+      .content
+      .should match /class\s+pasture\s+\(.*?\$db_uri\s+=\s+undef,/m
+    file("#{MODULE_PATH}pasture/manifests/init.pp")
+      .content
+      .should match /\$pasture_config_hash\s+=\s+\{.*?(['"])db_uri\1\s+=>\s+\$db_uri,/m
+  end
+end

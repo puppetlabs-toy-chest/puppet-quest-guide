@@ -200,7 +200,7 @@ Open your module's `init.pp` manifest.
 
     vim pasture/manifests/init.pp
 
-Add a `$db` parameter with a default value of `undef`. We can use this
+Add a `$db_uri` parameter with a default value of `undef`. We can use this
 `undef` with a conditional in the template to say "only manage this parameter
 if there's something set here". Next, add this variable to your
 `$pasture_config_hash` so it will be passed through to your template. When
@@ -213,7 +213,7 @@ class pasture (
   $default_message     = '',
   $pasture_config_file = '/etc/pasture_config.yaml',
   $sinatra_server      = 'webrick',
-  $db                  = undef,
+  $db_uri              = undef,
 ){
 
   package { 'pasture':
@@ -227,7 +227,7 @@ class pasture (
     'default_character' => $default_character,
     'default_message'   => $default_message,
     'sinatra_server'    => $sinatra_server,
-    'db'                => $db,
+    'db_uri'            => $db_uri,
   }
 
   file { $pasture_config_file:
@@ -277,8 +277,8 @@ the Pasture application's own default if we haven't explicitly set the
 ---
   :default_character: <%= $default_character %>
   :default_message: <%= $default_message %>
-  <% if $db { -%>
-  :db: <%= $db %>
+  <% if $db_uri { -%>
+  :db: <%= $db_uri %>
   <% } -%>
   :sinatra_settings:
     :port:   <%= $port %>
@@ -297,7 +297,7 @@ Declare the `pasture` class and set the `db` parameter to the URI of the
 node 'pasture-app.puppet.vm' {
   class { 'pasture':
     sinatra_server => 'thin',
-    db             => 'postgres://pasture:m00m00@pasture-db.puppet.vm/pasture'
+    db_uri         => 'postgres://pasture:m00m00@pasture-db.puppet.vm/pasture'
   }
 }
 ```
