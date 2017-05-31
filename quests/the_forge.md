@@ -286,7 +286,7 @@ the Pasture application's own default if we haven't explicitly set the
 ```
 
 Now that you've set up this `db_uri` parameter, edit your
-`pasture-app,puppet.vm` node definition.
+`pasture-app.puppet.vm` node definition.
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
