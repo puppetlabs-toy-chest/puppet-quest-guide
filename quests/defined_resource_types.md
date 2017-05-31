@@ -150,7 +150,7 @@ define user_accounts::ssh_user (
 ){
 
   if $key {
-    ssh_authorized_key { "${title}@puppet.vm"
+    ssh_authorized_key { "${title}@puppet.vm":
       ensure => present,
       user   => $title,
       type   => 'ssh-rsa',

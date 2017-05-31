@@ -222,19 +222,25 @@ It will look like this:
 define pasture_app::db (
   $user,
   $password,
-  $host     = $::hostname,
+  $host     = $::fqdn,
   $database = $name,
 ){
-
-  include postgres::server
-
-  postgres::server::db { $name:
+  class { 'postgresql::server':
+    listen_addresses => '*',
+  }
+  postgresql::server::db { $name:
     user     => $user,
     password => postgresql_password($user, $password),
   }
-
+  postgresql::server::pg_hba_rule { 'allow pasture app access':
+    type        => 'host',
+    database    => $database,
+    user        => $user,
+    address     => '172.18.0.2/24',
+    auth_method => 'password',
+  }
 }
-Pasture_App::Postgres produces Sql {
+Pasture_App::Db produces Sql {
   user     => $user,
   password => $password,
   host     => $host,
@@ -246,7 +252,7 @@ Check the the manifest with the `puppet parser` tool. Use the
 `--app_management` flag to enable the parser's checks for the application
 orchestration syntax:
 
-    puppet parser validate --app_management pasture_db/manifests/postgres.pp
+    puppet parser validate --app_management pasture_app/manifests/db.pp
 
 <div class = "lvm-task-number"><p>Task 8:</p></div>
 
@@ -266,8 +272,9 @@ define pasture_app::app (
 ) {
 
   class { 'pasture':
-    sinatra_server => 'thin',
-    db_uri         => "postgres:://${db_user}:${db_password}@${db_host}/${db_name}",
+    sinatra_server  => 'thin',
+    db              => "postgres://${db_user}:${db_password}@${db_host}/${db_name}",
+    default_message => "Hi! I'm connected to ${db_host}!",
   }
 
 }
@@ -305,7 +312,7 @@ application pasture_app (
   pasture_app::db { $name:
     user     => $db_user,
     password => $db_password,
-    export      => Sql[$name],
+    export   => Sql[$name],
   }
 
   pasture_app::app { $name:
@@ -350,25 +357,50 @@ Your module should look like the following:
 
 <div class = "lvm-task-number"><p>Task 10:</p></div>
 
-Now that your application is defined, the final step is to declare it in your
-`site.pp` manifest.
+Because we will be using the orchestration to manage these nodes, we'll remove
+the application-related classes from the nodes' roles. As long as there are no
+dependency relationships with any of your base profiles, you can leave these
+in your roles so that they will continue to be managed on the normal Puppet
+agent run schedule.
+
+Open your `role/manifests/pasture_app.pp` manifest, and remove the
+`profile::pasture::app` class.
+
+```puppet
+class role::pasture_app {
+  include profile::base::motd
+  include profile::pasture::dev_users
+}
+```
+
+Do the same for your `role/manifests/pasture_db.pp` manifest
+
+```puppet
+class role::pasture_db {
+  include profile::base::motd
+  include profile::pasture::dev_users
+}
+```
+
+<div class = "lvm-task-number"><p>Task 10:</p></div>
+
+The final step is to declare your application in your `site.pp` manifest.
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
-Until now, most of the configuration you've made in your `site.pp` has been in
-the context of node blocks. An application, however, is applied to your
-environment independent of any classification defined in your node blocks or
-the PE console node classifier. To express this distinction, we declare our
+Until now, the configuration you've made in your `site.pp` has been in the
+context of node blocks. However, an application requires a level of abstraction
+above the individual node level. To express this distinction, we declare our
 application instance in a special block called `site`.
 
 ```puppet
 site { 
   pasture { 'pasture_01':
     db_user     => 'pasture',
-    db_password => 'm00!',
+    db_password => 'm00m00',
     nodes       => {
-      Node['pasture_app.puppet.vm']  => Pasture::App['pasture_app_01'],
-      Node['pasture_db.puppet.vm'] => Pasture::Db['pasture_db_01'],
+      Node['pasture-app-large.puppet.vm'] => Pasture::App['pasture_app_01'],
+      Node['pasture-db.puppet.vm']        => Pasture::Db['pasture_db_01'],
     }
   }
 }
@@ -387,16 +419,16 @@ uses the `exports` and `consumes` metaparameters in your application definition
 correct order of Puppet runs across the nodes in the application.
 
 Now that the application is declared in our `site.pp` manifest, we can use the
-`puppet app` tool to view it:
+`puppet job` tool to view it:
 
-    puppet app show
+    puppet job plan --application Pasture_app
 
 You should see a result like the following:
 
     Pasture['pasture_01']
-      Pasture::Db['pasture_db_01'] => database.learning.puppetlabs.vm
+      Pasture::Db['pasture_db_01'] => pasture-db.puppet.vm
           - produces Sql['pasture_db_01']
-      Pasture::App['pasture_app_01'] => webserver.learning.puppetlabs.vm
+      Pasture::App['pasture_app_01'] => pasture-app-large.puppet.vm
           - consumes Sql['pasture_db_01']
 
 <div class = "lvm-task-number"><p>Task 11:</p></div>
@@ -408,15 +440,21 @@ Use the `puppet job` command to deploy the application:
 You can check on the status of any running or completed jobs with the
 `puppet job list` command.
 
+Now that you've deployed your application, use the `curl` command to check the
+default message configured for Pasture on `pasture-app-large.puppet.vm`:
+
+    curl 'pasture-app-large.puppet.vm/api/v1/cowsay'
+
 ## Review
 
-In the quest, we discussed the role of the Puppet Orchestrator tool in coordinating Puppet
-runs across multiple nodes.
+In the quest, we discussed the role of the Puppet Orchestrator tool in
+coordinating Puppet runs across multiple nodes.
 
-Before getting into the specifics of defining an application and running it as a job, we
-covered the configuration details on the Puppet agent nodes and the setup for the Puppet
-Application Orchestrator client. You can review these steps and find further information
-at the [Puppet Documentation](https://docs.puppetlabs.com/pe/latest/app_orchestration_overview.html)
+Before getting into the specifics of defining an application and running it as
+a job, we covered the configuration details on the Puppet agent nodes and the
+setup for the Puppet Application Orchestrator client. You can review these
+steps and find further information at the [Puppet
+Documentation](https://docs.puppetlabs.com/pe/latest/app_orchestration_overview.html)
 website.
 
 Defining an application generally requires several distinct manifests and Ruby extensions:
@@ -429,6 +467,6 @@ Defining an application generally requires several distinct manifests and Ruby e
 *  A declaration of your application in the `site` block of your `site.pp` manifest
    to assign your components to nodes in your infrastructure.
 
-Once an application is defined, you can use the `puppet app show` command to see it,
-and the `puppet job run` command to run it. You can see running and completed jobs with
-the `puppet job list` command.
+Once an application is defined, you can use the `puppet job plan` command to
+see it, and the `puppet job run` command to run it. You can see running and
+completed jobs with the `puppet job list` command.
