@@ -291,7 +291,7 @@ Now that you've set up this `db` parameter, edit your
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 Declare the `pasture` class and set the `db` parameter to the URI of the
-`pasture` database you're running on `pasture-db.puppet.vm`. 
+`pasture` database you're running on `pasture-db.puppet.vm`.
 
 ```puppet
 node 'pasture-app.puppet.vm' {
