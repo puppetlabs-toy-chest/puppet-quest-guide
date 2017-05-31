@@ -1,90 +1,65 @@
 describe "Task 1:" do
-  it 'Create the web_user module directory with manifests and examples subdirectories' do
-    file("#{MODULE_PATH}web_user")
+  it 'Create the directory structure for your accounts module' do
+    file("#{MODULE_PATH}user_accounts")
       .should be_directory
-    file("#{MODULE_PATH}web_user/manifests")
-      .should be_directory
-    file("#{MODULE_PATH}web_user/examples")
+    file("#{MODULE_PATH}user_accounts/manifests")
       .should be_directory
   end
 end
-
 describe "Task 2:" do
-  it 'Define a simple web_user::user resource type' do
-    file("#{MODULE_PATH}web_user/manifests/user.pp")
+  it 'Define the user_accounts::ssh_user defined resource type' do
+    file("#{MODULE_PATH}user_accounts/manifests/ssh_user.pp")
       .content
-      .should match /define\s*web_user::user/
-    file("#{MODULE_PATH}web_user/manifests/user.pp")
+      .should match /define\s+user_accounts::ssh_user\s*\(\s+
+                      \$key\s+=\s+undef,\s+
+                      \$group\s+=\s+undef,\s+
+                      \$shell\s+=\s+undef,\s+
+                      \$comment\s+=\s+undef,\s+
+                    \)\{/mx
+    file("#{MODULE_PATH}user_accounts/manifests/ssh_user.pp")
       .content
-      .should match /user\s*{\s*\$title\s*:/
-    file("#{MODULE_PATH}web_user/manifests/user.pp")
+      .should match /file\s*{\s*\"\/home\/\$\{title\}\":\s+
+                      ensure\s+=>\s+directory,\s+
+                    /mx
+    file("#{MODULE_PATH}user_accounts/manifests/ssh_user.pp")
       .content
-      .should match /file\s*{/
+      .should match /if\s+\$key\s*\{\s+
+                      ssh_authorized_key\s+\{\s*\"\$\{title\}@puppet\.vm\"
+                    /mx
   end
 end
-
 describe "Task 3:" do
-  it "Create a test manifest to apply your new defined resource type" do
-    file("#{MODULE_PATH}web_user/examples/user.pp")
-      .content
-      .should match /web_user::user\s*{\s*['"]shelob['"]\s*:\s*}/
+  it 'Create an ssh key' do 
+    file("/root/.ssh/id_rsa.pub")
+      .should be_file
   end
 end
-
 describe "Task 4:" do
-  it "Apply your test manifest" do
-    file('/home/shelob')
-      .should be_directory
-    user('shelob')
-      .should exist
+  it 'Create a profile::pasture::dev_users profile class' do
+    file("#{MODULE_PATH}profile/manifests/pasture/dev_users.pp")
+      .content
+      .should match /user_accounts::ssh_user\s*{\s*(['"])bert\1:\s+
+                      comment\s+=>\s+(['"])Bert\1,\s+
+                    /mx
+    file("#{MODULE_PATH}profile/manifests/pasture/dev_users.pp")
+      .content
+      .should match /user_accounts::ssh_user\s*{\s*(['"])ernie\1:\s+
+                      comment\s+=>\s+(['"])Ernie\1,\s+
+                    /mx
   end
 end
-
 describe "Task 5:" do
-  it "Extend your web_user::user resource type to create a public_html directory and an index.html document" do
-    file("#{MODULE_PATH}web_user/manifests/user.pp")
+  it 'Add profile::pasture::dev_users to the role::pasture_app class' do
+    file("#{MODULE_PATH}role/manifests/pasture_app.pp")
       .content
-      .should match /user\s*{\s*\$title\s*:/
-    file("#{MODULE_PATH}web_user/manifests/user.pp")
-      .content
-      .should match /file\s*{\s*\"\${public_html}\/index\.html\"\s*:/
+      .should match /include\s+profile::pasture::dev_users/mi
   end
 end
-
 describe "Task 6:" do
-  it "Apply your test manifest again to create your user's public_html directory and index.html document" do
-    file('/home/shelob/public_html')
-      .should be_directory
-    file('/home/shelob/public_html/index.html')
+  it 'Trigger a Puppet run on pasture-app-small.puppet.vm to enforce your changes' do
+    file('/home/bert/authorized_keys')
       .should be_file
   end
 end
+~                                                                                                                                                         
 
-describe "Task 7:" do
-  it 'Add $content and $password parameters to your defined resource type' do
-    file("#{MODULE_PATH}web_user/manifests/user.pp")
-      .content
-      .should match /\$content\s+=\s+"<h1>Welcome to \${title}'s home page!<\/h1>",/
-    file("#{MODULE_PATH}web_user/manifests/user.pp")
-      .content
-      .should match /\$password\s*\=\s*undef,/
-  end
-end
-
-describe "Task 8:" do
-  it "Declare a new web_user::user in your test manifest with parameters" do
-    file("#{MODULE_PATH}web_user/examples/user.pp")
-      .content
-      .should match /web_user::user\s*{\s*['"]frodo['"]\s*:/
-  end
-end
-
-
-describe "Task 9:" do
-  it "Apply your test manifest a final time to make use of your specified parameters" do
-    file('/home/frodo/public_html')
-      .should be_directory
-    file('/home/frodo/public_html/index.html')
-      .should be_file
-  end
-end
