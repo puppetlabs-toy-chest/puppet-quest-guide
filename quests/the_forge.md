@@ -251,10 +251,10 @@ class pasture (
 ```
 
 Next, edit the `pasture_config.yaml.epp` template. We'll use a conditional
-statement to only include the `:db_uri:` setting if there is a value set for
+statement to only include the `:uri:` setting if there is a value set for
 the `$db_uri` variable. This will allow us to leave this option unset and use
 the Pasture application's own default if we haven't explicitly set the
-`pasture` class's `db_uri` parameter.
+`pasture` class's `uri` parameter.
 
 ```puppet
 <%- | $port,
@@ -275,7 +275,7 @@ the Pasture application's own default if we haven't explicitly set the
     :server: <%= $sinatra_server %>
 ```
 
-Now that you've set up this `db_uri` parameter, edit your
+Now that you've set up this `uri` parameter, edit your
 `pasture-app,puppet.vm` node definition.
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
@@ -324,4 +324,6 @@ into your `modules` directory. With the module installed, you created a
 for the Pasture application, and updated the main `pasture` class to define
 the URI needed to connect to the database.
 
-We covered using the 
+With this new `pasture::db` class set up and the `db` parameter added to main
+pasture class, a few changes to your `site.pp` classification let you create
+a database server and connect it to your application server.
