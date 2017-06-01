@@ -275,14 +275,14 @@ the Pasture application's own default if we haven't explicitly set the
 | -%>
 # This file is managed by Puppet. Please do not make manual changes.
 ---
-  :default_character: <%= $default_character %>
-  :default_message: <%= $default_message %>
-  <% if $db { -%>
-  :db: <%= $db %>
-  <% } -%>
-  :sinatra_settings:
-    :port:   <%= $port %>
-    :server: <%= $sinatra_server %>
+:default_character: <%= $default_character %>
+:default_message: <%= $default_message %>
+<% if $db { -%>
+:db: <%= $db %>
+<% } -%>
+:sinatra_settings:
+  :port:   <%= $port %>
+  :server: <%= $sinatra_server %>
 ```
 
 Now that you've set up this `db` parameter, edit your
