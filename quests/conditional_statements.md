@@ -197,11 +197,11 @@ settings under the `:sinatra_settings:` key to Sinatra itself.
 | -%>
 # This file is managed by Puppet. Please do not make manual changes.
 ---
-  :default_character: <%= $default_character %>
-  :default_message:   <%= $default_message %>
-  :sinatra_settings:
-    :port:   <%= $port %>
-    :server: <%= $sinatra_server %>
+:default_character: <%= $default_character %>
+:default_message:   <%= $default_message %>
+:sinatra_settings:
+  :port:   <%= $port %>
+  :server: <%= $sinatra_server %>
 ```
 
 Now that your module is able to manage this setting, add a conditional
@@ -325,7 +325,7 @@ option to proceed.)
 
 Use the following credentials to log in:
 
-Username: **admin**  
+Username: **admin**
 Password: **puppetlabs**
 
 Once you're connected, click the **access control** menu option in the
@@ -365,7 +365,7 @@ When the jobs complete, take a moment to check each with a `curl` command.
 
     curl 'pasture-dev.puppet.vm/api/v1/cowsay?message=Hello!'
 
-and 
+and
 
     curl 'pasture-prod.puppet.vm/api/v1/cowsay?message=Hello!'
 
