@@ -243,7 +243,7 @@ define pasture_app::db (
 Pasture_App::Db produces Sql {
   user     => $user,
   password => $password,
-  host     => $host,
+  host     => $fqdn,
   database => $database,
 }
 ```
@@ -334,7 +334,7 @@ will consume that resource.
 Once you've finished your application definition, validate your syntax and make
 any necessary corrections:
 
-    puppet parser validate --app_management lamp/manifests/init.pp
+    puppet parser validate --app_management pasture_app/manifests/init.pp
 
 At this point, use the `tree` command to check that all the components of your
 module are in place:
@@ -343,7 +343,7 @@ module are in place:
 
 Your module should look like the following:
 
-    modules/pasture_app/
+    pasture_app/
     ├── lib
     │   └── puppet
     │       └── type
@@ -357,7 +357,7 @@ Your module should look like the following:
 
 <div class = "lvm-task-number"><p>Task 10:</p></div>
 
-Because we will be using the orchestration to manage these nodes, we'll remove
+Because we will be using the orchestrator to manage these nodes, we'll remove
 the application-related classes from the nodes' roles. As long as there are no
 dependency relationships with any of your base profiles, you can leave these
 in your roles so that they will continue to be managed on the normal Puppet
@@ -395,12 +395,12 @@ application instance in a special block called `site`.
 
 ```puppet
 site { 
-  pasture { 'pasture_01':
+  pasture_app { 'pasture_01':
     db_user     => 'pasture',
     db_password => 'm00m00',
     nodes       => {
-      Node['pasture-app-large.puppet.vm'] => Pasture::App['pasture_app_01'],
-      Node['pasture-db.puppet.vm']        => Pasture::Db['pasture_db_01'],
+      Node['pasture-app-large.puppet.vm'] => Pasture_app::App['pasture_01'],
+      Node['pasture-db.puppet.vm']        => Pasture_app::Db['pasture_01'],
     }
   }
 }
@@ -411,11 +411,11 @@ resource. The `db_user` and `db_password` parameters are set as usual.
 
 The `nodes` parameter is where the orchestration magic happens. This parameter
 takes a hash of nodes paired with one or more components. In this case, we've
-assigned the `Lamp::Mysql['app1']` component to
-`database.learning.puppetlabs.vm` and the `Lamp::Webapp['app1']` component to
-`webserver.learning.puppetlabs.vm`. When the orchestrator runs, it
+assigned the `Pasture::Db['pasture01']` component to
+`pasture-db.puppet.vm` and the `Pasture::App['pasture_01']` component to
+`pasture-app-large.puppet.vm`. When the orchestrator runs, it
 uses the `exports` and `consumes` metaparameters in your application definition
-(in your `lamp/manifests/init.pp` manifest, for example) to determine the
+(in your `pasture_app/manifests/init.pp` manifest, for example) to determine the
 correct order of Puppet runs across the nodes in the application.
 
 Now that the application is declared in our `site.pp` manifest, we can use the
@@ -425,17 +425,28 @@ Now that the application is declared in our `site.pp` manifest, we can use the
 
 You should see a result like the following:
 
-    Pasture['pasture_01']
-      Pasture::Db['pasture_db_01'] => pasture-db.puppet.vm
-          - produces Sql['pasture_db_01']
-      Pasture::App['pasture_app_01'] => pasture-app-large.puppet.vm
-          - consumes Sql['pasture_db_01']
+    +-------------------+-------------+
+    | Environment       | production  |
+    | Target            | Pasture_app |
+    | Concurrency Limit | None        |
+    | Nodes             | 2           |
+    +-------------------+-------------+
+    Application instances: 1
+      - Pasture_app[pasture_01]
+    Node run order (nodes in level 0 run before their dependent nodes in level 1, etc
+    .):
+    0 -----------------------------------------------------------------------
+    pasture-db.puppet.vm
+        Pasture_app[pasture_01] - Pasture_app::Db[pasture_01]
+    1 -----------------------------------------------------------------------
+    pasture-app-large.puppet.vm
+        Pasture_app[pasture_01] - Pasture_app::App[pasture_01]
 
 <div class = "lvm-task-number"><p>Task 11:</p></div>
 
 Use the `puppet job` command to deploy the application:
 
-    puppet job run Pasture['pasture_01']
+    puppet job run --application Pasture_app['pasture_01']
 
 You can check on the status of any running or completed jobs with the
 `puppet job list` command.
