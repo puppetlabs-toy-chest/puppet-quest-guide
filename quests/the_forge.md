@@ -277,9 +277,9 @@ the Pasture application's own default if we haven't explicitly set the
 ---
 :default_character: <%= $default_character %>
 :default_message: <%= $default_message %>
-<% if $db { -%>
+<%- if $db { -%>
 :db: <%= $db %>
-<% } -%>
+<%- } -%>
 :sinatra_settings:
   :port:   <%= $port %>
   :server: <%= $sinatra_server %>
