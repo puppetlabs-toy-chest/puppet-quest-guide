@@ -1,27 +1,11 @@
-describe "Task 1:", host: :localhost do
-  it 'List the subcommands for the quest tool' do
-    file('/root/.bash_history')
-      .content
-      .should match /quest\s+(-h|--help)/
-  end
-end
-
-describe "Task 2:", host: :localhost do
-  it 'Check the list of available quests' do
-    file('/root/.bash_history')
-      .content
-      .should match /quest\s+list/
-  end
-end
-
-describe "Task 3:", host: :hello do
+describe "Task 1:", host: :hello do
   it 'Install the Puppet agent' do
     file('/opt/puppetlabs/puppet/bin/puppet')
       .should be_file
   end
 end
 
-describe "Task 4:", host: :hello do
+describe "Task 2:", host: :hello do
   it 'Investigate the /tmp/test file resource' do
     file('/home/learning/.bash_history')
       .content
@@ -29,7 +13,7 @@ describe "Task 4:", host: :hello do
   end
 end
 
-describe "Task 5:", host: :hello do
+describe "Task 3:", host: :hello do
   it 'Create the /tmp/test file resource' do
     file('/tmp/test')
       .should be_file
@@ -39,7 +23,7 @@ describe "Task 5:", host: :hello do
   end
 end
 
-describe "Task 6:", host: :hello do
+describe "Task 4:", host: :hello do
   it 'Create the /tmp/test file resource' do
     file('/home/learning/.bash_history')
       .content
@@ -47,7 +31,7 @@ describe "Task 6:", host: :hello do
   end
 end
 
-describe "Task 7:", host: :hello do
+describe "Task 5:", host: :hello do
   it 'Create the /tmp/test file resource' do
     file('/home/learning/.bash_history')
       .content
