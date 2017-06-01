@@ -194,10 +194,10 @@ character configuration options.
 | -%>
 # This file is managed by Puppet. Please do not make manual changes.
 ---
-  :default_character: <%= $default_character %>
-  :default_message:   <%= $default_message %>
-  :sinatra_settings:
-    :port: <%= $port %>
+:default_character: <%= $default_character %>
+:default_message:   <%= $default_message %>
+:sinatra_settings:
+  :port: <%= $port %>
 ```
 
 The `<%= ... %>` tags we use to insert our variables into the file are called
@@ -213,13 +213,13 @@ First, save your template file and exit Vim.
 
 Now open your `init.pp` manifest.
 
-    vim pasture/manifests/init.pp 
+    vim pasture/manifests/init.pp
 
 The `file` resource type has two different parameters that can be used to
 define the content of the managed file: `source` and `content`.
 
 As we discussed earlier, `source` takes the URI of a source file like the ones
-we've placed in our module's `files` directory. The `content` parameter 
+we've placed in our module's `files` directory. The `content` parameter
 takes a string as a value and sets the content of the managed file to that
 string.
 
@@ -248,7 +248,7 @@ class pasture {
     before   => File[$pasture_config_file],
   }
 
-  $pasture_config_hash = { 
+  $pasture_config_hash = {
     'port'              => $port,
     'default_character' => $default_character,
   }
@@ -293,14 +293,14 @@ Add your parameters tag and comment to the beginning of the file. Set the
 <%- | $pasture_config_file = '/etc/pasture_config.yaml' | -%>
 # This file is managed by Puppet. Please do not make manual changes.
 [Unit]
-    Description=Run the pasture service
+Description=Run the pasture service
 
-    [Service]
-    Environment=RACK_ENV=production
-    ExecStart=/usr/local/bin/pasture start --config_file <%= $pasture_config_file %>
+[Service]
+Environment=RACK_ENV=production
+ExecStart=/usr/local/bin/pasture start --config_file <%= $pasture_config_file %>
 
-    [Install]
-    WantedBy=multi-user.target
+[Install]
+WantedBy=multi-user.target
 ```
 
 <div class = "lvm-task-number"><p>Task 5:</p></div>
@@ -403,4 +403,3 @@ introduce in the following quests. In the next quest, you'll see how to create
 a *parameterized class*, which will allow you to set important variables
 in your class as you declare it. Parameters allow you to customize how a class
 is configured without editing code in the module where the class is defined.
-
