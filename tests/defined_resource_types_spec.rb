@@ -26,6 +26,9 @@ describe "Task 2:" do
       .should match /if\s+\$key\s*\{\s+
                       ssh_authorized_key\s+\{\s*\"\$\{title\}@puppet\.vm\"
                     /mx
+    command("puppet parser validate #{MODULE_PATH}user_accounts/manifests/ssh_user.pp")
+      .exit_status
+      .should be_zero
   end
 end
 describe "Task 3:" do
@@ -46,6 +49,9 @@ describe "Task 4:" do
       .should match /user_accounts::ssh_user\s*{\s*(['"])ernie\1:\s+
                       comment\s+=>\s+(['"])Ernie\1,\s+
                     /mx
+    command("puppet parser validate #{MODULE_PATH}profile/manifests/pasture/dev_users.pp")
+      .exit_status
+      .should be_zero
   end
 end
 describe "Task 5:" do
@@ -53,6 +59,9 @@ describe "Task 5:" do
     file("#{MODULE_PATH}role/manifests/pasture_app.pp")
       .content
       .should match /include\s+profile::pasture::dev_users/mi
+    command("puppet parser validate #{MODULE_PATH}role/manifests/pasture_app.pp")
+      .exit_status
+      .should be_zero
   end
 end
 describe "Task 6:" do
@@ -61,5 +70,3 @@ describe "Task 6:" do
       .should be_file
   end
 end
-~                                                                                                                                                         
-
