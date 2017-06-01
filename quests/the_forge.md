@@ -297,7 +297,7 @@ Declare the `pasture` class and set the `db` parameter to the URI of the
 node 'pasture-app.puppet.vm' {
   class { 'pasture':
     sinatra_server => 'thin',
-    db             => 'postgres://pasture:m00m00@pasture-db.puppet.vm/pasture'
+    db             => 'postgres://pasture:m00m00@pasture-db.puppet.vm/pasture',
   }
 }
 ```
