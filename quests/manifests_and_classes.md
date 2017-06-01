@@ -361,6 +361,11 @@ Now that you have both packages installed, you can use them together. Try
 piping the output of the `fortune` command to `cowsay`.
 
     fortune | cowsay
+
+Now that you've seen the results of your Puppet run, disconnect to return to
+your Puppet master.
+
+    exit
 	
 ## Review
 
