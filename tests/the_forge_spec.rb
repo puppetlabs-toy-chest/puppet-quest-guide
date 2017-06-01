@@ -81,5 +81,8 @@ describe "Task 6:", host: :pastureapp do
     file('/etc/pasture_config.yaml')
       .content
       .should match /^:db:\s+postgres:\/\/pasture:m00m00@pasture\-db\.puppet\.vm\/pasture$/
+    command("curl 'localhost/api/v1/cowsay/sayings'")
+      .stdout
+      .should match /"id":\d+,"message":"Hello!"/
   end
 end
