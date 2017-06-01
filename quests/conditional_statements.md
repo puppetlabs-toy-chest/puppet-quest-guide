@@ -186,8 +186,8 @@ Once that's complete, open the `pasture_config.yaml.epp` template.
     vim pasture/templates/pasture_config.yaml.epp
 
 Add the `$sinatra_server` variable to the params block at the beginning of the
-template with the same `webrick` default. The Pasture appication passes any
-settings under the `:sinatra_settings:` key to Sinatra itself.
+template. The Pasture appication passes any settings under the
+`:sinatra_settings:` key to Sinatra itself.
 
 ```yaml
 <%- | $port,
