@@ -111,7 +111,7 @@ class profile::pasture::app {
     $default_character = undef
     $db                = undef
   } else {
-    fail("The ${facts['fqdn]} node name must match 'large' or 'small'.")
+    fail("The ${facts['fqdn']} node name must match 'large' or 'small'.")
   }
   class { 'pasture':
     default_message   => 'Hello Puppet!',
