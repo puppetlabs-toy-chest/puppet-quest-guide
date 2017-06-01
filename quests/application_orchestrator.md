@@ -465,7 +465,7 @@ Before getting into the specifics of defining an application and running it as
 a job, we covered the configuration details on the Puppet agent nodes and the
 setup for the Puppet Application Orchestrator client. You can review these
 steps and find further information at the [Puppet
-Documentation](https://docs.puppetlabs.com/pe/latest/app_orchestration_overview.html)
+Documentation](https://docs.puppet.com/pe/latest/app_orchestration_overview.html)
 website.
 
 Defining an application generally requires several distinct manifests and Ruby extensions:
