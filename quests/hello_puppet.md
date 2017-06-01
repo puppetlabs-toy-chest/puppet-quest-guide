@@ -1,6 +1,6 @@
 {% include '/version.md' %}
 
-# Hello Puppet Test Integration
+# Hello Puppet
 
 ## Quest objectives
 
