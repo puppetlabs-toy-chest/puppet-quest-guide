@@ -43,5 +43,28 @@ describe "Task 4:", host: :localhost do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /\$pasture_config_hash\s+=\s+\{.*?(['"])db\1\s+=>\s+\$db,/m
+    command("puppet parser validate #{MODULE_PATH}pasture/manifests/init.pp")
+      .exit_status
+      .should be_zero
+  end
+end
+
+describe "Task 5:", host: :localhost do
+  it 'Update the pasture configuration file template with a db parameter' do
+    file("#{MODULE_PATH}pasture/templates/pasture_config.yaml.epp")
+      .content
+      .should match /<%\-\s+\|\s+.*?\$db,.*?\|\s+\-%>/m
+    file("#{MODULE_PATH}pasture/templates/pasture_config.yaml.epp")
+      .content
+      .should match /<%\s+if\s+\$db\s+{\s+\-%>.*?:db:\s+<%=\s+\$db\s+%>.*?<%\s+}\s+\-%>/m
+    command("puppet epp validate #{MODULE_PATH}pasture/template/pasture_config.yaml.epp")
+      .exit_status
+      .should be_zero
+    file("#{PROD_PATH}/manifests/site.pp")
+      .content
+      .should match /node\s+(['"])pasture\-app\.puppet\.vm\1\s+{.*?class\s+{\s+(['"])pasture\1:.*?sinatra_server\s+=>\s+(['"])thin\1,.*?db\s+=>\s+(['"])postgres:\/\/pasture:m00m00@pasture\-db\.puppet\.vm\/pasture\1,/m
+    command("puppet parser validate #{PROD_PATH}manifests/site.pp")
+      .exit_status
+      .should be_zero
   end
 end
