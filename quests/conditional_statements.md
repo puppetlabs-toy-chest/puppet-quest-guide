@@ -190,10 +190,10 @@ template with the same `webrick` default. The Pasture appication passes any
 settings under the `:sinatra_settings:` key to Sinatra itself.
 
 ```yaml
-<%- | $port              = '80',
-      $default_character = 'sheep',
-      $default_message   = '',
-      $sinatra_server    = 'webrick',
+<%- | $port,
+      $default_character,
+      $default_message,
+      $sinatra_server,
 | -%>
 # This file is managed by Puppet. Please do not make manual changes.
 ---

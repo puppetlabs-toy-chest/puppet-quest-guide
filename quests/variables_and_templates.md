@@ -170,8 +170,8 @@ The beginning of your template should look like the following. We'll explain
 the details of the syntax below.
 
 ```
-<%- | $port              = '80',
-      $default_character = 'sheep',
+<%- | $port,
+      $default_character,
 | -%>
 # This file is managed by Puppet. Please do not make manual changes.
 ```
@@ -188,9 +188,9 @@ Next, we'll use the variables we set up to define values for the port and
 character configuration options.
 
 ```
-<%- | $port              = '80',
-      $default_character = 'sheep',
-      $default_message   = '',
+<%- | $port,
+      $default_character,
+      $default_message,
 | -%>
 # This file is managed by Puppet. Please do not make manual changes.
 ---
@@ -240,6 +240,7 @@ class pasture {
 
   $port                = '80'
   $default_character   = 'sheep'
+  $default_message     = ''
   $pasture_config_file = '/etc/pasture_config.yaml'
 
   package {'pasture':
@@ -251,6 +252,7 @@ class pasture {
   $pasture_config_hash = {
     'port'              => $port,
     'default_character' => $default_character,
+    'default_message'   => $default_message,
   }
 
   file { $pasture_config_file:
@@ -263,7 +265,7 @@ class pasture {
     notify  => Service['pasture'],
   }
 
-  servive { 'pasture':
+  service { 'pasture':
     ensure    => running.
   }
 

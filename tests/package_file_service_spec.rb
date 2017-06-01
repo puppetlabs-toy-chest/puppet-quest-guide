@@ -69,7 +69,7 @@ describe "Task 8:", host: :localhost do
       .should be_file
     file("#{MODULE_PATH}pasture/files/pasture_config.yaml")
       .content
-      .should match /^---.*?\s\s:default_character:\s+elephant/m
+      .should match /^---.*?:default_character:\s+elephant/m
   end
 end
 

@@ -167,7 +167,7 @@ Include a line here to set the default character to `elephant`.
 
 ```yaml
 ---
-  :default_character: elephant
+:default_character: elephant
 ```
 
 With this source file saved to your module's `files` directory, you can use
