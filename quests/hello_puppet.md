@@ -191,8 +191,8 @@ file { '/tmp/test':
 }
 ```
 
-Let's break down this resource syntax into its components so we
-can see the anatomy of a resource a little more clearly.
+Let's break down this resource syntax into its components so we can
+see the anatomy of a resource a little more clearly.
 
 ```puppet
 type { 'title':
