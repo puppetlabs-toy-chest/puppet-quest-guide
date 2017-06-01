@@ -34,5 +34,8 @@ describe "Task 3:", host: :pasture do
     file('/etc/pasture_config.yaml')
       .content
       .should match /:default_character:\s+cow/
+    command('ruby -e "require \'yaml\';puts YAML.load_file(\'/etc/pasture_config.yaml\')" >/dev/null 2>&1')
+      .exit_status
+      .should be_zero
   end
 end
