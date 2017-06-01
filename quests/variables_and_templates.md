@@ -71,12 +71,13 @@ references to the `/etc/pasture_config.yaml` configuration filepath with the
 variable.
 
 ```puppet
-class pasture (
-  $port                = '80',
-  $default_character   = 'sheep',
-  $default_message     = '',
-  $pasture_config_file = '/etc/pasture_config.yaml',
-){
+class pasture {
+
+  $port                = '80'
+  $default_character   = 'sheep'
+  $default_message     = ''
+  $pasture_config_file = '/etc/pasture_config.yaml'
+
   package {'pasture':
     ensure   => present,
     provider => 'gem',
@@ -232,12 +233,13 @@ To avoid cramming all our variables into the `epp()` function, we'll put them
 in a variable called `$pasture_config_hash` just before the file resource.
 
 ```puppet
-class pasture (
-  $port                = '80',
-  $default_character   = 'sheep',
-  $default_message     = '',
-  $pasture_config_file = '/etc/pasture_config.yaml',
-){
+class pasture {
+
+  $port                = '80'
+  $default_character   = 'sheep'
+  $default_message     = ''
+  $pasture_config_file = '/etc/pasture_config.yaml'
+
   package {'pasture':
     ensure   => present,
     provider => 'gem',
@@ -305,12 +307,13 @@ And modify the file resouce for your service unit file to use the template you
 just created.
 
 ```puppet
-class pasture (
-  $port                = '80',
-  $default_character   = 'sheep',
-  $default_message     = '',
-  $pasture_config_file = '/etc/pasture_config.yaml',
-){
+class pasture {
+
+  $port                = '80'
+  $default_character   = 'sheep'
+  $default_message     = ''
+  $pasture_config_file = '/etc/pasture_config.yaml'
+
   package {'pasture':
     ensure   => present,
     provider => 'gem',
