@@ -203,6 +203,10 @@ Now reconnect.
 
     ssh learning@pasture.puppet.vm
 
+Once you've had a chance to admire the MOTD, return to the Puppet master.
+
+    exit
+
 ## Review
 
 In this quest, we introduced the `facter` tool and provided an overview of how

@@ -395,6 +395,12 @@ When you don't specify a version of the package to install, Puppet
 defaults to installing the latest available version and displays this version
 number as the value of the `ensure` attribute.
 
+Now that you've had a chance to explore this system with the newly installed
+Puppet agent, exit to return to the Puppet master before you continue to the
+next quest.
+
+    exit
+
 ## Review
 
 In this quest, you learned what Puppet is and some of the advantages of
