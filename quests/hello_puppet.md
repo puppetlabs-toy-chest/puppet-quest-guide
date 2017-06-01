@@ -139,7 +139,7 @@ agent and explore some of the tools it provides. The Puppet master hosts an
 agent install script that makes it easy to install the Puppet agent on any
 system that can access the master.
 
-<div class = "lvm-task-number"><p>Task 3:</p></div>
+<div class = "lvm-task-number"><p>Task 1:</p></div>
 
 To get started, use `ssh` to connect to `hello.puppet.vm` by running the command
 below. When prompted, enter the password `puppet`.
@@ -174,7 +174,7 @@ user, file, service, or package) is represented in Puppet code as a unit called
 a *resource*. The `puppet resource` tool lets you view and modify these
 resources directly.
 
-<div class = "lvm-task-number"><p>Task 4:</p></div>
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 Be sure you're still connected your agent system, and run the following command
 to ask Puppet to describe a file resource:
@@ -253,7 +253,7 @@ Notice that it has a single parameter value pair: `ensure => 'absent'`. The
 this parameter will tell us if the file exists on the system and if it does,
 whether it's a normal file, a directory, or a link.
 
-<div class = "lvm-task-number"><p>Task 5:</p></div>
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 Puppet is telling us that this file doesn't exist. Let's see what happens when
 you use the `touch` command to create a new empty file at that path. Run:
@@ -287,7 +287,7 @@ the way Puppet shows an existing resource on the system and the way that
 resource would be fully defined in Puppet code's resource syntax can be a
 little different.
 
-<div class = "lvm-task-number"><p>Task 6:</p></div>
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Let's use the `puppet resource` tool to add some content to our file.
 
@@ -315,7 +315,7 @@ resource syntax is the heart of Puppet's resource abstraction layer. To get
 a better understanding of how this works, let's take a look at another resource
 type, the `package`.
 
-<div class = "lvm-task-number"><p>Task 7:</p></div>
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 As an example, we'll look at the package for the Apache webserver `httpd`. Run:
 
