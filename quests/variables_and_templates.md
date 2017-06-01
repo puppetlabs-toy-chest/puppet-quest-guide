@@ -71,32 +71,28 @@ references to the `/etc/pasture_config.yaml` configuration filepath with the
 variable.
 
 ```puppet
-class pasture {
-
-  $port                = '80'
-  $default_character   = 'sheep'
-  $pasture_config_file = '/etc/pasture_config.yaml'
-
-  package { 'pasture':
+class pasture (
+  $port                = '80',
+  $default_character   = 'sheep',
+  $default_message     = '',
+  $pasture_config_file = '/etc/pasture_config.yaml',
+){
+  package {'pasture':
     ensure   => present,
     provider => 'gem',
     before   => File[$pasture_config_file],
   }
-
   file { $pasture_config_file:
     source  => 'puppet:///modules/pasture/pasture_config.yaml',
     notify  => Service['pasture'],
   }
-
   file { '/etc/systemd/system/pasture.service':
     source => 'puppet:///modules/pasture/pasture.service',
     notify  => Service['pasture'],
   }
-
   service { 'pasture':
-    ensure => running,
+    ensure    => running,
   }
-
 }
 ```
 
@@ -236,39 +232,33 @@ To avoid cramming all our variables into the `epp()` function, we'll put them
 in a variable called `$pasture_config_hash` just before the file resource.
 
 ```puppet
-class pasture {
-
-  $port                = '80'
-  $default_character   = 'sheep'
-  $default_message     = ''
-  $pasture_config_file = '/etc/pasture_config.yaml'
-
+class pasture (
+  $port                = '80',
+  $default_character   = 'sheep',
+  $default_message     = '',
+  $pasture_config_file = '/etc/pasture_config.yaml',
+){
   package {'pasture':
     ensure   => present,
     provider => 'gem',
     before   => File[$pasture_config_file],
   }
-
   $pasture_config_hash = {
     'port'              => $port,
     'default_character' => $default_character,
     'default_message'   => $default_message,
   }
-
   file { $pasture_config_file:
     content => epp('pasture/pasture_config.yaml.epp', $pasture_config_hash),
     notify  => Service['pasture'],
   }
-
   file { '/etc/systemd/system/pasture.service':
     source => 'puppet:///modules/pasture/pasture.service',
     notify  => Service['pasture'],
   }
-
   service { 'pasture':
-    ensure    => running.
+    ensure    => running,
   }
-
 }
 ```
 
@@ -315,43 +305,36 @@ And modify the file resouce for your service unit file to use the template you
 just created.
 
 ```puppet
-class pasture {
-
-  $port                = '80'
-  $default_character   = 'sheep'
-  $default_message     = ''
-  $pasture_config_file = '/etc/pasture_config.yaml'
-
+class pasture (
+  $port                = '80',
+  $default_character   = 'sheep',
+  $default_message     = '',
+  $pasture_config_file = '/etc/pasture_config.yaml',
+){
   package {'pasture':
     ensure   => present,
     provider => 'gem',
     before   => File[$pasture_config_file],
   }
-
   $pasture_config_hash = {
     'port'              => $port,
     'default_character' => $default_character,
     'default_message'   => $default_message,
   }
-
   file { $pasture_config_file:
     content => epp('pasture/pasture_config.yaml.epp', $pasture_config_hash),
     notify  => Service['pasture'],
   }
-
   $pasture_service_hash = {
     'pasture_config_file' => $pasture_config_file,
   }
-
   file { '/etc/systemd/system/pasture.service':
     content => epp('pasture/pasture.service.epp', $pasture_service_hash),
     notify  => Service['pasture'],
   }
-
   service { 'pasture':
     ensure    => running,
   }
-
 }
 ```
 

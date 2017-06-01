@@ -2,13 +2,12 @@ describe "Task 1:", host: :localhost do
   it 'Add variables to the pasture main manifest' do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
-      .should match /^class\s+pasture\s+{.*?\$port\s+=\s+(['"])80\1.*?\$default_character\s+=\s+(['"])sheep\1.*?\$pasture_config_file\s+=\s+(['"])\/etc\/pasture_config\.yaml\1.*?package\s+{\s+(['"])pasture\1:.*?before\s+=>\s+File\[\$pasture_config_file\],/m
+      .should match /^class\s+pasture\s+\(\s+\$port\s+=\s+(['"])80\1,\s+\$default_character\s+=\s+(['"])sheep\2,.*\s+\$default_message\s+=\s*(['"])\3,\s+\$pasture_config_file\s+=\s+(['"])\/etc\/pasture_config\.yaml\4,\s+\)\s*{\s+package\s+{(['"])pasture\5:\s+.*before\s+=>\s+File\[\$pasture_config_file\],/m
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /file\s+{\s+\$pasture_config_file:.*?notify\s+=>\s+Service\[(['"])pasture\1\],/m
   end
 end
-
 describe "Task 2:", host: :localhost do
   it 'Create pasture configuration file template' do
     file("#{MODULE_PATH}pasture/templates")
@@ -29,12 +28,11 @@ describe "Task 2:", host: :localhost do
       .should be_zero
   end
 end
-
 describe "Task 3:", host: :localhost do
   it 'Use pasture configuration file template' do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
-      .should match /\$pasture_config_hash\s+=\s+{.*?(['"])port\1\s+=>\s+\$port,/m
+      .should match /\$pasture_config_hash\s+=\s+{\s+(['"])port\1\s+=>\s+\$port,/m
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /content\s+=>\s+epp\((['"])pasture\/pasture_config\.yaml\.epp\1,\s+\$pasture_config_hash\),/
@@ -43,7 +41,6 @@ describe "Task 3:", host: :localhost do
       .should be_zero
   end
 end
-
 describe "Task 4:", host: :localhost do
   it 'Create pasture service unit file template' do
     file("#{MODULE_PATH}pasture/templates/pasture.service.epp")
@@ -59,7 +56,6 @@ describe "Task 4:", host: :localhost do
       .should be_zero
   end
 end
-
 describe "Task 5:", host: :localhost do
   it 'Use pasture service unit file template' do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
@@ -73,7 +69,6 @@ describe "Task 5:", host: :localhost do
       .should be_zero
   end
 end
-
 describe "Task 6:", host: :pasture do
   it 'Run the agent and test the changes' do
     file('/home/learning/.bash_history')
