@@ -68,3 +68,18 @@ describe "Task 5:", host: :localhost do
       .should be_zero
   end
 end
+
+describe "Task 6:", host: :pastureapp do
+  it 'Trigger an agent run on pasture-app.puppet.vm and test service' do
+    package('thin')
+      .should be_installed
+      .by('gem')
+    process('pasture')
+      .should be_running
+    port('80')
+      .should be_listening
+    file('/etc/pasture_config.yaml')
+      .content
+      .should match /^:db:\s+postgres:\/\/pasture:m00m00@pasture\-db\.puppet\.vm\/pasture$/
+  end
+end
