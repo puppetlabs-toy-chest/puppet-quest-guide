@@ -56,7 +56,7 @@ describe "Task 5:", host: :localhost do
       .should match /<%\-\s+\|\s+.*?\$db,.*?\|\s+\-%>/m
     file("#{MODULE_PATH}pasture/templates/pasture_config.yaml.epp")
       .content
-      .should match /<%\s+if\s+\$db\s+{\s+\-%>.*?:db:\s+<%=\s+\$db\s+%>.*?<%\s+}\s+\-%>/m
+      .should match /<%\-?\s+if\s+\$db\s+{\s+\-%>.*?:db:\s+<%=\s+\$db\s+%>.*?<%\-?\s+}\s+\-%>/m
     command("puppet epp validate #{MODULE_PATH}pasture/template/pasture_config.yaml.epp")
       .exit_status
       .should be_zero
