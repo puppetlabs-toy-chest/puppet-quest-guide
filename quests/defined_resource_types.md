@@ -160,13 +160,13 @@ define user_accounts::ssh_user (
 
   user { $title:
     ensure  => present,
-    group   => $group,
+    groups  => $group,
     shell   => $shell,
     home    => "/home/${title}",
     comment => $comment,
   }
 
-  file { "/home/${title}":
+  file { ["/home/${title}", "/home/${title}/.ssh"]:
     ensure  => directory,
     owner   => $title,
     group   => $title,
