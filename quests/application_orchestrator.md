@@ -204,8 +204,7 @@ how this `sql` resource is produced and consumed.
 
 Now that you have this new `sql` resource type, let's move on to the database
 component. This component will consist of a defined resource type similar to
-the `profile::pasture_db` profile class you created in the roles and profiles
-quest.
+the `pasture::db` profile class you created in the Forge quest.
 
 In the same manifest, but after we've closed out the defined resource type,
 we'll also include a `produces` statement to define the relationship between
