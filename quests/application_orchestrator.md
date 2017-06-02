@@ -165,7 +165,7 @@ directory is where you keep any extensions to the core Puppet language that
 your module provides. This is where you'll put the custom `sql` type that
 you'll define with Ruby code.
 
-<div class = "lvm-task-number"><p>Task 6:</p></div>
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 Go ahead and create this new `sql` resource type:
 
@@ -200,7 +200,7 @@ at the environment level, but doesn't directly specify any system state.
 As we move on to the other components involved in the application, you will see
 how this `sql` resource is produced and consumed.
 
-<div class = "lvm-task-number"><p>Task 7:</p></div>
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 Now that you have this new `sql` resource type, let's move on to the database
 component. This component will consist of a defined resource type similar to
@@ -254,7 +254,7 @@ orchestration syntax:
 
     puppet parser validate --app_management pasture_app/manifests/db.pp
 
-<div class = "lvm-task-number"><p>Task 8:</p></div>
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Next, create an `app` component to set up the Pasture application server
 itself:
@@ -290,7 +290,7 @@ Again, check the syntax of your manifest.
 
     puppet parser validate --app_management pasture_app/manifests/app.pp
 
-<div class = "lvm-task-number"><p>Task 9:</p></div>
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 Now that these defined resource types are complete, define the
 application itself. Because the application is the main thing provided by the
@@ -355,7 +355,7 @@ Your module should look like the following:
 
     4 directories, 4 files
 
-<div class = "lvm-task-number"><p>Task 10:</p></div>
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Because we will be using the orchestrator to manage these nodes, we'll remove
 the application-related classes from the nodes' roles. As long as there are no
@@ -382,7 +382,7 @@ class role::pasture_db {
 }
 ```
 
-<div class = "lvm-task-number"><p>Task 10:</p></div>
+<div class = "lvm-task-number"><p>Task 7:</p></div>
 
 The final step is to declare your application in your `site.pp` manifest.
 
@@ -442,7 +442,7 @@ You should see a result like the following:
     pasture-app-large.puppet.vm
         Pasture_app[pasture_01] - Pasture_app::App[pasture_01]
 
-<div class = "lvm-task-number"><p>Task 11:</p></div>
+<div class = "lvm-task-number"><p>Task 8:</p></div>
 
 Use the `puppet job` command to deploy the application:
 
