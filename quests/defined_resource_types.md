@@ -196,7 +196,7 @@ it into your manifest.
 
     vim ~/.ssh/id_rsa.pub
 
-Copy only the actual key. Don't include the `ssh-rsa` and `learning@puppet.vm`.
+Copy only the actual key. Don't include the `ssh-rsa` and `root@learning.puppet.vm`.
 Be careful not to include any leading or trailing whitespace. Depending on how
 line-breaks appear in your console, you may have to manually delete newline
 characters or whitespace after you paste in this key.
