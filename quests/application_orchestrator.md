@@ -327,7 +327,7 @@ components. We pass our `db_user` and `db_password` parameters through to the
 `pasture_app::db` component. This is also where we use the special
 `export` metaparameter to tell Puppet we want this component to create a `sql`
 environment resource. The `pasture_app::app`
-component includes a corresponding `comsume` metaparameter to indicate that it
+component includes a corresponding `consume` metaparameter to indicate that it
 will consume that resource.
 
 Once you've finished your application definition, validate your syntax and make
