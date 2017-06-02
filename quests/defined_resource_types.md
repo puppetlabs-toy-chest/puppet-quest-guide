@@ -225,7 +225,7 @@ Now that this `profile::pasture::dev_users` class is set up, you can easily
 drop it into the `role::pasture_app` class to add these user accounts and
 configure their SSH keys.
 
-    vim /etc/puppetlabs/code/environments/production/role/manifests/pasture_app.pp
+    vim /etc/puppetlabs/code/environments/production/modules/role/manifests/pasture_app.pp
 
 ```puppet
 class role::pasture_app {
