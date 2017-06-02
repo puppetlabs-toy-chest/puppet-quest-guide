@@ -15,7 +15,7 @@
 ## Getting started
 
 In the last quest, we shifted from managing the Pasture application on a single
-system to distributing its components across the `pasture-prod.puppet.vm` and
+system to distributing its components across the `pasture-app.puppet.vm` and
 `pasture-db.puppet.vm` hosts. The application server and database server you
 configured each play a different role in your infrastructure and have a
 different classification in Puppet.
@@ -67,6 +67,8 @@ Using roles and profiles is a design pattern, not something written into the
 Puppet source code. As far as the Puppet parser is concerned, the classes that
 define your roles and profiles are no different than any other class.
 
+<div class = "lvm-task-number"><p>Task 1:</p></div>
+
 To get started setting up your profiles, create a new `profile` module
 directory in your modulepath:
 
@@ -85,6 +87,8 @@ we'll place them in a `pasture` subdirectory within `profile/manifests`.
 Create that subdirectory.
 
     mkdir profile/manifests/pasture
+
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 Next, create a profile for the Pasture application.
 
@@ -122,6 +126,8 @@ class profile::pasture::app {
 }
 ```
 
+<div class = "lvm-task-number"><p>Task 3:</p></div>
+
 Next, create a profile for the Pasture database using the `pasture::db`
 component class.
 
@@ -145,6 +151,8 @@ across many or all of the systems in your infrastructure, the convention is to
 keep them in a `base` subdirectory. To give an example of a base profile, we'll
 create a `profile::base::motd` profile class to wrap the `motd` component class
 you created earlier.
+
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Create a `base` subdirectory in your `profile` module's `manifests` directory.
 
@@ -192,6 +200,8 @@ system it describes. Specific implementation details related to the technology
 stack are left to the profiles. For example, `role::myapp_webserver` and
 `role::myapp_database` are appropriate names for role classes, while
 `role::postgres_db` or `role::apache_server` are not.
+
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 In this case, we need two roles to define the systems involved in the Pasture
 application: `role::pasture_app` and `role::pasture_db`. First, create
@@ -258,7 +268,9 @@ scheme or look into an alternate classification method such as the PE console
 [node
 classifier](https://docs.puppet.com/pe/latest/console_classes_groups.html) or
 an [external node
-classifier](https://docs.puppet.com/puppet/4.10/nodes_external.html).
+classifier](https://docs.puppet.com/puppet/latest/nodes_external.html).
+
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 To get started creating your node definitions, open your `site.pp` manifest:
 
@@ -287,6 +299,8 @@ node /^pasture-db/ {
 Now that we're using the roles and profiles pattern, you should remove the
 previous node definitions for the `pasture-app.puppet.vm` and
 `pasture-db.puppet.vm` nodes.
+
+<div class = "lvm-task-number"><p>Task 7:</p></div>
 
 Use the `puppet job` tool to trigger a Puppet agent run on the
 `pasture-db.puppet.vm` node.
