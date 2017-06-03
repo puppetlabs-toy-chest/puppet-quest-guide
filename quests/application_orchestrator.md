@@ -35,7 +35,7 @@ two tier web application with a load balancer.
 ![image](../assets/orchestrator1.png)
 
 We have a single load balancer that distributes requests among three
-webservers, which all connect to the same database server.
+web servers, which all connect to the same database server.
 
 Each of the nodes involved in this application will have some configuration for
 things not directly involved in the application. Things like SSHD, and NTP will
@@ -43,7 +43,7 @@ likely be common to many nodes in your infrastructure, and Puppet won't require
 specific information about the application the node is involved in to configure
 them correctly. In addition to these classes and resources that are
 independent of the application, each node in this example contains some
-components of the application: the webserver, database, and load balancer along
+components of the application: the web server, database, and load balancer along
 with whatever other resources are necessary to support and configure their
 application-specific content and services.
 
@@ -51,13 +51,13 @@ application-specific content and services.
 
 In the context of application orchestration, we call each of these
 application-specific parts of your configuration a component. In our example,
-we define components for the database, webserver, and loadbalancer. Each
+we define components for the database, web server, and load balancer. Each
 component contains all the classes and resources necessary for a node to
 fulfill its role in the application. A component is generally defined by a
 defined resource type. Unlike an ordinary Puppet run that compiles a catalog
 for a node as it checks in, the components for an application orchestration job
 are compiled in a special `site` context. This means that even though you may
-ultimately be applying each instance of a webserver component on a distinct
+ultimately be applying each instance of a web server component on a distinct
 node, you still need to use a defined resource type rather than a class to
 avoid violating Puppet's singleton class rules.
 
@@ -80,9 +80,9 @@ orchestrator work. It requires a little more direct control over when and how
 the Puppet agent runs on the nodes involved in your application. If Puppet runs
 occurred at the default scheduled interval of half an hour, we'd have no way of
 ensuring that the components of our application would be configured in the
-correct order. If, for example, the Puppet run on our webserver happened to
+correct order. If, for example, the Puppet run on our web server happened to
 trigger before that of the database server, a change to the database name would
-break our application. Our webserver would still try to connect to the database
+break our application. Our web server would still try to connect to the database
 from a previous configuration resulting in an error when that database
 wasn't available.
 
@@ -98,7 +98,7 @@ demonstrate the key features of the Puppet Application Orchestrator.
 We'll define two components which will be applied to two separate nodes. One
 will define the PostgreSQL database configuration and will be applied to the
 `pasture-db.puppet.vm` node. The other will define the configuration for
-our application and be applied to the `pasture-app.puppet.vm` node.
+our application and be applied to the `pasture-app-large.puppet.vm` node.
 
 The `pasture` module you created and the `postgres` module you downloaded from
 the Forge already allow you to manage all the resources that will be involved
@@ -107,16 +107,16 @@ these will work together as components in your application deployment.
 
 So for these two nodes to be deployed correctly, what needs to happen?
 
-First, we also need a method for passing information among our nodes. Because the
-information our webserver needs to connect to our database may be based on
+First, we also need a method for passing information between our nodes. Because the
+information our web server needs to connect to our database may be based on
 Facter facts, conditional logic, or functions in the Puppet manifest that
 define the component, Puppet won't know what it is until it actually generates
 the catalog for the database node. Once Puppet has this information, it needs a
-way to pass it on as parameters for our webserver component.
+way to pass it on as parameters for our web server component.
 
 Second, the Puppet runs on these nodes must occur in the correct order.
-Because the application server node relies on the database server, Puppet must
-run on the database server first and the webserver second.
+Because the web server node relies on the database server, Puppet must
+run on the database server first and the web server second.
 
 Both of these requirements are met through something called an environment
 resource. Unlike the node-specific resources (like `user` or `file`) that tell
@@ -128,22 +128,22 @@ The first step in creating an application is to determine exactly what
 information needs to be passed among the components. What does this look like
 in the case of our application?
 
-1. **Host**: Our webserver needs to know the hostname of the database server.
+1. **Host**: Our web server needs to know the hostname of the database server.
 1. **Database**: We need to know the name of the specific database to which to connect.
 1. **User**: If we want to connect to the database, we'll need the name of a database user.
 1. **Password**: We'll also need to know the password associated with that user.
 
-This list specifies what our database server *produces* and what our webserver
-*consumes*. If we pass this information to our webserver, it will have
+This list specifies what our database server *produces* and what our web server
+*consumes*. If we pass this information to our web server, it will have
 everything it needs to connect to the database hosted on the database server.
 
 To allow all this information to be produced when we run Puppet on our database
-server and be consumed by our webserver, we'll create a custom resource type
+server and be consumed by our web server, we'll create a custom resource type
 called `sql`. Unlike a typical node resource, our `sql` resource won't directly
 specify any changes on our nodes. You can think of it as a sort of dummy
 resource. Once its parameters are set by the database component, it remains in
 the site level catalog where those parameters can be consumed by the
-webserver component.
+web server component.
 
 Unlike the defined resource types that can be written in native Puppet code,
 creating a custom type requires a detour into Ruby. The syntax is simple, so
@@ -165,7 +165,7 @@ directory is where you keep any extensions to the core Puppet language that
 your module provides. This is where you'll put the custom `sql` type that
 you'll define with Ruby code.
 
-<div class = "lvm-task-number"><p>Task 6:</p></div>
+<div class = "lvm-task-number"><p>Task 2:</p></div>
 
 Go ahead and create this new `sql` resource type:
 
@@ -192,7 +192,7 @@ can pass information across nodes involved in an orchestration job.
 The second distinguishing feature is that this `sql` resource doesn't have any
 associated *providers*. While most resources are intended to manage some aspect
 of a system, this `sql` resource's only function is to pass its parameter
-values from a database node where they're defined to a webserver node that
+values from a database node where they're defined to a web server node that
 needs to consume them. In this sense, you can think of it as a sort of dummy
 resource—it uses Puppet's resource syntax to provide a set of key-value pairs
 at the environment level, but doesn't directly specify any system state.
@@ -200,12 +200,11 @@ at the environment level, but doesn't directly specify any system state.
 As we move on to the other components involved in the application, you will see
 how this `sql` resource is produced and consumed.
 
-<div class = "lvm-task-number"><p>Task 7:</p></div>
+<div class = "lvm-task-number"><p>Task 3:</p></div>
 
 Now that you have this new `sql` resource type, let's move on to the database
 component. This component will consist of a defined resource type similar to
-the `profile::pasture_db` profile class you created in the roles and profiles
-quest.
+the `pasture::db` profile class you created in the Forge quest.
 
 In the same manifest, but after we've closed out the defined resource type,
 we'll also include a `produces` statement to define the relationship between
@@ -254,7 +253,7 @@ orchestration syntax:
 
     puppet parser validate --app_management pasture_app/manifests/db.pp
 
-<div class = "lvm-task-number"><p>Task 8:</p></div>
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Next, create an `app` component to set up the Pasture application server
 itself:
@@ -290,7 +289,7 @@ Again, check the syntax of your manifest.
 
     puppet parser validate --app_management pasture_app/manifests/app.pp
 
-<div class = "lvm-task-number"><p>Task 9:</p></div>
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 Now that these defined resource types are complete, define the
 application itself. Because the application is the main thing provided by the
@@ -328,7 +327,7 @@ components. We pass our `db_user` and `db_password` parameters through to the
 `pasture_app::db` component. This is also where we use the special
 `export` metaparameter to tell Puppet we want this component to create a `sql`
 environment resource. The `pasture_app::app`
-component includes a corresponding `comsume` metaparameter to indicate that it
+component includes a corresponding `consume` metaparameter to indicate that it
 will consume that resource.
 
 Once you've finished your application definition, validate your syntax and make
@@ -355,7 +354,7 @@ Your module should look like the following:
 
     4 directories, 4 files
 
-<div class = "lvm-task-number"><p>Task 10:</p></div>
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Because we will be using the orchestrator to manage these nodes, we'll remove
 the application-related classes from the nodes' roles. As long as there are no
@@ -382,7 +381,7 @@ class role::pasture_db {
 }
 ```
 
-<div class = "lvm-task-number"><p>Task 10:</p></div>
+<div class = "lvm-task-number"><p>Task 7:</p></div>
 
 The final step is to declare your application in your `site.pp` manifest.
 
@@ -442,7 +441,7 @@ You should see a result like the following:
     pasture-app-large.puppet.vm
         Pasture_app[pasture_01] - Pasture_app::App[pasture_01]
 
-<div class = "lvm-task-number"><p>Task 11:</p></div>
+<div class = "lvm-task-number"><p>Task 8:</p></div>
 
 Use the `puppet job` command to deploy the application:
 
