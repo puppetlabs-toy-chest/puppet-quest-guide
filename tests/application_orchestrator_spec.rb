@@ -1,4 +1,4 @@
-describe 'Task 1:' do
+describe 'Task 1:', host: :localhost do
   it 'Create application module directories' do
     file("#{MODULE_PATH}pasture_app/manifests")
       .should be_directory
@@ -7,7 +7,7 @@ describe 'Task 1:' do
   end
 end
 
-describe 'Task 2:' do
+describe 'Task 2:', host: :localhost do
   it 'Create sql resource type file' do
     file("#{MODULE_PATH}pasture_app/lib/puppet/type/sql.rb")
       .should be_file
@@ -20,7 +20,7 @@ describe 'Task 2:' do
   end
 end
 
-describe 'Task 3:' do
+describe 'Task 3:', host: :localhost do
   it 'Create the pasture_app::db component' do
     file("#{MODULE_PATH}pasture_app/manifests/db.pp")
       .should be_file
@@ -36,7 +36,7 @@ describe 'Task 3:' do
   end
 end
 
-describe 'Task 4:' do
+describe 'Task 4:', host: :localhost do
   it 'Create the pasture_app::app component' do
     file("#{MODULE_PATH}pasture_app/manifests/app.pp")
       .should be_file
@@ -52,7 +52,7 @@ describe 'Task 4:' do
   end
 end
 
-describe 'Task 5:' do
+describe 'Task 5:', host: :localhost do
   it 'Create the pasture_app application class' do
     file("#{MODULE_PATH}pasture_app/manifests/init.pp")
       .should be_file
@@ -71,51 +71,47 @@ describe 'Task 5:' do
   end
 end
 
-describe "Task 6:" do
-  it "Create a sql type" do
-    file("#{MODULE_PATH}lamp/lib/puppet/type/sql.rb")
+describe 'Task 6:', host: :localhost do
+  it 'Remove application-related classes from role classes' do
+    file("#{MODULE_PATH}role/manifests/pasture_app.pp")
       .content
-      .should match /Puppet::Type\.newtype\s+:sql,\s+:is_capability\s+=>\s+true\s+do/
+      .should match /class\s+role::pasture_app\s+{.*?include\s+profile::base::motd.*?include\s+profile::pasture::dev_users.*?}/m
+    file("#{MODULE_PATH}role/manifests/pasture_db.pp")
+      .content
+      .should match /class\s+role::pasture_db\s+{.*?include\s+profile::base::motd.*?include\s+profile::pasture::dev_users.*?}/m
   end
 end
 
-describe "Task 7:" do
-  it "Define a lamp::mysql component" do
-    # Need a better test!
-    file("#{MODULE_PATH}lamp/manifests/mysql.pp")
-      .should be_file
-  end
-end
-
-describe "Task 8:" do
-  it "Define a lamp::webapp component" do
-    # Need a better test!
-    file("#{MODULE_PATH}lamp/manifests/webapp.pp")
-      .should be_file
-  end
-end
-
-describe "Task 9:" do
-  it "Define the lamp application" do
-    # Need a better test!
-    file("#{MODULE_PATH}lamp/manifests/init.pp")
-      .should be_file
-  end
-end
-
-describe "Task 10:" do
-  it "Declare an application instance in your site.pp manifest" do
-    # Need a better test!
+describe 'Task 7:', host: :localhost do
+  it 'Add the application classification to site.pp' do
     file("#{PROD_PATH}manifests/site.pp")
       .content
-      .should match /Node\[\s*['"]database\.learning\.puppetlabs\.vm['"],?\s*\]\s*=>\s*Lamp::Mysql\[\s*['"]app1['"],?\s*\],/
+      .should match /site\s+{.*?pasture_app\s+{\s+(['"])pasture_01\1:.*?Node\[(['"])pasture-app-large\.puppet\.vm\1\]\s+=>\s+Pasture_app::App\[(['"])pasture_01\1\],/m
+    command("puppet parser validate --app_management #{PROD_PATH}manifests/site.pp")
+      .exit_status
+      .should be_zero
+    file('/root/.bash_history')
+      .content
+      .should match /puppet\s+job\s+plan\s+\-\-application\s+Pasture_app/
+    #command('/opt/puppetlabs/bin/puppet-job plan --application Pasture_app')
+      #.stdout
+      #.should match /pasture\-db\.puppet\.vm.*?Pasture_app\[pasture_01\]\s+\-\s+Pasture_app::Db\[pasture_01\]/m
+    #command('/opt/puppetlabs/bin/puppet-job plan --application Pasture_app')
+      #.stdout
+      #.should match /pasture\-app\-large\.puppet\.vm.*?Pasture_app\[pasture_01\]\s+\-\s+Pasture_app::App\[pasture_01\]/m
   end
 end
 
-describe "Task 11:" do
-  it "Trigger a puppet job run to deploy your application" do
-    command('docker exec webserver curl localhost/index.php')
+describe 'Task 8:', host: :localhost do
+  it 'Trigger agent runs with puppet job and test the application' do
+    command('docker exec pasture-db.puppet.vm grep -q ernie@puppet.vm /home/ernie/.ssh/authorized_keys')
+      .exit_status
+      .should be_zero
+    command('docker exec pasture-db.puppet.vm grep -q bert@puppet.vm /home/bert/.ssh/authorized_keys')
+      .exit_status
+      .should be_zero
+    command("curl 'pasture-app-large.puppet.vm/api/v1/cowsay'")
       .stdout
-      .should match /successfully/
+      .should match /Hi!\s+I'm\s+connected\s+to\s+pasture\-db\.puppet\.vm!/
   end
 end
