@@ -1,4 +1,4 @@
-describe "Task 1:" host: :localhost do
+describe "Task 1:", host: :localhost do
   it 'Create the directory structure for your accounts module' do
     file("#{MODULE_PATH}user_accounts")
       .should be_directory
@@ -6,7 +6,7 @@ describe "Task 1:" host: :localhost do
       .should be_directory
   end
 end
-describe "Task 2:" host: :localhost do
+describe "Task 2:", host: :localhost do
   it 'Define the user_accounts::ssh_user defined resource type' do
     file("#{MODULE_PATH}user_accounts/manifests/ssh_user.pp")
       .content
@@ -31,13 +31,13 @@ describe "Task 2:" host: :localhost do
       .should be_zero
   end
 end
-describe "Task 3:" host: :localhost do
+describe "Task 3:", host: :localhost do
   it 'Create an ssh key' do 
     file("/root/.ssh/id_rsa.pub")
       .should be_file
   end
 end
-describe "Task 4:" host: :localhost do
+describe "Task 4:", host: :localhost do
   it 'Create a profile::pasture::dev_users profile class' do
     file("#{MODULE_PATH}profile/manifests/pasture/dev_users.pp")
       .content
@@ -54,7 +54,7 @@ describe "Task 4:" host: :localhost do
       .should be_zero
   end
 end
-describe "Task 5:" host: :localhost do
+describe "Task 5:", host: :localhost do
   it 'Add profile::pasture::dev_users to the role::pasture_app class' do
     file("#{MODULE_PATH}role/manifests/pasture_app.pp")
       .content
@@ -64,7 +64,7 @@ describe "Task 5:" host: :localhost do
       .should be_zero
   end
 end
-describe "Task 6:" host: :pastureappsmall do
+describe "Task 6:", host: :pastureappsmall do
   it 'Trigger a Puppet run on pasture-app-small.puppet.vm to enforce your changes' do
     file('/home/bert/.ssh/authorized_keys')
       .should be_file
