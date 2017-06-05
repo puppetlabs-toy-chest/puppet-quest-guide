@@ -166,13 +166,21 @@ define user_accounts::ssh_user (
     comment => $comment,
   }
 
-  file { ["/home/${title}", "/home/${title}/.ssh"]:
-    ensure  => directory,
-    owner   => $title,
-    group   => $title,
-    mode    => '0775',
+  file { "/home/${title}":
+    ensure => directory,
+    owner  => $title,
+    group  => $title,
+    mode   => '0755',
   }
-} 
+
+  file { "/home/${title}/.ssh":
+    ensure => directory,
+    owner  => $title,
+    group  => $title,
+    mode   => '0700',
+    before => Ssh_authorized_key["${title}@puppet.vm"],
+  }
+}
 ```
 
 Normally you would ask the users who needed accounts on this system to provide
@@ -244,7 +252,7 @@ expired, run the `puppet access login --lifetime 1d` and use the credentials
 When the Puppet run completes, connect to `pasture-app-small.puppet.vm` as the
 user `bert`.
 
-    ssh bert@pasture-dev.puppet.vm
+    ssh bert@pasture-app-small.puppet.vm
 
 Once you've verified that the you can connect as this user, go ahead and
 disconnect.
