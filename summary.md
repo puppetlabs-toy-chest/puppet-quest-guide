@@ -18,12 +18,6 @@
 * [Defined Resource Types](quests/defined_resource_types.md)
 * [Application Orchestrator](quests/application_orchestrator.md)
 
-### TODO V2
-* [Code Management](quests/code_management.md)
-* [Environments and Testing](quests/environments_and_testing.md)
-* [Hiera](quests/hiera.md)
-* [Params Class](quests/params_class.md)
-
 ### Appendix
 
 * [Afterword](quests/afterword.md)
