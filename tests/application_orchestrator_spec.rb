@@ -93,12 +93,12 @@ describe 'Task 7:', host: :localhost do
     file('/root/.bash_history')
       .content
       .should match /puppet\s+job\s+plan\s+\-\-application\s+Pasture_app/
-    #command('/opt/puppetlabs/bin/puppet-job plan --application Pasture_app')
-      #.stdout
-      #.should match /pasture\-db\.puppet\.vm.*?Pasture_app\[pasture_01\]\s+\-\s+Pasture_app::Db\[pasture_01\]/m
-    #command('/opt/puppetlabs/bin/puppet-job plan --application Pasture_app')
-      #.stdout
-      #.should match /pasture\-app\-large\.puppet\.vm.*?Pasture_app\[pasture_01\]\s+\-\s+Pasture_app::App\[pasture_01\]/m
+    command('env USER=root LOGNAME=root HOME=/root /opt/puppetlabs/bin/puppet-job --no-color plan --application Pasture_app')
+      .stdout
+      .should match /pasture\-db\.puppet\.vm.*?Pasture_app\[pasture_01\]\s+\-\s+Pasture_app::Db\[pasture_01\]/m
+    command('env USER=root LOGNAME=root HOME=/root /opt/puppetlabs/bin/puppet-job --no-color plan --application Pasture_app')
+      .stdout
+      .should match /pasture\-app\-large\.puppet\.vm.*?Pasture_app\[pasture_01\]\s+\-\s+Pasture_app::App\[pasture_01\]/m
   end
 end
 
