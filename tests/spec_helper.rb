@@ -51,7 +51,6 @@ RSpec.configure do |config|
     set :ssh_options, options
   end
   config.before(:example, :host => :localhost) do
-  config.before(:example, :host => :localhost) do
     set :backend, 'exec'
     set :host, 'localhost'
   end
