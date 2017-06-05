@@ -68,7 +68,7 @@ def node_setup(quest)
   when 'manifests_and_classes'
     create_node('cowsay.puppet.vm')
     update_docker_hosts
-    wait_for_ssh(['pasture.puppet.vm'])
+    wait_for_ssh(['cowsay.puppet.vm'])
   when 'package_file_service'
     create_node('pasture.puppet.vm')
     update_docker_hosts
