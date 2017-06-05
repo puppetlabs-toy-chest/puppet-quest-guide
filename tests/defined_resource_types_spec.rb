@@ -18,8 +18,14 @@ describe "Task 2:", host: :localhost do
                     \)\{/mx
     file("#{MODULE_PATH}user_accounts/manifests/ssh_user.pp")
       .content
-      .should match /file\s*{\s*\"\/home\/\$\{title\}\":\s+
+      .should match /file\s*{\s*\[?\s*"\/home\/\$\{title\}\".*?
                       ensure\s+=>\s+directory,\s+
+                    /mx
+    file("#{MODULE_PATH}user_accounts/manifests/ssh_user.pp")
+      .content
+      .should match /file\s*{\s*\[?\s*"\/home\/\$\{title\}\/\.ssh\".*?
+                      ensure\s+=>\s+directory,.*?
+                      before\s+=>\s+Ssh_authorized_key\["\$\{title\}@puppet\.vm"\],\s+
                     /mx
     file("#{MODULE_PATH}user_accounts/manifests/ssh_user.pp")
       .content
@@ -32,7 +38,7 @@ describe "Task 2:", host: :localhost do
   end
 end
 describe "Task 3:", host: :localhost do
-  it 'Create an ssh key' do 
+  it 'Create an ssh key' do
     file("/root/.ssh/id_rsa.pub")
       .should be_file
   end
@@ -66,9 +72,41 @@ describe "Task 5:", host: :localhost do
 end
 describe "Task 6:", host: :pastureappsmall do
   it 'Trigger a Puppet run on pasture-app-small.puppet.vm to enforce your changes' do
+    file('/home/bert')
+      .should be_owned_by('bert')
+    file('/home/bert')
+      .should be_directory
+    file('/home/bert')
+      .should be_mode(755)
+    file('/home/bert/.ssh')
+      .should be_owned_by('bert')
+    file('/home/bert/.ssh')
+      .should be_directory
+    file('/home/bert/.ssh')
+      .should be_mode(700)
+    file('/home/bert/.ssh/authorized_keys')
+      .should be_owned_by('bert')
     file('/home/bert/.ssh/authorized_keys')
       .should be_file
+    file('/home/bert/.ssh/authorized_keys')
+      .should be_mode(600)
+    file('/home/ernie')
+      .should be_owned_by('ernie')
+    file('/home/ernie')
+      .should be_directory
+    file('/home/ernie')
+      .should be_mode(755)
+    file('/home/ernie/.ssh')
+      .should be_owned_by('ernie')
+    file('/home/ernie/.ssh')
+      .should be_directory
+    file('/home/ernie/.ssh')
+      .should be_mode(700)
+    file('/home/ernie/.ssh/authorized_keys')
+      .should be_owned_by('ernie')
     file('/home/ernie/.ssh/authorized_keys')
       .should be_file
+    file('/home/ernie/.ssh/authorized_keys')
+      .should be_mode(600)
   end
 end
