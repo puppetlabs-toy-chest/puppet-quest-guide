@@ -1,0 +1,13 @@
+{% endblock %}
+{% extends template.self %}
+
+{% block body %}
+    {{ super() }}
+    <div class='terminal_wrapper'>
+      <iframe id='terminal' src=''></iframe>
+    </div>
+    <script>
+      document.getElementById('terminal')
+        .setAttribute('src', 'http://' + window.location.hostname.toString() + ':9091');
+    </script>
+{% endblock %}
