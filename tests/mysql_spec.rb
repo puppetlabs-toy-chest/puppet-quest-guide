@@ -32,7 +32,7 @@ describe "Task 4:" do
   it "Apply the mysql::server::account_security class" do
     file('/usr/bin/mysql')
       .should be_file
-    command("echo strongpassword | mysql -e 'show databases;' -u root -p")
+    command("mysql -e 'show databases;' -u root -pstrongpassword | grep lvm")
       .stdout
       .should_not match /test/
   end
@@ -40,13 +40,13 @@ end
 
 describe "Task 5:" do
   it "Create a new database, user, and grant" do
-    command("echo strongpassword | mysql -e 'show databases;' -u root -p | grep lvm")
+    command("mysql -e 'show databases;' -u root -pstrongpassword | grep lvm")
       .exit_status
       .should be_zero
-    command("echo strongpassword | mysql -e 'SELECT User FROM mysql.user;' -u root -p | grep lvm_user")
+    command("mysql -e 'SELECT User FROM mysql.user;' -u root -pstrongpassword | grep lvm_user")
       .exit_status
       .should be_zero
-    command("echo strongpassword | mysql -e 'show grants for lvm_user@localhost;' -u root -p | grep lvm.*")
+    command("mysql -e 'show grants for lvm_user@localhost;' -u root -pstrongpassword | grep lvm.*")
       .exit_status
       .should be_zero
   end

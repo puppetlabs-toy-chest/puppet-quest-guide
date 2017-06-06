@@ -6,18 +6,16 @@
 
 =======
 * [Hello](quests/hello_puppet.md)
-* [Welcome](quests/welcome.md)
-* [Power of Puppet](quests/power_of_puppet.md)
-* [Resources](quests/resources.md)
+* [Agent Run](quests/agent_run.md)
 * [Manifests and Classes](quests/manifests_and_classes.md)
-* [Modules](quests/modules.md)
-* [NTP](quests/ntp.md)
-* [MySQL](quests/mysql.md)
-* [Variables and Parameters](quests/variables_and_parameters.md)
+* [Package File Service](quests/package_file_service.md)
+* [Variables and Templates](quests/variables_and_templates.md)
+* [Class Parameters](quests/class_parameters.md)
+* [Facts](quests/facts.md)
 * [Conditional Statements](quests/conditional_statements.md)
-* [Resource Ordering](quests/resource_ordering.md)
+* [The Forge](quests/the_forge.md)
+* [Roles and Profiles](quests/roles_and_profiles.md)
 * [Defined Resource Types](quests/defined_resource_types.md)
-* [Agent Setup](quests/agent_setup.md)
 * [Application Orchestrator](quests/application_orchestrator.md)
 
 ### Appendix

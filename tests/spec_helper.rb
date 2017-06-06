@@ -6,16 +6,47 @@ require 'net/ssh'
 
 PROD_PATH = '/etc/puppetlabs/code/environments/production/'
 MODULE_PATH = "#{PROD_PATH}modules/"
-PE_VERSION = '2016.1.2'
+
+set :backend, :exec
 
 ### enable both :should and :expect syntax ###
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = [:should, :expect]
   end
+  config.before(:example, :host => :agent) do
+    set :backend, 'ssh'
+    set :host, 'agent.puppet.vm'
+    options = {password: 'puppet', user: 'root'}
+    set :ssh_options, options
+  end
+  config.before(:example, :host => :cowsay) do
+    set :backend, 'ssh'
+    set :host, 'cowsay.puppet.vm'
+    options = {password: 'puppet', user: 'root'}
+    set :ssh_options, options
+  end
   config.before(:example, :host => :hello) do
     set :backend, 'ssh'
-    set :host, 'hello.learning.puppetlabs.vm'
+    set :host, 'hello.puppet.vm'
+    options = {password: 'puppet', user: 'root'}
+    set :ssh_options, options
+  end
+  config.before(:example, :host => :pasture) do
+    set :backend, 'ssh'
+    set :host, 'pasture.puppet.vm'
+    options = {password: 'puppet', user: 'root'}
+    set :ssh_options, options
+  end
+  config.before(:example, :host => :pastureapp) do
+    set :backend, 'ssh'
+    set :host, 'pasture-app.puppet.vm'
+    options = {password: 'puppet', user: 'root'}
+    set :ssh_options, options
+  end
+  config.before(:example, :host => :pastureappsmall) do
+    set :backend, 'ssh'
+    set :host, 'pasture-app-small.puppet.vm'
     options = {password: 'puppet', user: 'root'}
     set :ssh_options, options
   end
