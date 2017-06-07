@@ -25,7 +25,7 @@ Instead, you will use a *defined resource type*. A defined resource type is a
 block of Puppet code similar in syntax to a class. It can take parameters and
 contain a collection of resources along with other Puppet code such as
 variables and conditionals to control how those resources will be defined in a
-node's catalog. Unlike a class, a defined resource type is not singleton—it can
+node's catalog. Unlike a class, a defined resource type is not singleton - it can
 be declared multiple times on the same node.
 
 When you're ready to get started, type the following command:
@@ -273,3 +273,8 @@ on a defined resource type:
     uniqueness.
   * You can use the `undef` value as a default if you want to allow a parameter
     to remain unspecified when the defined type is declared.
+
+## Additional Resources
+
+* Read more about defined resource types at our [docs page](https://docs.puppet.com/puppet/latest/lang_defined_types.html).
+* Defined resource types are covered in our Puppet Fundamentals, Puppet Practitioner, and Puppetizing Infrastructure courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.

@@ -339,3 +339,9 @@ the URI needed to connect to the database.
 With this new `pasture::db` class set up and the `db` parameter added to the
 main pasture class, a few changes to your `site.pp` classification let you
 create a database server and connect it to your application server.
+
+## Additional Resources
+
+* Watch this [short video](https://fast.wistia.net/embed/iframe/uxfpduvk64?seo=false) for a basic introduction to the Forge.
+* For more in-depth information on the Forge, check our [Introduction to the Forge](https://learn.puppet.com/elearning/an-introduction-to-the-forge) self-paced course.
+* Our [Puppetizing Infrastructure](https://learn.puppet.com/instructor-led-training/puppetizing-infrastructure)  course focuses on using Forge modules to quickly get started managing your infrastructure with Puppet.

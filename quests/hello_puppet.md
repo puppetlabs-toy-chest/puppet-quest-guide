@@ -428,3 +428,9 @@ And you'll see how the Puppet agent communicates with your Puppet master to
 fetch a compiled list of resources called a **catalog** based on Puppet code
 kept on the master.
 
+## Additional Resources
+
+* Watch our on-demand webinar ["Introduction to Puppet Enterprise"](https://puppet.com/resources/webinar/introduction-puppet-enterprise)
+* Read about installing Puppet Enterprise on our [docs page](https://docs.puppet.com/pe/latest/install_basic.html)
+* Take a look at our [What is Puppet](https://learn.puppet.com/elearning/what-is-puppet) and [What is Puppet Enterprise](https://learn.puppet.com/elearning/what-is-puppet-enterprise) and [Resources](https://learn.puppet.com/elearning/resources) [self-paced lessons](https://learn.puppet.com/category/self-paced-training).
+* Puppet basics are covered in-depth in our Puppet Fundamentals and Puppetizing Infrastructure courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.

@@ -194,7 +194,7 @@ associated *providers*. While most resources are intended to manage some aspect
 of a system, this `sql` resource's only function is to pass its parameter
 values from a database node where they're defined to a web server node that
 needs to consume them. In this sense, you can think of it as a sort of dummy
-resource—it uses Puppet's resource syntax to provide a set of key-value pairs
+resource - it uses Puppet's resource syntax to provide a set of key-value pairs
 at the environment level, but doesn't directly specify any system state.
 
 As we move on to the other components involved in the application, you will see
@@ -480,3 +480,9 @@ Defining an application generally requires several distinct manifests and Ruby e
 Once an application is defined, you can use the `puppet job plan` command to
 see it, and the `puppet job run` command to run it. You can see running and
 completed jobs with the `puppet job list` command.
+
+## Additional Resources
+
+* Read more about application orchestration at our [docs page](https://docs.puppet.com/pe/latest/app_orchestration_overview.html).
+* Check out an overview of the feature on the [product page](https://puppet.com/product/capabilities/orchestration).
+* If you’re interested in a concrete demonstration, look at this [example application GitHub repository](https://github.com/puppetlabs/puppetlabs-wordpress_app).
