@@ -14,6 +14,33 @@
   src: url('/gitbook/fonts/calibre/CalibreWeb-Semibold.woff');
 }
 
+/* Terminal pinning */
+body {
+  display: flex;
+}
+
+.book {
+  flex: 1;
+}
+
+.terminal_wrapper {
+  flex: 1;
+  min-width: 700px;
+  overflow: hidden;
+}
+
+#terminal {
+  height: 100%;
+  width: 100%;
+  border: none;
+}
+
+@media (max-width: 1400px) {
+  body {
+    flex-direction: column;
+  }
+}
+
 .book.font-family-1,
 .book .book-header,
 .book .book-summary {
