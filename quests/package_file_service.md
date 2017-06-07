@@ -185,7 +185,7 @@ modules on your Puppet master.
 
 Don't worry if this URI syntax seems complex. It's pretty rare that you'll need
 to use it for anything other than referring to files within your modules, so
-the patern above is likely all you'll need to learn. You can always refer back
+the pattern above is likely all you'll need to learn. You can always refer back
 to the
 [docs](https://docs.puppet.com/puppet/latest/reference/types/file.html#file-attribute-source)
 for a reminder.
