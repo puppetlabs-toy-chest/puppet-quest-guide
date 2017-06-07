@@ -125,7 +125,7 @@ screen. Log in to the VM via the virtualization directly (rather than SSH) and
 use the `ifconfig | less` command to show the IP address associated with each
 network interface. There will be several interfaces listed, including those
 used for internal docker networking. The correct interface will usually start
-with `eth` or `enp`. If you continue to get an no IP address or an
+with `eth` or `enp`. If you continue to get no IP address or an
 invalid IP address, restarting the VM is generally the quickest way to ensure
 that the network services are correctly reset. (Unfortunately restarting the
 network service directly isn't always reliable.)
