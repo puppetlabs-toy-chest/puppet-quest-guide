@@ -154,7 +154,7 @@ extend to more complex configurations.
 
 You already created a `files` directory inside the `pasture` module directory.
 Just like placing manifests inside a module's `manifests` directory allows Puppet
-find the classes they define, placing files in the module's `files` directory
+to find the classes they define, placing files in the module's `files` directory
 makes them available to Puppet.
 
 <div class = "lvm-task-number"><p>Task 8:</p></div>
