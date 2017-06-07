@@ -1,0 +1,117 @@
+#!/bin/ruby
+
+require 'socket'
+
+SCRIPT_DIR = File.dirname(__FILE__)
+
+$stdout.sync = true
+
+def create_node(name, image='agent', sign_cert=true, run_puppet=true)
+  puts "Creating #{name}..."
+  `puppet apply -e "dockeragent::node { '#{name}': ensure => present, image => '#{image}', require_dockeragent => false, }"`
+  if sign_cert
+    wait_for_container(name)
+    `docker exec #{name} puppet agent -t`
+    sleep 3
+    `puppet cert sign --all`
+    sleep 3
+  end
+  if run_puppet
+    `docker exec #{name} puppet agent -t`
+  end
+end
+
+def wait_for_container(name)
+  count = 0
+  while !system("docker ps | grep #{name}") && count < 10 do
+    count =+ 1
+    sleep 2
+  end
+end
+
+def clear_nodes
+  `puppet apply #{File.join(SCRIPT_DIR, 'clear_nodes.pp')}`
+end
+
+def update_docker_hosts
+  puts 'Updating /etc/hosts...'
+  `puppet apply #{File.join(SCRIPT_DIR, 'docker_hosts.pp')}`
+end
+
+def wait_for_ssh(hosts)
+  puts "Waiting for node SSH services to become available..."
+  hosts.each do |host|
+    retries = 0
+    begin
+      Socket.tcp(host, 22, connect_timeout: 5)
+    rescue
+      retries +=1
+      if retries > 5
+        puts "Timed out waiting for node SSH services to become available. Please refer the the Learning VM troubleshooting guide."
+      end
+      sleep 8
+      retry
+    end
+  end
+end
+
+def node_setup(quest)
+  case quest
+  when 'hello_puppet'
+    create_node('hello.puppet.vm', image='no_agent', sign_cert=false, run_puppet=false)
+    update_docker_hosts
+    wait_for_ssh(['hello.puppet.vm'])
+  when 'agent_run'
+    create_node('agent.puppet.vm', image='agent', sign_cert=false, run_puppet=false)
+    update_docker_hosts
+    wait_for_ssh(['agent.puppet.vm'])
+  when 'manifests_and_classes'
+    create_node('cowsay.puppet.vm')
+    update_docker_hosts
+    wait_for_ssh(['cowsay.puppet.vm'])
+  when 'package_file_service'
+    create_node('pasture.puppet.vm')
+    update_docker_hosts
+    wait_for_ssh(['pasture.puppet.vm'])
+  when 'variables_and_templates'
+    create_node('pasture.puppet.vm')
+    update_docker_hosts
+    wait_for_ssh(['pasture.puppet.vm'])
+  when 'class_parameters'
+    create_node('pasture.puppet.vm')
+    update_docker_hosts
+    wait_for_ssh(['pasture.puppet.vm'])
+  when 'facts'
+    create_node('pasture.puppet.vm')
+    update_docker_hosts
+    wait_for_ssh(['pasture.puppet.vm'])
+  when 'conditional_statements'
+    create_node('pasture-dev.puppet.vm')
+    create_node('pasture-prod.puppet.vm')
+    update_docker_hosts
+    wait_for_ssh(['pasture-dev.puppet.vm', 'pasture-prod.puppet.vm'])
+  when 'the_forge'
+    create_node('pasture-db.puppet.vm')
+    create_node('pasture-app.puppet.vm')
+    update_docker_hosts
+    wait_for_ssh(['pasture-db.puppet.vm', 'pasture-app.puppet.vm'])
+  when 'roles_and_profiles'
+    create_node('pasture-app-small.puppet.vm')
+    create_node('pasture-app-large.puppet.vm')
+    create_node('pasture-db.puppet.vm')
+    update_docker_hosts
+    wait_for_ssh(['pasture-app-small.puppet.vm', 'pasture-app-large.puppet.vm', 'pasture-db.puppet.vm'])
+  when 'defined_resource_types'
+    create_node('pasture-app-small.puppet.vm')
+    update_docker_hosts
+    wait_for_ssh(['pasture-app-small.puppet.vm'])
+  when 'application_orchestrator'
+    create_node('pasture-app-large.puppet.vm')
+    create_node('pasture-db.puppet.vm')
+    update_docker_hosts
+    wait_for_ssh(['pasture-app-large.puppet.vm'])
+  end
+end
+
+clear_nodes
+node_setup(ARGV[0])

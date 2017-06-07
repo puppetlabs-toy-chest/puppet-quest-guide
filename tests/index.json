@@ -1,45 +1,54 @@
 {
-  "welcome": { 
-    "watch_list": ["/root/.bash_history"]
+  "welcome": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup welcome"
   },
   "hello_puppet": {
     "watch_list": ["/root/.bash_history"],
-    "setup_command": "ruby ./scripts/hello_puppet.rb"
+    "setup_command": "ruby ./scripts/setup hello_puppet"
   },
-  "power_of_puppet": {
-    "watch_list": ["/root/.bash_history"]
-  },
-  "resources": {
-    "watch_list": ["/root/.bash_history"]
+  "agent_run": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup agent_run"
   },
   "manifests_and_classes": {
-    "watch_list": ["/root/.bash_history"]
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup manifests_and_classes"
   },
-  "modules": {
-    "watch_list": ["/root/.bash_history"]
+  "package_file_service": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup package_file_service"
   },
-  "ntp": {
-    "watch_list": ["/root/.bash_history"]
+  "variables_and_templates": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup variables_and_templates"
   },
-  "mysql": {
-    "watch_list": ["/root/.bash_history"]
+  "class_parameters": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup class_parameters"
   },
-  "variables_and_parameters": {
-    "watch_list": ["/root/.bash_history"]
+  "facts": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup facts"
   },
   "conditional_statements": {
-    "watch_list": ["/root/.bash_history"]
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup conditional_statements"
   },
-  "resource_ordering": {
-    "watch_list": ["/root/.bash_history"]
+  "the_forge": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup the_forge"
+  },
+  "roles_and_profiles": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup roles_and_profiles"
   },
   "defined_resource_types": {
-    "watch_list": ["/root/.bash_history"]
-  },
-  "agent_setup": {
-    "watch_list": ["/root/.bash_history"]
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup defined_resource_types"
   },
   "application_orchestrator": {
-    "watch_list": ["/root/.bash_history"]
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup application_orchestrator"
   }
 }
