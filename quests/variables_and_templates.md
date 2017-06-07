@@ -391,3 +391,8 @@ introduce in the following quests. In the next quest, you'll see how to create
 a *parameterized class*, which will allow you to set important variables
 in your class as you declare it. Parameters allow you to customize how a class
 is configured without editing code in the module where the class is defined.
+
+## Additional Resources
+
+* Our docs page has more information on [variables](https://docs.puppet.com/puppet/latest/lang_variables.html) and [templates](https://docs.puppet.com/puppet/latest/lang_template.html).
+* These topics are also covered in more depth in our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) trainings.

@@ -220,3 +220,9 @@ In the next quest, we'll show you how you can add further flexibility to your
 Puppet code with *conditional statements*. We'll give you an example of how
 these facts can be used in conjunction with these conditional statements to
 create intelligent defaults based on system information.
+
+## Additional Resources
+
+* Check out our [docs page](https://docs.puppet.com/puppet/latest/lang_facts_and_builtin_vars.html) for more information on facter and facts in Puppet.
+* You can also find a [lesson on Facter](https://learn.puppet.com/elearning/an-introduction-to-facter) in our [self-paced training course catalog](https://learn.puppet.com/category/self-paced-training).
+* Facts are covered in-depth in our Puppet Fundamentals, Puppet Practitioner, and Puppetizing Infrastructure courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.

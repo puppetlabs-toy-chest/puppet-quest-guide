@@ -34,8 +34,8 @@ questions, while the Puppet code itself answers **what** questions.
 
 As an example, let's take a look at the `puppetlabs-apache` module. While this
 module's developers rely on Puppet's providers to determine how the Apache
-package is installed—whether it's handled by `yum`, `apt-get` or another
-package manager—Puppet doesn't have any way of automatically determining the
+package is installed - whether it's handled by `yum`, `apt-get` or another
+package manager - Puppet doesn't have any way of automatically determining the
 name of the package that needs to be installed. Depending on whether the module
 is used to manage Apache on a RedHat or Debian system, it will need to manage
 either the `httpd` or `apache2` package.
@@ -82,7 +82,7 @@ package { 'httpd':
 
 Remember that because the `name` parameter is being explicitly set here, the
 resource *title* (`httpd`) only serves as an internal identifier for the
-resource—it doesn't actually determine the name of the package that will be
+resource - it doesn't actually determine the name of the package that will be
 installed.
 
 ## Conditions
@@ -407,7 +407,12 @@ for the different server options available to the Sinatra framework.
 
 So far, the `pasture` and `motd` modules you've used have been written from
 scratch. This is great for the sake of learning, but one of Puppet's strengths
-lies in the Puppet community and the Puppet Forge—the repository of pre-written
+lies in the Puppet community and the Puppet Forge - the repository of pre-written
 modules you can easily incorporate into your own Puppet codebase. In the next
 quest, you'll see how to make use of an existing module to set up a database
 backend for the Pasture application.
+
+## Additional Resources
+
+* Puppet's [docs page](https://docs.puppet.com/puppet/latest/lang_conditional.html) covers the syntax of all forms of conditional statements and expressions.
+* The [style guide](https://docs.puppet.com/puppet/latest/style_guide.html#conditionals) includes best-practices recommendations for the use of conditionals.
