@@ -273,3 +273,8 @@ on a defined resource type:
     uniqueness.
   * You can use the `undef` value as a default if you want to allow a parameter
     to remain unspecified when the defined type is declared.
+
+## Additional Resources
+
+* Read more about defined resource types at our [docs page](https://docs.puppet.com/puppet/latest/lang_defined_types.html).
+* Defined resource types are covered in our Puppet Fundamentals, Puppet Practitioner, and Puppetizing Infrastructure courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.

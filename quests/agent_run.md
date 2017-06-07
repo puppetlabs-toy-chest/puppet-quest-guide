@@ -357,3 +357,8 @@ Now that we've introduced the resource abstraction layer, the agent/master
 communication involved in a Puppet run, and a simple example of classification
 with the `site.pp` manifest, you've seen the foundations that the rest of
 Puppet is built on.
+
+## Additional Resources
+
+* Read about the basics of a Puppet agent run on our [docs page](https://docs.puppet.com/pe/latest/console_classes_groups_running_puppet.html)
+* Puppet agent concepts are covered in-depth in our Puppet Fundamentals and Puppetizing Infrastructure courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.

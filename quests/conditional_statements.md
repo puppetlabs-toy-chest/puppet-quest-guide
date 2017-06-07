@@ -411,3 +411,8 @@ lies in the Puppet community and the Puppet Forge—the repository of pre-writte
 modules you can easily incorporate into your own Puppet codebase. In the next
 quest, you'll see how to make use of an existing module to set up a database
 backend for the Pasture application.
+
+## Additional Resources
+
+* Puppet's [docs page](https://docs.puppet.com/puppet/latest/lang_conditional.html) covers the syntax of all forms of conditional statements and expressions.
+* The [style guide](https://docs.puppet.com/puppet/latest/style_guide.html#conditionals) includes best-practices recommendations for the use of conditionals.
