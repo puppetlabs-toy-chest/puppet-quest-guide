@@ -49,6 +49,32 @@
   font-weight: normal;
 }
 
+/* Terminal pinning */
+body {
+  display: flex;
+}
+
+.book {
+  flex: 3;
+}
+
+.terminal_wrapper {
+  flex: 2;
+}
+
+#terminal {
+  height: 100%;
+  width: 100%;
+  border: none;
+}
+
+@media (max-width: 1440px) {
+  body {
+    flex-direction: column;
+  }
+}
+
+
 .markdown-section h1 {
   margin-top: 0em;
   font-size: 3.2em;
