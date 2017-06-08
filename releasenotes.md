@@ -2,6 +2,15 @@
 
 ## Release Notes
 
+### v2.0.0
+  * Complete re-write of quest content and task spec tests.
+  * Content tested for compatibility with puppet-2017.2.1-learning-5.15 VM build
+  * Updated the [quest tool](https://github.com/puppetlabs/quest) to improve quest setup process.
+  * Merged [pltraining-learning](https://github.com/puppetlabs/pltraining-learning) module into [pltraining-bootstrap](https://github.com/puppetlabs/pltraining-bootstrap).
+  * Updated [pltraining-bootstrap](https://github.com/puppetlabs/pltraining-bootstrap) module to include a local gem server and Forge server.
+  * Updated [pltraining-bootstrap](https://github.com/puppetlabs/pltraining-bootstrap) module to cache all needed content to fully support offline use.
+  * Updated [pltraining-dockeragent](https://github.com/puppetlabs/pltraining-dockeragent) to support quest containerized agent use cases, including support for local gem server, local yum repo, ssh login, Puppet certificates, and PostgreSQL dependencies.
+
 ### v1.2.6
   * Add instructions to create cowsayings directory structure in the manifests
     and classes quest instead of relying on it being pre-created in the build.
