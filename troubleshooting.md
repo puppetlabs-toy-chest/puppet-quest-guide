@@ -128,7 +128,7 @@ If you are using Mac OS X and see `Unable to retrieve kernel symbols`,
 `Failed to initialize monitor device`, or `Internal error`, please refer to
 [this VMWare knowledge base page](https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2061791).
 
-VirtualBox is not compatible with Hyper-V. You will need to disable Hyper-v on
+VirtualBox is not compatible with Hyper-V. You will need to disable Hyper-V on
 your system to successfully run the VM with VirtualBox.
 
 ### The Learning VM has no IP address or the IP address will not respond.
