@@ -1,12 +1,4 @@
 describe "Task 1:" do
-  it 'Use puppet -V to check the puppet version' do 
-    file('/root/.bash_history')
-      .content
-      .should match /puppet\s+(-V|--version)/
-  end
-end
-
-describe "Task 2:" do
   it 'View the options for the quest tool' do
     file('/root/.bash_history')
       .content
@@ -14,10 +6,10 @@ describe "Task 2:" do
   end
 end
 
-describe "Task 3:" do
-  it 'Check the quest status' do 
+describe "Task 2:" do
+  it 'View the list of available quests' do 
     file('/root/.bash_history')
       .content
-      .should match /quest\s+status/
+      .should match /quest\s+list/
   end
 end
