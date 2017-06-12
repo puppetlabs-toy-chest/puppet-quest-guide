@@ -74,8 +74,8 @@ describe "Task 6:", host: :pasture do
     file('/home/learning/.bash_history')
       .content
       .should match /sudo puppet agent -t/
-    file('/home/learning/.bash_history')
+    file('/etc/systemd/system/pasture.service')
       .content
-      .should match /curl \'pasture\.puppet\.vm\/api\/v1\/cowsay\?message=Hello!\'/
+      .should match /ExecStart=\/usr\/local\/bin\/pasture\s+start\s+--config_file\s+\/etc\/pasture_config\.yaml/
   end
 end
