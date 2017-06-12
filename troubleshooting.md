@@ -104,7 +104,18 @@ learning.puppetlabs.vm:8140` generally indicates that the `pe-puppetdb` service
 is down. Again, refer to the section above for instructions on checking and
 restarting PE services.
 
-### I cannot import the OVA
+When triggering a Puppet run via the `puppet job` tool, you may see an error
+similar to `Error running puppet on pasture.puppet.vm: pasture.puppet.vm is not
+connected to the PCP broker`. A node connects to the PCP broker on its initial
+Puppet run. The agent nodes created by the `quest` tool will automatically run
+Puppet as they are created, which should generally connect the node to the PCP
+broker. If this initial Puppet run fails, however, the node will not be
+connected to the PCP broker, resulting in the error shown. To troubleshoot this
+issue, connect to the agent node directly and manually trigger a Puppet agent
+run. This will either generate an error message to indicate the cause of the
+agent run's failure or run successfully and connect the node to the PCP broker.
+
+### I cannot import or start the OVA
 
 Ensure that you have an up-to-date version of your virtualization software
 installed.  Note that the "check for updates" feature of VirtualBox may not
@@ -116,6 +127,9 @@ will be specific to your system, will generally available online.
 If you are using Mac OS X and see `Unable to retrieve kernel symbols`,
 `Failed to initialize monitor device`, or `Internal error`, please refer to
 [this VMWare knowledge base page](https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2061791).
+
+VirtualBox is not compatible with Hyper-V. You will need to disable Hyper-V on
+your system to successfully run the VM with VirtualBox.
 
 ### The Learning VM has no IP address or the IP address will not respond.
 
