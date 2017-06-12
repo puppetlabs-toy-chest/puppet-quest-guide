@@ -5,7 +5,8 @@
 ### Quests
 
 =======
-* [Hello](quests/hello_puppet.md)
+* [Welcome](quests/welcome.md)
+* [Hello Puppet](quests/hello_puppet.md)
 * [Agent Run](quests/agent_run.md)
 * [Manifests and Classes](quests/manifests_and_classes.md)
 * [Package File Service](quests/package_file_service.md)
