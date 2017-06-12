@@ -377,7 +377,6 @@ Do the same for your `role/manifests/pasture_db.pp` manifest
 ```puppet
 class role::pasture_db {
   include profile::base::motd
-  include profile::pasture::dev_users
 }
 ```
 

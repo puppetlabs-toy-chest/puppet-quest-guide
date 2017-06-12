@@ -368,6 +368,8 @@ state you intend.
 Once the Puppet run has successfully completed, disconnect to return to your
 session on the Learning VM itself.
 
+    exit
+
 Use the `curl` command again to see that your changes to the defaults have
 taken effect.
 
