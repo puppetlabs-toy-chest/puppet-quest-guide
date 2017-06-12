@@ -106,7 +106,7 @@ restarting PE services.
 
 When triggering a Puppet run via the `puppet job` tool, you may see an error
 similar to `Error running puppet on pasture.puppet.vm: pasture.puppet.vm is not
-connected to the PCP broker. A node connects to the PCP broker on its initial
+connected to the PCP broker`. A node connects to the PCP broker on its initial
 Puppet run. The agent nodes created by the `quest` tool will automatically run
 Puppet as they are created, which should generally connect the node to the PCP
 broker. If this initial Puppet run fails, however, the node will not be
