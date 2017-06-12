@@ -75,10 +75,10 @@ describe 'Task 6:', host: :localhost do
   it 'Remove application-related classes from role classes' do
     file("#{MODULE_PATH}role/manifests/pasture_app.pp")
       .content
-      .should match /class\s+role::pasture_app\s+{.*?include\s+profile::base::motd.*?include\s+profile::pasture::dev_users.*?}/m
+      .should_not match /include\s+profile::pasture::app/m
     file("#{MODULE_PATH}role/manifests/pasture_db.pp")
       .content
-      .should match /class\s+role::pasture_db\s+{.*?include\s+profile::base::motd.*?include\s+profile::pasture::dev_users.*?}/m
+      .should_not match /include\s+profile::pasture::db/m
   end
 end
 
