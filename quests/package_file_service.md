@@ -120,6 +120,10 @@ it in the background.
 
     pasture start &
 
+As the process starts, it will write some output to your terminal, but will not
+prevent you from entering new commands. If you want a clean prompt for your
+next command, just hit the `enter` key.
+
 <div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Use the `curl` command to test the Pasture API. The request takes two
@@ -136,12 +140,20 @@ in another parameter to change this.
 
 <div class = "lvm-task-number"><p>Task 7:</p></div>
 
-Feel free to experiemnt with other parameters. When you're done, foreground the
-process:
+Feel free to experiemnt with other parameters. When you're done, use the `fg`
+command to foreground the `pasture` process:
 
     fg
 
-And use `CTRL-C` to end the process, and disconnect from the agent node.
+Use the `CTRL-C` key combination to end the process:  
+
+`CTRL-C`  
+
+If `fg` doesn't foreground the process, use the `ps` command to find the
+`pasture` process's PID and use the `kill` command with that PID (e.g. `kill
+5983`) to stop the process.
+
+Once you've stopped the process, disconnect from the agent node.
 
     exit
 
