@@ -54,7 +54,7 @@ describe "Task 6:", host: :localhost do
       .should be_file
     file("#{MODULE_PATH}cowsay/manifests/fortune.pp")
       .content
-      .should match /^class\s+cowsay::fortune\s+{.*?package\s+{\s+(['"])fortune\-mod\1:/m
+      .should match /^class\s+cowsay::fortune\s+{.*?package\s*{\s*(['"])fortune\-mod\1:/m
   end
 end
 
