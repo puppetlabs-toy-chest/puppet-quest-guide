@@ -181,7 +181,8 @@ Puppet run continues. This ensures that the agent has all the tools it needs to
 correctly apply the catalog.
 
 This pluginsync process adds a lot of clutter, but we'll focus on three lines
-that look like the following:
+that look like the following. If you'd like to see these lines with less
+clutter, trigger another agent run.
 
 ```
 Info: Loading facts
