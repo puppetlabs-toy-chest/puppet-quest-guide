@@ -140,7 +140,7 @@ in another parameter to change this.
 
 <div class = "lvm-task-number"><p>Task 7:</p></div>
 
-Feel free to experiemnt with other parameters. When you're done, use the `fg`
+Feel free to experiment with other parameters. When you're done, use the `fg`
 command to foreground the `pasture` process:
 
     fg
