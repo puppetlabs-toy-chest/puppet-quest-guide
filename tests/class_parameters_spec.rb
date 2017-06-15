@@ -1,5 +1,5 @@
-describe "Task 1:", host: :localhost do
-  it 'Add parameters to the pasture class' do
+describe _("Task 1:", host: :localhost) do
+  it _('Add parameters to the pasture class') do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /class\s+pasture\s+\(.*?\$port\s+=\s+(['"])80\1,/m
@@ -18,8 +18,8 @@ describe "Task 1:", host: :localhost do
   end
 end
 
-describe "Task 2:", host: :localhost do
-  it 'Use resource-like syntax for classification' do
+describe _("Task 2:", host: :localhost) do
+  it _('Use resource-like syntax for classification') do
     file("#{PROD_PATH}manifests/site.pp")
       .content
       .should match /node\s+(['"])?pasture\.puppet\.vm\1\s+\{.*?class\s+\{\s+(['"])pasture\1:.*?default_character\s+=>\s+(['"])cow\1,.*?\}.*?\}/m
@@ -29,8 +29,8 @@ describe "Task 2:", host: :localhost do
   end
 end
 
-describe "Task 3:", host: :pasture do
-  it 'Run the agent and test the changes' do
+describe _("Task 3:", host: :pasture) do
+  it _('Run the agent and test the changes') do
     file('/etc/pasture_config.yaml')
       .content
       .should match /:default_character:\s+cow/

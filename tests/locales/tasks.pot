@@ -1,0 +1,407 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017 Puppet, Inc.
+# This file is distributed under the same license as the Puppet Quest Guide package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Puppet Quest Guide \n"
+"Report-Msgid-Bugs-To: learningvm@puppet.com\n"
+"POT-Creation-Date: 2017-06-15 11:19-0700\n"
+"PO-Revision-Date: 2017-06-15 11:19-0700\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: ../agent_run_spec.rb:1 ../application_orchestrator_spec.rb:1 ../class_parameters_spec.rb:1 ../conditional_statements_spec.rb:1 ../defined_resource_types_spec.rb:1 ../facts_spec.rb:1 ../hello_puppet_spec.rb:1 ../manifests_and_classes_spec.rb:1 ../modules_spec.rb:1 ../mysql_spec.rb:1 ../ntp_spec.rb:1 ../package_file_service_spec.rb:1 ../power_of_puppet_spec.rb:1 ../resource_ordering_spec.rb:1 ../resources_spec.rb:1 ../roles_and_profiles_spec.rb:1 ../the_forge_spec.rb:1 ../variables_and_parameters_spec.rb:1 ../variables_and_templates_spec.rb:1 ../welcome_spec.rb:1
+msgid "Task 1:"
+msgstr ""
+
+#: ../agent_run_spec.rb:2
+msgid "Run the pre-installed agent"
+msgstr ""
+
+#: ../agent_run_spec.rb:9 ../application_orchestrator_spec.rb:10 ../class_parameters_spec.rb:21 ../conditional_statements_spec.rb:15 ../defined_resource_types_spec.rb:9 ../facts_spec.rb:15 ../hello_puppet_spec.rb:8 ../manifests_and_classes_spec.rb:9 ../modules_spec.rb:9 ../mysql_spec.rb:10 ../ntp_spec.rb:10 ../package_file_service_spec.rb:10 ../power_of_puppet_spec.rb:9 ../resource_ordering_spec.rb:14 ../resources_spec.rb:9 ../roles_and_profiles_spec.rb:10 ../the_forge_spec.rb:11 ../variables_and_parameters_spec.rb:12 ../welcome_spec.rb:9
+msgid "Task 2:"
+msgstr ""
+
+#: ../agent_run_spec.rb:10
+msgid "Sign the agent certificate"
+msgstr ""
+
+#: ../agent_run_spec.rb:16 ../application_orchestrator_spec.rb:23 ../class_parameters_spec.rb:32 ../defined_resource_types_spec.rb:40 ../facts_spec.rb:24 ../hello_puppet_spec.rb:16 ../manifests_and_classes_spec.rb:16 ../modules_spec.rb:16 ../ntp_spec.rb:17 ../package_file_service_spec.rb:20 ../power_of_puppet_spec.rb:19 ../resources_spec.rb:17 ../roles_and_profiles_spec.rb:23 ../variables_and_parameters_spec.rb:20
+msgid "Task 3:"
+msgstr ""
+
+#: ../agent_run_spec.rb:17
+msgid "Check for successful agent run"
+msgstr ""
+
+#: ../agent_run_spec.rb:23 ../conditional_statements_spec.rb:41 ../defined_resource_types_spec.rb:46 ../facts_spec.rb:37 ../hello_puppet_spec.rb:26 ../modules_spec.rb:27 ../ntp_spec.rb:24 ../power_of_puppet_spec.rb:27 ../resource_ordering_spec.rb:37 ../resources_spec.rb:24 ../roles_and_profiles_spec.rb:36 ../the_forge_spec.rb:38 ../variables_and_parameters_spec.rb:27
+msgid "Task 4:"
+msgstr ""
+
+#: ../agent_run_spec.rb:24
+msgid "Check for site.pp classification"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:2
+msgid "Create application module directories"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:11
+msgid "Create sql resource type file"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:24
+msgid "Create the pasture_app::db component"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:74 ../defined_resource_types_spec.rb:73 ../manifests_and_classes_spec.rb:51 ../modules_spec.rb:42 ../resource_ordering_spec.rb:51 ../roles_and_profiles_spec.rb:74 ../variables_and_parameters_spec.rb:47 ../variables_and_templates_spec.rb:72
+msgid "Task 6:"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:75
+msgid "Remove application-related classes from role classes"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:85 ../modules_spec.rb:49 ../resource_ordering_spec.rb:62
+msgid "Task 7:"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:86
+msgid "Add the application classification to site.pp"
+msgstr ""
+
+#: ../class_parameters_spec.rb:2
+msgid "Add parameters to the pasture class"
+msgstr ""
+
+#: ../class_parameters_spec.rb:22
+msgid "Use resource-like syntax for classification"
+msgstr ""
+
+#: ../class_parameters_spec.rb:33 ../variables_and_templates_spec.rb:73
+msgid "Run the agent and test the changes"
+msgstr ""
+
+#: ../conditional_statements_spec.rb:2
+msgid "Add the sinatra_server parameter to the pasture main manifest"
+msgstr ""
+
+#: ../conditional_statements_spec.rb:16
+msgid "Add the sinatra_server parameter to the pasture config file template"
+msgstr ""
+
+#: ../conditional_statements_spec.rb:42
+msgid "Classify nodes"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:2
+msgid "Create the directory structure for your accounts module"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:10
+msgid "Define the user_accounts::ssh_user defined resource type"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:41
+msgid "Create an ssh key"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:47
+msgid "Create a profile::pasture::dev_users profile class"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:63 ../hello_puppet_spec.rb:34 ../manifests_and_classes_spec.rb:40 ../modules_spec.rb:34 ../ntp_spec.rb:32 ../resource_ordering_spec.rb:44 ../roles_and_profiles_spec.rb:51 ../variables_and_parameters_spec.rb:36
+msgid "Task 5:"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:64
+msgid "Add profile::pasture::dev_users to the role::pasture_app class"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:74
+msgid "Trigger a Puppet run on pasture-app-small.puppet.vm to enforce your changes"
+msgstr ""
+
+#: ../facts_spec.rb:2
+msgid "Use the facter command"
+msgstr ""
+
+#: ../facts_spec.rb:16
+msgid "Create motd module directories"
+msgstr ""
+
+#: ../facts_spec.rb:25
+msgid "Create the motd module main manifest"
+msgstr ""
+
+#: ../facts_spec.rb:38
+msgid "Create the motd.epp template"
+msgstr ""
+
+#: ../hello_puppet_spec.rb:2
+msgid "Install the Puppet agent"
+msgstr ""
+
+#: ../hello_puppet_spec.rb:9
+msgid "Investigate the /tmp/test file resource"
+msgstr ""
+
+#: ../hello_puppet_spec.rb:17 ../hello_puppet_spec.rb:27 ../hello_puppet_spec.rb:35
+msgid "Create the /tmp/test file resource"
+msgstr ""
+
+#: ../manifests_and_classes_spec.rb:2
+msgid "Display the module path"
+msgstr ""
+
+#: ../manifests_and_classes_spec.rb:10
+msgid "Make the cowsay module directory"
+msgstr ""
+
+#: ../manifests_and_classes_spec.rb:17
+msgid "Create the cowsay default manifest"
+msgstr ""
+
+#: ../manifests_and_classes_spec.rb:41
+msgid "Run the agent and test cowsay"
+msgstr ""
+
+#: ../manifests_and_classes_spec.rb:52
+msgid "Create the cowsay::fortune class"
+msgstr ""
+
+#: ../modules_spec.rb:2
+msgid "Use puppet master --configprint find the modulepath"
+msgstr ""
+
+#: ../modules_spec.rb:10
+msgid "Create a directory for your vimrc module"
+msgstr ""
+
+#: ../modules_spec.rb:17
+msgid "Create manifests, examples, and files subdirectories"
+msgstr ""
+
+#: ../modules_spec.rb:28
+msgid "Copy the .vimrc into the module files directory"
+msgstr ""
+
+#: ../modules_spec.rb:35
+msgid "Add the 'set nu' command to the vimrc file"
+msgstr ""
+
+#: ../modules_spec.rb:43
+msgid "Define the vimrc class"
+msgstr ""
+
+#: ../modules_spec.rb:50
+msgid "Include the vimrc class in a test manifest"
+msgstr ""
+
+#: ../modules_spec.rb:56
+msgid "Task 8:"
+msgstr ""
+
+#: ../modules_spec.rb:57
+msgid "Apply the test to add the 'set nu' command to your .vimrc"
+msgstr ""
+
+#: ../mysql_spec.rb:2
+msgid "Install the puppetlabs-mysql module"
+msgstr ""
+
+#: ../mysql_spec.rb:11
+msgid "Define the mysql class"
+msgstr ""
+
+#: ../ntp_spec.rb:2
+msgid "Install the puppetlabs-ntp module"
+msgstr ""
+
+#: ../ntp_spec.rb:11
+msgid "Include the ntp class in your 'learning.puppetlabs.vm' node definition"
+msgstr ""
+
+#: ../ntp_spec.rb:18
+msgid "Trigger a puppet run to install and configure NTP"
+msgstr ""
+
+#: ../ntp_spec.rb:25
+msgid "Set the servers parameter to specify non-default servers"
+msgstr ""
+
+#: ../ntp_spec.rb:33
+msgid "Trigger a puppet run to apply your server configuration changes"
+msgstr ""
+
+#: ../package_file_service_spec.rb:2
+msgid "Create the pasture module directories"
+msgstr ""
+
+#: ../package_file_service_spec.rb:11
+msgid "Create the pasture main manifest"
+msgstr ""
+
+#: ../package_file_service_spec.rb:21
+msgid "Update site.pp with classification for pasture.puppet.vm"
+msgstr ""
+
+#: ../package_file_service_spec.rb:87
+msgid "Task 10:"
+msgstr ""
+
+#: ../package_file_service_spec.rb:88
+msgid "Create the pasture service unit file"
+msgstr ""
+
+#: ../package_file_service_spec.rb:97
+msgid "Task 11:"
+msgstr ""
+
+#: ../package_file_service_spec.rb:98
+msgid "Manage the pasture configuration file and service"
+msgstr ""
+
+#: ../package_file_service_spec.rb:111
+msgid "Task 12:"
+msgstr ""
+
+#: ../package_file_service_spec.rb:112
+msgid "Add relationship metaparameters to the pasture main manifest"
+msgstr ""
+
+#: ../power_of_puppet_spec.rb:2
+msgid "Use the puppet module tool to search for graphite"
+msgstr ""
+
+#: ../power_of_puppet_spec.rb:10
+msgid "Install the dwerder-graphite module"
+msgstr ""
+
+#: ../power_of_puppet_spec.rb:20
+msgid "Use facter to find the Learning VM's IP address"
+msgstr ""
+
+#: ../power_of_puppet_spec.rb:28
+msgid "Trigger a puppet agent run to install and configure Graphite"
+msgstr ""
+
+#: ../resource_ordering_spec.rb:2
+msgid "Create the sshd module directory with manifests, examples, and files subdirectories"
+msgstr ""
+
+#: ../resource_ordering_spec.rb:15
+msgid "Define the sshd class"
+msgstr ""
+
+#: ../resource_ordering_spec.rb:38
+msgid "Use the `dot` tool to generate an image of your resource relationships graph"
+msgstr ""
+
+#: ../resource_ordering_spec.rb:45
+msgid "Copy the sshd_config file to the module's files direcotry"
+msgstr ""
+
+#: ../resource_ordering_spec.rb:52
+msgid "Disable GSSAPIAuthentication in the module's sshd_config file"
+msgstr ""
+
+#: ../resource_ordering_spec.rb:63
+msgid "Add a `file` resource to manage the `sshd` configuration file"
+msgstr ""
+
+#: ../resources_spec.rb:2
+msgid "Inspect the root user resource"
+msgstr ""
+
+#: ../resources_spec.rb:10
+msgid "View the description of the user resource"
+msgstr ""
+
+#: ../resources_spec.rb:18
+msgid "Create the user galatea"
+msgstr ""
+
+#: ../resources_spec.rb:25
+msgid "Give the galatea user the comment Galatea of Cyprus"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:2
+msgid "Create the profile module directories"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:11
+msgid "Create the profile::pasture::app class"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:24
+msgid "Create the profile::pasture::db class"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:37
+msgid "Create the profile::base::motd class"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:52
+msgid "Create the role classes"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:75
+msgid "Classify nodes with role classes"
+msgstr ""
+
+#: ../the_forge_spec.rb:2
+msgid "Install the PostgreSQL Puppet module"
+msgstr ""
+
+#: ../the_forge_spec.rb:12
+msgid "Create the pasture::db wrapper class"
+msgstr ""
+
+#: ../the_forge_spec.rb:39
+msgid "Update the pasture main manifest with a db parameter"
+msgstr ""
+
+#: ../variables_and_parameters_spec.rb:2
+msgid "Create the directory structure for your web module"
+msgstr ""
+
+#: ../variables_and_parameters_spec.rb:13
+msgid "Define the web class"
+msgstr ""
+
+#: ../variables_and_parameters_spec.rb:21
+msgid "Include the web class in a test manifest"
+msgstr ""
+
+#: ../variables_and_parameters_spec.rb:28
+msgid "Apply your test manifest to create your website files"
+msgstr ""
+
+#: ../variables_and_parameters_spec.rb:37
+msgid "Add $page_name and $message parameters and create a file using their values"
+msgstr ""
+
+#: ../variables_and_parameters_spec.rb:48
+msgid "Declare the web class with parameters in your test manifest"
+msgstr ""
+
+#: ../variables_and_templates_spec.rb:2
+msgid "Add variables to the pasture main manifest"
+msgstr ""
+
+#: ../welcome_spec.rb:2
+msgid "View the options for the quest tool"
+msgstr ""
+
+#: ../welcome_spec.rb:10
+msgid "View the list of available quests"
+msgstr ""

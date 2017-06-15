@@ -1,5 +1,5 @@
-describe "Task 1:" do
-  it 'Create the sshd module directory with manifests, examples, and files subdirectories' do
+describe _("Task 1:") do
+  it _('Create the sshd module directory with manifests, examples, and files subdirectories') do
     file("#{MODULE_PATH}sshd")
       .should be_directory
     file("#{MODULE_PATH}sshd/manifests")
@@ -11,8 +11,8 @@ describe "Task 1:" do
   end
 end
 
-describe "Task 2:" do
-  it 'Define the sshd class' do
+describe _("Task 2:") do
+  it _('Define the sshd class') do
     file("#{MODULE_PATH}sshd/manifests/init.pp")
       .content
       .should match /class\s+sshd\s*\{/
@@ -25,8 +25,8 @@ describe "Task 2:" do
   end
 end
 
-describe "Task 3:" do
-  it "Create a test manifest, and apply it with `--noop` and `--graph` flags" do
+describe _("Task 3:") do
+  it _("Create a test manifest, and apply it with `--noop` and `--graph` flags") do
     file("#{MODULE_PATH}sshd/examples/init.pp")
       .should contain "include sshd"
     file("/opt/puppetlabs/puppet/cache/state/graphs/relationships.dot")
@@ -34,22 +34,22 @@ describe "Task 3:" do
   end
 end
 
-describe "Task 4:" do
-  it "Use the `dot` tool to generate an image of your resource relationships graph" do
+describe _("Task 4:") do
+  it _("Use the `dot` tool to generate an image of your resource relationships graph") do
     file("/var/www/quest/relationships.png")
       .should be_file
   end
 end
 
-describe "Task 5:" do
-  it "Copy the sshd_config file to the module's files direcotry" do
+describe _("Task 5:") do
+  it _("Copy the sshd_config file to the module's files direcotry") do
     file("#{MODULE_PATH}sshd/files/sshd_config")
       .should be_file
   end
 end
 
-describe "Task 6:" do
-  it "Disable GSSAPIAuthentication in the module's sshd_config file" do
+describe _("Task 6:") do
+  it _("Disable GSSAPIAuthentication in the module's sshd_config file") do
     file("#{MODULE_PATH}sshd/files/sshd_config")
       .content
       .should match /^\s*GSSAPIAuthentication\s+no/
@@ -59,8 +59,8 @@ describe "Task 6:" do
   end
 end
 
-describe "Task 7:" do
-  it 'Add a `file` resource to manage the `sshd` configuration file' do
+describe _("Task 7:") do
+  it _('Add a `file` resource to manage the `sshd` configuration file') do
     file("#{MODULE_PATH}sshd/manifests/init.pp")
       .content
       .should match /file\s*\{\s*['"]\/etc\/ssh\/sshd_config['"]\s*:/
@@ -73,16 +73,16 @@ describe "Task 7:" do
   end
 end
 
-describe "Task 8:" do
-  it "Apply your test manifest with the `--noop` and `--graph` flags" do
+describe _("Task 8:") do
+  it _("Apply your test manifest with the `--noop` and `--graph` flags") do
     file("/opt/puppetlabs/puppet/cache/state/graphs/relationships.dot")
       .should contain "sshd_config"
   end
 end
 
 
-describe "Task 9:" do
-  it 'Add a `subscribe` metaparameter to your `sshd` resource' do
+describe _("Task 9:") do
+  it _('Add a `subscribe` metaparameter to your `sshd` resource') do
     file("#{MODULE_PATH}sshd/manifests/init.pp")
       .content
       .should match /subscribe\s*=>\s*File\[\s*['"]\/etc\/ssh\/sshd_config['"]\s*,?\s*\]/

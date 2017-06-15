@@ -1,5 +1,5 @@
-describe "Task 1:", host: :localhost do
-  it 'Add the sinatra_server parameter to the pasture main manifest' do
+describe _("Task 1:", host: :localhost) do
+  it _('Add the sinatra_server parameter to the pasture main manifest') do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /class\s+pasture\s+\(.*?\$sinatra_server\s+=\s+(['"])webrick\1,/m
@@ -12,8 +12,8 @@ describe "Task 1:", host: :localhost do
   end
 end
 
-describe "Task 2:", host: :localhost do
-  it 'Add the sinatra_server parameter to the pasture config file template' do
+describe _("Task 2:", host: :localhost) do
+  it _('Add the sinatra_server parameter to the pasture config file template') do
     file("#{MODULE_PATH}pasture/templates/pasture_config.yaml.epp")
       .content
       .should match /<%\-\s+\|.*?\$sinatra_server\s+=\s+(['"])webrick\1,/m
@@ -27,8 +27,8 @@ describe "Task 2:", host: :localhost do
 end
 
 
-describe "Task 3:", host: :localhost do
-  it 'Conditionally manage the Sinatra server package' do
+describe _("Task 3:", host: :localhost) do
+  it _('Conditionally manage the Sinatra server package') do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /if\s+\$sinatra_server\s+==\s+(['"])thin\1\s+or\s+(['"])mongrel\1\s+\{.*?package\s+\{\s+\$sinatra_server:/m
@@ -38,8 +38,8 @@ describe "Task 3:", host: :localhost do
   end
 end
 
-describe "Task 4:", host: :localhost do
-  it 'Classify nodes' do
+describe _("Task 4:", host: :localhost) do
+  it _('Classify nodes') do
     file("#{PROD_PATH}manifests/site.pp")
       .content
       .should match /node\s+(['"])pasture\-dev\.puppet\.vm\1\s+\{.*?include\s+pasture.*?\}/m
@@ -49,8 +49,8 @@ describe "Task 4:", host: :localhost do
   end
 end
 
-describe "Task 5:", host: :localhost do
-  it 'Generate token and use puppet job run command' do
+describe _("Task 5:", host: :localhost) do
+  it _('Generate token and use puppet job run command') do
     file('/root/.puppetlabs/token')
       .should be_file
     command('docker exec pasture-dev.puppet.vm grep :server: /etc/pasture_config.yaml | grep -q webrick')

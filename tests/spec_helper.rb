@@ -7,6 +7,8 @@ require 'net/ssh'
 PROD_PATH = '/etc/puppetlabs/code/environments/production/'
 MODULE_PATH = "#{PROD_PATH}modules/"
 
+GettextSetup.initialize(File.expand_path('./locales', File.dirname(__FILE__)))
+
 set :backend, :exec
 
 ### enable both :should and :expect syntax ###
