@@ -11,6 +11,7 @@ set :backend, :exec
 
 ### enable both :should and :expect syntax ###
 RSpec.configure do |config|
+  config.filter_run_excluding :solution => true
   config.expect_with :rspec do |c|
     c.syntax = [:should, :expect]
   end
