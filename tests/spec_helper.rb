@@ -6,6 +6,7 @@ require 'net/ssh'
 
 PROD_PATH = '/etc/puppetlabs/code/environments/production/'
 MODULE_PATH = "#{PROD_PATH}modules/"
+SOLUTION_PATH = File.expand_path('../solution_files/', __FILE__)
 
 set :backend, :exec
 
@@ -18,7 +19,7 @@ RSpec.configure do |config|
   config.before(:example, :host => :agent) do
     set :backend, 'ssh'
     set :host, 'agent.puppet.vm'
-    options = {password: 'puppet', user: 'root'}
+    options = {password: 'puppet', user: 'learning'}
     set :ssh_options, options
   end
   config.before(:example, :host => :cowsay) do
