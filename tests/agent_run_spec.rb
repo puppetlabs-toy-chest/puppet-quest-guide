@@ -46,7 +46,7 @@ end
 
 describe "Task 4:", host: :localhost do
   it 'has a working solution', :solution do
-    command("cp #{File.join(SOLUTION_PATH, 'agent_run_site.pp')} #{File.join(PROD_PATH, 'manifests/site.pp')}")
+    command("cp #{SOLUTION_PATH}/agent_run/4/site.pp #{PROD_PATH}/manifests/site.pp")
       .exit_status
       .should eq 0
   end

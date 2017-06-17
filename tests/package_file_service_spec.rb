@@ -1,5 +1,20 @@
+require './spec_helper'
+
+describe "The package_file_service quest" do
+  it 'begins', :solution do
+    command("quest begin package_file_service")
+      .exit_status
+      .should eq 0
+  end
+end
+
 describe "Task 1:", host: :localhost do
-  it 'Create the pasture module directories' do
+  it 'has a working solution', :solution do
+    command("mkdir -p #{MODULE_PATH}pasture/{manifests,files}")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create the pasture module directories', :validation do
     file("#{MODULE_PATH}pasture/manifests")
       .should be_directory
     file("#{MODULE_PATH}pasture/files")
@@ -8,9 +23,17 @@ describe "Task 1:", host: :localhost do
 end
 
 describe "Task 2:", host: :localhost do
-  it 'Create the pasture main manifest' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/package_file_service/2/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create the pasture main manifest', :validation do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .should be_file
+    file("#{MODULE_PATH}/pasture/manifests/init.pp")
+      .content
+      .should match /^class\s+pasture\s+{.*?package\s+{\s+(['"])pasture\1:/m
     command("puppet parser validate #{MODULE_PATH}pasture/manifests/init.pp")
       .exit_status
       .should be_zero
@@ -18,7 +41,12 @@ describe "Task 2:", host: :localhost do
 end
 
 describe "Task 3:", host: :localhost do
-  it 'Update site.pp with classification for pasture.puppet.vm' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/package_file_service/3/site.pp #{PROD_PATH}/manifests/site.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Update site.pp with classification for pasture.puppet.vm', :validation do
     file("#{PROD_PATH}manifests/site.pp")
       .content
       .should match /node\s+(['"])?pasture\.puppet\.vm\1\s+\{.*?include\s+pasture.*?\}/mi
@@ -29,7 +57,12 @@ describe "Task 3:", host: :localhost do
 end
 
 describe "Task 4:", host: :pasture do
-  it 'Run the agent' do
+  it 'has a working solution', :solution do
+    command("sudo puppet agent -t")
+      .exit_status
+      .should_not eq 1
+  end
+  it 'Run the Puppet agent', :validation do
     package('pasture')
       .should be_installed
       .by('gem')
@@ -37,6 +70,17 @@ describe "Task 4:", host: :pasture do
 end
 
 describe "Task 5:", host: :pasture do
+  # The solutions for this and the following two
+  # tasks are skipped until there's a better way to
+  # run the service via rspec
+  xit 'has a working solution', :solution do
+    command("pasture start &")
+      .exit_status
+      .should eq 0
+    command("ps -elf")
+      .stdout
+      .should match /pasture/
+  end
   it 'Start the pasture service' do
     file('/home/learning/.bash_history')
       .content
@@ -45,6 +89,11 @@ describe "Task 5:", host: :pasture do
 end
 
 describe "Task 6:", host: :pasture do
+  xit 'has a working solution', :solution do
+    command("curl 'localhost:4567/api/v1/cowsay?message=Hello!'")
+      .stdout
+      .should match /Hello!/
+  end
   it 'Test the pasture service' do
     file('/home/learning/.bash_history')
       .content
@@ -56,63 +105,93 @@ describe "Task 6:", host: :pasture do
 end
 
 describe "Task 7:", host: :pasture do
+  xit 'has a working solution', :solution do
+    command("kill $(ps | grep pasture | cut -f1 -d' ')")
+      .exit_status
+      .should eq 0
+  end
   it 'Stop the pasture service' do
-    file('/home/learning/.bash_history')
-      .content
-      .should match /^fg$/
+    command('ps')
+      .stdout
+      .should_not match /pasture/
   end
 end
 
 describe "Task 8:", host: :localhost do
-  it 'Create the pasture configuration file' do
-    file("#{MODULE_PATH}pasture/files/pasture_config.yaml")
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/package_file_service/8/pasture_config.yaml #{MODULE_PATH}/pasture/files/pasture_config.yaml")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create the pasture configuration file', :validation do
+    file("#{MODULE_PATH}/pasture/files/pasture_config.yaml")
       .should be_file
-    file("#{MODULE_PATH}pasture/files/pasture_config.yaml")
+    file("#{MODULE_PATH}/pasture/files/pasture_config.yaml")
       .content
       .should match /^---.*?:default_character:\s+elephant/m
   end
 end
 
 describe "Task 9:", host: :localhost do
-  it 'Manage the pasture configuration file' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/package_file_service/9/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Manage the pasture configuration file', :validation do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /file\s+{\s+(['"])\/etc\/pasture_config\.yaml\1:/
-    command("puppet parser validate #{MODULE_PATH}pasture/manifests/init.pp")
+    command("puppet parser validate #{MODULE_PATH}/pasture/manifests/init.pp")
       .exit_status
       .should be_zero
   end
 end
 
 describe "Task 10:", host: :localhost do
-  it 'Create the pasture service unit file' do
-    file("#{MODULE_PATH}pasture/files/pasture.service")
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/package_file_service/10/pasture.service #{MODULE_PATH}/pasture/files/pasture.service")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create the pasture service unit file', :validation do
+    file("#{MODULE_PATH}/pasture/files/pasture.service")
       .should be_file
-    file("#{MODULE_PATH}pasture/files/pasture.service")
+    file("#{MODULE_PATH}/pasture/files/pasture.service")
       .content
       .should match /\[Unit\].*?Description=Run the pasture service/m
   end
 end
 
 describe "Task 11:", host: :localhost do
-  it 'Manage the pasture configuration file and service' do
-    file("#{MODULE_PATH}pasture/manifests/init.pp")
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/package_file_service/11/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Manage the pasture configuration file and service', :validation do
+    file("#{MODULE_PATH}/pasture/manifests/init.pp")
       .content
       .should match /file\s+{\s+(['"])\/etc\/systemd\/system\/pasture.service\1:/
-    file("#{MODULE_PATH}pasture/manifests/init.pp")
+    file("#{MODULE_PATH}/pasture/manifests/init.pp")
       .content
       .should match /service\s+{\s+(['"])pasture\1:/
-    command("puppet parser validate #{MODULE_PATH}pasture/manifests/init.pp")
+    command("puppet parser validate #{MODULE_PATH}/pasture/manifests/init.pp")
       .exit_status
       .should be_zero
   end
 end
 
 describe "Task 12:", host: :localhost do
-  it 'Add relationship metaparameters to the pasture main manifest' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/package_file_service/12/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Add relationship metaparameters to the pasture main manifest', :validation do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
-      .should match /^class\s+pasture\s+{.*?package\s+{\s+(['"])pasture\1:.*?before\s+=>\s+File\[(['"])\/etc\/pasture_config\.yaml\1\],/m
+      .should match /^class\s+pasture\s+{.*?package\s+{\s*(['"])pasture\1:.*?before\s+=>\s+File\[(['"])\/etc\/pasture_config\.yaml\1\],/m
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /file\s+{\s+(['"])\/etc\/pasture_config\.yaml\1:.*?notify\s+=>\s+Service\[(['"])pasture\1\],/m
@@ -120,16 +199,18 @@ describe "Task 12:", host: :localhost do
 end
 
 describe "Task 13:", host: :pasture do
-  it '' do
+  it 'has a working solution', :solution do
+    command("sudo puppet agent -t")
+      .exit_status
+      .should_not eq 1
+  end
+  it 'Trigger a Puppet agent run', :validation do
     file('/etc/pasture_config.yaml')
       .should be_file
     file('/etc/systemd/system/pasture.service')
       .should be_file
     process('pasture')
       .should be_running
-    file('/root/.bash_history')
-      .content
-      .match /curl 'pasture.puppet.vm:4567\/api\/v1\/cowsay\?message=Hello!'/
     command('ruby -e "require \'yaml\';puts YAML.load_file(\'/etc/pasture_config.yaml\')" >/dev/null 2>&1')
       .exit_status
       .should be_zero

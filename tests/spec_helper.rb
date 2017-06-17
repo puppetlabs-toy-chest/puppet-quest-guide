@@ -25,31 +25,31 @@ RSpec.configure do |config|
   config.before(:example, :host => :cowsay) do
     set :backend, 'ssh'
     set :host, 'cowsay.puppet.vm'
-    options = {password: 'puppet', user: 'root'}
+    options = {password: 'puppet', user: 'learning'}
     set :ssh_options, options
   end
   config.before(:example, :host => :hello) do
     set :backend, 'ssh'
     set :host, 'hello.puppet.vm'
-    options = {password: 'puppet', user: 'root'}
+    options = {password: 'puppet', user: 'learning'}
     set :ssh_options, options
   end
   config.before(:example, :host => :pasture) do
     set :backend, 'ssh'
     set :host, 'pasture.puppet.vm'
-    options = {password: 'puppet', user: 'root'}
+    options = {password: 'puppet', user: 'learning'}
     set :ssh_options, options
   end
   config.before(:example, :host => :pastureapp) do
     set :backend, 'ssh'
     set :host, 'pasture-app.puppet.vm'
-    options = {password: 'puppet', user: 'root'}
+    options = {password: 'puppet', user: 'learning'}
     set :ssh_options, options
   end
   config.before(:example, :host => :pastureappsmall) do
     set :backend, 'ssh'
     set :host, 'pasture-app-small.puppet.vm'
-    options = {password: 'puppet', user: 'root'}
+    options = {password: 'puppet', user: 'learning'}
     set :ssh_options, options
   end
   config.before(:example, :host => :localhost) do
