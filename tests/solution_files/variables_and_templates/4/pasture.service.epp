@@ -1,0 +1,11 @@
+<%- | $pasture_config_file = '/etc/pasture_config.yaml' | -%>
+# This file is managed by Puppet. Please do not make manual changes.
+[Unit]
+Description=Run the pasture service
+
+[Service]
+Environment=RACK_ENV=production
+ExecStart=/usr/local/bin/pasture start --config_file <%= $pasture_config_file %>
+
+[Install]
+WantedBy=multi-user.target
