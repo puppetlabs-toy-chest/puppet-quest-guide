@@ -5,6 +5,9 @@ describe "The defined_resource_types quest" do
     command("quest begin defined_resource_types")
       .exit_status
       .should eq 0
+    command("echo 'puppet' | puppet access login --username learning --lifetime 1d")
+      .exit_status
+      .should eq 0
   end
 end
 

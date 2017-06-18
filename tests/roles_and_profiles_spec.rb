@@ -5,6 +5,9 @@ describe "The roles_and_profiles quest" do
     command("quest begin roles_and_profiles")
       .exit_status
       .should eq 0
+    command("echo 'puppet' | puppet access login --username learning --lifetime 1d")
+      .exit_status
+      .should eq 0
   end
 end
 
