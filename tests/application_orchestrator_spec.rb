@@ -1,5 +1,23 @@
+require './spec_helper'
+
+describe "The application_orchestrator quest" do
+  it 'begins', :solution do
+    command("quest begin application_orchestrator")
+      .exit_status
+      .should eq 0
+    command("echo 'puppet' | puppet access login --username learning --lifetime 1d")
+      .exit_status
+      .should eq 0
+  end
+end
+
 describe 'Task 1:', host: :localhost do
-  it 'Create application module directories' do
+  it 'has a working solution', :solution do
+    command("mkdir -p #{MODULE_PATH}/pasture_app/{manifests,lib/puppet/type}")
+      .exit_status
+      .should eq 0
+  end 
+  it 'Create application module directories', :validation do
     file("#{MODULE_PATH}pasture_app/manifests")
       .should be_directory
     file("#{MODULE_PATH}pasture_app/lib/puppet/type")
@@ -8,7 +26,12 @@ describe 'Task 1:', host: :localhost do
 end
 
 describe 'Task 2:', host: :localhost do
-  it 'Create sql resource type file' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/application_orchestrator/2/sql.rb #{MODULE_PATH}/pasture_app/lib/puppet/type/sql.rb")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create sql resource type file', :validation do
     file("#{MODULE_PATH}pasture_app/lib/puppet/type/sql.rb")
       .should be_file
     command("ruby -c #{MODULE_PATH}pasture_app/lib/puppet/type/sql.rb >/dev/null 2>&1")
@@ -21,7 +44,12 @@ describe 'Task 2:', host: :localhost do
 end
 
 describe 'Task 3:', host: :localhost do
-  it 'Create the pasture_app::db component' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/application_orchestrator/3/db.pp #{MODULE_PATH}/pasture_app/manifests/db.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create the pasture_app::db component', :validation do
     file("#{MODULE_PATH}pasture_app/manifests/db.pp")
       .should be_file
     command("puppet parser validate --app_management #{MODULE_PATH}pasture_app/manifests/db.pp")
@@ -37,6 +65,11 @@ describe 'Task 3:', host: :localhost do
 end
 
 describe 'Task 4:', host: :localhost do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/application_orchestrator/4/app.pp #{MODULE_PATH}/pasture_app/manifests/app.pp")
+      .exit_status
+      .should eq 0
+  end
   it 'Create the pasture_app::app component' do
     file("#{MODULE_PATH}pasture_app/manifests/app.pp")
       .should be_file
@@ -53,7 +86,12 @@ describe 'Task 4:', host: :localhost do
 end
 
 describe 'Task 5:', host: :localhost do
-  it 'Create the pasture_app application class' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/application_orchestrator/5/init.pp #{MODULE_PATH}/pasture_app/manifests/init.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create the pasture_app application class', :validation do
     file("#{MODULE_PATH}pasture_app/manifests/init.pp")
       .should be_file
     command("puppet parser validate --app_management #{MODULE_PATH}pasture_app/manifests/init.pp")
@@ -72,7 +110,15 @@ describe 'Task 5:', host: :localhost do
 end
 
 describe 'Task 6:', host: :localhost do
-  it 'Remove application-related classes from role classes' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/application_orchestrator/6/pasture_app.pp #{MODULE_PATH}/role/manifests/pasture_app.pp")
+      .exit_status
+      .should eq 0
+    command("cp #{SOLUTION_PATH}/application_orchestrator/6/pasture_db.pp #{MODULE_PATH}/role/manifests/pasture_db.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Remove application-related classes from role classes', :validation do
     file("#{MODULE_PATH}role/manifests/pasture_app.pp")
       .content
       .should_not match /include\s+profile::pasture::app/m
@@ -83,16 +129,18 @@ describe 'Task 6:', host: :localhost do
 end
 
 describe 'Task 7:', host: :localhost do
-  it 'Add the application classification to site.pp' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/application_orchestrator/7/site.pp #{PROD_PATH}/manifests/site.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Add the application classification to site.pp', :validation do
     file("#{PROD_PATH}manifests/site.pp")
       .content
       .should match /site\s+{.*?pasture_app\s+{\s+(['"])pasture_01\1:.*?Node\[(['"])pasture-app-large\.puppet\.vm\1\]\s+=>\s+Pasture_app::App\[(['"])pasture_01\1\],/m
     command("puppet parser validate --app_management #{PROD_PATH}manifests/site.pp")
       .exit_status
       .should be_zero
-    file('/root/.bash_history')
-      .content
-      .should match /puppet\s+job\s+plan\s+\-\-application\s+Pasture_app/
     command('env USER=root LOGNAME=root HOME=/root /opt/puppetlabs/bin/puppet-job --no-color plan --application Pasture_app')
       .stdout
       .should match /pasture\-db\.puppet\.vm.*?Pasture_app\[pasture_01\]\s+\-\s+Pasture_app::Db\[pasture_01\]/m
@@ -103,13 +151,12 @@ describe 'Task 7:', host: :localhost do
 end
 
 describe 'Task 8:', host: :localhost do
-  it 'Trigger agent runs with puppet job and test the application' do
-    command('docker exec pasture-db.puppet.vm grep -q ernie@puppet.vm /home/ernie/.ssh/authorized_keys')
+  it 'has a working solution', :solution do
+    command("puppet job run --application Pasture_app['pasture_01']")
       .exit_status
-      .should be_zero
-    command('docker exec pasture-db.puppet.vm grep -q bert@puppet.vm /home/bert/.ssh/authorized_keys')
-      .exit_status
-      .should be_zero
+      .should_not eq 1
+  end
+  it 'Trigger agent runs with puppet job and test the application', :validation do
     command("curl 'pasture-app-large.puppet.vm/api/v1/cowsay'")
       .stdout
       .should match /Hi!\s+I'm\s+connected\s+to\s+pasture\-db\.puppet\.vm!/
