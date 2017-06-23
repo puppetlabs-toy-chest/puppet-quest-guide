@@ -4,59 +4,44 @@
 
 ## Get the VM
 
-If you haven't already, please [download the Learning VM](https://puppet.com/download-learning-vm)
-
-Before beginning, you may want to use the MD5 sum provided at the VM
-download page to verify your download. On Mac OS X and *nix systems, you can
-use the command `md5 learning_puppet_vm.zip` and compare the output to the text
-contents of the `learning_puppet_vm.zip.md5` file provided on the download
-page. On Windows systems, you will need to download and use a tool such as the
-[Microsoft File Checksum Integrity Verifier](https://www.microsoft.com/en-us/download/details.aspx?id=11533).
+If you haven't already, [download the Learning VM](https://puppet.com/download-learning-vm)
 
 ## Virtualization setup
 
-Get an up-to-date version of your virtualization software. We suggest using
-either VirtualBox or a VMware application appropriate for your platform.
+Get an up-to-date version of your preferred virtualization software.
 [VirtualBox](https://www.virtualbox.org/wiki/Downloads) is free and available
-for Linux, OS X, and Windows. VMware has several desktop virtualization
-applications, including [VMWare
+for Linux, Mac, and Windows systems. VMware has several desktop virtualization
+applications, including [VMware
 Fusion](https://www.vmware.com/products/fusion/) for Mac and [VMware
 Workstation](https://www.vmware.com/products/workstation/) for Windows.
 
-The Learning VM's Open Virtualization Archive format must be *imported*
-rather than opened directly. Launch your virtualization software and find an
-option for *Import* or *Import Appliance*. (This will usually be in a *File*
-menu. If you cannot locate an *Import* option, please refer to your
-virtualization software's documentation.)
+The Learning VM OVA file must be *imported* rather than opened directly.
+Launch your virtualization software and find an **Import** or **Import
+Appliance** option in the **File** menu. If you cannot locate an **Import**
+option, refer to your virtualization software's documentation.
 
-*Before* starting the VM for the first time, you will need to adjust its
-settings.  We recommend allocating 4GB of memory for the best performance. If
-you don't have enough memory on your host machine, you may leave the allocation
-at 3GB or lower it to 2GB, though you may encounter stability and performance
-issues.
+If you have enough available memory on your host machine, increasing the memory
+allocation for the VM from the default 3GB to 4GB may improve performance and
+stability.
 
 ## Networking configuration
 
-### Online
-
-If you would like to run the Learning VM with internet access, set the
-*Network Adapter* to *Bridged*. Use an *Autodetect* setting if available, or
-accept the default Network Adapter name. (If you started the VM before making
-these changes, you may need to restart the VM before the settings will be
-applied correctly.)
-
 ### Offline
 
-If you would prefer to run the Learning VM without internet
-access, you will need to configure a host-only network adapter in your
-virtualization software.
+We recommend running the VM on a host-only network without an external internet
+connection. This avoids any issues related to your site network configuration
+and changing dependencies provided by remote hosts. All the packages and
+modules needed to complete the Quest Guide are hosted locally on the VM itself.
 
 For **VirtualBox:**
 
-Open the preferences dialog and select the **network** section. Select
-**Host-only Networks**. Create a new network, and click the screwdriver icon to
-the side of the dialog to edit the network configuration. In the **Adapter**
-section, enter the following settings:  
+To use host-only networking on VirtualBox, you will need to create and
+configure a new network from the VirtualBox preferences menu.
+
+Open the VirtualBOx preferences dialog and select the **network** section.
+Select **Host-only Networks**. Create a new network, and click the screwdriver
+icon to the side of the dialog to edit the network configuration. In the
+**Adapter** section, enter the following settings:  
 
 **IPv4 Address: 192.168.56.1**  
 **IPv4 Network Mask: 255.255.255.0**  
@@ -73,7 +58,7 @@ Click **OK** to accept the adapter configuration changes, and again to exit the
 preferences dialog. Open the settings section for the Learning VM from the
 VirtualBox Manager window. Go to the **Network** section, select **Host-only
 Adapter** from the drop-down menu, and select the name of the host-only adapter
-you set up from the **Name:** drop-down. Click **OK** to accept the setting
+you created from the **Name:** drop-down. Click **OK** to accept the setting
 change.
 
 For **VMWare:**  
@@ -82,24 +67,37 @@ Open the **Settings** dialog for the Learning VM and select the **Network**
 Section. Under the **Custom** heading, select the private network adapter
 option.
 
-## Get started!
+### Online
 
-Start the VM. When it is started, make a note of the IP address and password
-displayed on the splash page. Rather than logging in directly, we highly
-recommend using the built-in web terminal or SSH. To access the web-terminal,
-go open a web-browser and navigate to `http://<VM's IP ADDRESS>:9091`. If you
-prefer SSH, on OS X, you can use the default Terminal application or a
-third-party application like iTerm.  For Windows, we suggest the free SSH
-client [PuTTY](http://www.putty.org/). If you are unable to connect to the VM
-via the web-terminal or SSH, it is possible that your network has changed since
-the VM initialized its networking service. To resolve this, restart the VM, log
-in directly through the virtualization application console, and run `facter
-ipaddress` to determine the correct ipaddress. If you continue to have issues,
-please try running the VM with the host-only adapter as described above or
-contact us at learningvm@puppet.com for further assistance.
+If you would like to run the Learning VM with internet access, set the
+*Network Adapter* to *Bridged*. Use an *Autodetect* setting if available, or
+accept the default Network Adapter name. (If you started the VM before making
+these changes, you may need to restart the VM before the settings will be
+applied correctly.)
 
-You can access this Quest Guide via a webserver running on the Learning VM
-itself. Open a web browser on your host and enter the Learning VM's IP address
-in the address bar. (Be sure to use `http://<ADDRESS>` for the Quest Guide, as
-`https://<ADDRESS>` will take you to the PE console.) Follow along with the
-instructions provided in the Quest Guide to get started learning Puppet!
+Note that the Puppet module tool, yum, and RubyGems are configured to use local
+repositories, so you will not be able to access remote content without manually
+changing the settings for these tools. While we encourage exploration, we are
+not currently able to support issues beyond the scope of the Quest Guide.
+
+## Log in
+
+Start the VM. Rather than logging in directly, we suggest using the built-in
+web terminal or SSH.
+
+To access the web terminal, open your web browser and navigate to
+`http://<VM's IP ADDRESS>:9091`. Follow the instructions show on the
+splash page to log in.
+
+On Mac systems, you can use the default Terminal application or a third-party
+application like iTerm. For Windows, we suggest the free SSH client
+[PuTTY](http://www.putty.org/). Use the credentials provided on the VM console
+splash page to authenticate.
+
+## Get started
+
+Once the VM is set up and you have connected, you're ready to get started on
+the interactive lessons in the Quest Guide. Access the Quest Guide by opening a
+web browser on your host system and entering the Learning VM's IP address in
+the address bar: `http://<IP-ADDRESS>`. (Note that you must use `http`, as 
+`https` will connect you to the PE console interface.)

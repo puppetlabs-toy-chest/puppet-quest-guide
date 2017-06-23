@@ -2,27 +2,14 @@
 
 ## Release Notes
 
-### v1.3.0
-  * Content tested for compatibility with puppet-2016.5.2-learning-5.12 VM
-  * Added puppet-forge-server to provide local Forge service.
-  * Added browser-based terminal on port 9091.
-  * Added stickler gem server to provide local rubygems service.
-  * Various content clarifications.
-  * Changed offline instructions to use host-only network adapter.
-  * Resolved some issues with module dependency conflicts.
-  * Updated troubleshooting section.
-
-### v1.2.8
-  * Content tested for compatibility with puppet-2016.5.1-learning-5.9 VM
-  * Various minor typo fixes and content clarifications.
-
-### v1.2.7
-  * Content tested for compatibility with puppet-2016.4.2-learning-5.7 VM
-build.
-  * Add helpful error message for quest tool service failure.
-  * Fixed sytling issue for bold text.
-  * Fixed some issues with the task completion checks in the MySQL quest.
-  * Update troubleshooting to fix reference to PE service restart script.
+### v2.0.0
+  * Complete re-write of quest content and task spec tests.
+  * Content tested for compatibility with puppet-2017.2.1-learning-5.15 VM build
+  * Updated the [quest tool](https://github.com/puppetlabs/quest) to improve quest setup process.
+  * Merged [pltraining-learning](https://github.com/puppetlabs/pltraining-learning) module into [pltraining-bootstrap](https://github.com/puppetlabs/pltraining-bootstrap).
+  * Updated [pltraining-bootstrap](https://github.com/puppetlabs/pltraining-bootstrap) module to include a local gem server and Forge server.
+  * Updated [pltraining-bootstrap](https://github.com/puppetlabs/pltraining-bootstrap) module to cache all needed content to fully support offline use.
+  * Updated [pltraining-dockeragent](https://github.com/puppetlabs/pltraining-dockeragent) to support quest containerized agent use cases, including support for local gem server, local yum repo, ssh login, Puppet certificates, and PostgreSQL dependencies.
 
 ### v1.2.6
   * Add instructions to create cowsayings directory structure in the manifests
