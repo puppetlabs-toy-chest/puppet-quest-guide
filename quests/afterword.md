@@ -16,7 +16,7 @@ To get started with Puppet Enterprise [download it for
 free](https://puppet.com/download-puppet-enterprise).
 
 Please let us know about your experience with the Learning VM! Fill out our
-[feedback survey](http://puppetlabs.Learning-VM-Feedback.sgizmo.com/s3/) or
+[feedback survey](http://puppet.Learning-VM-Feedback.sgizmo.com/s3/) or
 reach us at [learningvm@puppet.com](mailto:learningvm@puppet.com). We
 look forward to hearing from you.
 

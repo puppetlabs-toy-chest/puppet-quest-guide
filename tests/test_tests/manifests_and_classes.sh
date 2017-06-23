@@ -3,6 +3,7 @@ HIST=~/.bash_history
 quest begin manifests_and_classes
 #Task 1
 cd /etc/puppetlabs/code/environments/production/modules/
+mkdir -p cowsayings/{manifests,examples}
 cat << EOF > cowsayings/manifests/cowsay.pp
 class cowsayings::cowsay {
   package { 'cowsay':
