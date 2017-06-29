@@ -1,4 +1,4 @@
-require './spec_helper'
+require_relative './spec_helper'
 
 describe "The package_file_service quest" do
   it 'begins', :solution do

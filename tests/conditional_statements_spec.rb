@@ -1,4 +1,4 @@
-require './spec_helper'
+require_relative './spec_helper'
 
 describe "The conditional_statements quest" do
   it 'begins', :solution do
@@ -81,9 +81,10 @@ describe "Task 5:", host: :localhost do
     command("curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -H \"Content-Type: application/json\" -X POST -d '{\"login\":\"learning\",\"display_name\":\"Learning\",\"password\":\"puppet\",\"role_ids\":[2],\"email\":\"learning@puppet.vm\"}' https://localhost:4433/rbac-api/v1/users")
       .exit_status
       .should eq 0
-  end
-  it 'has a working solution', :solution do
     command("echo 'puppet' | puppet access login --username learning --lifetime 1d")
+      .exit_status
+      .should eq 0
+    command("puppet job run --nodes pasture-dev.puppet.vm,pasture-prod.puppet.vm")
       .exit_status
       .should eq 0
   end

@@ -1,4 +1,4 @@
-require './spec_helper'
+require_relative './spec_helper'
 
 describe "The application_orchestrator quest" do
   it 'begins', :solution do

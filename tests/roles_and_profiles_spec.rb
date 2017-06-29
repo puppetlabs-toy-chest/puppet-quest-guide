@@ -1,4 +1,4 @@
-require './spec_helper'
+require_relative './spec_helper'
 
 describe "The roles_and_profiles quest" do
   it 'begins', :solution do
@@ -146,6 +146,9 @@ end
 describe "Task 7:", host: :localhost do
   it 'has a working solution', :solution do
     command("puppet job run --nodes pasture-db.puppet.vm")
+      .exit_status
+      .should eq 0
+    command("puppet job run --nodes pasture-app-small.puppet.vm,pasture-app-large.puppet.vm")
       .exit_status
       .should eq 0
   end

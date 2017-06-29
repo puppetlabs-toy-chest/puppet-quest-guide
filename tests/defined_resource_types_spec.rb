@@ -1,4 +1,4 @@
-require './spec_helper'
+require_relative './spec_helper'
 
 describe "The defined_resource_types quest" do
   it 'begins', :solution do
@@ -109,13 +109,13 @@ describe "Task 5:", host: :localhost do
       .should be_zero
   end
 end
-describe "Task 6:", host: :pastureappsmall do
+describe "Task 6:", host: :localhost do
   it 'has a working solution', :solution do
     command("puppet job run --nodes pasture-app-small.puppet.vm")
       .exit_status
       .should be_zero
   end
-  it 'Trigger a Puppet run on pasture-app-small.puppet.vm to enforce your changes', :validation do
+  it 'Trigger a Puppet run on pasture-app-small.puppet.vm to enforce your changes', host: :pastureappsmall, :validation do
     file('/home/bert')
       .should be_owned_by('bert')
     file('/home/bert')

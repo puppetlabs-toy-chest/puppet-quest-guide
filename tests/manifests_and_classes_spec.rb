@@ -1,4 +1,4 @@
-require './spec_helper'
+require_relative './spec_helper'
 
 describe "The manifests_and_classes quest" do
   it 'begins', :solution do

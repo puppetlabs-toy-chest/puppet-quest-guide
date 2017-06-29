@@ -1,4 +1,4 @@
-require './spec_helper'
+require_relative './spec_helper'
 
 describe "The hello_puppet quest", :solution do
   it 'begins' do

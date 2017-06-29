@@ -1,4 +1,4 @@
-require './spec_helper'
+require_relative './spec_helper'
 
 describe "The class_parameters quest" do
   it 'begins', :solution do
