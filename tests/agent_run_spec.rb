@@ -1,6 +1,6 @@
 require_relative './spec_helper'
 
-describe "The agent_run quest" do
+describe "The agent_run quest", host: :localhost do
   it 'begins', :solution do
     command("quest begin agent_run")
       .exit_status

@@ -1,6 +1,6 @@
 require_relative './spec_helper'
 
-describe "The class_parameters quest" do
+describe "The class_parameters quest", host: :localhost do
   it 'begins', :solution do
     command("quest begin class_parameters")
       .exit_status

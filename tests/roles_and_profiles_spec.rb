@@ -1,6 +1,6 @@
 require_relative './spec_helper'
 
-describe "The roles_and_profiles quest" do
+describe "The roles_and_profiles quest", host: :localhost do
   it 'begins', :solution do
     command("quest begin roles_and_profiles")
       .exit_status

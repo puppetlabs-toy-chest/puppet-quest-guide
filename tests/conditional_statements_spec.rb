@@ -1,6 +1,6 @@
 require_relative './spec_helper'
 
-describe "The conditional_statements quest" do
+describe "The conditional_statements quest", host: :localhost do
   it 'begins', :solution do
     command("quest begin conditional_statements")
       .exit_status

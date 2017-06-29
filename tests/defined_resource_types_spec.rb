@@ -1,6 +1,6 @@
 require_relative './spec_helper'
 
-describe "The defined_resource_types quest" do
+describe "The defined_resource_types quest", host: :localhost do
   it 'begins', :solution do
     command("quest begin defined_resource_types")
       .exit_status
@@ -99,6 +99,9 @@ describe "Task 5:", host: :localhost do
     command("cp #{SOLUTION_PATH}/defined_resource_types/5/pasture_app.pp #{MODULE_PATH}/role/manifests/pasture_app.pp")
       .exit_status
       .should eq 0
+    command("puppet job run --nodes pasture-app-small.puppet.vm")
+      .exit_status
+      .should be_zero
   end
   it 'Add profile::pasture::dev_users to the role::pasture_app class', :validation do
     file("#{MODULE_PATH}role/manifests/pasture_app.pp")
@@ -109,13 +112,8 @@ describe "Task 5:", host: :localhost do
       .should be_zero
   end
 end
-describe "Task 6:", host: :localhost do
-  it 'has a working solution', :solution do
-    command("puppet job run --nodes pasture-app-small.puppet.vm")
-      .exit_status
-      .should be_zero
-  end
-  it 'Trigger a Puppet run on pasture-app-small.puppet.vm to enforce your changes', host: :pastureappsmall, :validation do
+describe "Task 6:", host: :pastureappsmall do
+  it 'Trigger a Puppet run on pasture-app-small.puppet.vm to enforce your changes', validation: true do
     file('/home/bert')
       .should be_owned_by('bert')
     file('/home/bert')

@@ -1,6 +1,6 @@
 require_relative './spec_helper'
 
-describe "The variables_and_templates quest" do
+describe "The variables_and_templates quest", host: :localhost do
   it 'begins', :solution do
     command("quest begin variables_and_templates")
       .exit_status

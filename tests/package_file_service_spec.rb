@@ -1,6 +1,6 @@
 require_relative './spec_helper'
 
-describe "The package_file_service quest" do
+describe "The package_file_service quest", host: :localhost do
   it 'begins', :solution do
     command("quest begin package_file_service")
       .exit_status

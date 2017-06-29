@@ -1,6 +1,6 @@
 require_relative './spec_helper'
 
-describe "The manifests_and_classes quest" do
+describe "The manifests_and_classes quest", host: :localhost do
   it 'begins', :solution do
     command("quest begin manifests_and_classes")
       .exit_status

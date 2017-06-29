@@ -1,7 +1,7 @@
 require_relative './spec_helper'
 
-describe "The quest", :solution do
-  it 'begins' do
+describe "The quest", host: :localhost do
+  it 'begins', :solution do
     command('quest begin welcome')
       .exit_status
       .should eq 0

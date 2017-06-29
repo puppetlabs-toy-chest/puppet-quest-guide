@@ -1,6 +1,6 @@
 require_relative './spec_helper'
 
-describe "The application_orchestrator quest" do
+describe "The application_orchestrator quest", host: :localhost do
   it 'begins', :solution do
     command("quest begin application_orchestrator")
       .exit_status

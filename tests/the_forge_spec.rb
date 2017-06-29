@@ -1,6 +1,6 @@
 require_relative './spec_helper'
 
-describe "The the_forge quest" do
+describe "The the_forge quest", host: :localhost do
   it 'begins', :solution do
     command("quest begin the_forge")
       .exit_status
