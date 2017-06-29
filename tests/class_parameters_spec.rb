@@ -1,5 +1,20 @@
+require_relative './spec_helper'
+
+describe "The class_parameters quest", host: :localhost do
+  it 'begins', :solution do
+    command("quest begin class_parameters")
+      .exit_status
+      .should eq 0
+  end
+end
+
 describe "Task 1:", host: :localhost do
-  it 'Add parameters to the pasture class' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/class_parameters/1/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Add parameters to the pasture class', :validation do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /class\s+pasture\s+\(.*?\$port\s+=\s+(['"])80\1,/m
@@ -19,7 +34,12 @@ describe "Task 1:", host: :localhost do
 end
 
 describe "Task 2:", host: :localhost do
-  it 'Use resource-like syntax for classification' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/class_parameters/2/site.pp #{PROD_PATH}/manifests/site.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Use resource-like syntax for classification', :validation do
     file("#{PROD_PATH}manifests/site.pp")
       .content
       .should match /node\s+(['"])?pasture\.puppet\.vm\1\s+\{.*?class\s+\{\s+(['"])pasture\1:.*?default_character\s+=>\s+(['"])cow\1,.*?\}.*?\}/m
@@ -30,7 +50,12 @@ describe "Task 2:", host: :localhost do
 end
 
 describe "Task 3:", host: :pasture do
-  it 'Run the agent and test the changes' do
+  it 'has a working solution', :solution do
+    command("sudo puppet agent -t")
+      .exit_status
+      .should_not eq 1
+  end
+  it 'Run the agent and test the changes', :validation do
     file('/etc/pasture_config.yaml')
       .content
       .should match /:default_character:\s+cow/

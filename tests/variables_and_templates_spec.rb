@@ -1,5 +1,20 @@
+require_relative './spec_helper'
+
+describe "The variables_and_templates quest", host: :localhost do
+  it 'begins', :solution do
+    command("quest begin variables_and_templates")
+      .exit_status
+      .should eq 0
+  end
+end
+
 describe "Task 1:", host: :localhost do
-  it 'Add variables to the pasture main manifest' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/variables_and_templates/1/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Add variables to the pasture main manifest', :validation do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /^class\s+pasture\s+{\s+\$port\s+=\s+(['"])80\1\s+\$default_character\s+=\s+(['"])sheep\2.*\s+\$default_message\s+=\s*(['"])\3\s+\$pasture_config_file\s+=\s+(['"])\/etc\/pasture_config\.yaml\4\s+package\s+{\s*(['"])pasture\5:\s+.*before\s+=>\s+File\[\$pasture_config_file\],/m
@@ -9,7 +24,15 @@ describe "Task 1:", host: :localhost do
   end
 end
 describe "Task 2:", host: :localhost do
-  it 'Create pasture configuration file template' do
+  it 'has a working solution', :solution do
+    command("mkdir -p #{MODULE_PATH}/pasture/templates")
+      .exit_status
+      .should eq 0
+    command("cp #{SOLUTION_PATH}/variables_and_templates/2/pasture_config.yaml.epp #{MODULE_PATH}/pasture/templates/pasture_config.yaml.epp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create pasture configuration file template', :validation do
     file("#{MODULE_PATH}pasture/templates")
       .should be_directory
     file("#{MODULE_PATH}pasture/templates/pasture_config.yaml.epp")
@@ -29,7 +52,12 @@ describe "Task 2:", host: :localhost do
   end
 end
 describe "Task 3:", host: :localhost do
-  it 'Use pasture configuration file template' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/variables_and_templates/3/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Use pasture configuration file template', :validation do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /\$pasture_config_hash\s+=\s+{\s+(['"])port\1\s+=>\s+\$port,/m
@@ -42,7 +70,12 @@ describe "Task 3:", host: :localhost do
   end
 end
 describe "Task 4:", host: :localhost do
-  it 'Create pasture service unit file template' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/variables_and_templates/4/pasture.service.epp #{MODULE_PATH}/pasture/templates/pasture.service.epp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create pasture service unit file template', :validation do
     file("#{MODULE_PATH}pasture/templates/pasture.service.epp")
       .should be_file
     file("#{MODULE_PATH}pasture/templates/pasture.service.epp")
@@ -57,7 +90,12 @@ describe "Task 4:", host: :localhost do
   end
 end
 describe "Task 5:", host: :localhost do
-  it 'Use pasture service unit file template' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/variables_and_templates/5/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Use pasture service unit file template', :validation do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /\$pasture_service_hash\s+=\s+{.*?(['"])pasture_config_file\1\s+=>\s+\$pasture_config_file,/m
@@ -70,10 +108,12 @@ describe "Task 5:", host: :localhost do
   end
 end
 describe "Task 6:", host: :pasture do
-  it 'Run the agent and test the changes' do
-    file('/home/learning/.bash_history')
-      .content
-      .should match /sudo puppet agent -t/
+  it 'has a working solution', :solution do
+    command("sudo puppet agent -t")
+      .exit_status
+      .should_not eq 1
+  end
+  it 'Run the agent and test the changes', :validation do
     file('/etc/systemd/system/pasture.service')
       .content
       .should match /ExecStart=\/usr\/local\/bin\/pasture\s+start\s+--config_file\s+\/etc\/pasture_config\.yaml/

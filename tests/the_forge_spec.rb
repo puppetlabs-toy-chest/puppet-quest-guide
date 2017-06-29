@@ -1,15 +1,35 @@
+require_relative './spec_helper'
+
+describe "The the_forge quest", host: :localhost do
+  it 'begins', :solution do
+    command("quest begin the_forge")
+      .exit_status
+      .should eq 0
+    command("echo 'puppet' | puppet access login --username learning --lifetime 1d")
+      .exit_status
+      .should eq 0
+  end
+end
+
 describe "Task 1:", host: :localhost do
-  it 'Install the PostgreSQL Puppet module' do
+  it 'has a working solution', :solution do
+    command("puppet module install puppetlabs-postgresql --version 4.8.0")
+      .exit_status
+      .should eq 0
+  end
+  it 'Install the PostgreSQL Puppet module', :validation do
     file("#{MODULE_PATH}postgresql")
       .should be_directory
-    file('/root/.bash_history')
-      .content
-      .should match /puppet module list/
   end
 end
 
 describe "Task 2:", host: :localhost do
-  it 'Create the pasture::db wrapper class' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/the_forge/2/db.pp #{MODULE_PATH}/pasture/manifests/db.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create the pasture::db wrapper class', :validation do
     file("#{MODULE_PATH}pasture/manifests/db.pp")
       .should be_file
     file("#{MODULE_PATH}pasture/manifests/db.pp")
@@ -22,7 +42,15 @@ describe "Task 2:", host: :localhost do
 end
 
 describe "Task 3:", host: :localhost do
-  it 'Classify the database node' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/the_forge/3/site.pp #{PROD_PATH}/manifests/site.pp")
+      .exit_status
+      .should eq 0
+    command("puppet job run --nodes pasture-db.puppet.vm")
+      .exit_status
+      .should eq 0
+  end
+  it 'Classify the database node and trigger an agent run', :validation do
     file("#{PROD_PATH}manifests/site.pp")
       .content
       .should match /node\s+(['"])pasture\-db\.puppet\.vm\1\s+\{.*?include\s+pasture::db.*?\}/m
@@ -36,7 +64,12 @@ describe "Task 3:", host: :localhost do
 end
 
 describe "Task 4:", host: :localhost do
-  it 'Update the pasture main manifest with a db parameter' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/the_forge/4/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Update the pasture main manifest with a db parameter', :validation do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /class\s+pasture\s+\(.*?\$db\s+=\s+undef,/m
@@ -50,7 +83,15 @@ describe "Task 4:", host: :localhost do
 end
 
 describe "Task 5:", host: :localhost do
-  it 'Update the pasture configuration file template with a db parameter' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/the_forge/5/pasture_config.yaml.epp #{MODULE_PATH}/pasture/templates/pasture_config.yaml.epp")
+      .exit_status
+      .should eq 0
+    command("cp #{SOLUTION_PATH}/the_forge/5/site.pp #{PROD_PATH}/manifests/site.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Update the pasture configuration file template with a db parameter', :validation do
     file("#{MODULE_PATH}pasture/templates/pasture_config.yaml.epp")
       .content
       .should match /<%\-\s+\|\s+.*?\$db,.*?\|\s+\-%>/m
@@ -70,7 +111,15 @@ describe "Task 5:", host: :localhost do
 end
 
 describe "Task 6:", host: :pastureapp do
-  it 'Trigger an agent run on pasture-app.puppet.vm and test service' do
+  it "has a working solution", :solution do
+    command("sudo puppet agent -t")
+      .exit_status
+      .should_not eq 1
+    command("curl -X POST 'localhost/api/v1/cowsay/sayings?message=Hello!'")
+      .exit_status
+      .should eq 0
+  end
+  it 'Trigger an agent run on pasture-app.puppet.vm and test service', :validation do
     package('thin')
       .should be_installed
       .by('gem')

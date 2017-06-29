@@ -1,5 +1,23 @@
+require_relative './spec_helper'
+
+describe "The roles_and_profiles quest", host: :localhost do
+  it 'begins', :solution do
+    command("quest begin roles_and_profiles")
+      .exit_status
+      .should eq 0
+    command("echo 'puppet' | puppet access login --username learning --lifetime 1d")
+      .exit_status
+      .should eq 0
+  end
+end
+
 describe "Task 1:", host: :localhost do
-  it 'Create the profile module directories' do
+  it 'has a working solution', :solution do
+    command("mkdir -p #{MODULE_PATH}/profile/manifests/pasture")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create the profile module directories', :validation do
     file("#{MODULE_PATH}profile/manifests")
       .should be_directory
     file("#{MODULE_PATH}profile/manifests/pasture")
@@ -8,7 +26,12 @@ describe "Task 1:", host: :localhost do
 end
 
 describe "Task 2:", host: :localhost do
-  it 'Create the profile::pasture::app class' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/roles_and_profiles/2/app.pp #{MODULE_PATH}/profile/manifests/pasture/app.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create the profile::pasture::app class', :validation do
     file("#{MODULE_PATH}profile/manifests/pasture/app.pp")
       .should be_file
     file("#{MODULE_PATH}profile/manifests/pasture/app.pp")
@@ -21,7 +44,12 @@ describe "Task 2:", host: :localhost do
 end
 
 describe "Task 3:", host: :localhost do
-  it 'Create the profile::pasture::db class' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/roles_and_profiles/3/db.pp #{MODULE_PATH}/profile/manifests/pasture/db.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create the profile::pasture::db class', :validation do
     file("#{MODULE_PATH}profile/manifests/pasture/db.pp")
       .should be_file
     file("#{MODULE_PATH}profile/manifests/pasture/db.pp")
@@ -34,7 +62,15 @@ describe "Task 3:", host: :localhost do
 end
 
 describe "Task 4:", host: :localhost do
-  it 'Create the profile::base::motd class' do
+  it 'has a working solution', :solution do
+    command("mkdir -p #{MODULE_PATH}/profile/manifests/base")
+      .exit_status
+      .should eq 0
+    command("cp #{SOLUTION_PATH}/roles_and_profiles/4/motd.pp #{MODULE_PATH}/profile/manifests/base/motd.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create the profile::base::motd class', :validation do
     file("#{MODULE_PATH}profile/manifests/base")
       .should be_directory
     file("#{MODULE_PATH}profile/manifests/base/motd.pp")
@@ -49,7 +85,18 @@ describe "Task 4:", host: :localhost do
 end
 
 describe "Task 5:", host: :localhost do
-  it 'Create the role classes' do
+  it 'has a working solution', :solution do
+    command("mkdir -p #{MODULE_PATH}/role/manifests")
+      .exit_status
+      .should eq 0
+    command("cp #{SOLUTION_PATH}/roles_and_profiles/5/pasture_app.pp #{MODULE_PATH}/role/manifests/pasture_app.pp")
+      .exit_status
+      .should eq 0
+    command("cp #{SOLUTION_PATH}/roles_and_profiles/5/pasture_db.pp #{MODULE_PATH}/role/manifests/pasture_db.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create the role classes', :validation do
     file("#{MODULE_PATH}role/manifests")
       .should be_directory
     file("#{MODULE_PATH}role/manifests/pasture_app.pp")
@@ -72,7 +119,12 @@ describe "Task 5:", host: :localhost do
 end
 
 describe "Task 6:", host: :localhost do
-  it 'Classify nodes with role classes' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/roles_and_profiles/6/site.pp #{PROD_PATH}/manifests/site.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Classify nodes with role classes', :validation do
     command("puppet parser validate #{PROD_PATH}manifests/site.pp")
       .exit_status
       .should be_zero
@@ -92,7 +144,15 @@ describe "Task 6:", host: :localhost do
 end
 
 describe "Task 7:", host: :localhost do
-  it 'Trigger the puppet agent on database and app servers' do
+  it 'has a working solution', :solution do
+    command("puppet job run --nodes pasture-db.puppet.vm")
+      .exit_status
+      .should eq 0
+    command("puppet job run --nodes pasture-app-small.puppet.vm,pasture-app-large.puppet.vm")
+      .exit_status
+      .should eq 0
+  end
+  it 'Trigger the puppet agent on database and app servers', :validation do
     command('docker exec pasture-db.puppet.vm grep -q "Welcome to pasture-db" /etc/motd')
       .exit_status
       .should eq 0

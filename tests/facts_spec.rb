@@ -1,3 +1,13 @@
+require_relative './spec_helper'
+
+describe "The facts quest", host: :localhost do
+  it 'begins', :solution do
+    command("quest begin facts")
+      .exit_status
+      .should eq 0
+  end
+end
+
 describe "Task 1:", host: :pasture do
   it 'Use the facter command' do
     file('/home/learning/.bash_history')
@@ -13,7 +23,12 @@ describe "Task 1:", host: :pasture do
 end
 
 describe "Task 2:", host: :localhost do
-  it 'Create motd module directories' do
+  it 'has a working solution', :solution do
+    command("mkdir -p #{MODULE_PATH}/motd/{manifests,templates}")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create motd module directories', :validation do
     file("#{MODULE_PATH}motd/manifests")
       .should be_directory
     file("#{MODULE_PATH}motd/templates")
@@ -22,7 +37,12 @@ describe "Task 2:", host: :localhost do
 end
 
 describe "Task 3:", host: :localhost do
-  it 'Create the motd module main manifest' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/facts/3/init.pp #{MODULE_PATH}/motd/manifests/init.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create the motd module main manifest', :validation do
     file("#{MODULE_PATH}motd/manifests/init.pp")
       .should be_file
     file("#{MODULE_PATH}motd/manifests/init.pp")
@@ -35,7 +55,12 @@ describe "Task 3:", host: :localhost do
 end
 
 describe "Task 4:", host: :localhost do
-  it 'Create the motd.epp template' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/facts/4/motd.epp #{MODULE_PATH}/motd/templates/motd.epp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Create the motd.epp template', :validation do
     file("#{MODULE_PATH}motd/templates/motd.epp")
       .should be_file
     file("#{MODULE_PATH}motd/templates/motd.epp")
@@ -45,7 +70,12 @@ describe "Task 4:", host: :localhost do
 end
 
 describe "Task 5:", host: :localhost do
-  it 'Classify the node with the motd class' do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/facts/5/site.pp #{PROD_PATH}/manifests/site.pp")
+      .exit_status
+      .should eq 0
+  end
+  it 'Classify the node with the motd class', :validation do
     file("#{PROD_PATH}manifests/site.pp")
       .content
       .should match /node\s+(['"])?pasture\.puppet\.vm\1\s+\{.*?include\s+motd/m
@@ -53,6 +83,11 @@ describe "Task 5:", host: :localhost do
 end
 
 describe "Task 6:", host: :pasture do
+  it 'has a working solution', :solution do
+    command("sudo puppet agent -t")
+      .exit_status
+      .should_not eq 1
+  end
   it 'Run the agent and update the /etc/motd file' do
     file('/etc/motd')
       .content
