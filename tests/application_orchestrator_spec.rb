@@ -1,5 +1,5 @@
-describe 'Task 1:', host: :localhost do
-  it 'Create application module directories' do
+describe _('Task 1:', host: :localhost) do
+  it _('Create application module directories') do
     file("#{MODULE_PATH}pasture_app/manifests")
       .should be_directory
     file("#{MODULE_PATH}pasture_app/lib/puppet/type")
@@ -7,8 +7,8 @@ describe 'Task 1:', host: :localhost do
   end
 end
 
-describe 'Task 2:', host: :localhost do
-  it 'Create sql resource type file' do
+describe _('Task 2:', host: :localhost) do
+  it _('Create sql resource type file') do
     file("#{MODULE_PATH}pasture_app/lib/puppet/type/sql.rb")
       .should be_file
     command("ruby -c #{MODULE_PATH}pasture_app/lib/puppet/type/sql.rb >/dev/null 2>&1")
@@ -20,8 +20,8 @@ describe 'Task 2:', host: :localhost do
   end
 end
 
-describe 'Task 3:', host: :localhost do
-  it 'Create the pasture_app::db component' do
+describe _('Task 3:', host: :localhost) do
+  it _('Create the pasture_app::db component') do
     file("#{MODULE_PATH}pasture_app/manifests/db.pp")
       .should be_file
     command("puppet parser validate --app_management #{MODULE_PATH}pasture_app/manifests/db.pp")
@@ -36,8 +36,8 @@ describe 'Task 3:', host: :localhost do
   end
 end
 
-describe 'Task 4:', host: :localhost do
-  it 'Create the pasture_app::app component' do
+describe _('Task 4:', host: :localhost) do
+  it _('Create the pasture_app::app component') do
     file("#{MODULE_PATH}pasture_app/manifests/app.pp")
       .should be_file
     command("puppet parser validate --app_management #{MODULE_PATH}pasture_app/manifests/app.pp")
@@ -52,8 +52,8 @@ describe 'Task 4:', host: :localhost do
   end
 end
 
-describe 'Task 5:', host: :localhost do
-  it 'Create the pasture_app application class' do
+describe _('Task 5:', host: :localhost) do
+  it _('Create the pasture_app application class') do
     file("#{MODULE_PATH}pasture_app/manifests/init.pp")
       .should be_file
     command("puppet parser validate --app_management #{MODULE_PATH}pasture_app/manifests/init.pp")
@@ -71,8 +71,8 @@ describe 'Task 5:', host: :localhost do
   end
 end
 
-describe 'Task 6:', host: :localhost do
-  it 'Remove application-related classes from role classes' do
+describe _('Task 6:', host: :localhost) do
+  it _('Remove application-related classes from role classes') do
     file("#{MODULE_PATH}role/manifests/pasture_app.pp")
       .content
       .should_not match /include\s+profile::pasture::app/m
@@ -82,8 +82,8 @@ describe 'Task 6:', host: :localhost do
   end
 end
 
-describe 'Task 7:', host: :localhost do
-  it 'Add the application classification to site.pp' do
+describe _('Task 7:', host: :localhost) do
+  it _('Add the application classification to site.pp') do
     file("#{PROD_PATH}manifests/site.pp")
       .content
       .should match /site\s+{.*?pasture_app\s+{\s+(['"])pasture_01\1:.*?Node\[(['"])pasture-app-large\.puppet\.vm\1\]\s+=>\s+Pasture_app::App\[(['"])pasture_01\1\],/m
@@ -102,8 +102,8 @@ describe 'Task 7:', host: :localhost do
   end
 end
 
-describe 'Task 8:', host: :localhost do
-  it 'Trigger agent runs with puppet job and test the application' do
+describe _('Task 8:', host: :localhost) do
+  it _('Trigger agent runs with puppet job and test the application') do
     command('docker exec pasture-db.puppet.vm grep -q ernie@puppet.vm /home/ernie/.ssh/authorized_keys')
       .exit_status
       .should be_zero

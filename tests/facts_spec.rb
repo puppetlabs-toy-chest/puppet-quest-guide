@@ -1,5 +1,5 @@
-describe "Task 1:", host: :pasture do
-  it 'Use the facter command' do
+describe _("Task 1:", host: :pasture) do
+  it _('Use the facter command') do
     file('/home/learning/.bash_history')
       .content
       .should match /facter\s+\-p\s+\|\s+less/
@@ -12,8 +12,8 @@ describe "Task 1:", host: :pasture do
   end
 end
 
-describe "Task 2:", host: :localhost do
-  it 'Create motd module directories' do
+describe _("Task 2:", host: :localhost) do
+  it _('Create motd module directories') do
     file("#{MODULE_PATH}motd/manifests")
       .should be_directory
     file("#{MODULE_PATH}motd/templates")
@@ -21,8 +21,8 @@ describe "Task 2:", host: :localhost do
   end
 end
 
-describe "Task 3:", host: :localhost do
-  it 'Create the motd module main manifest' do
+describe _("Task 3:", host: :localhost) do
+  it _('Create the motd module main manifest') do
     file("#{MODULE_PATH}motd/manifests/init.pp")
       .should be_file
     file("#{MODULE_PATH}motd/manifests/init.pp")
@@ -34,8 +34,8 @@ describe "Task 3:", host: :localhost do
   end
 end
 
-describe "Task 4:", host: :localhost do
-  it 'Create the motd.epp template' do
+describe _("Task 4:", host: :localhost) do
+  it _('Create the motd.epp template') do
     file("#{MODULE_PATH}motd/templates/motd.epp")
       .should be_file
     file("#{MODULE_PATH}motd/templates/motd.epp")
@@ -44,16 +44,16 @@ describe "Task 4:", host: :localhost do
   end
 end
 
-describe "Task 5:", host: :localhost do
-  it 'Classify the node with the motd class' do
+describe _("Task 5:", host: :localhost) do
+  it _('Classify the node with the motd class') do
     file("#{PROD_PATH}manifests/site.pp")
       .content
       .should match /node\s+(['"])?pasture\.puppet\.vm\1\s+\{.*?include\s+motd/m
   end
 end
 
-describe "Task 6:", host: :pasture do
-  it 'Run the agent and update the /etc/motd file' do
+describe _("Task 6:", host: :pasture) do
+  it _('Run the agent and update the /etc/motd file') do
     file('/etc/motd')
       .content
       .should match /Welcome\s+to\s+pasture\.puppet\.vm.*?This\s+is\s+a\s+RedHat/m
