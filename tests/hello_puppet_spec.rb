@@ -46,7 +46,7 @@ describe "Task 3:", host: :hello do
 end
 
 describe "Task 4:", host: :hello do
-  it 'Use the puppet resource tool to set the contents of the /tmp/test file', :solution do
+  it 'has a working solution', :solution do
     command("puppet resource file /tmp/test content='Hello Puppet!'")
       .exit_status
       .should eq 0
