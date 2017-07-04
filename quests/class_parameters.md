@@ -150,7 +150,7 @@ throw an error.
 
 Though we won't go into detail here, you should know that external data-sources
 like `facter` and `hiera` can give you a lot of flexibility in your classes
-even if with the include syntax. For now, you should be aware that though the
+even with the include syntax. For now, you should be aware that though the
 `include` function uses defaults, there are ways to make those defaults very
 intelligent.
 
