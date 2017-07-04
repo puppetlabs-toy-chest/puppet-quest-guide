@@ -52,7 +52,7 @@ First, connect to the agent node prepared for this quest.
     ssh learning@pasture.puppet.vm
 
 You can access a standard set of facts with the `facter` command. Adding the
-`-p` flag will include any custom facts that may you may have installed on the
+`-p` flag will include any custom facts that you may have installed on the
 Puppet master and synchronized with the agent during the pluginsync step of a
 Puppet run. We'll pass this `facter -p` command to `less` so you can scroll
 through the output in your terminal.
