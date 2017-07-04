@@ -114,7 +114,7 @@ When you're done making these changes, save and exit your file. Use the
 
 ## Resource-like class declarations
 
-Now that your class has parameters, let's see how these paramters are set.
+Now that your class has parameters, let's see how these parameters are set.
 
 Until now, you've been using `include` to declare the class as part of your
 node classification in the `site.pp` manifest. This `include` function declares
