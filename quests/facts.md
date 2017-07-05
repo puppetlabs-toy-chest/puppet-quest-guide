@@ -52,7 +52,7 @@ First, connect to the agent node prepared for this quest.
     ssh learning@pasture.puppet.vm
 
 You can access a standard set of facts with the `facter` command. Adding the
-`-p` flag will include any custom facts that may you may have installed on the
+`-p` flag will include any custom facts that you may have installed on the
 Puppet master and synchronized with the agent during the pluginsync step of a
 Puppet run. We'll pass this `facter -p` command to `less` so you can scroll
 through the output in your terminal.
@@ -85,7 +85,7 @@ you accessed above is available within a manifest as `$facts['os']['family']`.
 
 Let's take a break from the Pasture module you've been working on. Instead,
 we'll create a new module to manage an MOTD (Message of the Day) file. This
-file is commonly used on \*nix\ systems to display information about a host when
+file is commonly used on \*nix systems to display information about a host when
 a user connects. Using facts will allow you to create a dynamic MOTD that can
 display some basic information about the system.
 

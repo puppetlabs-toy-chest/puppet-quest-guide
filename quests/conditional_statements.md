@@ -10,7 +10,7 @@
 ## Getting started
 
 In this quest, we'll discuss **conditional statements.** Conditional statements let
-you write Puppet code to will behave differently in different contexts.
+you write Puppet code that will behave differently in different contexts.
 
 To start this quest enter the following command:
 
