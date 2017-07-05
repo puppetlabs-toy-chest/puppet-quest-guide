@@ -50,8 +50,8 @@ component modules according to the specific applications in your
 infrastructure.
 
 A *profile* is a class that declares one or more related component
-modules and sets their paramaters as needed. The set of profiles on a system
-defines and configures the technology stack it needs to fulfull its
+modules and sets their parameters as needed. The set of profiles on a system
+defines and configures the technology stack it needs to fulfill its
 business role.
 
 A *role* is a class that combines one or more profiles to define the desired
