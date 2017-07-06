@@ -22,7 +22,9 @@ option, refer to your virtualization software's documentation.
 
 If you have enough available memory on your host machine, increasing the memory
 allocation for the VM from the default 3GB to 4GB may improve performance and
-stability.
+stability. Memory allocation settings are found by selecting the VM in the
+VirtualBox Manager window, opening the *Settings* dialog, and selecting the
+*System* section.
 
 ## Networking configuration
 
@@ -47,9 +49,12 @@ in the online configuration section below.
 For **VirtualBox:**
 
 To use host-only networking on VirtualBox, you will need to create and
-configure a new network from the VirtualBox preferences menu.
+configure a new network from the VirtualBox *preferences* panel. Note that this
+may be called *settings* on some systems. Be sure that you're looking at the
+preferences for VirtualBox itself, not the settings configurations for a
+specific VM.
 
-Open the VirtualBOx preferences dialog and select the **network** section.
+Open the VirtualBox preferences panel and select the **network** section.
 Select **Host-only Networks**. Create a new network, and click the screwdriver
 icon to the side of the dialog to edit the network configuration. In the
 **Adapter** section, enter the following settings:  
