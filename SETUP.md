@@ -22,23 +22,39 @@ option, refer to your virtualization software's documentation.
 
 If you have enough available memory on your host machine, increasing the memory
 allocation for the VM from the default 3GB to 4GB may improve performance and
-stability.
+stability. Memory allocation settings are found by selecting the VM in the
+VirtualBox Manager window, opening the *Settings* dialog, and selecting the
+*System* section.
 
 ## Networking configuration
 
-### Offline
+All the packages and modules needed to complete the Quest Guide are hosted
+locally on the VM itself, but you will need to set up networking to access the
+VM from your host system.
 
-We recommend running the VM on a host-only network without an external internet
-connection. This avoids any issues related to your site network configuration
-and changing dependencies provided by remote hosts. All the packages and
-modules needed to complete the Quest Guide are hosted locally on the VM itself.
+Your virtualization software provides several options for network
+configuration. If you are on a network that may have a proxy or restrictive
+firewall rules (ask your network administrator if you're not sure), we strongly
+suggest running the VM with an offline host-only network. This offline
+configuration requires more complex initial setup with VirtualBox software, but
+will help you avoid troubleshooting networking issues between your Puppet
+master and agent systems.
+
+If you are using VirtualBox on a network without a proxy or restrictive
+firewall rules, you may find it simpler to use the bridged adapter described
+in the online configuration section below.
+
+### Offline
 
 For **VirtualBox:**
 
 To use host-only networking on VirtualBox, you will need to create and
-configure a new network from the VirtualBox preferences menu.
+configure a new network from the VirtualBox *preferences* panel. Note that this
+may be called *settings* on some systems. Be sure that you're looking at the
+preferences for VirtualBox itself, not the settings configurations for a
+specific VM.
 
-Open the VirtualBOx preferences dialog and select the **network** section.
+Open the VirtualBox preferences panel and select the **network** section.
 Select **Host-only Networks**. Create a new network, and click the screwdriver
 icon to the side of the dialog to edit the network configuration. In the
 **Adapter** section, enter the following settings:  
@@ -82,8 +98,8 @@ not currently able to support issues beyond the scope of the Quest Guide.
 
 ## Log in
 
-Start the VM. Rather than logging in directly, we suggest using the built-in
-web terminal or SSH.
+Start the VM. Rather than logging in directly, we suggest using the
+browser-based web terminal or SSH.
 
 To access the web terminal, open your web browser and navigate to
 `http://<VM's IP ADDRESS>:9091`. Follow the instructions show on the
