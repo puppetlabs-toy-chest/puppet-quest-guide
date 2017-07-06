@@ -343,4 +343,4 @@ infrastructure.
 * Learn more about Roles and Profiles in our [self-paced course](https://learn.puppet.com/elearning/an-introduction-to-roles-profiles)
 * Roles and Profiles are covered in our Puppet Practitioner, and Puppetizing Infrastructure courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.
 * You can learn more about using regular expressions in node definitions on our [docs page](https://docs.puppet.com/puppet/latest/lang_node_definitions.html#regular-expression-names) .
-* You can find a tool to easily test your regular expressions (here)[http://rubular.com].
+* You can find a tool to easily test your regular expressions [here](http://rubular.com).
