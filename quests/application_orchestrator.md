@@ -447,7 +447,7 @@ Use the `puppet job` command to deploy the application:
     puppet job run --application Pasture_app['pasture_01']
 
 You can check on the status of any running or completed jobs with the
-`puppet job list` command.
+`puppet job show` command.
 
 Now that you've deployed your application, use the `curl` command to check the
 default message configured for Pasture on `pasture-app-large.puppet.vm`:
@@ -478,7 +478,7 @@ Defining an application generally requires several distinct manifests and Ruby e
 
 Once an application is defined, you can use the `puppet job plan` command to
 see it, and the `puppet job run` command to run it. You can see running and
-completed jobs with the `puppet job list` command.
+completed jobs with the `puppet job show` command.
 
 ## Additional Resources
 

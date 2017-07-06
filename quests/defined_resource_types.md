@@ -95,8 +95,8 @@ Begin by creating the module's directory structure.
 
     mkdir -p user_accounts/manifests
 
-We'll start with a `user_account.pp` manifest where we'll write an
-`ssh_users::user_account` defined resource type.
+We'll start with a `ssh_user.pp` manifest where we'll write an
+`user_accounts::ssh_user` defined resource type.
 
     vim user_accounts/manifests/ssh_user.pp
 
