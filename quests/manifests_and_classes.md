@@ -47,7 +47,9 @@ a system and what values are set for those resourses' parameters.
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
-Go ahead and ssh to the node we've created for this quest:
+Go ahead and ssh to the node we've created for this quest. Remember, the
+password for this and all the agent systems you'll use in this Quest Guide is
+`puppet`.
 
     ssh learning@cowsay.puppet.vm
 
