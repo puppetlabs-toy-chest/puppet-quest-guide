@@ -2,6 +2,13 @@
 
 ## Release Notes
 
+### v2.0.1
+  * Content tested for compatibility with puppet-2017.2.2-learning-6.0 VM build
+  * Added missing task labels to the Defined Resource Types quest.
+  * Various typo and spelling fixes.
+  * Several task validation test improvements.
+  * Added some clarifications to the setup guide.
+
 ### v2.0.0
   * Complete re-write of quest content and task spec tests.
   * Content tested for compatibility with puppet-2017.2.1-learning-5.15 VM build
