@@ -1,0 +1,279 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017 Puppet, Inc.
+# This file is distributed under the same license as the puppet quest guide package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: puppet quest guide \n"
+"Report-Msgid-Bugs-To: learningvm@puppet.com\n"
+"POT-Creation-Date: 2017-07-25 10:10-0700\n"
+"PO-Revision-Date: 2017-07-25 10:10-0700\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: ../agent_run_spec.rb:4 ../application_orchestrator_spec.rb:4 ../class_parameters_spec.rb:4 ../conditional_statements_spec.rb:4 ../defined_resource_types_spec.rb:4 ../facts_spec.rb:4 ../hello_puppet_spec.rb:4 ../manifests_and_classes_spec.rb:4 ../package_file_service_spec.rb:4 ../roles_and_profiles_spec.rb:4 ../the_forge_spec.rb:4 ../variables_and_templates_spec.rb:4 ../welcome_spec.rb:4
+msgid "begins"
+msgstr ""
+
+#: ../agent_run_spec.rb:11 ../class_parameters_spec.rb:11 ../conditional_statements_spec.rb:11 ../defined_resource_types_spec.rb:14 ../facts_spec.rb:11 ../hello_puppet_spec.rb:11 ../manifests_and_classes_spec.rb:11 ../package_file_service_spec.rb:11 ../roles_and_profiles_spec.rb:14 ../the_forge_spec.rb:14 ../variables_and_templates_spec.rb:11 ../welcome_spec.rb:11
+msgid "Task 1:"
+msgstr ""
+
+#: ../agent_run_spec.rb:12 ../agent_run_spec.rb:24 ../agent_run_spec.rb:36 ../agent_run_spec.rb:48 ../application_orchestrator_spec.rb:15 ../application_orchestrator_spec.rb:29 ../application_orchestrator_spec.rb:47 ../application_orchestrator_spec.rb:113 ../application_orchestrator_spec.rb:132 ../class_parameters_spec.rb:12 ../class_parameters_spec.rb:37 ../class_parameters_spec.rb:53 ../conditional_statements_spec.rb:12 ../conditional_statements_spec.rb:31 ../conditional_statements_spec.rb:64 ../defined_resource_types_spec.rb:15 ../defined_resource_types_spec.rb:29 ../defined_resource_types_spec.rb:65 ../defined_resource_types_spec.rb:76 ../defined_resource_types_spec.rb:98 ../facts_spec.rb:26 ../facts_spec.rb:40 ../facts_spec.rb:58 ../hello_puppet_spec.rb:12 ../hello_puppet_spec.rb:24 ../hello_puppet_spec.rb:37 ../hello_puppet_spec.rb:49 ../hello_puppet_spec.rb:62 ../manifests_and_classes_spec.rb:12 ../manifests_and_classes_spec.rb:55 ../manifests_and_classes_spec.rb:115 ../package_file_service_spec.rb:12 ../package_file_service_spec.rb:26 ../package_file_service_spec.rb:60 ../package_file_service_spec.rb:76 ../package_file_service_spec.rb:152 ../package_file_service_spec.rb:167 ../package_file_service_spec.rb:186 ../roles_and_profiles_spec.rb:15 ../roles_and_profiles_spec.rb:29 ../roles_and_profiles_spec.rb:47 ../roles_and_profiles_spec.rb:65 ../roles_and_profiles_spec.rb:88 ../roles_and_profiles_spec.rb:122 ../the_forge_spec.rb:15 ../the_forge_spec.rb:27 ../the_forge_spec.rb:67 ../variables_and_templates_spec.rb:12 ../variables_and_templates_spec.rb:111 ../welcome_spec.rb:12 ../welcome_spec.rb:25
+msgid "has a working solution"
+msgstr ""
+
+#: ../agent_run_spec.rb:17
+msgid "Run the pre-installed agent"
+msgstr ""
+
+#: ../agent_run_spec.rb:23 ../class_parameters_spec.rb:36 ../conditional_statements_spec.rb:30 ../defined_resource_types_spec.rb:28 ../facts_spec.rb:25 ../hello_puppet_spec.rb:23 ../package_file_service_spec.rb:25 ../roles_and_profiles_spec.rb:28 ../the_forge_spec.rb:26 ../welcome_spec.rb:24
+msgid "Task 2:"
+msgstr ""
+
+#: ../agent_run_spec.rb:29
+msgid "Sign the agent certificate"
+msgstr ""
+
+#: ../agent_run_spec.rb:35 ../class_parameters_spec.rb:52 ../defined_resource_types_spec.rb:64 ../facts_spec.rb:39 ../hello_puppet_spec.rb:36 ../roles_and_profiles_spec.rb:46
+msgid "Task 3:"
+msgstr ""
+
+#: ../agent_run_spec.rb:41
+msgid "Check for successful agent run"
+msgstr ""
+
+#: ../agent_run_spec.rb:47 ../conditional_statements_spec.rb:63 ../defined_resource_types_spec.rb:75 ../facts_spec.rb:57 ../hello_puppet_spec.rb:48 ../manifests_and_classes_spec.rb:54 ../package_file_service_spec.rb:59 ../roles_and_profiles_spec.rb:64 ../the_forge_spec.rb:66
+msgid "Task 4:"
+msgstr ""
+
+#: ../agent_run_spec.rb:53
+msgid "Check for site.pp classification"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:20
+msgid "Create application module directories"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:34
+msgid "Create sql resource type file"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:52
+msgid "Create the pasture_app::db component"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:73
+msgid "Create the pasture_app::app component"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:94
+msgid "Create the pasture_app application class"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:121
+msgid "Remove application-related classes from role classes"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:137
+msgid "Add the application classification to site.pp"
+msgstr ""
+
+#: ../class_parameters_spec.rb:17
+msgid "Add parameters to the pasture class"
+msgstr ""
+
+#: ../class_parameters_spec.rb:42
+msgid "Use resource-like syntax for classification"
+msgstr ""
+
+#: ../class_parameters_spec.rb:58 ../variables_and_templates_spec.rb:116
+msgid "Run the agent and test the changes"
+msgstr ""
+
+#: ../conditional_statements_spec.rb:17
+msgid "Add the sinatra_server parameter to the pasture main manifest"
+msgstr ""
+
+#: ../conditional_statements_spec.rb:36
+msgid "Add the sinatra_server parameter to the pasture config file template"
+msgstr ""
+
+#: ../conditional_statements_spec.rb:69
+msgid "Classify nodes"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:20
+msgid "Create the directory structure for your accounts module"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:34
+msgid "Define the user_accounts::ssh_user defined resource type"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:70
+msgid "Create an ssh key"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:81
+msgid "Create a profile::pasture::dev_users profile class"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:97 ../hello_puppet_spec.rb:61 ../package_file_service_spec.rb:72 ../roles_and_profiles_spec.rb:87
+msgid "Task 5:"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:106
+msgid "Add profile::pasture::dev_users to the role::pasture_app class"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:115 ../roles_and_profiles_spec.rb:121 ../variables_and_templates_spec.rb:110
+msgid "Task 6:"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:116
+msgid "Trigger a Puppet run on pasture-app-small.puppet.vm to enforce your changes"
+msgstr ""
+
+#: ../facts_spec.rb:12
+msgid "Use the facter command"
+msgstr ""
+
+#: ../facts_spec.rb:31
+msgid "Create motd module directories"
+msgstr ""
+
+#: ../facts_spec.rb:45
+msgid "Create the motd module main manifest"
+msgstr ""
+
+#: ../facts_spec.rb:63
+msgid "Create the motd.epp template"
+msgstr ""
+
+#: ../hello_puppet_spec.rb:17
+msgid "Install the Puppet agent"
+msgstr ""
+
+#: ../hello_puppet_spec.rb:29
+msgid "Investigate the /tmp/test file resource"
+msgstr ""
+
+#: ../hello_puppet_spec.rb:42
+msgid "Create the /tmp/test file resource"
+msgstr ""
+
+#: ../hello_puppet_spec.rb:54
+msgid "Change the content of the /tmp/test file resource"
+msgstr ""
+
+#: ../hello_puppet_spec.rb:67
+msgid "Investigate the package provider"
+msgstr ""
+
+#: ../manifests_and_classes_spec.rb:17
+msgid "Create a temporary hello.pp manifest"
+msgstr ""
+
+#: ../manifests_and_classes_spec.rb:60
+msgid "Update site.pp with classification for cowsay.puppet.vm"
+msgstr ""
+
+#: ../manifests_and_classes_spec.rb:104
+msgid "Include the cowsay::fortune class into the default class"
+msgstr ""
+
+#: ../manifests_and_classes_spec.rb:114
+msgid "Task 8:"
+msgstr ""
+
+#: ../manifests_and_classes_spec.rb:120
+msgid "Run the agent and test cowsay with fortune"
+msgstr ""
+
+#: ../package_file_service_spec.rb:17
+msgid "Create the pasture module directories"
+msgstr ""
+
+#: ../package_file_service_spec.rb:31
+msgid "Create the pasture main manifest"
+msgstr ""
+
+#: ../package_file_service_spec.rb:65
+msgid "Run the Puppet agent"
+msgstr ""
+
+#: ../package_file_service_spec.rb:84
+msgid "Start the pasture service"
+msgstr ""
+
+#: ../package_file_service_spec.rb:157
+msgid "Create the pasture service unit file"
+msgstr ""
+
+#: ../package_file_service_spec.rb:172
+msgid "Manage the pasture configuration file and service"
+msgstr ""
+
+#: ../package_file_service_spec.rb:191
+msgid "Add relationship metaparameters to the pasture main manifest"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:20
+msgid "Create the profile module directories"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:34
+msgid "Create the profile::pasture::app class"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:52
+msgid "Create the profile::pasture::db class"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:73
+msgid "Create the profile::base::motd class"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:99
+msgid "Create the role classes"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:127
+msgid "Classify nodes with role classes"
+msgstr ""
+
+#: ../the_forge_spec.rb:20
+msgid "Install the PostgreSQL Puppet module"
+msgstr ""
+
+#: ../the_forge_spec.rb:32
+msgid "Create the pasture::db wrapper class"
+msgstr ""
+
+#: ../the_forge_spec.rb:72
+msgid "Update the pasture main manifest with a db parameter"
+msgstr ""
+
+#: ../the_forge_spec.rb:94
+msgid "Update the pasture configuration file template with a db parameter"
+msgstr ""
+
+#: ../variables_and_templates_spec.rb:17
+msgid "Add variables to the pasture main manifest"
+msgstr ""
+
+#: ../welcome_spec.rb:17
+msgid "View the options for the quest tool"
+msgstr ""
+
+#: ../welcome_spec.rb:30
+msgid "View the list of available quests"
+msgstr ""
