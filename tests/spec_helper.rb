@@ -2,11 +2,15 @@ require 'serverspec'
 require 'pathname'
 require 'highline/import'
 require 'net/ssh'
+require 'gettext-setup'
 ### include requirements ###
 
 PROD_PATH = '/etc/puppetlabs/code/environments/production/'
 MODULE_PATH = "#{PROD_PATH}modules/"
 SOLUTION_PATH = File.expand_path('../solution_files/', __FILE__)
+
+GettextSetup.initialize(File.expand_path('./locales', File.dirname(__FILE__)))
+GettextSetup.negotiate_locale!(GettextSetup.candidate_locales)
 
 set :backend, :exec
 
