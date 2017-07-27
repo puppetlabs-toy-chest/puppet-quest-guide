@@ -32,4 +32,4 @@ describe _("Task 2:") do
       .content
       .should match /quest\s+list/
   end
-endd
+end
