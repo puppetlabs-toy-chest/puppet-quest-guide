@@ -113,7 +113,7 @@ describe _("Task 5:"), host: :localhost do
   end
 end
 describe _("Task 6:"), host: :pastureappsmall do
-  it _('Trigger a Puppet run on pasture-app-small.puppet.vm to enforce your changes') validation: true do
+  it _('Trigger a Puppet run on pasture-app-small.puppet.vm to enforce your changes'), :validation do
     file('/home/bert')
       .should be_owned_by('bert')
     file('/home/bert')
