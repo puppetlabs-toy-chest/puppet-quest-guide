@@ -89,7 +89,7 @@ describe _("Task 5:"), host: :pasture do
 end
 
 describe _("Task 6:"), host: :pasture do
-  x_('has a working solution'), :solution do
+  xit _('has a working solution'), :solution do
     command("curl 'localhost:4567/api/v1/cowsay?message=Hello!'")
       .stdout
       .should match /Hello!/
