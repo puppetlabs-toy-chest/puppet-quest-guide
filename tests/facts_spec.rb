@@ -1,7 +1,7 @@
 require_relative './spec_helper'
 
 describe "The facts quest", host: :localhost do
-  _('begins'), :solution do
+  it _('begins'), :solution do
     command("quest begin facts")
       .exit_status
       .should eq 0
@@ -88,7 +88,7 @@ describe _("Task 6:"), host: :pasture do
       .exit_status
       .should_not eq 1
   end
-  it 'Run the agent and update the /etc/motd file' do
+  it _('Run the agent and update the /etc/motd file') do
     file('/etc/motd')
       .content
       .should match /Welcome\s+to\s+pasture\.puppet\.vm.*?This\s+is\s+a\s+RedHat/m
