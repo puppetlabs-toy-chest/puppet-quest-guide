@@ -117,3 +117,12 @@ the interactive lessons in the Quest Guide. Access the Quest Guide by opening a
 web browser on your host system and entering the Learning VM's IP address in
 the address bar: `http://<IP-ADDRESS>`. (Note that you must use `http`, as 
 `https` will connect you to the PE console interface.)
+
+## Localization
+
+The Learning VM's Quest Guide and Quest tool currently support English and
+Japanese localization. The default language is English. If you would like to
+use the Quest tool in Japanese, run the following command on the Learning VM:
+`export LANG=ja_JP.utf-8`. Note that you must use SSH or the browser-based web
+terminal to see Japanese characters. Japanese characters will not display
+correctly on the default VirtualBox or VMware terminal.
