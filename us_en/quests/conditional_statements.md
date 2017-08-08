@@ -10,7 +10,7 @@
 ## Getting started
 
 In this quest, we'll discuss **conditional statements.** Conditional statements let
-you write Puppet code to will behave differently in different contexts.
+you write Puppet code that will behave differently in different contexts.
 
 To start this quest enter the following command:
 
@@ -128,7 +128,7 @@ clause.
 Let's return to our Pasture example module. The application is build on the
 [Sinatra](http://www.sinatrarb.com/) framework. Out of the box, Sinatra
 supports a few different options for the server the service will run: WEBrick,
-Thin, or Mongrel. In production, you would likely use Sinatra wiht a more
+Thin, or Mongrel. In production, you would likely use Sinatra with a more
 robust option such as [Passenger](https://www.phusionpassenger.com/) or
 [Unicorn](http://bogomips.org/unicorn/), but these built-in options will be
 adequate for this lesson.
@@ -283,9 +283,9 @@ for production.
 We created two new systems for this quest: `pasture-dev.puppet.vm` and
 `pasture-prod.puppet,vm`. For a more complex infrastructure, you would likely
 manage your development, test, and production segments of your infrastructure
-by creating a distinct [envionrment](https://docs.puppet.com/puppet/latest/environments.html)
+by creating a distinct [environment](https://docs.puppet.com/puppet/latest/environments.html)
 for each. For now, however, we can easily demonstrate our conditional statement
-by setting up two different node definition in the `site.pp` manifest.
+by setting up two different node definitions in the `site.pp` manifest.
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
@@ -310,7 +310,7 @@ lets you trigger Puppet runs across multiple nodes remotely.
 
 <div class = "lvm-task-number"><p>Task 5:</p></div>
 
-Before using this tool, we'll have take a few steps via the PE console to set
+Before using this tool, we'll have to take a few steps via the PE console to set
 up authentication through PE's role-based access control system (RBAC).
 
 To log in to the console, bring up a web browser on the host system you're
@@ -391,7 +391,7 @@ Check the log here as well:
     journalctl -u pasture
 
 Now that you've verified that each node is running the expected server,
-disconnect to retunr to the Learning VM.
+disconnect to return to the Learning VM.
 
     exit
 

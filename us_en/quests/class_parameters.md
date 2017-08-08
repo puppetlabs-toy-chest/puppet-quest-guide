@@ -114,7 +114,7 @@ When you're done making these changes, save and exit your file. Use the
 
 ## Resource-like class declarations
 
-Now that your class has parameters, let's see how these paramters are set.
+Now that your class has parameters, let's see how these parameters are set.
 
 Until now, you've been using `include` to declare the class as part of your
 node classification in the `site.pp` manifest. This `include` function declares
@@ -150,7 +150,7 @@ throw an error.
 
 Though we won't go into detail here, you should know that external data-sources
 like `facter` and `hiera` can give you a lot of flexibility in your classes
-even if with the include syntax. For now, you should be aware that though the
+even with the include syntax. For now, you should be aware that though the
 `include` function uses defaults, there are ways to make those defaults very
 intelligent.
 

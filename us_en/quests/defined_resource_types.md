@@ -91,12 +91,16 @@ the functionality provided by that module's class or classes. For example, the
 types to help manage things like databases, users, and grants. In this case,
 however, we'll create a standalone module for our defined resource type.
 
+<div class = "lvm-task-number"><p>Task 1:</p></div>
+
 Begin by creating the module's directory structure.
 
     mkdir -p user_accounts/manifests
 
-We'll start with a `user_account.pp` manifest where we'll write an
-`ssh_users::user_account` defined resource type.
+<div class = "lvm-task-number"><p>Task 2:</p></div>
+
+We'll start with a `ssh_user.pp` manifest where we'll write an
+`user_accounts::ssh_user` defined resource type.
 
     vim user_accounts/manifests/ssh_user.pp
 
@@ -183,6 +187,8 @@ define user_accounts::ssh_user (
 }
 ```
 
+<div class = "lvm-task-number"><p>Task 3:</p></div>
+
 Normally you would ask the users who needed accounts on this system to provide
 their own public keys. For the sake of demonstration we'll generate our own
 key. The private half of the key pair will stay in your learning user's
@@ -209,6 +215,8 @@ Be careful not to include any leading or trailing whitespace. Depending on how
 line-breaks appear in your console, you may have to manually delete newline
 characters or whitespace after you paste in this key.
 
+<div class = "lvm-task-number"><p>Task 4:</p></div>
+
 Now create a `dev_users.pp` profile manifest.
 
     vim profile/manifests/pasture/dev_users.pp
@@ -229,6 +237,8 @@ class profile::pasture::dev_users {
 }
 ```
 
+<div class = "lvm-task-number"><p>Task 5:</p></div>
+
 Now that this `profile::pasture::dev_users` class is set up, you can easily
 drop it into the `role::pasture_app` class to add these user accounts and
 configure their SSH keys.
@@ -242,6 +252,8 @@ class role::pasture_app {
   include profile::base::motd
 }
 ```
+
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Use the `puppet job` tool to trigger a Puppet agent run. (If your token has
 expired, run the `puppet access login --lifetime 1d` and use the credentials
