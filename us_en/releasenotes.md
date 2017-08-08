@@ -2,6 +2,11 @@
 
 ## Release Notes
 
+### v2.1.0
+  * Content tested for compatibility with puppet-2017.2.2-learning-6.1 VM build.
+  * Added internationalization framework and Japanese translated content.
+  * Replaced Stickler gem server with filesystem gem cache.
+
 ### v2.0.1
   * Content tested for compatibility with puppet-2017.2.2-learning-6.0 VM build
   * Added missing task labels to the Defined Resource Types quest.
