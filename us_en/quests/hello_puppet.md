@@ -196,7 +196,7 @@ see the anatomy of a resource a little more clearly.
 
 ```puppet
 type { 'title':
-   parameter => 'value',
+  parameter => 'value',
 }
 ```
 
@@ -227,8 +227,8 @@ if you also set a `path` parameter for that resource.  For example:
 
 ```puppet
 file { 'my_file':
-   ensure => 'present',
-   path   => '/tmp/test'
+  ensure => 'present',
+  path   => '/tmp/test'
 }
 ```
 
