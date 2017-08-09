@@ -48,7 +48,7 @@ cowsayコマンドラインツールと同様に、`package`リソースと`gem`
 
 ```puppet
 class pasture {
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => gem,
   }
@@ -276,7 +276,7 @@ class pasture {
     notify  => Service['pasture'],
   }
 
-  service {'pasture':
+  service { 'pasture':
     ensure => running,
   }
 
