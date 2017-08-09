@@ -48,7 +48,7 @@ cowsayコマンドラインツールと同様に、`package`リソースと`gem`
 
 ```puppet
 class pasture {
-  package { 'pasture':
+  package {'pasture':
     ensure   => present,
     provider => gem,
   }
@@ -146,7 +146,7 @@ Puppet agent実行を開始します。
 ```puppet
 class pasture {
 
-  package { 'pasture':
+  package {'pasture':
     ensure   => present,
     provider => 'gem',
   }
@@ -198,7 +198,7 @@ systemdユニットファイルのフォーマットに慣れていない方も�
 ```puppet
 class pasture {
 
-  package { 'pasture':
+  package {'pasture':
     ensure   => present,
     provider => 'gem',
   }
@@ -219,7 +219,7 @@ class pasture {
 ```puppet
 class pasture {
 
-  package { 'pasture':
+  package {'pasture':
     ensure   => present,
     provider => 'gem',
   }
@@ -260,7 +260,7 @@ Puppetコードは、デフォルトではマニフェストで記述した順�
 ```puppet
 class pasture {
 
-  package { 'pasture':
+  package {'pasture':
     ensure   => present,
     provider => 'gem',
     before   => File['/etc/pasture_config.yaml'],
@@ -276,7 +276,7 @@ class pasture {
     notify  => Service['pasture'],
   }
 
-  service { 'pasture':
+  service {'pasture':
     ensure => running,
   }
 
