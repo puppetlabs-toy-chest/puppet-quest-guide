@@ -1,6 +1,6 @@
 class pasture {
 
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => 'gem',
     before   => File['/etc/pasture_config.yaml'],

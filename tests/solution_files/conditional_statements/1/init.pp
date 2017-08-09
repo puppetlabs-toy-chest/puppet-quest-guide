@@ -6,7 +6,7 @@ class pasture (
   $sinatra_server    = 'webrick',
 ){
 
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => 'gem',
     before   => File[$pasture_config_file],
