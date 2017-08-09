@@ -213,7 +213,7 @@ And add a file resource declaration.
 ```puppet
 class pasture {
 
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => 'gem',
   }
@@ -274,7 +274,7 @@ First, add a file resource to manage your service unit file.
 ```puppet
 class pasture {
 
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => 'gem',
   }
@@ -296,7 +296,7 @@ Next, add the `service` resource itself. This resource will have the title
 ```puppet
 class pasture {
 
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => 'gem',
   }
@@ -361,7 +361,7 @@ what each of these relationship metaparameters does and why.
 ```puppet
 class pasture {
 
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => 'gem',
     before   => File['/etc/pasture_config.yaml'],
