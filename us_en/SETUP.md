@@ -110,14 +110,6 @@ application like iTerm. For Windows, we suggest the free SSH client
 [PuTTY](http://www.putty.org/). Use the credentials provided on the VM console
 splash page to authenticate.
 
-## Get started
-
-Once the VM is set up and you have connected, you're ready to get started on
-the interactive lessons in the Quest Guide. Access the Quest Guide by opening a
-web browser on your host system and entering the Learning VM's IP address in
-the address bar: `http://<IP-ADDRESS>`. (Note that you must use `http`, as 
-`https` will connect you to the PE console interface.)
-
 ## Localization
 
 The Learning VM's Quest Guide and Quest tool currently support English and
@@ -126,3 +118,11 @@ use the Quest tool in Japanese, run the following command on the Learning VM:
 `export LANG=ja_JP.utf-8`. Note that you must use SSH or the browser-based web
 terminal to see Japanese characters. Japanese characters will not display
 correctly on the default VirtualBox or VMware terminal.
+
+## Get started
+
+Once the VM is set up and you have connected, you're ready to get started on
+the interactive lessons in the Quest Guide. Access the Quest Guide by opening a
+web browser on your host system and entering the Learning VM's IP address in
+the address bar: `http://<IP-ADDRESS>`. (Note that you must use `http`, as 
+`https` will connect you to the PE console interface.)
