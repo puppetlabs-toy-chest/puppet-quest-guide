@@ -1,7 +1,7 @@
 require_relative './spec_helper'
 
 describe "The variables_and_templates quest", host: :localhost do
-  it _('begins'), :solution do
+  it 'begins', :solution do
     command("quest begin variables_and_templates")
       .exit_status
       .should eq 0
@@ -9,7 +9,7 @@ describe "The variables_and_templates quest", host: :localhost do
 end
 
 describe _("Task 1:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/variables_and_templates/1/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
       .exit_status
       .should eq 0
@@ -24,7 +24,7 @@ describe _("Task 1:"), host: :localhost do
   end
 end
 describe _("Task 2:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("mkdir -p #{MODULE_PATH}/pasture/templates")
       .exit_status
       .should eq 0
@@ -52,7 +52,7 @@ describe _("Task 2:"), host: :localhost do
   end
 end
 describe _("Task 3:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/variables_and_templates/3/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
       .exit_status
       .should eq 0
@@ -70,7 +70,7 @@ describe _("Task 3:"), host: :localhost do
   end
 end
 describe _("Task 4:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/variables_and_templates/4/pasture.service.epp #{MODULE_PATH}/pasture/templates/pasture.service.epp")
       .exit_status
       .should eq 0
@@ -90,7 +90,7 @@ describe _("Task 4:"), host: :localhost do
   end
 end
 describe _("Task 5:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/variables_and_templates/5/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
       .exit_status
       .should eq 0
@@ -108,7 +108,7 @@ describe _("Task 5:"), host: :localhost do
   end
 end
 describe _("Task 6:"), host: :pasture do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("sudo puppet agent -t")
       .exit_status
       .should_not eq 1

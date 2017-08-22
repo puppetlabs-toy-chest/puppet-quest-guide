@@ -1,7 +1,7 @@
 require_relative './spec_helper'
 
 describe "The defined_resource_types quest", host: :localhost do
-  it _('begins'), :solution do
+  it 'begins', :solution do
     command("quest begin defined_resource_types")
       .exit_status
       .should eq 0
@@ -12,7 +12,7 @@ describe "The defined_resource_types quest", host: :localhost do
 end
 
 describe _("Task 1:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("mkdir -p #{MODULE_PATH}/user_accounts/manifests")
       .exit_status
       .should eq 0
@@ -26,7 +26,7 @@ describe _("Task 1:"), host: :localhost do
 end
 
 describe _("Task 2:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/defined_resource_types/2/ssh_user.pp #{MODULE_PATH}/user_accounts/manifests/ssh_user.pp")
       .exit_status
       .should eq 0
@@ -62,7 +62,7 @@ describe _("Task 2:"), host: :localhost do
   end
 end
 describe _("Task 3:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("echo | ssh-keygen -t rsa -P puppet")
       .exit_status
       .should be_zero
@@ -73,7 +73,7 @@ describe _("Task 3:"), host: :localhost do
   end
 end
 describe _("Task 4:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("awk 'BEGIN{\"cut -f2 -d'\"'\"' '\"'\"' /root/.ssh/id_rsa.pub\" | getline l}/<PASTE KEY HERE>/{gsub(\"<PASTE KEY HERE>\",l)}1' #{SOLUTION_PATH}/defined_resource_types/4/dev_users.pp > #{MODULE_PATH}/profile/manifests/pasture/dev_users.pp")
       .exit_status
       .should eq 0
@@ -95,7 +95,7 @@ describe _("Task 4:"), host: :localhost do
   end
 end
 describe _("Task 5:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/defined_resource_types/5/pasture_app.pp #{MODULE_PATH}/role/manifests/pasture_app.pp")
       .exit_status
       .should eq 0

@@ -1,7 +1,7 @@
 require_relative './spec_helper'
 
 describe "The the_forge quest", host: :localhost do
-  it _('begins'), :solution do
+  it 'begins', :solution do
     command("quest begin the_forge")
       .exit_status
       .should eq 0
@@ -12,7 +12,7 @@ describe "The the_forge quest", host: :localhost do
 end
 
 describe _("Task 1:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("puppet module install puppetlabs-postgresql --version 4.8.0")
       .exit_status
       .should eq 0
@@ -24,7 +24,7 @@ describe _("Task 1:"), host: :localhost do
 end
 
 describe _("Task 2:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/the_forge/2/db.pp #{MODULE_PATH}/pasture/manifests/db.pp")
       .exit_status
       .should eq 0
@@ -42,7 +42,7 @@ describe _("Task 2:"), host: :localhost do
 end
 
 describe _("Task 3:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/the_forge/3/site.pp #{PROD_PATH}/manifests/site.pp")
       .exit_status
       .should eq 0
@@ -64,7 +64,7 @@ describe _("Task 3:"), host: :localhost do
 end
 
 describe _("Task 4:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/the_forge/4/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
       .exit_status
       .should eq 0
@@ -83,7 +83,7 @@ describe _("Task 4:"), host: :localhost do
 end
 
 describe _("Task 5:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/the_forge/5/pasture_config.yaml.epp #{MODULE_PATH}/pasture/templates/pasture_config.yaml.epp")
       .exit_status
       .should eq 0

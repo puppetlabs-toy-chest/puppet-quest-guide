@@ -1,7 +1,7 @@
 require_relative './spec_helper'
 
 describe "The agent_run quest", host: :localhost do
-  it _('begins'), :solution do
+  it 'begins', :solution do
     command("quest begin agent_run")
       .exit_status
       .should eq 0
@@ -9,7 +9,7 @@ describe "The agent_run quest", host: :localhost do
 end
 
 describe _("Task 1:"), host: :agent do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("sudo puppet agent -t")
       .exit_status
       .should eq 1
@@ -21,7 +21,7 @@ describe _("Task 1:"), host: :agent do
 end
 
 describe _("Task 2:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("puppet cert sign agent.puppet.vm")
       .exit_status
       .should eq 0
@@ -33,7 +33,7 @@ describe _("Task 2:"), host: :localhost do
 end
 
 describe _("Task 3:"), host: :agent do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("sudo puppet agent -t")
       .exit_status
       .should_not eq 1
@@ -45,7 +45,7 @@ describe _("Task 3:"), host: :agent do
 end
 
 describe _("Task 4:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/agent_run/4/site.pp #{PROD_PATH}/manifests/site.pp")
       .exit_status
       .should eq 0

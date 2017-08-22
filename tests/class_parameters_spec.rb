@@ -1,7 +1,7 @@
 require_relative './spec_helper'
 
 describe "The class_parameters quest", host: :localhost do
-  it _('begins'), :solution do
+  it 'begins', :solution do
     command("quest begin class_parameters")
       .exit_status
       .should eq 0
@@ -9,7 +9,7 @@ describe "The class_parameters quest", host: :localhost do
 end
 
 describe _("Task 1:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/class_parameters/1/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
       .exit_status
       .should eq 0
@@ -34,7 +34,7 @@ describe _("Task 1:"), host: :localhost do
 end
 
 describe _("Task 2:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/class_parameters/2/site.pp #{PROD_PATH}/manifests/site.pp")
       .exit_status
       .should eq 0
@@ -50,7 +50,7 @@ describe _("Task 2:"), host: :localhost do
 end
 
 describe _("Task 3:"), host: :pasture do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("sudo puppet agent -t")
       .exit_status
       .should_not eq 1
