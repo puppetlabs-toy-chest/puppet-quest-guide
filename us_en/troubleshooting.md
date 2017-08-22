@@ -144,6 +144,12 @@ invalid IP address, restarting the VM is generally the quickest way to ensure
 that the network services are correctly reset. (Unfortunately restarting the
 network service directly isn't always reliable.)
 
+There has been a history of issues with VirtualBox Host Only adapter settings
+affecting some Windows systems. If the settings you apply in the network
+adapter configuration interface seem to change or be re-set, please refer to
+[this VirtualBox ticket](https://www.virtualbox.org/ticket/8796#comment:20)
+for background information and a possible work-around.
+
 It is also possible that the bridged adapter interface configured in the VM
 network settings menu of your virtualization software is incorrect. This can
 happen if you change from a wired to wireless network after setting the
