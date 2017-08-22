@@ -196,7 +196,7 @@ see the anatomy of a resource a little more clearly.
 
 ```puppet
 type { 'title':
-   parameter => 'value',
+  parameter => 'value',
 }
 ```
 
@@ -227,8 +227,8 @@ if you also set a `path` parameter for that resource.  For example:
 
 ```puppet
 file { 'my_file':
-   ensure => 'present',
-   path   => '/tmp/test'
+  ensure => 'present',
+  path   => '/tmp/test'
 }
 ```
 
@@ -242,7 +242,7 @@ Reference](https://docs.puppet.com/puppet/latest/reference/type.html).
 Now that you're more familiar with the resource syntax, let's take another look
 at that file resource.
 
-``` puppet
+```puppet
 file { '/tmp/test':
   ensure => 'absent',
 }
@@ -270,7 +270,7 @@ shows the `ensure` and `content` parameters and their values,
 plus information about the file's owner, when it was created, and
 when it was last modified.
 
-``` puppet
+```puppet
 file { '/tmp/test':
   ensure  => 'file',
   content => '{md5}d41d8cd98f00b204e9800998ecf8427e',

@@ -5,7 +5,7 @@ class pasture {
   $default_message     = ''
   $pasture_config_file = '/etc/pasture_config.yaml'
 
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => 'gem',
     before   => File[$pasture_config_file],

@@ -128,7 +128,7 @@ The output is a list of directories separated by the colon (`:`) character.
 
 ```
 /etc/puppetlabs/code/environments/production/modules:/etc/puppetlabs/code/modules:/opt/puppetlabs/puppet/modules
-``` 
+```
 
 For now, we'll work in the first directory listed in the modulepath. This
 directory includes modules specific to the production environment. (The second directory
