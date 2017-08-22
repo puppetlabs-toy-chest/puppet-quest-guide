@@ -1,7 +1,7 @@
 require_relative './spec_helper'
 
 describe "The facts quest", host: :localhost do
-  it _('begins'), :solution do
+  it 'begins', :solution do
     command("quest begin facts")
       .exit_status
       .should eq 0
@@ -23,7 +23,7 @@ describe _("Task 1:"), host: :pasture do
 end
 
 describe _("Task 2:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("mkdir -p #{MODULE_PATH}/motd/{manifests,templates}")
       .exit_status
       .should eq 0
@@ -37,7 +37,7 @@ describe _("Task 2:"), host: :localhost do
 end
 
 describe _("Task 3:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/facts/3/init.pp #{MODULE_PATH}/motd/manifests/init.pp")
       .exit_status
       .should eq 0
@@ -55,7 +55,7 @@ describe _("Task 3:"), host: :localhost do
 end
 
 describe _("Task 4:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/facts/4/motd.epp #{MODULE_PATH}/motd/templates/motd.epp")
       .exit_status
       .should eq 0
@@ -70,7 +70,7 @@ describe _("Task 4:"), host: :localhost do
 end
 
 describe _("Task 5:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/facts/5/site.pp #{PROD_PATH}/manifests/site.pp")
       .exit_status
       .should eq 0
@@ -83,7 +83,7 @@ describe _("Task 5:"), host: :localhost do
 end
 
 describe _("Task 6:"), host: :pasture do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("sudo puppet agent -t")
       .exit_status
       .should_not eq 1

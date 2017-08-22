@@ -1,7 +1,7 @@
 require_relative './spec_helper'
 
 describe "The application_orchestrator quest", host: :localhost do
-  it _('begins'), :solution do
+  it 'begins', :solution do
     command("quest begin application_orchestrator")
       .exit_status
       .should eq 0
@@ -12,7 +12,7 @@ describe "The application_orchestrator quest", host: :localhost do
 end
 
 describe 'Task 1:', host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("mkdir -p #{MODULE_PATH}/pasture_app/{manifests,lib/puppet/type}")
       .exit_status
       .should eq 0
@@ -26,7 +26,7 @@ describe 'Task 1:', host: :localhost do
 end
 
 describe 'Task 2:', host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/application_orchestrator/2/sql.rb #{MODULE_PATH}/pasture_app/lib/puppet/type/sql.rb")
       .exit_status
       .should eq 0
@@ -44,7 +44,7 @@ describe 'Task 2:', host: :localhost do
 end
 
 describe 'Task 3:', host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/application_orchestrator/3/db.pp #{MODULE_PATH}/pasture_app/manifests/db.pp")
       .exit_status
       .should eq 0
@@ -65,7 +65,7 @@ describe 'Task 3:', host: :localhost do
 end
 
 describe 'Task 4:', host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/application_orchestrator/4/app.pp #{MODULE_PATH}/pasture_app/manifests/app.pp")
       .exit_status
       .should eq 0
@@ -86,7 +86,7 @@ describe 'Task 4:', host: :localhost do
 end
 
 describe 'Task 5:', host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/application_orchestrator/5/init.pp #{MODULE_PATH}/pasture_app/manifests/init.pp")
       .exit_status
       .should eq 0
@@ -110,7 +110,7 @@ describe 'Task 5:', host: :localhost do
 end
 
 describe 'Task 6:', host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/application_orchestrator/6/pasture_app.pp #{MODULE_PATH}/role/manifests/pasture_app.pp")
       .exit_status
       .should eq 0
@@ -129,7 +129,7 @@ describe 'Task 6:', host: :localhost do
 end
 
 describe 'Task 7:', host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/application_orchestrator/7/site.pp #{PROD_PATH}/manifests/site.pp")
       .exit_status
       .should eq 0
@@ -151,7 +151,7 @@ describe 'Task 7:', host: :localhost do
 end
 
 describe 'Task 8:', host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("puppet job run --application Pasture_app['pasture_01']")
       .exit_status
       .should_not eq 1

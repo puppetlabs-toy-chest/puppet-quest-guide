@@ -1,7 +1,7 @@
 require_relative './spec_helper'
 
 describe "The package_file_service quest", host: :localhost do
-  it _('begins'), :solution do
+  it 'begins', :solution do
     command("quest begin package_file_service")
       .exit_status
       .should eq 0
@@ -9,7 +9,7 @@ describe "The package_file_service quest", host: :localhost do
 end
 
 describe _("Task 1:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("mkdir -p #{MODULE_PATH}pasture/{manifests,files}")
       .exit_status
       .should eq 0
@@ -23,7 +23,7 @@ describe _("Task 1:"), host: :localhost do
 end
 
 describe _("Task 2:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/package_file_service/2/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
       .exit_status
       .should eq 0
@@ -41,7 +41,7 @@ describe _("Task 2:"), host: :localhost do
 end
 
 describe _("Task 3:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/package_file_service/3/site.pp #{PROD_PATH}/manifests/site.pp")
       .exit_status
       .should eq 0
@@ -57,7 +57,7 @@ describe _("Task 3:"), host: :localhost do
 end
 
 describe _("Task 4:"), host: :pasture do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("sudo puppet agent -t")
       .exit_status
       .should_not eq 1
@@ -73,7 +73,7 @@ describe _("Task 5:"), host: :pasture do
   # The solutions for this and the following two
   # tasks are skipped until there's a better way to
   # run the service via rspec
-  xit _('has a working solution'), :solution do
+  xit 'has a working solution', :solution do
     command("pasture start &")
       .exit_status
       .should eq 0
@@ -89,7 +89,7 @@ describe _("Task 5:"), host: :pasture do
 end
 
 describe _("Task 6:"), host: :pasture do
-  xit _('has a working solution'), :solution do
+  xit 'has a working solution', :solution do
     command("curl 'localhost:4567/api/v1/cowsay?message=Hello!'")
       .stdout
       .should match /Hello!/
@@ -105,7 +105,7 @@ describe _("Task 6:"), host: :pasture do
 end
 
 describe _("Task 7:"), host: :pasture do
-  xit _('has a working solution'), :solution do
+  xit 'has a working solution', :solution do
     command("kill $(ps | grep pasture | cut -f1 -d' ')")
       .exit_status
       .should eq 0
@@ -118,7 +118,7 @@ describe _("Task 7:"), host: :pasture do
 end
 
 describe _("Task 8:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/package_file_service/8/pasture_config.yaml #{MODULE_PATH}/pasture/files/pasture_config.yaml")
       .exit_status
       .should eq 0
@@ -133,7 +133,7 @@ describe _("Task 8:"), host: :localhost do
 end
 
 describe _("Task 9:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/package_file_service/9/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
       .exit_status
       .should eq 0
@@ -149,7 +149,7 @@ describe _("Task 9:"), host: :localhost do
 end
 
 describe "Task 10:", host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/package_file_service/10/pasture.service #{MODULE_PATH}/pasture/files/pasture.service")
       .exit_status
       .should eq 0
@@ -164,7 +164,7 @@ describe "Task 10:", host: :localhost do
 end
 
 describe "Task 11:", host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/package_file_service/11/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
       .exit_status
       .should eq 0
@@ -183,7 +183,7 @@ describe "Task 11:", host: :localhost do
 end
 
 describe "Task 12:", host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/package_file_service/12/init.pp #{MODULE_PATH}/pasture/manifests/init.pp")
       .exit_status
       .should eq 0
@@ -199,7 +199,7 @@ describe "Task 12:", host: :localhost do
 end
 
 describe "Task 13:", host: :pasture do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("sudo puppet agent -t")
       .exit_status
       .should_not eq 1

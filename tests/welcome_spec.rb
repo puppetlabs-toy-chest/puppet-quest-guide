@@ -1,7 +1,7 @@
 require_relative './spec_helper'
 
 describe "The quest", host: :localhost do
-  it _('begins'), :solution do
+  it 'begins', :solution do
     command('quest begin welcome')
       .exit_status
       .should eq 0
@@ -9,7 +9,7 @@ describe "The quest", host: :localhost do
 end
 
 describe _("Task 1:") do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command('quest --help')
       .exit_status
       .should eq 0
@@ -22,7 +22,7 @@ describe _("Task 1:") do
 end
 
 describe _("Task 2:") do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command('quest list')
       .exit_status
       .should eq 0

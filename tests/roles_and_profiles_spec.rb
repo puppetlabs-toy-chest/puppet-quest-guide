@@ -1,7 +1,7 @@
 require_relative './spec_helper'
 
 describe "The roles_and_profiles quest", host: :localhost do
-  it _('begins'), :solution do
+  it 'begins', :solution do
     command("quest begin roles_and_profiles")
       .exit_status
       .should eq 0
@@ -12,7 +12,7 @@ describe "The roles_and_profiles quest", host: :localhost do
 end
 
 describe _("Task 1:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("mkdir -p #{MODULE_PATH}/profile/manifests/pasture")
       .exit_status
       .should eq 0
@@ -26,7 +26,7 @@ describe _("Task 1:"), host: :localhost do
 end
 
 describe _("Task 2:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/roles_and_profiles/2/app.pp #{MODULE_PATH}/profile/manifests/pasture/app.pp")
       .exit_status
       .should eq 0
@@ -44,7 +44,7 @@ describe _("Task 2:"), host: :localhost do
 end
 
 describe _("Task 3:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/roles_and_profiles/3/db.pp #{MODULE_PATH}/profile/manifests/pasture/db.pp")
       .exit_status
       .should eq 0
@@ -62,7 +62,7 @@ describe _("Task 3:"), host: :localhost do
 end
 
 describe _("Task 4:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("mkdir -p #{MODULE_PATH}/profile/manifests/base")
       .exit_status
       .should eq 0
@@ -85,7 +85,7 @@ describe _("Task 4:"), host: :localhost do
 end
 
 describe _("Task 5:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("mkdir -p #{MODULE_PATH}/role/manifests")
       .exit_status
       .should eq 0
@@ -119,7 +119,7 @@ describe _("Task 5:"), host: :localhost do
 end
 
 describe _("Task 6:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/roles_and_profiles/6/site.pp #{PROD_PATH}/manifests/site.pp")
       .exit_status
       .should eq 0
@@ -144,7 +144,7 @@ describe _("Task 6:"), host: :localhost do
 end
 
 describe _("Task 7:"), host: :localhost do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("puppet job run --nodes pasture-db.puppet.vm")
       .exit_status
       .should eq 0

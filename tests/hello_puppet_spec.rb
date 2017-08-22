@@ -1,7 +1,7 @@
 require_relative './spec_helper'
 
 describe "The hello_puppet quest", host: :localhost do
-  it _('begins'), :solution do
+  it 'begins', :solution do
     command("quest begin hello_puppet")
       .exit_status
       .should eq 0
@@ -9,7 +9,7 @@ describe "The hello_puppet quest", host: :localhost do
 end
 
 describe _("Task 1:"), host: :hello do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | sudo bash")
       .exit_status
       .should eq 0
@@ -21,7 +21,7 @@ describe _("Task 1:"), host: :hello do
 end
 
 describe _("Task 2:"), host: :hello do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("sudo puppet resource file /tmp/test")
       .exit_status
       .should eq 0
@@ -34,7 +34,7 @@ describe _("Task 2:"), host: :hello do
 end
 
 describe _("Task 3:"), host: :hello do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("touch /tmp/test")
       .exit_status
       .should eq 0
@@ -46,7 +46,7 @@ describe _("Task 3:"), host: :hello do
 end
 
 describe _("Task 4:"), host: :hello do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("puppet resource file /tmp/test content='Hello Puppet!'")
       .exit_status
       .should eq 0
@@ -59,7 +59,7 @@ describe _("Task 4:"), host: :hello do
 end
 
 describe _("Task 5:"), host: :hello do
-  it _('has a working solution'), :solution do
+  it 'has a working solution', :solution do
     command("sudo puppet resource package httpd ensure=present")
       .exit_status
       .should eq 0
