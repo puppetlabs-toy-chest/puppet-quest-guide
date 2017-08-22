@@ -281,7 +281,7 @@ Now open the file with Vim to templatize it.
 
 Add your parameters tag and comment to the beginning of the file. Set the
 `--config_file` argument of the start command to the value of
-`$pasture_config_fle`
+`$pasture_config_file`
 
 ```
 <%- | $pasture_config_file = '/etc/pasture_config.yaml' | -%>
