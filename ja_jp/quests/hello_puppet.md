@@ -117,7 +117,7 @@ file { 'my_file':
 
 リソースの構文に慣れたら、先ほどのファイルリソースをもう少し見ていきましょう。
 
-``` puppet
+```puppet
 file { '/tmp/test':
   ensure => 'absent',
 }
@@ -137,7 +137,7 @@ Puppetは、このファイルが存在しないことを伝えています。`t
 
 システムにファイルが存在するようになったので、Puppetの情報も先ほどより増えています。`ensure`および`content`パラメータとその値が示されているほか、ファイルのオーナー、作成日時、最終修正日時に関する情報が示されています。
 
-``` puppet
+```puppet
 file { '/tmp/test':
   ensure  => 'file',
   content => '{md5}d41d8cd98f00b204e9800998ecf8427e',
