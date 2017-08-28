@@ -87,7 +87,7 @@ Puppetアプリケーションオーケストレータの仕組みを理解す�
 
 現在作成しているのは、`lib/puppet/type` ディレクトリです。`lib/puppet/`ディレクトリは、モジュールの提供するコアPuppet言語のエクステンションが保存される場所です。ここに、Rubyコードで定義するカスタム`sql`型を置きます。
 
-<div class = "lvm-task-number"><p>タスク6:</p></div>
+<div class = "lvm-task-number"><p>タスク2:</p></div>
 
 次に、この新しい`sql`リソース型を追加します。
 
@@ -111,7 +111,7 @@ end
 
 アプリケーションに関係する他のコンポーネントを扱っていくなかで、この`sql`リソースがどのように生成され、使用されるか確認していきます。
 
-<div class = "lvm-task-number"><p>タスク7:</p></div>
+<div class = "lvm-task-number"><p>タスク3:</p></div>
 
 これで新しい`sql`リソース型ができました。データベースコンポーネントに進みましょう。このコンポーネントは、役割およびプロフィールのクエストで作成した`profile::pasture_db`プロフィールクラスによく似た、定義されたリソース型で構成されます。
 
@@ -155,7 +155,7 @@ Pasture_App::Db produces Sql {
 
     puppet parser validate --app_management pasture_app/manifests/db.pp
 
-<div class = "lvm-task-number"><p>タスク8:</p></div>
+<div class = "lvm-task-number"><p>タスク4:</p></div>
 
 次に、`app`コンポーネントを作成し、Pastureアプリケーションサーバそのものを設定します。
 
@@ -190,7 +190,7 @@ Pasture_App::App consumes Sql {
 
     puppet parser validate --app_management pasture_app/manifests/app.pp
 
-<div class = "lvm-task-number"><p>タスク9:</p></div>
+<div class = "lvm-task-number"><p>タスク5:</p></div>
 
 これで定義リソース型が完成しました。ここでアプリケーションそのものを定義します。アプリケーションは`pasture_app`モジュールが提供する主要な要素であるため、`init.pp`マニフェストを使用します。
 
@@ -241,7 +241,7 @@ application pasture_app (
 
     4 directories, 4 files
 
-<div class = "lvm-task-number"><p>タスク10:</p></div>
+<div class = "lvm-task-number"><p>タスク6:</p></div>
 
 これらのノードの管理にはオーケストレータを使用するため、アプリケーション関連のクラスをノードの役割から削除します。これらのクラスがベースプロファイルと依存関係にない限り、そのまま役割に残し、引き続き通常のPuppet agent実行スケジュールで管理されるようにすることができます。
 
@@ -259,11 +259,10 @@ class role::pasture_app {
 ```puppet
 class role::pasture_db {
   include profile::base::motd
-  include profile::pasture::dev_users
 }
 ```
 
-<div class = "lvm-task-number"><p>タスク10:</p></div>
+<div class = "lvm-task-number"><p>タスク7:</p></div>
 
 最後のステップは、`site.pp`マニフェストでアプリケーションを宣言することです。
 
@@ -311,13 +310,13 @@ site {
     pasture-app-large.puppet.vm
         Pasture_app[pasture_01] - Pasture_app::App[pasture_01]
 
-<div class = "lvm-task-number"><p>タスク11:</p></div>
+<div class = "lvm-task-number"><p>タスク8:</p></div>
 
 `puppet job`コマンドを使用し、アプリケーションをデプロイします。
 
     puppet job run --application Pasture_app['pasture_01']
 
-`puppet job list`コマンドを使うと、実行中のジョブや完了したジョブの状況を確認することができます。
+`puppet job show`コマンドを使うと、実行中のジョブや完了したジョブの状況を確認することができます。
 
 アプリケーションをデプロイしたら、`curl`コマンドを使って、 `pasture-app-large.puppet.vm`上のPastureに関して設定されたデフォルトメッセージをチェックします。 
 
@@ -339,4 +338,10 @@ site {
 *  インフラストラクチャ内のノードにコンポーネントを割り当てるための、`site.pp`マニフェストの`site`ブロックでの
    アプリケーションの宣言。
 
-定義したアプリケーションは、`puppet job plan`コマンドで確認したり、`puppet job run`コマンドで実行したりできます。`puppet job list`コマンドを使うと、実行中のジョブや完了したジョブを確認できます。
+定義したアプリケーションは、`puppet job plan`コマンドで確認したり、`puppet job run`コマンドで実行したりできます。`puppet job show`コマンドを使うと、実行中のジョブや完了したジョブを確認できます。
+
+## その他のリソース
+
+* アプリケーションのオーケストレーションについては、[ドキュメントページ](https://docs.puppet.com/pe/latest/app_orchestration_overview.html)をご覧ください。
+* アプリケーションのオーケストレーションの機能概要については[製品ページ](https://puppet.com/product/capabilities/orchestration)
+* デモについては[GitHubでのアップリケーションリポジトリ例](https://github.com/puppetlabs/puppetlabs-wordpress_app)をご覧ください。
