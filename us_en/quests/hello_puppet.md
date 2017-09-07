@@ -221,7 +221,7 @@ resource type has a unique identifying feature that can be used as the resource
 title. A `user` resource uses the account name as a title, for example, and
 a `package` resource uses the name of the package you want to manage.
 
-There's an caveat to resource titles, however, that can trip up new users. You
+There's a caveat to resource titles, however, that can trip up new users. You
 can set a `file` resource's title to something other than the file's path 
 if you also set a `path` parameter for that resource.  For example:
 
