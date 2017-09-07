@@ -134,7 +134,7 @@ Now there's just one more tool you need to finish your defined resource type,
 one we skimmed over in our earlier discussion of variables. As noted above,
 to ensure that all the resources in a defined resource type are unique, you
 should incorporate the title of the defined resource type itself into the
-titles (and namevars if they're set explicitly) of the resoruces it contains.
+titles (and namevars if they're set explicitly) of the resources it contains.
 
 Often, however, you'll need to insert this `$title` into a string to create
 the full title for a resource. The title for our `ssh_authorized_key` resource, for
