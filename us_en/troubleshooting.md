@@ -22,8 +22,13 @@ we have written the test for a task in a way that doesn't capture a valid
 syntactical variation.
 
 You can check the specific matchers by looking at a quest's spec file in the
-`/usr/src/puppet-quest-guide/tests` directory. If you find an issue with the
-tests, please let us know by sending an email to learningvm@puppet.com.
+`/usr/src/puppet-quest-guide/tests` directory on the Learning VM, or the latest
+corresponding code in the Quest Guide [repository](https://github.com/puppetlabs/puppet-quest-guide/tree/master/tests).
+You can also find the solution files we use in testing in the `solution_files`
+subdirectory under that `tests` directory.
+
+If you find an issue with the tests or fixtures, please let us know by sending an
+email to learningvm@puppet.com.
 
 ### Password Required for the Quest Guide
 
