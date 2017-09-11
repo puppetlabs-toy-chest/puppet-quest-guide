@@ -36,7 +36,7 @@ describe _("Task 2:"), host: :localhost do
       .should be_file
     file("#{MODULE_PATH}profile/manifests/pasture/app.pp")
       .content
-      .should match /class\s+{\s+(['"])pasture\1:.*?default_message\s+=>\s+(['"])Hello\s+Puppet!\1,/mi
+      .should match /class\s*{\s+(['"])pasture\1:.*?default_message\s+=>\s+(['"])Hello\s+Puppet!\1,/mi
     command("puppet parser validate #{MODULE_PATH}profile/manifests/pasture/app.pp")
       .exit_status
       .should be_zero
@@ -54,7 +54,7 @@ describe _("Task 3:"), host: :localhost do
       .should be_file
     file("#{MODULE_PATH}profile/manifests/pasture/db.pp")
       .content
-      .should match /class\s+profile::pasture::db\s+{.*?include\s+pasture::db.*?}/m
+      .should match /class\s+profile::pasture::db\s*{.*?include\s+pasture::db.*?}/m
     command("puppet parser validate #{MODULE_PATH}profile/manifests/pasture/db.pp")
       .exit_status
       .should be_zero
