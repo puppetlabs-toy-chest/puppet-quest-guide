@@ -1,90 +1,154 @@
-describe "Task 1:" do
-  it 'Create the web_user module directory with manifests and examples subdirectories' do
-    file("#{MODULE_PATH}web_user")
+require_relative './spec_helper'
+
+describe "The defined_resource_types quest", host: :localhost do
+  it 'begins', :solution do
+    command("quest begin defined_resource_types")
+      .exit_status
+      .should eq 0
+    command("echo 'puppet' | puppet access login --username learning --lifetime 1d")
+      .exit_status
+      .should eq 0
+  end
+end
+
+describe _("Task 1:"), host: :localhost do
+  it 'has a working solution', :solution do
+    command("mkdir -p #{MODULE_PATH}/user_accounts/manifests")
+      .exit_status
+      .should eq 0
+  end
+  it _('Create the directory structure for your accounts module'), :validation do
+    file("#{MODULE_PATH}user_accounts")
       .should be_directory
-    file("#{MODULE_PATH}web_user/manifests")
-      .should be_directory
-    file("#{MODULE_PATH}web_user/examples")
+    file("#{MODULE_PATH}user_accounts/manifests")
       .should be_directory
   end
 end
 
-describe "Task 2:" do
-  it 'Define a simple web_user::user resource type' do
-    file("#{MODULE_PATH}web_user/manifests/user.pp")
+describe _("Task 2:"), host: :localhost do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/defined_resource_types/2/ssh_user.pp #{MODULE_PATH}/user_accounts/manifests/ssh_user.pp")
+      .exit_status
+      .should eq 0
+  end
+  it _('Define the user_accounts::ssh_user defined resource type'), :validation do
+    file("#{MODULE_PATH}user_accounts/manifests/ssh_user.pp")
       .content
-      .should match /define\s*web_user::user/
-    file("#{MODULE_PATH}web_user/manifests/user.pp")
+      .should match /define\s+user_accounts::ssh_user\s*\(\s+
+                      \$key\s+=\s+undef,\s+
+                      \$group\s+=\s+undef,\s+
+                      \$shell\s+=\s+undef,\s+
+                      \$comment\s+=\s+undef,\s+
+                    \)\{/mx
+    file("#{MODULE_PATH}user_accounts/manifests/ssh_user.pp")
       .content
-      .should match /user\s*{\s*\$title\s*:/
-    file("#{MODULE_PATH}web_user/manifests/user.pp")
+      .should match /file\s*{\s*\[?\s*"\/home\/\$\{title\}\".*?
+                      ensure\s+=>\s+directory,\s+
+                    /mx
+    file("#{MODULE_PATH}user_accounts/manifests/ssh_user.pp")
       .content
-      .should match /file\s*{/
+      .should match /file\s*{\s*\[?\s*"\/home\/\$\{title\}\/\.ssh\".*?
+                      ensure\s+=>\s+directory,.*?
+                      before\s+=>\s+Ssh_authorized_key\["\$\{title\}@puppet\.vm"\],\s+
+                    /mx
+    file("#{MODULE_PATH}user_accounts/manifests/ssh_user.pp")
+      .content
+      .should match /if\s+\$key\s*\{\s+
+                      ssh_authorized_key\s+\{\s*\"\$\{title\}@puppet\.vm\"
+                    /mx
+    command("puppet parser validate #{MODULE_PATH}user_accounts/manifests/ssh_user.pp")
+      .exit_status
+      .should be_zero
   end
 end
-
-describe "Task 3:" do
-  it "Create a test manifest to apply your new defined resource type" do
-    file("#{MODULE_PATH}web_user/examples/user.pp")
-      .content
-      .should match /web_user::user\s*{\s*['"]shelob['"]\s*:\s*}/
+describe _("Task 3:"), host: :localhost do
+  it 'has a working solution', :solution do
+    command("echo | ssh-keygen -t rsa -P puppet")
+      .exit_status
+      .should be_zero
   end
-end
-
-describe "Task 4:" do
-  it "Apply your test manifest" do
-    file('/home/shelob')
-      .should be_directory
-    user('shelob')
-      .should exist
-  end
-end
-
-describe "Task 5:" do
-  it "Extend your web_user::user resource type to create a public_html directory and an index.html document" do
-    file("#{MODULE_PATH}web_user/manifests/user.pp")
-      .content
-      .should match /user\s*{\s*\$title\s*:/
-    file("#{MODULE_PATH}web_user/manifests/user.pp")
-      .content
-      .should match /file\s*{\s*\"\${public_html}\/index\.html\"\s*:/
-  end
-end
-
-describe "Task 6:" do
-  it "Apply your test manifest again to create your user's public_html directory and index.html document" do
-    file('/home/shelob/public_html')
-      .should be_directory
-    file('/home/shelob/public_html/index.html')
+  it _('Create an ssh key'), :validation do
+    file("/root/.ssh/id_rsa.pub")
       .should be_file
   end
 end
-
-describe "Task 7:" do
-  it 'Add $content and $password parameters to your defined resource type' do
-    file("#{MODULE_PATH}web_user/manifests/user.pp")
+describe _("Task 4:"), host: :localhost do
+  it 'has a working solution', :solution do
+    command("awk 'BEGIN{\"cut -f2 -d'\"'\"' '\"'\"' /root/.ssh/id_rsa.pub\" | getline l}/<PASTE KEY HERE>/{gsub(\"<PASTE KEY HERE>\",l)}1' #{SOLUTION_PATH}/defined_resource_types/4/dev_users.pp > #{MODULE_PATH}/profile/manifests/pasture/dev_users.pp")
+      .exit_status
+      .should eq 0
+  end
+  it _('Create a profile::pasture::dev_users profile class'), :validation do
+    file("#{MODULE_PATH}profile/manifests/pasture/dev_users.pp")
       .content
-      .should match /\$content\s+=\s+"<h1>Welcome to \${title}'s home page!<\/h1>",/
-    file("#{MODULE_PATH}web_user/manifests/user.pp")
+      .should match /user_accounts::ssh_user\s*{\s*(['"])bert\1:\s+
+                      comment\s+=>\s+(['"])Bert\1,\s+
+                    /mx
+    file("#{MODULE_PATH}profile/manifests/pasture/dev_users.pp")
       .content
-      .should match /\$password\s*\=\s*undef,/
+      .should match /user_accounts::ssh_user\s*{\s*(['"])ernie\1:\s+
+                      comment\s+=>\s+(['"])Ernie\1,\s+
+                    /mx
+    command("puppet parser validate #{MODULE_PATH}profile/manifests/pasture/dev_users.pp")
+      .exit_status
+      .should be_zero
   end
 end
-
-describe "Task 8:" do
-  it "Declare a new web_user::user in your test manifest with parameters" do
-    file("#{MODULE_PATH}web_user/examples/user.pp")
+describe _("Task 5:"), host: :localhost do
+  it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/defined_resource_types/5/pasture_app.pp #{MODULE_PATH}/role/manifests/pasture_app.pp")
+      .exit_status
+      .should eq 0
+    command("puppet job run --nodes pasture-app-small.puppet.vm")
+      .exit_status
+      .should be_zero
+  end
+  it _('Add profile::pasture::dev_users to the role::pasture_app class'), :validation do
+    file("#{MODULE_PATH}role/manifests/pasture_app.pp")
       .content
-      .should match /web_user::user\s*{\s*['"]frodo['"]\s*:/
+      .should match /include\s+profile::pasture::dev_users/mi
+    command("puppet parser validate #{MODULE_PATH}role/manifests/pasture_app.pp")
+      .exit_status
+      .should be_zero
   end
 end
-
-
-describe "Task 9:" do
-  it "Apply your test manifest a final time to make use of your specified parameters" do
-    file('/home/frodo/public_html')
+describe _("Task 6:"), host: :pastureappsmall do
+  it _('Trigger a Puppet run on pasture-app-small.puppet.vm to enforce your changes'), :validation do
+    file('/home/bert')
+      .should be_owned_by('bert')
+    file('/home/bert')
       .should be_directory
-    file('/home/frodo/public_html/index.html')
+    file('/home/bert')
+      .should be_mode(755)
+    file('/home/bert/.ssh')
+      .should be_owned_by('bert')
+    file('/home/bert/.ssh')
+      .should be_directory
+    file('/home/bert/.ssh')
+      .should be_mode(700)
+    file('/home/bert/.ssh/authorized_keys')
+      .should be_owned_by('bert')
+    file('/home/bert/.ssh/authorized_keys')
       .should be_file
+    file('/home/bert/.ssh/authorized_keys')
+      .should be_mode(600)
+    file('/home/ernie')
+      .should be_owned_by('ernie')
+    file('/home/ernie')
+      .should be_directory
+    file('/home/ernie')
+      .should be_mode(755)
+    file('/home/ernie/.ssh')
+      .should be_owned_by('ernie')
+    file('/home/ernie/.ssh')
+      .should be_directory
+    file('/home/ernie/.ssh')
+      .should be_mode(700)
+    file('/home/ernie/.ssh/authorized_keys')
+      .should be_owned_by('ernie')
+    file('/home/ernie/.ssh/authorized_keys')
+      .should be_file
+    file('/home/ernie/.ssh/authorized_keys')
+      .should be_mode(600)
   end
 end
