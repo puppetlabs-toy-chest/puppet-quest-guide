@@ -1,5 +1,6 @@
 # Summary
 
+* [Introduction](README.md)
 * [Setup](SETUP.md)
 
 ### Quests
