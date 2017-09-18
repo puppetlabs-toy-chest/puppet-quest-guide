@@ -243,6 +243,6 @@ Puppetを支える主要コンセプトを学ぶと、より現実的なワー�
 ## その他のリソース
 
 * オンデマンドウェビナー ["Puppet Enterprise入門"](https://puppet.com/resources/webinar/introduction-puppet-enterprise)をご覧ください。
-* Puppet Enterpriseのインストールについては、[ドキュメントページ](https://docs.puppet.com/ja/pe/latest/install_basic.html)をご覧ください。
+* Puppet Enterpriseのインストールについては、[ドキュメントページ](https://docs.puppet.com/ja/pe/latest/install_basic.html)
 *  [Puppetとは何か](https://learn.puppet.com/elearning/what-is-puppet)、[Puppet Enterpriseとは何か](https://learn.puppet.com/elearning/what-is-puppet-enterprise)、[リソース](https://learn.puppet.com/elearning/resources)、[自己ペースレッスン](https://learn.puppet.com/category/self-paced-training)もご覧ください。
 * Puppetの基礎は、Puppet FundamentalsおよびPuppetizing Infrastructureコースで詳しく説明しています。詳細については、[対面](https://learn.puppet.com/category/instructor-led-training)および[オンライン](https://learn.puppet.com/category/online-instructor-led-training)のトレーニングオプションをチェックしてみてください。
