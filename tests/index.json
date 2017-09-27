@@ -43,8 +43,20 @@
     "watch_list": ["/root/.bash_history"],
     "setup_command": "ruby ./scripts/setup roles_and_profiles"
   },
+  "hiera": {
+    "watch_list": ["/root/,bash_history"],
+    "setup_command": "ruby ./scripts/setup hiera"
+  },
   "defined_resource_types": {
     "watch_list": ["/root/.bash_history"],
     "setup_command": "ruby ./scripts/setup defined_resource_types"
+  },
+  "control_repository": {
+    "watch_list": ["/root/,bash_history"],
+    "setup_command": "ruby ./scripts/setup control_repository"
+  },
+  "puppetfile": {
+    "watch_list": ["/root/,bash_history"],
+    "setup_command": "ruby ./scripts/setup puppetfile"
   }
 }
