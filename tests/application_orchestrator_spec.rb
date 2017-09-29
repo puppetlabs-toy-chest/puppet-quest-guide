@@ -111,18 +111,21 @@ end
 
 describe 'Task 6:', host: :localhost do
   it 'has a working solution', :solution do
-    command("cp #{SOLUTION_PATH}/application_orchestrator/6/pasture_app.pp #{MODULE_PATH}/role/manifests/pasture_app.pp")
+    command("cp #{SOLUTION_PATH}/application_orchestrator/6/pasture_app_orch.pp #{MODULE_PATH}/role/manifests/pasture_app_orch.pp")
       .exit_status
       .should eq 0
-    command("cp #{SOLUTION_PATH}/application_orchestrator/6/pasture_db.pp #{MODULE_PATH}/role/manifests/pasture_db.pp")
+    command("cp #{SOLUTION_PATH}/application_orchestrator/6/pasture_db_orch.pp #{MODULE_PATH}/role/manifests/pasture_db_orch.pp")
+      .exit_status
+      .should eq 0
+    command("cp #{SOLUTION_PATH}/application_orchestrator/6/site.pp #{PRDO_PATH}/manifests/site.pp")
       .exit_status
       .should eq 0
   end
   it _('Remove application-related classes from role classes'), :validation do
-    file("#{MODULE_PATH}role/manifests/pasture_app.pp")
+    file("#{MODULE_PATH}role/manifests/pasture_app_orch.pp")
       .content
       .should_not match /include\s+profile::pasture::app/m
-    file("#{MODULE_PATH}role/manifests/pasture_db.pp")
+    file("#{MODULE_PATH}role/manifests/pasture_db_orch.pp")
       .content
       .should_not match /include\s+profile::pasture::db/m
   end
