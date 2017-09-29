@@ -11,6 +11,7 @@ def create_node(name, image='agent', sign_cert=true, run_puppet=true)
   `puppet apply -e "dockeragent::node { '#{name}': ensure => present, image => '#{image}', require_dockeragent => false, }"`
   if sign_cert
     `puppet cert generate #{name}`
+    sleep 3
     `cp -f /etc/puppetlabs/puppet/ssl/certs/#{name}.pem /etc/docker/ssl_dir/`
     `cp -f /etc/puppetlabs/puppet/ssl/public_keys/#{name}.pem /etc/docker/ssl_dir/public_keys/`
     `cp -f /etc/puppetlabs/puppet/ssl/private_keys/#{name}.pem /etc/docker/ssl_dir/private_keys/`
