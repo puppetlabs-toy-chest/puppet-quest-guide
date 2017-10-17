@@ -110,6 +110,9 @@ application like iTerm. For Windows, we suggest the free SSH client
 [PuTTY](http://www.putty.org/). Use the credentials provided on the VM console
 splash page to authenticate.
 
+Once you're logged in, continue on to the **Get started** section below to
+access the Quest Guide and begin the interactive lessons.
+
 ## Localization
 
 The Learning VM's Quest Guide and Quest tool currently support English and
