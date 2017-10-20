@@ -36,14 +36,3 @@ node /^pasture-app/ {
 node /^pasture-db/ {
   include role::pasture_db_orch
 }
-
-site { 
-  pasture_app { 'pasture_01':
-    db_user     => 'pasture',
-    db_password => 'm00m00',
-    nodes       => {
-      Node['pasture-app-large.puppet.vm'] => Pasture_app::App['pasture_01'],
-      Node['pasture-db.puppet.vm']        => Pasture_app::Db['pasture_01'],
-    }
-  }
-}

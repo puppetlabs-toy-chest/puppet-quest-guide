@@ -356,27 +356,51 @@ Your module should look like the following:
 
 <div class = "lvm-task-number"><p>Task 6:</p></div>
 
-Because we will be using the orchestrator to manage these nodes, we'll remove
-the application-related classes from the nodes' roles. As long as there are no
-dependency relationships with any of your base profiles, you can leave these
-in your roles so that they will continue to be managed on the normal Puppet
-agent run schedule.
+Because we will be using the orchestrator to manage the application components
+of our nodes outside the usual scheduled Puppet agent runs, we'll create a new
+role that will include only the profiles that are independent of the
+orchestrated application.
 
-Open your `role/manifests/pasture_app.pp` manifest, and remove the
+Copy your `role/manifests/pasture_app.pp` manifest to create a new
+`pasture_app_orch` role.
+
+    cp role/manifests/pasture_app.pp role/manifests/pasture_app_orch.pp
+
+Open this manifest to change the role title and remove the
 `profile::pasture::app` class.
 
+    vim role/manifests/pasture_app_orch.pp
+
 ```puppet
-class role::pasture_app {
+class role::pasture_app_orch {
   include profile::base::motd
   include profile::pasture::dev_users
 }
 ```
 
-Do the same for your `role/manifests/pasture_db.pp` manifest
+Do the same for your `role/manifests/pasture_db.pp` manifest.
+
+    cp role/manifests/pasture_db.pp role/manifests/pasture_db_orch.pp
+
+Open it to change the role title and remove the `profile::pasture::app`
+class.
+
+    vim role/manifests/pasture_app_orch.pp
 
 ```puppet
-class role::pasture_db {
+class role::pasture_db_orch {
   include profile::base::motd
+}
+```
+
+Modify your `site.pp` manifest to classify your nodes with these new roles.
+
+```puppet
+node /^pasture-app/ {
+  include role::pasture_app_orch
+}
+node /^pasture-db/ {
+  include role::pasture_db_orch
 }
 ```
 
@@ -389,7 +413,7 @@ The final step is to declare your application in your `site.pp` manifest.
 Until now, the configuration you've made in your `site.pp` has been in the
 context of node blocks. However, an application requires a level of abstraction
 above the individual node level. To express this distinction, we declare our
-application instance in a special block called `site`.
+application instance in a special `site.pp` block called `site`.
 
 ```puppet
 site { 

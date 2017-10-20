@@ -1,3 +1,3 @@
-class role::pasture_db {
+class role::pasture_db_orch {
   include profile::base::motd
 }
