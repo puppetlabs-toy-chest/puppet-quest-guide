@@ -1,22 +1,22 @@
 #!/bin/ruby
-
 require 'socket'
 require 'erb'
+require 'json'
 
 SCRIPT_DIR = File.dirname(__FILE__)
-
 $stdout.sync = true
 
-def create_node(name, image='agent', sign_cert=true, run_puppet=true)
-  puts "Creating #{name}..."
-  `puppet apply -e "dockeragent::node { '#{name}': ensure => present, image => '#{image}', require_dockeragent => false, }"`
-  wait_for_container(name)
-  if sign_cert
-    `puppet cert generate #{name}`
+def create_node(opts)
+  puts "Creating #{opts['name']}..."
+  `puppet apply -e "dockeragent::node { '#{opts['name']}': ensure => present, image => '#{opts['image']}', require_dockeragent => false, }"`
+  wait_for_container(opts['name'])
+  if opts['sign_cert']
+    `puppet cert generate #{opts['name']}`
+    `puppet cert sign #{opts['name']}`
     sleep 2
-    `cp -f /etc/puppetlabs/puppet/ssl/certs/#{name}.pem /etc/docker/ssl_dir/`
-    `cp -f /etc/puppetlabs/puppet/ssl/public_keys/#{name}.pem /etc/docker/ssl_dir/public_keys/`
-    `cp -f /etc/puppetlabs/puppet/ssl/private_keys/#{name}.pem /etc/docker/ssl_dir/private_keys/`
+    `cp -f /etc/puppetlabs/puppet/ssl/certs/#{opts['name']}.pem /etc/docker/ssl_dir/`
+    `cp -f /etc/puppetlabs/puppet/ssl/public_keys/#{opts['name']}.pem /etc/docker/ssl_dir/public_keys/`
+    `cp -f /etc/puppetlabs/puppet/ssl/private_keys/#{opts['name']}.pem /etc/docker/ssl_dir/private_keys/`
   end
 end
 
@@ -62,11 +62,12 @@ hosts_template = <<-HEREDOC
 127.0.0.1 <%= fqdn %> learning localhost localhost.localdomain localhost4
 ::2 localhost localhost.localdomain localhost6 localhost6.localdomain6
 <% hosts.each do |name, ip|  %>
-<%= $ip %> <%= $hostname %>\n
+<%= ip %> <%= name %>\n
 <% end %>
 HEREDOC
   puts 'Updating /etc/hosts...'
-  File.write('/etc/hosts', ERB.new(hosts_template, 3, '>').result(binding))
+  hosts_string = ERB.new(hosts_template, 3, '>').result(binding)
+  File.write('/etc/hosts', hosts_string)
 end
 
 def wait_for_ssh
@@ -76,6 +77,7 @@ def wait_for_ssh
     begin
       Socket.tcp(name, 22, connect_timeout: 5)
     rescue
+      sleep 2
       retries +=1
       if retries > 10
         puts "Timed out waiting for node SSH services to become available. Please refer the the Learning VM troubleshooting guide."
@@ -88,39 +90,16 @@ end
 
 def node_setup(quest)
   run_puppet_after = true
-  case quest
-  when 'hello_puppet'
-    create_node('hello.puppet.vm', image='no_agent', sign_cert=false, run_puppet=false)
-    run_puppet_after = false
-  when 'agent_run'
-    create_node('agent.puppet.vm', image='agent', sign_cert=false, run_puppet=false)
-    run_puppet_after = false
-  when 'manifests_and_classes'
-    create_node('cowsay.puppet.vm')
-  when 'package_file_service'
-    create_node('pasture.puppet.vm')
-  when 'variables_and_templates'
-    create_node('pasture.puppet.vm')
-  when 'class_parameters'
-    create_node('pasture.puppet.vm')
-  when 'facts'
-    create_node('pasture.puppet.vm')
-  when 'conditional_statements'
-    create_node('pasture-dev.puppet.vm')
-    create_node('pasture-prod.puppet.vm')
-  when 'the_forge'
-    create_node('pasture-db.puppet.vm')
-    create_node('pasture-app.puppet.vm')
-  when 'roles_and_profiles'
-    create_node('pasture-app-small.puppet.vm')
-    create_node('pasture-app-large.puppet.vm')
-    create_node('pasture-db.puppet.vm')
-  when 'defined_resource_types'
-    create_node('pasture-app-small.puppet.vm')
-    update_docker_hosts
-  when 'application_orchestrator'
-    create_node('pasture-app-large.puppet.vm')
-    create_node('pasture-db.puppet.vm')
+  quest_node_hash = JSON.parse(File.read(File.expand_path('./quest_nodes.json', File.dirname(__FILE__))))
+  quest_node_hash[quest].each do |node|
+    default_opts = {
+      'image' => 'agent',
+      'sign_cert' => true,
+      'run_puppet' => true
+    }
+    opts = default_opts.merge(node)
+    run_puppet_after &= opts['run_puppet']
+    create_node(opts)
   end
   update_docker_hosts
   run_puppet_on_nodes if run_puppet_after
