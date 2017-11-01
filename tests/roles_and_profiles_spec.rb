@@ -145,6 +145,7 @@ end
 
 describe _("Task 7:"), host: :localhost do
   it 'has a working solution', :solution do
+    wait_for_pxp_service
     command("puppet job run --nodes pasture-db.puppet.vm")
       .exit_status
       .should eq 0

@@ -43,6 +43,7 @@ end
 
 describe _("Task 3:"), host: :localhost do
   it 'has a working solution', :solution do
+    wait_for_pxp_service
     command("cp #{SOLUTION_PATH}/the_forge/3/site.pp #{PROD_PATH}/manifests/site.pp")
       .exit_status
       .should eq 0

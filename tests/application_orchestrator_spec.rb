@@ -155,6 +155,7 @@ end
 
 describe 'Task 8:', host: :localhost do
   it 'has a working solution', :solution do
+    wait_for_pxp_service
     command("puppet job run --application Pasture_app['pasture_01']")
       .exit_status
       .should_not eq 1

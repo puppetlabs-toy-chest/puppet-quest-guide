@@ -35,8 +35,8 @@
     {"name" : "pasture-prod.puppet.vm"}
   ],
   "the_forge" : [
-    {"name" : "pasture-dev.puppet.vm"},
-    {"name" : "pasture-prod.puppet.vm"}
+    {"name" : "pasture-app.puppet.vm"},
+    {"name" : "pasture-db.puppet.vm"}
   ],
   "roles_and_profiles" : [
     {"name" : "pasture-app-small.puppet.vm"},
