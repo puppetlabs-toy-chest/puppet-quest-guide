@@ -77,6 +77,7 @@ describe _("Task 4:"), host: :localhost do
 end
 
 describe _("Task 5:"), host: :localhost do
+  wait_for_pxp_service
   it 'has a working solution', :solution do
     command("curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -H \"Content-Type: application/json\" -X POST -d '{\"login\":\"learning\",\"display_name\":\"Learning\",\"password\":\"puppet\",\"role_ids\":[2],\"email\":\"learning@puppet.vm\"}' https://localhost:4433/rbac-api/v1/users")
       .exit_status

@@ -95,6 +95,7 @@ describe _("Task 4:"), host: :localhost do
   end
 end
 describe _("Task 5:"), host: :localhost do
+  wait_for_pxp_service
   it 'has a working solution', :solution do
     command("cp #{SOLUTION_PATH}/defined_resource_types/5/pasture_app.pp #{MODULE_PATH}/role/manifests/pasture_app.pp")
       .exit_status

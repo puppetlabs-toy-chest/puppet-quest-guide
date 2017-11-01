@@ -22,8 +22,8 @@ end
 
 def run_puppet_on_nodes
   docker_hosts.each do |name, ip|
-    #Use a bogus tag to only run pluginsync
-    `docker exec -d #{name} puppet agent -t --tags bogus`
+    puts "Triggering puppet agent run on #{name}"
+    `docker exec -d #{name} puppet agent -t --tags puppet_enterprise::profile::agent`
   end
 end
 
@@ -70,21 +70,26 @@ HEREDOC
   File.write('/etc/hosts', hosts_string)
 end
 
-def wait_for_ssh
-  puts "Waiting for node SSH services to become available..."
-  docker_hosts.each do |name, ip|
+def poll_nodes(poll_name, max_retries=10, interval=2, initial_sleep=0)
+  puts "Waiting for #{poll_name}..."
+  sleep initial_sleep
+  docker_hosts.each do |name, _|
     retries = 0
-    begin
-      Socket.tcp(name, 22, connect_timeout: 5)
-    rescue
-      sleep 2
-      retries +=1
-      if retries > 10
-        puts "Timed out waiting for node SSH services to become available. Please refer the the Learning VM troubleshooting guide."
-        exit 1
-      end
-      retry
+    while !yield(name) do
+      sleep interval
+      puts retries
+      retries += 1
+      fail "Timed out waiting for #{poll_name}." if retries > max_retries
     end
+  end
+end
+
+def query_ssh(name)
+  begin
+    Socket.tcp(name, 22, connect_timeout: 5).close
+    return true
+  rescue
+    return false
   end
 end
 
@@ -102,8 +107,13 @@ def node_setup(quest)
     create_node(opts)
   end
   update_docker_hosts
-  run_puppet_on_nodes if run_puppet_after
-  wait_for_ssh
+  poll_nodes("SSH", 10){ |name| query_ssh(name) }
+  if run_puppet_after
+      run_puppet_on_nodes
+      poll_nodes("Puppet agent run", 10, 2, 3) do |name|
+        !system("docker exec -it #{name} test -f /var/opt/lib/pe-puppet/state/agent_catalog_run.lock")
+      end
+  end
 end
 
 clear_nodes
