@@ -25,7 +25,10 @@ def create_node(opts)
   wait_for_container(opts['name'])
 
   #There doesn't seem to be a way to use existing puppet tooling to generate
-  #a CSR from the agent side outside the context of a puppet run.
+  #a CSR from the agent side outside the context of a puppet run. Instead,
+  #The following commands complete this process from the master and copy the
+  #necessary files to the /etc/docker/ssl_dir/ directory, which is mounted on
+  #the docker nodes.
   if opts['sign_cert']
     `puppet cert generate #{opts['name']}`
     `puppet cert sign #{opts['name']}`
@@ -46,16 +49,19 @@ def run_puppet_on_nodes
   #This initial agent run handles pxp-service init in the
   #puppet_enterprise::profile::agent profile class and pluginsync. Doing this
   #in setup makes the first user initiated run happen faster and more clearly
-  #show the changes the user has introduced.
+  #show the changes the user has introduced. It also ensures that the pxp-agent
+  #service is configured and running for quests that rely on puppet job run
+  #commands.
 
   manifests_dir = '/etc/puppetlabs/code/environments/production/manifests/'
 
   begin
 
     #Using the --tags puppet_enterprise::profile::agent argument ensures that
-    #only the resources in the PE agent profile are run, any compilation errors
-    #still abort the run. For clean catalog compilation, substitute empty site.pp
-    #file, then revert to the original after the runs ar complete.
+    #only the resources in the PE agent profile are run, but compilation errors
+    #in other puppet code still abort the run. For clean catalog compilation,
+    #substitute empty site.pp file, then revert to the original after the runs
+    #are complete.
    
     File.rename(File.join(manifests_dir, 'site.pp'), File.join(manifests_dir, 'site.pp.bak'))
     File.write(File.join(manifests_dir, 'site.pp'),'node default {}')
