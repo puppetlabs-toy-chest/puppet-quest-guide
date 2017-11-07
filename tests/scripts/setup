@@ -75,7 +75,7 @@ def run_puppet_on_nodes
   end
 end
 
-def wait_for_container(name)
+def wait_for_container(name, max_retries=10)
   #Poll the `docker ps` command until the specified container name appears
   #in the output.
   
