@@ -8,7 +8,7 @@
 ---
 :default_character: <%= $default_character %>
 :default_message: <%= $default_message %>
-<%- if $db { -%>
+<%- if $db != 'none' { -%>
 :db: <%= $db %>
 <%- } -%>
 :sinatra_settings:

@@ -100,11 +100,9 @@ The quest tool created a `pasture-app-small.puppet.vm` and
 `pasture-app-large.puppet.vm` node for this quest, so we can determine the
 appropriate profile based on the node name. We'll use a conditional statement
 to set the `$default_character` and `$db` parameters based on whether the
-node's `fqdn` fact contains the string 'large' or 'small'. In the 'small' case,
-we'll use the special `undef` value to leave these parameters unset and use the
-defaults set in the `pasture` component class. We'll also add an `else` block
-to fail with an appropriate error message if the `fqdn` variable doesn't match
-'small' or 'large'.
+node's `fqdn` fact contains the string 'large' or 'small'. We'll also add an
+`else` block to fail with an appropriate error message if the `fqdn` variable
+doesn't match 'small' or 'large'.
 
 ```puppet
 class profile::pasture::app {
@@ -112,8 +110,8 @@ class profile::pasture::app {
     $default_character = 'elephant'
     $db                = 'postgres://pasture:m00m00@pasture-db.puppet.vm/pasture'
   } elsif $facts['fqdn'] =~ 'small' {
-    $default_character = undef
-    $db                = undef
+    $default_character = 'cow'
+    $db                = 'none'
   } else {
     fail("The ${facts['fqdn']} node name must match 'large' or 'small'.")
   }
@@ -276,34 +274,45 @@ To get started creating your node definitions, open your `site.pp` manifest:
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
-Create a node definition block for your application server nodes. Use the
-`/^pasture-app/` regular expression as the title of your node definition and
-include the `role::pasture_app` role class.
+Create a node definition blocks for your application and database nodes.
+
+Remember, a node definition block can take a regular expression as its title.
+You want any node whose host name begins with `pasture-app` to be classified
+with the `role::pasture_app` role, so create a node definition block with the
+title `/^pasture-app/` and `include` the `role::pasture_app` role for matching
+nodes. Similarly, any node whose name matches `pasture-db` should be classified
+with the `role::pasture_db` role, so add a node definition with the title
+`/^pasture-db/` that includes this role.
+
+Now that you've implemented the roles and profiles pattern, remove the previous
+node definitions for the `pasture-app.puppet.vm` and `pasture-db.puppet.vm`
+nodes.
+
+When you're done, the section of your `site.pp` after the initial comments
+should look like the following.
 
 ```puppet
+node default {
+  # This is where you can declare classes for all nodes.
+  # Example:
+  #   class { 'my_class': }
+}
+
 node /^pasture-app/ {
   include role::pasture_app
 }
-```
 
-Add a second node definition block for your database role. We only have one
-database node, but using a regular expression here will make it easy
-to scale in the future.
-
-```puppet
 node /^pasture-db/ {
   include role::pasture_db
 }
 ```
 
-Now that we're using the roles and profiles pattern, you should remove the
-previous node definitions for the `pasture-app.puppet.vm` and
-`pasture-db.puppet.vm` nodes.
-
 <div class = "lvm-task-number"><p>Task 7:</p></div>
 
 Use the `puppet job` tool to trigger a Puppet agent run on the
-`pasture-db.puppet.vm` node.
+`pasture-db.puppet.vm` node. (If your access token has expired, run
+`puppet access login learning --lifetime 1d` and supply the password `puppet`
+to generate a new token.)
 
     puppet job run --nodes pasture-db.puppet.vm
 
@@ -318,7 +327,7 @@ the functionality of your application on the two different servers.
     curl 'pasture-app-large.puppet.vm/api/v1/cowsay?message="HELLO!"'
 
 Note that the database functionality we introduced in the previous quest will
-work on the 'large' instance of our application, while the 'small' instance
+work on the 'large' instance of our application. The 'small' instance
 will return a 501 error:
 
     curl 'pasture-app-small.puppet.vm/api/v1/cowsay/sayings'

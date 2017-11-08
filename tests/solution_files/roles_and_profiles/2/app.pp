@@ -3,8 +3,8 @@ class profile::pasture::app {
     $default_character = 'elephant'
     $db                = 'postgres://pasture:m00m00@pasture-db.puppet.vm/pasture'
   } elsif $facts['fqdn'] =~ 'small' {
-    $default_character = undef
-    $db                = undef
+    $default_character = 'cow'
+    $db                = 'none'
   } else {
     fail("The ${facts['fqdn']} node name must match 'large' or 'small'.")
   }
