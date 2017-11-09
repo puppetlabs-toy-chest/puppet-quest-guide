@@ -26,7 +26,7 @@ def create_node(opts)
 
   #There doesn't seem to be a way to use existing puppet tooling to generate
   #a CSR from the agent side outside the context of a puppet run. Instead,
-  #The following commands complete this process from the master and copy the
+  #the following commands complete this process from the master and copy the
   #necessary files to the /etc/docker/ssl_dir/ directory, which is mounted on
   #the docker nodes.
   if opts['sign_cert']
