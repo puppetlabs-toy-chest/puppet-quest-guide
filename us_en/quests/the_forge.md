@@ -200,11 +200,11 @@ Open your module's `init.pp` manifest.
 
     vim pasture/manifests/init.pp
 
-Add a `$db` parameter with a default value of `undef`. We can use this
-`undef` with a conditional in the template to say "only manage this parameter
-if there's something set here". Next, add this variable to your
-`$pasture_config_hash` so it will be passed through to your template. When
-you've made these two additions, your class will look like the example below.
+Add a `$db` parameter with a default value of `'none'`. You'll see why we use
+`'none'` a little later. Add this `$db` variable to the `$pasture_config_hash`
+so it will be passed through to the template that defines the application's
+configuration file. When you've made these two additions, your class should
+look like the example below.
 
 ```puppet
 class pasture (
@@ -213,7 +213,7 @@ class pasture (
   $default_message     = '',
   $pasture_config_file = '/etc/pasture_config.yaml',
   $sinatra_server      = 'webrick',
-  $db                  = undef,
+  $db                  = 'none',
 ){
 
   package { 'pasture':
@@ -261,10 +261,8 @@ class pasture (
 <div class = "lvm-task-number"><p>Task 5:</p></div>
 
 Next, edit the `pasture_config.yaml.epp` template. We'll use a conditional
-statement to only include the `:db:` setting if there is a value set for
-the `$db` variable. This will allow us to leave this option unset and use
-the Pasture application's own default if we haven't explicitly set the
-`pasture` class's `db` parameter.
+statement to only include the `:db:` setting if there is a value other than
+`none` set for the `$db` variable.
 
 ```puppet
 <%- | $port,
@@ -277,7 +275,7 @@ the Pasture application's own default if we haven't explicitly set the
 ---
 :default_character: <%= $default_character %>
 :default_message: <%= $default_message %>
-<%- if $db { -%>
+<%- if $db != 'none' { -%>
 :db: <%= $db %>
 <%- } -%>
 :sinatra_settings:
