@@ -49,5 +49,10 @@
   "application_orchestrator" : [
     {"name" : "pasture-app-large.puppet.vm"},
     {"name" : "pasture-db.puppet.vm"}
+  ],
+  "puppethack" : [
+    {"name" : "hack1.puppet.vm"},
+    {"name" : "hack2.puppet.vm"},
+    {"name" : "hack3.puppet.vm"}
   ]
 }
