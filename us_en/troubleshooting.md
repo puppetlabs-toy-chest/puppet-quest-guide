@@ -89,7 +89,7 @@ several minutes after the VM has started, double check that you have sufficient
 memory allocated to the VM and available on your host, then use the following
 script to restart these services in the correct order:
 
-    restart_pe_services.sh
+    restart_classroom_services.sh
 
 ### My Puppet run fails!
 
