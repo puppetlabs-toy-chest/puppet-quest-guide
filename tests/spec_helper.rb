@@ -39,6 +39,8 @@ def wait_for_pxp_service
   poll_nodes("pxp-agent service", max_retries=20) do |name|
     system("docker exec -it #{name} systemctl status pxp-agent.service | grep 'running'")
   end
+  # It may take a moment after PXP service is available for it to actually work!
+  sleep 5
 end
 
 set :backend, :exec
