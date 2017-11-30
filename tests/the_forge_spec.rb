@@ -73,7 +73,7 @@ describe _("Task 4:"), host: :localhost do
   it _('Update the pasture main manifest with a db parameter'), :validation do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
-      .should match /class\s+pasture\s+\(.*?\$db\s+=\s+undef,/m
+      .should match /class\s+pasture\s+\(.*?\$db\s+=\s+(['"])none\1,/m
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
       .should match /\$pasture_config_hash\s+=\s+\{.*?(['"])db\1\s+=>\s+\$db,/m
@@ -98,7 +98,7 @@ describe _("Task 5:"), host: :localhost do
       .should match /<%\-\s+\|\s+.*?\$db,.*?\|\s+\-%>/m
     file("#{MODULE_PATH}pasture/templates/pasture_config.yaml.epp")
       .content
-      .should match /<%\-?\s+if\s+\$db\s+{\s+\-%>.*?:db:\s+<%=\s+\$db\s+%>.*?<%\-?\s+}\s+\-%>/m
+      .should match /<%\-?\s+if\s+\$db\s+!=\s*(['"])none\1\s*{\s+\-%>.*?:db:\s+<%=\s+\$db\s+%>.*?<%\-?\s+}\s+\-%>/m
     command("puppet epp validate #{MODULE_PATH}pasture/template/pasture_config.yaml.epp")
       .exit_status
       .should be_zero
