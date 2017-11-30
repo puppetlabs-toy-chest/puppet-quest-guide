@@ -99,7 +99,7 @@ the Puppetfile and code management workflow
 On your master, go ahead and use the `puppet module` tool to install this
 module.
 
-    puppet module install puppetlabs-postgresql --version 4.8.0
+    puppet module install puppetlabs-postgresql --version 4.9.0
 
 To confirm that this command placed the module in your modulepath, take a look
 at the contents of your modules directory.
