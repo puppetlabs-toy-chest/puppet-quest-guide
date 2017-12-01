@@ -2,6 +2,15 @@
 
 ## Release Notes
 
+### v2.2.0
+  * Content tested for compatibility with puppet-2017.3.2-learning-6.2 VM build
+  * Removed Application Orchestration content pending implementation of Tasks
+    quest to replace it.
+  * Made several improvements to the quest setup process.
+  * Several typo fixes and content clarifications.
+  * Modified the pasture class to use the string `'none'` to specify no database
+    connection rather than `undef`.
+
 ### v2.1.0
   * Content tested for compatibility with puppet-2017.2.2-learning-6.1 VM build.
   * Added internationalization framework and Japanese translated content.
