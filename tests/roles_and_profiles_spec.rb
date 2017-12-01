@@ -163,7 +163,7 @@ describe _("Task 7:"), host: :localhost do
     command('docker exec pasture-app-small.puppet.vm grep -q "Welcome to pasture-app-small" /etc/motd')
       .exit_status
       .should eq 0
-    command('docker exec pasture-app-small.puppet.vm grep -q sheep /etc/pasture_config.yaml')
+    command('docker exec pasture-app-small.puppet.vm grep -q cow /etc/pasture_config.yaml')
       .exit_status
       .should eq 0
     command('docker exec pasture-app-small.puppet.vm systemctl status pasture.service | grep -q "active (running)"')
