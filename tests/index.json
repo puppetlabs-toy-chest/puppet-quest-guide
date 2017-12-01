@@ -46,9 +46,5 @@
   "defined_resource_types": {
     "watch_list": ["/root/.bash_history"],
     "setup_command": "ruby ./scripts/setup defined_resource_types"
-  },
-  "application_orchestrator": {
-    "watch_list": ["/root/.bash_history"],
-    "setup_command": "ruby ./scripts/setup application_orchestrator"
   }
 }
