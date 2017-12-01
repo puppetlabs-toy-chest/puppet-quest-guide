@@ -18,7 +18,6 @@
 * [The Forge](quests/the_forge.md)
 * [Roles and Profiles](quests/roles_and_profiles.md)
 * [Defined Resource Types](quests/defined_resource_types.md)
-* [Application Orchestrator](quests/application_orchestrator.md)
 
 ### Appendix
 
