@@ -2,6 +2,13 @@
 
 ## Release Notes
 
+### v2.2.1
+  * Content tested for compatibility with puppet-2017.3.2-learning-6.4 VM build
+  * Modified the quest setup script to ensure that the Docker SSL directory
+    tree exists before attempting to copy keys from the Puppet SSL direcory.
+  * New VM release fixes regression in the build process that added ~0.5GB to
+    the archive size.
+
 ### v2.2.0
   * Content tested for compatibility with puppet-2017.3.2-learning-6.2 VM build
   * Removed Application Orchestration content pending implementation of Tasks
