@@ -39,6 +39,10 @@ def create_node(opts)
     #time anyway.
     sleep 2
 
+    # Ensure that the ssl_dir tree exists
+    `mkdir -p /etc/docker/ssl_dir/{public_keys,private_keys}`
+    
+    # Copy keys from puppet's ssl_dir to docker ssl_dir
     `cp -f /etc/puppetlabs/puppet/ssl/certs/#{opts['name']}.pem /etc/docker/ssl_dir/`
     `cp -f /etc/puppetlabs/puppet/ssl/public_keys/#{opts['name']}.pem /etc/docker/ssl_dir/public_keys/`
     `cp -f /etc/puppetlabs/puppet/ssl/private_keys/#{opts['name']}.pem /etc/docker/ssl_dir/private_keys/`
