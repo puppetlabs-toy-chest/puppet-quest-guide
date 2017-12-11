@@ -44,7 +44,7 @@
     "setup_command": "ruby ./scripts/setup roles_and_profiles"
   },
   "hiera": {
-    "watch_list": ["/root/,bash_history"],
+    "watch_list": ["/root/.bash_history"],
     "setup_command": "ruby ./scripts/setup hiera"
   },
   "defined_resource_types": {
