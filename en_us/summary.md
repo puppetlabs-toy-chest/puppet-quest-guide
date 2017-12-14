@@ -17,7 +17,10 @@
 * [Conditional Statements](quests/conditional_statements.md)
 * [The Forge](quests/the_forge.md)
 * [Roles and Profiles](quests/roles_and_profiles.md)
+* [Hiera](quests/hiera.md)
 * [Defined Resource Types](quests/defined_resource_types.md)
+* [Control Repository](quests/control_repository.md)
+* [Puppetfile](quests/puppetfile.md)
 
 ### Appendix
 

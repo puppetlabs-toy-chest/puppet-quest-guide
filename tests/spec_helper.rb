@@ -87,6 +87,12 @@ RSpec.configure do |config|
     options = {password: 'puppet', user: 'learning'}
     set :ssh_options, options
   end
+  config.before(:example, :host => :pastureappbeauvine) do
+    set :backend, 'ssh'
+    set :host, 'pasture-app.beauvine.vm'
+    options = {password: 'puppet', user: 'learning'}
+    set :ssh_options, options
+  end
   config.before(:example, :host => :localhost) do
     set :backend, 'exec'
     set :host, 'localhost'
