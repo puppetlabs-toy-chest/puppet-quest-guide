@@ -52,6 +52,9 @@
   "defined_resource_types" : [
     {"name" : "pasture-app.beauvine.vm"}
   ],
+  "control_repository" : [
+    {"name" : "pasture-app.beauvine.vm"}
+  ],
   "puppethack" : [
     {"name" : "hack1.puppet.vm"},
     {"name" : "hack2.puppet.vm"},

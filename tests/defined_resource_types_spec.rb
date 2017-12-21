@@ -73,30 +73,47 @@ describe _("Task 3:"), host: :localhost do
 end
 describe _("Task 4:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("awk 'BEGIN{\"cut -f2 -d'\"'\"' '\"'\"' /root/.ssh/id_rsa.pub\" | getline l}/<PASTE KEY HERE>/{gsub(\"<PASTE KEY HERE>\",l)}1' #{SOLUTION_PATH}/defined_resource_types/4/dev_users.pp > #{MODULE_PATH}/profile/manifests/base/dev_users.pp")
-      .exit_status
-      .should eq 0
   end
-  it _('Create a profile::base::dev_users profile class'), :validation do
-    file("#{MODULE_PATH}profile/manifests/base/dev_users.pp")
+  it _('Add user data to your Hiera data sources'), :validation do
+    file("#{PROD_PATH}/data/common.yaml")
       .content
-      .should match /user_accounts::ssh_user\s*{\s*\$user\[(['"])title\1\]:\s+
-                      comment\s+=>\s+\$user\[(['"])comment\1\],\s+
-                      key\s+=>\s+\$user\[(['"])pub_key\1\],
-                    /mx
-    command("puppet parser validate #{MODULE_PATH}profile/manifests/base/dev_users.pp")
-      .exit_status
-      .should be_zero
+      .should match /profile::base::dev_users::users: \[\]/
+    file("#{PROD_PATH}/data/domain/beauvine.vm.yaml")
+      .content
+      .should match /profile::base::dev_users::users:\s+
+        \-\stitle:\s'bessie'\s+
+        comment:\s'Bessie\sJohnson'\s+
+        pub_key:\s+'.*'\s+
+        \-\stitle:\s'gertie'\s+
+        comment:\s'Gertie\sPhilips'\s+
+        pub_key:\s+'.*'/x
   end
 end
 describe _("Task 5:"), host: :localhost do
+  it 'has a working solution', :solution do
+  end
+  it _('Create the profile::base::dev_users profile class'), :validation do
+    file("#{MODULE_PATH}/profile/manifests/base/dev_users.pp")
+      .content
+      .should match /class\s+profile::base::dev_users\s+{\s+
+        lookup\(profile::base::dev_users::users\).each\s\|\$user\|\s+
+        \{\s+
+        user_accounts::ssh_user\s+{\s+\$user\[(['"])title\1\]:\s+
+        comment\s+=>\s+\$user\[(['"])comment\2\],\s+
+        key\s+=>\s+\$user\[(['"])pub_key\3\],\s+
+        \}\s+
+        \}\s+
+        \}/mx
+  end
+end
+describe _("Task 6:"), host: :localhost do
   it 'has a working solution', :solution do
     wait_for_pxp_service
     command("cp #{SOLUTION_PATH}/defined_resource_types/5/pasture_app.pp #{MODULE_PATH}/role/manifests/pasture_app.pp")
       .exit_status
       .should eq 0
   end
-  it _('Add profile::pasture::dev_users to the role::pasture_app class'), :validation do
+  it _('Add profile::base::dev_users to the role::pasture_app class'), :validation do
     file("#{MODULE_PATH}role/manifests/pasture_app.pp")
       .content
       .should match /include\s+profile::base::dev_users/mi
@@ -105,7 +122,7 @@ describe _("Task 5:"), host: :localhost do
       .should be_zero
   end
 end
-describe _("Task 6:"), host: :pastureappsmall do
+describe _("Task 7:"), host: :pastureappbeauvine do
   it 'has a working solution', :solution do
     command("puppet job run --nodes pasture-app.beauvine.vm")
       .exit_status

@@ -65,22 +65,61 @@ The `manifests` directory will contain your `site.pp` manifest.
 Copy the `pasture`, `motd`, `user_accounts`, `role`, and `profile` Puppet
 modules you created in the previous quests into the your control repository's
 `site` directory. The name of this "site" directory refers to the fact that the
-modules it contains should be site-specific. General purpose component modules
-taken from the Forge or from other repositories will be managed by a
-Puppetfile, which we will introduce later in this quest.
+modules it contains are site-specific modules created to manage your particular
+infrastructure, rather than general purpose component modules like those you
+would find on the Forge.
 
     cp -r /etc/puppetlabs/code/environments/production/modules/{pasture,motd,user_accounts,role,profile} ./control_repo/site/
 
-Next, copy your existing `site.pp` module from the production `manifests`
-directory into your control repository's `manifests` directory.
+To understand why we create this `site` subdirectory for site-specific modules,
+you'll also need to know how external modules are managed in your control
+repository. For that reason, we'll take a brief detour here to discuss
+something called a
+[Puppetfile](https://puppet.com/docs/pe/latest/code_management/puppetfile.html)
+and the way it's used to manage these external dependencies. We won't be using
+a Puppetfile in this quest, but if you understand how it fits into a Puppet
+code deployment workflow, you'll understand the need for a distinct `site`
+directory.
+
+In brief, a Puppetfile is a way to manage external module dependencies.  When
+you use Puppet's Code Manager to deploy your control repository, it reads your
+Puppetfile to get a list of external module dependencies and version
+requirements. It then uses the Puppet module tool to install those dependencies
+into your environment's modules directory. As it runs, this process removes
+any existing modules in that directory to make sure the contents exactly match
+the Puppetfile's specifications. This means that when you manage external
+dependencies with a Puppetfile, your environment's `modules` directory must
+be reserved for *only* these external dependencies. Any site-specific code
+placed in that directory will be overwritten.
+
+The convention, then, is to create a new `site` directory for your site-specific
+module code. Remember, however, that Puppet can only find modules included in
+its `modulepath`. By default, this already includes the `modules` directory, but
+you'll need to add your `site` directory if you want Puppet to find the
+module code kept there.
+
+To do this, we'll create a new `environment.conf` configuration file in the
+control repository. Here, we'll add a `modulepath` entry to extend our
+modulepath so that it includes the `site` directory.
+
+    vim control_repo/environment.conf
+
+Include the following line in this file:
+
+    modulepath = site:modules:$basemodulepath
+
+Now that you've copied your site-specific modules into your control repository
+and added their `site` directory to the modulepath, the final step is to copy
+your existing `site.pp` manifest from the production `manifests` directory into
+your control repository's `manifests` directory.
 
     cp -r /etc/puppetlabs/code/environments/production/manifests/site.pp ./control_repo/manifests/
 
-Now that you've copied your Puppet code into this new repository, you're ready
-to check it into source control. First, you will initialize your local
-`control_repo` directory as a git repository. Next, you will set up a hosted
-remote repository to act as an upstream source for your code. When you deploy
-your code, Puppet will fetch it from this upstream repository.
+With this done, you're ready to check your Puppet code into source control.
+First, you will initialize your local `control_repo` directory as a git
+repository. Next, you will set up a hosted remote repository to act as an
+upstream source for your code. When you deploy your code, Puppet will fetch it
+from this upstream repository.
 
 This architecure allows multiple developers to all work on the same codebase
 while ensuring that any changes they make can be tested and approved before
@@ -233,20 +272,20 @@ code manager via the PE console.
 To do this, first open the PE console interface in your browser by navigating
 to `https://<VM IP ADDRESS>`. Log in with the credentials:
 
-**user:** admin  
+**user:** admin
 **password:** puppetlabs
 
 Click on the **Classifaction** tab in the PE console navigation menu. From
-there, select the **PE Master** node group. (This node group is nested under
-**All Nodes** > **PE Infrastructure**)
+there, expand the **All nodes** and **PE Infrastructure** groups and select
+the **PE Master** node group.
 
-In the **PE Master** node group interface, select the **Classes** tab. Locate
-the `puppet_enterprise::profile::master` class in the class list. Select the
-`code_manager_auto_configure` parameter from the drop-down menu and set the
+In the **PE Master** node group interface, select the **Configuration** tab.
+Locate the `puppet_enterprise::profile::master` class in the class list. Select
+the `code_manager_auto_configure` parameter from the drop-down menu and set the
 value to `true`. Click the **Add parameter** button to the left. Following the
 same method, set the `r10k_remote` parameter to
-`localhost:3000/<gitea_name>/control-repo.git`, the `r10k_private_key`
-parameter to `/etc/puppetlabs/puppetserver/ssh/id-control.rsa.pub`, and
+`http://localhost:3000/<gitea_name>/control-repo.git`, the `r10k_private_key`
+parameter to `/etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa.pub`, and
 `file_sync_enabled` to `true`.
 
 Trigger a puppet agent run to enforce these configuration changes on the
@@ -288,16 +327,16 @@ When the deploy process completes, your production code directory at
 control repository.
 
 Use the `puppet job` tool to trigger a Puppet agent run on the new
-`pasture-app-small.puppet.vm` node that was created for this quest. This Puppet
+`pasture-app.beauvine.vm` node that was created for this quest. This Puppet
 run will apply the configuration currently defined in your `role::pasture_app`
 to the node.
 
-    puppet job run --nodes pasture-app-small.puppet.vm
+    puppet job run --nodes pasture-app.beauvine.vm
 
 Once the job is complete, validate that the service is running as expected on
 the node:
 
-    curl 'pasture-app-small.puppet.vm/api/v1/cowsay'
+    curl 'pasture-app.beauvine.vm/api/v1/cowsay'
 
 Now that Puppet is running with code depolyed from your control repository,
 let's walk through the process of introducing changes to your control repository
@@ -493,11 +532,11 @@ to deploy your new code to your production infrastructure!
 
 Once your new code is deployed, trigger another Puppet run on your node.
 
-    puppet job run --nodes pasture-app-small.puppet.vm
+    puppet job run --nodes pasture-app.beauvine.vm
 
 Validate that the service now returns the new default message.
 
-    curl 'pasture-app-small.puppet.vm/api/v1/cowsay'
+    curl 'pasture-app.beauvine.vm/api/v1/cowsay'
 
 ## Review
 
@@ -517,7 +556,7 @@ With that repository set up, you used the PE console to configure Puppet's
 Code Manager tool to connect to your control repository hosted on Gitea.
 
 After deploying the existing code to test the system, you triggered a Puppet
-agent run on the `pasture-app-small.puppet.vm` node to validate that your
+agent run on the `pasture-app.beauvine.vm` node to validate that your
 master's Puppet code would still function as expected.
 
 Finally, you went through the workflow of making a change in your local

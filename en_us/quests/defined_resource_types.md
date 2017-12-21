@@ -305,6 +305,8 @@ Accept the default location and supply the password *puppet*.
 With this key created, you're ready to write the Puppet code to actually
 declare which users we want on a system.
 
+<div class = "lvm-task-number"><p>Task 4:</p></div>
+
 Rather than place this directly in your `site.pp` manifest, as you might have
 before we introduced the roles and profiles pattern, we'll create a
 `pasture_dev_users` profile class, and use a Hiera lookup to programatically
@@ -405,7 +407,25 @@ t7qZFA0j6/h43SG0POmkG1iHSHnlwvbcpJoYZZpKz5+Iq7P9JmOv7zf8UsJtQccWHxAHcJ+xJ6xZJ
 sH5FL8M8IR3Xkgp80NAQqmyVi7cx+c9n4RjEdMGk3XtutPNsSLcgm8/YZqv/yTRH6wAQl/"}]}
 ```
 
-<div class = "lvm-task-number"><p>Task 4:</p></div>
+We'll also change the `common.yaml` data source to set a default for this key.
+In this case, we'll set the value to an empty list. This way, when Hiera tries
+to look up this value on a node outside of the `beauvine.vm` domain, it will
+still get a valid result.
+
+    vim data/common.yaml
+
+Your `common.yaml` file should look like the following:
+
+```yaml
+---
+profile::pasture::app::default_message: "Baa"
+profile::pasture::app::sinatra_server: "thin"
+profile::pasture::app::default_character: "sheep"
+profile::pasture::app::db: "none"
+profile::base::dev_users::users: []
+```
+
+<div class = "lvm-task-number"><p>Task 5:</p></div>
 
 Now that this data is available in Hiera, create a `dev_users.pp` manifest
 in `profile/manifests/base/`.
@@ -419,9 +439,9 @@ addressed how to bring this data together with your code.
 
 Here, we'll use a Puppet language feature called an
 [iterator](https://puppet.com/docs/puppet/latest/lang_iteration.html). An
-iterator allows you to take structured data such as a hash or array and repeat
-a block of Puppet code multiple times with values from your data bound to
-variables in your block of Puppet code. In this the iterator goes through a
+iterator allows you to repeat a block of Puppet code multiple times, using
+data from a hash or array to bind different values to the variables in
+the block for each iteration. In this case, the iterator goes through a
 list of users accounts defined in your Hiera data source and declares an
 instance of the `user_accoutns::ssh_user` defined resource type for each.
 
@@ -439,7 +459,7 @@ class profile::base::dev_users {
 When using iteration, be very mindful of your code's readability and
 maintainability. One of the Puppet language's benefits is that its declarative
 nature tends to make Puppet code itself readible description of desired state
-for your system. Used injudiciously, iteration can increase your Puppet code's
+for your system. Used unnecessarily, iteration can increase your Puppet code's
 complexity, making it more difficult to understand and maintain.
 
 In this case, the roles and profiles pattern, Hiera, and the defined resource
@@ -450,11 +470,9 @@ and for each, create an SSH user account." If you find yourself writing
 iterators that go much beyond this level of complexity, it's a good cue to stop
 and consider whether there's a clearer way to write your Puppet code.
 
-<div class = "lvm-task-number"><p>Task 5:</p></div>
+<div class = "lvm-task-number"><p>Task 6:</p></div>
 
-Now that your profile class is done, all that remains is to add it to 
-
-With this `profile::base::dev_users` class is set up, drop it into the
+With this `profile::base::dev_users` class is set up, add it to the
 `role::pasture_app` class.
 
     vim /etc/puppetlabs/code/environments/production/modules/role/manifests/pasture_app.pp
@@ -467,7 +485,7 @@ class role::pasture_app {
 }
 ```
 
-<div class = "lvm-task-number"><p>Task 6:</p></div>
+<div class = "lvm-task-number"><p>Task 7:</p></div>
 
 Use the `puppet job` tool to trigger a Puppet agent run. (If your token has
 expired, run the `puppet access login --lifetime 1d` and use the credentials
