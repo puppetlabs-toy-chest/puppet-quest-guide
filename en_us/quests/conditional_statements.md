@@ -281,7 +281,7 @@ use the default WEBrick server on a development system and the Thin server on
 for production.
 
 We created two new systems for this quest: `pasture-dev.puppet.vm` and
-`pasture-prod.puppet,vm`. For a more complex infrastructure, you would likely
+`pasture-prod.puppet.vm`. For a more complex infrastructure, you would likely
 manage your development, test, and production segments of your infrastructure
 by creating a distinct [environment](https://docs.puppet.com/puppet/latest/environments.html)
 for each. For now, however, we can easily demonstrate our conditional statement
