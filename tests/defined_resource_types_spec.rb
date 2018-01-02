@@ -73,6 +73,15 @@ describe _("Task 3:"), host: :localhost do
 end
 describe _("Task 4:"), host: :localhost do
   it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/defined_resource_types/4/beauvine.vm.yaml #{PROD_PATH}/data/domain/beauvine.vm.yaml")
+      .exit_status
+      .should eq 0
+    command("sed $\"/pub_key:/c\ \ \ \ pub_key:\ $(cut -d\" \" -f 2 /root/.ssh/id_rsa.pub)\" #{PROD_PATH}/data/domain/beauvine.vm.yaml")
+      .exit_status
+      .should eq 0
+    command("cp #{SOLUTION_PATH}/defined_resource_types/4/common.yaml #{PROD_PATH}/data/common.yaml")
+      .exit_status
+      .should eq 0
   end
   it _('Add user data to your Hiera data sources'), :validation do
     file("#{PROD_PATH}/data/common.yaml")
@@ -91,6 +100,9 @@ describe _("Task 4:"), host: :localhost do
 end
 describe _("Task 5:"), host: :localhost do
   it 'has a working solution', :solution do
+    command("cp #{SOLUTION_PATH}/defined_resource_types/5/dev_users.pp #{MODULE_PATH}/profile/manifests/base/dev_users.pp")
+      .exit_status
+      .should eq 0
   end
   it _('Create the profile::base::dev_users profile class'), :validation do
     file("#{MODULE_PATH}/profile/manifests/base/dev_users.pp")
@@ -108,8 +120,7 @@ describe _("Task 5:"), host: :localhost do
 end
 describe _("Task 6:"), host: :localhost do
   it 'has a working solution', :solution do
-    wait_for_pxp_service
-    command("cp #{SOLUTION_PATH}/defined_resource_types/5/pasture_app.pp #{MODULE_PATH}/role/manifests/pasture_app.pp")
+    command("cp #{SOLUTION_PATH}/defined_resource_types/6/pasture_app.pp #{MODULE_PATH}/role/manifests/pasture_app.pp")
       .exit_status
       .should eq 0
   end
@@ -122,48 +133,13 @@ describe _("Task 6:"), host: :localhost do
       .should be_zero
   end
 end
-describe _("Task 7:"), host: :pastureappbeauvine do
+describe _("Task 7:"), host: :localhost do
   it 'has a working solution', :solution do
+    wait_for_pxp_service
     command("puppet job run --nodes pasture-app.beauvine.vm")
       .exit_status
       .should be_zero
   end
   it _('Trigger a Puppet run on pasture-app.beauvine.vm to enforce your changes'), :validation do
-    file('/home/gertie')
-      .should be_owned_by('gertie')
-    file('/home/gertie')
-      .should be_directory
-    file('/home/gertie')
-      .should be_mode(755)
-    file('/home/gertie/.ssh')
-      .should be_owned_by('gertie')
-    file('/home/gertie/.ssh')
-      .should be_directory
-    file('/home/gertie/.ssh')
-      .should be_mode(700)
-    file('/home/gertie/.ssh/authorized_keys')
-      .should be_owned_by('gertie')
-    file('/home/gertie/.ssh/authorized_keys')
-      .should be_file
-    file('/home/gertie/.ssh/authorized_keys')
-      .should be_mode(600)
-    file('/home/bessie')
-      .should be_owned_by('bessie')
-    file('/home/bessie')
-      .should be_directory
-    file('/home/bessie')
-      .should be_mode(755)
-    file('/home/bessie/.ssh')
-      .should be_owned_by('bessie')
-    file('/home/bessie/.ssh')
-      .should be_directory
-    file('/home/bessie/.ssh')
-      .should be_mode(700)
-    file('/home/bessie/.ssh/authorized_keys')
-      .should be_owned_by('bessie')
-    file('/home/bessie/.ssh/authorized_keys')
-      .should be_file
-    file('/home/bessie/.ssh/authorized_keys')
-      .should be_mode(600)
   end
 end
