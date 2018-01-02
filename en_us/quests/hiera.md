@@ -142,9 +142,11 @@ Expect to see the following output:
    {"name"=>"Common data", "path"=>"common.yaml"}]}
 ```
 
-Before setting up your data sources for these levels, make some changes to the
-`profile::pasture::app` class. By doing this first, you will know which values
-you need to define in your data sources.
+<div class = "lvm-task-number"><p>Task 2:</p></div>
+
+Before setting up your data sources for these levels, let's add our Hiera
+lookups to the `profile::pasture::app` class. By doing this first, we'll know
+which values the data sources need to define.
 
     vim modules/profile/manifests/pasture/app.pp
 
@@ -185,9 +187,13 @@ Though this flexibility may tempt you to implement a creative solution, it's
 best to use the simplest data source that meets your needs. For that reason,
 we'll use YAML files for all the data sources in this quest.
 
+<div class = "lvm-task-number"><p>Task 3:</p></div>
+
 Create a `data` directory with `domain` and `nodes` subdirectories.
 
     mkdir -p data/{domain,nodes}
+
+<div class = "lvm-task-number"><p>Task 4:</p></div>
 
 Begin with your `common.yaml` data source, which is kept directly under the
 `data` directory.
@@ -204,6 +210,8 @@ profile::pasture::app::default_character: "sheep"
 profile::pasture::app::db: "none"
 ```
 
+<div class = "lvm-task-number"><p>Task 5:</p></div>
+
 Next, create the `data/domain/beauvine.vm.yaml` data source to define defaults
 for the `beauvine.vm` domain name. Note that because the domain level is above
 the common level in your hierarchy, the values set here take precedence over
@@ -217,6 +225,8 @@ common.
 profile::pasture::app::default_message: "Welcome to Beauvine!"
 ```
 
+<div class = "lvm-task-number"><p>Task 6:</p></div>
+
 Next, create the `data/domain/auroch.vm.yaml` data source.
 
     vim data/domain/auroch.vm.yaml
@@ -226,6 +236,8 @@ Next, create the `data/domain/auroch.vm.yaml` data source.
 profile::pasture::app::default_message: "Welcome to Auroch!"
 profile::pasture::app::db: "postgres://pasture:m00m00@pasture-db.auroch.vm/pasture"
 ```
+
+<div class = "lvm-task-number"><p>Task 7:</p></div>
 
 Now that the data sources for the domain level are complete, move on to the
 node level.
@@ -253,6 +265,8 @@ data
     └── pasture-app-dragon.auroch.vm.yaml
 ```
 2 directories, 4 files
+
+<div class = "lvm-task-number"><p>Task 8:</p></div>
 
 Next you will use the `puppet job` tool to trigger a puppet agent run on each
 of these nodes.  Remember, the Learning VM is running both your PE master and
