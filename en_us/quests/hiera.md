@@ -295,16 +295,32 @@ result will be!
 
 ## Review
 
-In this quest, we introduced defined resource types, a way to bundle a group of
-resource declarations into a repeatable and configurable group.
+In this quest, we introduced Hiera, a data abstraction tool that lets you
+separate data from your Puppet code.
 
-We covered a few key details you should keep in mind when you're working
-on a defined resource type:
+You learned about Hiera's *hierarchical* model. Hiera lookups start from the
+data source assigned to the most specific level of your Hierarchy—in this case,
+the node level. If a value is found at this first level, it is returned and the
+lookup is complete. If no value is found, Hiera will continue checking each
+higher level of the Hierarchy until it returns a value or determines that no
+value has been set.
 
-  * Defined resource type definitions use similar syntax to class declarations,
-    but use the `define` keyword instead of `class`.
-    to remain unspecified when the defined type is declared.
+You used the `hiera.yaml` configuration file to set up a hierarchy of data
+sources. You set environment defaults in a `common.yaml` file, a middle level
+of per-domain defaults for the `beauvine.vm` and `auroch.vm` domains, and
+finally node-specific data for the `pasture-app-dragon.auroch.vm` node.
+
+You learned how to use the `lookup` function to retrieve values from these
+data sources to be used in your Puppet manifests. Using this lookup function,
+you set parameters for the `pasture` class based on Hiera data.
 
 ## Additional Resources
 
-* YAML docs.
+* Read the Puppet docs on [Hiera](https://puppet.com/docs/puppet/latest/hiera_intro.html).
+* Check out an [interactive Hiera demo](http://puppetlabs.github.io/hierademo/)
+  to explore how different lookups are resolved for different Hiera hierarchy
+  configurations.
+* You can find a review of some of the changes introduced in Hiera 5 (the
+  version discussed in this quest) in [this blog post](https://www.example42.com/2017/04/17/hiera-5/).
+* Hiera is discussed in several of our online and in-person based [courses](https://learn.puppet.com/course-catalog)
+  and covered in a [self-paced training module](https://learn.puppet.com/category/self-paced-training).
