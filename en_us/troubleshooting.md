@@ -4,7 +4,7 @@
 
 For the most up-to-date version of this troubleshooting information, [check the
 GitHub
-repository](https://github.com/puppetlabs/puppet-quest-guide/blob/master/troubleshooting.md).
+repository](https://github.com/puppetlabs/puppet-quest-guide/blob/master/en_us/troubleshooting.md).
 
 ### I completed a task, but the quest tool doesn't show it as complete
 
