@@ -13,7 +13,7 @@ end
 
 describe _("Task 1:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp #{SOLUTION_PATH}/hiera/1/hiera.yaml #{PROD_PATH}/hiera.yaml")
+    command("cp -n #{SOLUTION_PATH}/hiera/1/hiera.yaml #{PROD_PATH}/hiera.yaml")
       .exit_status
       .should eq 0
   end
@@ -42,7 +42,7 @@ end
 
 describe _("Task 2:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp #{SOLUTION_PATH}/hiera/2/app.pp #{MODULE_PATH}/profile/manifests/pasture/app.pp")
+    command("cp -n #{SOLUTION_PATH}/hiera/2/app.pp #{MODULE_PATH}/profile/manifests/pasture/app.pp")
       .exit_status
       .should eq 0
   end
@@ -51,10 +51,10 @@ describe _("Task 2:"), host: :localhost do
       .should be_file
     file("#{MODULE_PATH}/profile/manifests/pasture/app.pp")
       .content
-      .should match /lookup\(profile::pasture::app::default_message\),.*
-        lookup\(profile::pasture::app::sinatra_server\),.*
-        lookup\(profile::pasture::app::default_character\),.*
-        lookup\(profile::pasture::app::db\),?/mx
+      .should match /lookup\('profile::pasture::app::default_message'\),.*
+        lookup\('profile::pasture::app::sinatra_server'\),.*
+        lookup\('profile::pasture::app::default_character'\),.*
+        lookup\('profile::pasture::app::db'\),?/mx
     command("puppet parser validate #{MODULE_PATH}profile/manifests/pasture/app.pp")
       .exit_status
       .should be_zero

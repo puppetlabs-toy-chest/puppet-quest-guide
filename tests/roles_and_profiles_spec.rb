@@ -120,7 +120,7 @@ end
 
 describe _("Task 6:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp #{SOLUTION_PATH}/roles_and_profiles/6/site.pp #{PROD_PATH}/manifests/site.pp")
+    command("cp -n #{SOLUTION_PATH}/roles_and_profiles/6/site.pp #{PROD_PATH}/manifests/site.pp")
       .exit_status
       .should eq 0
   end
