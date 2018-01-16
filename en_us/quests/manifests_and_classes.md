@@ -4,7 +4,7 @@
 
 ## Quest objectives
 
-- Understand how Puppet code is organized in *classes*, contained within *manifest* files.
+- Understand how Puppet code is organized into *classes*, contained within *manifest* files.
 - Learn how the module structure keeps your Puppet code organized in a way the Puppet master understands.
 - Create a new Puppet module to manage the `cowsay` and `fortune` packages. 
 
@@ -43,7 +43,7 @@ At its simplest, a Puppet *manifest* is Puppet code saved to a file with the
 language* (DSL). You already saw some examples of this DSL as you learned
 about resources. The Puppet DSL includes resource declarations, along with a set
 of other language features, that let you control which resources are applied on
-a system and what values are set for those resourses' parameters.
+a system and what values are set for those resources' parameters.
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
@@ -73,7 +73,7 @@ run, apply this manifest directly with the `puppet apply` tool. You can use the
 
     sudo puppet apply /tmp/hello.pp 
 
-Now you know how to save Puppet code to a file, but how to you bridge the gap
+Now you know how to save Puppet code to a file, but how do you bridge the gap
 between this saved Puppet code and the `site.pp` manifest where you define
 node classification? The first step is to organize your Puppet code into
 *classes* and *modules*.
@@ -138,7 +138,7 @@ uses to configure itself).
 Because we're focusing on the structure of your module and class, we'll be
 writing our code directly to the modulepath on the master. In a real production
 environment, however, you would likely want to keep your Puppet code in a
-version control repostiory such as Git and use Puppet's code manager tool to
+version control repository such as Git and use Puppet's code manager tool to
 deploy it to your master. Because we don't have any critical infrastructure
 relying on the VM, we can safely skip this step and dive right into the code.
 
