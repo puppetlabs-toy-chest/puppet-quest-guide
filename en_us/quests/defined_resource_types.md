@@ -240,7 +240,7 @@ define user_accounts::ssh_user (
     ensure => present,
     user   => $title,
     type   => 'ssh-rsa',
-    key    => $pub,
+    key    => $key,
   }
   file { "/home/${title}/.ssh":
     ensure => directory,
