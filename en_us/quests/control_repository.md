@@ -780,16 +780,17 @@ Validate that the service now returns the new default message.
 
 ## Review
 
-This quest and introduced several new tools and interfaces. Much of the work done
-here pertains only to the initial setup of the system, and the steps of the
-workflow itself will be much simpler after this setup is complete.
+In this quest, you learned about the importance of a source control system for
+tracking and approving changes to your infrastructure by managing the
+underlying Puppet code. You then walked through the set up of a control
+repository and the workflow involved in developing and deploying code changes.
 
 You began by using the `git` command-line tool to create and initialize a
 control repository and moving your existing code into that repository.
 
-Once your repository was set up locally, you also created a remote upstream
-repository in Gitea to serve as the central source for all the code you will
-be deploying to your Puppet master.
+Once your repository was set up locally, you used the Gitea service to create a
+remote upstream repository. This upstream repository serves as the central
+source for all the code you will be deploying to your Puppet master.
 
 With that repository set up, you used the PE console to configure Puppet's
 Code Manager tool to connect to your control repository hosted on Gitea.
@@ -803,3 +804,11 @@ repository, using a pull request to merge it into your upstream production
 branch, and deploying and testing the new code.
 
 ## Additional Resources
+
+* Read up on using a control repository, the Code Manager tool, and other
+  relevant topics in the [managing and deploying Puppet code](https://puppet.com/docs/pe/latest/code_management/managing_puppet_code.html) section of the Puppet docs.
+* Puppet maintains a [template control repository](https://github.com/puppetlabs/control-repo)
+  you can clone directly to get started on your own or use as reference.
+* You can find some good discussion of how a control repository can fit with
+  the roles and profiles patterns [here](http://garylarizza.com/blog/2017/01/17/roles-and-profiles-in-a-control-repo/)
+

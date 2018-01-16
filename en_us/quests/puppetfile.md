@@ -92,12 +92,12 @@ a few third-party tools such as
 and [librarian-puppet](https://github.com/voxpupuli/librarian-puppet) that can
 help with this.
 
+<div class = "lvm-task-number"><p>Task 3:</p></div>
+
 In this case, however, you're only dealing with one external module, so you can
 resort to a common work-around. Install the desired version of the
 `puppetlabs/postgresql` module into a temporary directory using the `puppet
 module` tool and use the tool's output to determine the needed dependencies.
-
-<div class = "lvm-task-number"><p>Task 3:</p></div>
 
     mkdir temp  
     puppet module install puppetlabs/postgresql --version 4.8.0 --modulepath=temp  
@@ -188,8 +188,48 @@ production environment's modulepath.
 ├── puppetlabs-postgresql (v4.8.0)
 └── puppetlabs-stdlib (v4.20.0)
 ```
-=======
+
+<div class = "lvm-task-number"><p>Task 7:</p></div>
+
+Now that these external Forge modules are included in your Puppetfile, your
+control repository can support your Pasture application's database server.
+
+Use the `puppet job` tool to trigger Puppet agent runs on the `pasture-db.auroch.vm`
+and `pasture-app.auroch.vm` nodes.
+
+    puppet job run --nodes pasture-app.auroch.vm,pasture-db.auroch.vm
+
+Now that your nodes are configured, take a moment to test that your application
+can store a value in the connected database and retrieve it.
+
+    curl -X POST 'pasture-app.auroch.vm/api/v1/cowsay/sayings?message=Hello!'
+    curl pasture-app.auroch.vm/api/v1/cowsay/sayings/1
 
 ## Review
 
+In this quest, we introduced the the use of a Puppetfile to manage external
+module dependencies.
+
+After learning the basic syntax of the Puppetfile, you used the `puppet module
+tool` to resolve your set of module dependencies and versions for the
+`puppetlabs-postgresql` module by installing it to a temporary directory.
+
+With your external modules specified in your Puppetfile, you used a pull
+request to add these changes to your upstream control repository and used the
+`puppet code deploy` command to deploy that repository to the master's
+production environment. As part of the deploy process, Puppet's Code Manager
+parsed the Puppetfile and installed each listed module to the
+`/etc/puppetlabs/code/environments/production/modules` directory.
+
+With these modules installed, you were able to configure your database server
+and the application server that connects to it.
+
 ## Additional Resources
+
+You can find more information on how to use a Puppetfile on the Puppet [docs
+page](https://puppet.com/docs/pe/latest/code_management/puppetfile.html).
+
+The Puppetfile is covered in several of our [instructor-led trainings](https://learn.puppet.com/course-catalog).
+
+The example [control-repo repository](https://github.com/puppetlabs/control-repo) includes a Puppetfile
+you may use as reference when creating your own.
