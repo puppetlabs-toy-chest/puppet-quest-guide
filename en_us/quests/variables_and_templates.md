@@ -42,7 +42,7 @@ looks like this:
 $my_variable = 'look, a string!'
 ```
 
-Once you have defined a variable you can use it anywhere in your manifest where
+Once you have defined a variable, you can use it anywhere in your manifest where
 you want to use the assigned value. Note that variables are parse-order
 dependent, which means that a variable must be defined before it can be used.
 Trying to use an undefined variable will result in a special `undef` value.
@@ -176,7 +176,7 @@ the details of the syntax below.
 The bars (`|`) surrounding the list of parameters are a special syntax that
 define the parameters tag. The `<%` and `%>` are the opening and closing tag
 delimiters that distinguish EPP tags from the body of the file. Those hyphens
-(`-`) next to the tag delimiters will remove indendentation and whitespace
+(`-`) next to the tag delimiters will remove indentation and whitespace
 before and after the tag. This allows you to put this parameter tag at the
 beginning of the file, for example, without the newline character after the
 tag creating an empty line at the beginning of the output file.
@@ -303,7 +303,7 @@ Now return to your `init.pp` manifest.
 
     vim pasture/manifests/init.pp
 
-And modify the file resouce for your service unit file to use the template you
+And modify the file resource for your service unit file to use the template you
 just created.
 
 ```puppet
