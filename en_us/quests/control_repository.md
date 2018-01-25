@@ -203,7 +203,7 @@ First, copy over your `hiera.yaml` configuration file.
 
 Then recursively copy the Hiera data directory and its contents.
 
-    cp -r data /root/control-repo/hiera
+    cp -r data /root/control-repo/data
 
 ## Git repository initialization
 
@@ -434,13 +434,11 @@ When prompted, save the key to the following file:
 When prompted for a passphrase, hit enter twice to create a key without a
 passphrase.
 
-<div class = "lvm-task-number"><p>Task 14:</p></div>
-
 Set the owner and group of this `ssh` subdirectory to `pe-puppet`:
 
     chown -R pe-puppet:pe-puppet /etc/puppetlabs/puppetserver/ssh
 
-<div class = "lvm-task-number"><p>Task 15:</p></div>
+<div class = "lvm-task-number"><p>Task 14:</p></div>
 
 Now that the keypair is set up, you'll need to add it to Gitea.
 
@@ -466,34 +464,33 @@ key.
 The other option is to run the following command on the Learning VM to add the
 key via Gitea's API.
 
-    curl -i \
-    -H "Content-Type: application/json" \
-    -X POST -d "{\"Title\": \"Code Manager\",\"Key\": \"$(cut -d\" \" -f 2 /etc/puppetlabs/puppetserver/ssh/id-control_repo.pub)\"}" \
-    http://learning:puppet@localhost:3000/api/v1/repos/learning/control-repo/keys
+		curl -i \
+		-H "Content-Type: application/json" \
+		-X POST -d "{\"Title\": \"Code Manager\",\"Key\": \"$(cut -d' ' -f 2 /etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa.pub)\"}" \
+		http://learning:puppet@localhost:3000/api/v1/repos/learning/control-repo/keys
 
 Once you've run this command, refresh your browser window to confirm that the
-key was added correctly.
+key has been added successfully.
 
 ## Code Manager configuration
 
-Before you can deploy code from your control repository, you need to enable
-and configure Code Manager. Code Manager, like many of PE's internal
-configuration options, Code Manager managed by Puppet itself. The configuration
-of your Puppet master is managed by the `puppet_enterprise::profile::master`
-class. Like any Puppet class, this one can be configured through its
-parameters.
+Before you can deploy code from your control repository, you need to enable and
+configure Code Manager. Code Manager, like many of PE's internal configuration
+options, is managed by Puppet itself. Most configuration options of your Puppet
+master, including those related to Code Manager, are managed by the
+`puppet_enterprise::profile::master` class. Like any Puppet class, this master
+profile can be configured through its parameters.
 
 So far, you've been using the `site.pp` manifest to assign classes to nodes and
 set their parameters. The PE console's interface provides an alternative
-interface for node classification. Because the built-in set of node groups and
-classificiation that define how services on your Puppet master (or masters)
-are configured, this interface is the appropriate place to configure
-Code Manager.
+interface for node classification. The PE console's node classifier includes a
+built-in set of node groups and classificiations that define configuration
+related to Puppet itself.
 
-<div class = "lvm-task-number"><p>Task 16:</p></div>
+<div class = "lvm-task-number"><p>Task 15:</p></div>
 
-First, open the PE console interface in your browser by navigating
-to `https://<VM IP ADDRESS>`. Log in with the credentials:
+First, open the PE console interface in your browser by navigating to
+`https://<VM IP ADDRESS>`. Log in with the credentials:
 
 **user:** admin
 **password:** puppetlabs
@@ -516,7 +513,7 @@ parameter to `/etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa`, and
 
 ![image](../assets/pe_console_code_manager.png)
 
-<div class = "lvm-task-number"><p>Task 17:</p></div>
+<div class = "lvm-task-number"><p>Task 16:</p></div>
 
 Trigger a puppet agent run to enforce these configuration changes on the
 master.
@@ -541,7 +538,7 @@ Like the `puppet job run` command you've been using to trigger Puppet runs,
 this command can be run from any workstation with the correct credentials and
 network access to the Puppet master.
 
-<div class = "lvm-task-number"><p>Task 18:</p></div>
+<div class = "lvm-task-number"><p>Task 17:</p></div>
  
 From the PE console interface, click on **Access Control** in the left
 navigation bar and select the **User Roles** link in the left navigation bar.
@@ -549,7 +546,7 @@ Click on the **Code Deployers** role.  From the **Member Users** tab, select
 your `Learning` user from the dropdown menu and click **Add user** to add this
 user to the role.
 
-<div class = "lvm-task-number"><p>Task 19:</p></div>
+<div class = "lvm-task-number"><p>Task 18:</p></div>
 
 Now use the `puppet access` command to generate a token.
 
@@ -570,7 +567,7 @@ When the deploy process completes, your production code directory at
 `/etc/puppetlabs/code/environments/production` will by synchronized with your
 control repository.
 
-<div class = "lvm-task-number"><p>Task 20:</p></div>
+<div class = "lvm-task-number"><p>Task 19:</p></div>
 
 Use the `puppet job` tool to trigger a Puppet agent run on the
 `pasture-app.beauvine.vm` node. When this quest began, a new instance of this
@@ -593,6 +590,8 @@ Now that Puppet is running with code depolyed from your control repository,
 let's walk through the process of introducing changes to your a local copy of
 the repository, creating a PR to merge those changes to your upstream
 repository, and finally deploying those changes to production.
+
+<div class = "lvm-task-number"><p>Task 20:</p></div>
 
 First, be sure you're working in this `control-repo` directory:
 
@@ -629,8 +628,6 @@ begin work on a new branch. The focus of this quest is the control repository
 and code deployer workflow, so we'll make a small and easily tested change to
 the `default_message` parameter in your `beauvine.vm` domain's Hiera data.
 
-<div class = "lvm-task-number"><p>Task 21:</p></div>
-
 To begin work on this change, create a new branch. The branch name should be
 brief, but still give good idea of what changes the branch will introduce.
 Let's call it `beauvine_message_default`. Use the `git checkout` command to
@@ -651,7 +648,7 @@ repository!'`.
 profile::pasture::app::default_message: "Hello control repository!"
 ```
 
-<div class = "lvm-task-number"><p>Task 22:</p></div>
+<div class = "lvm-task-number"><p>Task 21:</p></div>
 
 Once you've made your change, check the status of the repository.
 
@@ -719,7 +716,7 @@ control repository.
 #
 ```
 
-<div class = "lvm-task-number"><p>Task 23:</p></div>
+<div class = "lvm-task-number"><p>Task 22:</p></div>
 
 Now that you have committed your changes to your local branch, push the branch
 to your upstream repository.
@@ -729,7 +726,7 @@ to your upstream repository.
 When prompted, enter your Gitea user account name and password: `learning` and
 `puppet`.
 
-<div class = "lvm-task-number"><p>Task 24:</p></div>
+<div class = "lvm-task-number"><p>Task 23:</p></div>
 
 To merge the changes in this branch into your production branch, you will first
 create a pull request. A pull request is a way of suggesting that commits in
@@ -759,7 +756,7 @@ so you'll have to satisfy yourself with a quick review of the code change.
 When you're satisfied that your change is good, return to the **Conversation**
 tab and click the **Merge Pull Request** button.
 
-<div class = "lvm-task-number"><p>Task 25:</p></div>
+<div class = "lvm-task-number"><p>Task 24:</p></div>
 
 Now that your change has been merged into your upstream repository's production
 branch, return the the Learning VM command-line. Use `puppet code deploy`
@@ -767,7 +764,7 @@ command to deploy your new code to the production environment.
 
     puppet code deploy production --wait
 
-<div class = "lvm-task-number"><p>Task 26:</p></div>
+<div class = "lvm-task-number"><p>Task 25:</p></div>
 
 When the code deploy completes, trigger another Puppet run on your node to
 apply the changes.
