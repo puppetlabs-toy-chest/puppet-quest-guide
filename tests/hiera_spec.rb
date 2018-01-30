@@ -13,7 +13,7 @@ end
 
 describe _("Task 1:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp -n #{SOLUTION_PATH}/hiera/1/hiera.yaml #{PROD_PATH}/hiera.yaml")
+    command("yes | cp -f #{SOLUTION_PATH}/hiera/1/hiera.yaml #{PROD_PATH}/hiera.yaml")
       .exit_status
       .should eq 0
   end
@@ -42,7 +42,7 @@ end
 
 describe _("Task 2:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp -n #{SOLUTION_PATH}/hiera/2/app.pp #{MODULE_PATH}/profile/manifests/pasture/app.pp")
+    command("yes | cp -f #{SOLUTION_PATH}/hiera/2/app.pp #{MODULE_PATH}/profile/manifests/pasture/app.pp")
       .exit_status
       .should eq 0
   end
@@ -79,7 +79,7 @@ end
 
 describe _("Task 4:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp #{SOLUTION_PATH}/hiera/4/common.yaml #{PROD_PATH}/data/common.yaml")
+    command("yes | cp -f #{SOLUTION_PATH}/hiera/4/common.yaml #{PROD_PATH}/data/common.yaml")
       .exit_status
       .should eq 0
   end
@@ -98,7 +98,7 @@ end
 
 describe _("Task 5:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp #{SOLUTION_PATH}/hiera/5/beauvine.vm.yaml #{PROD_PATH}/data/domain/beauvine.vm.yaml")
+    command("yes | cp -f #{SOLUTION_PATH}/hiera/5/beauvine.vm.yaml #{PROD_PATH}/data/domain/beauvine.vm.yaml")
       .exit_status
       .should eq 0
   end
@@ -114,7 +114,7 @@ end
 
 describe _("Task 6:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp #{SOLUTION_PATH}/hiera/6/auroch.vm.yaml #{PROD_PATH}/data/domain/auroch.vm.yaml")
+    command("yes | cp -f #{SOLUTION_PATH}/hiera/6/auroch.vm.yaml #{PROD_PATH}/data/domain/auroch.vm.yaml")
       .exit_status
       .should eq 0
   end
@@ -131,7 +131,7 @@ end
 
 describe _("Task 7:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp #{SOLUTION_PATH}/hiera/7/pasture-app-dragon.auroch.vm.yaml #{PROD_PATH}/data/nodes/pasture-app-dragon.auroch.vm.yaml")
+    command("yes | cp -f #{SOLUTION_PATH}/hiera/7/pasture-app-dragon.auroch.vm.yaml #{PROD_PATH}/data/nodes/pasture-app-dragon.auroch.vm.yaml")
       .exit_status
       .should eq 0
   end

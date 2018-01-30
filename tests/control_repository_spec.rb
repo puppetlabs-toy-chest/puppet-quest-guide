@@ -30,7 +30,7 @@ end
 
 describe _("Task 2:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp -r /etc/puppetlabs/code/environments/production/modules/{pasture,motd,user_accounts,role,profile} /root/control-repo/site/")
+    command("yes | cp -r /etc/puppetlabs/code/environments/production/modules/{pasture,motd,user_accounts,role,profile} /root/control-repo/site/")
       .exit_status
       .should eq 0
   end
@@ -50,14 +50,14 @@ end
 
 describe _("Task 3:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp -n #{SOLUTION_PATH}/control_repository/3/environment.conf /root/control-repo/environment.conf")
+    command("yes | cp -f #{SOLUTION_PATH}/control_repository/3/environment.conf /root/control-repo/environment.conf")
       .exit_status
       .should eq 0
   end
   it _('Copy and edit the environment.conf file'), :validation do
     file("/root/control-repo/environment.conf")
       .content
-      .should match /site:modules:\$basemodulepath/
+      .should match /\.\/site:\.\/modules:\$basemodulepath/
   end
 end
 
@@ -66,7 +66,7 @@ describe _("Task 4:"), host: :localhost do
     command("mkdir /root/control-repo/manifests")
       .exit_status
       .should eq 0
-    command("cp -n #{SOLUTION_PATH}/control_repository/4/site.pp /root/control-repo/manifets/site.pp")
+    command("yes | cp -f /etc/puppetlabs/code/environments/production/manifests/site.pp /root/control-repo/manifets/site.pp")
       .exit_status
       .should eq 0
   end
@@ -78,10 +78,10 @@ end
 
 describe _("Task 5:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp /etc/puppetlabs/code/environments/produciton/hiera.yaml /root/control-repo/hiera.yaml")
+    command("yes | cp /etc/puppetlabs/code/environments/produciton/hiera.yaml /root/control-repo/hiera.yaml")
       .exit_status
       .should eq 0
-    command("cp -r /etc/puppetlabs/code/environments/produciton/data /root/control-repo/data")
+    command("yes | cp -r /etc/puppetlabs/code/environments/produciton/data /root/control-repo/data")
       .exit_status
       .should eq 0
   end
@@ -116,10 +116,11 @@ describe _("Task 7:"), host: :localhost do
     .exit_status
     .should eq 0
   end
-  it _('Rename the master branch to production')
+  it _('Rename the master branch to production') do
     command("cd /root/control-repo && git branch")
       .stdout
       .should match /production/
+  end
 end
 
 describe _("Task 8:"), host: :localhost do
@@ -136,8 +137,6 @@ end
 describe _("Task 9:"), host: :localhost do
   it 'has a working solution', :solution do
     make_gitea_user('learning', 'puppet')
-  end
-
     command("git remote add upstream http://localhost:3000/test_user/control-repo.git")
       .exit_status
       .should eq 0
@@ -288,7 +287,7 @@ describe _("Task 20:"), host: :localhost do
     command('cd /root/control-repo && git checkout -b beauvine_message_default')
       .exit_status
       .should eq 0
-    command("cp -n #{SOLUTION_PATH}/control_repository/20/beauvine.vm.yaml /root/control-repo/data/domain/beauvine.vm.yaml")
+    command("yes | cp -f #{SOLUTION_PATH}/control_repository/20/beauvine.vm.yaml /root/control-repo/data/domain/beauvine.vm.yaml")
       .exit_status
       .should eq 0
   end

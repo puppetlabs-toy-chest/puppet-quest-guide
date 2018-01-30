@@ -491,12 +491,12 @@ Use the `puppet job` tool to trigger a Puppet agent run. (If your token has
 expired, run the `puppet access login --lifetime 1d` and use the credentials
 **learning** and **puppet** to generate a new access token.)
 
-    puppet job run --nodes pasture-app-small.puppet.vm
+    puppet job run --nodes pasture-app.beauvine.vm
 
-When the Puppet run completes, connect to `pasture-app-small.puppet.vm` as the
+When the Puppet run completes, connect to `pasture-app.beauvine.vm` as the
 user `bert`.
 
-    ssh bert@pasture-app-small.puppet.vm
+    ssh bert@pasture-app.beauvine.vm
 
 Once you've verified that the you can connect as this user, go ahead and
 disconnect.

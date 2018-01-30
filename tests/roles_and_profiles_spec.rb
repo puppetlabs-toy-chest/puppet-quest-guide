@@ -120,7 +120,7 @@ end
 
 describe _("Task 6:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp -n #{SOLUTION_PATH}/roles_and_profiles/6/site.pp #{PROD_PATH}/manifests/site.pp")
+    command("yes | cp -f #{SOLUTION_PATH}/roles_and_profiles/6/site.pp #{PROD_PATH}/manifests/site.pp")
       .exit_status
       .should eq 0
   end
@@ -130,10 +130,10 @@ describe _("Task 6:"), host: :localhost do
       .should be_zero
     file("#{PROD_PATH}manifests/site.pp")
       .content
-      .should match /node\s+\/\^pasture\-app\/\s+{.*?include\s+role::pasture_app.*?}/m
+      .should match /node\s+\/\^pasture\-app\/\s+{\s+include\s+role::pasture_app\s+}/m
     file("#{PROD_PATH}manifests/site.pp")
       .content
-      .should match /node\s+\/\^pasture\-db\/\s+{.*?include\s+role::pasture_db.*?}/m
+      .should match /node\s+\/\^pasture\-db\/\s+{\s+include\s+role::pasture_db\s+}/m
     file("#{PROD_PATH}manifests/site.pp")
       .content
       .should_not match /node\s+(['"])pasture\-db\.puppet\.vm\1\s+{/

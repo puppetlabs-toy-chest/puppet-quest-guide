@@ -27,7 +27,7 @@ end
 
 describe _("Task 2:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp #{SOLUTION_PATH}/defined_resource_types/2/ssh_user.pp #{MODULE_PATH}/user_accounts/manifests/ssh_user.pp")
+    command("yes | cp#{SOLUTION_PATH}/defined_resource_types/2/ssh_user.pp #{MODULE_PATH}/user_accounts/manifests/ssh_user.pp")
       .exit_status
       .should eq 0
   end
@@ -73,13 +73,13 @@ describe _("Task 3:"), host: :localhost do
 end
 describe _("Task 4:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp -n #{SOLUTION_PATH}/defined_resource_types/4/beauvine.vm.yaml #{PROD_PATH}/data/domain/beauvine.vm.yaml")
+    command("yes | cp -f #{SOLUTION_PATH}/defined_resource_types/4/beauvine.vm.yaml #{PROD_PATH}/data/domain/beauvine.vm.yaml")
       .exit_status
       .should eq 0
-    command("sed -i $\"/pub_key:/c\ \ \ \ pub_key:\ '$(cut -d\" \" -f 2 /root/.ssh/id_rsa.pub)'\" #{PROD_PATH}/data/domain/beauvine.vm.yaml")
+    command("sed -i $\"/pub_key:/c\\ \\ \\ \\ pub_key:\\ '$(cut -d\" \" -f 2 /root/.ssh/id_rsa.pub)'\" #{PROD_PATH}/data/domain/beauvine.vm.yaml")
       .exit_status
       .should eq 0
-    command("cp -n #{SOLUTION_PATH}/defined_resource_types/4/common.yaml #{PROD_PATH}/data/common.yaml")
+    command("yes | cp -f #{SOLUTION_PATH}/defined_resource_types/4/common.yaml #{PROD_PATH}/data/common.yaml")
       .exit_status
       .should eq 0
   end
@@ -100,7 +100,7 @@ describe _("Task 4:"), host: :localhost do
 end
 describe _("Task 5:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp -n #{SOLUTION_PATH}/defined_resource_types/5/dev_users.pp #{MODULE_PATH}/profile/manifests/base/dev_users.pp")
+    command("yes | cp -f #{SOLUTION_PATH}/defined_resource_types/5/dev_users.pp #{MODULE_PATH}/profile/manifests/base/dev_users.pp")
       .exit_status
       .should eq 0
   end
@@ -120,7 +120,7 @@ describe _("Task 5:"), host: :localhost do
 end
 describe _("Task 6:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp -n #{SOLUTION_PATH}/defined_resource_types/6/pasture_app.pp #{MODULE_PATH}/role/manifests/pasture_app.pp")
+    command("yes | cp -f #{SOLUTION_PATH}/defined_resource_types/6/pasture_app.pp #{MODULE_PATH}/role/manifests/pasture_app.pp")
       .exit_status
       .should eq 0
   end
@@ -141,7 +141,7 @@ describe _("Task 7:"), host: :localhost do
       .should be_zero
   end
   it _('Trigger a Puppet run on pasture-app.beauvine.vm to enforce your changes'), :validation do
-    command('docker exec pasture-db.puppet.vm cat /home/bessie/.ssh/authorized_keys')
+    command('docker exec pasture-app.beauvine.vm cat /home/bessie/.ssh/authorized_keys')
       .stdout
       .should match /ssh-rsa\s.+bessie@puppet\.vm/
   end
