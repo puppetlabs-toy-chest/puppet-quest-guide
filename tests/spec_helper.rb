@@ -19,14 +19,14 @@ def get_master_group_id
 	`curl -s -k -X GET https://$(puppet config print certname):4433/classifier-api/v1/groups \
 	--cert $(puppet config print hostcert) --key $(puppet config print hostprivkey) \
 	--cacert $(puppet config print cacert) \
-	-H "Content-Type: application/json" | jq -r -c '.[] | select(.name | contains("PE Master")) | .id'`
+  -H "Content-Type: application/json" | jq -r -c '.[] | select(.name | contains("PE Master")) | .id'`.chomp
 end
 
 def get_learning_user_id
 	`curl -s -k -X GET https://$(puppet config print certname):4433/rbac-api/v1/users \
 	--cert $(puppet config print hostcert) --key $(puppet config print hostprivkey) \
 	--cacert $(puppet config print cacert) \
-	-H "Content-Type: application/json" | jq -r -c '.[] | select(.login | contains("learning")) | .id'`
+  -H "Content-Type: application/json" | jq -r -c '.[] | select(.login | contains("learning")) | .id'`.chomp
 end
 
 def make_gitea_user(username, password)

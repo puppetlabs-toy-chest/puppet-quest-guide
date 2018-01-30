@@ -66,7 +66,7 @@ describe _("Task 4:"), host: :localhost do
     command("mkdir /root/control-repo/manifests")
       .exit_status
       .should eq 0
-    command("yes | cp -f /etc/puppetlabs/code/environments/production/manifests/site.pp /root/control-repo/manifets/site.pp")
+    command("yes | cp -f /etc/puppetlabs/code/environments/production/manifests/site.pp /root/control-repo/manifests/site.pp")
       .exit_status
       .should eq 0
   end
@@ -78,10 +78,10 @@ end
 
 describe _("Task 5:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("yes | cp /etc/puppetlabs/code/environments/produciton/hiera.yaml /root/control-repo/hiera.yaml")
+    command("yes | cp /etc/puppetlabs/code/environments/production/hiera.yaml /root/control-repo/hiera.yaml")
       .exit_status
       .should eq 0
-    command("yes | cp -r /etc/puppetlabs/code/environments/produciton/data /root/control-repo/data")
+    command("yes | cp -r /etc/puppetlabs/code/environments/production/data /root/control-repo/data")
       .exit_status
       .should eq 0
   end
@@ -92,7 +92,7 @@ describe _("Task 5:"), host: :localhost do
       .should be_directory
     file("/root/control-repo/data/nodes")
       .should be_directory
-    file("/root/control-repo/data/domains")
+    file("/root/control-repo/data/domain")
       .should be_directory
   end
 end
@@ -130,19 +130,13 @@ describe _("Task 8:"), host: :localhost do
   it _('Create a Gitea user account'), :validation do
     command("curl -i http://learning:puppet@localhost:3000/api/v1/users/learning")
       .stdout
-      .shoudl match /200\sOK/
+      .should match /200\sOK/
   end
 end
 
 describe _("Task 9:"), host: :localhost do
   it 'has a working solution', :solution do
-    make_gitea_user('learning', 'puppet')
-    command("git remote add upstream http://localhost:3000/test_user/control-repo.git")
-      .exit_status
-      .should eq 0
-    command("cd /root/control-repo && git push upstream production")
-      .exit_status
-      .should eq 0
+    make_gitea_repo('learning', 'puppet', 'control-repo')
   end
   it _('Set up an upstream remote in Gitea'), :validation do
     command("cd /root/control-repo && git remote -v")
@@ -160,18 +154,21 @@ describe _("Task 10:"), host: :localhost do
   it _("Add the Gitea repository as upstream remote"), :validation do
     command("cd /root/control-repo && git remote -v")
       .stdout
-      .should match /upstream\s+http:\/\/localhost:3000\/learning\/control\/repo\.git/
+      .should match /upstream\s+http:\/\/localhost:3000\/learning\/control-repo\.git/
   end
 end
 
 describe _("Task 11:"), host: :localhost do
   it 'has a working solution', :solution do
+    command("echo http://learning:puppet@localhost%3a3000 > ~/.my-credentials")
+      .exit_status
+      .should eq 0
     command("cd /root/control-repo && git push upstream HEAD")
       .exit_status
       .should eq 0
   end
   it _("Push your production branch to the upstream remote"), :validation do
-    command("curl -i http://learning:puppet@localhost:3000/api/v1/users/learning/control-repo/branches")
+    command("curl -i http://learning:puppet@localhost:3000/api/v1/repos/learning/control-repo/branches")
       .stdout
       .should match /commit/
   end
@@ -212,7 +209,7 @@ describe _("Task 14:"), host: :localhost do
       .should eq 0
   end
   it _('Add your deploy key to the upstream repository'), :validation do
-    command("curl -i http://learning:puppet@localhost:3000/api/v1/users/learning/control-repo/keys")
+    command("curl -i http://learning:puppet@localhost:3000/api/v1/repos/learning/control-repo/keys")
       .stdout
       .should match /"key":"ssh-rsa/
   end
