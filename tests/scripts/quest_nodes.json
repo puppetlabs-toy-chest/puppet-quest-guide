@@ -55,6 +55,10 @@
   "control_repository" : [
     {"name" : "pasture-app.beauvine.vm"}
   ],
+  "puppetfile" : [
+    {"name" : "pasture-app.auroch.vm"},
+    {"name" : "pasture-db.auroch.vm"}
+  ],
   "puppethack" : [
     {"name" : "hack1.puppet.vm"},
     {"name" : "hack2.puppet.vm"},
