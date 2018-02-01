@@ -27,7 +27,7 @@ end
 
 describe _("Task 2:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("yes | cp#{SOLUTION_PATH}/defined_resource_types/2/ssh_user.pp #{MODULE_PATH}/user_accounts/manifests/ssh_user.pp")
+    command("yes | cp -f #{SOLUTION_PATH}/defined_resource_types/2/ssh_user.pp #{MODULE_PATH}/user_accounts/manifests/ssh_user.pp")
       .exit_status
       .should eq 0
   end

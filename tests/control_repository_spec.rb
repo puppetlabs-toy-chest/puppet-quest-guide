@@ -126,6 +126,7 @@ end
 describe _("Task 8:"), host: :localhost do
   it 'has a working solution', :solution do
     make_gitea_user('learning', 'puppet')
+    sleep 30 # We could poll gitea, but for the sake of getting this done, just sleep!
   end
   it _('Create a Gitea user account'), :validation do
     command("curl -i http://learning:puppet@localhost:3000/api/v1/users/learning")
@@ -224,7 +225,7 @@ describe _("Task 15:"), host: :localhost do
   it _('Use the PE console node classifier to enable Code Manager'), :validation do
     command("curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem 'https://localhost:4433/classifier-api/v1/groups/#{MASTER_GID}'")
       .stdout
-      .should match /\"code_manager_auto_configure":"true","file_sync_enabled":"true","r10k_private_key":"\/etc\/puppetlabs\/puppetserver\/ssh\/id-control_repo\.rsa","r10k_remote":"http:\/\/localhost:3000\/learning\/control-repo\.git"/
+      .should match /"code_manager_auto_configure":true,"file_sync_enabled":true,"r10k_private_key":"\/etc\/puppetlabs\/puppetserver\/ssh\/id-control_repo\.rsa","r10k_remote":"http:\/\/localhost:3000\/learning\/control-repo\.git"/
   end
 end
 
