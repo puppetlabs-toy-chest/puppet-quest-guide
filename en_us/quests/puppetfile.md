@@ -15,7 +15,7 @@ repository using a Puppetfile.
 
 When you're ready to get started, type the following command:
 
-    quest begin control_repository
+    quest begin puppetfile
 
 ## Puppetfile
 

@@ -5,77 +5,103 @@ LEARNING_UID = get_learning_user_id
 
 describe _("Task 1:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('cd /root/control-repo && git checkout production && git pull upstream production && git checkout -b puppetfile')
+    command('cd /root/control-repo && git checkout master && git pull upstream master && git checkout -b puppetfile')
       .exit_status
       .should eq 0
   end
   it _('Check out a new puppetfile branch'), :validation do
-    file("cd root/control-repo && git status")
-      .content
+    command("cd root/control-repo && git status")
+      .stdout
       .should match /puppetfile/
   end
 end
 
 describe _("Task 2:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cp -n #{SOLUTION_PATH}/puppetfile/2/Puppetfile /root/control-repo/Puppetfile")
+    command("yes | cp -f #{SOLUTION_PATH}/puppetfile/2/Puppetfile /root/control-repo/Puppetfile")
       .exit_status
       .should eq 0
   end
-  it _('Add and commit your change'), :validation do
-    command("cd /root/control-repo && git log")
-      .stdout
-      .should match /Change\sbeauvine\sdefault/
+  it _('Create a Puppetfile in your control repository'), :validation do
+    file("/root/control-repo/Puppetfile")
+      .content
+      .should match /mod\s"puppetlabs\/postgresql",\s'4\.8\.0'/
   end
 end
 
-describe _("Task 22:"), host: :localhost do
+describe _("Task 3:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('cd /root/control-repo && git push upstream update_cowsay_message')
+    command("yes | cp -f #{SOLUTION_PATH}/puppetfile/3/Puppetfile /root/control-repo/Puppetfile")
       .exit_status
       .should eq 0
   end
-  it _('Push your branch to the upstream remote'), :validation do
+  it _('Add dependencies to your Puppetfile'), :validation do
+    file("/root/control-repo/Puppetfile")
+      .content
+      .should match /mod\s"puppetlabs\/stdlib",\s'4\.20\.0'/
+  end
+end
+
+describe _("Task 4:"), host: :localhost do
+  it 'has a working solution', :solution do
+    command('cd /root/control-repo && git add Puppetfile')
+      .exit_status
+      .should eq 0
+    command("cd /root/control-repo && git commit -m 'Add Puppetfile with puppetlabs-postgresql module' && git push upstream puppetfile")
+      .exit_status
+      .should eq 0
+  end
+  it _('Commit your code and push the branch upstream'), :validation do
     command("curl -i http://learning:puppet@localhost:3000/api/v1/repos/learning/control-repo/branches")
       .stdout
-      .should match /beauvine_message_default/
+      .should match /puppetfile/
   end
 end
 
-describe _("Task 23:"), host: :localhost do
+describe _("Task 5:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('cd /root/control-repo && git checkout production && git merge update_cowsay_message && git push -f upstream production')
+    # Again, pushing to master branch rather than produciton for solution
+    command('cd /root/control-repo && git checkout master && git merge puppetfile && git push -f upstream master')
       .exit_status
       .should eq 0
   end
   it _('Merge your change to the upstream production branch'), :validation do
-    command("curl -i http://learning:puppet@localhost:3000/api/v1/repos/learning/control-repo/branches/production")
+    command("curl -i http://learning:puppet@localhost:3000/api/v1/repos/learning/control-repo/branches")
       .stdout
-      .should match /default_message/
+      .should match /postgresql/
   end
 end
 
-describe _("Task 24:"), host: :localhost do
+describe _("Task 6:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('puppet code deploy production --wait')
+    # We can't deploy production without being able to change the default branch
+    # in gitea, so to test, deploy master branch, copy it to produciton, and
+    # manually reset the production environment cache via the API. 
+    command('puppet code deploy master --wait && yes | cp -rf /etc/puppetlabs/code/environments/master /etc/puppetlabs/code/environments/production && chown -R pe-puppet /etc/puppetlabs/code/environments/production')
+      .exit_status
+      .should_not eq 1
+    command("curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -X DELETE 'https://localhost:8140/puppet-admin-api/v1/environment-cache?environment=production'")
       .exit_status
       .should_not eq 1
   end
-  it _('Deploy your modified production code'), :validation do
-    file("/etc/puppetlabs/code/environments/production/data/domain/beauvine.vm.yaml")
-      .should be_directory
+  it _('Deploy your production code'), :validation do
+    file("/etc/puppetlabs/code/environments/production/Puppetfile")
+      .should be_file
   end
 end
 
-describe _("Task 25:"), host: :localhost do
+describe _("Task 7:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('puppet job run --nodes pasture-app.beauvine.vm')
+    command('puppet job run --nodes pasture-app.auroch.vm,pasture-db.auroch.vm')
       .exit_status
       .should_not eq 1
+    command("curl -X POST 'pasture-app.auroch.vm/api/v1/cowsay/sayings?message=Hello!")
+      .exit_status
+      .should eq 0
   end
   it _('Trigger a second puppet run on the pasture-app.beauvine.vm node'), :validation do
-    command("curl 'pasture-app.beauvine.vm/api/v1/cowsay'")
+    command("curl pasture-app.auroch.vm/api/v1/cowsay/sayings/1")
       .stdout
-      .should match /repository/
+      .should match /Hello/
   end
 end

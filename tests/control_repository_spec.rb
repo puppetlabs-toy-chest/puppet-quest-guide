@@ -138,6 +138,7 @@ end
 describe _("Task 9:"), host: :localhost do
   it 'has a working solution', :solution do
     make_gitea_repo('learning', 'puppet', 'control-repo')
+    sleep 30 # We could poll gitea, but for the sake of getting this done, just sleep!
   end
   it _('Set up an upstream remote in Gitea'), :validation do
     command("cd /root/control-repo && git remote -v")
