@@ -257,7 +257,13 @@ end
 
 describe _("Task 18:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('puppet code deploy production --wait')
+    # We can't deploy production without being able to change the default branch
+    # in gitea, so to test, deploy master branch, copy it to produciton, and
+    # manually reset the production environment cache via the API. 
+    command('puppet code deploy master --wait && yes | cp -rf /etc/puppetlabs/code/environments/master /etc/puppetlabs/code/environments/production && chown -R pe-puppet /etc/puppetlabs/code/environments/production')
+      .exit_status
+      .should_not eq 1
+    command("curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -X DELETE 'https://localhost:8140/puppet-admin-api/v1/environment-cache?environment=production'")
       .exit_status
       .should_not eq 1
   end
@@ -276,7 +282,7 @@ describe _("Task 19:"), host: :localhost do
   it _('Trigger a puppet run on the pasture-app.beauvine.vm node'), :validation do
     command("curl 'pasture-app.beauvine.vm/api/v1/cowsay'")
       .stdout
-      .should match /repository/
+      .should match /Beauvine/
   end
 end
 
@@ -314,7 +320,7 @@ end
 
 describe _("Task 22:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('cd /root/control-repo && git push upstream update_cowsay_message')
+    command('cd /root/control-repo && git push upstream beauvine_message_default')
       .exit_status
       .should eq 0
   end
@@ -327,12 +333,13 @@ end
 
 describe _("Task 23:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('cd /root/control-repo && git checkout production && git merge update_cowsay_message && git push -f upstream production')
+    # Again, pushing to master branch rather than produciton for solution
+    command('cd /root/control-repo && git checkout master && git merge beauvine_message_default && git push -f upstream master')
       .exit_status
       .should eq 0
   end
   it _('Merge your change to the upstream production branch'), :validation do
-    command("curl -i http://learning:puppet@localhost:3000/api/v1/repos/learning/control-repo/branches/production")
+    command("curl -i http://learning:puppet@localhost:3000/api/v1/repos/learning/control-repo/branches")
       .stdout
       .should match /default_message/
   end
@@ -340,13 +347,14 @@ end
 
 describe _("Task 24:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('puppet code deploy production --wait')
+    command('puppet code deploy master --wait && yes | cp -rf /etc/puppetlabs/code/environments/master /etc/puppetlabs/code/environments/production && chown -R pe-puppet /etc/puppetlabs/code/environments/production')
       .exit_status
       .should_not eq 1
   end
   it _('Deploy your modified production code'), :validation do
     file("/etc/puppetlabs/code/environments/production/data/domain/beauvine.vm.yaml")
-      .should be_directory
+      .content
+      .should match /repository/
   end
 end
 
