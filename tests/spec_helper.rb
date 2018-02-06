@@ -3,14 +3,55 @@ require 'pathname'
 require 'highline/import'
 require 'net/ssh'
 require 'gettext-setup'
+require 'restclient'
 ### include requirements ###
 
 PROD_PATH = '/etc/puppetlabs/code/environments/production/'
 MODULE_PATH = "#{PROD_PATH}modules/"
 SOLUTION_PATH = File.expand_path('../solution_files/', __FILE__)
+GITEA_HOMEDIR = '/home/git/'
+GITEA_BIN = '/home/git/go/bin/gitea'
 
 GettextSetup.initialize(File.expand_path('./locales', File.dirname(__FILE__)))
 GettextSetup.negotiate_locale!(GettextSetup.candidate_locales)
+
+def get_master_group_id
+	`curl -s -k -X GET https://$(puppet config print certname):4433/classifier-api/v1/groups \
+	--cert $(puppet config print hostcert) --key $(puppet config print hostprivkey) \
+	--cacert $(puppet config print cacert) \
+  -H "Content-Type: application/json" | jq -r -c '.[] | select(.name | contains("PE Master")) | .id'`.chomp
+end
+
+def get_learning_user_id
+	`curl -s -k -X GET https://$(puppet config print certname):4433/rbac-api/v1/users \
+	--cert $(puppet config print hostcert) --key $(puppet config print hostprivkey) \
+	--cacert $(puppet config print cacert) \
+  -H "Content-Type: application/json" | jq -r -c '.[] | select(.login | contains("learning")) | .id'`.chomp
+end
+
+def make_gitea_user(username, password)
+  Dir.chdir(GITEA_HOMEDIR) do
+    uid = Etc.getpwnam('git').uid
+    pid = Process.fork do
+      ENV['USER'] = 'git'
+      Process.uid  = uid
+      Process.euid = uid
+      output, status = Open3.capture2e(GITEA_BIN, 'admin', 'create-user',
+                                       '--name', username,
+                                       '--password', password,
+                                       '--email',  "#{username}@learning.vm")
+    end
+  end
+end
+
+def make_gitea_repo(username, password, reponame)
+  RestClient.post("http://#{username}:#{password}@localhost:3000/api/v1/user/repos", {
+    'auto_init'   => false,
+    'description' => "test repo",
+    'repo_name'   => reponame,
+    'name'        => 'control-repo',
+  })
+end
 
 def docker_hosts
   hosts = {}
@@ -84,6 +125,12 @@ RSpec.configure do |config|
   config.before(:example, :host => :pastureappsmall) do
     set :backend, 'ssh'
     set :host, 'pasture-app-small.puppet.vm'
+    options = {password: 'puppet', user: 'learning'}
+    set :ssh_options, options
+  end
+  config.before(:example, :host => :pastureappbeauvine) do
+    set :backend, 'ssh'
+    set :host, 'pasture-app.beauvine.vm'
     options = {password: 'puppet', user: 'learning'}
     set :ssh_options, options
   end

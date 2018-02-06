@@ -27,6 +27,24 @@ for these systems directly in your `site.pp` manifest doesn't scale well. The
 how the components provided in your Puppet modules come together to define each
 different kind of system you need to manage.
 
+The concepts introduced in this quest mark an important transition in your
+progress from learning Puppet basics to understanding how to build these out
+into the higher level abstractions suitable for managing production
+infrastructure. This also means a shift in focus from well the well-defined
+aspects of Puppet tools and syntax to more open-ended questions about what you
+should do with them.
+
+The roles and profiles pattern given in this quest has been successfully
+adopted by some of Puppet's largest customers and is used internally to manage
+our own infrastructure. It is an example of how higher-level abstractions in
+your Puppet code can greatly simplify the task of managing configuration across
+a great number and variety of systems while maintaining a concise and
+expressive base of Puppet code. You may find that this kind of abstraction
+can be better achieved for your particular needs by modifying or abandoning the
+roles and profiles pattern. Even if this is your ultimate conclusion, however,
+you divergences should be well reasoned and based on strong understanding of
+the high-level abstraction that the roles and profiles pattern provides.
+
 When you're ready to get started, enter the following command:
 
     quest begin roles_and_profiles

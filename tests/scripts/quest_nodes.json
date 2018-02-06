@@ -1,5 +1,5 @@
 {
-  "hello_puppet" :[
+  "hello_puppet" : [
     {
       "name" : "hello.puppet.vm",
       "image" : "no_agent",
@@ -43,12 +43,21 @@
     {"name" : "pasture-app-large.puppet.vm"},
     {"name" : "pasture-db.puppet.vm"}
   ],
-  "defined_resource_types" : [
-    {"name" : "pasture-app-small.puppet.vm"}
+  "hiera" : [
+    {"name" : "pasture-app.beauvine.vm"},
+    {"name" : "pasture-app.auroch.vm"},
+    {"name" : "pasture-db.auroch.vm"},
+    {"name" : "pasture-app-dragon.auroch.vm"}
   ],
-  "application_orchestrator" : [
-    {"name" : "pasture-app-large.puppet.vm"},
-    {"name" : "pasture-db.puppet.vm"}
+  "defined_resource_types" : [
+    {"name" : "pasture-app.beauvine.vm"}
+  ],
+  "control_repository" : [
+    {"name" : "pasture-app.beauvine.vm"}
+  ],
+  "puppetfile" : [
+    {"name" : "pasture-app.auroch.vm"},
+    {"name" : "pasture-db.auroch.vm"}
   ],
   "puppethack" : [
     {"name" : "hack1.puppet.vm"},
