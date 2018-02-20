@@ -177,7 +177,7 @@ We're not using any parameters, so we'll use the `include` function to add the
 `motd` class to the `pasture.puppet.vm` node definition.
 
 ```puppet
-node 'pasture.puppet.vm` {
+node 'pasture.puppet.vm' {
   include motd
   class { 'pasture':
     default_character => 'cow',
