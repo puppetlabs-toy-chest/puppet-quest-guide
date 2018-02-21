@@ -4,7 +4,7 @@
 
 ## Get the VM
 
-If you haven't already, [download the Learning VM](https://puppet.com/download-learning-vm)
+If you haven't already, [download the Learning VM](https://puppet.com/download-learning-vm).
 
 ## Virtualization setup
 
