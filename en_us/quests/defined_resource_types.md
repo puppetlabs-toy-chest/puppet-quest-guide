@@ -326,6 +326,7 @@ Before you open the data file to edit, save some effort by using the bash `>>`
 append operator to append it to your `id_rsa.pub` public key to the end of the
 data file.
 
+    mkdir -p data/domain
     cat ~/.ssh/id_rsa.pub >> data/domain/beauvine.vm.yaml
 
 Now open the file:
