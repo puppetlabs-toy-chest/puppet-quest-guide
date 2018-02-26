@@ -238,7 +238,7 @@ works.
 
 2. The PE console includes a GUI node classifier that makes it easy to manage
 node groups and classification without editing code directly. Though this is a
-very effecient way to manage node classification, you'll understand it best after you're familiar with some of the underlying Puppet concepts.
+very efficient way to manage node classification, you'll understand it best after you're familiar with some of the underlying Puppet concepts.
 
 3. Finally, if you want to customize node classification, you can create your
 own [external node
