@@ -36,7 +36,7 @@ Puppetコードにfactsを組み込む作業の前に、コマンドラインで
     ssh learning@pasture.puppet.vm
 
 `facter`コマンドを使うと、factsの標準セットにアクセスできます。`-p`フラグを追加すると、Puppet masterにインストールし、Puppet実行のpluginsyncステップでagentと同期したカスタムファクトが含まれます。この`facter -p`コマンドを`less`に渡し、ターミナルでアウトプットをスクロールできるようにします。
-	
+
     facter -p | less
 
 終わったら`q`を押して`less`を終了します。
@@ -131,7 +131,7 @@ This is a <%= $os_family %> system running <%= $os_name %> <%= $os_release %>
 パラメータをいっさい使っていないため、`include`関数を用いて、`motd`クラスを`pasture.puppet.vm`ノード定義に追加します。
 
 ```puppet
-node 'pasture.puppet.vm` {
+node 'pasture.puppet.vm' {
   include motd
   class { 'pasture':
     default_character => 'cow',
@@ -168,3 +168,9 @@ MOTDを確認したら、Puppet masterに戻ります。
 その後、Puppetマニフェスト内からfactsにアクセスし、それらの factsの値を変数に割り当てる方法を説明しました。また、Facterのデータを使って、MOTDファイルを管理するテンプレートを作成しました。
 
 次のクエストでは、*条件文*を用いてPuppetコードの柔軟性をさらに高める方法を説明します。そのような条件文とfactsを組み合わせ、システム情報をもとにインテリジェントなデフォルトを作成する例を紹介します。
+
+## その他のリソース
+
+* Puppetのfacterとfactsの詳細については、Puppetの [ドキュメントページ](https://docs.puppet.com/puppet/latest/lang_facts_and_builtin_vars.html)を参照してください。
+* [Facterのレッスン](https://learn.puppet.com/elearning/an-introduction-to-facter)は、[自分のペースでできるトレーニングコースのカタログ](https://learn.puppet.com/category/self-paced-training)にも含まれています。
+* Factsは、Puppet Fundamentals、Puppet PractitionerおよびPuppetizing Infrastructureコースで詳しく説明しています。詳細については、[対面](https://learn.puppet.com/category/instructor-led-training)および[オンライン](https://learn.puppet.com/category/online-instructor-led-training)のトレーニングオプションをチェックしてみてください。
