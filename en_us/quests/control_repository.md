@@ -22,8 +22,8 @@ makes it much easier for you and your team to collaborate, control change, and
 safely test new features.
 
 The concepts introduced in this quest mark an important transition in your
-progress from learning Puppet basics to understanding the system and
-process architecture suitable for managing production infrastructure.
+progress from learning Puppet basics to building a workflow suitable for
+managing production infrastructure.
 
 Though it is possible to use other SCM tools with Puppet, this quest focuses on
 Git. Learning to use Git effectively can be an undertaking in itself. This
