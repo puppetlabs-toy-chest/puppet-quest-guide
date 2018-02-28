@@ -1,5 +1,6 @@
 # 概要
 
+* [はじめに](README.md)
 * [セットアップ](SETUP.md)
 
 ### クエスト
@@ -16,8 +17,10 @@
 * [条件文](quests/conditional_statements.md)
 * [Forge](quests/the_forge.md)
 * [ロールとプロファイル](quests/roles_and_profiles.md)
+* [Hiera](quests/hiera.md)
 * [定義リソース型](quests/defined_resource_types.md)
-* [アプリケーションオーケストレータ](quests/application_orchestrator.md)
+* [コントロールリポジトリ](quests/control_repository.md)
+* [Puppetfile](quests/puppetfile.md)
 
 ### 付録
 
