@@ -18,6 +18,10 @@
 
 Puppetで構成したインフラストラクチャの規模と複雑さが増すにつれて、より多様なシステムを管理する必要が生じます。そうしたシステムのクラスとパラメータをすべて`site.pp`マニフェストで直接定義するのは、スケールアップの方法としてあまり効果的ではありません。*ロールとプロファイル*パターンを使えば、一貫したモジュール形式の方法で、Puppetモジュールで提供されるコンポーネントをまとめ、管理が必要なさまざまなシステムを定義することができます。
 
+このクエストで説明するコンセプトは、Puppetの基礎の学習から、それをもとに本稼働インフラの管理に適した高次の抽象化を構築する方法の理解へと前進するうえで、重要な移行ポイントとなるものです。また、十分に定義されたPuppetのツールや構文規則から、それを使って何をするべきかという、より答えの幅の広い疑問へと焦点が移ることも意味しています。 
+
+このクエストで提示するロールとプロファイルパターンは、Puppet最大級の顧客に問題なく採用されています。また、Puppet社内のインフラ管理にも使用されています。ここで提示する例は、Puppetコードの高次の抽象化により、Puppetコードの簡潔な表現の基礎を維持しながら、多種多様な多くのシステムの管理タスクを単純化できることを示しています。ユーザそれぞれのニーズによっては、ロールとプロファイルパターンを修正または放棄するほうが、この種の抽象化を実現しやすいことがわかるかもしれません。しかし、最終的にそうした結論に達する場合でも、その進路の変更は、ロールとプロファイルパターンが提供する高次の抽象化を十分に理解したうえで、それを根拠として判断するべきです。
+
 準備ができたら、以下のコマンドを入力してください。
 
     quest begin roles_and_profiles
@@ -60,7 +64,7 @@ Puppetで構成したインフラストラクチャの規模と複雑さが増�
 
 ここで、`profile::pasture::app`クラスを定義します。
 
-このクエストのクエストツールでは、`pasture-app-small.puppet.vm`および`pasture-app-large.puppet.vm`ノードが作成されています。そのため、ノード名に基づいて適切なプロファイルを決定することができます。条件文を用いて、ノードの`fqdn` factに文字列'large'または'small'が含まれているかどうかに応じて、`$default_character`および`$db`パラメータを設定します。'small'の場合は、特殊な`undef`値を用いてこれらのパラメータを設定しないまま残し、`pasture`コンポーネントクラスで設定されたデフォルトを使用するようにします。また、`else`ブロックを追加し、`fqdn`変数が'small'または'large'のどちらとも一致しない場合に、適切なエラーメッセージを表示して失敗するようにします。
+このクエストのクエストツールでは、`pasture-app-small.puppet.vm`および`pasture-app-large.puppet.vm`ノードが作成されています。そのため、ノード名に基づいて適切なプロファイルを決定することができます。条件文を用いて、ノードの`fqdn` factに文字列'large'または'small'が含まれているかどうかに応じて、`$default_character`および`$db`パラメータを設定します。また、`else`ブロックを追加し、`fqdn`変数が'small'または'large'のどちらとも一致しない場合に、適切なエラーメッセージを表示して失敗するようにします。
 
 ```puppet
 class profile::pasture::app {
@@ -68,8 +72,8 @@ class profile::pasture::app {
     $default_character = 'elephant'
     $db                = 'postgres://pasture:m00m00@pasture-db.puppet.vm/pasture'
   } elsif $facts['fqdn'] =~ 'small' {
-    $default_character = undef
-    $db                = undef
+    $default_character = 'cow'
+    $db                = 'none'
   } else {
     fail("The ${facts['fqdn']} node name must match 'large' or 'small'.")
   }
@@ -174,27 +178,33 @@ Puppetのノード定義構文の別の機能を使えば、分類モデルを�
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
-アプリケーションサーバノードのノード定義ブロックを作成します。`/^pasture-app/`正規表現をノード定義のタイトルとして使用し、`role::pasture_app`ロールクラスを含めます。
+アプリケーションとノードのノード定義ブロックを作成します。
+
+ノード定義ブロックは、タイトルとして正規表現を使用できることを思い出してください。ここでの目的は、ホスト名が`pasture-app`で始まるノードを`role::pasture_app`ロールで分類することです。そのため、`/^pasture-app/`のタイトルを持ち、一致するノードの`role::pasture_app`ロールを`include`するノード定義ブロックを作成します。同様に、名前が`pasture-db`に一致するノードを`role::pasture_db`と分類する必要があるため、このノードを含むタイトル `/^pasture-db/`のノード定義を追加します。
+
+ロールとプロファイルパターンを使用するので、`pasture-app.puppet.vm`および`pasture-db.puppet.vm`の過去のノード定義を削除します。
+
+削除したら、最初のコメントの後の`site.pp`セクションは、以下のようになるはずです。
 
 ```puppet
+node default {
+  # This is where you can declare classes for all nodes.
+  # Example:
+  #   class { 'my_class': }
+}
+
 node /^pasture-app/ {
   include role::pasture_app
 }
-```
 
-データベースロールの第2のノード定義を追加します。ここではデータベースノードは1つだけですが、ここで使う正規表現は、後から簡単にスケールアップできます。
-
-```puppet
 node /^pasture-db/ {
   include role::pasture_db
 }
 ```
 
-ロールとプロファイルパターンを使用するので、`pasture-app.puppet.vm`および`pasture-db.puppet.vm`ノードの過去のノード定義を削除する必要があります。
-
 <div class = "lvm-task-number"><p>タスク7:</p></div>
 
-`puppet job`ツールを使って、`pasture-db.puppet.vm`ノードでPuppet agent実行を開始します。
+`puppet job`ツールを使って、`pasture-db.puppet.vm`ノードでPuppet agent実行を開始します(トークンの期限が切れている場合は、`puppet access login learning --lifetime 1d`を実行し、パスワード`puppet`で新規トークンを生成してください)。
 
     puppet job run --nodes pasture-db.puppet.vm
 
@@ -207,7 +217,7 @@ node /^pasture-db/ {
     curl 'pasture-app-small.puppet.vm/api/v1/cowsay?message="hello"'
     curl 'pasture-app-large.puppet.vm/api/v1/cowsay?message="HELLO!"'
 
-前回のクエストで導入したデータベース機能が、アプリケーションの'large'インスタンスで稼働していること、また一方で'small'インスタンスは501エラーを返すことに注目してください。
+前回のクエストで導入したデータベース機能が、アプリケーションの'large'インスタンスで稼働していることに注目してください。'small'インスタンスは501エラーを返します。
 
     curl 'pasture-app-small.puppet.vm/api/v1/cowsay/sayings'
 
@@ -219,3 +229,11 @@ node /^pasture-db/ {
 
 最後に、`site.pp`マニフェストで正規表現を使って、インフラ内の各システムに適切なロールを割り当てる柔軟なノード定義を作成しました。
 
+## その他のリソース
+
+* ロールとプロファイルの詳細については、[ドキュメントページ](https://docs.puppet.com/pe/latest/r_n_p_intro.html)をご覧ください。
+* [ブログ記事](http://garylarizza.com/blog/2014/02/17/puppet-workflow-part-1/)も参照してください。これは、推奨されるPuppetワークフローとしてロールとプロファイルパターンを確立するうえで役立ちます。
+* [自分のペースでできるトレーニングコース](https://learn.puppet.com/elearning/an-introduction-to-roles-profiles)でも、ロールとプロファイルを扱っています。
+* ロールとプロファイルは、Puppet Practitioner、Puppetizing Infrastructureコースでも扱っています。詳細については、[対面](https://learn.puppet.com/category/instructor-led-training)および[オンライン](https://learn.puppet.com/category/online-instructor-led-training)トレーニングオプションをチェックしてみてください。
+* ノード定義における正規表現の使用については、[ドキュメントページ](https://docs.puppet.com/puppet/latest/lang_node_definitions.html#regular-expression-names)をご覧ください。
+* 正規表現を簡単にテストするためのツールは、[こちら](http://rubular.com)にあります。
