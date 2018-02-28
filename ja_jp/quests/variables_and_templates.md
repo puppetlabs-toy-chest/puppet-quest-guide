@@ -32,7 +32,7 @@
 $my_variable = 'look, a string!'
 ```
 
-いったん定義した変数は、マニフェスト内のどこででも、割り当てられた値を使いたい場所で使うことができます。変数は構文解析順序に依存する点に注意してください。つまり、使用する前に、変数を定義する必要があります。定義されていない変数を使おうとすると、特殊な`undef`値が生じる結果になります。一部のケースでは、これは明示的なエラーになりますが、予期せぬコンテンツを持つ有効なカタログにつながるケースもあります。
+いったん定義した変数は、マニフェスト内のどこででも、割り当てられた値を使いたい場所で使うことができます。変数は構文解析順序に依存する点に注意してください。つまり、使用する前に、変数を定義する必要があります。定義されていない変数を使おうとすると、特殊な`undef`値が生じる結果になります。これは明示的なエラーになりますが、一部のケースでは、予期せぬコンテンツを持つ有効なカタログにつながるケースもあります。
 
 技術的には、Puppetコードを解析してカタログを生成するPuppet構文解析という観点から言えば、Puppet変数は実際には*定数*です。変数をいったん割り当てたら、その値は固定され、変更できません。ここで言う*変動性*とは、インフラ内のさまざまなPuppet実行やさまざまなシステムで、変数として異なる値を設定できるという意味です。
 
@@ -54,7 +54,7 @@ class pasture {
   $default_message     = ''
   $pasture_config_file = '/etc/pasture_config.yaml'
 
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => 'gem',
     before   => File[$pasture_config_file],
@@ -115,7 +115,7 @@ EPPテンプレートは*パラメータタグ*から始めることをおすす
 # This file is managed by Puppet. Please do not make manual changes.
 ```
 
-パラメータリストを囲むバー(`|`)は、パラメータタグを定義する特殊な構文です。 `<%`と`%>`は、開始および終了側のタグデリミタで、ファイル本体とEPPタグを区別するものです。タグデリミタの隣のハイフン(`-`)は、タグ前後のインデントと余白を削除します。これにより、例えばアウトプットファイルの冒頭に空行を作成する改行文字をタグの後に入れなくても、このパラメータタグをファイルの冒頭に置けるようになります。
+パラメータリストを囲むバー(`|`)は、パラメータタグを定義する特殊な構文です。 `<%`と`%>`は、開始および終了側のタグデリミタで、ファイル本体とEPPタグを区別するものです。タグデリミタの隣のハイフン(`-`)は、タグ前後のインデントとホワイトスペースを削除します。これにより、例えばアウトプットファイルの冒頭に空行を作成する改行文字をタグの後に入れなくても、このパラメータタグをファイルの冒頭に置けるようになります。
 
 次に、設定した変数を使って、ポートおよびキャラクター設定オプションの値を定義します。
 
@@ -162,7 +162,7 @@ class pasture {
   $default_message     = ''
   $pasture_config_file = '/etc/pasture_config.yaml'
 
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => 'gem',
     before   => File[$pasture_config_file],
@@ -200,7 +200,7 @@ Vimでファイルを開き、テンプレート化します。
 
     vim pasture/templates/pasture.service.epp
 
-ファイルの冒頭にパラメータタグとコメントを追加します。開始コマンドの`--config_file`引数を`$pasture_config_fle`の値に設定します。
+ファイルの冒頭にパラメータタグとコメントを追加します。開始コマンドの`--config_file`引数を`$pasture_config_file`の値に設定します。
 
 ```
 <%- | $pasture_config_file = '/etc/pasture_config.yaml' | -%>
@@ -232,7 +232,7 @@ class pasture {
   $default_message     = ''
   $pasture_config_file = '/etc/pasture_config.yaml'
 
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => 'gem',
     before   => File[$pasture_config_file],
@@ -277,6 +277,8 @@ Puppet agent実行を開始します。
 
 Puppet実行が問題なく完了したら、接続を解除してLearning VMのセッションに戻ります。
 
+    exit
+
 もう一度`curl`コマンドを使って、デフォルトの変更が有効になっていることを確認します。
 
     curl 'pasture.puppet.vm/api/v1/cowsay?message=Hello!'
@@ -288,3 +290,8 @@ Puppet実行が問題なく完了したら、接続を解除してLearning VMの
 マニフェスト内で変数を設定し、ハッシュ構文とEPPテンプレート関数を使ってこれらの変数をテンプレートに渡す方法を学びました。`.epp`テンプレートでは、*パラメータタグ*を扱いました。これは、テンプレートの冒頭で使用し、テンプレート内で使用できる変数を指定するためのものです。また、テンプレート化したファイルのコンテンツに変数値を挿入する*表示式タグ*も扱いました。
 
 変数は重要なコンセプトの要素で、今後のクエストでも扱うことは、すでにお話ししました。次のクエストでは、*パラメータ化したクラス*の作成方法を説明します。これを使えば、クラスの宣言時にクラス内の重要な値を設定することができます。パラメータを使えば、クラスが定義されているモジュールのコードを編集せずに、クラスの設定をカスタマイズすることが可能です。
+
+## その他のリソース
+
+* Puppetのドキュメントページには、[変数](https://docs.puppet.com/puppet/latest/lang_variables.html)と[テンプレート](https://docs.puppet.com/puppet/latest/lang_template.html)についてより詳しい情報が提供されています。
+* これらのトピックは、Puppetの[対面](https://learn.puppet.com/category/instructor-led-training)および[オンライン](https://learn.puppet.com/category/online-instructor-led-training)トレーニングでも、詳しく説明します。
