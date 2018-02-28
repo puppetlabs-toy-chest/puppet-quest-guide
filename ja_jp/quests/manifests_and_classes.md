@@ -30,7 +30,7 @@ Puppetコードの構成、維持、デプロイに用いるパターンやワ�
 
 <div class = "lvm-task-number"><p>タスク1:</p></div>
 
-まず、このクエストのために作成したノードにSSH接続します。
+まず、このクエストのために作成したノードにSSH接続します。本クエストガイドにおいて、この接続およびすべてのAgentシステムで使用するパスワードは`puppet`であることを覚えておいてください。
 
     ssh learning@cowsay.puppet.vm
 
@@ -50,7 +50,7 @@ masterでこのノードを分類してPuppet agent実行を開始する代わ�
 
     sudo puppet apply /tmp/hello.pp 
 
-Puppetコードをファイルに保存する方法はわかりましたが、この保存したPuppetコードと、ノード分類を定義する`site.pp`の間のギャップはどうやって埋めたらいいのでしょうか？　 最初のステップは、Puppetコードを*クラス*および*モジュール*に組み込むことです。
+Puppetコードをファイルに保存する方法はわかりましたが、この保存したPuppetコードと、ノード分類を定義する`site.pp`の間のギャップはどうやって埋めたらいいのでしょうか？最初のステップは、Puppetコードを*クラス*および*モジュール*に組み込むことです。
 
 ### クラスとモジュール
 
@@ -80,11 +80,11 @@ Puppetコードをファイルに保存する方法はわかりましたが、�
 
 ```
 /etc/puppetlabs/code/environments/production/modules:/etc/puppetlabs/code/modules:/opt/puppetlabs/puppet/modules
-``` 
+```
 
 とりあえずは、モジュールパスのリストの最初にあるディレクトリで作業します。このディレクトリには、プロダクション環境固有のモジュールが含まれています(2番目のディレクトリには、すべての環境で使われるモジュールが含まれています。3番目は、PEが設定に使用するモジュールです)。
 
-ここではモジュールとクラスの構造に焦点を絞っているので、master上のモジュールパスに直接コードを書きます。ただし、実際のプロダクション環境では、Gitなどのバージョン管理リポジトリにPuppetコードを保存し、Puppetコードマネージャツールを使ってmasterにデプロイするほうがいいかもしれません。VMに依存する重要なインフラはないので、ここではこのステップを省き、直接コードを書いても問題ありません。
+ここではモジュールとクラスの構造に焦点を絞っているので、master上のモジュールパスに直接コードを書きます。ただし、実際のプロダクション環境では、Gitなどのバージョン管理リポジトリにPuppetコードを保存し、Puppetコードマネージャツールを使ってmasterにデプロイするほうがよいかもしれません。VMに依存する重要なインフラはないので、ここではこのステップを省き、直接コードを書いても問題ありません。
 
 <div class = "lvm-task-number"><p>タスク2:</p></div>
 
@@ -122,7 +122,7 @@ class cowsay {
 適用する前にコードを検証する習慣をつけましょう。`puppet parser`ツールを使って、新規マニフェストの構文をチェックします。
 
     puppet parser validate cowsay/manifests/init.pp
-	
+
 エラーがなければ、構文解析ツールは何も返しません。構文エラーが検出された場合は再びファイルを開き、問題を修正して先へ進みます。この検証で見つかるのは簡単な構文エラーのみで、マニフェストで生じる可能性のあるその他のエラーは見つからない点に注意してください。
 
 モジュールの`init.pp`マニフェスト内で`cowsay`クラスが定義されました。これで、`cowsay`クラスをノードに適用する際にどこを探せば適切なPuppetコードが見つかるか、Puppet masterが認識できるようになりました。
@@ -262,7 +262,7 @@ cowsayパッケージはすでにインストールされているので、Puppe
 Puppet実行の結果を確認したら、接続を解除して Puppet masterに戻ります。
 
     exit
-	
+
 ## おさらい
 
 このクエストではまず、Puppetコードを整理された状態に保つことの重要性を説明しました。この*クラス*、*マニフェスト*、*モジュール*という構造により、コードを論理的で再利用可能なユニットにまとめておくことができます。また、Puppetの*モジュールパス*内にモジュールを保存すれば、Puppet masterがモジュールに含まれるクラスを見つけることができます。
@@ -270,3 +270,9 @@ Puppet実行の結果を確認したら、接続を解除して Puppet masterに
 ここまで学んだことを使って、`cowsay`パッケージを管理する新規モジュールを作成し、`fortune-mod`パッケージを管理する新規クラスを作成してこのモジュールを拡張しました。
 
 以降のクエストでも引き続き、この整理スキームを用いて、ユーザの記述するPuppetコードを構築していきます。
+
+## その他のリソース
+
+* モジュールの基礎および構造については、Puppetの[ドキュメントページ](https://docs.puppet.com/puppet/latest/modules_fundamentals.html)に掲載されています。ここにはモジュールテストやForgeへの公開を含むその他のトピックも記載されています。
+* Puppetのモジュールは、Puppet Fundamentals、Puppet PractitionerおよびPuppetizing Infrastructureコースで詳しく説明しています。詳細については、[対面](https://learn.puppet.com/category/instructor-led-training)および[オンライン](https://learn.puppet.com/category/online-instructor-led-training)のトレーニングオプションをチェックしてみてください。
+* [クラス](https://learn.puppet.com/elearning/classes)および[自動ローディング](https://learn.puppet.com/elearning/autoloading)は、自分のペースで学習できるレッスンとして用意されています。
