@@ -3,6 +3,17 @@ require_relative './spec_helper'
 MASTER_GID = get_master_group_id
 LEARNING_UID = get_learning_user_id
 
+describe "The puppetfile quest", host: :localhost do
+  it 'begins', :solution do
+    command("quest begin puppetfile")
+      .exit_status
+      .should eq 0
+    command("echo 'puppet' | puppet access login --username learning --lifetime 1d")
+      .exit_status
+      .should eq 0
+  end
+end
+
 describe _("Task 1:"), host: :localhost do
   it 'has a working solution', :solution do
     command('cd /root/control-repo && git checkout master && git pull upstream master && git checkout -b puppetfile')
