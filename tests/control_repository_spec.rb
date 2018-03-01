@@ -141,9 +141,9 @@ describe _("Task 9:"), host: :localhost do
     sleep 30 # We could poll gitea, but for the sake of getting this done, just sleep!
   end
   it _('Set up an upstream remote in Gitea'), :validation do
-    command("cd /root/control-repo && git remote -v")
+    command("curl -i http://learning:puppet@localhost:3000/api/v1/repos/learning/control-repo")
       .stdout
-      .should match /upstream\s+http:\/\/localhost:3000\/.*\/control-repo\.git\s\(fetch\)/
+      .should match /200 OK/
   end
 end
 
