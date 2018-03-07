@@ -2,6 +2,12 @@
 
 ## Release Notes
 
+### v2.3.0
+  * Content tested for compatibility with puppet-2017.3.5-learning-6.5.ova VM build
+  * Added Hiera, Control Repository, and Puppetfile quests localized for English and Japanese.
+  * Removed some unused packages to reduce VM archive size.
+  * Minor typo and punctuation fixes.
+
 ### v2.2.1
   * Content tested for compatibility with puppet-2017.3.2-learning-6.4 VM build
   * Modified the quest setup script to ensure that the Docker SSL directory
