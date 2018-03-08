@@ -36,7 +36,7 @@ describe _("Task 2:"), host: :localhost do
   it _('Create a Puppetfile in your control repository'), :validation do
     file("/root/control-repo/Puppetfile")
       .content
-      .should match /mod\s"puppetlabs\/postgresql",\s'4\.8\.0'/
+      .should match /mod\s"puppetlabs\/postgresql",\s'4\.9\.0'/
   end
 end
 
