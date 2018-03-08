@@ -21,7 +21,7 @@ describe _("Task 1:"), host: :localhost do
       .should eq 0
   end
   it _('Check out a new puppetfile branch'), :validation do
-    command("cd root/control-repo && git status")
+    command("cd /root/control-repo && git status")
       .stdout
       .should match /puppetfile/
   end
