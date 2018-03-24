@@ -265,7 +265,7 @@ class pasture (
     ensure    => running,
   }
 
-  if $sinatra_server == 'thin' or 'mongrel'  {
+  if ($sinatra_server == 'thin') or ($sinatra_server == 'mongrel')  {
     package { $sinatra_server:
       provider => 'gem',
       notify   => Service['pasture'],
