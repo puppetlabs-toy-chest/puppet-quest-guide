@@ -505,7 +505,7 @@ Select the `code_manager_auto_configure` parameter from the drop-down menu and
 set the value to `true`. Click the **Add parameter** button to the left.
 Following the same method, set the `r10k_remote` parameter to
 `http://localhost:3000/learning/control-repo.git`, the `r10k_private_key`
-parameter to `/etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa`, and
+parameter to `/etc/puppetlabs/puppetserver/ssh/id-control_repo`, and
 `file_sync_enabled` to `true`.
 
 ![image](../assets/pe_console_code_manager.png)
@@ -718,7 +718,7 @@ control repository.
 Now that you have committed your changes to your local branch, push the branch
 to your upstream repository.
 
-    git push upstream update_cowsay_message
+    git push upstream beauvine_message_default
 
 When prompted, enter your Gitea user account name and password: `learning` and
 `puppet`.
