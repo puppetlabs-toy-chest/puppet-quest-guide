@@ -136,7 +136,7 @@ To see how this all fits together, let's get started on a `ssh_user` defined
 resource type.
 
 Like a class, a defined resource type should be defined within a module. In
-many cases, a defined resource type is be included in a module to support the
+many cases, a defined resource type is included in a module to support the
 functionality provided by that module's class or classes. For example, the
 `postgresql` module you used in the previous quest provides defined resource
 types to help manage the groups of related resources that come together to
@@ -178,13 +178,13 @@ define user_accounts::ssh_user (
 }
 ```
 
-Note that the `$pub_key` parameter has no default value, while the default
+Note that the `$key` parameter has no default value, while the default
 values for the other parameters are set to 'undef'. There is an important
 difference here.
 
 A parameter with no supplied default value is required. Leaving out a default
-value for the `$pub_key` parameter means that declaring an instance of this
-`ssh_user` defined resource type without supplying a value for the `$pub_key`
+value for the `$key` parameter means that declaring an instance of this
+`ssh_user` defined resource type without supplying a value for the `$key`
 parameter will result in a compilation error. Because this resource requires
 a user's public key in order to correctly provide SSH access with public key
 authentication, this is the desired behavior.
@@ -494,9 +494,9 @@ expired, run the `puppet access login --lifetime 1d` and use the credentials
     puppet job run --nodes pasture-app.beauvine.vm
 
 When the Puppet run completes, connect to `pasture-app.beauvine.vm` as the
-user `bert`.
+user `gertie`.
 
-    ssh bert@pasture-app.beauvine.vm
+    ssh gertie@pasture-app.beauvine.vm
 
 Once you've verified that the you can connect as this user, go ahead and
 disconnect.
