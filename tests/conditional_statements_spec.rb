@@ -53,7 +53,7 @@ describe _("Task 3:"), host: :localhost do
   it _('Conditionally manage the Sinatra server package'), :validation do
     file("#{MODULE_PATH}pasture/manifests/init.pp")
       .content
-      .should match /if\s+\$sinatra_server\s+==\s+(['"])thin\1\s+or\s+(['"])mongrel\1\s+\{.*?package\s+\{\s+\$sinatra_server:/m
+      .should match /if\s+\(\$sinatra_server\s+==\s+(['"])thin\1\)\s+or\s+\(\$sinatra_server\s+==\s+(['"])mongrel\2\)\s+\{.*?package\s+\{\s+\$sinatra_server:/m
     command("puppet parser validate #{MODULE_PATH}pasture/manifests/init.pp")
       .exit_status
       .should be_zero
