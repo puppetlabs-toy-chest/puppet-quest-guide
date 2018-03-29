@@ -718,7 +718,7 @@ control repository.
 Now that you have committed your changes to your local branch, push the branch
 to your upstream repository.
 
-    git push upstream update_cowsay_message
+    git push upstream beauvine_message_default
 
 When prompted, enter your Gitea user account name and password: `learning` and
 `puppet`.
