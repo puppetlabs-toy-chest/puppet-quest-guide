@@ -426,7 +426,7 @@ Next, use the `ssh-keygen` command to generate a new keypair.
 
 When prompted, save the key to the following file:
 
-    /etc/puppetlabs/puppetserver/ssh/id-control_repo
+    /etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa
 
 When prompted for a passphrase, hit enter twice to create a key without a
 passphrase.
@@ -446,7 +446,7 @@ To add your deploy key, you have two options. Your first option is to simply
 copy and paste the key. You can view the public key on the vim with the `cat`
 command.
 
-    cat /etc/puppetlabs/puppetserver/ssh/id-control_repo.pub
+    cat /etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa.pub
 
 Copy only the actual key segment between "ssh-rsa" and "learning@puppet.vm" to
 your clipboard. Click on the **Add Deploy Key** button in the Gitea interface,
@@ -718,7 +718,7 @@ control repository.
 Now that you have committed your changes to your local branch, push the branch
 to your upstream repository.
 
-    git push upstream update_cowsay_message
+    git push upstream beauvine_message_default
 
 When prompted, enter your Gitea user account name and password: `learning` and
 `puppet`.

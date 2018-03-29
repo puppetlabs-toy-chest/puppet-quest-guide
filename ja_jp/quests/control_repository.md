@@ -267,7 +267,7 @@ Giteaリポジトリのセットアップが完了したので、トレーニン
 
 プロンプトが表示されたら、以下のファイルにキーを保存します。
 
-    /etc/puppetlabs/puppetserver/ssh/id-control_repo
+    /etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa
 
 パスフレーズの入力を要求されたら、Enterを2回押して、パスフレーズなしでキーを作成します。
 
@@ -283,7 +283,7 @@ Giteaリポジトリのセットアップが完了したので、トレーニン
 
 デプロイキーの追加方法は2種類あります。1つ目は、単純にキーをコピーしてペーストする方法です。`cat`コマンドを使用すると、vimでパブリックキーを表示できます。
 
-    cat /etc/puppetlabs/puppetserver/ssh/id-control_repo.pub
+    cat /etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa.pub
 
 "ssh-rsa"と"learning@puppet.vm"の間の実際のキー部分だけをクリップボードにコピーします。Giteaインターフェースで[**Add Deploy Key**]ボタンをクリックし、フォームの[**Content**]フィールドにキーをペーストします。トレーニングVMのWebベースコンソールからコピーしている場合、パブリックキーのコピーを正確に入力するために、改行コードをいくつか手動で削除する必要があります。[**Title**]フィールドに"Code Manager"を設定し、[**Add Deploy Key**]ボタンをクリックして、キーを追加します。エラーが表示される場合、挿入したテキストが正確にキーと一致しており、改行コードや余分なスペースがキーの前後にないことを確認します。
 
@@ -474,7 +474,7 @@ control repository.
 
 ローカルブランチに変更をコミットしたので、次に、このブランチをアップストリームリポジトリにプッシュします。
 
-    git push upstream update_cowsay_message
+    git push upstream beauvine_message_default
 
 プロンプトが表示されたら、Giteaのユーザアカウント名とパスワードとして、`learning`および`puppet`を入力します。
 
