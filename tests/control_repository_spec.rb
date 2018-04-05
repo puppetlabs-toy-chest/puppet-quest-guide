@@ -99,7 +99,16 @@ end
 
 describe _("Task 6:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("cd /root/control-repo && git init && git add * && git status && git commit -m 'Initial commit of existing modules'")
+    command("cd /root/control-repo && git init")
+    .exit_status
+    .should eq 0
+    command("cd /root/control-repo && git config credential.helper store")
+    .exit_status
+    .should eq 0
+    command('echo "http://learning:puppet@localhost%3a3000" > /root/.git-credentials')
+    .exit_status
+    .should eq 0
+    command("cd /root/control-repo && git add * && git status && git commit -m 'Initial commit of existing modules'")
     .exit_status
     .should eq 0
   end
