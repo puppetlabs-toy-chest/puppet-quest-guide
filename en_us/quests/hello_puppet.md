@@ -84,7 +84,7 @@ Ask questions on [Slack](https://slack.puppet.com/),
 [Ask](http://ask.puppet.com/) Q&A site. Attend 
 [Puppet User Groups (PUGs)](https://puppet.com/community/user-groups) to
 connect with other Puppet users in your area. Get a jump start on your Puppet
-infrastructure with [the Puppet Forge](forge.puppet.com), a repository of
+infrastructure with [the Puppet Forge](https://forge.puppet.com), a repository of
 modules maintained by Puppet and the Puppet community that give you everything
 you need to manage common applications and services. The Forge has a wide range
 of modules to help you manage everything from NTP and SQL Server to Minecraft.
