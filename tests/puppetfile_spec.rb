@@ -106,7 +106,7 @@ describe _("Task 7:"), host: :localhost do
     command('puppet job run --nodes pasture-app.auroch.vm,pasture-db.auroch.vm')
       .exit_status
       .should_not eq 1
-    command("curl -X POST 'pasture-app.auroch.vm/api/v1/cowsay/sayings?message=Hello!")
+    command("curl -X POST 'pasture-app.auroch.vm/api/v1/cowsay/sayings?message=Hello!'")
       .exit_status
       .should eq 0
   end
