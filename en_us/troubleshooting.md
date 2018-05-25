@@ -6,6 +6,55 @@ For the most up-to-date version of this troubleshooting information, [check the
 GitHub
 repository](https://github.com/puppetlabs/puppet-quest-guide/blob/master/en_us/troubleshooting.md).
 
+### I can't find the Quest Guide for the Learning VM
+
+The Quest Guide is hosted by the VM itself, at http://<IPADDRESS>, where is the
+IPADDRESS of the VM. Note that the Quest Guide is hosted on http, not https. If
+you are prompted for a password, you're looking at the PE console login screen,
+which is hosted on https.
+    
+### Running the puppet agent returns "Server Error: Could not parse for environment production"
+
+The Puppet agent returns this error when it is unable to parse your Puppet code. The error
+message will indicate the file where the syntax error occurred. Use the `puppet parser validate`
+command to check the syntax of the indicated file. Note that problems with unpaired quotation marks,
+parentheses, and curly braces will often result in a syntax error shown for the end of the file
+where the parser's scan for the matching character failed. If the output of this syntax validation
+is not clear, compare your code against the example in the Quest Guide and against the solution
+files used we use for automated testing: https://github.com/puppetlabs/puppet-quest-guide/tree/master/tests/solution_files.
+
+### The agent node does not generate a certificate signing request or does not have a signed certificate
+
+If the pe-puppetserver service on the master is not fully started when you begin
+a quest, the certification signing request and certificate signing process may not
+complete. In this case, use the `systemctl --all | grep pe-` command to validate that
+all PE services are fully started, then use the `quest` tool to restart the quest.
+
+### I get a "Connection refused" when trying to run a curl command against the Pasture API
+
+It is likely that your Puppet code itself is correct and able to run without error,
+but that there is a problem with the pasture_config.yaml file or pasture.service
+file that causes the Pasture service to fail.
+
+You can check the pasture log by connecting to the node and running `journalctl -u pasture`.
+
+Check that the content of the pasture_config.yaml file and pasture.service
+file exactly match what's given in the Quest Guide. Note that YAML is sensitive
+to whitespace, so your line-breaks and indentations must be correct. If you
+think there may be a mistake, but cannot identify it, it may be helpful to
+use an online YAML parser such as the one found here: http://yaml-online-parser.appspot.com/
+
+### I get a "Connection refused" error when attempting to install the puppet agent
+
+It is likely that the pe-puppetserver service hasn't fully started or has
+failed due to a lack of memory. Restart the machine and give the `pe-puppetserver`
+service several minutes to complete startup before using the quest tool to
+restart the quest and trying again. You can check the status of all the PE
+services with the `systemctl --all | grep pe-` command. If you continue to
+have issues, you may want to check that you have the correct amount of memory
+allocated to the VM as specified in the setup guide, and that the host machine
+actually has that memory available to provide for the VM.
+
 ### I completed a task, but the quest tool doesn't show it as complete
 
 The quest tool uses a series of [Serverspec](http://serverspec.org/) tests for
@@ -30,15 +79,14 @@ subdirectory under that `tests` directory.
 If you find an issue with the tests or fixtures, please let us know by sending an
 email to learningvm@puppet.com.
 
-### Password Required for the Quest Guide
+### Do I need a password for the Quest Guide?
 
-The Learning VM's Quest Guide is accessible at `http://<VM's IP Address>`. Note
-that this is `http` and not `https` which is reserved for the PE console. The
-PE console will prompt you for a password, while no password is required for
-the Quest Guide.  (The Quest Guide includes a password for the PE console in
-the Power of Puppet quest: **admin/puppetlabs**)
+The Learning VM's Quest Guide is accessible at `http://<IPAddress>` where `IPADDRESS`
+is the password of the Learning VM. Note that this is `http` and not `https`
+which is reserved for the PE console. The PE console will prompt you for a password,
+while no password is required for the Quest Guide.
 
-### I can't find the VM password
+### I can't find the VM login password
 
 The Learning VM's password is generated randomly and will be shown on
 the splash page displayed on the terminal of your virtualization software when
@@ -52,12 +100,10 @@ console. This can generally be resolved by refreshing the page.
 
 ### Does the Learning VM work on vSphere, ESXi, etc.?
 
-While the VM should be compatible with these platforms, we don't test or
+While the VM may be compatible with these platforms, we don't test or
 support the VM in this context.
 
 ### I cannot connect to the PE console
-
-To connect to the PE console, you must use `https` rather than `http`.
 
 The console uses a self-signed certificate, which means that most browsers will
 show a security warning. To bypass this warning, you may have to click the
@@ -68,6 +114,13 @@ are fully started. If you attempt to connect to the console before the service
 is started, you will see a 503 error. If you recently started or restarted the
 VM, or restarted any services in the PE stack, please wait a few minutes before
 you try to access the PE console. See the section on PE services below.
+
+### I can't find the PE console login credentials
+
+The PE console login credentials are listed in the Quest Guide when you need
+to access the console as part of a lesson. The login is **admin** and the password
+is **puppetlabs**. If you see the PE console login prompt when you are trying to
+access the Quest Guide, it is because you are using `https` in the url rather than `http`.
 
 ### One of the PE services hasn't started or has crashed
 
@@ -90,6 +143,24 @@ memory allocated to the VM and available on your host, then use the following
 script to restart these services in the correct order:
 
     restart_classroom_services.sh
+
+### I cannot SSH or apply the puppet job tool to one of the nodes used in a quest
+
+When you use the quest tool to begin a quest, it uses docker to generate the
+needed nodes for that quest. It may be helpful to use the `docker ps` command
+to list running container nodes. If you restart the VM, the docker service will
+be reset and the generated nodes will be removed. If this happens, you must use
+the quest tool to restart the quest. You will have to re do any tasks that
+involve changes on a generated node, such as triggering a puppet run. Changes
+to Puppet code or configuration on the master will be preserved.
+
+If you are prompted for a password to connect with one of the alternate user
+accounts in the Defined Resource Types quest, it is an indication that there
+is a problem with your Puppet code, Hiera data, or ssh-keypair. If configured
+correctly, you should be able connect without a password. You can check manually
+by logging in to the system as the learning user and using sudo to check
+/home/gertie/.ssh/authorized_keys. There should be an entry there matching the
+key you generated and included in your Hiera file.
 
 ### My Puppet run fails!
 
@@ -172,9 +243,20 @@ adapter for the VM.
 ### I can't scroll up in my terminal
 
 The Learning VM uses a tool called tmux to allow us to display the quest
-status. You can scroll in tmux by first hitting control-b, then [ (left
+status. You can scroll in tmux by first hitting control-b, then `[` (left
 bracket). You will then be able to use the arrow keys to scroll. Press q to
 exit scrolling.
+
+### Is there a PDF version of the Quest Guide?
+
+We decided to discontinue the PDF version of the Quest Guide, as a profusion
+of PDFs of different versions was making it difficult for users of the
+guide and VM to match the correct documentation to the correct version. If
+you would like to look at the Quest Guide content without running the Learning
+VM, you can refer to the project's GitHub page:
+https://github.com/puppetlabs/puppet-quest-guide/blob/master/en_us/summary.md. Note,
+however, that this may include unreleased changes and may not match with task
+validation and content on your copy of the Learning VM.
 
 ### Still need help?
 
