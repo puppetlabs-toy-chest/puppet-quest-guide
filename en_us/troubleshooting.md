@@ -8,8 +8,8 @@ repository](https://github.com/puppetlabs/puppet-quest-guide/blob/master/en_us/t
 
 ### I can't find the Quest Guide for the Learning VM
 
-The Quest Guide is hosted by the VM itself, at http://<IPADDRESS>, where is the
-IPADDRESS of the VM. Note that the Quest Guide is hosted on http, not https. If
+The Quest Guide is hosted by the VM itself, at http://<IPADDRESS>, where `IPADDRESS` is the
+IP address of the VM. Note that the Quest Guide is hosted on http, not https. If
 you are prompted for a password, you're looking at the PE console login screen,
 which is hosted on https.
     
@@ -19,7 +19,7 @@ The Puppet agent returns this error when it is unable to parse your Puppet code.
 message will indicate the file where the syntax error occurred. Use the `puppet parser validate`
 command to check the syntax of the indicated file. Note that problems with unpaired quotation marks,
 parentheses, and curly braces will often result in a syntax error shown for the end of the file
-where the parser's scan for the matching character failed. If the output of this syntax validation
+where the parsers scan for the matching character failed. If the output of this syntax validation
 is not clear, compare your code against the example in the Quest Guide and against the solution
 files used we use for automated testing: https://github.com/puppetlabs/puppet-quest-guide/tree/master/tests/solution_files.
 
@@ -81,8 +81,8 @@ email to learningvm@puppet.com.
 
 ### Do I need a password for the Quest Guide?
 
-The Learning VM's Quest Guide is accessible at `http://<IPAddress>` where `IPADDRESS`
-is the password of the Learning VM. Note that this is `http` and not `https`
+No. The Learning VM's Quest Guide is accessible at `http://<IPAddress>` where `IPADDRESS`
+is the password of the Learning VM. Note that this is `http` and not `https`,
 which is reserved for the PE console. The PE console will prompt you for a password,
 while no password is required for the Quest Guide.
 
