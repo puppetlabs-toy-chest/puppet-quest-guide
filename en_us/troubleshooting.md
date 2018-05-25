@@ -9,7 +9,7 @@ repository](https://github.com/puppetlabs/puppet-quest-guide/blob/master/en_us/t
 ### I can't find the Quest Guide for the Learning VM
 
 The Quest Guide is hosted by the VM itself, at http://<IPADDRESS>, where `IPADDRESS` is the
-IPADDRESS of the VM. Note that the Quest Guide is hosted on http, not https. If
+IP address of the VM. Note that the Quest Guide is hosted on http, not https. If
 you are prompted for a password, you're looking at the PE console login screen,
 which is hosted on https.
     
