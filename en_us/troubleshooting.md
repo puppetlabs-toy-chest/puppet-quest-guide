@@ -71,7 +71,7 @@ email to learningvm@puppet.com.
 
 ### Do I need a password for the Quest Guide?
 
-No. The Learning VM's Quest Guide is accessible at `http://<IPAddress>` where `IPADDRESS`
+No. The Learning VM's Quest Guide is accessible at `http://<IPAddress>` where `IPAddress`
 is the password of the Learning VM. Note that this is `http` and not `https`,
 which is reserved for the PE console. The PE console will prompt you for a password,
 while no password is required for the Quest Guide.
@@ -140,8 +140,8 @@ When you use the quest tool to begin a quest, it uses docker to generate the
 needed nodes for that quest. It may be helpful to use the `docker ps` command
 to list running container nodes. If you restart the VM, the docker service will
 be reset and the generated nodes will be removed. If this happens, you must use
-the quest tool to restart the quest. You will have to re do any tasks that
-involve changes on a generated node, such as triggering a puppet run. Changes
+the quest tool to restart the quest. You will have to redo any tasks that
+involve changes on a generated node, such as triggering a Puppet run. Changes
 to Puppet code or configuration on the master will be preserved.
 
 If you are prompted for a password to connect with one of the alternate user
@@ -162,12 +162,12 @@ where the parser's scan for the matching character failed. If the output of this
 is not clear, compare your code against the example in the Quest Guide and against the solution
 files used we use for automated testing: https://github.com/puppetlabs/puppet-quest-guide/tree/master/tests/solution_files.
 
-### Running the puppet agent returns connect(2) for "learning.puppetlabs.vm" port 8140
+### Running the puppet agent returns "connect(2) for learning.puppetlabs.vm port 8140"
 
 This generally indicates that the `pe-puppetserver` service is down. See
 the section above for instructions on checking and restarting PE services.
 
-### Running the Puppet agent returns Failed to find facts from PuppetDB at learning.puppetlabs.vm:8140`
+### Running the Puppet agent returns "Failed to find facts from PuppetDB at learning.puppetlabs.vm:8140"
 
 This generally indicates that the `pe-puppetdb` service is down. Again,
 refer to the section above for instructions on checking and restarting PE services.
@@ -238,7 +238,7 @@ adapter for the VM.
 
 The Learning VM uses a tool called tmux to allow us to display the quest
 status. You can scroll in tmux by first hitting control-b, then `[` (left
-bracket). You will then be able to use the arrow keys to scroll. Press q to
+bracket). You will then be able to use the arrow keys to scroll. Press `q` to
 exit scrolling.
 
 ### Is there a PDF version of the Quest Guide?
