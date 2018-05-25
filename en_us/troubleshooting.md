@@ -12,16 +12,6 @@ The Quest Guide is hosted by the VM itself, at http://<IPADDRESS>, where `IPADDR
 IP address of the VM. Note that the Quest Guide is hosted on http, not https. If
 you are prompted for a password, you're looking at the PE console login screen,
 which is hosted on https.
-    
-### Running the puppet agent returns "Server Error: Could not parse for environment production"
-
-The Puppet agent returns this error when it is unable to parse your Puppet code. The error
-message will indicate the file where the syntax error occurred. Use the `puppet parser validate`
-command to check the syntax of the indicated file. Note that problems with unpaired quotation marks,
-parentheses, and curly braces will often result in a syntax error shown for the end of the file
-where the parsers scan for the matching character failed. If the output of this syntax validation
-is not clear, compare your code against the example in the Quest Guide and against the solution
-files used we use for automated testing: https://github.com/puppetlabs/puppet-quest-guide/tree/master/tests/solution_files.
 
 ### The agent node does not generate a certificate signing request or does not have a signed certificate
 
@@ -161,24 +151,28 @@ correctly, you should be able connect without a password. You can check manually
 by logging in to the system as the learning user and using sudo to check
 /home/gertie/.ssh/authorized_keys. There should be an entry there matching the
 key you generated and included in your Hiera file.
+  
+### Running the puppet agent returns "Server Error: Could not parse for environment production"
 
-### My Puppet run fails!
+The Puppet agent returns this error when it is unable to parse your Puppet code. The error
+message will indicate the file where the syntax error occurred. Use the `puppet parser validate`
+command to check the syntax of the indicated file. Note that problems with unpaired quotation marks,
+parentheses, and curly braces will often result in a syntax error shown for the end of the file
+where the parser's scan for the matching character failed. If the output of this syntax validation
+is not clear, compare your code against the example in the Quest Guide and against the solution
+files used we use for automated testing: https://github.com/puppetlabs/puppet-quest-guide/tree/master/tests/solution_files.
 
-There are several common reasons for a Puppet run to fail.
+### Running the puppet agent returns connect(2) for "learning.puppetlabs.vm" port 8140
 
-If a syntax error is indicated, please correct the specified file. Note that
-due to the way syntax is parsed, an error may not always be on the line
-indicated. For example, a missing comma, bracket, or parenthesis will likely
-cause a syntax error on a later line.
-
-If you see an issue including `connect(2) for "learning.puppetlabs.vm" port
-8140` this generally indicates that the `pe-puppetserver` service is down. See
+This generally indicates that the `pe-puppetserver` service is down. See
 the section above for instructions on checking and restarting PE services.
 
-Similarly, an error including `Failed to find facts from PuppetDB at
-learning.puppetlabs.vm:8140` generally indicates that the `pe-puppetdb` service
-is down. Again, refer to the section above for instructions on checking and
-restarting PE services.
+### Running the Puppet agent returns Failed to find facts from PuppetDB at learning.puppetlabs.vm:8140`
+
+This generally indicates that the `pe-puppetdb` service is down. Again,
+refer to the section above for instructions on checking and restarting PE services.
+
+### The puppet job tool returns an error indicating that the node is not connected to the PCP broker
 
 When triggering a Puppet run via the `puppet job` tool, you may see an error
 similar to `Error running puppet on pasture.puppet.vm: pasture.puppet.vm is not
