@@ -487,7 +487,7 @@ Before getting into the specifics of defining an application and running it as
 a job, we covered the configuration details on the Puppet agent nodes and the
 setup for the Puppet Application Orchestrator client. You can review these
 steps and find further information at the [Puppet
-Documentation](https://docs.puppet.com/pe/latest/app_orchestration_overview.html)
+Documentation](https://puppet.com/docs/pe/latest/application_orchestration_overview.html)
 website.
 
 Defining an application generally requires several distinct manifests and Ruby extensions:
@@ -506,6 +506,6 @@ completed jobs with the `puppet job show` command.
 
 ## Additional Resources
 
-* Read more about application orchestration at our [docs page](https://docs.puppet.com/pe/latest/app_orchestration_overview.html).
+* Read more about application orchestration at our [docs page](https://puppet.com/docs/pe/latest/application_orchestration_overview.html).
 * Check out an overview of the feature on the [product page](https://puppet.com/product/capabilities/orchestration).
 * If you’re interested in a concrete demonstration, look at this [example application GitHub repository](https://github.com/puppetlabs/puppetlabs-wordpress_app).

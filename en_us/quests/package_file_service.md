@@ -199,7 +199,7 @@ Don't worry if this URI syntax seems complex. It's pretty rare that you'll need
 to use it for anything other than referring to files within your modules, so
 the pattern above is likely all you'll need to learn. You can always refer back
 to the
-[docs](https://docs.puppet.com/puppet/latest/reference/types/file.html#file-attribute-source)
+[docs](https://puppet.com/docs/puppet/latest/types/file.html#file-attribute-source)
 for a reminder.
 
 <div class = "lvm-task-number"><p>Task 9:</p></div>
@@ -329,7 +329,7 @@ pick up those changes.
 Though Puppet code will default to managing resources in the order they're
 written in a manifest, we strongly recommend that you make dependencies among
 resources explicit through [relationship
-metaparameters](https://docs.puppet.com/puppet/latest/lang_relationships.html#syntax-relationship-metaparameters).
+metaparameters](https://puppet.com/docs/puppet/latest/lang_relationships.html#syntax-relationship-metaparameters).
 A metaparameter is a parameter, that affects *how* Puppet handles a resource
 rather than directly defining its desired state. Relationship metaparameters
 tell Puppet about ordering relationships among your resources.
@@ -343,7 +343,7 @@ useful when you need Puppet to restart a service to pick up changes in a
 configuration file.
 
 Relationship metaparameters take a [resource
-reference](https://docs.puppet.com/puppet/latest/lang_data_resource_reference.html)
+reference](https://puppet.com/docs/puppet/latest/lang_data_resource_reference.html)
 as a value. This resource reference points to another resource in your Puppet
 code. The syntax for a resource reference is the capitalized resource type,
 followed by square brackets containing the resource title: `Type['title']`. 
@@ -434,5 +434,5 @@ variables and replacing your static files with templates.
 
 ## Additional Resources
 
-* Our [docs page](https://docs.puppet.com/puppet/latest/lang_relationships.html) covers resource relationships in more depth, including some alternative syntax forms you might run into reading others’ Puppet code.
-* Resource relationships are also covered by [a lesson](https://learn.puppet.com/elearning/relationships) in our [self-paced course catalog](https://learn.puppet.com/category/self-paced-training).
+* Our [docs page](https://puppet.com/docs/puppet/latest/lang_relationships.html) covers resource relationships in more depth, including some alternative syntax forms you might run into reading others’ Puppet code.
+* Resource relationships are also covered by [a lesson](https://learn.puppet.com/course/relationships) in our [self-paced course catalog](https://learn.puppet.com/category/self-paced-training).

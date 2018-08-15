@@ -26,7 +26,7 @@ When you're ready to get started, type the following command:
 All of the methods for managing data you've encountered so far in this guide,
 from variables and templates to the roles and profiles pattern, get you closer
 to a clean separation of data from code.
-[Hiera](https://docs.puppet.com/puppet/latest/hiera_intro.html) is Puppet's
+[Hiera](https://puppet.com/docs/puppet/latest/hiera_intro.html) is Puppet's
 built-in data lookup system. It lets you complete this separation by moving
 data out of your Puppet manifests and into a separate data source.
 
@@ -38,8 +38,8 @@ level overrides the default set on the more general level. Between these
 most-general and most-specific levels, Hiera allows you to specify any number
 of intermediate levels.
 
-Though we haven't addressed the topic in this guide, implementing (custom and
-external facts)[https://docs.puppet.com/facter/latest/custom_facts.html] gives
+Though we haven't addressed the topic in this guide, implementing [custom and
+external facts](https://puppet.com/docs/facter/latest/custom_facts.html) gives
 you great leeway in setting up your Hiera hierarchies. For example, you might
 include a Hiera level corresponding to a country to specify default locale
 configuration for a set of workstations or a level corresponding to datacenter

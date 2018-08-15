@@ -106,7 +106,7 @@ Puppet administrator can then validate that the system sending the CSR should
 be allowed to request catalogs from the master before deciding to sign the
 certificate. (You can read more about the details of Puppet's cryptographic
 security and the certification system on the [docs
-page](https://docs.puppet.com/background/ssl/index.html))
+page](https://puppet.com/docs/pe/latest/ssl_and_certificates.html))
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
@@ -134,7 +134,7 @@ You'll see a notification like the following:
 No problem: you just have to sign the certificate. For now, we'll show you how
 to do it from the command line. If you prefer a GUI, the PE console includes
 [tools for certificate
-management](https://docs.puppet.com/pe/latest/console_cert_mgmt.html).
+management](https://puppet.com/docs/pe/latest/adding_and_removing_nodes.html).
 
 <div class = "lvm-task-number"><p>Task 2:</p></div>
 
@@ -174,7 +174,7 @@ receive a catalog from the Puppet master.
 
 While you haven't yet told Puppet to manage any resources on the system, you'll
 see a lot of text scroll by. Most of what you see is a process called
-[pluginsync](https://docs.puppet.com/puppet/latest/plugins_in_modules.html#auto-download-of-agent-side-plugins-pluginsync).
+[pluginsync](https://puppet.com/docs/puppet/latest/plugins_in_modules.html#auto-download-of-agent-side-plug-ins-pluginsync).
 During pluginsync, any extensions installed on the master (such as custom
 facts, resource types, or providers) are copied to the Puppet agent before the
 Puppet run continues. This ensures that the agent has all the tools it needs to
@@ -242,7 +242,7 @@ very efficient way to manage node classification, you'll understand it best afte
 
 3. Finally, if you want to customize node classification, you can create your
 own [external node
-classifier](https://docs.puppet.com/guides/external_nodes.html). An external
+classifier](https://puppet.com/docs/puppet/latest/nodes_external.html). An external
 node classifier can be any executable that takes the name of a node as an
 argument and returns a YAML file describing the Puppet code to be applied to
 that node. This is an advanced topic and is not covered in this guide.
@@ -301,7 +301,7 @@ will default to the resource title. This lets us save some time by leaving out
 the parameter value pairs and using the title to define the message we want the
 resource to display. (This parameter that uses the resource title as its
 default is called a **namevar**. You can read more about the role of the
-namevar in the [Puppet docs](https://docs.puppet.com/puppet/latest/lang_resources.html))
+namevar in the [Puppet docs](https://puppet.com/docs/puppet/latest/lang_resources.html#namenamevar))
 
 Now that you have a concrete example of a node declaration, let's return to our
 review of the agent run process from the master's perspective. When the agent
@@ -361,5 +361,5 @@ Puppet is built on.
 
 ## Additional Resources
 
-* Read about the basics of a Puppet agent run on our [docs page](https://docs.puppet.com/pe/latest/console_classes_groups_running_puppet.html)
+* Read about the basics of a Puppet agent run on our [docs page](https://puppet.com/docs/pe/latest/run_puppet_on_nodes.html)
 * Puppet agent concepts are covered in-depth in our Puppet Fundamentals and Puppetizing Infrastructure courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.

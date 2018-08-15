@@ -159,7 +159,7 @@ installation script available. In this case, our master and agent are both
 running CentOS 7, so we don't have to worry about this difference. You can find
 full documentation of the agent installation process, including specific
 instructions for Windows and other operating systems in the [installation
-documentation](https://docs.puppet.com/pe/latest/install_agents.html).
+documentation](https://puppet.com/docs/pe/latest/installing_agents.html).
 
 ## Resources
 
@@ -212,7 +212,7 @@ The body of a resource is a list of **parameter value pairs** that follow the
 pattern `parameter => value`. The parameters and possible values vary from type
 to type. They specify the state of the resource on the system. Documentation
 for resource parameters is provided in the [Resource Type
-Reference](https://docs.puppet.com/puppet/latest/reference/type.html).
+Reference](https://puppet.com/docs/puppet/latest/types/).
 
 The **resource title** is a unique name that Puppet uses to identify the
 resource internally. In the case of our file resource that you looked at above, the
@@ -237,7 +237,7 @@ not explicilty set. The same pattern applies for other resources, such as a
 user's account name or package name as we mentioned above. This parameter that
 defaults to the title is called a **namevar**. You can find more information
 about the **namevar** for different resource types in the [Resource Type
-Reference](https://docs.puppet.com/puppet/latest/reference/type.html).
+Reference](https://puppet.com/docs/puppet/latest/types/).
 
 Now that you're more familiar with the resource syntax, let's take another look
 at that file resource.
@@ -431,6 +431,6 @@ kept on the master.
 ## Additional Resources
 
 * Watch our on-demand webinar ["Introduction to Puppet Enterprise"](https://puppet.com/resources/webinar/introduction-puppet-enterprise)
-* Read about installing Puppet Enterprise on our [docs page](https://docs.puppet.com/pe/latest/install_basic.html)
-* Take a look at our [What is Puppet](https://learn.puppet.com/elearning/what-is-puppet) and [What is Puppet Enterprise](https://learn.puppet.com/elearning/what-is-puppet-enterprise) and [Resources](https://learn.puppet.com/elearning/resources) [self-paced lessons](https://learn.puppet.com/category/self-paced-training).
+* Read about installing Puppet Enterprise on our [docs page](https://puppet.com/docs/pe/latest/installing_pe.html)
+* Take a look at our [What is Puppet](https://learn.puppet.com/course/what-is-puppet) and [What is Puppet Enterprise](https://learn.puppet.com/course/what-is-puppet-enterprise) and [Resources](https://learn.puppet.com/course/resources) [self-paced lessons](https://learn.puppet.com/category/self-paced-training).
 * Puppet basics are covered in-depth in our Puppet Fundamentals and Puppetizing Infrastructure courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.

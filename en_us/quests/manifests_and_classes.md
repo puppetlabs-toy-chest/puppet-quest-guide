@@ -386,6 +386,6 @@ scheme to structure the Puppet code you write.
 
 ## Additional Resources
 
-* Module fundamentals and structure are covered on our [docs page](https://docs.puppet.com/puppet/latest/modules_fundamentals.html), along with other topics such as module testing and publishing to the Forge.
+* Module fundamentals and structure are covered on our [docs page](https://puppet.com/docs/puppet/latest/modules_fundamentals.html), along with other topics such as module testing and publishing to the Forge.
 * Puppet modules are covered in-depth in our Puppet Fundamentals, Puppet Practitioner, and Puppetizing Infrastructure courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.
-* [Classes](https://learn.puppet.com/elearning/classes) and [Autoloading](https://learn.puppet.com/elearning/autoloading) are covered as self-paced lessons.
+* [Classes](https://learn.puppet.com/course/classes) and [Autoloading](https://learn.puppet.com/course/autoloading) are covered as self-paced lessons.
