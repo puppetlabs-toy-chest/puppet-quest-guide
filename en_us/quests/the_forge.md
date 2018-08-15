@@ -92,7 +92,7 @@ quest, we'll use the simpler `puppet module` tool. (As you start managing a
 more complex Puppet environment and checking your Puppet code into a control
 repository, however, using a Puppetfile is recommended. You can read more about
 the Puppetfile and code management workflow
-[here](https://docs.puppet.com/pe/latest/cmgmt_managing_code.html).)
+[here](https://puppet.com/docs/pe/latest/managing_puppet_code.html).)
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
@@ -342,4 +342,4 @@ create a database server and connect it to your application server.
 
 * Watch this [short video](https://fast.wistia.net/embed/iframe/uxfpduvk64?seo=false) for a basic introduction to the Forge.
 * For more in-depth information on the Forge, check our [Introduction to the Forge](https://learn.puppet.com/elearning/an-introduction-to-the-forge) self-paced course.
-* Our [Puppetizing Infrastructure](https://learn.puppet.com/instructor-led-training/puppetizing-infrastructure)  course focuses on using Forge modules to quickly get started managing your infrastructure with Puppet.
+* Our [Puppetizing Infrastructure](https://learn.puppet.com/instructor-led-training/puppetizing-infrastructure) course focuses on using Forge modules to quickly get started managing your infrastructure with Puppet.

@@ -51,7 +51,7 @@ When you're ready to get started, type the following command:
 > -Søren Kierkegaard
 
 A [defined resource
-type](https://docs.puppet.com/puppet/latest/lang_defined_types.html) is a block
+type](https://puppet.com/docs/puppet/latest/lang_defined_types.html) is a block
 of Puppet code that can be evaluated multiple times within a single node's
 catalog.
 
@@ -270,7 +270,7 @@ define user_accounts::ssh_user (
 You may have noticed another new element of syntax into this code. Some of the
 double-quoted strings (`"..."`) in this manifest include variables in the
 `${var_name}` format. This is Puppet's [string
-interpolation](https://docs.puppet.com/puppet/latest/lang_variables.html#interpolation)
+interpolation](https://puppet.com/docs/puppet/latest/lang_variables.html#interpolation)
 syntax. String interpolation allows you to insert a variable into any
 double-quoted string.
 
@@ -520,5 +520,5 @@ on a defined resource type:
 
 ## Additional Resources
 
-* Read more about defined resource types at our [docs page](https://docs.puppet.com/puppet/latest/lang_defined_types.html).
+* Read more about defined resource types at our [docs page](https://puppet.com/docs/puppet/latest/lang_defined_types.html).
 * Defined resource types are covered in our Puppet Fundamentals, Puppet Practitioner, and Puppetizing Infrastructure courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.

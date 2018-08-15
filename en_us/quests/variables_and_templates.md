@@ -116,7 +116,7 @@ The limitation of templates is that they're all-or-nothing. The template must
 define the entire file you want to manage. If you need to manage only a single
 line or value in a file because another process or Puppet module will manage a
 different part of the file, you may want to investigate
-[Augeas](https://docs.puppet.com/guides/augeas.html),
+[Augeas](https://puppet.com/docs/puppet/latest/resources_augeas.html),
 [concat](https://forge.puppet.com/puppetlabs/concat), or the
 [file_line](https://forge.puppet.com/puppetlabs/stdlib#file_line) resource
 type.
@@ -124,9 +124,9 @@ type.
 ## Embedded Puppet templating language
 
 Puppet supports two templating languages, [Embedded Puppet
-(EPP)](https://docs.puppet.com/puppet/latest/lang_template_epp.html) and
+(EPP)](https://puppet.com/docs/puppet/latest/lang_template_epp.html) and
 [Embedded Ruby
-(ERB)](https://docs.puppet.com/puppet/latest/lang_template_erb.html).
+(ERB)](https://puppet.com/docs/puppet/latest/lang_template_erb.html).
 
 EPP templates were released in Puppet 4 to provide a Puppet-native templating
 language that would offer several improvements over the ERB templates that had
@@ -396,5 +396,5 @@ is configured without editing code in the module where the class is defined.
 
 ## Additional Resources
 
-* Our docs page has more information on [variables](https://docs.puppet.com/puppet/latest/lang_variables.html) and [templates](https://docs.puppet.com/puppet/latest/lang_template.html).
+* Our docs page has more information on [variables](https://puppet.com/docs/puppet/latest/lang_variables.html) and [templates](https://puppet.com/docs/puppet/latest/lang_template.html).
 * These topics are also covered in more depth in our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) trainings.

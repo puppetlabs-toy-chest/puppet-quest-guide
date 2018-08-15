@@ -282,9 +282,9 @@ any other special character, you will need to escape it with a backslash
 overly complex, it may be a sign that you need to revisit your node naming
 scheme or look into an alternate classification method such as the PE console
 [node
-classifier](https://docs.puppet.com/pe/latest/console_classes_groups.html) or
+classifier](https://puppet.com/docs/pe/latest/grouping_and_classifying_nodes.html) or
 an [external node
-classifier](https://docs.puppet.com/puppet/latest/nodes_external.html).
+classifier](https://puppet.com/docs/puppet/latest/nodes_external.html).
 
 <div class = "lvm-task-number"><p>Task 6:</p></div>
 
@@ -365,9 +365,9 @@ infrastructure.
 
 ## Additional Resources
 
-* Read more about Roles and Profiles at our [docs page](https://docs.puppet.com/pe/latest/r_n_p_intro.html)
+* Read more about Roles and Profiles at our [docs page](https://puppet.com/docs/pe/latest/the_roles_and_profiles_method.html)
 * Have a look at the [blog post](http://garylarizza.com/blog/2014/02/17/puppet-workflow-part-1/) that helped establish the Roles and Profiles pattern as a recommended Puppet workflow.
-* Learn more about Roles and Profiles in our [self-paced course](https://learn.puppet.com/elearning/an-introduction-to-roles-profiles)
+* Learn more about Roles and Profiles in our [self-paced course](https://learn.puppet.com/course/an-introduction-to-roles-profiles)
 * Roles and Profiles are covered in our Puppet Practitioner, and Puppetizing Infrastructure courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.
-* You can learn more about using regular expressions in node definitions on our [docs page](https://docs.puppet.com/puppet/latest/lang_node_definitions.html#regular-expression-names) .
+* You can learn more about using regular expressions in node definitions on our [docs page](https://puppet.com/docs/puppet/latest/lang_node_definitions.html#regular-expression-names) .
 * You can find a tool to easily test your regular expressions [here](http://rubular.com).

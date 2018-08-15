@@ -49,7 +49,7 @@ set based on an `if` statement using the `osfamily` fact. (You may notice that
 this module uses an un-structured `$::osfamily` format for this fact to
 preserve backwards compatibility. You can read more about this form of
 reference on [the docs
-page](https://docs.puppet.com/puppet/latest/lang_facts_and_builtin_vars.html#classic-factname-facts))
+page](https://puppet.com/docs/puppet/latest/lang_facts_and_builtin_vars.html#classic-factname-facts))
 
 Simplified to show only the values we're concerned with, the conditional
 statement looks like this:
@@ -283,7 +283,7 @@ for production.
 We created two new systems for this quest: `pasture-dev.puppet.vm` and
 `pasture-prod.puppet.vm`. For a more complex infrastructure, you would likely
 manage your development, test, and production segments of your infrastructure
-by creating a distinct [environment](https://docs.puppet.com/puppet/latest/environments.html)
+by creating a distinct [environment](https://puppet.com/docs/puppet/latest/environments_about.html)
 for each. For now, however, we can easily demonstrate our conditional statement
 by setting up two different node definitions in the `site.pp` manifest.
 
@@ -414,5 +414,5 @@ backend for the Pasture application.
 
 ## Additional Resources
 
-* Puppet's [docs page](https://docs.puppet.com/puppet/latest/lang_conditional.html) covers the syntax of all forms of conditional statements and expressions.
-* The [style guide](https://docs.puppet.com/puppet/latest/style_guide.html#conditionals) includes best-practices recommendations for the use of conditionals.
+* Puppet's [docs page](https://puppet.com/docs/puppet/latest/lang_conditional.html) covers the syntax of all forms of conditional statements and expressions.
+* The [style guide](https://puppet.com/docs/puppet/latest/style_guide.html#conditionals) includes best-practices recommendations for the use of conditionals.

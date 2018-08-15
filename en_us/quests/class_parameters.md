@@ -218,5 +218,5 @@ introduce data about your agent system into your Puppet code.
 
 ## Additional Resources
 
-* Check out our [docs page on classes](https://docs.puppet.com/puppet/latest/lang_classes.html) for more information.
-* If you're interested in more advanced methods for adding data to your classes, you might want to read about [using modules with Hiera](https://docs.puppet.com/puppet/latest/hiera_migrate_modules.html).
+* Check out our [docs page on classes](https://puppet.com/docs/puppet/latest/lang_classes.html) for more information.
+* If you're interested in more advanced methods for adding data to your classes, you might want to read about [using modules with Hiera](https://puppet.com/docs/puppet/latest/hiera_migrate.html#adding-hiera-data-to-a-module).
