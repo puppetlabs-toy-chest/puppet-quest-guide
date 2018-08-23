@@ -6,7 +6,7 @@ For the most up-to-date version of this troubleshooting information, [check the
 GitHub
 repository](https://github.com/puppetlabs/puppet-quest-guide/blob/master/en_us/troubleshooting.md).
 
-[Watch a video tutorial](https://youtu.be/51f5uEPoZns)on setting up the Learning VM.
+[Watch a video tutorial](https://youtu.be/51f5uEPoZns) on setting up the Learning VM.
 
 ### I can't find the Quest Guide for the Learning VM
 
