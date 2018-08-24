@@ -627,11 +627,11 @@ the `default_message` parameter in your `beauvine.vm` domain's Hiera data.
 
 To begin work on this change, create a new branch. The branch name should be
 brief, but still give good idea of what changes the branch will introduce.
-Let's call it `beauvine_message_default`. Use the `git checkout` command to
+Let's call it `beauvine_default_message`. Use the `git checkout` command to
 switch to this branch. The `-b` flag tells Git to create a new branch with this
 name it doesn't already exist.
 
-    git checkout -b beauvine_message_default
+    git checkout -b beauvine_default_message
 
 With this new branch is set up, open the `data/domain/beauvine.vm.yaml` file
 in Vim.
@@ -718,7 +718,7 @@ control repository.
 Now that you have committed your changes to your local branch, push the branch
 to your upstream repository.
 
-    git push upstream beauvine_message_default
+    git push upstream beauvine_default_message
 
 When prompted, enter your Gitea user account name and password: `learning` and
 `puppet`.
