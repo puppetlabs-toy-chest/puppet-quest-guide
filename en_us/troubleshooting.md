@@ -258,7 +258,7 @@ validation and content on your copy of the Learning VM.
 
 If your puppet runs still fail after trying the steps above, check the Puppet
 Enterprise [Known
-Issues](https://docs.puppet.com/pe/latest/release_notes_known_issues.html)
+Issues](https://puppet.com/docs/pe/latest/pe_known_issues.html)
 page or feel free to contact us at learningvm@puppet.com. Please include
 details of your host OS, virtualization software and version, and any details
 of the site network configuration where you're running the VM (for example,
@@ -268,7 +268,7 @@ a local directory:
 
     scp root@<IPADDRESS>:/var/log/messages messages
 
-On a Windows system wtih [PuTTY PSCP
+On a Windows system with [PuTTY PSCP
 installed](http://tartarus.org/~simon/putty-snapshots/htmldoc/Chapter5.html#pscp),
 you can use `pscp` from a command prompt:
 
