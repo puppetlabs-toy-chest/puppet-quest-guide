@@ -19,7 +19,7 @@ When you're ready to get started, enter the following command:
 
 ## What is the Forge?
 
-The [Puppet Forge](forge.puppet.com) is a public repository for Puppet modules.
+The [Puppet Forge](https://forge.puppet.com) is a public repository for Puppet modules.
 The Forge gives you access to community maintained modules. Using existing
 modules from the Forge allows you to manage a wide variety of applications and systems
 without spending extensive time on custom module development. Furthermore,
@@ -50,7 +50,7 @@ In this quest, you'll use a PostgreSQL module from the Forge to configure a
 database the Pasture application can use to store and retrieve cow messages.
 
 Your first step will be to find an appropriate module to use. Use the search
-interface on the [Forge](forge.puppet.com) website to do a search for
+interface on the [Forge](https://forge.puppet.com) website to do a search for
 `PostgreSQL`.
 
 (If you don't currently have internet access, we suggest you still read through
