@@ -215,7 +215,7 @@ end
 
 describe _("Task 14:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('curl -i -H "Content-Type: application/json" -X POST -d "{\"Title\": \"Code Manager\",\"Key\": \"$(cut -d\" \" -f 2 /etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa.pub)\"}" http://learning:puppet@localhost:3000/api/v1/repos/learning/control-repo/keys')
+    command('curl -i -H "Content-Type: application/json" -X POST -d "{\"Title\": \"Code Manager\",\"Key\": \"$(cut -d\" \" -f 2 /etc/puppetlabs/puppetserver/ssh/id-control_repo.pub)\"}" http://learning:puppet@localhost:3000/api/v1/repos/learning/control-repo/keys')
       .exit_status
       .should eq 0
   end
@@ -228,7 +228,7 @@ end
 
 describe _("Task 15:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -H \"Content-Type: application/json\" -X POST -d '{\"classes\":{\"puppet_enterprise::profile::master\":{\"code_manager_auto_configure\":true,\"r10k_remote\":\"http://localhost:3000/learning/control-repo.git\",\"r10k_private_key\":\"/etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa\",\"file_sync_enabled\":true}}}' 'https://localhost:4433/classifier-api/v1/groups/#{MASTER_GID}'")
+    command("curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -H \"Content-Type: application/json\" -X POST -d '{\"classes\":{\"puppet_enterprise::profile::master\":{\"code_manager_auto_configure\":true,\"r10k_remote\":\"http://localhost:3000/learning/control-repo.git\",\"r10k_private_key\":\"/etc/puppetlabs/puppetserver/ssh/id-control_repo\",\"file_sync_enabled\":true}}}' 'https://localhost:4433/classifier-api/v1/groups/#{MASTER_GID}'")
       .stdout
       .should match /200\sOK/
   end
