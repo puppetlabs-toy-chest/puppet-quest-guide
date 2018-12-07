@@ -22,7 +22,7 @@ end
 
 describe _("Task 2:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("puppet cert sign agent.puppet.vm")
+    command("puppetserver ca sign --certname agent.puppet.vm")
       .exit_status
       .should eq 0
   end
@@ -63,6 +63,6 @@ describe _("Task 5:"), host: :agent do
       .should be_file
     file('/var/opt/lib/pe-puppet/state/resources.txt')
       .content
-      .should match /notify\[Hello Puppet!\]/
+      .should match /notify\[hello puppet!\]/
   end
 end

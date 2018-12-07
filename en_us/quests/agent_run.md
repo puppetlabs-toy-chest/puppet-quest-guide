@@ -142,13 +142,13 @@ First, exit your SSH session to return to the your Puppet master:
 
     exit
 
-Use the `puppet cert` tool to list unsigned certificates:
+Use the `puppetserver ca` tool to list unsigned certificates:
 
-    puppet cert list
+    puppetserver ca list
 
 Sign the cert for `agent.puppet.vm`:
 
-    puppet cert sign agent.puppet.vm
+    puppetserver ca sign --certname agent.puppet.vm
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
@@ -362,4 +362,4 @@ Puppet is built on.
 ## Additional Resources
 
 * Read about the basics of a Puppet agent run on our [docs page](https://puppet.com/docs/pe/latest/run_puppet_on_nodes.html)
-* Puppet agent concepts are covered in-depth in our Puppet Fundamentals and Puppetizing Infrastructure courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.
+* Puppet agent concepts are covered in-depth in our Getting Started with Puppet course. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.

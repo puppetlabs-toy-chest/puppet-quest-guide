@@ -342,4 +342,4 @@ create a database server and connect it to your application server.
 
 * Watch this [short video](https://fast.wistia.net/embed/iframe/uxfpduvk64?seo=false) for a basic introduction to the Forge.
 * For more in-depth information on the Forge, check our [Introduction to the Forge](https://learn.puppet.com/elearning/an-introduction-to-the-forge) self-paced course.
-* Our [Puppetizing Infrastructure](https://learn.puppet.com/instructor-led-training/puppetizing-infrastructure) course focuses on using Forge modules to quickly get started managing your infrastructure with Puppet.
+* Our [Getting Started with Puppet](https://learn.puppet.com/instructor-led-training/getting-started-with-puppet) course focuses on using Forge modules to quickly get started managing your infrastructure with Puppet.
