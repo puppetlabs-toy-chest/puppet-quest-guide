@@ -44,7 +44,7 @@ This kind of **what** question is often addressed through a combination of
 conditional statements and facts or parameters.  If you look at the
 `puppetlabs-apache` module on the [Forge](forge.puppet.com), you'll see [this
 package name and numerous other
-variables](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/params.pp#L59)
+variables](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/params.pp#L62)
 set based on an `if` statement using the `osfamily` fact. (You may notice that
 this module uses an un-structured `$::osfamily` format for this fact to
 preserve backwards compatibility. You can read more about this form of
@@ -325,10 +325,10 @@ option to proceed.)
 
 Use the following credentials to log in:
 
-Username: **admin**
+Username: **admin**  
 Password: **puppetlabs**
 
-Once you're connected, click the **access control** menu option in the
+Once you're connected, click the **Access control** menu option in the
 navigation bar at near the bottom left of the screen, then select **Users**
 in the *Access Control* navigation menu.
 
