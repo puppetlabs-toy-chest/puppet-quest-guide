@@ -99,6 +99,8 @@ We'll implement a simple hierarchy with three levels: "Common data" to set up
 environment defaults, "Per-Domain defaults" to define domain-specific defaults,
 and "Per-node data" to define specific data values for individual nodes.
 
+[//]: # (code/120_hiera/hiera.yaml)
+
 ```yaml
 ---
 version: 5
@@ -157,6 +159,8 @@ which values the data sources need to define.
 Here, use the built-in Hiera `lookup()` function to tell Puppet to fetch data
 for each of the `pasture` component class parameters you want to manage.
 
+[//]: # (code/120_hiera/modules/profile/manifests/pasture/app.pp)
+
 ```puppet
 class profile::pasture::app {
   class { 'pasture':
@@ -206,6 +210,8 @@ Begin with your `common.yaml` data source, which is kept directly under the
 
 Here, set common defaults to be used when no value is set in a higher level.
 
+[//]: # (code/120_hiera/data/common.yaml)
+
 ```yaml
 ---
 profile::pasture::app::default_message: "Baa"
@@ -224,6 +230,8 @@ common.
 
     vim data/domain/beauvine.vm.yaml
 
+[//]: # (code/120_hiera/data/domain/beauvine.vm.yaml)
+
 ```yaml
 ---
 profile::pasture::app::default_message: "Welcome to Beauvine!"
@@ -234,6 +242,8 @@ profile::pasture::app::default_message: "Welcome to Beauvine!"
 Next, create the `data/domain/auroch.vm.yaml` data source.
 
     vim data/domain/auroch.vm.yaml
+
+[//]: # (code/120_hiera/data/domain/auroch.vm.yaml)
 
 ```yaml
 ---
@@ -248,7 +258,9 @@ node level.
 
     vim data/nodes/pasture-app-dragon.auroch.vm.yaml
 
-Here, just set the `default_character` to `dragon`. 
+Here, just set the `default_character` to `dragon`.
+
+[//]: # (code/120_hiera/data/nodes/pasture-app-dragon.auroch.vm.yaml)
 
 ```yaml
 ---

@@ -229,6 +229,8 @@ Putting these `user` and `ssh_authorized_key` resources together with `file`
 resources to manage the user's home directory and `.ssh` directory, your
 `user_accounts::ssh_user` defined resource type will look like this:
 
+[//]: # (code/130_defined_resource_types/modules/user_accounts/manifests/ssh_user.pp)
+
 ```puppet
 define user_accounts::ssh_user (
   $key,
@@ -357,6 +359,8 @@ When your finished, your data file should look like the following example,
 though your public key will be different from the one shown. Note that the
 `pub_key:` must all be on a single line.
 
+[//]: # (code/130_defined_resource_types/data/domain/beauvine.vm.yaml)
+
 ```yaml
 ---
 profile::pasture::app::default_message: "Welcome to Beauvine!"
@@ -416,6 +420,8 @@ still get a valid result.
 
 Your `common.yaml` file should look like the following:
 
+[//]: # (code/130_defined_resource_types/data/common.yaml)
+
 ```yaml
 ---
 profile::pasture::app::default_message: "Baa"
@@ -444,6 +450,8 @@ data from a hash or array to bind different values to the variables in
 the block for each iteration. In this case, the iterator goes through a
 list of users accounts defined in your Hiera data source and declares an
 instance of the `user_accoutns::ssh_user` defined resource type for each.
+
+[//]: # (code/130_defined_resource_types/modules/profile/manifests/base/dev_users.pp)
 
 ```puppet
 class profile::base::dev_users {
@@ -476,6 +484,8 @@ With this `profile::base::dev_users` class is set up, add it to the
 `role::pasture_app` class.
 
     vim /etc/puppetlabs/code/environments/production/modules/role/manifests/pasture_app.pp
+
+[//]: # (code/130_defined_resource_types/modules/role/manifests/pasture_app.pp)
 
 ```puppet
 class role::pasture_app {

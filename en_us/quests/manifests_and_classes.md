@@ -170,6 +170,8 @@ This main class is always kept in a manifest with the special name `init.pp`.
 
 Enter the following class definition, then save and exit (`:wq`):
 
+[//]: # (code/040_manifests_and_classes/modules/cowsay/manifests/init.pp)
+
 ```puppet
 class cowsay {
   package { 'cowsay':
@@ -207,6 +209,8 @@ manifest.
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 At the end of the `site.pp` manifest, insert the following code:
+
+[//]: # (code/040_manifests_and_classes/manifests/site.pp)
 
 ```puppet
 node 'cowsay.puppet.vm' {
@@ -288,6 +292,8 @@ Create a new manifest for your `fortune` class definition.
 
 Write your class definition here:
 
+[//]: # (code/040_manifests_and_classes/modules/cowsay/manifests/fortune.pp)
+
 ```puppet
 class cowsay::fortune {
   package { 'fortune-mod':
@@ -323,6 +329,8 @@ into our main `cowsay` class.
     vim cowsay/manifests/init.pp
 
 Add an include statement for your `cowsay::fortune` class to the cowsay class.
+
+[//]: # (code/040_manifests_and_classes/modules/cowsay/manifests/init.pp)
 
 ```puppet
 class cowsay {

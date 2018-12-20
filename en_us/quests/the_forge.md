@@ -141,6 +141,8 @@ Within this `pasture::db` class, we'll use the classes provided by the
 `postgresql` module to set up the `pasture` database that
 will keep track of our cow sayings.
 
+[//]: # (code/100_the_forge/modules/pasture/manifests/db.pp)
+
 ```puppet
 class pasture::db {
 
@@ -179,6 +181,8 @@ Go ahead and open your `site.pp` manifest.
 Create a node definition to classify the `pasture-db.puppet.vm` node with
 the `pasture::db` class.
 
+[//]: # (code/100_the_forge/manifests/site.pp.1)
+
 ```puppet
 node 'pasture-db.puppet.vm' {
   include pasture::db
@@ -205,6 +209,8 @@ Add a `$db` parameter with a default value of `'none'`. You'll see why we use
 so it will be passed through to the template that defines the application's
 configuration file. When you've made these two additions, your class should
 look like the example below.
+
+[//]: # (code/100_the_forge/modules/pasture/manifests/init.pp)
 
 ```puppet
 class pasture (
@@ -264,6 +270,10 @@ Next, edit the `pasture_config.yaml.epp` template. We'll use a conditional
 statement to only include the `:db:` setting if there is a value other than
 `none` set for the `$db` variable.
 
+    vim pasture/templates/pasture_config.yaml.epp
+
+[//]: # (code/100_the_forge/modules/pasture/templates/pasture_config.yaml.epp)
+
 ```puppet
 <%- | $port,
       $default_character,
@@ -290,6 +300,8 @@ Now that you've set up this `db` parameter, edit your
 
 Declare the `pasture` class and set the `db` parameter to the URI of the
 `pasture` database you're running on `pasture-db.puppet.vm`.
+
+[//]: # (code/100_the_forge/manifests/site.pp.2)
 
 ```puppet
 node 'pasture-app.puppet.vm' {

@@ -122,6 +122,8 @@ node's `fqdn` fact contains the string 'large' or 'small'. We'll also add an
 `else` block to fail with an appropriate error message if the `fqdn` variable
 doesn't match 'small' or 'large'.
 
+[//]: # (code/110_roles_and_profiles/modules/profile/manifests/pasture/app.pp)
+
 ```puppet
 class profile::pasture::app {
   if $facts['fqdn'] =~ 'large' {
@@ -152,6 +154,8 @@ component class.
 You don't need to customize any parameters here, so you can use the `include`
 syntax to declare the `pasture::db` class.
 
+[//]: # (code/110_roles_and_profiles/modules/profile/manifests/pasture/db.pp)
+
 ```puppet
 class profile::pasture::db {
   include pasture::db
@@ -180,6 +184,8 @@ Next, create a manifest to define your `profile::base::motd` profile.
 
 Like the `profile::pasture::db` profile class, the `profile::base::motd` class
 is a wrapper class with an `include` statement for the `motd` class.
+
+[//]: # (code/110_roles_and_profiles/modules/profile/manifests/base/motd.pp)
 
 ```puppet
 class profile::base::motd {
@@ -229,6 +235,8 @@ Create a manifest to define your `role::pasture_app` role.
 
     vim role/manifests/pasture_app.pp
 
+[//]: # (code/110_roles_and_profiles/modules/role/manifests/pasture_app.pp)
+
 ```puppet
 class role::pasture_app {
   include profile::pasture::app
@@ -239,6 +247,8 @@ class role::pasture_app {
 Next, create a role for your database server.
 
     vim role/manifests/pasture_db.pp
+
+[//]: # (code/110_roles_and_profiles/modules/role/manifests/pasture_db.pp)
 
 ```puppet
 class role::pasture_db {
@@ -308,6 +318,8 @@ nodes.
 
 When you're done, the section of your `site.pp` after the initial comments
 should look like the following.
+
+[//]: # (code/110_roles_and_profiles/manifests/site.pp)
 
 ```puppet
 node default {

@@ -189,7 +189,9 @@ Add the `$sinatra_server` variable to the params block at the beginning of the
 template. The Pasture appication passes any settings under the
 `:sinatra_settings:` key to Sinatra itself.
 
-```yaml
+[//]: # (code/090_conditional_statements/modules/pasture/templates/pasture_config.yaml.epp)
+
+```puppet
 <%- | $port,
       $default_character,
       $default_message,
@@ -224,6 +226,8 @@ This will ensure that the server package is managed before the service, and
 that any updates to the package will trigger a restart of the service. Your
 class should look like the example below, with the conditional statement to
 manage your server packages included at the end.
+
+[//]: # (code/090_conditional_statements/modules/pasture/manifests/init.pp)
 
 ```puppet
 class pasture (
@@ -290,6 +294,8 @@ by setting up two different node definitions in the `site.pp` manifest.
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
+
+[//]: # (code/090_conditional_statements/manifests/site.pp)
 
 ```puppet
 node 'pasture-dev.puppet.vm' {

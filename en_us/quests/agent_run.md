@@ -15,7 +15,7 @@
 > - Lewis Carroll
 
 The `puppet resource` command you explored in the previous quest let you see a
-system the way Puppet does—through the resource abstraction layer. While
+system the way Puppet does—through the site. abstraction layer. While
 exploring and manipulating resources through Puppet's command line tools are
 useful, the real value of the resource abstraction layer is to provide a single
 common language for your Puppet master to manage all the systems in your
@@ -285,6 +285,8 @@ learn Puppet code syntax more quickly if you type out your code manually, but
 if you prefer to paste content into Vim, you can hit `ESC` to enter command
 mode and type `:set paste` to disable the automatic formatting. Press `i` to
 return to insert mode before pasting your text.)
+
+[//]: # (code/030_agent_run/manifests/site.pp)
 
 ```puppet
 node 'agent.puppet.vm' {
