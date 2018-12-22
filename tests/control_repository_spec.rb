@@ -189,7 +189,7 @@ describe _("Task 12:"), host: :localhost do
   xit 'has a working solution', :solution do
   end
   it _("Change the upstream repository's default branch to production") do
-    command("curl -i http://learning:puppet@localhost:3000/api/v1/users/learning/control-repo")
+    command("curl -i http://learning:puppet@localhost:3000/api/v1/repos/learning/control-repo")
       .stdout
       .should match /"default_branch":"production"/
   end
