@@ -128,13 +128,13 @@ in this case, "Per-OS defaults". Finally, if no value is found in the previous
 data sources, Hiera looks in the "Common data" level's `common.yaml` file.
 
 Because this configuration file is written in
-(YAML)[http://www.yaml.org/start.html], not Puppet code you cannot use the
+[YAML](http://www.yaml.org/start.html), not Puppet code you cannot use the
 `puppet parser validate` command to check your syntax. Instead use the
 following Ruby one-liner from the command line to check your YAML syntax. Keep
 in mind that like `puppet parser`, this will only verify that your file can be
 parsed, not guarantee that the content is correct.
 
-ruby -e "require 'yaml';require 'pp';pp YAML.load_file('./hiera.yaml')"
+    ruby -e "require 'yaml';require 'pp';pp YAML.load_file('./hiera.yaml')"
 
 Expect to see the following output:
 
