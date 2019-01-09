@@ -343,8 +343,9 @@ structured data is actually implemented by a Puppet manifest.
 
 The final content of the file is given below, but managing the big `pub_key`
 block may be a little awkward, especially if you're not used to Vim. (If you
-are comfortable with Vim, feel free to skip this paragraph) First,
-you'll need to trim the "ssh-rsa" and "root@learning.puppetlabs.vm" strings
+are comfortable with Vim, feel free to skip this paragraph)
+
+First, you'll need to trim the `ssh-rsa` and `root@learning.puppetlabs.vm` strings
 from the beginning and end of the key. First, position your cursor over the
 line with the key. Be sure you're in command mode by hitting the `ESC` key.
 From command mode, you can navigate easily to the beginning or end of the line
