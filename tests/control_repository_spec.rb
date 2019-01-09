@@ -57,7 +57,7 @@ describe _("Task 3:"), host: :localhost do
   it _('Copy and edit the environment.conf file'), :validation do
     file("/root/control-repo/environment.conf")
       .content
-      .should match /\.\/site:\.\/modules:\$basemodulepath/
+      .should match /site:modules:\$basemodulepath/
   end
 end
 
