@@ -279,8 +279,9 @@ data
 │   └── beauvine.vm.yaml
 └── nodes
     └── pasture-app-dragon.auroch.vm.yaml
-```
+
 2 directories, 4 files
+```
 
 <div class = "lvm-task-number"><p>Task 8:</p></div>
 
