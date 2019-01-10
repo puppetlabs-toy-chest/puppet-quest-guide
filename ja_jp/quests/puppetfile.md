@@ -56,10 +56,10 @@ Pastureアプリケーションのデータベース支援バージョンは`pup
 
     vim Puppetfile
 
-以下の行を追加し、`puppetlabs-postgresql`モジュールのバージョン4.9.0を含めます。
+以下の行を追加し、`puppetlabs-postgresql`モジュールのバージョン5.11.0を含めます。
 
 ```ruby
-mod "puppetlabs/postgresql", '4.9.0'
+mod "puppetlabs/postgresql", '5.11.0'
 ```
 
 残念ながら、まだ終わりではありません。`puppet module`ツールとは違い、コードマネージャは、モジュールの依存関係ツリーを自動的に管理してくれません。依存関係を解決したいモジュールが多数ある場合は、[puppet-generate-puppetfile](https://github.com/rnelson0/puppet-generate-puppetfile)や[librarian-puppet](https://github.com/voxpupuli/librarian-puppet)などのいくつかのサードパーティ製ツールが役に立ちます。
@@ -69,7 +69,7 @@ mod "puppetlabs/postgresql", '4.9.0'
 しかし、このケースでは、扱う外部モジュールは1つだけなので、一般的な次善策で対応可能です。`puppet module`ツールを使って任意のバージョンの`puppetlabs/postgresql`モジュールを一時ディレクトリにインストールし、このツールのアウトプットを使って必要な依存関係を決定します。
 
     mkdir temp  
-    puppet module install puppetlabs/postgresql --version 4.9.0 --modulepath=temp  
+    puppet module install puppetlabs/postgresql --version 5.11.0 --modulepath=temp
 
 ツールは以下のような結果を返します。
 
@@ -78,10 +78,11 @@ Notice: Preparing to install into /root/control-repo/tmp ...
 Notice: Downloading from https://forge.puppet.com ...
 Notice: Installing -- do not interrupt ...
 /root/control-repo/tmp
-└─┬ puppetlabs-postgresql (v4.9.0)
-  ├── puppetlabs-apt (v2.4.0)
-  ├── puppetlabs-concat (v2.2.1)
-  └── puppetlabs-stdlib (v4.20.0)
+└─┬ puppetlabs-postgresql (v5.11.0)
+  ├─┬ puppetlabs-apt (v6.2.1)
+  │ └── puppetlabs-translate (v1.2.0)
+  ├── puppetlabs-concat (v5.1.0)
+  └── puppetlabs-stdlib (v5.1.0)
 ```
 
 一時ディレクトリを削除し、クリーンアップします。
@@ -93,10 +94,11 @@ Puppetfileに戻り、リストに記載されたバージョンを用いて、`
 完成したPuppetfileは、以下のようになります。
 
 ```ruby
-mod "puppetlabs/postgresql", '4.9.0'
-mod "puppetlabs/apt", '2.4.0'
-mod "puppetlabs/concat", '2.2.1'
-mod "puppetlabs/stdlib", '4.20.0'
+mod "puppetlabs/postgresql", '5.11.0'
+mod "puppetlabs/apt", '6.2.1'
+mod "puppetlabs/translate", '1.2.0'
+mod "puppetlabs/concat", '5.1.0'
+mod "puppetlabs/stdlib", '5.1.0'
 ```
 
 <div class = "lvm-task-number"><p>タスク4:</p></div>
@@ -137,16 +139,17 @@ Gitea UI (`<IP ADDRESS>:3000`)から、新しいプルリクエストを作成�
 
 デプロイが完了したら、インストールされたモジュールのリストをチェックし、適切なモジュールがインストールされていることを確認します。
 
-    puppet module list
+    puppet module list --tree --modulepath /etc/puppetlabs/code/environments/production/modules
 
 Puppetfileに追加したモジュールが、本稼働環境のモジュールパスに含まれているはずです。
 
 ```
 /etc/puppetlabs/code/environments/production/modules
-├── puppetlabs-apt (v2.4.0)
-├── puppetlabs-concat (v2.2.1)
-├── puppetlabs-postgresql (v4.9.0)
-└── puppetlabs-stdlib (v4.20.0)
+└─┬ puppetlabs-postgresql (v5.11.0)
+  ├── puppetlabs-stdlib (v5.1.0)
+  ├─┬ puppetlabs-apt (v6.2.1)
+  │ └── puppetlabs-translate (v1.2.0)
+  └── puppetlabs-concat (v5.1.0)
 ```
 
 <div class = "lvm-task-number"><p>タスク7:</p></div>
