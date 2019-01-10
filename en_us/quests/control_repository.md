@@ -406,7 +406,7 @@ and click the **Update Settings** button to save your change.
 ## Code Manager deploy key
 
 The Code Manager tool lets you automate the deployment of Puppet code to your
-master from a control repository. To congigure code manager, we'll need to set
+master from a control repository. To configure code manager, we'll need to set
 up authentication with an RSA keypair. This will allow Gitea to authenticate
 the Puppet master when it requests code from the control repository to deploy.
 
@@ -450,15 +450,15 @@ command.
 
     cat /etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa.pub
 
-Copy only the actual key segment between "ssh-rsa" and "learning@puppet.vm" to
+Copy only the actual key segment between `ssh-rsa` and `learning@puppet.vm` to
 your clipboard. Click on the **Add Deploy Key** button in the Gitea interface,
 and paste the key into the **Content** field of the form. If you are copying
-from the Learnign VM's web-based console, you will have to manually delete
+from the Learning VM's web-based console, you will have to manually delete
 several line-breaks to ensure that you're inputting a clean copy of the public
-key. Set the **Title** field to "Code Manager", and click on the **Add Deploy
-Key** button to add the key. If you get an error, check that what you inserted
-matches the key exactly, without linebreaks or extra spaces before or after the
-key.
+key. Set the **Title** field to "Code Manager", leave the **Enable Write Access**
+checkbox unchecked, and click on the **Add Deploy Key** button to add the key.
+If you get an error, check that what you inserted matches the key exactly,
+without linebreaks or extra spaces before or after the key.
 
 The other option is to run the following command on the Learning VM to add the
 key via Gitea's API.
