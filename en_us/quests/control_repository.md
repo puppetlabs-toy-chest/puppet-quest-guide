@@ -736,7 +736,7 @@ before incorporating them into the project's main branch.
 Open the Gitea interface (`<VM's IP ADDRESS>:3000`) in a browser window.
 
 From the **Branch:** dropdown menu, select your new `beauvine_default_message`
-branch. Click the icon net to the dropdown menu to compare your branches and
+branch. Click the icon next to the dropdown menu to compare your branches and
 begin a pull request. Fill out the pull request form with the title and
 description of your pull request. Because this pull request consists of a
 single commit, you may want to use the same title and commit message as that
