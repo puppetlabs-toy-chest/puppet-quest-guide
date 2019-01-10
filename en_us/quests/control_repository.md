@@ -491,7 +491,7 @@ related to Puppet itself.
 First, open the PE console interface in your browser by navigating to
 `https://<VM IP ADDRESS>`. Log in with the credentials:
 
-**user:** admin
+**user:** admin  
 **password:** puppetlabs
 
 Click on the **Classifaction** tab in the PE console navigation menu. From
