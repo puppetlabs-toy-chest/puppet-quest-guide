@@ -337,7 +337,7 @@ describe _("Task 22:"), host: :localhost do
   it _('Push your branch to the upstream remote'), :validation do
     command("curl -i http://learning:puppet@localhost:3000/api/v1/repos/learning/control-repo/branches")
       .stdout
-      .should match /beauvine_message_default/
+      .should match /beauvine_default_message/
   end
 end
 
