@@ -384,6 +384,8 @@ workflow a little later in this quest.
 
     git push upstream production
 
+Enter the username `learning` and password `puppet` if prompted.
+
 Return to the Gitea interface in your browser or refresh the page. You can now
 access all the content of your control repository through the Gitea web
 interface.
