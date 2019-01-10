@@ -1,4 +1,3 @@
-
 ---
 profile::pasture::app::default_message: "Baa"
 profile::pasture::app::sinatra_server: "thin"
