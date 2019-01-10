@@ -298,7 +298,7 @@ end
 
 describe _("Task 20:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('cd /root/control-repo && git checkout -b beauvine_message_default')
+    command('cd /root/control-repo && git checkout -b beauvine_default_message')
       .exit_status
       .should eq 0
     command("yes | cp -f #{SOLUTION_PATH}/control_repository/20/beauvine.vm.yaml /root/control-repo/data/domain/beauvine.vm.yaml")
@@ -330,7 +330,7 @@ end
 
 describe _("Task 22:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('cd /root/control-repo && git push upstream beauvine_message_default')
+    command('cd /root/control-repo && git push upstream beauvine_default_message')
       .exit_status
       .should eq 0
   end
@@ -344,7 +344,7 @@ end
 describe _("Task 23:"), host: :localhost do
   it 'has a working solution', :solution do
     # Again, pushing to master branch rather than produciton for solution
-    command('cd /root/control-repo && git checkout master && git merge beauvine_message_default && git push -f upstream master')
+    command('cd /root/control-repo && git checkout master && git merge beauvine_default_message && git push -f upstream master')
       .exit_status
       .should eq 0
   end
