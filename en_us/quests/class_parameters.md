@@ -66,6 +66,8 @@ Remove the variables set at the beginning of your class and add a corresponding
 set of parameters. When you're done, your class should look like the following
 example.
 
+[//]: # (code/070_class_parameters/modules/pasture/manifests/init.pp)
+
 ```puppet
 class pasture (
   $port                = '80',
@@ -170,6 +172,8 @@ And modify your node definition for `pasture.puppet.vm` to include a
 resource-like class declartion. We'll set the `default_character` parameter
 to the string `'cow'`, and leave the other two parameters unset, letting them
 take their default values.
+
+[//]: # (code/070_class_parameters/manifests/site.pp)
 
 ```puppet
 node 'pasture.puppet.vm' {

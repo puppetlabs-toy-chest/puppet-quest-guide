@@ -151,7 +151,7 @@ describe _("Task 8:"), host: :localhost do
       .exit_status
       .should eq 0
   end
-  it _('Create the auroch.vm.yaml data source'), :validation do
+  it _('Test API endpoints'), :validation do
     command("curl pasture-app-dragon.auroch.vm/api/v1/cowsay/sayings")
       .exit_status
       .should eq 0

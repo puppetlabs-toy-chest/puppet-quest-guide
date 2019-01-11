@@ -57,7 +57,7 @@ describe _("Task 3:"), host: :localhost do
   it _('Copy and edit the environment.conf file'), :validation do
     file("/root/control-repo/environment.conf")
       .content
-      .should match /\.\/site:\.\/modules:\$basemodulepath/
+      .should match /site:modules:\$basemodulepath/
   end
 end
 
@@ -189,7 +189,7 @@ describe _("Task 12:"), host: :localhost do
   xit 'has a working solution', :solution do
   end
   it _("Change the upstream repository's default branch to production") do
-    command("curl -i http://learning:puppet@localhost:3000/api/v1/users/learning/control-repo")
+    command("curl -i http://learning:puppet@localhost:3000/api/v1/repos/learning/control-repo")
       .stdout
       .should match /"default_branch":"production"/
   end
@@ -298,7 +298,7 @@ end
 
 describe _("Task 20:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('cd /root/control-repo && git checkout -b beauvine_message_default')
+    command('cd /root/control-repo && git checkout -b beauvine_default_message')
       .exit_status
       .should eq 0
     command("yes | cp -f #{SOLUTION_PATH}/control_repository/20/beauvine.vm.yaml /root/control-repo/data/domain/beauvine.vm.yaml")
@@ -330,21 +330,21 @@ end
 
 describe _("Task 22:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('cd /root/control-repo && git push upstream beauvine_message_default')
+    command('cd /root/control-repo && git push upstream beauvine_default_message')
       .exit_status
       .should eq 0
   end
   it _('Push your branch to the upstream remote'), :validation do
     command("curl -i http://learning:puppet@localhost:3000/api/v1/repos/learning/control-repo/branches")
       .stdout
-      .should match /beauvine_message_default/
+      .should match /beauvine_default_message/
   end
 end
 
 describe _("Task 23:"), host: :localhost do
   it 'has a working solution', :solution do
     # Again, pushing to master branch rather than produciton for solution
-    command('cd /root/control-repo && git checkout master && git merge beauvine_message_default && git push -f upstream master')
+    command('cd /root/control-repo && git checkout master && git merge beauvine_default_message && git push -f upstream master')
       .exit_status
       .should eq 0
   end

@@ -77,11 +77,11 @@ Open a new file called `Puppetfile` in your editor.
 
     vim Puppetfile
 
-Add the following line to include version 4.9.0 of the `puppetlabs-postgresql`
+Add the following line to include version 5.11.0 of the `puppetlabs-postgresql`
 module:
 
 ```ruby
-mod "puppetlabs/postgresql", '4.9.0'
+mod "puppetlabs/postgresql", '5.11.0'
 ```
 
 Unfortunately you're not quite done yet. Unlike the `puppet module` tool, Code
@@ -100,7 +100,7 @@ resort to a common work-around. Install the desired version of the
 module` tool and use the tool's output to determine the needed dependencies.
 
     mkdir temp  
-    puppet module install puppetlabs/postgresql --version 4.9.0 --modulepath=temp  
+    puppet module install puppetlabs/postgresql --version 5.11.0 --modulepath=temp
 
 The tool will return the following:
 
@@ -109,10 +109,11 @@ Notice: Preparing to install into /root/control-repo/tmp ...
 Notice: Downloading from https://forge.puppet.com ...
 Notice: Installing -- do not interrupt ...
 /root/control-repo/tmp
-└─┬ puppetlabs-postgresql (v4.9.0)
-  ├── puppetlabs-apt (v2.4.0)
-  ├── puppetlabs-concat (v2.2.1)
-  └── puppetlabs-stdlib (v4.20.0)
+└─┬ puppetlabs-postgresql (v5.11.0)
+  ├─┬ puppetlabs-apt (v6.2.1)
+  │ └── puppetlabs-translate (v1.2.0)
+  ├── puppetlabs-concat (v5.1.0)
+  └── puppetlabs-stdlib (v5.1.0)
 ```
 
 Clean up after yourself by removing the temporary directory.
@@ -120,15 +121,17 @@ Clean up after yourself by removing the temporary directory.
     rm -rf temp
 
 Return to your Puppetfile and add entries for the `puppetlabs-apt`,
-`puppetlabs-concat`, and `puppetlabs-stdlib` modules using the listed versions.
+`puppetlabs-translate`, `puppetlabs-concat`, and `puppetlabs-stdlib`
+modules using the listed versions.
 
 Your finished Puppetfile should look like this:
 
 ```ruby
-mod "puppetlabs/postgresql", '4.9.0'
-mod "puppetlabs/apt", '2.4.0'
-mod "puppetlabs/concat", '2.2.1'
-mod "puppetlabs/stdlib", '4.20.0'
+mod "puppetlabs/postgresql", '5.11.0'
+mod "puppetlabs/apt", '6.2.1'
+mod "puppetlabs/translate", '1.2.0'
+mod "puppetlabs/concat", '5.1.0'
+mod "puppetlabs/stdlib", '5.1.0'
 ```
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>
@@ -176,17 +179,18 @@ and supply the credentials `deployer`:`puppet` generate a new token.)
 Once the deployment completes, check the list of installed modules to verify
 that the correct modules have been installed.
 
-    puppet module list
+    puppet module list --tree --modulepath /etc/puppetlabs/code/environments/production/modules
 
 The modules you added to your Puppetfile should now be included in your
 production environment's modulepath.
 
 ```
 /etc/puppetlabs/code/environments/production/modules
-├── puppetlabs-apt (v2.4.0)
-├── puppetlabs-concat (v2.2.1)
-├── puppetlabs-postgresql (v4.9.0)
-└── puppetlabs-stdlib (v4.20.0)
+└─┬ puppetlabs-postgresql (v5.11.0)
+  ├── puppetlabs-stdlib (v5.1.0)
+  ├─┬ puppetlabs-apt (v6.2.1)
+  │ └── puppetlabs-translate (v1.2.0)
+  └── puppetlabs-concat (v5.1.0)
 ```
 
 <div class = "lvm-task-number"><p>Task 7:</p></div>

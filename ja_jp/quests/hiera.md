@@ -78,9 +78,9 @@ hierarchy:
 
 PuppetでHieraを使用して値を探す場合、この設定ファイルの`hierarchy:`セクションに記載されたレベルの順序に従って検索が行われます。"Per-node data"レベルに定義されたデータソース内で値が見つかった場合、この値が使用されます。一致する値がここで見つからない場合、次のレベル( ここでは、"Per-OS defaults")に進みます。このデータソースにも値が見つからない場合、最終的に、"Common data"レベルの`common.yaml`ファイルが検索されます。
 
-この設定ファイルは、Puppetコードではなく(YAML)[http://www.yaml.org/start.html]で記述されているので、構文チェックに`puppet parser validate`コマンドを使用することはできません。代わりに、以下のRubyの1行コマンドをコマンドラインで実行して、YAML構文をチェックします。このコマンドは、`puppet parser`と同様に、ファイルが解析できるかどうかだけをチェックするものであり、内容の正しさは保証しません。
+この設定ファイルは、Puppetコードではなく[YAML](http://www.yaml.org/start.html)で記述されているので、構文チェックに`puppet parser validate`コマンドを使用することはできません。代わりに、以下のRubyの1行コマンドをコマンドラインで実行して、YAML構文をチェックします。このコマンドは、`puppet parser`と同様に、ファイルが解析できるかどうかだけをチェックするものであり、内容の正しさは保証しません。
 
-ruby -e "require 'yaml';require 'pp';pp YAML.load_file('./hiera.yaml')"
+    ruby -e "require 'yaml';require 'pp';pp YAML.load_file('./hiera.yaml')"
 
 以下のような出力が表示されます。
 

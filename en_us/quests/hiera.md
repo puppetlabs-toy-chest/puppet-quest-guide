@@ -71,7 +71,7 @@ differently. Let's imagine that you've set up a tiered pricing structure for
 your Cowsay as a Service application. Your basic tier offers only basic cowsay
 API features, while your your premium level customers get the added database
 features. The hot new startup Beauvine is paying for the basic service, while
-their competitor, the more established Auroch has opts for your premium
+their competitor, the more established Auroch has opted for your premium
 service. Auroch also insists that you set up also set up a custom one-off
 instance of the application using cowsay's dragon character as the default.
 
@@ -98,6 +98,8 @@ Start work on a new `hiera.yaml` file.
 We'll implement a simple hierarchy with three levels: "Common data" to set up
 environment defaults, "Per-Domain defaults" to define domain-specific defaults,
 and "Per-node data" to define specific data values for individual nodes.
+
+[//]: # (code/120_hiera/hiera.yaml)
 
 ```yaml
 ---
@@ -126,13 +128,13 @@ in this case, "Per-OS defaults". Finally, if no value is found in the previous
 data sources, Hiera looks in the "Common data" level's `common.yaml` file.
 
 Because this configuration file is written in
-(YAML)[http://www.yaml.org/start.html], not Puppet code you cannot use the
+[YAML](http://www.yaml.org/start.html), not Puppet code you cannot use the
 `puppet parser validate` command to check your syntax. Instead use the
 following Ruby one-liner from the command line to check your YAML syntax. Keep
 in mind that like `puppet parser`, this will only verify that your file can be
 parsed, not guarantee that the content is correct.
 
-ruby -e "require 'yaml';require 'pp';pp YAML.load_file('./hiera.yaml')"
+    ruby -e "require 'yaml';require 'pp';pp YAML.load_file('./hiera.yaml')"
 
 Expect to see the following output:
 
@@ -156,6 +158,8 @@ which values the data sources need to define.
 
 Here, use the built-in Hiera `lookup()` function to tell Puppet to fetch data
 for each of the `pasture` component class parameters you want to manage.
+
+[//]: # (code/120_hiera/modules/profile/manifests/pasture/app.pp)
 
 ```puppet
 class profile::pasture::app {
@@ -206,6 +210,8 @@ Begin with your `common.yaml` data source, which is kept directly under the
 
 Here, set common defaults to be used when no value is set in a higher level.
 
+[//]: # (code/120_hiera/data/common.yaml)
+
 ```yaml
 ---
 profile::pasture::app::default_message: "Baa"
@@ -224,6 +230,8 @@ common.
 
     vim data/domain/beauvine.vm.yaml
 
+[//]: # (code/120_hiera/data/domain/beauvine.vm.yaml)
+
 ```yaml
 ---
 profile::pasture::app::default_message: "Welcome to Beauvine!"
@@ -234,6 +242,8 @@ profile::pasture::app::default_message: "Welcome to Beauvine!"
 Next, create the `data/domain/auroch.vm.yaml` data source.
 
     vim data/domain/auroch.vm.yaml
+
+[//]: # (code/120_hiera/data/domain/auroch.vm.yaml)
 
 ```yaml
 ---
@@ -248,7 +258,9 @@ node level.
 
     vim data/nodes/pasture-app-dragon.auroch.vm.yaml
 
-Here, just set the `default_character` to `dragon`. 
+Here, just set the `default_character` to `dragon`.
+
+[//]: # (code/120_hiera/data/nodes/pasture-app-dragon.auroch.vm.yaml)
 
 ```yaml
 ---
@@ -267,8 +279,9 @@ data
 │   └── beauvine.vm.yaml
 └── nodes
     └── pasture-app-dragon.auroch.vm.yaml
-```
+
 2 directories, 4 files
+```
 
 <div class = "lvm-task-number"><p>Task 8:</p></div>
 

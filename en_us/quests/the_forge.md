@@ -99,7 +99,7 @@ the Puppetfile and code management workflow
 On your master, go ahead and use the `puppet module` tool to install this
 module.
 
-    puppet module install puppetlabs-postgresql --version 4.9.0
+    puppet module install puppetlabs-postgresql
 
 To confirm that this command placed the module in your modulepath, take a look
 at the contents of your modules directory.
@@ -141,6 +141,8 @@ Within this `pasture::db` class, we'll use the classes provided by the
 `postgresql` module to set up the `pasture` database that
 will keep track of our cow sayings.
 
+[//]: # (code/100_the_forge/modules/pasture/manifests/db.pp)
+
 ```puppet
 class pasture::db {
 
@@ -179,6 +181,8 @@ Go ahead and open your `site.pp` manifest.
 Create a node definition to classify the `pasture-db.puppet.vm` node with
 the `pasture::db` class.
 
+[//]: # (code/100_the_forge/manifests/site.pp.1)
+
 ```puppet
 node 'pasture-db.puppet.vm' {
   include pasture::db
@@ -205,6 +209,8 @@ Add a `$db` parameter with a default value of `'none'`. You'll see why we use
 so it will be passed through to the template that defines the application's
 configuration file. When you've made these two additions, your class should
 look like the example below.
+
+[//]: # (code/100_the_forge/modules/pasture/manifests/init.pp)
 
 ```puppet
 class pasture (
@@ -264,6 +270,10 @@ Next, edit the `pasture_config.yaml.epp` template. We'll use a conditional
 statement to only include the `:db:` setting if there is a value other than
 `none` set for the `$db` variable.
 
+    vim pasture/templates/pasture_config.yaml.epp
+
+[//]: # (code/100_the_forge/modules/pasture/templates/pasture_config.yaml.epp)
+
 ```puppet
 <%- | $port,
       $default_character,
@@ -290,6 +300,8 @@ Now that you've set up this `db` parameter, edit your
 
 Declare the `pasture` class and set the `db` parameter to the URI of the
 `pasture` database you're running on `pasture-db.puppet.vm`.
+
+[//]: # (code/100_the_forge/manifests/site.pp.2)
 
 ```puppet
 node 'pasture-app.puppet.vm' {
@@ -342,4 +354,4 @@ create a database server and connect it to your application server.
 
 * Watch this [short video](https://fast.wistia.net/embed/iframe/uxfpduvk64?seo=false) for a basic introduction to the Forge.
 * For more in-depth information on the Forge, check our [Introduction to the Forge](https://learn.puppet.com/elearning/an-introduction-to-the-forge) self-paced course.
-* Our [Puppetizing Infrastructure](https://learn.puppet.com/instructor-led-training/puppetizing-infrastructure) course focuses on using Forge modules to quickly get started managing your infrastructure with Puppet.
+* Our [Getting Started with Puppet](https://learn.puppet.com/instructor-led-training/getting-started-with-puppet) course focuses on using Forge modules to quickly get started managing your infrastructure with Puppet.

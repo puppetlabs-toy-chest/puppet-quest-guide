@@ -110,6 +110,8 @@ This class will consist of a single `file` resource to manage the `/etc/motd`
 file. We'll use a template to set the value for this resource's `content`
 parameter.
 
+[//]: # (code/080_facts/modules/motd/manifests/init.pp)
+
 ```puppet
 class motd {
 
@@ -154,6 +156,8 @@ so we'll leave out the conventional "managed by Puppet" note.
 Next, add a simple welcome message and use the variables assigned from our fact
 values to provide some basic information about the system.
 
+[//]: # (code/080_facts/modules/motd/templates/motd.epp)
+
 ```
 <%- | $fqdn,
       $os_family,
@@ -175,6 +179,8 @@ With this template set, your simple MOTD module is complete. Open your
 
 We're not using any parameters, so we'll use the `include` function to add the
 `motd` class to the `pasture.puppet.vm` node definition.
+
+[//]: # (code/080_facts/manifests/site.pp)
 
 ```puppet
 node 'pasture.puppet.vm' {
@@ -225,4 +231,4 @@ create intelligent defaults based on system information.
 
 * Check out our [docs page](https://puppet.com/docs/puppet/latest/lang_facts_and_builtin_vars.html) for more information on facter and facts in Puppet.
 * You can also find a [lesson on Facter](https://learn.puppet.com/course/an-introduction-to-facter) in our [self-paced training course catalog](https://learn.puppet.com/category/self-paced-training).
-* Facts are covered in-depth in our Puppet Fundamentals, Puppet Practitioner, and Puppetizing Infrastructure courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.
+* Facts are covered in-depth in our Getting Started with Puppet and Puppet Practitioner courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.

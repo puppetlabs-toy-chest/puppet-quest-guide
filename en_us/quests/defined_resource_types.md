@@ -229,6 +229,8 @@ Putting these `user` and `ssh_authorized_key` resources together with `file`
 resources to manage the user's home directory and `.ssh` directory, your
 `user_accounts::ssh_user` defined resource type will look like this:
 
+[//]: # (code/130_defined_resource_types/modules/user_accounts/manifests/ssh_user.pp)
+
 ```puppet
 define user_accounts::ssh_user (
   $key,
@@ -341,8 +343,9 @@ structured data is actually implemented by a Puppet manifest.
 
 The final content of the file is given below, but managing the big `pub_key`
 block may be a little awkward, especially if you're not used to Vim. (If you
-are comfortable with Vim, feel free to skip this paragraph) First,
-you'll need to trim the "ssh-rsa" and "root@learning.puppetlabs.vm" strings
+are comfortable with Vim, feel free to skip this paragraph)
+
+First, you'll need to trim the `ssh-rsa` and `root@learning.puppetlabs.vm` strings
 from the beginning and end of the key. First, position your cursor over the
 line with the key. Be sure you're in command mode by hitting the `ESC` key.
 From command mode, you can navigate easily to the beginning or end of the line
@@ -356,6 +359,8 @@ position of your cursor with the `p` key.  You can also delete a line with the
 When your finished, your data file should look like the following example,
 though your public key will be different from the one shown. Note that the
 `pub_key:` must all be on a single line.
+
+[//]: # (code/130_defined_resource_types/data/domain/beauvine.vm.yaml)
 
 ```yaml
 ---
@@ -416,6 +421,8 @@ still get a valid result.
 
 Your `common.yaml` file should look like the following:
 
+[//]: # (code/130_defined_resource_types/data/common.yaml)
+
 ```yaml
 ---
 profile::pasture::app::default_message: "Baa"
@@ -444,6 +451,8 @@ data from a hash or array to bind different values to the variables in
 the block for each iteration. In this case, the iterator goes through a
 list of users accounts defined in your Hiera data source and declares an
 instance of the `user_accoutns::ssh_user` defined resource type for each.
+
+[//]: # (code/130_defined_resource_types/modules/profile/manifests/base/dev_users.pp)
 
 ```puppet
 class profile::base::dev_users {
@@ -476,6 +485,8 @@ With this `profile::base::dev_users` class is set up, add it to the
 `role::pasture_app` class.
 
     vim /etc/puppetlabs/code/environments/production/modules/role/manifests/pasture_app.pp
+
+[//]: # (code/130_defined_resource_types/modules/role/manifests/pasture_app.pp)
 
 ```puppet
 class role::pasture_app {
@@ -521,4 +532,4 @@ on a defined resource type:
 ## Additional Resources
 
 * Read more about defined resource types at our [docs page](https://puppet.com/docs/puppet/latest/lang_defined_types.html).
-* Defined resource types are covered in our Puppet Fundamentals, Puppet Practitioner, and Puppetizing Infrastructure courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.
+* Defined resource types are covered in our Puppet Practitioner course. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.

@@ -70,6 +70,8 @@ Assign these variables at the top of your class. Replace the hard-coded
 references to the `/etc/pasture_config.yaml` configuration filepath with the
 variable.
 
+[//]: # (code/060_variables_and_templates/pasture/manifests/init.pp)
+
 ```puppet
 class pasture {
 
@@ -184,7 +186,9 @@ tag creating an empty line at the beginning of the output file.
 Next, we'll use the variables we set up to define values for the port and
 character configuration options.
 
-```
+[//]: # (code/060_variables_and_templates/pasture/templates/pasture_config.yaml.epp)
+
+```puppet
 <%- | $port,
       $default_character,
       $default_message,
@@ -231,6 +235,8 @@ template.
 
 To avoid cramming all our variables into the `epp()` function, we'll put them
 in a variable called `$pasture_config_hash` just before the file resource.
+
+[//]: # (code/060_variables_and_templates/pasture/manifests/init.pp)
 
 ```puppet
 class pasture {
@@ -283,7 +289,9 @@ Add your parameters tag and comment to the beginning of the file. Set the
 `--config_file` argument of the start command to the value of
 `$pasture_config_file`
 
-```
+[//]: # (code/060_variables_and_templates/pasture/templates/pasture.service.epp)
+
+```puppet
 <%- | $pasture_config_file = '/etc/pasture_config.yaml' | -%>
 # This file is managed by Puppet. Please do not make manual changes.
 [Unit]
@@ -305,6 +313,8 @@ Now return to your `init.pp` manifest.
 
 And modify the file resource for your service unit file to use the template you
 just created.
+
+[//]: # (code/060_variables_and_templates/pasture/manifests/init.pp)
 
 ```puppet
 class pasture {

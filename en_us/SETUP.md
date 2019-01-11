@@ -20,11 +20,10 @@ Launch your virtualization software and find an **Import** or **Import
 Appliance** option in the **File** menu. If you cannot locate an **Import**
 option, refer to your virtualization software's documentation.
 
-If you have enough available memory on your host machine, increasing the memory
-allocation for the VM from the default 3GB to 4GB may improve performance and
-stability. Memory allocation settings are found by selecting the VM in the
-VirtualBox Manager window, opening the *Settings* dialog, and selecting the
-*System* section.
+The Learning VM has been preset with 4GB of memory allocation for the virtual
+machine. This should be sufficient for starting it and Puppet Enterprise
+running inside it. If available, you can increase the virtual machine memory
+allocation as needed.
 
 ## Networking configuration
 

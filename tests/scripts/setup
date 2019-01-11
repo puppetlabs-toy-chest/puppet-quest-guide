@@ -30,8 +30,8 @@ def create_node(opts)
   #necessary files to the /etc/docker/ssl_dir/ directory, which is mounted on
   #the docker nodes.
   if opts['sign_cert']
-    `puppet cert generate #{opts['name']} > /dev/null 2>&1`
-    `puppet cert sign #{opts['name']} > /dev/null 2>&1`
+    `puppetserver ca generate --certname #{opts['name']} > /dev/null 2>&1`
+    `puppetserver ca sign --certname #{opts['name']} > /dev/null 2>&1`
 
     #It seems to take a moment after the puppet cert sign returns before the
     #cert is actually signed. A sleep here isn't the most elegant, but because
@@ -127,7 +127,7 @@ def clear_nodes
   hosts.each do |name, ip|
     `systemctl stop docker-#{name}.service`
     `/bin/find /etc/docker/ssl_dir -name #{name}.pem -delete`
-    `/opt/puppetlabs/bin/puppet cert clean #{name}`
+    `/opt/puppetlabs/bin/puppetserver ca clean --certname #{name}`
   end
 end
 

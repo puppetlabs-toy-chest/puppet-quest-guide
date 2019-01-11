@@ -170,6 +170,8 @@ This main class is always kept in a manifest with the special name `init.pp`.
 
 Enter the following class definition, then save and exit (`:wq`):
 
+[//]: # (code/040_manifests_and_classes/modules/cowsay/manifests/init.pp)
+
 ```puppet
 class cowsay {
   package { 'cowsay':
@@ -207,6 +209,8 @@ manifest.
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 At the end of the `site.pp` manifest, insert the following code:
+
+[//]: # (code/040_manifests_and_classes/manifests/site.pp)
 
 ```puppet
 node 'cowsay.puppet.vm' {
@@ -288,6 +292,8 @@ Create a new manifest for your `fortune` class definition.
 
 Write your class definition here:
 
+[//]: # (code/040_manifests_and_classes/modules/cowsay/manifests/fortune.pp)
+
 ```puppet
 class cowsay::fortune {
   package { 'fortune-mod':
@@ -323,6 +329,8 @@ into our main `cowsay` class.
     vim cowsay/manifests/init.pp
 
 Add an include statement for your `cowsay::fortune` class to the cowsay class.
+
+[//]: # (code/040_manifests_and_classes/modules/cowsay/manifests/init.pp)
 
 ```puppet
 class cowsay {
@@ -387,5 +395,5 @@ scheme to structure the Puppet code you write.
 ## Additional Resources
 
 * Module fundamentals and structure are covered on our [docs page](https://puppet.com/docs/puppet/latest/modules_fundamentals.html), along with other topics such as module testing and publishing to the Forge.
-* Puppet modules are covered in-depth in our Puppet Fundamentals, Puppet Practitioner, and Puppetizing Infrastructure courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.
+* Puppet modules are covered in-depth in our Getting Started with Puppet and Puppet Practitioner courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.
 * [Classes](https://learn.puppet.com/course/classes) and [Autoloading](https://learn.puppet.com/course/autoloading) are covered as self-paced lessons.

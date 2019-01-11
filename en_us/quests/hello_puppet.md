@@ -89,7 +89,7 @@ modules maintained by Puppet and the Puppet community that give you everything
 you need to manage common applications and services. The Forge has a wide range
 of modules to help you manage everything from NTP and SQL Server to Minecraft.
 The base of well tested and reviewed code means that you can get started
-puppetizing key aspects of your infrastructure right out of the gate.
+Puppetizing key aspects of your infrastructure right out of the gate.
 
 **Puppet connects you to the cutting edge.** Puppet provides a stable platform
 for bringing new technologies into production. Integrations with Docker,
@@ -433,4 +433,4 @@ kept on the master.
 * Watch our on-demand webinar ["Introduction to Puppet Enterprise"](https://puppet.com/resources/webinar/introduction-puppet-enterprise)
 * Read about installing Puppet Enterprise on our [docs page](https://puppet.com/docs/pe/latest/installing_pe.html)
 * Take a look at our [What is Puppet](https://learn.puppet.com/course/what-is-puppet) and [What is Puppet Enterprise](https://learn.puppet.com/course/what-is-puppet-enterprise) and [Resources](https://learn.puppet.com/course/resources) [self-paced lessons](https://learn.puppet.com/category/self-paced-training).
-* Puppet basics are covered in-depth in our Puppet Fundamentals and Puppetizing Infrastructure courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.
+* Puppet basics are covered in-depth in our Getting Started with Puppet course. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.

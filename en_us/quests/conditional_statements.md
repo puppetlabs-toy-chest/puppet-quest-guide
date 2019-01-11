@@ -44,7 +44,7 @@ This kind of **what** question is often addressed through a combination of
 conditional statements and facts or parameters.  If you look at the
 `puppetlabs-apache` module on the [Forge](forge.puppet.com), you'll see [this
 package name and numerous other
-variables](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/params.pp#L59)
+variables](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/params.pp#L62)
 set based on an `if` statement using the `osfamily` fact. (You may notice that
 this module uses an un-structured `$::osfamily` format for this fact to
 preserve backwards compatibility. You can read more about this form of
@@ -189,7 +189,9 @@ Add the `$sinatra_server` variable to the params block at the beginning of the
 template. The Pasture appication passes any settings under the
 `:sinatra_settings:` key to Sinatra itself.
 
-```yaml
+[//]: # (code/090_conditional_statements/modules/pasture/templates/pasture_config.yaml.epp)
+
+```puppet
 <%- | $port,
       $default_character,
       $default_message,
@@ -224,6 +226,8 @@ This will ensure that the server package is managed before the service, and
 that any updates to the package will trigger a restart of the service. Your
 class should look like the example below, with the conditional statement to
 manage your server packages included at the end.
+
+[//]: # (code/090_conditional_statements/modules/pasture/manifests/init.pp)
 
 ```puppet
 class pasture (
@@ -291,6 +295,8 @@ by setting up two different node definitions in the `site.pp` manifest.
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
+[//]: # (code/090_conditional_statements/manifests/site.pp)
+
 ```puppet
 node 'pasture-dev.puppet.vm' {
   include pasture
@@ -325,10 +331,10 @@ option to proceed.)
 
 Use the following credentials to log in:
 
-Username: **admin**
+Username: **admin**  
 Password: **puppetlabs**
 
-Once you're connected, click the **access control** menu option in the
+Once you're connected, click the **Access control** menu option in the
 navigation bar at near the bottom left of the screen, then select **Users**
 in the *Access Control* navigation menu.
 
