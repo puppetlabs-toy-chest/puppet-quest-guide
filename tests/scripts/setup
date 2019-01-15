@@ -30,14 +30,14 @@ def create_node(opts)
   #necessary files to the /etc/docker/ssl_dir/ directory, which is mounted on
   #the docker nodes.
   if opts['sign_cert']
-    `puppetserver ca generate --certname #{opts['name']} > /dev/null 2>&1`
-    `puppetserver ca sign --certname #{opts['name']} > /dev/null 2>&1`
+    `/opt/puppetlabs/bin/puppetserver ca generate --certname #{opts['name']} > /dev/null 2>&1`
+    `/opt/puppetlabs/bin/puppetserver ca sign --certname #{opts['name']} > /dev/null 2>&1`
 
     #It seems to take a moment after the puppet cert sign returns before the
     #cert is actually signed. A sleep here isn't the most elegant, but because
     #it only takes a moment, polling would always return after a minimal wait
     #time anyway.
-    sleep 2
+    sleep 5
 
     # Ensure that the ssl_dir tree exists
     `mkdir -p /etc/docker/ssl_dir/{public_keys,private_keys}`
