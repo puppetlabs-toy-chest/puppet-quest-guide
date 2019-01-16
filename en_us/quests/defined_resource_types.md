@@ -163,7 +163,7 @@ defined resource type.
 
 We want to manage the user account itself along with the user's public key for
 SSH, so we'll expose a few basic parameters for the user resource as well as a
-`pub_key` parameter for the user's public key.
+`key` parameter for the user's public key.
 
 The parameter list for your defined type should look like this:
 
