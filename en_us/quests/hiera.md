@@ -162,6 +162,8 @@ which values the data sources need to define.
 Here, use the built-in Hiera `lookup()` function to tell Puppet to fetch data
 for each of the `pasture` component class parameters you want to manage.
 
+Replace the content of your class with the content that is shown below.
+
 [//]: # (code/120_hiera/modules/profile/manifests/pasture/app.pp)
 
 ```puppet
