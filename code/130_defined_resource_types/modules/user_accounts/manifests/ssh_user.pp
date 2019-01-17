@@ -1,4 +1,3 @@
-#!/opt/puppetlabs/puppet/bin/puppet apply
 define user_accounts::ssh_user (
   $key,
   $group   = undef,

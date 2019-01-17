@@ -158,7 +158,7 @@ values to provide some basic information about the system.
 
 [//]: # (code/080_facts/modules/motd/templates/motd.epp)
 
-```
+```puppet
 <%- | $fqdn,
       $os_family,
       $os_name,

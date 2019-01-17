@@ -494,7 +494,7 @@ First, open the PE console interface in your browser by navigating to
 **user:** admin  
 **password:** puppetlabs
 
-Click on the **Classifaction** tab in the PE console navigation menu. From
+Click on the **Classification** tab in the PE console navigation menu. From
 there, expand the **All nodes** and **PE Infrastructure** groups and select
 the **PE Master** node group.
 
@@ -509,6 +509,8 @@ Following the same method, set the `r10k_remote` parameter to
 `http://localhost:3000/learning/control-repo.git`, the `r10k_private_key`
 parameter to `/etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa`, and
 `file_sync_enabled` to `true`.
+
+Click the `Commit N changes` button to save your changes to the console.
 
 ![image](../assets/pe_console_code_manager.png)
 
@@ -544,6 +546,8 @@ navigation bar and select the **User Roles** link in the left navigation bar.
 Click on the **Code Deployers** role.  From the **Member Users** tab, select
 your `Learning` user from the dropdown menu and click **Add user** to add this
 user to the role.
+
+Click the `Commit 1 change` button to save your changes to the console.
 
 <div class = "lvm-task-number"><p>Task 18:</p></div>
 

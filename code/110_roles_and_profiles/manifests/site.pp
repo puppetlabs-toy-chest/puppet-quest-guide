@@ -1,4 +1,3 @@
-#!/opt/puppetlabs/puppet/bin/puppet apply
 node default {
   # This is where you can declare classes for all nodes.
   # Example:

@@ -1,4 +1,3 @@
-#!/opt/puppetlabs/puppet/bin/puppet apply
 node 'pasture-dev.puppet.vm' {
   include pasture
 }

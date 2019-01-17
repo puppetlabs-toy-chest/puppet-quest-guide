@@ -95,6 +95,9 @@ Start work on a new `hiera.yaml` file.
 
     vim hiera.yaml
 
+If there is an existing `hiera.yaml` file present, delete the content found in
+it and replace it with the content below.
+
 We'll implement a simple hierarchy with three levels: "Common data" to set up
 environment defaults, "Per-Domain defaults" to define domain-specific defaults,
 and "Per-node data" to define specific data values for individual nodes.
@@ -124,7 +127,7 @@ When Puppet uses Hiera to look for a value, it searches according to the order
 of levels listed under this configuration file's `hierarchy:` section. If
 a value is found in a data source defined for the "Per-node data" level, that
 value is used. If no matching value is found there, Hiera tries the next level:
-in this case, "Per-OS defaults". Finally, if no value is found in the previous
+in this case, "Per-domain defaults". Finally, if no value is found in the previous
 data sources, Hiera looks in the "Common data" level's `common.yaml` file.
 
 Because this configuration file is written in
@@ -158,6 +161,8 @@ which values the data sources need to define.
 
 Here, use the built-in Hiera `lookup()` function to tell Puppet to fetch data
 for each of the `pasture` component class parameters you want to manage.
+
+Replace the content of your class with the content that is shown below.
 
 [//]: # (code/120_hiera/modules/profile/manifests/pasture/app.pp)
 
@@ -302,13 +307,11 @@ result will be!
 
     curl -X POST 'pasture-app-dragon.auroch.vm/api/v1/cowsay/sayings?message=Hello!'
 
-    curl pasture-app-dragon.auroch.vm/api/v1/cowsay/sayings
+    curl pasture-app-dragon.auroch.vm/api/v1/cowsay/sayings/1
 
     curl pasture-app.auroch.vm/api/v1/cowsay/sayings/1
 
     curl pasture-app.beauvine.vm/api/v1/cowsay
-
-    curl pasture-app.beauvine.vm/api/v1/cowsay/sayings
 
 ## Review
 

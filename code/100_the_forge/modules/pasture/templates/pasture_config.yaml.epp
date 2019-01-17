@@ -1,4 +1,3 @@
-#!/opt/puppetlabs/puppet/bin/puppet apply
 <%- | $port,
       $default_character,
       $default_message,

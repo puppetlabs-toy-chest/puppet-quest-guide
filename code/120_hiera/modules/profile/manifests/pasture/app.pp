@@ -1,4 +1,3 @@
-#!/opt/puppetlabs/puppet/bin/puppet apply
 class profile::pasture::app {
   class { 'pasture':
     default_message   => lookup('profile::pasture::app::default_message'),

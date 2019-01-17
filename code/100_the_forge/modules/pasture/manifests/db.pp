@@ -1,4 +1,3 @@
-#!/opt/puppetlabs/puppet/bin/puppet apply
 class pasture::db {
 
   class { 'postgresql::server':

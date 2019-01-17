@@ -1,4 +1,3 @@
-#!/opt/puppetlabs/puppet/bin/puppet apply
 <%- | $pasture_config_file = '/etc/pasture_config.yaml' | -%>
 # This file is managed by Puppet. Please do not make manual changes.
 [Unit]
