@@ -2,6 +2,13 @@
 
 ## Release Notes
 
+### v2.4.0
+  * Updated content for compatibility with PE 2019.0.1
+  * Updated content for compatibility with currently-supported Puppet modules
+  * Various typo, grammar and other verbiage fixes
+  * Fixed control repository private key name
+  * Added more specific instructions based on user feedback
+
 ### v2.3.0
   * Content tested for compatibility with puppet-2017.3.5-learning-6.5.ova VM build
   * Added Hiera, Control Repository, and Puppetfile quests localized for English and Japanese.
