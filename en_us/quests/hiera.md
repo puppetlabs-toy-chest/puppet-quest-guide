@@ -307,13 +307,11 @@ result will be!
 
     curl -X POST 'pasture-app-dragon.auroch.vm/api/v1/cowsay/sayings?message=Hello!'
 
-    curl pasture-app-dragon.auroch.vm/api/v1/cowsay/sayings
+    curl pasture-app-dragon.auroch.vm/api/v1/cowsay/sayings/1
 
     curl pasture-app.auroch.vm/api/v1/cowsay/sayings/1
 
     curl pasture-app.beauvine.vm/api/v1/cowsay
-
-    curl pasture-app.beauvine.vm/api/v1/cowsay/sayings
 
 ## Review
 
