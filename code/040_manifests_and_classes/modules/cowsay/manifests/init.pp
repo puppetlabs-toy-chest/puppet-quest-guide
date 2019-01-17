@@ -1,4 +1,3 @@
-#!/opt/puppetlabs/puppet/bin/puppet apply
 class cowsay {
   package { 'cowsay':
     ensure   => present,

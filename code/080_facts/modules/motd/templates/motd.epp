@@ -1,4 +1,3 @@
-#!/opt/puppetlabs/puppet/bin/puppet apply
 <%- | $fqdn,
       $os_family,
       $os_name,

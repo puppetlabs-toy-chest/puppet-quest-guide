@@ -1,4 +1,3 @@
-#!/opt/puppetlabs/puppet/bin/puppet apply
 class profile::pasture::app {
   if $facts['fqdn'] =~ 'large' {
     $default_character = 'elephant'

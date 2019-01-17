@@ -1,4 +1,3 @@
-#!/opt/puppetlabs/puppet/bin/puppet apply
 class pasture {
 
   $port                = '80'
