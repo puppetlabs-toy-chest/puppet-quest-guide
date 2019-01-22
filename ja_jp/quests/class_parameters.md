@@ -44,6 +44,8 @@ class class_name (
 
 クラスの最初の変数セットを削除し、対応するパラメータセットを追加します。これが終わると、クラスは以下の例のようになるはずです。
 
+[//]: # (code/070_class_parameters/modules/pasture/manifests/init.pp)
+
 ```puppet
 class pasture (
   $port                = '80',
@@ -52,7 +54,7 @@ class pasture (
   $pasture_config_file = '/etc/pasture_config.yaml',
 ){
 
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => 'gem',
     before   => File[$pasture_config_file],
@@ -91,7 +93,7 @@ class pasture (
 
 ## リソースライクなクラス宣言
 
-これで、クラスにパラメータを持たせることができました。次はこのパラメータの設定方法を見ていきましょう。
+これで、クラスにパラメータを持たせることができました。次は、このパラメータの設定方法を見ていきましょう。
 
 これまでは、`include`を用いて、`site.pp`マニフェスト内でノード分類の一環としてクラスを宣言してきました。この`include`関数は、パラメータを明示的に設定せずにクラスを宣言するものです。これにより、クラス内のパラメータでデフォルト値を使用できます。デフォルトのないパラメータは、特別な`undef`値をとります。
 
@@ -106,7 +108,7 @@ class { 'class_name':
 
 複数の場所で同じクラスに使用できる`include`関数とは異なり、リソースライクなクラス宣言は、1つのクラスにつき一度しか使用できません。`include`で宣言されたクラスはデフォルトを使用するため、常にカタログ内と同じリソースセットとして扱われます。つまり、同一クラスに関する複数の`include`コールをPuppetが安全に処理できるということです。複数のリソースライクなクラス宣言は、同じリソースセットにつながることが保証されていないため、Puppetには、同じクラスの複数のリソースライクなクラス宣言を処理する一義的な方法はありません。同じクラスで複数のリソースライクなクラス宣言を試みると、Puppetの構文解析ツールによりエラーが生じます。
 
-ここでは詳細は説明しませんが、`facter`や`hiera`といった外部データソースを使えば、include構文を用いる場合でも、クラスに関して大幅な柔軟性を得られる点は知っておいてください。 今の時点では、`include`関数ではデフォルトを使うものの、このデフォルトをインテリジェントなものにする方法があることに留意しておいてください。
+ここでは詳細は説明しませんが、`facter`や`hiera`といった外部データソースを使えば、include構文を用いる場合でも、クラスに関して大幅な柔軟性を得られる点は知っておいてください。今の時点では、`include`関数ではデフォルトを使うものの、このデフォルトをインテリジェントなものにする方法があることに留意しておいてください。
 
 <div class = "lvm-task-number"><p>タスク2:</p></div>
 
@@ -117,6 +119,8 @@ class { 'class_name':
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 `pasture.puppet.vm`のノード定義を修正し、リソースライクなクラス宣言を含めます。`default_character`パラメータを`'cow'`という文字列に変更し、その他の2つのパラメータは設定せずに、デフォルト値をとるようにします。
+
+[//]: # (code/070_class_parameters/manifests/site.pp)
 
 ```puppet
 node 'pasture.puppet.vm' {
@@ -153,3 +157,8 @@ Puppet agent実行を開始し、このパラメータ化したクラスを適�
 また、`include`関数を復習し、*リソースライクなクラス宣言*についても説明しました。これは、宣言されたクラスのパラメータの値を指定するための構文です。
 
 次のクエストでは、*facts*を扱います。これを使えば、agentシステムに関するデータをPuppetコードに簡単に盛り込むことができます。
+
+## その他のリソース
+
+* 詳細については、[クラスに関するドキュメントページ](https://puppet.com/docs/puppet/latest/lang_classes.html)を参照してください。
+* クラスへのデータの追加に関して、さらに高度な方法に興味がある場合は、[Hieraによるモジュールの使用](https://puppet.com/docs/puppet/latest/hiera_migrate.html#adding-hiera-data-to-a-module)が参考になるかもしれません。
