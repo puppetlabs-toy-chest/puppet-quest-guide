@@ -46,6 +46,8 @@ $my_variable = 'look, a string!'
 
 クラスの冒頭でこれらの変数を割り当てます。ハードコードされたリファレンスを、この変数により`/etc/pasture_config.yaml`設定ファイルパスに置き換えます。
 
+[//]: # (code/060_variables_and_templates/modules/pasture/manifests/init.pp)
+
 ```puppet
 class pasture {
 
@@ -79,12 +81,12 @@ class pasture {
 
 システム設定および管理に関わる多くのタスクは、最終的にはテキストファイルのコンテンツを管理することに行き着きます。これに対処するもっとも直接的な方法は、テンプレート言語を使用することです。テンプレートはテキストファイルと似ていますが、変数のほか、条件や反復といったより高度な言語機能を挿入する構文を備えています。この柔軟性の高さにより、1つのツールで幅広いファイルフォーマットを管理することが可能になります。 
 
-テンプレートの制約は、全部かゼロかという点です。テンプレートは、管理したいファイル全体を定義するものです。ファイルの別の部分は異なるプロセスやPuppetモジュールで管理していて、ファイル内の1行だけ、または値だけを管理する必要がある場合は、[Augeas](https://docs.puppet.com/guides/augeas.html)、
+テンプレートの制約は、全部かゼロかという点です。テンプレートは、管理したいファイル全体を定義するものです。ファイルの別の部分は異なるプロセスやPuppetモジュールで管理していて、ファイル内の1行だけ、または値だけを管理する必要がある場合は、[Augeas](https://puppet.com/docs/puppet/latest/resources_augeas.html)、
 [concat](https://forge.puppet.com/puppetlabs/concat)、[file_line](https://forge.puppet.com/puppetlabs/stdlib#file_line)リソースタイプを調べてみるほうがいいかもしれません。 
 
 ## 埋め込み型Puppetテンプレート言語
 
-Puppetは、[埋め込み型Puppet(EPP)](https://docs.puppet.com/puppet/latest/lang_template_epp.html)および[埋め込み型Ruby(ERB)](https://docs.puppet.com/puppet/latest/lang_template_erb.html)という2つのテンプレート言語をサポートしています。
+Puppetは、[埋め込み型Puppet(EPP)](https://puppet.com/docs/puppet/latest/lang_template_epp.html)および[埋め込み型Ruby(ERB)](https://puppet.com/docs/puppet/latest/lang_template_erb.html)という2つのテンプレート言語をサポートしています。
 
  Puppet 4でリリースされたEPPテンプレートは、Puppetネイティブのテンプレート言語を提供するもので、Rubyから受け継がれたERB言語に比べて多くの点が改善されています。現在はEPPが推奨手法になっているため、このクエストでもEPPを使用します。ただし、いったんテンプレートの基礎を理解してしまえば、ドキュメントを参照しながら、ERBフォーマットを簡単に使うことができます。
 
@@ -120,7 +122,9 @@ EPPテンプレートは*パラメータタグ*から始めることをおすす
 
 次に、設定した変数を使って、ポートおよびキャラクター設定オプションの値を定義します。
 
-```
+[//]: # (code/060_variables_and_templates/modules/pasture/templates/pasture_config.yaml.epp)
+
+```puppet
 <%- | $port,
       $default_character,
       $default_message,
@@ -154,6 +158,8 @@ EPPテンプレートは*パラメータタグ*から始めることをおすす
 この`epp()`関数は、2つの引数をとります。1つ目は、`'<MODULE>/<TEMPLATE_NAME>'`という形式のファイルリファレンスです。これは、使用するテンプレートファイルを指定します。2つ目は、テンプレートに渡す変数名と値のハッシュです。
 
 `epp()`関数にすべての変数を詰め込むのを避けるために、`$pasture_config_hash`と呼ばれる変数にまとめ、ファイルリソースの直前に置きます。
+
+[//]: # (code/060_variables_and_templates/modules/pasture/manifests/init.pp)
 
 ```puppet
 class pasture {
@@ -203,7 +209,9 @@ Vimでファイルを開き、テンプレート化します。
 
 ファイルの冒頭にパラメータタグとコメントを追加します。開始コマンドの`--config_file`引数を`$pasture_config_file`の値に設定します。
 
-```
+[//]: # (code/060_variables_and_templates/modules/pasture/templates/pasture.service.epp)
+
+```puppet
 <%- | $pasture_config_file = '/etc/pasture_config.yaml' | -%>
 # This file is managed by Puppet. Please do not make manual changes.
 [Unit]
@@ -224,6 +232,8 @@ WantedBy=multi-user.target
     vim pasture/manifests/init.pp
 
 サービスユニットファイルのファイルリソースを修正し、作成したばかりのテンプレートを使用するようにします。
+
+[//]: # (code/060_variables_and_templates/modules/pasture/manifests/init.pp)
 
 ```puppet
 class pasture {
@@ -294,5 +304,5 @@ Puppet実行が問題なく完了したら、接続を解除してLearning VMの
 
 ## その他のリソース
 
-* Puppetのドキュメントページには、[変数](https://docs.puppet.com/puppet/latest/lang_variables.html)と[テンプレート](https://docs.puppet.com/puppet/latest/lang_template.html)についてより詳しい情報が提供されています。
+* Puppetのドキュメントページには、[変数](https://puppet.com/docs/puppet/latest/lang_variables.html)と[テンプレート](https://puppet.com/docs/puppet/latest/lang_template.html)についてより詳しい情報が提供されています。
 * これらのトピックは、Puppetの[対面](https://learn.puppet.com/category/instructor-led-training)および[オンライン](https://learn.puppet.com/category/online-instructor-led-training)トレーニングでも、詳しく説明します。
