@@ -89,7 +89,7 @@ Notice: Installing -- do not interrupt ...
 
     rm -rf temp
 
-Puppetfileに戻り、リストに記載されたバージョンを用いて、`puppetlabs-apt`、`puppetlabs-concat`、および`puppetlabs-stdlib`モジュールのエントリを追加します。
+Puppetfileに戻り、リストに記載されたバージョンを用いて、`puppetlabs-apt`、`puppetlabs-translate`、`puppetlabs-concat`、`puppetlabs-stdlib`モジュールのエントリを追加します。
 
 完成したPuppetfileは、以下のようになります。
 
