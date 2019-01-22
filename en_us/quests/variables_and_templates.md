@@ -171,6 +171,7 @@ the details of the syntax below.
 ```
 <%- | $port,
       $default_character,
+      $default_message,
 | -%>
 # This file is managed by Puppet. Please do not make manual changes.
 ```
