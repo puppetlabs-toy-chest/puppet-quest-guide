@@ -243,12 +243,18 @@ application pasture_app (
 
 <div class = "lvm-task-number"><p>タスク6:</p></div>
 
-これらのノードの管理にはオーケストレータを使用するため、アプリケーション関連のクラスをノードの役割から削除します。これらのクラスがベースプロファイルと依存関係にない限り、そのまま役割に残し、引き続き通常のPuppet agent実行スケジュールで管理されるようにすることができます。
+ここでは、オーケストレータを使って、通常のスケジュールされたPuppet agent実行の外でノードのアプリケーションコンポーネントを管理します。そのため、オーケストレーションされたアプリケーションから独立したプロファイルのみを含む新しいロールを作成します。
 
-`role/manifests/pasture_app.pp`マニフェストを開き、`profile::pasture::app`クラスを削除します。
+`role/manifests/pasture_app.pp`マニフェストをコピーし、新しい `pasture_app_orch`ロールを作成します。
+
+    cp role/manifests/pasture_app.pp role/manifests/pasture_app_orch.pp
+
+このマニフェストを開き、ロールタイトルを変更し、`profile::pasture::app`クラスを削除します。
+
+    vim role/manifests/pasture_app_orch.pp
 
 ```puppet
-class role::pasture_app {
+class role::pasture_app_orch {
   include profile::base::motd
   include profile::pasture::dev_users
 }
@@ -256,9 +262,26 @@ class role::pasture_app {
 
 `role/manifests/pasture_db.pp`マニフェストも同じようにします。
 
+    cp role/manifests/pasture_db.pp role/manifests/pasture_db_orch.pp
+
+このマニフェストを開き、ロールタイトルを変更し、`profile::pasture::app`クラスを削除します。
+
+    vim role/manifests/pasture_app_orch.pp
+
 ```puppet
-class role::pasture_db {
+class role::pasture_db_orch {
   include profile::base::motd
+}
+```
+
+`site.pp`マニフェストを修正し、これらの新しいロールでノードを分類します。
+
+```puppet
+node /^pasture-app/ {
+  include role::pasture_app_orch
+}
+node /^pasture-db/ {
+  include role::pasture_db_orch
 }
 ```
 
@@ -268,7 +291,7 @@ class role::pasture_db {
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
-これまでは、`site.pp`内で作成した設定は、ノードブロックの文脈内にありました。しかし、アプリケーションには、個々のノードレベルよりも上位の抽象レベルが必要です。この特徴を表現するために、`site`と呼ばれる特別なブロック内でアプリケーションインスタンスを宣言します。
+これまでは、`site.pp`内で作成した設定は、ノードブロックの文脈内にありました。しかし、アプリケーションには、個々のノードレベルよりも上位の抽象レベルが必要です。この特徴を表現するために、`site`と呼ばれる特別な`site.pp`ブロック内でアプリケーションインスタンスを宣言します。
 
 ```puppet
 site { 
@@ -326,7 +349,7 @@ site {
 
 このクエストでは、複数のノード間でPuppet実行を調整する際のPuppetオーケストレータの役割を説明しました。
 
-アプリケーションの定義やジョブとして実行する方法を具体的に説明する前に、Puppet agent上の設定の詳細と、Puppetアプリケーションオーケストレータクライアントの設定について説明しました。これらのステップとさらに詳しい情報については、[Puppetドキュメンテーション](https://docs.puppet.com/pe/latest/app_orchestration_overview.html)Webサイトを参照してください。
+アプリケーションの定義やジョブとして実行する方法を具体的に説明する前に、Puppet agentノード上の設定の詳細と、Puppetアプリケーションオーケストレータクライアントの設定について説明しました。これらのステップとさらに詳しい情報については、[Puppetドキュメンテーション](https://puppet.com/docs/pe/latest/application_orchestration_overview.html)Webサイトを参照してください。
 
 アプリケーションの定義には通常、いくつかの特徴的なマニフェストとRubyエクステンションが必要です。
 
@@ -342,6 +365,6 @@ site {
 
 ## その他のリソース
 
-* アプリケーションのオーケストレーションについては、[ドキュメントページ](https://docs.puppet.com/pe/latest/app_orchestration_overview.html)をご覧ください。
+* アプリケーションのオーケストレーションについては、[ドキュメントページ](https://puppet.com/docs/pe/latest/application_orchestration_overview.html)を参照してください。
 * アプリケーションのオーケストレーションの機能概要については[製品ページ](https://puppet.com/product/capabilities/orchestration)
 * デモについては[GitHubでのアップリケーションリポジトリ例](https://github.com/puppetlabs/puppetlabs-wordpress_app)をご覧ください。
