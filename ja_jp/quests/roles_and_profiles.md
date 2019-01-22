@@ -66,6 +66,8 @@ Puppetで構成したインフラストラクチャの規模と複雑さが増�
 
 このクエストのクエストツールでは、`pasture-app-small.puppet.vm`および`pasture-app-large.puppet.vm`ノードが作成されています。そのため、ノード名に基づいて適切なプロファイルを決定することができます。条件文を用いて、ノードの`fqdn` factに文字列'large'または'small'が含まれているかどうかに応じて、`$default_character`および`$db`パラメータを設定します。また、`else`ブロックを追加し、`fqdn`変数が'small'または'large'のどちらとも一致しない場合に、適切なエラーメッセージを表示して失敗するようにします。
 
+[//]: # (code/110_roles_and_profiles/modules/profile/manifests/pasture/app.pp)
+
 ```puppet
 class profile::pasture::app {
   if $facts['fqdn'] =~ 'large' {
@@ -94,6 +96,8 @@ class profile::pasture::app {
 
 ここではパラメータをカスタマイズする必要はありません。そのため、`include`構文を使って`pasture::db`クラスを宣言することができます。
 
+[//]: # (code/110_roles_and_profiles/modules/profile/manifests/pasture/db.pp)
+
 ```puppet
 class profile::pasture::db {
   include pasture::db
@@ -113,6 +117,8 @@ class profile::pasture::db {
     vim profile/manifests/base/motd.pp
 
 `profile::pasture::db`プロファイルクラスと同様、`profile::base::motd`クラスは、`motd`クラスの`include`文を持つラッパークラスです。
+
+[//]: # (code/110_roles_and_profiles/modules/profile/manifests/base/motd.pp)
 
 ```puppet
 class profile::base::motd {
@@ -142,6 +148,8 @@ class profile::base::motd {
 
     vim role/manifests/pasture_app.pp
 
+[//]: # (code/110_roles_and_profiles/modules/role/manifests/pasture_app.pp)
+
 ```puppet
 class role::pasture_app {
   include profile::pasture::app
@@ -152,6 +160,8 @@ class role::pasture_app {
 次に、データベースサーバのロールを作成します。
 
     vim role/manifests/pasture_db.pp
+
+[//]: # (code/110_roles_and_profiles/modules/role/manifests/pasture_db.pp)
 
 ```puppet
 class role::pasture_db {
@@ -170,7 +180,7 @@ Puppetのノード定義構文の別の機能を使えば、分類モデルを�
 
 正規表現についてさらに詳しく学ぶには、[rubular.com](http://rubular.com/)を参照してください。これはクイックリファレンスとしても、テストツールとしても役立ちます。例えば、上述の正規表現を適用して一致するノード名があるかどうか検証できます。また、正規表現の詳しいガイドとしては、[regular-expressions.info](http://www.regular-expressions.info/)も参考になります。一般に、ノード定義で使用する正規表現は、きわめてシンプルです。
 
-ノード名の一致条件として正規表現を使用する場合、エスケープすべき特殊文字がある点に注意してください。たとえば、ドット(`.`)は、あらゆる文字と一致する特殊文字です。ドットなどの特殊文字を含む名前と一致させるには、バックスラッシュ(`\.`)を付けてエスケープする必要があります。ノード定義の正規表現があまりに複雑になる場合は、ノードのネーミングスキームを再考するか、PEコンソールの[ノード分類子](https://docs.puppet.com/pe/latest/console_classes_groups.html)や[外部のノード分類子](https://docs.puppet.com/puppet/latest/nodes_external.html)など、別の分類手法の検討が必要かもしれません。
+ノード名の一致条件として正規表現を使用する場合、エスケープすべき特殊文字がある点に注意してください。たとえば、ドット(`.`)は、あらゆる文字と一致する特殊文字です。ドットなどの特殊文字を含む名前と一致させるには、バックスラッシュ(`\.`)を付けてエスケープする必要があります。ノード定義の正規表現があまりに複雑になる場合は、ノードのネーミングスキームを再考するか、Puppet Enterprise Webコンソールの[ノード分類子](https://puppet.com/docs/pe/latest/grouping_and_classifying_nodes.html)や[外部のノード分類子](https://puppet.com/docs/puppet/latest/nodes_external.html)など、別の分類手法の検討が必要かもしれません。
 
 <div class = "lvm-task-number"><p>タスク6:</p></div>
 
@@ -185,6 +195,8 @@ Puppetのノード定義構文の別の機能を使えば、分類モデルを�
 ロールとプロファイルパターンを使用するので、`pasture-app.puppet.vm`および`pasture-db.puppet.vm`の過去のノード定義を削除します。
 
 削除したら、最初のコメントの後の`site.pp`セクションは、以下のようになるはずです。
+
+[//]: # (code/110_roles_and_profiles/manifests/site.pp)
 
 ```puppet
 node default {
@@ -231,9 +243,9 @@ node /^pasture-db/ {
 
 ## その他のリソース
 
-* ロールとプロファイルの詳細については、[ドキュメントページ](https://docs.puppet.com/pe/latest/r_n_p_intro.html)をご覧ください。
+* ロールとプロファイルの詳細については、[ドキュメントページ](https://puppet.com/docs/pe/latest/the_roles_and_profiles_method.html)をご覧ください。
 * [ブログ記事](http://garylarizza.com/blog/2014/02/17/puppet-workflow-part-1/)も参照してください。これは、推奨されるPuppetワークフローとしてロールとプロファイルパターンを確立するうえで役立ちます。
-* [自分のペースでできるトレーニングコース](https://learn.puppet.com/elearning/an-introduction-to-roles-profiles)でも、ロールとプロファイルを扱っています。
-* ロールとプロファイルは、Puppet Practitioner、Puppetizing Infrastructureコースでも扱っています。詳細については、[対面](https://learn.puppet.com/category/instructor-led-training)および[オンライン](https://learn.puppet.com/category/online-instructor-led-training)トレーニングオプションをチェックしてみてください。
-* ノード定義における正規表現の使用については、[ドキュメントページ](https://docs.puppet.com/puppet/latest/lang_node_definitions.html#regular-expression-names)をご覧ください。
+* [自分のペースでできるトレーニングコース](https://learn.puppet.com/course/an-introduction-to-roles-profiles)でも、ロールとプロファイルを扱っています。
+* ロールとプロファイルについては、Getting Started with PuppetおよびPuppet Practitionerコースで説明しています。詳細については、[対面](https://learn.puppet.com/category/instructor-led-training)および[オンライン](https://learn.puppet.com/category/online-instructor-led-training)トレーニングオプションをチェックしてみてください。
+* ノード定義における正規表現の使用については、[ドキュメントページ](https://puppet.com/docs/puppet/latest/lang_node_definitions.html#regular-expression-names)をご覧ください。
 * 正規表現を簡単にテストするためのツールは、[こちら](http://rubular.com)にあります。
