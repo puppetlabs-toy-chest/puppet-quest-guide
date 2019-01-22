@@ -90,6 +90,8 @@ Puppet agent実行を開始します。
 
     pasture start &
 
+プロセスが始まるとターミナルに何らかの出力が表示されますが、新しいコマンドを入力することはできます。次のコマンドを入力する前にプロンプトをクリアするには、`enter`キーを押してください。
+
 <div class = "lvm-task-number"><p>タスク6:</p></div>
 
 `curl`コマンドを使ってPasture APIをテストします。このリクエストには2つのパラメータがあります。`string`は返されるメッセージを定義し、`character`にはメッセージを言わせるキャラクターを設定します。デフォルトでは、このプロセスはポート4567でリッスンします。以下のコマンドを試してみてください。
@@ -102,11 +104,17 @@ Puppet agent実行を開始します。
 
 <div class = "lvm-task-number"><p>タスク7:</p></div>
 
-ほかのパラメータでも自由に試してみてください。終わったらプロセスをフォアグラウンドにします。
+ほかのパラメータでも自由に試してみてください。終わったら、`fg`コマンドを使用して`pasture`プロセスをフォアグラウンドにします。
 
     fg
 
-`CTRL-C`を使ってプロセスを終了し、agentノードとの接続を解除します。
+`CTRL-C`を使ってプロセスを終了します。
+
+`CTRL-C`  
+
+`fg`コマンドを使用してもプロセスがフォアグラウンドにならない場合、`ps`コマンドを使用して`pasture`プロセスのPIDを見つけます。次に、このPIDに対して`kill`コマンドを実行して(例: `kill 5983`)、プロセスを停止します。
+
+プロセスが停止したら、agentノードとの接続を解除します。
 
     exit
 
@@ -133,7 +141,7 @@ Puppet agent実行を開始します。
 
 `file`リソースは`source`パラメータをとります。このパラメータにより、管理対象のファイルの内容を定義するソースファイルを指定できます。 このパラメータは、値としてURIをとります。他のロケーションを指定することも可能ですが、通常はこれを使ってモジュールの`files`ディレクトリを指定します。Puppetでは、`puppet:`という接頭辞で始まる短縮化されたURIフォーマットを用いて、Puppet masterのモジュールファイルを指定します。このフォーマットは、`puppet:///modules/<MODULE NAME>/<FILE PATH>`というパターンに従います。`puppet:`のすぐ後に続く3つのスラッシュに注目してください。これは、Puppet master上のモジュールの暗黙パスの代わりです。
 
-このURI構文は複雑に見えるかもしれませんが、心配ありません。モジュール内のファイルを指定するとき以外に、この構文を使用することはめったにありません。ですから上述のパターンさえ覚えておけば大丈夫でしょう。忘れてしまったら、いつでも[ドキュメント](https://docs.puppet.com/puppet/latest/reference/types/file.html#file-attribute-source)を参照すれば思い出すことができます。
+このURI構文は複雑に見えるかもしれませんが、心配ありません。モジュール内のファイルを指定するとき以外に、この構文を使用することはめったにありません。ですから上述のパターンさえ覚えておけば大丈夫でしょう。忘れてしまったら、いつでも[ドキュメント](https://puppet.com/docs/puppet/latest/types/file.html#file-attribute-source)を参照すれば思い出すことができます。
 
 <div class = "lvm-task-number"><p>タスク9:</p></div>
 
@@ -146,7 +154,7 @@ Puppet agent実行を開始します。
 ```puppet
 class pasture {
 
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => 'gem',
   }
@@ -198,7 +206,7 @@ systemdユニットファイルのフォーマットに慣れていない方も�
 ```puppet
 class pasture {
 
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => 'gem',
   }
@@ -219,7 +227,7 @@ class pasture {
 ```puppet
 class pasture {
 
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => 'gem',
   }
@@ -243,11 +251,11 @@ class pasture {
 
 クラスを完成させるには、あと1つ手順があります。このクラスで定義したリソースを、適切な順序で管理する必要があります。"パッケージ、ファイル、サービス"パターンは、これらのリソースに共通する依存関係を記述するものです。 ここで意図しているのは、パッケージをインストールし、設定ファイルを記述し、サービスを開始することですが、この順序で行う必要があります。さらに、後から設定ファイルに変更を加えた場合には、Puppetがサービスを再起動し、この変更が適用されるようにしておく必要もあります。
 
-Puppetコードは、デフォルトではマニフェストで記述した順序に従ってリソースを管理しますが、[関係性メタパラメータ](https://docs.puppet.com/puppet/latest/lang_relationships.html#syntax-relationship-metaparameters)を通じて、リソースの依存関係を明示することを強く推奨します。メタパラメータは、リソースのあるべき状態を直接定義するのではなく、Puppetが*どのように*リソースを処理するかに影響を与えるパラメータです。関係性メタパラメータは、リソースの順序関係をPuppetに伝えます。
+Puppetコードは、デフォルトではマニフェストで記述した順序に従ってリソースを管理しますが、[関係性メタパラメータ](https://puppet.com/docs/puppet/latest/lang_relationships.html#syntax-relationship-metaparameters)を通じて、リソースの依存関係を明示することを強く推奨します。メタパラメータは、リソースのあるべき状態を直接定義するのではなく、Puppetが*どのように*リソースを処理するかに影響を与えるパラメータです。関係性メタパラメータは、リソースの順序関係をPuppetに伝えます。
 
 この例のクラスでは、`before`と`notify`という2つの関係性メタパラメータを使います。`before`は、現在のリソースがターゲットリソースの前に来なければならないことをPuppetに伝えます。`notify`メタパラメータは、`before`と同様のものですが、ターゲットリソースがサービスの場合、メタパラメータセットによりPuppetがそのリソースに修正を加えた際に必ずサービスを再起動するという追加の機能があります。これは、Puppetにサービスを再起動させ、設定ファイルの変更を適用する必要がある場合に役立ちます。
 
-関係性メタパラメータは、値として[リソースリファレンス](https://docs.puppet.com/puppet/latest/lang_data_resource_reference.html)をとります。このリソースリファレンスは、Puppetコード内の別のリソースを指定するものです。 リソースリファレンスの構文は、`Type['title']`のように、先頭が大文字のリソースタイプの後に、大括弧で囲まれたリソースタイトルが続く形式になります。
+関係性メタパラメータは、値として[リソースリファレンス](https://puppet.com/docs/puppet/latest/lang_data_resource_reference.html)をとります。このリソースリファレンスは、Puppetコード内の別のリソースを指定するものです。 リソースリファレンスの構文は、`Type['title']`のように、先頭が大文字のリソースタイプの後に、大括弧で囲まれたリソースタイトルが続く形式になります。
 
 <div class = "lvm-task-number"><p>タスク12:</p></div>
 
@@ -260,7 +268,7 @@ Puppetコードは、デフォルトではマニフェストで記述した順�
 ```puppet
 class pasture {
 
-  package {'pasture':
+  package { 'pasture':
     ensure   => present,
     provider => 'gem',
     before   => File['/etc/pasture_config.yaml'],
@@ -316,3 +324,8 @@ masterから、`curl`コマンドを使って、`pasture.puppet.vm`ノードの�
 最後に、リソースの順序付けをしました。`before`および`notify`メタパラメータを使って、クラス内のリソースの関係性を定義し、Puppetが正しい順序でリソースを管理し、設定ファイルが修正された場合にはサービスを再起動できるようにしました。
 
 次のクエストでは、変数を追加し、静的ファイルをテンプレートに置き換えることで、このクラスをさらに柔軟なものにする方法を学びます。
+
+## その他のリソース
+
+* Puppetの[ドキュメントページ](https://puppet.com/docs/puppet/latest/lang_relationships.html)では、他者の作成したPuppetコードで見かける別の構文を含めて、リソース関係について詳しく説明しています。
+* また、[自分のペースでできるトレーニングコースのカタログ](https://learn.puppet.com/category/self-paced-training)の[レッスン](https://learn.puppet.com/course/relationships)でもリソース関係について説明しています。
