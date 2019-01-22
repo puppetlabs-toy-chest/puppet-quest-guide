@@ -108,6 +108,8 @@ vimを使って、モジュール`manifests`ディレクトリに`init.pp`マニ
 
 以下のクラス定義を入力し、保存して終了します(`:wq`)。
 
+[//]: # (code/040_manifests_and_classes/modules/cowsay/manifests/init.pp)
+
 ```puppet
 class cowsay {
   package { 'cowsay':
@@ -134,6 +136,8 @@ class cowsay {
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 `site.pp`マニフェストの末尾に、以下のコードを挿入します。
+
+[//]: # (code/040_manifests_and_classes/manifests/site.pp)
 
 ```puppet
 node 'cowsay.puppet.vm' {
@@ -201,6 +205,8 @@ node 'cowsay.puppet.vm' {
 
 ここにクラス定義を記述します。
 
+[//]: # (code/040_manifests_and_classes/modules/cowsay/manifests/fortune.pp)
+
 ```puppet
 class cowsay::fortune {
   package { 'fortune-mod':
@@ -224,6 +230,8 @@ class cowsay::fortune {
     vim cowsay/manifests/init.pp
 
 `cowsay::fortune`クラスのインクルード文をcowsayクラスに追加します。
+
+[//]: # (code/040_manifests_and_classes/modules/cowsay/manifests/init.pp)
 
 ```puppet
 class cowsay {
@@ -273,6 +281,6 @@ Puppet実行の結果を確認したら、接続を解除して Puppet masterに
 
 ## その他のリソース
 
-* モジュールの基礎および構造については、Puppetの[ドキュメントページ](https://docs.puppet.com/puppet/latest/modules_fundamentals.html)に掲載されています。ここにはモジュールテストやForgeへの公開を含むその他のトピックも記載されています。
-* Puppetのモジュールは、Puppet Fundamentals、Puppet PractitionerおよびPuppetizing Infrastructureコースで詳しく説明しています。詳細については、[対面](https://learn.puppet.com/category/instructor-led-training)および[オンライン](https://learn.puppet.com/category/online-instructor-led-training)のトレーニングオプションをチェックしてみてください。
-* [クラス](https://learn.puppet.com/elearning/classes)および[自動ローディング](https://learn.puppet.com/elearning/autoloading)は、自分のペースで学習できるレッスンとして用意されています。
+* モジュールの基礎および構造については、Puppetの[ドキュメントページ](https://puppet.com/docs/puppet/latest/modules_fundamentals.html)に掲載されています。ここにはモジュールテストやForgeへの公開を含むその他のトピックも記載されています。
+* Puppetモジュールについては、Getting Started with PuppetおよびPuppet Practitionerコースで詳しく説明しています。詳細については、[対面](https://learn.puppet.com/category/instructor-led-training)および[オンライン](https://learn.puppet.com/category/online-instructor-led-training)トレーニングオプションをチェックしてみてください。
+* [クラス](https://learn.puppet.com/course/classes)および[自動ローディング](https://learn.puppet.com/course/autoloading)は、自分のペースで学習できるレッスンとして用意されています。
