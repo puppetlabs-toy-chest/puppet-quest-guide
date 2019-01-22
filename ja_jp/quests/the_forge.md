@@ -18,7 +18,7 @@
 
 ## Forgeとは？
 
-[Puppet Forge](forge.puppet.com)は、Puppetモジュールの公開されたリポジトリです。Forgeから、モジュールのメンテナンスを行うコミュニティにアクセスできます。Forgeにある既存のモジュールを使えば、時間をかけてカスタムモジュールを開発しなくても、さまざまなアプリケーションやシステムを管理することができます。さらに、多くのForgeモジュールは、Puppetコミュニティによりアクティブに使用され、メンテナンスされているため、そのコードは十分に検証・テストされています。1つのモジュールに関わるユーザの数が増えるほど、あなたやチームが担うメンテナンスやテストの負荷が軽くなります。
+[Puppet Forge](https://forge.puppet.com)は、Puppetモジュールの公開されたリポジトリです。Forgeから、モジュールのメンテナンスを行うコミュニティにアクセスできます。Forgeにある既存のモジュールを使えば、時間をかけてカスタムモジュールを開発しなくても、さまざまなアプリケーションやシステムを管理することができます。さらに、多くのForgeモジュールは、Puppetコミュニティによりアクティブに使用され、メンテナンスされているため、そのコードは十分に検証・テストされています。1つのモジュールに関わるユーザの数が増えるほど、あなたやチームが担うメンテナンスやテストの負荷が軽くなります。
 
 十分に検証されたコードやアクティブなメンテナンスを重視するユーザのために、ForgeチームがPuppetの標準セットに照らしてForgeのモジュールのリストをチェックし、メンテナンスしています。[Puppet
 Approved](https://forge.puppet.com/approved)カテゴリのモジュールは、十分に検証され、品質、信頼性、アクティブな開発が保証されています。[Puppet
@@ -29,7 +29,7 @@ Enterprise [サポート](https://puppet.com/support-services/customer-support)�
 
 このクエストでは、ForgeのPostgreSQLモジュールを使って、Pastureアプリケーションが牛のメッセージを保存して検索するためのデータベースを設定します。
 
-最初のステップは、使用する適切なモジュールを見つけることです。[Forge](forge.puppet.com)ウェブサイトの検索インターフェースを使って、`PostgreSQL`を検索します。
+最初のステップは、使用する適切なモジュールを見つけることです。[Forge](https://forge.puppet.com)ウェブサイトの検索インターフェースを使って、`PostgreSQL`を検索します。
 
 (現在、インターネットにアクセスできいない場合も、このセクションの続きを読み、Forgeに慣れ親しんでおくことをおすすめします。クエストを完了するのに必要なすべてのリソースは、すでにVM上でキャッシュされているので、モジュールをインストールするために外部接続する必要はありません。)
 
@@ -45,13 +45,13 @@ Pastureアプリケーション用のデータベースを設定するには、�
 
 モジュールをインストールすると、そのモジュールディレクトリがPuppet masterのモジュールパスに置かれます。モジュールをダウンロードして手動でモジュールパスに移動させることもできますが、Puppetには、モジュールの管理に役立つツールがあります。
 
-`postgresql`モジュールの上のほうに、 Puppetfileと`puppet module` という2種類のインストール方法があること気付いた方もいるかもしれません。このクエストでは、よりシンプルな`puppet module`ツールを使います(ただし、管理するPuppet環境が複雑になり、Puppetコードを管理リポジトリに入れるようになったら、Puppetfileを使うことをおすすめします。Puppetfileとコード管理ワークフローについては、[こちら](https://docs.puppet.com/pe/latest/cmgmt_managing_code.html)を参照してください)。
+`postgresql`モジュールの上のほうに、 Puppetfileと`puppet module`という2種類のインストール方法があることに気付いた方もいるかもしれません。このクエストでは、よりシンプルな`puppet module`ツールを使います(ただし、管理するPuppet環境が複雑になり、Puppetコードを管理リポジトリに入れるようになったら、Puppetfileを使うことをおすすめします。Puppetfileとコード管理ワークフローについては、[こちら](https://puppet.com/docs/pe/latest/managing_puppet_code.html)を参照してください)。
 
 <div class = "lvm-task-number"><p>タスク1:</p></div>
 
 master上で、`puppet module`ツールを使ってモジュールをインストールします。
 
-    puppet module install puppetlabs-postgresql --version 4.8.0
+    puppet module install puppetlabs-postgresql
 
 このコマンドにより、モジュールパスにモジュールが配置されたことを確認するために、モジュールディレクトリのコンテンツを見てみます。
 
@@ -74,6 +74,8 @@ master上のすべてのモジュールパスにインストールされたモ�
     vim pasture/manifests/db.pp
 
 この`pasture::db`クラス内で、`postgresql`モジュールの提供するクラスを用いて、牛の言葉を追跡する`pasture`データベースを設定します。
+
+[//]: # (code/100_the_forge/modules/pasture/manifests/db.pp)
 
 ```puppet
 class pasture::db {
@@ -108,6 +110,8 @@ class pasture::db {
 
 ノード定義を作成し、`pasture::db`クラスにより`pasture-db.puppet.vm`ノードを分類します。
 
+[//]: # (code/100_the_forge/manifests/site.pp.1)
+
 ```puppet
 node 'pasture-db.puppet.vm' {
   include pasture::db
@@ -126,7 +130,9 @@ node 'pasture-db.puppet.vm' {
 
     vim pasture/manifests/init.pp
 
-デフォルト値を`undef`として、`$db`パラメータを追加します。このテンプレート内で条件とともにこの`undef`を使えば、"何かが設定されている場合のみこのパラメータを管理する"と伝えることができます。次に、この変数を `$pasture_config_hash`に追加し、テンプレートに渡されるようにします。この2つを追加すると、クラスは以下の例のようになるはずです。
+デフォルト値を`'none'`として、`$db`パラメータを追加します。`'none'`を使用する理由は後でわかります。次に、この`$db`変数を`$pasture_config_hash`に追加し、アプリケーションの設定ファイルを定義するテンプレートに渡されるようにします。この2つを追加すると、クラスは以下の例のようになるはずです。
+
+[//]: # (code/100_the_forge/modules/pasture/manifests/init.pp)
 
 ```puppet
 class pasture (
@@ -135,7 +141,7 @@ class pasture (
   $default_message     = '',
   $pasture_config_file = '/etc/pasture_config.yaml',
   $sinatra_server      = 'webrick',
-  $db                  = undef,
+  $db                  = 'none',
 ){
 
   package { 'pasture':
@@ -182,7 +188,11 @@ class pasture (
 
 <div class = "lvm-task-number"><p>タスク5:</p></div>
 
-次に、`pasture_config.yaml.epp`テンプレートを編集します。条件文を用いて、`$db`変数に値が設定されている場合のみ、`:db:`設定が含まれるようにします。これにより、このオプションを設定しないまま残し、`pasture`クラスの`db`パラメータが明示的に設定されていない場合はPastureアプリケーションのデフォルトを使うようにすることができます。
+次に、`pasture_config.yaml.epp`テンプレートを編集します。条件文を用いて、`$db`変数に`none`以外の値が設定されている場合のみ、`:db:`設定が含まれるようにします。
+
+    vim pasture/templates/pasture_config.yaml.epp
+
+[//]: # (code/100_the_forge/modules/pasture/templates/pasture_config.yaml.epp)
 
 ```puppet
 <%- | $port,
@@ -195,7 +205,7 @@ class pasture (
 ---
 :default_character: <%= $default_character %>
 :default_message: <%= $default_message %>
-<%- if $db { -%>
+<%- if $db != 'none' { -%>
 :db: <%= $db %>
 <%- } -%>
 :sinatra_settings:
@@ -208,6 +218,8 @@ class pasture (
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 `pasture`クラスを宣言し、`db`パラメータを、 `pasture-db.puppet.vm`で実行している`pasture`データベースのURIに設定します。
+
+[//]: # (code/100_the_forge/manifests/site.pp.2)
 
 ```puppet
 node 'pasture-app.puppet.vm' {
@@ -245,3 +257,9 @@ node 'pasture-app.puppet.vm' {
 適切なモジュールを見つけ、`puppet module`ツールを使って`modules`ディレクトリにインストールしました。モジュールをインストールした後、`pasture::db`クラスを作成し、Pastureアプリケーションに必要とされる具体的なデータベース機能を定義しました。さらに、メインの `pasture`クラスを更新し、データベースへの接続に必要なURIを定義しました。
 
 この新しい`pasture::db`クラスを設定し、`db`パラメータをメインのpastureクラスに追加しておけば、`site.pp`分類に若干の変更を加えるだけで、データベースサーバを作成し、アプリケーションサーバに接続できるようになります。
+
+## その他のリソース
+
+* Forgeの基礎については、この[短いビデオ](https://fast.wistia.net/embed/iframe/uxfpduvk64?seo=false)をご覧ください。
+* Forgeの詳しい情報については、自分のペースでできるトレーニングコース[Forgeの概要](https://learn.puppet.com/elearning/an-introduction-to-the-forge)をご覧ください。
+* [Puppetについて](https://learn.puppet.com/instructor-led-training/getting-started-with-puppet)コースでは、Forgeモジュールを使用して、Puppetでのインフラ管理を簡単に始める方法について説明しています。
