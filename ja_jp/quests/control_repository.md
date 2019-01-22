@@ -237,6 +237,8 @@ Giteaリポジトリのセットアップが完了したので、トレーニン
 
     git push upstream production
 
+ダイアログが表示されたら、ユーザ名`learning`とパスワード`puppet`を入力します。
+
 ブラウザでGiteaインターフェースに戻るか、ページをリフレッシュします。Gitea Webインターフェースから、制御リポジトリのすべてのコンテンツにアクセスできるようになりました。
 
 <div class = "lvm-task-number"><p>タスク12:</p></div>
@@ -285,7 +287,7 @@ Giteaリポジトリのセットアップが完了したので、トレーニン
 
     cat /etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa.pub
 
-"ssh-rsa"と"learning@puppet.vm"の間の実際のキー部分だけをクリップボードにコピーします。Giteaインターフェースで[**Add Deploy Key**]ボタンをクリックし、フォームの[**Content**]フィールドにキーをペーストします。トレーニングVMのWebベースコンソールからコピーしている場合、パブリックキーのコピーを正確に入力するために、改行コードをいくつか手動で削除する必要があります。[**Title**]フィールドに"Code Manager"を設定し、[**Add Deploy Key**]ボタンをクリックして、キーを追加します。エラーが表示される場合、挿入したテキストが正確にキーと一致しており、改行コードや余分なスペースがキーの前後にないことを確認します。
+`ssh-rsa`と`learning@puppet.vm`の間の実際のキー部分だけをクリップボードにコピーします。Giteaインターフェースで**[Add Deploy Key]**ボタンをクリックし、フォームの**[Content]**フィールドにキーをペーストします。トレーニングVMのWebページコンソールからコピーしている場合、パブリックキーのコピーを正確に入力するために、改行コードをいくつか手動で削除する必要があります。**[Title]**フィールドに"Code Manager"を設定し、**[Enable Write Access]**チェックボックスにチェックを入れないままにして、**[Add Deploy Key]**ボタンをクリックしてキーを追加します。エラーが表示される場合は、挿入したテキストが正確にキーと一致しており、改行コードや余分なスペースがキーの前後にないことを確認します。
 
 もう1つの方法では、以下のコマンドをトレーニングVMで実行して、GiteaのAPIからキーを追加します。
 
@@ -306,16 +308,18 @@ Giteaリポジトリのセットアップが完了したので、トレーニン
 
 はじめに、ブラウザでPuppet Enterprise Webコンソールインターフェースを開き、https://<VM IP ADDRESS>`にアクセスします。以下の認証情報を使用してログインします。
 
-**ユーザ名:** admin
+**ユーザ名:** admin  
 **パスワード:** puppetlabs
 
-Puppet Enterprise Webコンソールのナビゲーションメニューで[**Classifaction**]タブをクリックします。ここで、[**All nodes**]と[**PE Infrastructure**]グループを展開し、[**PE Master**]ノードグループを選択します。
+Puppet Enterprise Webコンソールのナビゲーションメニューで**[Classification]**タブをクリックします。ここで、**[All nodes]**と**[PE Infrastructure]**グループを展開し、**[PE Master]**ノードグループを選択します。
 
 ![image](../assets/pe_console_master.png)
 
 [**PE Master**]ノードグループのインターフェースで、[**Configuration**]タブを選択します。クラスリストから[`puppet_enterprise::profile::master`]クラスを見つけます。
 
 ドロップダウンメニューで[`code_manager_auto_configure`]パラメータを選択し、値に`true`を設定します。左側の[**Add parameter**]ボタンをクリックします。同じ方法で、[`r10k_remote`]パラメータに`http://localhost:3000/learning/control-repo.git`を設定し、[`r10k_private_key`]パラメータに`/etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa`を設定し、[`file_sync_enabled`]パラメータに`true`を設定します。
+
+`[Commit N changes]`ボタンをクリックし、コンソールに変更を保存します。
 
 ![image](../assets/pe_console_code_manager.png)
 
@@ -336,6 +340,8 @@ Puppet agentの実行を開始し、これらの設定の変更をmasterに適�
 <div class = "lvm-task-number"><p>タスク17:</p></div>
 
 Puppet Enterprise Webコンソールのインターフェースで、左側のナビゲーションバーにある[**Access Control**]をクリックし、[**User Roles**]リンクを選択します。[**Code Deployers**]ロールをクリックします。[**Member Users**]タブで、ドロップダウンメニューから[`Learning`]ユーザを選択し、[**Add user**]をクリックしてこのユーザをロールに追加します。
+
+`[Commit 1 change]`ボタンをクリックし、コンソールに変更を保存します。
 
 <div class = "lvm-task-number"><p>タスク18:</p></div>
 
@@ -399,7 +405,7 @@ Puppet Enterprise Webコンソールのインターフェースで、左側の�
 
 この変更を開始する前に、新しいブランチを作成します。ブランチには、変更内容を明確に表す短い名前を付けます。ここでは、`beauvine_default_message`という名前を付けましょう。`git checkout`コマンドを使用して、このブランチに切り替えます。`-b`フラグを指定すると、同じ名前が存在しなければ、この名前で新しいブランチが作成されます。
 
-    git checkout -b beauvine_message_default
+    git checkout -b beauvine_default_message
 
 新しいブランチがセットアップされたら、Vimで`data/domain/beauvine.vm.yaml`ファイルを開きます。
 
@@ -474,7 +480,7 @@ control repository.
 
 ローカルブランチに変更をコミットしたので、次に、このブランチをアップストリームリポジトリにプッシュします。
 
-    git push upstream beauvine_message_default
+    git push upstream beauvine_default_message
 
 プロンプトが表示されたら、Giteaのユーザアカウント名とパスワードとして、`learning`および`puppet`を入力します。
 
@@ -484,7 +490,7 @@ control repository.
 
 ブラウザウィンドウで、Giteaインターフェース(`<VM's IP ADDRESS>:3000`)を開きます。
 
-[**Branch:**]ドロップダウンメニューから、新しい`beauvine_default_message`ブランチを選択します。ドロップダウンメニューの隣にあるアイコンをクリックし、ブランチ同士を比較したら、プルリクエストを開始します。プルリクエストフォームに、タイトルとリクエストの説明を入力します。このプルリクエストに含まれるコミットは1つだけなので、該当コミットのタイトルおよびコミットメッセージと同じものを入力しても構いません。
+**[Branch:]**ドロップダウンメニューから、新しい`beauvine_default_message`ブランチを選択します。ドロップダウンメニューの隣にあるアイコンをクリックし、ブランチ同士を比較したら、プルリクエストを開始します。プルリクエストフォームに、タイトルとリクエストの説明を入力します。このプルリクエストに含まれるコミットは1つだけなので、該当コミットのタイトルおよびコミットメッセージと同じものを入力しても構いません。
 
 [**Create Pull Request**]ボタンをクリックして、プルリクエストを作成します。
 
