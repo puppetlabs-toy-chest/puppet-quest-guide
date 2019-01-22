@@ -28,7 +28,7 @@ Puppet言語でこのような、反復可能なリソースグループのニ�
 
 > -セーレン・キェルケゴール
 
-[定義リソース型](https://docs.puppet.com/puppet/latest/lang_defined_types.html)は、単一のノードのカタログ内で複数回評価することのできるPuppetコードのブロックです。
+[定義リソース型](https://puppet.com/docs/puppet/latest/lang_defined_types.html)は、単一のノードのカタログ内で複数回評価することのできるPuppetコードのブロックです。
 
 定義リソース型を作成するための構文は、クラスの定義に用いる構文とよく似ています。ただし、`class`キーワードを使う代わりに、このコードブロックは`define`から始まります。
 
@@ -90,7 +90,7 @@ Puppetにビルトインされた任意のリソース型を宣言する際に�
 
     vim user_accounts/manifests/ssh_user.pp
 
-ここでは、ユーザアカウントとそのユーザのSSH公開キーを管理するため、ユーザリソースの基本的なパラメータいくつかと、ユーザの公開キーの`pub_key`パラメータを提示します。
+ここでは、ユーザアカウントとそのユーザのSSH公開キーを管理するため、ユーザリソースの基本的なパラメータいくつかと、ユーザの公開キーの`key`パラメータを提示します。
 
 この定義リソース型のパラメータリストは次のようになるはずです。
 
@@ -105,9 +105,9 @@ define user_accounts::ssh_user (
 }
 ```
 
-`$pub_key`パラメータにはデフォルト値が存在せず、その他のパラメータのデフォルト値は'undef'に設定されていることに注意してください。ここには重要な違いがあります。
+`$key`パラメータにはデフォルト値が存在せず、その他のパラメータのデフォルト値は'undef'に設定されていることに注意してください。ここには重要な違いがあります。
 
-デフォルト値のないパラメータが必要なのです。`$pub_key`パラメータのデフォルト値を省略するということは、`$pub_key`パラメータに値を指定せずにこの`ssh_user`定義リソース型のインスタンスを宣言して、コンパイルエラーになるということです。このリソースには、公開鍵認証によってSSHアクセスを適切に提供するためにユーザの公開鍵が必要なため、これは望ましい挙動です。
+デフォルト値のないパラメータが必要なのです。`$key`パラメータのデフォルト値を省略するということは、`$key`パラメータに値を指定せずにこの`ssh_user`定義リソース型のインスタンスを宣言して、コンパイルエラーになるということです。このリソースには、公開鍵認証によってSSHアクセスを適切に提供するためにユーザの公開鍵が必要なため、これは望ましい挙動です。
 
 ```puppet
   ssh_authorized_key { "${title}@puppet.vm":
@@ -135,6 +135,8 @@ define user_accounts::ssh_user (
 `undef`という特別な値を使えば、その両方を実現することができます。`undef`は、内部的には、未設定の変数またはパラメータを評価するときにPuppetが扱う値そのものです。これをオプションのパラメータのデフォルト値として設定しておけば、文字通り「undefined=未定義」のパラメータ状態を配下の`user`リソースに受け渡し、`user`リソースのパラメータをデフォルト動作に戻すことができます。
 
 これらの`user`リソースおよび`ssh_authorized_key`リソースと、ユーザのホームディレクトリと`.ssh`ディレクトリを管理する`file`リソースを組み合わせると、`user_accounts::ssh_user`定義リソース型は次のようになります。
+
+[//]: # (code/130_defined_resource_types/modules/user_accounts/manifests/ssh_user.pp)
 
 ```puppet
 define user_accounts::ssh_user (
@@ -174,7 +176,7 @@ define user_accounts::ssh_user (
 
 ## 文字列の補間
 
-このコードに、もう1つ新しい構文規則要素が加わったことにお気付きでしょうか。このマニフェストでダブルクォートで囲まれた文字列(`"..."`)に`${var_name}`形式の変数が含まれている箇所があります。これは、Puppetの[文字列の補間](https://docs.puppet.com/puppet/latest/lang_variables.html#interpolation)という構文規則です。文字列の補間を使用すると、ダブルクォートで囲まれた任意の文字列に変数を挿入できます。
+このコードに、もう1つ新しい構文規則要素が加わったことにお気付きでしょうか。このマニフェストでダブルクォートで囲まれた文字列(`"..."`)に`${var_name}`形式の変数が含まれている箇所があります。これは、Puppetの[文字列の補間](https://puppet.com/docs/puppet/latest/lang_variables.html#interpolation)という構文規則です。文字列の補間を使用すると、ダブルクォートで囲まれた任意の文字列に変数を挿入できます。
 
 文字列の補間はPuppet全体で役に立ちますが、その中でも、定義リソース型では特に重要な役割を果たします。なぜなら、文字列の補間を使用することで、定義リソース型の`$title` 変数を、その構成要素である各リソースのタイトルに組み込むことが可能になるからです。たとえば、`ssh_authorized_key`リソースのタイトルは、`"${title}@puppet.vm"`のようになります。
 
@@ -212,9 +214,13 @@ define user_accounts::ssh_user (
 
 `profile::base::dev_users::users:`のHiera値を定義するために新しい行を作成します。ここで、Hieraの構造化データの特性を利用して、新規に`ssh_user`のインスタンスを2つ定義し、それぞれにパラメータを設定します。ここでは、YAMLデータファイルにこのデータを正しく入力することだけに集中しましょう。この構造化データがPuppetマニフェストによって実際にどのように実装されるかについては、少し後で説明します。
 
-ファイルの最終的な内容を以下に示します。大きな`pub_key`ブロックを管理するのは、特にVimに不慣れなユーザにとっては、少し厄介な作業です(Vimを使い慣れたユーザは、この段落は飛ばして次に進んでください)。まず、鍵の冒頭と末尾から、文字列"ssh-rsa"および"root@learning.puppetlabs.vm"を削除する必要があります。そのため、鍵が記述されている行にカーソルを置きます。必ず、`ESC`キーを押して、コマンドモードになっていることを確認しておいてください。コマンドモードなら、`^`キーで行頭、`$`キーで行末へと簡単に移動できます。`ssh-rsa`または`root@learning.puppetlabs.vm`文字列の上にカーソルが来たら、コマンドモードでコマンド`daW`を使用して削除できます。同じ鍵を両方のユーザで使用するため、鍵をコピーする必要もあります。コマンド`yy`で行をコピーし、`p`キーでカーソル位置にペーストできます。また、`dd`コマンドで行を削除できます。
+ファイルの最終的な内容を以下に示していますが、Vimに慣れていない場合、大きい`pub_key`ブロックは扱いにくいかもしれません(Vimを使い慣れている場合は、この段落を省略して構いません)。
+
+VMまず、鍵の冒頭と末尾から、文字列`ssh-rsa`および`root@learning.puppetlabs.vm`を削除する必要があります。そのため、鍵が記述されている行にカーソルを置きます。必ず、`ESC`キーを押して、コマンドモードになっていることを確認しておいてください。コマンドモードなら、`^`キーで行頭、`$`キーで行末へと簡単に移動できます。`ssh-rsa`または`root@learning.puppetlabs.vm`文字列の上にカーソルが来たら、コマンドモードでコマンド`daW`を使用して削除できます。同じ鍵を両方のユーザで使用するため、鍵をコピーする必要もあります。コマンド`yy`で行をコピーし、`p`キーでカーソル位置にペーストできます。また、`dd`コマンドで行を削除できます。
 
 完了すると、データファイルは次の例のようになるはずです(公開鍵の内容は例と異なる可能性があります)。`pub_key:`はすべて1行に収まっている必要があることに注意してください。
+
+[//]: # (code/130_defined_resource_types/data/domain/beauvine.vm.yaml)
 
 ```yaml
 ---
@@ -272,6 +278,8 @@ sH5FL8M8IR3Xkgp80NAQqmyVi7cx+c9n4RjEdMGk3XtutPNsSLcgm8/YZqv/yTRH6wAQl/"}]}
 
 `common.yaml`ファイルは、以下のようになるはずです。
 
+[//]: # (code/130_defined_resource_types/data/common.yaml)
+
 ```yaml
 ---
 profile::pasture::app::default_message: "Baa"
@@ -290,6 +298,8 @@ profile::base::dev_users::users: []
 これで、`user_accounts::ssh_user`定義リソース型が、ひと組のパラメータ入力からのSSH鍵を利用して新しいユーザアカウントを作成する方法を提供し、Hieraデータファイルが各ユーザのための入力リストを定義するよう設定されました。しかし、コードにおいてこれらのデータを組み合わせる方法についてはまだ取り組んでいません。
 
 ここで、[イテレータ](https://puppet.com/docs/puppet/latest/lang_iteration.html)と呼ばれるPuppet言語の機能を使用します。イテレータを使用すると、Puppetコードのブロックを複数回反復することができます。このとき、ハッシュまたは配列のデータを使用して、各反復につき、ブロック内の変数に異なる値をバインドします。今回の場合、イテレータはHieraデータソースで定義されたユーザアカウントのリストを処理して、それぞれについて`user_accoutns::ssh_user`定義リソース型のインスタンスを宣言します。
+
+[//]: # (code/130_defined_resource_types/modules/profile/manifests/base/dev_users.pp)
 
 ```puppet
 class profile::base::dev_users {
@@ -312,6 +322,8 @@ class profile::base::dev_users {
 
     vim /etc/puppetlabs/code/environments/production/modules/role/manifests/pasture_app.pp
 
+[//]: # (code/130_defined_resource_types/modules/role/manifests/pasture_app.pp)
+
 ```puppet
 class role::pasture_app {
   include profile::pasture::app
@@ -326,9 +338,9 @@ class role::pasture_app {
 
     puppet job run --nodes pasture-app.beauvine.vm
 
-Puppet実行が完了したら、ユーザ`bert`として`pasture-app.beauvine.vm`に接続します。
+Puppet実行が完了したら、ユーザ`gertie`として`pasture-app.beauvine.vm`に接続します。
 
-    ssh bert@pasture-app.beauvine.vm
+    ssh gertie@pasture-app.beauvine.vm
 
 このユーザとして接続できることを確認したら、そのまま接続を終了します。
 
@@ -349,5 +361,5 @@ Puppet実行が完了したら、ユーザ`bert`として`pasture-app.beauvine.v
 
 ## その他のリソース
 
-* 定義リソース型については、[ドキュメントページ](https://docs.puppet.com/puppet/latest/lang_defined_types.html)をご覧ください。
-* 定義リソース型は、Puppet Fundamentals、Puppet PractitionerおよびPuppetizing Infrastructureコースで詳しく説明しています。詳細については、[対面](https://learn.puppet.com/category/instructor-led-training)および[オンライン](https://learn.puppet.com/category/online-instructor-led-training)トレーニングオプションをチェックしてみてください。
+* 定義リソース型については、[ドキュメントページ](https://puppet.com/docs/puppet/latest/lang_defined_types.html)をご覧ください。
+* 定義リソース型は、Puppet Practitionerコースで詳しく説明しています。詳細については、[対面](https://learn.puppet.com/category/instructor-led-training)および[オンライン](https://learn.puppet.com/category/online-instructor-led-training)トレーニングオプションをチェックしてみてください。
