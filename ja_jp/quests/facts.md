@@ -73,6 +73,8 @@ Puppetコードにfactsを組み込む作業の前に、コマンドラインで
 
 このクラスは、`/etc/motd`ファイルを管理する単一の`file`リソースで構成されます。テンプレートを使って、このリソースの`content`パラメータの値を設定します。
 
+[//]: # (code/080_facts/modules/motd/manifests/init.pp)
+
 ```puppet
 class motd {
 
@@ -110,7 +112,9 @@ class motd {
 
 次に、シンプルな挨拶メッセージを追加し、fact値から割り当てられた変数を用いて、システムに関する基本情報を提供します。
 
-```
+[//]: # (code/080_facts/modules/motd/templates/motd.epp)
+
+```puppet
 <%- | $fqdn,
       $os_family,
       $os_name,
@@ -129,6 +133,8 @@ This is a <%= $os_family %> system running <%= $os_name %> <%= $os_release %>
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 パラメータをいっさい使っていないため、`include`関数を用いて、`motd`クラスを`pasture.puppet.vm`ノード定義に追加します。
+
+[//]: # (code/080_facts/manifests/site.pp)
 
 ```puppet
 node 'pasture.puppet.vm' {
@@ -171,6 +177,6 @@ MOTDを確認したら、Puppet masterに戻ります。
 
 ## その他のリソース
 
-* Puppetのfacterとfactsの詳細については、Puppetの [ドキュメントページ](https://docs.puppet.com/puppet/latest/lang_facts_and_builtin_vars.html)を参照してください。
-* [Facterのレッスン](https://learn.puppet.com/elearning/an-introduction-to-facter)は、[自分のペースでできるトレーニングコースのカタログ](https://learn.puppet.com/category/self-paced-training)にも含まれています。
-* Factsは、Puppet Fundamentals、Puppet PractitionerおよびPuppetizing Infrastructureコースで詳しく説明しています。詳細については、[対面](https://learn.puppet.com/category/instructor-led-training)および[オンライン](https://learn.puppet.com/category/online-instructor-led-training)のトレーニングオプションをチェックしてみてください。
+* Puppetのfacterとfactsの詳細については、Puppetの[ドキュメントページ](https://puppet.com/docs/puppet/latest/lang_facts_and_builtin_vars.html)を参照してください。
+* [Facterのレッスン](https://learn.puppet.com/course/an-introduction-to-facter)は、[自分のペースでできるトレーニングコースのカタログ](https://learn.puppet.com/category/self-paced-training)にも含まれています。
+* Factsについては、Getting Started with PuppetおよびPuppet Practitionerコースで詳しく説明しています。詳細については、[対面](https://learn.puppet.com/category/instructor-led-training)および[オンライン](https://learn.puppet.com/category/online-instructor-led-training)トレーニングオプションをチェックしてみてください。
