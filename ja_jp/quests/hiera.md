@@ -20,11 +20,11 @@ HieraはPuppetのデータルックアップシステムです。Puppetインフ
 ## Hieraとは?
 
 このガイドでここまでに学習したすべてのデータ管理手法は、変数やテンプレートからロールおよびプロファイルまで、さまざまなデータをコードから明確に分離するために役立ちます。
-[Hiera](https://docs.puppet.com/puppet/latest/hiera_intro.html)は、Puppetのビルトインデータルックアップシステムで、Puppetマニフェストから別のデータソースにデータを移動することで、この分離を実現します。
+[Hiera](https://puppet.com/docs/puppet/latest/hiera_intro.html)は、Puppetのビルトインデータルックアップシステムで、Puppetマニフェストから別のデータソースにデータを移動することで、この分離を実現します。
 
 Hieraという名前は、データを*階層的*に構成できるという事実にちなんで付けられています。ほとんどのHiera導入は、インフラ全体にデフォルト値を設定する共通データから始まり、独自システムの設定に必要なノード固有データで終わります。より限定的なレベルで指定されたデータが、より一般的なレベルに設定されたデフォルト値をオーバーライドします。Hieraでは、最も一般的なレベルから最も限定的なレベルまでの間に、いくつでも中間レベルを指定できます。
 
-このガイドではまだ説明していませんが、(カスタムおよび外部fact) [https://docs.puppet.com/facter/latest/custom_facts.html]を導入すると、Hiera階層を非常に柔軟にセットアップできます。例えば、国に相当するHieraレベルを設定して、一連のワークステーションにデフォルトロケールを指定したり、データセンターに相当するレベルを設定して、ネットワーク構成の管理に使用したりすることができます。
+このガイドではまだ説明していませんが、[カスタムおよび外部fact] (https://puppet.com/docs/facter/latest/custom_facts.html)を導入すると、Hiera階層を非常に柔軟にセットアップできます。例えば、国に相当するHieraレベルを設定して、一連のワークステーションにデフォルトロケールを指定したり、データセンターに相当するレベルを設定して、ネットワーク構成の管理に使用したりすることができます。
 
 Puppet自体と同様に、Hieraはさまざまな方法で設定および使用できる柔軟性の高いツールです。このクエストの目標は、Hieraの機能や考えられる実装をすべて網羅することではなく、小規模デプロイと大規模デプロイの両方で、多くのPuppetユーザが問題なく使用してきたシンプルなパターンを提示することにあります。
 
@@ -55,7 +55,11 @@ Hiera実装の第1ステップは、使用する環境のコードディレク�
 
     vim hiera.yaml
 
+既存の`hiera.yaml`ファイルがある場合、ファイルの内容を削除して下記で置き換えてください。
+
 ここでは、3つのレベルを持つ単純な階層を実装します。"Common data"には、環境のデフォルト値を設定し、"Per-Domain defaults"にはドメイン固有のデフォルト値を定義し、"Per-node data"には個々のノードに固有のデータ値を定義します。
+
+[//]: # (code/120_hiera/hiera.yaml)
 
 ```yaml
 ---
@@ -76,7 +80,7 @@ hierarchy:
     path: "common.yaml"
 ``` 
 
-PuppetでHieraを使用して値を探す場合、この設定ファイルの`hierarchy:`セクションに記載されたレベルの順序に従って検索が行われます。"Per-node data"レベルに定義されたデータソース内で値が見つかった場合、この値が使用されます。一致する値がここで見つからない場合、次のレベル( ここでは、"Per-OS defaults")に進みます。このデータソースにも値が見つからない場合、最終的に、"Common data"レベルの`common.yaml`ファイルが検索されます。
+PuppetでHieraを使用して値を探す場合、この設定ファイルの`hierarchy:`セクションに記載されたレベルの順序に従って検索が行われます。"Per-node data"レベルに定義されたデータソース内で値が見つかった場合、この値が使用されます。一致する値がここで見つからない場合、次のレベル(ここでは、"Per-domain defaults")に進みます。このデータソースにも値が見つからない場合、最終的に、"Common data"レベルの`common.yaml`ファイルが検索されます。
 
 この設定ファイルは、Puppetコードではなく[YAML](http://www.yaml.org/start.html)で記述されているので、構文チェックに`puppet parser validate`コマンドを使用することはできません。代わりに、以下のRubyの1行コマンドをコマンドラインで実行して、YAML構文をチェックします。このコマンドは、`puppet parser`と同様に、ファイルが解析できるかどうかだけをチェックするものであり、内容の正しさは保証しません。
 
@@ -101,6 +105,10 @@ PuppetでHieraを使用して値を探す場合、この設定ファイルの`hi
     vim modules/profile/manifests/pasture/app.pp
 
 Hieraのビルトイン関数`lookup()`を使用して、管理する`pasture`コンポーネントの各クラスパラメータに対して、どのデータをフェッチするかを指定します。
+
+クラスの内容を下記で置き換えます。
+
+[//]: # (code/120_hiera/modules/profile/manifests/pasture/app.pp)
 
 ```puppet
 class profile::pasture::app {
@@ -137,6 +145,8 @@ Hieraは、さまざまな種類のデータソースを非常に柔軟に使用
 
 ここには、より高いレベルで値が設定されない場合に使用される共通のデフォルト値を設定します。
 
+[//]: # (code/120_hiera/data/common.yaml)
+
 ```yaml
 ---
 profile::pasture::app::default_message: "Baa"
@@ -151,6 +161,8 @@ profile::pasture::app::db: "none"
 
     vim data/domain/beauvine.vm.yaml
 
+[//]: # (code/120_hiera/data/domain/beauvine.vm.yaml)
+
 ```yaml
 ---
 profile::pasture::app::default_message: "Welcome to Beauvine!"
@@ -161,6 +173,8 @@ profile::pasture::app::default_message: "Welcome to Beauvine!"
 次に、`data/domain/auroch.vm.yaml`データソースを作成します。
 
     vim data/domain/auroch.vm.yaml
+
+[//]: # (code/120_hiera/data/domain/auroch.vm.yaml)
 
 ```yaml
 ---
@@ -175,6 +189,8 @@ profile::pasture::app::db: "postgres://pasture:m00m00@pasture-db.auroch.vm/pastu
     vim data/nodes/pasture-app-dragon.auroch.vm.yaml
 
 ここでは、`default_character`に`dragon`を設定するだけです。
+
+[//]: # (code/120_hiera/data/nodes/pasture-app-dragon.auroch.vm.yaml)
 
 ```yaml
 ---
@@ -193,8 +209,9 @@ data
 │   └── beauvine.vm.yaml
 └── nodes
     └── pasture-app-dragon.auroch.vm.yaml
+
+2 directories, 4 files
 ```
-2ディレクトリ、4ファイル
 
 <div class = "lvm-task-number"><p>タスク8:</p></div>
 
@@ -209,13 +226,11 @@ data
 
     curl -X POST 'pasture-app-dragon.auroch.vm/api/v1/cowsay/sayings?message=Hello!'
 
-    curl pasture-app-dragon.auroch.vm/api/v1/cowsay/sayings
+    curl pasture-app-dragon.auroch.vm/api/v1/cowsay/sayings/1
 
     curl pasture-app.auroch.vm/api/v1/cowsay/sayings/1
 
     curl pasture-app.beauvine.vm/api/v1/cowsay
-
-    curl pasture-app.beauvine.vm/api/v1/cowsay/sayings
 
 ## おさらい
 
