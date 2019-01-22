@@ -28,7 +28,7 @@ Puppetは、さまざま役割を担う多様なシステムの設定を管理�
 
 例として、`puppetlabs-apache`モジュールを見てみましょう。このモジュールの開発者は、Apacheパッケージのインストール方法(`yum`、`apt-get`、または別のパッケージマネージャで処理するかどうか)をPuppetのプロバイダに委ねていますが、Puppetには、インストールが必要なパッケージの名前を自動的に決定する方法はありません。このモジュールを使用してRedHatかDebianシステムのどちらでApacheを管理するかに応じて、`httpd`または`apache2`パッケージのどちらかを管理する必要があります。
 
-多くの場合、このような**何を**という疑問には、条件文とfactまたはパラメータを組み合わせて対応します。 [Forge](forge.puppet.com)の`puppetlabs-apache`モジュールを見れば、[このパッケージの名前やその他の多数の変数](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/params.pp#L59)が、`osfamily` factを用いて`if`文をもとに設定されていることがわかります(このモジュールでは、下位互換性を確保するために、このfactに非構造化`$::osfamily`フォーマットを用いていることにお気づきかもしれません。このリファレンス形式の詳細については、[ドキュメントページ](https://docs.puppet.com/puppet/latest/lang_facts_and_builtin_vars.html#classic-factname-facts)を参照してください)。
+多くの場合、このような**何を**という疑問には、条件文とfactまたはパラメータを組み合わせて対応します。[Forge](forge.puppet.com)の`puppetlabs-apache`モジュールを見れば、[このパッケージの名前やその他の多数の変数](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/params.pp#L62)が、`osfamily` factを用いて`if`文をもとに設定されていることがわかります(このモジュールでは、下位互換性を確保するために、このfactに非構造化`$::osfamily`フォーマットを用いていることにお気づきかもしれません。このリファレンス形式の詳細については、[ドキュメントページ](https://puppet.com/docs/puppet/latest/lang_facts_and_builtin_vars.html#classic-factname-facts)を参照してください)。
 
 単純化してこのクエストに関係する値のみを示すと、条件文は次のようになります。
 
@@ -129,7 +129,9 @@ class pasture (
 
 `$sinatra_server`変数をテンプレート冒頭のparamsブロックに追加します。Pastureアプリケーションは、`:sinatra_settings:`キーの下にあるすべての設定をSinatraに渡します。
 
-```yaml
+[//]: # (code/090_conditional_statements/modules/pasture/templates/pasture_config.yaml.epp)
+
+```puppet
 <%- | $port,
       $default_character,
       $default_message,
@@ -157,6 +159,8 @@ class pasture (
 どちらのサーバもgemとして使用できるので、このパッケージには`gem`プロバイダを使用します。
 
 最後に、サービスリソースを示す`notify`パラメータを追加します。このようにすると、サーバパッケージがサービスの前に管理されるため、パッケージがアップデートされた場合にサービスを再起動させることができます。クラスは以下の例のようになります。サーバパッケージを管理するための条件文は、一番下に含まれています。 
+
+[//]: # (code/090_conditional_statements/modules/pasture/manifests/init.pp)
 
 ```puppet
 class pasture (
@@ -210,11 +214,13 @@ class pasture (
 
 これらの変更をクラスに加えれば、インフラストラクチャ内の異なるagentノードについて、異なるサーバを簡単に割り当てることができます。例えば、デプロイシステムではデフォルトのWEBrickサーバを使い、プロダクションでは Thinサーバを使うことが可能です。
 
-このクエストでは、`pasture-dev.puppet.vm`と`pasture-prod.puppet,vm`という2つの新しいシステムを作成しました。さらに複雑なインフラストラクチャの場合は、インフラストラクチャの開発、テスト、プロダクションといった各区分について、それぞれ個別の[環境](https://docs.puppet.com/puppet/latest/environments.html)を作成して管理するケースがあるかもしれません。しかし、とりあえずは、`site.pp`マニフェスト内で2種類のノード定義を設定すれば、条件文の実例を簡単に示すことができます。
+このクエストでは、`pasture-dev.puppet.vm`と`pasture-prod.puppet.vm`という2つの新しいシステムを作成しました。さらに複雑なインフラストラクチャの場合は、インフラストラクチャの開発、テスト、プロダクションといった各区分について、それぞれ個別の[環境](https://puppet.com/docs/puppet/latest/environments_about.html)を作成して管理するケースがあるかもしれません。しかし、とりあえずは、`site.pp`マニフェスト内で2種類のノード定義を設定すれば、条件文の実例を簡単に示すことができます。
 
 <div class = "lvm-task-number"><p>タスク4:</p></div>
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
+
+[//]: # (code/090_conditional_statements/manifests/site.pp)
 
 ```puppet
 node 'pasture-dev.puppet.vm' {
@@ -241,10 +247,10 @@ PEコンソールが自己署名証明書を使用していることを告げる
 
 以下の認証情報を使ってログインします。
 
-ユーザ名: **admin**
+ユーザ名: **admin**  
 パスワード: **puppetlabs**
 
-接続したら、画面の左下にあるナビゲーションバーの**[access control]**メニューオプションをクリックし、*[Access Control]*ナビゲーションメニューの**[Users]**を選択します。
+接続したら、画面の左下にあるナビゲーションバーの**[Access control]**メニューオプションをクリックし、*[Access Control]*ナビゲーションメニューの**[Users]**を選択します。
 
 **[Full name]**に`Learning`、**[Login]**に `learning`と入力して新規ユーザを作成します。
 
@@ -302,5 +308,5 @@ PEコンソールが自己署名証明書を使用していることを告げる
 
 ## その他のリソース
 
-* Puppetの[ドキュメントページ](https://docs.puppet.com/puppet/latest/lang_conditional.html)には、あらゆる形式の条件文および式の構文規則が記載されています。
-* [スタイルガイド](https://docs.puppet.com/puppet/latest/style_guide.html#conditionals)には、条件文を使用する際にお勧めするベストプラクティスが記載されています。
+* Puppetの[ドキュメントページ](https://puppet.com/docs/puppet/latest/lang_conditional.html)には、あらゆる形式の条件文および式の構文規則が記載されています。
+* [スタイルガイド](https://puppet.com/docs/puppet/latest/style_guide.html#conditionals)には、条件文を使用する際にお勧めするベストプラクティスが記載されています。
