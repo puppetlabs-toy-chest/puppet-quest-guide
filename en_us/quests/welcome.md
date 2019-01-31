@@ -10,7 +10,7 @@
 
 Welcome to the Quest Guide for the Puppet Learning VM. This guide will be
 your companion as you make your way through the Learning VM's series of
-interactive lessons.
+interactive lessons or *quests*.
 
 At this point, you should have the Learning VM set up and an open session in
 your browser-based terminal or SSH client. If not, please return to the Setup
