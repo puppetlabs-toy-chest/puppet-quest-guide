@@ -7,6 +7,7 @@
 
 =======
 * [Welcome](quests/welcome.md)
+* [Portfolio](quests/portfolio_introduction.md)
 * [Hello Puppet](quests/hello_puppet.md)
 * [Agent Run](quests/agent_run.md)
 * [Manifests and Classes](quests/manifests_and_classes.md)
