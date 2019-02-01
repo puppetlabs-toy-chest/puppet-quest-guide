@@ -71,6 +71,3 @@ source code for the quest tool itself is
 In this quest, we introduced the concept of the quest and interactive task. You
 tried out the quest tool and reviewed the mechanics completing quests and
 tasks.
-
-Now that you're familiar with the quest tool, you're ready to move on to the
-next quest: Hello Puppet.
