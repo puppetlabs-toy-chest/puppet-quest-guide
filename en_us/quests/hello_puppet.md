@@ -72,9 +72,7 @@ service is running on a system, it will periodically establish a secure
 connection to the Puppet master, fetch any Puppet code you've applied to it, and
 make the changes necessary to bring the system in line with the desired state
 you described. The fact that centralized control is built in from Puppet's
-foundations makes monitoring and compliance much easier. Puppet also
-offers orchestration features that allow you to coordinate changes across
-multiple systems involved in an application.
+foundations makes monitoring and compliance much easier.
 
 **Puppet is community driven.** Joining the [Puppet
 community](https://puppet.com/community) means you can benefit from the
