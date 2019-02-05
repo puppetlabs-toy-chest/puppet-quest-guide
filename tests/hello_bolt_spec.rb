@@ -34,12 +34,10 @@ describe _("Task 2:") do
       .exit_status
       .should eq 0
   end
-  it _('View the options for the bolt tool'), :validation do
+  it _('Verify the bolt tool installation'), :validation do
     file('/root/.bash_history')
       .content
       .should match /bolt\s+(-h|--help)/
-  end
-  it _('View the version for the bolt tool'), :validation do
     file('/root/.bash_history')
       .content
       .should match /bolt\s+\-\-version/
