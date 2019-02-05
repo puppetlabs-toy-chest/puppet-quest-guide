@@ -24,3 +24,24 @@ describe _("Task 1:") do
       .should be_installed
   end
 end
+
+describe _("Task 2:") do
+  it 'has a working solution', :solution do
+    command('bolt --help')
+      .exit_status
+      .should eq 0
+    command('bolt --version')
+      .exit_status
+      .should eq 0
+  end
+  it _('View the options for the bolt tool'), :validation do
+    file('/root/.bash_history')
+      .content
+      .should match /bolt\s+(-h|--help)/
+  end
+  it _('View the version for the bolt tool'), :validation do
+    file('/root/.bash_history')
+      .content
+      .should match /bolt\s+\-\-version/
+  end
+end
