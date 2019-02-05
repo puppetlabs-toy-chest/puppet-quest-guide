@@ -1,6 +1,6 @@
 require_relative './spec_helper'
 
-describe "The quest", host: :localhost do
+describe "The hello_bolt quest", host: :localhost do
   it 'begins', :solution do
     command('quest begin hello_bolt')
       .exit_status
@@ -41,5 +41,30 @@ describe _("Task 2:") do
     file('/root/.bash_history')
       .content
       .should match /bolt\s+\-\-version/
+  end
+end
+
+describe _("Task 3:") do
+  it 'has a working solution', :solution do
+    command('bolt command run "free -th" --nodes localhost')
+      .exit_status
+      .should eq 0
+    command('bolt command run hostname --nodes docker://bolt.puppet.vm')
+      .exit_status
+      .should eq 0
+    command('bolt command run "cat /etc/hosts" --nodes docker://bolt.puppet.vm')
+      .exit_status
+      .should eq 0
+  end
+  it _('Execute bolt commands'), :validation do
+    file('/root/.bash_history')
+      .content
+      .should match /bolt\s+command\s+run\s+\'free\s+-th\'\s+\-\-nodes\s+localhost/
+    file('/root/.bash_history')
+      .content
+      .should match /bolt\s+command\s+run\s+hostname\s+\-\-nodes\s+docker:\/\/bolt\.puppet\.vm/
+    file('/root/.bash_history')
+      .content
+      .should match /bolt\s+command\s+run\s+\'cat\s+\/etc\/hosts\'\s+\-\-nodes\s+docker:\/\/bolt.puppet.vm/
   end
 end
