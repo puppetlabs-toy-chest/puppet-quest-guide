@@ -18,7 +18,7 @@ describe _("Task 1:") do
       .should eq 0
   end
   it _('Install bolt'), :validation do
-    package('puppet6-release-el-7')
+    package('puppet6-release')
       .should be_installed
     package('puppet-bolt')
       .should be_installed
