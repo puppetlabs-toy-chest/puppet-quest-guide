@@ -13,7 +13,7 @@ describe _("Task 1:") do
     command('rpm -Uvh https://yum.puppet.com/puppet6/puppet6-release-el-7.noarch.rpm')
       .exit_status
       .should eq 0
-    command('yum install puppet-bolt')
+    command('yum install -y puppet-bolt')
       .exit_status
       .should eq 0
   end
