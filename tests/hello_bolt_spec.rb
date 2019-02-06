@@ -65,6 +65,9 @@ describe _("Task 3:") do
       .should match /bolt\s+command\s+run\s+hostname\s+\-\-nodes\s+docker:\/\/bolt\.puppet\.vm/
     file('/root/.bash_history')
       .content
+      .should match /bolt\s+\-\-format\s+json\s+command\s+run\s+\'cat\s+\/etc\/hosts\'\s+\-\-nodes\s+docker:\/\/bolt.puppet.vm/
+    file('/root/.bash_history')
+      .content
       .should match /bolt\s+command\s+run\s+\'cat\s+\/etc\/hosts\'\s+\-\-nodes\s+docker:\/\/bolt.puppet.vm/
   end
 end

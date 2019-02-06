@@ -82,3 +82,58 @@ try some examples using a Docker-hosted machine as target node:
     bolt command run hostname --nodes docker://bolt.puppet.vm
 
     bolt command run 'cat /etc/hosts' --nodes docker://bolt.puppet.vm
+
+The output from these commands will look similar to the following:
+
+```
+Started on bolt.puppet.vm...
+Finished on bolt.puppet.vm:
+  STDOUT:
+    bolt.puppet.vm
+Successful on 1 node: docker://bolt.puppet.vm
+Ran on 1 node in 0.05 seconds
+```
+
+```
+Started on bolt.puppet.vm...
+Finished on bolt.puppet.vm:
+  STDOUT:
+    127.0.0.1   localhost
+    ::1 localhost ip6-localhost ip6-loopback
+    fe00::0     ip6-localnet
+    ff00::0     ip6-mcastprefix
+    ff02::1     ip6-allnodes
+    ff02::2     ip6-allrouters
+    172.18.0.1  learning.puppetlabs.vm puppet
+    172.18.0.2  bolt.puppet.vm bolt
+Successful on 1 node: docker://bolt.puppet.vm
+Ran on 1 node in 0.05 seconds
+```
+
+Perhaps you want to generate machine-parseable output. That is also possible
+by using the `--format` option to the `bolt` command like so:
+
+```
+# bolt --format json command run 'cat /etc/hosts' --nodes docker://bolt.puppet.vm
+{ "items": [
+{"node":"docker://bolt.puppet.vm","status":"success","result":{"stdout":"127.0.0.1\tlocalhost\n::1\tlocalhost ip6-localhost ip6-loopback\nfe00::0\tip6-localnet\nff00::0\tip6-mcastprefix\nff02::1\tip6-allnodes\nff02::2\tip6-allrouters\n172.18.0.1\tlearning.puppetlabs.vm puppet\n172.18.0.2\tbolt.puppet.vm bolt\n","stderr":"","exit_code":0}}
+],
+"node_count": 1, "elapsed_time": 0 }
+```
+
+The output can then be piped into a JSON query tool, such as `jq`, for
+further processing. There are a number of other useful bolt command-line
+options, and you can see them by running `bolt --help`.
+
+## Review
+
+In this quest, you installed the Puppet Bolt tool, verified the installation
+and practiced running some simple commands to get a feel for usage. Bolt is
+a flexible task runner that can target multiple nodes at once, connect to
+different types of nodes with a variety of protocols, including SSH, WinRM
+and Docker, as shown in this quest.
+
+## Additional Resources
+
+* Read the Puppet Bolt [documentation](https://puppet.com/docs/bolt/latest/bolt.html) for more details about all of its use cases.
+* There is a Puppet Bolt and Tasks [self-paced course](https://learn.puppet.com/course/puppet-orchestration-bolt-and-tasks) for a deeper dive into how to manage nodes with Bolt and using it from the command-line and the Puppet Enterprise Console.
