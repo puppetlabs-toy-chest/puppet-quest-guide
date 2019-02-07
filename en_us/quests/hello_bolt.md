@@ -76,7 +76,7 @@ output.
 Bolt is better suited to running commands on one or more remote nodes so the
 output can be collected and potentially acted upon by another tool. And instead
 of using a tool like ssh in a `for` loop, you provide a list of nodes to Bolt,
-and it will connect to each one and running the desired command. Now let's
+and it will connect to each one and run the desired command. Now let's
 try some examples using a Docker-hosted machine as target node:
 
     bolt command run hostname --nodes docker://bolt.puppet.vm
