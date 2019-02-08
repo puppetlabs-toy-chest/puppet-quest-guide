@@ -12,7 +12,7 @@
 
 In this quest, you will install Puppet Bolt and run some introductory commands.
 As described in the previous quest, Bolt is a task runner that enables you
-to invokes commands on one or more target nodes. It is well-suited to
+to invoke commands on one or more target nodes. It is well-suited to
 performing actions in an ad hoc manner instead of managing a node on a
 long-term basis.
 
