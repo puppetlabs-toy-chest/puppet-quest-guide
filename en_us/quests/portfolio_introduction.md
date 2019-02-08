@@ -38,7 +38,7 @@ for additional information of the entire suite of Puppet products.
 
 ## Puppet Bolt
 
-Bolt is an open-source task runner that automates the manual work that you do
+Bolt is an open-source remote task runner that automates the manual work that you do
 to maintain your infrastructure. Use Bolt to automate tasks that you need to
 perform on your infrastructure on an ad hoc basis, such as troubleshooting,
 deploying an applications, stopping and starting services, and upgrading a
