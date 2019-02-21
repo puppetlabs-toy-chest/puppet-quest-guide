@@ -25,10 +25,10 @@ this quest:
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
-Packaged versions of Bolt are available for Red Hat Enterprise Linux 6 and 7,
-SUSE Linux Enterprise Server 12, as well as Windows and macOS. The Learning
-VM is based on a CentOS 7 image, so run the following commands to install
-Bolt:
+Pre-built Bolt packages are available for various Red Hat Enterprise Linux,
+SUSE, Debian, Ubuntu, and Fedora distributions, as well as Windows and macOS.
+The Learning VM is based on a CentOS (Red Hat Enterprise Linux equivalent)
+7 image, so run the following commands to install Bolt:
 
     rpm -Uvh https://yum.puppet.com/puppet6/puppet6-release-el-7.noarch.rpm
 
