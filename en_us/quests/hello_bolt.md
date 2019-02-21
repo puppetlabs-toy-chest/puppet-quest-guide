@@ -113,8 +113,11 @@ Ran on 1 node in 0.05 seconds
 Perhaps you want to generate machine-parseable output. That is also possible
 by using the `--format` option to the `bolt` command like so:
 
+    bolt --format json command run 'cat /etc/hosts' --nodes docker://bolt.puppet.vm
+
+And the output will look similar to the following:
+
 ```
-# bolt --format json command run 'cat /etc/hosts' --nodes docker://bolt.puppet.vm
 { "items": [
 {"node":"docker://bolt.puppet.vm","status":"success","result":{"stdout":"127.0.0.1\tlocalhost\n::1\tlocalhost ip6-localhost ip6-loopback\nfe00::0\tip6-localnet\nff00::0\tip6-mcastprefix\nff02::1\tip6-allnodes\nff02::2\tip6-allrouters\n172.18.0.1\tlearning.puppetlabs.vm puppet\n172.18.0.2\tbolt.puppet.vm bolt\n","stderr":"","exit_code":0}}
 ],
