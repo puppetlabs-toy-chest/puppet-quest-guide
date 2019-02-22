@@ -26,7 +26,6 @@ open-source Puppet to manage their server infrastructure.
 Over time, the company has expanded its offerings to the following portfolio
 of enterprise products:
 
-- Puppet Discovery: Identify your IT resources in real time and act on them
 - Puppet Bolt: Perform ad hoc system configuration tasks on your infrastructure
 - Puppet Enterprise: Build model-driven configuration for your IT infrastructure
 - Puppet Pipelines: Simplify your application delivery and deployment process
