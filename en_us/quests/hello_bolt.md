@@ -139,4 +139,4 @@ and Docker, as shown in this quest.
 ## Additional Resources
 
 * Read the Puppet Bolt [documentation](https://puppet.com/docs/bolt/latest/bolt.html) for more details about all of its use cases.
-* There is a Puppet Bolt and Tasks [self-paced course](https://learn.puppet.com/course/puppet-orchestration-bolt-and-tasks) for a deeper dive into how to manage nodes with Bolt and using it from the command-line and the Puppet Enterprise Console.
+* Dive deeper with a Puppet Bolt and Tasks [self-paced course](https://learn.puppet.com/course/puppet-orchestration-bolt-and-tasks) and learn how to manage nodes with Bolt, using it from the command-line and the Puppet Enterprise Console.
