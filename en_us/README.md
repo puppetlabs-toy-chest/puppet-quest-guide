@@ -32,7 +32,8 @@ to a graphical user interface will find all necessary commands provided.
 The Learning VM comes with Puppet Enterprise installed, and some of the
 content is specific to Puppet Enterprise. Users interested in the open source
 version of Puppet will nonetheless benefit from the majority of the content.
-Certain features, such as the graphical web console and high availability,
-are exclusive to Puppet Enterprise. Content related to the Puppet
+Certain features, such as the graphical web console and Application Orchestration
+tool, are exclusive to Puppet Enterprise. Content related to the Puppet
 master-agent architecture, Puppet code, and module structure will be generally
-applicable to the open source version of Puppet.
+applicable to the open source version of Puppet, though there are some
+differences in file locations.

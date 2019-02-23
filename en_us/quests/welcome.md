@@ -10,7 +10,7 @@
 
 Welcome to the Quest Guide for the Puppet Learning VM. This guide will be
 your companion as you make your way through the Learning VM's series of
-interactive lessons or *quests*.
+interactive lessons.
 
 At this point, you should have the Learning VM set up and an open session in
 your browser-based terminal or SSH client. If not, please return to the Setup
@@ -71,3 +71,6 @@ source code for the quest tool itself is
 In this quest, we introduced the concept of the quest and interactive task. You
 tried out the quest tool and reviewed the mechanics completing quests and
 tasks.
+
+Now that you're familiar with the quest tool, you're ready to move on to the
+next quest: Hello Puppet.
