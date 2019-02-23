@@ -1,4 +1,20 @@
 {
+  "portfolio_introduction": [
+    {
+      "name" : "intro.puppet.vm",
+      "image" : "no_agent",
+      "sign_cert" : false,
+      "run_puppet" : false
+    }
+  ],
+  "hello_bolt" : [
+    {
+      "name" : "bolt.puppet.vm",
+      "image" : "no_agent",
+      "sign_cert" : false,
+      "run_puppet" : false
+    }
+  ],
   "hello_puppet" : [
     {
       "name" : "hello.puppet.vm",

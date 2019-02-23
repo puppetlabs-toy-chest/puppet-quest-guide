@@ -3,6 +3,14 @@
     "watch_list": ["/root/.bash_history"],
     "setup_command": "ruby ./scripts/setup welcome"
   },
+  "portfolio_introduction": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup portfolio_introduction"
+  },
+  "hello_bolt": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup hello_bolt"
+  },
   "hello_puppet": {
     "watch_list": ["/root/.bash_history"],
     "setup_command": "ruby ./scripts/setup hello_puppet"
