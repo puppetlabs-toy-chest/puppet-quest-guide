@@ -14,8 +14,8 @@
 
 > - Arthur C. Clarke
 
-This quest kicks off your hands-on introduction to managing infrastructure with
-Puppet tools and services. We'll start by installing the agent and learning
+This quest kicks off a hands-on introduction to managing infrastructure with
+Puppet tools and services. You'll start by installing the agent and learning
 some of the core ideas involved in managing infrastructure. Once the agent is
 installed on a new system, you will use the `puppet resource` tool to explore
 the state of that system. Through this tool, you will learn about *resources*,
@@ -29,20 +29,20 @@ this quest:
 ## What is Puppet?
 
 Before getting into the details of the Puppet tools and how to use them, let's
-discuss what Puppet is and why it's worth learning. We often using the term
-Puppet as a shorthand for a collection of tools and services that work in
-concert to help you define your infrastructure configuration and then automate
+discuss what Puppet is and why it's worth learning. The term Puppet is often
+used as a shorthand for a collection of tools and services that work in
+concert to help define your infrastructure configuration and then automate
 the process of bringing the systems into their desired state and keeping them
 there.
 
-As you continue with this guide, we'll dive deeper into individual components
-of the software, but for now we'll introduce some of the key points that
+Continuing with this guide, you'll dive deeper into individual components
+of the software, but for now there are key points that
 distinguish its approach from the other tools you might use to manage
 your systems.
 
-You define a desired state for all systems in your infrastructure. Once this
-state is defined, Puppet automates the process of bringing your systems into
-that state and keeping them there.
+Using Puppet, you define a desired state for all systems in your
+infrastructure. Once this state is defined, it automates the process of
+bringing your systems into that state and keeping them there.
 
 This desired state for your systems is written in Puppet code, a domain specific
 language (DSL). This **infrastructure as code** approach means that users
@@ -52,8 +52,8 @@ and release workflow.
 
 Puppet code is a **declarative** language, which means that you describe only
 the desired state for your systems, not the steps needed to get there. Once
-you've specified in Puppet code those aspects of a system you want Puppet to
-manage, a Puppet agent service running in the background makes any changes
+you've specified in code those aspects of a system you want Puppet to
+manage, an agent service running in the background makes any changes
 needed to bring the system into compliance with the desired state.
 
 A declarative approach requires that you think about the systems in your
@@ -69,23 +69,22 @@ carried across projects and roles.
 
 With a master-agent architecture, there's no need to connect to systems
 individually to make changes. Once the agent service is running on a system,
-it will periodically establish a secure connection to the master, fetch
-any code you've applied to it, and make the changes necessary to bring
-the system in line with the desired state you described. The fact that
+it periodically establishes a secure connection to the master, fetches
+any code you've applied to it, and makes the changes necessary to bring
+the system in line with the desired state. The fact that
 centralized control is built in from Puppet's foundations makes monitoring and
 compliance much easier.
 
 ## The Puppet agent
 
-As we noted above, what we call Puppet is actually a variety of tools and
+As we noted above, Puppet is actually a variety of tools and
 services that work together to help you manage and coordinate the systems in
 your infrastructure. Though this ecosystem gives you a great degree of power
-and control, the complexity can leave a new user wondering where to start. So
-this was the first question we answered as we put together this
-guide: "Where do we begin?"
+and control, the complexity can leave a new user wondering where to start.
 
-By introducing the Puppet agent and some of the command line tools included in
-the agent installation, we hope to strike the right balance between the 
+By initially introducing Bolt, and now the Puppet agent and some of the
+command line tools included in
+the agent installation, there should be a balance between the
 big-picture view of Puppet and the the bottom-up fundamentals. You'll begin to
 understand the agent's role in the broader Puppet architecture, as well as the
 details of how it interacts with the system where it's installed.
@@ -97,30 +96,26 @@ master to see how its system should be configured, and then inward to native
 system tools to check the actual state of the system and to make changes
 to bring it in line with the desired state.
 
-For now, we'll set aside the agent's interactions with the Puppet master 
-and focus on the tools that Puppet uses to check and modify a system's state. When
-you install the Puppet agent you get a set of command-line tools that help you
-interact directly with a system in the same way the Puppet agent does. Using these
-tools will help you understand how the Puppet agent sees and modifies the state
-of the system where it's running.
+When you install the Puppet agent you get a set of command-line tools that help
+you interact directly with a system in the same way the Puppet agent does.
+Using these tools will help you understand how the Puppet agent sees and
+modifies the state of the system where it's running.
 
 ## Agent installation
 
-Though we're focusing on the local Puppet agent in this quest, we are
-still working within the context of the master-agent architecture set up on the
-Learning VM. The Learning VM itself has Puppet Enterprise
+The Learning VM itself has Puppet Enterprise
 pre-installed, including the Puppet master service. For each quest, the quest
 tool provides one or more agent systems that you explore and configure
 with Puppet.
 
-For this quest, we've prepared a fresh system where you can install the Puppet
+For this quest, there is a fresh system where you can install the Puppet
 agent and explore some of the tools it provides. The Puppet master hosts an
 agent install script that makes it easy to install the Puppet agent on any
 system that can access the master.
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
-To get started, we will use the `bolt` tool that was introduced in the previous quest. Copy and run the following command to
+To get started, use the `bolt` tool that was introduced in the previous quest. Copy and run the following command to
 load the agent installer from the master and run it on the agent system:
 
     bolt command run "sh -c 'curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | sudo bash'" --nodes docker://hello.puppet.vm
@@ -133,9 +128,9 @@ documentation](https://puppet.com/docs/pe/latest/installing_agents.html).
 
 ## Resources
 
-As we noted above, the Puppet agent comes with a set of supporting tools you
+As noted above, the Puppet agent comes with a set of supporting tools you
 can use to explore your system. Now that the agent is
-installed, let's use these tools to see what they can teach you about how
+installed, use these tools to see what they can teach you about how
 Puppet works.
 
 One of Puppet's core concepts is the *resource abstraction layer*. For Puppet, 
@@ -164,8 +159,8 @@ file { '/tmp/test':
 }
 ```
 
-Let's break down this resource syntax into its components so we can
-see the anatomy of a resource a little more clearly.
+The resource syntax can be broken down into its components so its
+anatomy can be understood a little more clearly.
 
 ```puppet
 type { 'title':
@@ -189,13 +184,13 @@ for resource parameters is provided in the [Resource Type
 Reference](https://puppet.com/docs/puppet/latest/types/).
 
 The **resource title** is a unique name that Puppet uses to identify the
-resource internally. In the case of our file resource that you looked at above, the
+resource internally. In the case of the file resource above, the
 resource's title was the path of the file on the system: `/tmp/test`. Each
 resource type has a unique identifying feature that can be used as the resource
 title. A `user` resource uses the account name as a title, for example, and
 a `package` resource uses the name of the package you want to manage.
 
-Now that you're more familiar with the resource syntax, let's take another look
+Now that you're more familiar with the resource syntax, take another look
 at that file resource.
 
 ```puppet
@@ -206,17 +201,17 @@ file { '/tmp/test':
 
 Notice that it has a single parameter value pair: `ensure => 'absent'`. The
 `ensure` parameter tells us the basic state of a resource. For the *file* type,
-this parameter will tell us if the file exists on the system and if it does,
+this parameter describes if the file exists on the system and if it does,
 whether it's a normal file, a directory, or a link.
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
-Puppet is telling us that this file doesn't exist. Let's see what happens when
-you use the `touch` command to create a new empty file at that path. Run:
+Puppet is indicating that this file doesn't exist. So what happens when
+you use the `touch` command to create a new empty file at that path? Run:
 
     touch /tmp/test
 
-Now use the `puppet resource` tool to see how this change is represented in
+Use the `puppet resource` tool to see how this change is represented in
 Puppet's resource syntax:
 
     sudo puppet resource file /tmp/test
@@ -242,13 +237,13 @@ content to see if has changed.
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
-Let's use the `puppet resource` tool to add some content to our file.
+Next, use the `puppet resource` tool to add some content to our file.
 
 Running `puppet resource` with a `parameter=value` argument tells Puppet to
 modify the resource on the system to match the value you set. (Note that while
 this is a great way to test out changes in a development environment, it's not
-a good way to manage production infrastructure. Don't worry, though, we'll get
-to that soon enough.) We can use this to set the content of your file resource.
+a good way to manage production infrastructure.
+
 Run the following command:
 
     sudo puppet resource file /tmp/test content='Hello Puppet!'
@@ -270,7 +265,8 @@ type, the `package`.
 
 <div class = "lvm-task-number"><p>Task 5:</p></div>
 
-As an example, we'll look at the package for the Apache webserver `httpd`. Run:
+As an example, run the following command to install the package for the
+Apache webserver `httpd`:
 
     sudo puppet resource package httpd
 
@@ -311,7 +307,7 @@ Puppet selects a default provider based on the agent's operating system and
 whether the commands associated with that provider are available. You
 can override this default by setting a resource's `provider` parameter.
 
-Try installing the same fake package again, this time with the gem
+Try installing the same fake package again, this time with the `gem`
 provider:
 
      sudo puppet resource package bogus-package ensure=present provider=gem
