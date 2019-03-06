@@ -126,7 +126,7 @@ def clear_nodes
   hosts = docker_hosts
   hosts.each do |name, ip|
     `systemctl stop docker-#{name}.service`
-    `/bin/find /etc/docker/ssl_dir -name #{name}.pem -delete`
+    `/bin/find /etc/docker/ssl_dir /etc/puppetlabs/puppet/ssl -name #{name}.pem -delete`
     `/opt/puppetlabs/bin/puppetserver ca clean --certname #{name}`
   end
 end
