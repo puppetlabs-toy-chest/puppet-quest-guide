@@ -63,7 +63,7 @@ end
 
 describe _("Task 4:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("mkdir /root/control-repo/manifests")
+    command("mkdir -p /root/control-repo/manifests")
       .exit_status
       .should eq 0
     command("yes | cp -f /etc/puppetlabs/code/environments/production/manifests/site.pp /root/control-repo/manifests/site.pp")
@@ -197,7 +197,7 @@ end
 
 describe _("Task 13:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("mkdir /etc/puppetlabs/puppetserver/ssh")
+    command("mkdir -p /etc/puppetlabs/puppetserver/ssh")
       .exit_status
       .should eq 0
     command('ssh-keygen -t rsa -b 4096 -C "learning@puppet.vm" -f /etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa -P ""')
