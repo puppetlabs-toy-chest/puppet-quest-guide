@@ -1,15 +1,15 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2018 Puppet, Inc.
+# Copyright (C) 2019 Puppet, Inc.
 # This file is distributed under the same license as the puppet quest guide package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: puppet quest guide \n"
 "Report-Msgid-Bugs-To: learningvm@puppet.com\n"
-"POT-Creation-Date: 2018-02-06 13:56-0800\n"
-"PO-Revision-Date: 2018-02-06 13:56-0800\n"
+"POT-Creation-Date: 2019-02-21 15:42-0800\n"
+"PO-Revision-Date: 2019-02-21 15:42-0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ../agent_run_spec.rb:11 ../class_parameters_spec.rb:11 ../conditional_statements_spec.rb:11 ../control_repository_spec.rb:17 ../defined_resource_types_spec.rb:14 ../facts_spec.rb:11 ../hello_puppet_spec.rb:11 ../hiera_spec.rb:14 ../manifests_and_classes_spec.rb:11 ../package_file_service_spec.rb:11 ../puppetfile_spec.rb:6 ../roles_and_profiles_spec.rb:14 ../the_forge_spec.rb:14 ../variables_and_templates_spec.rb:11 ../welcome_spec.rb:11
+#: ../agent_run_spec.rb:11 ../class_parameters_spec.rb:11 ../conditional_statements_spec.rb:11 ../control_repository_spec.rb:17 ../defined_resource_types_spec.rb:14 ../facts_spec.rb:11 ../hello_bolt_spec.rb:11 ../hello_puppet_spec.rb:11 ../hiera_spec.rb:14 ../manifests_and_classes_spec.rb:11 ../package_file_service_spec.rb:11 ../puppetfile_spec.rb:17 ../roles_and_profiles_spec.rb:14 ../the_forge_spec.rb:14 ../variables_and_templates_spec.rb:11 ../welcome_spec.rb:11
 msgid "Task 1:"
 msgstr ""
 
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Run the pre-installed agent"
 msgstr ""
 
-#: ../agent_run_spec.rb:23 ../class_parameters_spec.rb:36 ../conditional_statements_spec.rb:30 ../control_repository_spec.rb:31 ../defined_resource_types_spec.rb:28 ../facts_spec.rb:25 ../hello_puppet_spec.rb:23 ../hiera_spec.rb:43 ../package_file_service_spec.rb:25 ../puppetfile_spec.rb:19 ../roles_and_profiles_spec.rb:28 ../the_forge_spec.rb:26 ../welcome_spec.rb:24
+#: ../agent_run_spec.rb:23 ../class_parameters_spec.rb:36 ../conditional_statements_spec.rb:30 ../control_repository_spec.rb:31 ../defined_resource_types_spec.rb:28 ../facts_spec.rb:25 ../hello_bolt_spec.rb:28 ../hello_puppet_spec.rb:23 ../hiera_spec.rb:43 ../package_file_service_spec.rb:25 ../puppetfile_spec.rb:30 ../roles_and_profiles_spec.rb:28 ../the_forge_spec.rb:26 ../welcome_spec.rb:24
 msgid "Task 2:"
 msgstr ""
 
@@ -34,7 +34,7 @@ msgstr ""
 msgid "Sign the agent certificate"
 msgstr ""
 
-#: ../agent_run_spec.rb:35 ../class_parameters_spec.rb:52 ../control_repository_spec.rb:51 ../defined_resource_types_spec.rb:63 ../facts_spec.rb:39 ../hello_puppet_spec.rb:36 ../roles_and_profiles_spec.rb:46
+#: ../agent_run_spec.rb:35 ../class_parameters_spec.rb:52 ../control_repository_spec.rb:51 ../defined_resource_types_spec.rb:63 ../facts_spec.rb:39 ../hello_bolt_spec.rb:47 ../hello_puppet_spec.rb:36 ../roles_and_profiles_spec.rb:46
 msgid "Task 3:"
 msgstr ""
 
@@ -130,151 +130,151 @@ msgstr ""
 msgid "Task 6:"
 msgstr ""
 
-#: ../control_repository_spec.rb:106
+#: ../control_repository_spec.rb:115
 msgid "Initialize the control-repo repository make an initial commit"
 msgstr ""
 
-#: ../control_repository_spec.rb:113 ../hiera_spec.rb:132
+#: ../control_repository_spec.rb:122 ../hiera_spec.rb:132
 msgid "Task 7:"
 msgstr ""
 
-#: ../control_repository_spec.rb:119
+#: ../control_repository_spec.rb:128
 msgid "Rename the master branch to production"
 msgstr ""
 
-#: ../control_repository_spec.rb:126 ../manifests_and_classes_spec.rb:114
+#: ../control_repository_spec.rb:135 ../manifests_and_classes_spec.rb:114
 msgid "Task 8:"
 msgstr ""
 
-#: ../control_repository_spec.rb:131
+#: ../control_repository_spec.rb:140
 msgid "Create a Gitea user account"
 msgstr ""
 
-#: ../control_repository_spec.rb:138
+#: ../control_repository_spec.rb:147
 msgid "Task 9:"
 msgstr ""
 
-#: ../control_repository_spec.rb:143
+#: ../control_repository_spec.rb:152
 msgid "Set up an upstream remote in Gitea"
 msgstr ""
 
-#: ../control_repository_spec.rb:150
+#: ../control_repository_spec.rb:159
 msgid "Task 10:"
 msgstr ""
 
-#: ../control_repository_spec.rb:156
+#: ../control_repository_spec.rb:165
 msgid "Add the Gitea repository as upstream remote"
 msgstr ""
 
-#: ../control_repository_spec.rb:163
+#: ../control_repository_spec.rb:172
 msgid "Task 11:"
 msgstr ""
 
-#: ../control_repository_spec.rb:172
+#: ../control_repository_spec.rb:181
 msgid "Push your production branch to the upstream remote"
 msgstr ""
 
-#: ../control_repository_spec.rb:179
+#: ../control_repository_spec.rb:188
 msgid "Task 12:"
 msgstr ""
 
-#: ../control_repository_spec.rb:182
+#: ../control_repository_spec.rb:191
 msgid "Change the upstream repository's default branch to production"
 msgstr ""
 
-#: ../control_repository_spec.rb:189
+#: ../control_repository_spec.rb:198
 msgid "Task 13:"
 msgstr ""
 
-#: ../control_repository_spec.rb:201
+#: ../control_repository_spec.rb:210
 msgid "Create a deploy key"
 msgstr ""
 
-#: ../control_repository_spec.rb:207
+#: ../control_repository_spec.rb:216
 msgid "Task 14:"
 msgstr ""
 
-#: ../control_repository_spec.rb:213
+#: ../control_repository_spec.rb:222
 msgid "Add your deploy key to the upstream repository"
 msgstr ""
 
-#: ../control_repository_spec.rb:233
+#: ../control_repository_spec.rb:242
 msgid "Task 16:"
 msgstr ""
 
-#: ../control_repository_spec.rb:239
+#: ../control_repository_spec.rb:248
 msgid "Run the Puppet agent on your master"
 msgstr ""
 
-#: ../control_repository_spec.rb:246
+#: ../control_repository_spec.rb:255
 msgid "Task 17:"
 msgstr ""
 
-#: ../control_repository_spec.rb:252
+#: ../control_repository_spec.rb:261
 msgid "Add the learning user to the Code Deployers role"
 msgstr ""
 
-#: ../control_repository_spec.rb:259
+#: ../control_repository_spec.rb:268
 msgid "Task 18:"
 msgstr ""
 
-#: ../control_repository_spec.rb:271
+#: ../control_repository_spec.rb:280
 msgid "Deploy your production code"
 msgstr ""
 
-#: ../control_repository_spec.rb:277
+#: ../control_repository_spec.rb:286
 msgid "Task 19:"
 msgstr ""
 
-#: ../control_repository_spec.rb:283
+#: ../control_repository_spec.rb:292
 msgid "Trigger a puppet run on the pasture-app.beauvine.vm node"
 msgstr ""
 
-#: ../control_repository_spec.rb:290
+#: ../control_repository_spec.rb:299
 msgid "Task 20:"
 msgstr ""
 
-#: ../control_repository_spec.rb:299
+#: ../control_repository_spec.rb:308
 msgid "Modify the beauvine.vm.yaml file"
 msgstr ""
 
-#: ../control_repository_spec.rb:306
+#: ../control_repository_spec.rb:315
 msgid "Task 21:"
 msgstr ""
 
-#: ../control_repository_spec.rb:315
+#: ../control_repository_spec.rb:324
 msgid "Add and commit your change"
 msgstr ""
 
-#: ../control_repository_spec.rb:322
+#: ../control_repository_spec.rb:331
 msgid "Task 22:"
 msgstr ""
 
-#: ../control_repository_spec.rb:328
+#: ../control_repository_spec.rb:337
 msgid "Push your branch to the upstream remote"
 msgstr ""
 
-#: ../control_repository_spec.rb:335
+#: ../control_repository_spec.rb:344
 msgid "Task 23:"
 msgstr ""
 
-#: ../control_repository_spec.rb:342
+#: ../control_repository_spec.rb:351
 msgid "Merge your change to the upstream production branch"
 msgstr ""
 
-#: ../control_repository_spec.rb:349
+#: ../control_repository_spec.rb:358
 msgid "Task 24:"
 msgstr ""
 
-#: ../control_repository_spec.rb:355
+#: ../control_repository_spec.rb:364
 msgid "Deploy your modified production code"
 msgstr ""
 
-#: ../control_repository_spec.rb:362
+#: ../control_repository_spec.rb:371
 msgid "Task 25:"
 msgstr ""
 
-#: ../control_repository_spec.rb:368
+#: ../control_repository_spec.rb:377
 msgid "Trigger a second puppet run on the pasture-app.beauvine.vm node"
 msgstr ""
 
@@ -308,6 +308,18 @@ msgstr ""
 
 #: ../facts_spec.rb:63
 msgid "Create the motd.epp template"
+msgstr ""
+
+#: ../hello_bolt_spec.rb:20
+msgid "Install bolt"
+msgstr ""
+
+#: ../hello_bolt_spec.rb:37
+msgid "Verify the bolt tool installation"
+msgstr ""
+
+#: ../hello_bolt_spec.rb:59
+msgid "Execute bolt commands"
 msgstr ""
 
 #: ../hello_puppet_spec.rb:17
@@ -394,15 +406,15 @@ msgstr ""
 msgid "Add relationship metaparameters to the pasture main manifest"
 msgstr ""
 
-#: ../puppetfile_spec.rb:12
+#: ../puppetfile_spec.rb:23
 msgid "Check out a new puppetfile branch"
 msgstr ""
 
-#: ../puppetfile_spec.rb:25
+#: ../puppetfile_spec.rb:36
 msgid "Create a Puppetfile in your control repository"
 msgstr ""
 
-#: ../puppetfile_spec.rb:38
+#: ../puppetfile_spec.rb:49
 msgid "Add dependencies to your Puppetfile"
 msgstr ""
 
