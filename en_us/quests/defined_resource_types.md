@@ -106,7 +106,7 @@ target system. If Puppet allowed two `file` resource declarations with the same
 declarations should be enforced for the file at that path.
 
 Though a resource's title and namevar are distinct, the value you would assign
-to a resource's namevar is generally an excellent cadidate for an expressive
+to a resource's namevar is generally an excellent candidate for an expressive
 and unique title. For example, if the `path` of a file resource is
 `/etc/hosts`, using that path as the resource title makes it immediately clear
 what the the resource is managing. The common convention, then, is to use the
@@ -311,7 +311,7 @@ declare which users we want on a system.
 
 Rather than place this directly in your `site.pp` manifest, as you might have
 before we introduced the roles and profiles pattern, we'll create a
-`pasture_dev_users` profile class, and use a Hiera lookup to programatically
+`pasture_dev_users` profile class, and use a Hiera lookup to programmatically
 create users as needed on each system in your infrastructure.
 
 In this case, we'll include our user accounts on all nodes in the `beauvine.vm`
@@ -467,7 +467,7 @@ class profile::base::dev_users {
 
 When using iteration, be very mindful of your code's readability and
 maintainability. One of the Puppet language's benefits is that its declarative
-nature tends to make Puppet code itself readible description of desired state
+nature tends to make Puppet code itself readable description of desired state
 for your system. Used unnecessarily, iteration can increase your Puppet code's
 complexity, making it more difficult to understand and maintain.
 
