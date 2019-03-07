@@ -186,7 +186,7 @@ Once that's complete, open the `pasture_config.yaml.epp` template.
     vim pasture/templates/pasture_config.yaml.epp
 
 Add the `$sinatra_server` variable to the params block at the beginning of the
-template. The Pasture appication passes any settings under the
+template. The Pasture application passes any settings under the
 `:sinatra_settings:` key to Sinatra itself.
 
 [//]: # (code/090_conditional_statements/modules/pasture/templates/pasture_config.yaml.epp)
