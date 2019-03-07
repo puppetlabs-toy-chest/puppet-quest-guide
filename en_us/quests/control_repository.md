@@ -589,7 +589,7 @@ the node:
 
 ## Control repository development workflow
 
-Now that Puppet is running with code depolyed from your control repository,
+Now that Puppet is running with code deployed from your control repository,
 let's walk through the process of introducing changes to your a local copy of
 the repository, creating a PR to merge those changes to your upstream
 repository, and finally deploying those changes to production.
