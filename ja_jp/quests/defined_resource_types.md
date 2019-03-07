@@ -297,7 +297,7 @@ profile::base::dev_users::users: []
 
 これで、`user_accounts::ssh_user`定義リソース型が、ひと組のパラメータ入力からのSSH鍵を利用して新しいユーザアカウントを作成する方法を提供し、Hieraデータファイルが各ユーザのための入力リストを定義するよう設定されました。しかし、コードにおいてこれらのデータを組み合わせる方法についてはまだ取り組んでいません。
 
-ここで、[イテレータ](https://puppet.com/docs/puppet/latest/lang_iteration.html)と呼ばれるPuppet言語の機能を使用します。イテレータを使用すると、Puppetコードのブロックを複数回反復することができます。このとき、ハッシュまたは配列のデータを使用して、各反復につき、ブロック内の変数に異なる値をバインドします。今回の場合、イテレータはHieraデータソースで定義されたユーザアカウントのリストを処理して、それぞれについて`user_accoutns::ssh_user`定義リソース型のインスタンスを宣言します。
+ここで、[イテレータ](https://puppet.com/docs/puppet/latest/lang_iteration.html)と呼ばれるPuppet言語の機能を使用します。イテレータを使用すると、Puppetコードのブロックを複数回反復することができます。このとき、ハッシュまたは配列のデータを使用して、各反復につき、ブロック内の変数に異なる値をバインドします。今回の場合、イテレータはHieraデータソースで定義されたユーザアカウントのリストを処理して、それぞれについて`user_accounts::ssh_user`定義リソース型のインスタンスを宣言します。
 
 [//]: # (code/130_defined_resource_types/modules/profile/manifests/base/dev_users.pp)
 
