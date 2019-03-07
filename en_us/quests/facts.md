@@ -130,7 +130,7 @@ class motd {
 ```
 
 The `$facts` hash and top-level (unstructured) facts are automatically loaded
-as variables into any template. To improve readibility and reliability, we
+as variables into any template. To improve readability and reliability, we
 strongly suggest using the method shown here. Be aware, however, that
 you will likely encounter templates that refer directly to facts using the
 general variable syntax rather than the `$facts` hash syntax we suggest here.
