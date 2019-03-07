@@ -31,17 +31,30 @@ All the packages and modules needed to complete the Quest Guide are hosted
 locally on the VM itself, but you will need to set up networking to access the
 VM from your host system.
 
-Your virtualization software provides several options for network
-configuration. If you are on a network that may have a proxy or restrictive
+Your virtualization software provides several options for network configuration.
+If you are using VirtualBox on a network without a proxy or restrictive
+firewall rules, you may find it simpler to use the bridged adapter described
+in the online configuration section below.
+
+If you are on a network that may have a proxy or restrictive
 firewall rules (ask your network administrator if you're not sure), we strongly
 suggest running the VM with an offline host-only network. This offline
 configuration requires more complex initial setup with VirtualBox software, but
 will help you avoid troubleshooting networking issues between your Puppet
 master and agent systems.
 
-If you are using VirtualBox on a network without a proxy or restrictive
-firewall rules, you may find it simpler to use the bridged adapter described
-in the online configuration section below.
+### Online
+
+If you would like to run the Learning VM with internet access, set the
+*Network Adapter* to *Bridged*. Use an *Autodetect* setting if available, or
+accept the default Network Adapter name. (If you started the VM before making
+these changes, you may need to restart the VM before the settings will be
+applied correctly.)
+
+Note that the Puppet module tool, yum, and RubyGems are configured to use local
+repositories, so you will not be able to access remote content without manually
+changing the settings for these tools. While we encourage exploration, we are
+not currently able to support issues beyond the scope of the Quest Guide.
 
 ### Offline
 
@@ -82,32 +95,15 @@ Open the **Settings** dialog for the Learning VM and select the **Network**
 Section. Under the **Custom** heading, select the private network adapter
 option.
 
-### Online
-
-If you would like to run the Learning VM with internet access, set the
-*Network Adapter* to *Bridged*. Use an *Autodetect* setting if available, or
-accept the default Network Adapter name. (If you started the VM before making
-these changes, you may need to restart the VM before the settings will be
-applied correctly.)
-
-Note that the Puppet module tool, yum, and RubyGems are configured to use local
-repositories, so you will not be able to access remote content without manually
-changing the settings for these tools. While we encourage exploration, we are
-not currently able to support issues beyond the scope of the Quest Guide.
-
 ## Log in
 
-Start the VM. Rather than logging in directly, we suggest using the
-browser-based web terminal or SSH.
+Start the VM. Rather than logging in directly through the virtual machine
+console, we suggest using SSH.
 
-To access the web terminal, open your web browser and navigate to
-`http://<VM's IP ADDRESS>:9091`. Follow the instructions show on the
-splash page to log in.
-
-On Mac systems, you can use the default Terminal application or a third-party
-application like iTerm. For Windows, we suggest the free SSH client
-[PuTTY](http://www.putty.org/). Use the credentials provided on the VM console
-splash page to authenticate.
+On Mac systems, you can use the SSH command-line application inside the default
+Terminal application or a third-party application like iTerm. For Windows,
+we suggest the free SSH client [PuTTY](http://www.putty.org/). Use the
+credentials provided on the VM console splash page to authenticate.
 
 Once you're logged in, continue on to the **Get started** section below to
 access the Quest Guide and begin the interactive lessons.
@@ -116,10 +112,10 @@ access the Quest Guide and begin the interactive lessons.
 
 The Learning VM's Quest Guide and Quest tool currently support English and
 Japanese localization. The default language is English. If you would like to
-use the Quest tool in Japanese, run the following command on the Learning VM:
-`export LANG=ja_JP.utf-8`. Note that you must use SSH or the browser-based web
-terminal to see Japanese characters. Japanese characters will not display
-correctly on the default VirtualBox or VMware terminal.
+use the Quest tool in Japanese, run the following command in the Learning VM:
+`export LANG=ja_JP.utf-8`. Note that you must use SSH to see Japanese
+characters. Japanese characters will not display correctly on the default
+VirtualBox or VMware terminal.
 
 ## Get started
 
