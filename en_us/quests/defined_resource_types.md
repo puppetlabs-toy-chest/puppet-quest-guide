@@ -437,7 +437,7 @@ profile::base::dev_users::users: []
 Now that this data is available in Hiera, create a `dev_users.pp` manifest
 in `profile/manifests/base/`.
 
-    vim profile/manifests/base/dev_users.pp
+    vim /etc/puppetlabs/code/environments/production/modules/profile/manifests/base/dev_users.pp
 
 Your `user_accounts::ssh_user` defined resource type gives you a way to create
 a new user account with an SSH key from a set of parameter inputs, and your

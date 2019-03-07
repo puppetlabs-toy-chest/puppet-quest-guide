@@ -293,7 +293,7 @@ profile::base::dev_users::users: []
 
 これでデータがHieraで利用できるようになったので、`profile/manifests/base/`に`dev_users.pp`マニフェストを作成します。
 
-    vim profile/manifests/base/dev_users.pp
+    vim /etc/puppetlabs/code/environments/production/modules/profile/manifests/base/dev_users.pp
 
 これで、`user_accounts::ssh_user`定義リソース型が、ひと組のパラメータ入力からのSSH鍵を利用して新しいユーザアカウントを作成する方法を提供し、Hieraデータファイルが各ユーザのための入力リストを定義するよう設定されました。しかし、コードにおいてこれらのデータを組み合わせる方法についてはまだ取り組んでいません。
 
