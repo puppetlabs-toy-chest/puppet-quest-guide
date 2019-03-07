@@ -154,7 +154,7 @@ subdirectory at once.)
 
     mkdir -p cowsay/manifests
 
-With this directory strucure in place, it's time to create the manifest where
+With this directory structure in place, it's time to create the manifest where
 we'll write the `cowsay` class.
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
@@ -193,7 +193,7 @@ the `puppet parser` tool to check the syntax of your new manifest.
 	
 The parser will return nothing if there are no errors. If it does detect a
 syntax error, open the file again and fix the problem before continuing. Be
-aware that this validataion can only catch simple syntax errors and won't let
+aware that this validation can only catch simple syntax errors and won't let
 you know about other possible errors in your manifests.
 
 Now that the `cowsay` class is defined in your module's `init.pp` manifest,

@@ -25,7 +25,7 @@ A common solution is to create a separate `params.pp` class where the all the
 default values for class parameters are calculated and assigned to variables.
 These variables are then used to set parameter defaults in the main class's
 parameter block. This `params.pp` pattern allows you to use complex conditional
-logic to determine defaults, while maintining the simple parameter interface
+logic to determine defaults, while maintaining the simple parameter interface
 for your main class.
 
 We'll start by creating a `params.pp` manifest to contain the `pasture::params`

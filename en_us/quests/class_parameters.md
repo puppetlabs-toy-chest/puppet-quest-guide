@@ -169,7 +169,7 @@ Open your `site.pp` manifest.
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 And modify your node definition for `pasture.puppet.vm` to include a
-resource-like class declartion. We'll set the `default_character` parameter
+resource-like class declaration. We'll set the `default_character` parameter
 to the string `'cow'`, and leave the other two parameters unset, letting them
 take their default values.
 
