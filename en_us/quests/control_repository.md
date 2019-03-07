@@ -48,7 +48,7 @@ So far, the work you've done on the Learning VM has been on modules included
 directly in Puppet's modulepath. As a learning exercise, this has the advantage
 of simplicity and directness. To manage production infrastructure with Puppet,
 however, we strongly suggest adopting a workflow that allows for multiple
-contributers to coordinate, review, and test their changes before modifying
+contributors to coordinate, review, and test their changes before modifying
 production code.
 
 A Puppet control repository is an SCM repository containing the code and
@@ -114,7 +114,7 @@ specific code changes in your control repository.
 
 We'll create a Puppetfile in the next quest and cover its use in more depth.
 For now, we'll be focusing on the modules in your `site` directory whose code
-you will be directly managing in your control reposiotry. Just be aware that
+you will be directly managing in your control repository. Just be aware that
 because the contents of the `modules` directory are typically defined by a
 Puppetfile, your site-specific modules are kept in the distinct `site`
 directory to avoid being removed or overwritten when external modules are
@@ -152,7 +152,7 @@ directory.
 
 Now that you're done bringing over your modules, we'll copy over the rest of
 the production environment content to the control repository. Use `cd` to go up
-a direcory from the `modules` subdirectory to your `production` environment
+a directory from the `modules` subdirectory to your `production` environment
 directory.
 
     cd ..
@@ -220,7 +220,7 @@ upstream source for your code. Finally, you will configure Puppet to fetch code
 from the hosted control repository and deploy it to the Puppet master's
 production environment.
 
-This architecure allows multiple contributers to work on the same codebase
+This architecture allows multiple contributors to work on the same codebase
 while ensuring that any changes they make can be tested and approved before
 being committed to the upstream repository and deployed to production.
 
@@ -483,7 +483,7 @@ profile can be configured through its parameters.
 So far, you've been using the `site.pp` manifest to assign classes to nodes and
 set their parameters. The PE console's interface provides an alternative
 interface for node classification. The PE console's node classifier includes a
-built-in set of node groups and classificiations that define configuration
+built-in set of node groups and classifications that define configuration
 related to Puppet itself.
 
 <div class = "lvm-task-number"><p>Task 15:</p></div>
