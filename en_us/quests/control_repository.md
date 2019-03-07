@@ -146,7 +146,7 @@ Copy the site-specific `cowsay`, `pasture`, `motd`, `user_accounts`, `role`,
 and `profile` Puppet modules into the your control repository's `site`
 directory.
 
-    cp -r {pasture,motd,user_accounts,role,profile} /root/control-repo/site/
+    cp -r {cowsay,pasture,motd,user_accounts,role,profile} /root/control-repo/site/
 
 <div class = "lvm-task-number"><p>Task 3:</p></div>
 
