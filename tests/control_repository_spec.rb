@@ -30,11 +30,13 @@ end
 
 describe _("Task 2:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("yes | cp -r /etc/puppetlabs/code/environments/production/modules/{pasture,motd,user_accounts,role,profile} /root/control-repo/site/")
+    command("yes | cp -r /etc/puppetlabs/code/environments/production/modules/{cowsay,pasture,motd,user_accounts,role,profile} /root/control-repo/site/")
       .exit_status
       .should eq 0
   end
   it _('Copy site modules to your control repository'), :validation do
+    file("/root/control-repo/site/cowsay")
+      .should be_directory
     file("/root/control-repo/site/pasture")
       .should be_directory
     file("/root/control-repo/site/motd")

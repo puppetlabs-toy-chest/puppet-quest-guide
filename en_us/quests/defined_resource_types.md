@@ -450,7 +450,7 @@ iterator allows you to repeat a block of Puppet code multiple times, using
 data from a hash or array to bind different values to the variables in
 the block for each iteration. In this case, the iterator goes through a
 list of users accounts defined in your Hiera data source and declares an
-instance of the `user_accoutns::ssh_user` defined resource type for each.
+instance of the `user_accounts::ssh_user` defined resource type for each.
 
 [//]: # (code/130_defined_resource_types/modules/profile/manifests/base/dev_users.pp)
 
