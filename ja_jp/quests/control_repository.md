@@ -79,7 +79,7 @@ Puppetコードマネージャを使用して、master上の環境に制御リ�
 
 サイト固有のPuppetモジュールである`cowsay`、`pasture`、`motd`、`user_accounts`、`role`、`profile`を、制御リポジトリの`site`ディレクトリにコピーします。
 
-    cp -r {pasture,motd,user_accounts,role,profile} /root/control-repo/site/
+    cp -r {cowsay,pasture,motd,user_accounts,role,profile} /root/control-repo/site/
 
 <div class = "lvm-task-number"><p>タスク3:</p></div>
 
