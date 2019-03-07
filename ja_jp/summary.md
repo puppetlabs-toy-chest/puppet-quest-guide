@@ -7,6 +7,8 @@
 
 =======
 * [ようこそ](quests/welcome.md)
+* [ポートフォリオの概要](quests/portfolio_introduction.md)
+* [ハロー、Bolt](quests/hello_bolt.md)
 * [ハロー、Puppet](quests/hello_puppet.md)
 * [Agentの実行](quests/agent_run.md)
 * [マニフェストとクラス](quests/manifests_and_classes.md)
