@@ -215,7 +215,7 @@ Return to your `init.pp` manifest.
 
     vim pasture/manifests/init.pp
 
-You can wrap a package resource in an `if` statment to tell your class to only
+You can wrap a package resource in an `if` statement to tell your class to only
 manage the resource if the `$sinatra_server` variable is `thin` or `mongrel`.
 
 Both of these servers are available as gems, so you will use the `gem`
@@ -347,7 +347,7 @@ link. Copy the given link to a new browser tab and set the password to:
 Under the **Access Control** navigation bar, click the **User Roles** menu
 option. Click on the link for the **Operators** role. Select the **Learning**
 user from the dropdown menu, click the **Add user** button, and finally click
-the **Commit 1 change** botton near the bottom right of the console screen.
+the **Commit 1 change** button near the bottom right of the console screen.
 
 With this user configured, you can use the `puppet access` command to generate
 a token that will allow you to use the `puppet job` tool. We'll set the
