@@ -71,7 +71,7 @@ end
 
 describe _("Task 5:"), host: :localhost do
   it 'has a working solution', :solution do
-    # Again, pushing to master branch rather than produciton for solution
+    # Again, pushing to master branch rather than production for solution
     command('cd /root/control-repo && git checkout master && git merge puppetfile && git push -f upstream master')
       .exit_status
       .should eq 0
@@ -86,8 +86,8 @@ end
 describe _("Task 6:"), host: :localhost do
   it 'has a working solution', :solution do
     # We can't deploy production without being able to change the default branch
-    # in gitea, so to test, deploy master branch, copy it to produciton, and
-    # manually reset the production environment cache via the API. 
+    # in gitea, so to test, deploy master branch, copy it to production, and
+    # manually reset the production environment cache via the API.
     command('puppet code deploy master --wait && yes | cp -rf /etc/puppetlabs/code/environments/master /etc/puppetlabs/code/environments/production && chown -R pe-puppet /etc/puppetlabs/code/environments/production')
       .exit_status
       .should_not eq 1
@@ -110,7 +110,7 @@ describe _("Task 7:"), host: :localhost do
       .exit_status
       .should eq 0
   end
-  it _('Trigger a second puppet run on the pasture-app.beauvine.vm node'), :validation do
+  it _('Trigger a second puppet run on the pasture-app.auroch.vm node'), :validation do
     command("curl pasture-app.auroch.vm/api/v1/cowsay/sayings/1")
       .stdout
       .should match /Hello/
