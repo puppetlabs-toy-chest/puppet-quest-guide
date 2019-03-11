@@ -358,9 +358,8 @@ line.
 
 <div class = "lvm-task-number"><p>Task 10:</p></div>
 
-From within your `/root/control-repo` directory, run the following commands to
-set the Gitea hosted repository as your local repository's upstream remote,
-replacing `<gitea_name>` with the account name you selected for Gitea.
+From within your `/root/control-repo` directory, run the following command to
+set the Gitea hosted repository as your local repository's upstream remote.
 
     git remote add upstream http://localhost:3000/learning/control-repo.git
 

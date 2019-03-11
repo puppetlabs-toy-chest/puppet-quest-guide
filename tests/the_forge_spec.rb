@@ -13,7 +13,7 @@ end
 
 describe _("Task 1:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("puppet module install puppetlabs-postgresql --version 4.9.0")
+    command("puppet module install puppetlabs-postgresql --version 5.12.1")
       .exit_status
       .should eq 0
   end

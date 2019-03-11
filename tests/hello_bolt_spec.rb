@@ -8,7 +8,7 @@ describe "The hello_bolt quest", host: :localhost do
   end
 end
 
-describe _("Task 1:") do
+describe _("Task 1:"), host: :localhost do
   it 'has a working solution', :solution do
     command('rpm -Uvh https://yum.puppet.com/puppet6/puppet6-release-el-7.noarch.rpm')
       .exit_status
@@ -25,7 +25,7 @@ describe _("Task 1:") do
   end
 end
 
-describe _("Task 2:") do
+describe _("Task 2:"), host: :localhost do
   it 'has a working solution', :solution do
     command('bolt --help')
       .exit_status
@@ -34,7 +34,7 @@ describe _("Task 2:") do
       .exit_status
       .should eq 0
   end
-  it _('Verify the bolt tool installation'), :validation do
+  it _('Verify the bolt tool installation') do
     file('/root/.bash_history')
       .content
       .should match /bolt\s+(-h|--help)/
@@ -44,7 +44,7 @@ describe _("Task 2:") do
   end
 end
 
-describe _("Task 3:") do
+describe _("Task 3:"), host: :localhost do
   it 'has a working solution', :solution do
     command('bolt command run "free -th" --nodes localhost')
       .exit_status
@@ -56,7 +56,7 @@ describe _("Task 3:") do
       .exit_status
       .should eq 0
   end
-  it _('Execute bolt commands'), :validation do
+  it _('Execute bolt commands') do
     file('/root/.bash_history')
       .content
       .should match /bolt\s+command\s+run\s+\'free\s+-th\'\s+\-\-nodes\s+localhost/

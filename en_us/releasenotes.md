@@ -2,6 +2,11 @@
 
 ## Release Notes
 
+### 2.5.0
+  * Updated to PE 2019.0.2
+  * Added new quest content describing Bolt and the Puppet product portfolio
+  * Incorporated user-reported bug fixes
+
 ### v2.4.0
   * Updated content for compatibility with PE 2019.0.1
   * Updated content for compatibility with currently-supported Puppet modules

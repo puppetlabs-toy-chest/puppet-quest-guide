@@ -36,7 +36,7 @@ describe _("Task 2:"), host: :localhost do
   it _('Create a Puppetfile in your control repository'), :validation do
     file("/root/control-repo/Puppetfile")
       .content
-      .should match /mod\s"puppetlabs\/postgresql",\s'5\.11\.0'/
+      .should match /mod\s"puppetlabs\/postgresql",\s'5\.12\.1'/
   end
 end
 
@@ -49,7 +49,7 @@ describe _("Task 3:"), host: :localhost do
   it _('Add dependencies to your Puppetfile'), :validation do
     file("/root/control-repo/Puppetfile")
       .content
-      .should match /mod\s"puppetlabs\/stdlib",\s'5\.1\.0'/
+      .should match /mod\s"puppetlabs\/stdlib",\s'5\.2\.0'/
   end
 end
 
