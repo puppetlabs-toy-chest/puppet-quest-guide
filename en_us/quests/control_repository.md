@@ -634,7 +634,7 @@ To begin work on this change, create a new branch. The branch name should be
 brief, but still give good idea of what changes the branch will introduce.
 Let's call it `beauvine_default_message`. Use the `git checkout` command to
 switch to this branch. The `-b` flag tells Git to create a new branch with this
-name it doesn't already exist.
+name if it doesn't already exist.
 
     git checkout -b beauvine_default_message
 

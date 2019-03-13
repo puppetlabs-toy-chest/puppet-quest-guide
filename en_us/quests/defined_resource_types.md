@@ -8,7 +8,7 @@
 - Understand the difference between a defined resource type and class.
 - Learn how to handle the uniqueness constraints of resources contained within
   a defined resource type.
-- Use a defined resource type to manage user accounts and ssh keys.
+- Use a defined resource type to manage user accounts and SSH keys.
 
 ## Getting started
 
@@ -163,13 +163,13 @@ defined resource type.
 
 We want to manage the user account itself along with the user's public key for
 SSH, so we'll expose a few basic parameters for the user resource as well as a
-`key` parameter for the user's public key.
+`pub_key` parameter for the user's public key.
 
 The parameter list for your defined type should look like this:
 
 ```puppet
 define user_accounts::ssh_user (
-  $key,
+  $pub_key,
   $group   = undef,
   $shell   = undef,
   $comment = undef,
@@ -178,13 +178,13 @@ define user_accounts::ssh_user (
 }
 ```
 
-Note that the `$key` parameter has no default value, while the default
+Note that the `$pub_key` parameter has no default value, while the default
 values for the other parameters are set to 'undef'. There is an important
 difference here.
 
 A parameter with no supplied default value is required. Leaving out a default
-value for the `$key` parameter means that declaring an instance of this
-`ssh_user` defined resource type without supplying a value for the `$key`
+value for the `$pub_key` parameter means that declaring an instance of this
+`ssh_user` defined resource type without supplying a value for the `$pub_key`
 parameter will result in a compilation error. Because this resource requires
 a user's public key in order to correctly provide SSH access with public key
 authentication, this is the desired behavior.
@@ -194,7 +194,7 @@ authentication, this is the desired behavior.
     ensure => present,
     user   => $title,
     type   => 'ssh-rsa',
-    key    => $key,
+    key    => $pub_key,
   }
 ```
 
@@ -233,7 +233,7 @@ resources to manage the user's home directory and `.ssh` directory, your
 
 ```puppet
 define user_accounts::ssh_user (
-  $key,
+  $pub_key,
   $group   = undef,
   $shell   = undef,
   $comment = undef,
@@ -242,7 +242,7 @@ define user_accounts::ssh_user (
     ensure => present,
     user   => $title,
     type   => 'ssh-rsa',
-    key    => $key,
+    key    => $pub_key,
   }
   file { "/home/${title}/.ssh":
     ensure => directory,
@@ -459,7 +459,7 @@ class profile::base::dev_users {
   lookup(profile::base::dev_users::users).each |$user| {
     user_accounts::ssh_user { $user['title']:
         comment => $user['comment'],
-        key => $user['pub_key'],
+        pub_key => $user['pub_key'],
     }
   }
 }

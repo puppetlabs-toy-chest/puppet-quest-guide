@@ -30,7 +30,7 @@ different kind of system you need to manage.
 The concepts introduced in this quest mark an important transition in your
 progress from learning Puppet basics to understanding how to build these out
 into the higher level abstractions suitable for managing production
-infrastructure. This also means a shift in focus from well the well-defined
+infrastructure. This also means a shift in focus from the well-defined
 aspects of Puppet tools and syntax to more open-ended questions about what you
 should do with them.
 

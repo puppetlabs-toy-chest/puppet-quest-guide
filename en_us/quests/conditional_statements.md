@@ -159,11 +159,11 @@ beginning of your class should look like the following example:
 
 ```puppet
 class pasture (
-  $port              = '80',
-  $default_character = 'sheep',
-  $default_message   = '',
-  $config_file       = '/etc/pasture_config.yaml',
-  $sinatra_server    = 'webrick',
+  $port                = '80',
+  $default_character   = 'sheep',
+  $default_message     = '',
+  $pasture_config_file = '/etc/pasture_config.yaml',
+  $sinatra_server      = 'webrick',
 ){
 ```
 
@@ -344,10 +344,12 @@ Click on the name of the new user, then click the **Generate password reset**
 link. Copy the given link to a new browser tab and set the password to:
 **puppet**.
 
-Under the **Access Control** navigation bar, click the **User Roles** menu
-option. Click on the link for the **Operators** role. Select the **Learning**
-user from the dropdown menu, click the **Add user** button, and finally click
-the **Commit 1 change** button near the bottom right of the console screen.
+Return to the original PE console browser tab, and under the **Access Control**
+navigation bar, click the **User Roles** menu option. Click on the link for the
+**Operators** role. Select the **Learning** user from the dropdown menu, click
+the **Add user** button, and finally click the **Commit 1 change** button near
+the bottom right of the console screen. Close the new browser tab that was
+used to reset the user password.
 
 With this user configured, you can use the `puppet access` command to generate
 a token that will allow you to use the `puppet job` tool. We'll set the
