@@ -218,7 +218,7 @@ Giteaリポジトリのセットアップが完了したので、トレーニン
 
 <div class = "lvm-task-number"><p>タスク10:</p></div>
 
-`/root/control-repo`ディレクトリから以下のコマンドを実行し、Giteaにホストされたリポジトリをローカルリポジトリのアップストリームリモートとして設定します。ここで、`<gitea_name>`は、Gitea向けに選択したアカウント名で置き換えます。
+`/root/control-repo`ディレクトリから以下のコマンドを実行し、Giteaにホストされたリポジトリをローカルリポジトリのアップストリームリモートとして設定します。
 
     git remote add upstream http://localhost:3000/learning/control-repo.git
 
