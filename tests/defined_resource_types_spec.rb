@@ -35,7 +35,7 @@ describe _("Task 2:"), host: :localhost do
     file("#{MODULE_PATH}user_accounts/manifests/ssh_user.pp")
       .content
       .should match /define\s+user_accounts::ssh_user\s*\(\s+
-                      \$key,\s+
+                      \$pub_key,\s+
                       \$group\s+=\s+undef,\s+
                       \$shell\s+=\s+undef,\s+
                       \$comment\s+=\s+undef,\s+
@@ -112,7 +112,7 @@ describe _("Task 5:"), host: :localhost do
         \{\s+
         user_accounts::ssh_user\s+{\s+\$user\[(['"])title\1\]:\s+
         comment\s+=>\s+\$user\[(['"])comment\2\],\s+
-        key\s+=>\s+\$user\[(['"])pub_key\3\],\s+
+        pub_key\s+=>\s+\$user\[(['"])pub_key\3\],\s+
         \}\s+
         \}\s+
         \}/mx

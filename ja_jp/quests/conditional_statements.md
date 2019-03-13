@@ -102,11 +102,11 @@ Sinatraで使用するサーバをクラスパラメータを使って指定す�
 
 ```puppet
 class pasture (
-  $port              = '80',
-  $default_character = 'sheep',
-  $default_message   = '',
-  $config_file       = '/etc/pasture_config.yaml',
-  $sinatra_server    = 'webrick',
+  $port                = '80',
+  $default_character   = 'sheep',
+  $default_message     = '',
+  $pasture_config_file = '/etc/pasture_config.yaml',
+  $sinatra_server      = 'webrick',
 ){
 ```
 
