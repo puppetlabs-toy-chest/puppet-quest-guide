@@ -4,7 +4,7 @@
 
 このトラブルシューティングの最新バージョンについては、[GitHubリポジトリをチェックしてください](https://github.com/puppetlabs/puppet-quest-guide/blob/master/en_us/troubleshooting.md)。
 
-Learning VMのセットアップについては、[ビデオチュートリアルをご覧ください](https://youtu.be/51f5uEPoZns)。
+Learning VMのセットアップについては、[ビデオチュートリアルをご覧ください](https://youtu.be/Y0nsM4uG9pQ)。
 
 ### Learning VMのクエストガイドが見つからない
 
