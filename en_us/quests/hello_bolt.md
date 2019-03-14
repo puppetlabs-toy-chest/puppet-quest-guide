@@ -138,6 +138,6 @@ and Docker, as shown in this quest.
 
 ## Additional Resources
 
-* [Download Bolt](https://puppet.com/docs/bolt/latest/bolt_installing.html) on your own machine.
+* [Download Puppet Bolt](https://puppet.com/docs/bolt/latest/bolt_installing.html) on your own machine.
 * Read the Puppet Bolt [documentation](https://puppet.com/docs/bolt/latest/bolt.html) for more details about all of its use cases.
 * Dive deeper with a Puppet Bolt and Tasks [self-paced course](https://learn.puppet.com/course/puppet-orchestration-bolt-and-tasks) and learn how to manage nodes with Bolt, using it from the command-line and the Puppet Enterprise Console.
