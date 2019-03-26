@@ -28,9 +28,7 @@ this quest:
 Pre-built Bolt packages are available for various Red Hat Enterprise Linux,
 SUSE, Debian, Ubuntu, and Fedora distributions, as well as Windows and macOS.
 The Learning VM is based on a CentOS (Red Hat Enterprise Linux equivalent)
-7 image, so run the following commands to install Bolt:
-
-    rpm -Uvh https://yum.puppet.com/puppet6/puppet6-release-el-7.noarch.rpm
+7 image, so run the following command to install Bolt:
 
     yum install puppet-bolt
 
