@@ -3,7 +3,7 @@
 ## Release Notes
 
 ### 2.5.1
-  * Fix puppet-bolt package installation with host-only adapter
+  * Explain puppet-bolt package installation with host-only adapter
 
 ### 2.5.0
   * Updated to PE 2019.0.2
