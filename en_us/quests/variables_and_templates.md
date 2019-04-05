@@ -62,6 +62,10 @@ Let's start by setting up a few variables. We'll define the default
 character the cowsay application will use, the port we want to service to
 run on, and path of the configuration file.
 
+If you're not already in the modules directory, let's go a ahead and `cd` into it now.
+
+    cd /etc/puppetlabs/code/environments/production/modules
+
 Open your `init.pp` manifest.
 
     vim pasture/manifests/init.pp
