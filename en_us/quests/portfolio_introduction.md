@@ -40,7 +40,7 @@ for additional information of the entire suite of Puppet products.
 Bolt is an open-source remote task runner that automates the manual work that you do
 to maintain your infrastructure. Use Bolt to automate tasks that you need to
 perform on your infrastructure on an ad hoc basis, such as troubleshooting,
-deploying an applications, stopping and starting services, and upgrading a
+deploying an application, stopping and starting services, and upgrading a
 database schema. Bolt connects directly to remote nodes with SSH or WinRM, so
 you are not required to install any agent software.
 
