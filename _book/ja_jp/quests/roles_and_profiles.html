@@ -1,0 +1,691 @@
+
+<!DOCTYPE HTML>
+<html lang="ja_jp" >
+    <head>
+        <title>ロールとプロファイル · GitBook</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.1.1">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="hiera.html" />
+    
+    
+    <link rel="prev" href="the_forge.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    はじめに
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../SETUP.html">
+            
+                <a href="../SETUP.html">
+            
+                    
+                    セットアップ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">クエスト</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="welcome.html">
+            
+                <a href="welcome.html">
+            
+                    
+                    ようこそ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="portfolio_introduction.html">
+            
+                <a href="portfolio_introduction.html">
+            
+                    
+                    ポートフォリオの概要
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="hello_bolt.html">
+            
+                <a href="hello_bolt.html">
+            
+                    
+                    ハロー、Bolt
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="hello_puppet.html">
+            
+                <a href="hello_puppet.html">
+            
+                    
+                    ハロー、Puppet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="agent_run.html">
+            
+                <a href="agent_run.html">
+            
+                    
+                    Agentの実行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="manifests_and_classes.html">
+            
+                <a href="manifests_and_classes.html">
+            
+                    
+                    マニフェストとクラス
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.7" data-path="package_file_service.html">
+            
+                <a href="package_file_service.html">
+            
+                    
+                    パッケージファイルサービス
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.8" data-path="variables_and_templates.html">
+            
+                <a href="variables_and_templates.html">
+            
+                    
+                    変数とテンプレート
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.9" data-path="class_parameters.html">
+            
+                <a href="class_parameters.html">
+            
+                    
+                    クラスパラメータ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.10" data-path="facts.html">
+            
+                <a href="facts.html">
+            
+                    
+                    Facts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.11" data-path="conditional_statements.html">
+            
+                <a href="conditional_statements.html">
+            
+                    
+                    条件文
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.12" data-path="the_forge.html">
+            
+                <a href="the_forge.html">
+            
+                    
+                    Forge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.13" data-path="roles_and_profiles.html">
+            
+                <a href="roles_and_profiles.html">
+            
+                    
+                    ロールとプロファイル
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.14" data-path="hiera.html">
+            
+                <a href="hiera.html">
+            
+                    
+                    Hiera
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.15" data-path="defined_resource_types.html">
+            
+                <a href="defined_resource_types.html">
+            
+                    
+                    定義リソース型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.16" data-path="control_repository.html">
+            
+                <a href="control_repository.html">
+            
+                    
+                    コントロールリポジトリ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.17" data-path="puppetfile.html">
+            
+                <a href="puppetfile.html">
+            
+                    
+                    Puppetfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">付録</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="afterword.html">
+            
+                <a href="afterword.html">
+            
+                    
+                    あとがき
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../troubleshooting.html">
+            
+                <a href="../troubleshooting.html">
+            
+                    
+                    トラブルシューティング
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../releasenotes.html">
+            
+                <a href="../releasenotes.html">
+            
+                    
+                    リリースノート
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" >
+            
+                <a target="_blank" href="https://puppet.com/legal/privacy">
+            
+                    
+                    プライバシーポリシー
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >ロールとプロファイル</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>Quest Guide <a href="../releasenotes.html">v2.5.1</a></p>
+<h1 id="&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;">&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;</h1>
+<h2 id="&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x306E;&#x76EE;&#x7684;">&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x306E;&#x76EE;&#x7684;</h2>
+<ul>
+<li>&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x3092;&#x7406;&#x89E3;&#x3059;&#x308B;&#x3002;</li>
+<li>&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x30E9;&#x30C3;&#x30D4;&#x30F3;&#x30B0;&#x3057;&#x3001;&#x30B5;&#x30A4;&#x30C8;&#x30A4;&#x30F3;&#x30D5;&#x30E9;&#x306B;&#x56FA;&#x6709;&#x306E;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;<em>&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;</em>&#x30AF;&#x30E9;&#x30B9;&#x3092;
+&#x4F5C;&#x6210;&#x3059;&#x308B;&#x3002;</li>
+<li><em>&#x30ED;&#x30FC;&#x30EB;</em>&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x3001;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30AF;&#x30E9;&#x30B9;&#x306E;&#x7D44;&#x307F;&#x5408;&#x308F;&#x305B;&#x3092;&#x901A;&#x3058;&#x3066;&#x3001;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x306E;&#x8A2D;&#x5B9A;&#x5168;&#x4F53;&#x3092;
+&#x5B9A;&#x7FA9;&#x3059;&#x308B;&#x3002;</li>
+<li>&#x6B63;&#x898F;&#x8868;&#x73FE;&#x3092;&#x7528;&#x3044;&#x3066;&#x3001;&#x30CE;&#x30FC;&#x30C9;&#x5B9A;&#x7FA9;&#x3092;&#x3088;&#x308A;&#x67D4;&#x8EDF;&#x306B;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x65B9;&#x6CD5;&#x3092;
+&#x5B66;&#x3076;&#x3002;</li>
+</ul>
+<h2 id="&#x306F;&#x3058;&#x3081;&#x306B;">&#x306F;&#x3058;&#x3081;&#x306B;</h2>
+<p>&#x524D;&#x56DE;&#x306E;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3067;&#x306F;&#x3001;&#x5358;&#x4E00;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3067;&#x306E;Pasture&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x7BA1;&#x7406;&#x304B;&#x3089;&#x3001;<code>pasture-app.puppet.vm</code>&#x304A;&#x3088;&#x3073;<code>pasture-db.puppet.vm</code>&#x30DB;&#x30B9;&#x30C8;&#x3067;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x5206;&#x6563;&#x306B;&#x79FB;&#x884C;&#x3057;&#x307E;&#x3057;&#x305F;&#x3002;&#x8A2D;&#x5B9A;&#x3057;&#x305F;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30B5;&#x30FC;&#x30D0;&#x3068;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x30B5;&#x30FC;&#x30D0;&#x306F;&#x3001;&#x30A4;&#x30F3;&#x30D5;&#x30E9;&#x5185;&#x3067;&#x305D;&#x308C;&#x305E;&#x308C;&#x7570;&#x306A;&#x308B;&#x5F79;&#x5272;&#x3092;&#x679C;&#x305F;&#x3057;&#x3001;Puppet&#x5185;&#x3067;&#x306E;&#x5206;&#x985E;&#x304C;&#x305D;&#x308C;&#x305E;&#x308C;&#x7570;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>Puppet&#x3067;&#x69CB;&#x6210;&#x3057;&#x305F;&#x30A4;&#x30F3;&#x30D5;&#x30E9;&#x30B9;&#x30C8;&#x30E9;&#x30AF;&#x30C1;&#x30E3;&#x306E;&#x898F;&#x6A21;&#x3068;&#x8907;&#x96D1;&#x3055;&#x304C;&#x5897;&#x3059;&#x306B;&#x3064;&#x308C;&#x3066;&#x3001;&#x3088;&#x308A;&#x591A;&#x69D8;&#x306A;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3092;&#x7BA1;&#x7406;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x751F;&#x3058;&#x307E;&#x3059;&#x3002;&#x305D;&#x3046;&#x3057;&#x305F;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x306E;&#x30AF;&#x30E9;&#x30B9;&#x3068;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x3059;&#x3079;&#x3066;<code>site.pp</code>&#x30DE;&#x30CB;&#x30D5;&#x30A7;&#x30B9;&#x30C8;&#x3067;&#x76F4;&#x63A5;&#x5B9A;&#x7FA9;&#x3059;&#x308B;&#x306E;&#x306F;&#x3001;&#x30B9;&#x30B1;&#x30FC;&#x30EB;&#x30A2;&#x30C3;&#x30D7;&#x306E;&#x65B9;&#x6CD5;&#x3068;&#x3057;&#x3066;&#x3042;&#x307E;&#x308A;&#x52B9;&#x679C;&#x7684;&#x3067;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;<em>&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;</em>&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x3092;&#x4F7F;&#x3048;&#x3070;&#x3001;&#x4E00;&#x8CAB;&#x3057;&#x305F;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x5F62;&#x5F0F;&#x306E;&#x65B9;&#x6CD5;&#x3067;&#x3001;Puppet&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3067;&#x63D0;&#x4F9B;&#x3055;&#x308C;&#x308B;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x307E;&#x3068;&#x3081;&#x3001;&#x7BA1;&#x7406;&#x304C;&#x5FC5;&#x8981;&#x306A;&#x3055;&#x307E;&#x3056;&#x307E;&#x306A;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3092;&#x5B9A;&#x7FA9;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3067;&#x8AAC;&#x660E;&#x3059;&#x308B;&#x30B3;&#x30F3;&#x30BB;&#x30D7;&#x30C8;&#x306F;&#x3001;Puppet&#x306E;&#x57FA;&#x790E;&#x306E;&#x5B66;&#x7FD2;&#x304B;&#x3089;&#x3001;&#x305D;&#x308C;&#x3092;&#x3082;&#x3068;&#x306B;&#x672C;&#x7A3C;&#x50CD;&#x30A4;&#x30F3;&#x30D5;&#x30E9;&#x306E;&#x7BA1;&#x7406;&#x306B;&#x9069;&#x3057;&#x305F;&#x9AD8;&#x6B21;&#x306E;&#x62BD;&#x8C61;&#x5316;&#x3092;&#x69CB;&#x7BC9;&#x3059;&#x308B;&#x65B9;&#x6CD5;&#x306E;&#x7406;&#x89E3;&#x3078;&#x3068;&#x524D;&#x9032;&#x3059;&#x308B;&#x3046;&#x3048;&#x3067;&#x3001;&#x91CD;&#x8981;&#x306A;&#x79FB;&#x884C;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x3068;&#x306A;&#x308B;&#x3082;&#x306E;&#x3067;&#x3059;&#x3002;&#x307E;&#x305F;&#x3001;&#x5341;&#x5206;&#x306B;&#x5B9A;&#x7FA9;&#x3055;&#x308C;&#x305F;Puppet&#x306E;&#x30C4;&#x30FC;&#x30EB;&#x3084;&#x69CB;&#x6587;&#x898F;&#x5247;&#x304B;&#x3089;&#x3001;&#x305D;&#x308C;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x4F55;&#x3092;&#x3059;&#x308B;&#x3079;&#x304D;&#x304B;&#x3068;&#x3044;&#x3046;&#x3001;&#x3088;&#x308A;&#x7B54;&#x3048;&#x306E;&#x5E45;&#x306E;&#x5E83;&#x3044;&#x7591;&#x554F;&#x3078;&#x3068;&#x7126;&#x70B9;&#x304C;&#x79FB;&#x308B;&#x3053;&#x3068;&#x3082;&#x610F;&#x5473;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002; </p>
+<p>&#x3053;&#x306E;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3067;&#x63D0;&#x793A;&#x3059;&#x308B;&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x306F;&#x3001;Puppet&#x6700;&#x5927;&#x7D1A;&#x306E;&#x9867;&#x5BA2;&#x306B;&#x554F;&#x984C;&#x306A;&#x304F;&#x63A1;&#x7528;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x307E;&#x305F;&#x3001;Puppet&#x793E;&#x5185;&#x306E;&#x30A4;&#x30F3;&#x30D5;&#x30E9;&#x7BA1;&#x7406;&#x306B;&#x3082;&#x4F7F;&#x7528;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x3053;&#x3053;&#x3067;&#x63D0;&#x793A;&#x3059;&#x308B;&#x4F8B;&#x306F;&#x3001;Puppet&#x30B3;&#x30FC;&#x30C9;&#x306E;&#x9AD8;&#x6B21;&#x306E;&#x62BD;&#x8C61;&#x5316;&#x306B;&#x3088;&#x308A;&#x3001;Puppet&#x30B3;&#x30FC;&#x30C9;&#x306E;&#x7C21;&#x6F54;&#x306A;&#x8868;&#x73FE;&#x306E;&#x57FA;&#x790E;&#x3092;&#x7DAD;&#x6301;&#x3057;&#x306A;&#x304C;&#x3089;&#x3001;&#x591A;&#x7A2E;&#x591A;&#x69D8;&#x306A;&#x591A;&#x304F;&#x306E;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x306E;&#x7BA1;&#x7406;&#x30BF;&#x30B9;&#x30AF;&#x3092;&#x5358;&#x7D14;&#x5316;&#x3067;&#x304D;&#x308B;&#x3053;&#x3068;&#x3092;&#x793A;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x30E6;&#x30FC;&#x30B6;&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x30CB;&#x30FC;&#x30BA;&#x306B;&#x3088;&#x3063;&#x3066;&#x306F;&#x3001;&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x3092;&#x4FEE;&#x6B63;&#x307E;&#x305F;&#x306F;&#x653E;&#x68C4;&#x3059;&#x308B;&#x307B;&#x3046;&#x304C;&#x3001;&#x3053;&#x306E;&#x7A2E;&#x306E;&#x62BD;&#x8C61;&#x5316;&#x3092;&#x5B9F;&#x73FE;&#x3057;&#x3084;&#x3059;&#x3044;&#x3053;&#x3068;&#x304C;&#x308F;&#x304B;&#x308B;&#x304B;&#x3082;&#x3057;&#x308C;&#x307E;&#x305B;&#x3093;&#x3002;&#x3057;&#x304B;&#x3057;&#x3001;&#x6700;&#x7D42;&#x7684;&#x306B;&#x305D;&#x3046;&#x3057;&#x305F;&#x7D50;&#x8AD6;&#x306B;&#x9054;&#x3059;&#x308B;&#x5834;&#x5408;&#x3067;&#x3082;&#x3001;&#x305D;&#x306E;&#x9032;&#x8DEF;&#x306E;&#x5909;&#x66F4;&#x306F;&#x3001;&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x304C;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x9AD8;&#x6B21;&#x306E;&#x62BD;&#x8C61;&#x5316;&#x3092;&#x5341;&#x5206;&#x306B;&#x7406;&#x89E3;&#x3057;&#x305F;&#x3046;&#x3048;&#x3067;&#x3001;&#x305D;&#x308C;&#x3092;&#x6839;&#x62E0;&#x3068;&#x3057;&#x3066;&#x5224;&#x65AD;&#x3059;&#x308B;&#x3079;&#x304D;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x6E96;&#x5099;&#x304C;&#x3067;&#x304D;&#x305F;&#x3089;&#x3001;&#x4EE5;&#x4E0B;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x5165;&#x529B;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;</p>
+<pre><code>quest begin roles_and_profiles
+</code></pre><h2 id="&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3068;&#x306F;&#xFF1F;">&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3068;&#x306F;&#xFF1F;</h2>
+<p>&#x3053;&#x306E;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3067;&#x6271;&#x3046;<em>&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;</em>&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x306F;&#x3001;Puppet&#x306E;&#x30A8;&#x30B3;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x306B;&#x304A;&#x3051;&#x308B;&#x65B0;&#x3057;&#x3044;&#x30C4;&#x30FC;&#x30EB;&#x3084;&#x6A5F;&#x80FD;&#x3067;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;&#x3080;&#x3057;&#x308D;&#x3001;Puppet&#x3067;&#x69CB;&#x6210;&#x3057;&#x305F;&#x30A4;&#x30F3;&#x30D5;&#x30E9;&#x306E;&#x6210;&#x9577;&#x306B;&#x5FDC;&#x3058;&#x3066;&#x3001;&#x3059;&#x3067;&#x306B;&#x7D39;&#x4ECB;&#x3057;&#x305F;&#x30C4;&#x30FC;&#x30EB;&#x3092;&#x6D3B;&#x7528;&#x3057;&#x3066;&#x7DAD;&#x6301;&#x3084;&#x7BA1;&#x7406;&#x3092;&#x53EF;&#x80FD;&#x306B;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x624B;&#x6CD5;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306B;&#x3064;&#x3044;&#x3066;&#x3001;&#x307E;&#x305A;<em>&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;</em>&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;&#x3082;&#x306E;&#x304B;&#x3089;&#x8AAC;&#x660E;&#x3057;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x306F;&#x3001;Pasture&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3084;Forge&#x304B;&#x3089;&#x30C0;&#x30A6;&#x30F3;&#x30ED;&#x30FC;&#x30C9;&#x3057;&#x305F;PostgreSQL&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3068;&#x540C;&#x3058;&#x304F;&#x3001;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x4E0A;&#x306B;&#x3042;&#x308B;&#x7279;&#x5B9A;&#x306E;&#x6280;&#x8853;&#x3092;&#x69CB;&#x6210;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x3082;&#x306E;&#x3067;&#x3059;&#x3002;&#x3053;&#x308C;&#x3089;&#x306E;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x304C;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x30AF;&#x30E9;&#x30B9;&#x306F;&#x3001;&#x67D4;&#x8EDF;&#x6027;&#x304C;&#x5F97;&#x3089;&#x308C;&#x308B;&#x3088;&#x3046;&#x306B;&#x8A18;&#x8FF0;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3067;&#x63D0;&#x4F9B;&#x3055;&#x308C;&#x308B;API&#x3092;&#x4F7F;&#x3048;&#x3070;&#x3001;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x6280;&#x8853;&#x3092;&#x3069;&#x306E;&#x3088;&#x3046;&#x306B;&#x8A2D;&#x5B9A;&#x3059;&#x308C;&#x3070;&#x3088;&#x3044;&#x304B;&#x3001;&#x6B63;&#x78BA;&#x306B;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x3092;&#x4F7F;&#x3048;&#x3070;&#x3001;&#x30A4;&#x30F3;&#x30D5;&#x30E9;&#x5185;&#x306E;&#x7279;&#x5B9A;&#x306E;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306B;&#x5F93;&#x3063;&#x3066;&#x3001;&#x3053;&#x306E;&#x3088;&#x3046;&#x306A;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3092;&#x4E00;&#x8CAB;&#x3057;&#x305F;&#x65B9;&#x6CD5;&#x3067;&#x4F53;&#x7CFB;&#x7684;&#x306B;&#x6574;&#x7406;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p><em>&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;</em>&#x306F;&#x3001;1&#x3064;&#x307E;&#x305F;&#x306F;&#x8907;&#x6570;&#x306E;&#x95A2;&#x9023;&#x3059;&#x308B;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3092;&#x5BA3;&#x8A00;&#x3057;&#x3001;&#x5FC5;&#x8981;&#x306B;&#x5FDC;&#x3058;&#x3066;&#x305D;&#x306E;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;&#x3082;&#x306E;&#x3067;&#x3059;&#x3002;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x4E0A;&#x306E;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30BB;&#x30C3;&#x30C8;&#x306F;&#x3001;&#x30D3;&#x30B8;&#x30CD;&#x30B9;&#x4E0A;&#x306E;&#x30ED;&#x30FC;&#x30EB;&#x3092;&#x6E80;&#x305F;&#x3059;&#x5FC5;&#x8981;&#x306E;&#x3042;&#x308B;&#x6280;&#x8853;&#x30B9;&#x30BF;&#x30C3;&#x30AF;&#x3092;&#x5B9A;&#x7FA9;&#x304A;&#x3088;&#x3073;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;&#x3002; </p>
+<p><em>&#x30ED;&#x30FC;&#x30EB;</em>&#x306F;&#x3001;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x5168;&#x4F53;&#x306E;&#x3042;&#x308B;&#x3079;&#x304D;&#x72B6;&#x614B;&#x3092;&#x5B9A;&#x7FA9;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x3001;1&#x3064;&#x307E;&#x305F;&#x306F;&#x8907;&#x6570;&#x306E;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x7D44;&#x307F;&#x5408;&#x308F;&#x305F;&#x3082;&#x306E;&#x3067;&#x3059;&#x3002;&#x30ED;&#x30FC;&#x30EB;&#x306F;&#x3001;&#x30B5;&#x30FC;&#x30D0;&#x306E;&#x30D3;&#x30B8;&#x30CD;&#x30B9;&#x4E0A;&#x306E;&#x76EE;&#x7684;&#x3068;&#x5BFE;&#x5FDC;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x3064;&#x307E;&#x308A;&#x3001;CTO&#x306B;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x306E;&#x76EE;&#x7684;&#x3092;&#x554F;&#x308F;&#x308C;&#x305F;&#x5834;&#x5408;&#x306B;&#x306F;&#x3001;&#x3053;&#x306E;&#x30ED;&#x30FC;&#x30EB;&#x304C;&#x6982;&#x8981;&#x3092;&#x793A;&#x3059;&#x7B54;&#x3048;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;&#x4F8B;&#x3048;&#x3070;&#x3001;&quot;Pasture&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x305F;&#x3081;&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x30B5;&#x30FC;&#x30D0;&quot;&#x306A;&#x3069;&#x304C;&#x3001;&#x305D;&#x308C;&#x306B;&#x3042;&#x305F;&#x308A;&#x307E;&#x3059;&#x3002;&#x305F;&#x3060;&#x3057;&#x3001;&#x30ED;&#x30FC;&#x30EB;&#x306F;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x69CB;&#x6210;&#x3057;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;<strong>&#x3060;&#x3051;</strong>&#x3067;&#x3059;&#x3002;&#x30ED;&#x30FC;&#x30EB;&#x81EA;&#x4F53;&#x306B;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002; </p>
+<h2 id="&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x8A18;&#x8FF0;">&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x8A18;&#x8FF0;</h2>
+<p>&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x4F7F;&#x7528;&#x306F;&#x8A2D;&#x8A08;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x3067;&#x3042;&#x308A;&#x3001;Puppet&#x30BD;&#x30FC;&#x30B9;&#x30B3;&#x30FC;&#x30C9;&#x306B;&#x66F8;&#x304D;&#x8FBC;&#x3080;&#x3082;&#x306E;&#x3067;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;Puppet&#x69CB;&#x6587;&#x89E3;&#x6790;&#x30C4;&#x30FC;&#x30EB;&#x306E;&#x89B3;&#x70B9;&#x304B;&#x3089;&#x8A00;&#x3048;&#x3070;&#x3001;&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x5B9A;&#x7FA9;&#x3059;&#x308B;&#x30AF;&#x30E9;&#x30B9;&#x306F;&#x3001;&#x4ED6;&#x306E;&#x30AF;&#x30E9;&#x30B9;&#x3068;&#x4F55;&#x3082;&#x5909;&#x308F;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<div class="lvm-task-number"><p>&#x30BF;&#x30B9;&#x30AF;1:</p></div>
+
+<p>&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;&#x306B;&#x306F;&#x3001;&#x65B0;&#x3057;&#x3044;<code>profile</code>&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3092;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x30D1;&#x30B9;&#x306B;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>mkdir -p profile/manifests
+</code></pre><p>&#x307E;&#x305A;&#x3001;Pasture&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306B;&#x95A2;&#x9023;&#x3059;&#x308B;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30DA;&#x30A2;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30B5;&#x30FC;&#x30D0;&#x306E;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x306F;&#x3001;2&#x3064;&#x306E;&#x7570;&#x306A;&#x308B;&#x8A2D;&#x5B9A;&#x3092;&#x6761;&#x4EF6;&#x6587;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x7BA1;&#x7406;&#x3057;&#x307E;&#x3059;&#x3002;&apos;large&apos;&#x30C7;&#x30D7;&#x30ED;&#x30A4;&#x306F;&#x5916;&#x90E8;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x306B;&#x63A5;&#x7D9A;&#x3057;&#x3001;&apos;small&apos;&#x30C7;&#x30D7;&#x30ED;&#x30A4;&#x306F;&#x57FA;&#x672C;&#x7684;&#x306A;&apos;cowsay&apos;&#x30A8;&#x30F3;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x306E;&#x307F;&#x3092;&#x63D0;&#x4F9B;&#x3057;&#x307E;&#x3059;&#x3002;&#x7B2C;2&#x306E;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306F;&#x3001;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30B5;&#x30FC;&#x30D0;&#x306E;&apos;large&apos;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x306B;&#x5BFE;&#x5FDC;&#x3059;&#x308B; PostgreSQL&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x3092;&#x7BA1;&#x7406;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x308C;&#x3089;&#x3059;&#x3079;&#x3066;&#x306E;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x304C;Pasture&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306B;&#x95A2;&#x9023;&#x3059;&#x308B;&#x3053;&#x3068;&#x3092;&#x660E;&#x78BA;&#x306B;&#x793A;&#x3059;&#x305F;&#x3081;&#x3001;&#x3053;&#x308C;&#x3089;&#x306E;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;<code>profile/manifests</code>&#x5185;&#x306E; <code>pasture</code> &#x30B5;&#x30D6;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306B;&#x7F6E;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x305D;&#x306E;&#x30B5;&#x30D6;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>mkdir profile/manifests/pasture
+</code></pre><div class="lvm-task-number"><p>&#x30BF;&#x30B9;&#x30AF;2:</p></div>
+
+<p>&#x6B21;&#x306B;&#x3001;Pasture&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>vim profile/manifests/pasture/app.pp
+</code></pre><p>&#x3053;&#x3053;&#x3067;&#x3001;<code>profile::pasture::app</code>&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x5B9A;&#x7FA9;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x306E;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x30C4;&#x30FC;&#x30EB;&#x3067;&#x306F;&#x3001;<code>pasture-app-small.puppet.vm</code>&#x304A;&#x3088;&#x3073;<code>pasture-app-large.puppet.vm</code>&#x30CE;&#x30FC;&#x30C9;&#x304C;&#x4F5C;&#x6210;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x30CE;&#x30FC;&#x30C9;&#x540D;&#x306B;&#x57FA;&#x3065;&#x3044;&#x3066;&#x9069;&#x5207;&#x306A;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x6C7A;&#x5B9A;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x6761;&#x4EF6;&#x6587;&#x3092;&#x7528;&#x3044;&#x3066;&#x3001;&#x30CE;&#x30FC;&#x30C9;&#x306E;<code>fqdn</code> fact&#x306B;&#x6587;&#x5B57;&#x5217;&apos;large&apos;&#x307E;&#x305F;&#x306F;&apos;small&apos;&#x304C;&#x542B;&#x307E;&#x308C;&#x3066;&#x3044;&#x308B;&#x304B;&#x3069;&#x3046;&#x304B;&#x306B;&#x5FDC;&#x3058;&#x3066;&#x3001;<code>$default_character</code>&#x304A;&#x3088;&#x3073;<code>$db</code>&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;&#x3002;&#x307E;&#x305F;&#x3001;<code>else</code>&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x3001;<code>fqdn</code>&#x5909;&#x6570;&#x304C;&apos;small&apos;&#x307E;&#x305F;&#x306F;&apos;large&apos;&#x306E;&#x3069;&#x3061;&#x3089;&#x3068;&#x3082;&#x4E00;&#x81F4;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#x306B;&#x3001;&#x9069;&#x5207;&#x306A;&#x30A8;&#x30E9;&#x30FC;&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;&#x3092;&#x8868;&#x793A;&#x3057;&#x3066;&#x5931;&#x6557;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">class</span> <span class="hljs-title">profile::pasture::app</span> {
+  if <span class="hljs-variable">$facts</span>[<span class="hljs-string">&apos;fqdn&apos;</span>] =~ <span class="hljs-string">&apos;large&apos;</span> {
+    <span class="hljs-variable">$default_character</span> = <span class="hljs-string">&apos;elephant&apos;</span>
+    <span class="hljs-variable">$db</span>                = <span class="hljs-string">&apos;postgres://pasture:m00m00@pasture-db.puppet.vm/pasture&apos;</span>
+  } elsif <span class="hljs-variable">$facts</span>[<span class="hljs-string">&apos;fqdn&apos;</span>] =~ <span class="hljs-string">&apos;small&apos;</span> {
+    <span class="hljs-variable">$default_character</span> = <span class="hljs-string">&apos;cow&apos;</span>
+    <span class="hljs-variable">$db</span>                = <span class="hljs-string">&apos;none&apos;</span>
+  } <span class="hljs-keyword">else</span> {
+    fail(<span class="hljs-string">&quot;The ${facts[&apos;fqdn&apos;]} node name must match &apos;large&apos; or &apos;small&apos;.&quot;</span>)
+  }
+  <span class="hljs-keyword">class</span> { <span class="hljs-string">&apos;pasture&apos;</span>:
+    <span class="hljs-attr">default_message</span>   =&gt; <span class="hljs-string">&apos;Hello Puppet!&apos;</span>,
+    <span class="hljs-attr">sinatra_server</span>    =&gt; <span class="hljs-string">&apos;thin&apos;</span>,
+    <span class="hljs-attr">default_character</span> =&gt; <span class="hljs-variable">$default_character</span>,
+    <span class="hljs-attr">db</span>                =&gt; <span class="hljs-variable">$db</span>,
+  }
+}
+</code></pre>
+<div class="lvm-task-number"><p>&#x30BF;&#x30B9;&#x30AF;3:</p></div>
+
+<p>&#x6B21;&#x306B;&#x3001;<code>pasture::db</code>&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x7528;&#x3044;&#x3066;&#x3001;Pasture&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x306E;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>vim profile/manifests/pasture/db.pp
+</code></pre><p>&#x3053;&#x3053;&#x3067;&#x306F;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x30AB;&#x30B9;&#x30BF;&#x30DE;&#x30A4;&#x30BA;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;<code>include</code>&#x69CB;&#x6587;&#x3092;&#x4F7F;&#x3063;&#x3066;<code>pasture::db</code>&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x5BA3;&#x8A00;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">class</span> <span class="hljs-title">profile::pasture::db</span> {
+  include pasture::db
+}
+</code></pre>
+<p>&#x3053;&#x308C;&#x3089;&#x306E;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306F;&#x3001;Pasture&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306B;&#x76F4;&#x63A5;&#x95A2;&#x9023;&#x3059;&#x308B;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306E;&#x8A2D;&#x5B9A;&#x3092;&#x5B9A;&#x7FA9;&#x3059;&#x308B;&#x3082;&#x306E;&#x3067;&#x3059;&#x304C;&#x3001;&#x4E00;&#x822C;&#x306B;&#x306F;&#x3001;&#x305D;&#x306E;&#x30D3;&#x30B8;&#x30CD;&#x30B9;&#x4E0A;&#x306E;&#x30ED;&#x30FC;&#x30EB;&#x306B;&#x76F4;&#x63A5;&#x95A2;&#x9023;&#x3057;&#x306A;&#x3044;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x8981;&#x7D20;&#x3092;&#x7BA1;&#x7406;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;1&#x3064;&#x306E;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x306B;&#x306F;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3001;DHCP&#x8A2D;&#x5B9A;&#x3001;&#x30D5;&#x30A1;&#x30A4;&#x30A2;&#x30A6;&#x30A9;&#x30FC;&#x30EB;&#x306E;&#x30EB;&#x30FC;&#x30EB;&#x3001;NTP&#x306A;&#x3069;&#x3092;&#x7BA1;&#x7406;&#x3059;&#x308B;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x542B;&#x3081;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x3089;&#x306E;&#x30AF;&#x30E9;&#x30B9;&#x306F;&#x3001;&#x30A4;&#x30F3;&#x30D5;&#x30E9;&#x5185;&#x306E;&#x591A;&#x304F;&#x306E;&#x3001;&#x307E;&#x305F;&#x306F;&#x3059;&#x3079;&#x3066;&#x306E;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x306B;&#x9069;&#x7528;&#x3055;&#x308C;&#x308B;&#x305F;&#x3081;&#x3001;&#x901A;&#x5E38;&#x306F;<code>base</code>&#x30B5;&#x30D6;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306B;&#x7F6E;&#x304B;&#x308C;&#x307E;&#x3059;&#x3002;&#x57FA;&#x672C;&#x7684;&#x306A;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x4F8B;&#x3092;&#x793A;&#x3059;&#x305F;&#x3081;&#x306B;&#x3001;&#x5148;&#x307B;&#x3069;&#x4F5C;&#x6210;&#x3057;&#x305F;<code>motd</code>&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x30E9;&#x30C3;&#x30D4;&#x30F3;&#x30B0;&#x3059;&#x308B;<code>profile::base::motd</code>&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002; </p>
+<div class="lvm-task-number"><p>&#x30BF;&#x30B9;&#x30AF;4:</p></div>
+
+<p><code>profile</code>&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x306E;<code>manifests</code>&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306B;&#x3001;<code>base</code>&#x30B5;&#x30D6;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>mkdir profile/manifests/base
+</code></pre><p>&#x6B21;&#x306B;&#x3001;<code>profile::base::motd</code>&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x5B9A;&#x7FA9;&#x3059;&#x308B;&#x30DE;&#x30CB;&#x30D5;&#x30A7;&#x30B9;&#x30C8;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>vim profile/manifests/base/motd.pp
+</code></pre><p><code>profile::pasture::db</code>&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30AF;&#x30E9;&#x30B9;&#x3068;&#x540C;&#x69D8;&#x3001;<code>profile::base::motd</code>&#x30AF;&#x30E9;&#x30B9;&#x306F;&#x3001;<code>motd</code>&#x30AF;&#x30E9;&#x30B9;&#x306E;<code>include</code>&#x6587;&#x3092;&#x6301;&#x3064;&#x30E9;&#x30C3;&#x30D1;&#x30FC;&#x30AF;&#x30E9;&#x30B9;&#x3067;&#x3059;&#x3002;</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">class</span> <span class="hljs-title">profile::base::motd</span> {
+  include motd
+}
+</code></pre>
+<p>&#x30E9;&#x30C3;&#x30D1;&#x30FC;&#x30AF;&#x30E9;&#x30B9;&#x306E;&#x8A18;&#x8FF0;&#x306F;&#x3001;&#x6700;&#x521D;&#x306E;&#x3046;&#x3061;&#x306F;&#x5FC5;&#x8981;&#x4EE5;&#x4E0A;&#x306B;&#x8907;&#x96D1;&#x306B;&#x898B;&#x3048;&#x308B;&#x304B;&#x3082;&#x3057;&#x308C;&#x307E;&#x305B;&#x3093;&#x3002;&#x7279;&#x306B;<code>motd</code>&#x3084;<code>pasture::db</code>&#x3068;&#x3044;&#x3063;&#x305F;&#x30B7;&#x30F3;&#x30D7;&#x30EB;&#x306A;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x30AF;&#x30E9;&#x30B9;&#x3067;&#x306F;&#x3001;&#x305D;&#x306E;&#x8907;&#x96D1;&#x3055;&#x304C;&#x76EE;&#x7ACB;&#x3064;&#x304B;&#x3082;&#x3057;&#x308C;&#x307E;&#x305B;&#x3093;&#x304C;&#x3001;&#x3053;&#x308C;&#x306B;&#x3088;&#x308A;&#x5F97;&#x3089;&#x308C;&#x308B;&#x4E00;&#x8CAB;&#x6027;&#x306B;&#x306F;&#x3001;&#x30E9;&#x30C3;&#x30D1;&#x30FC;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x624B;&#x9593;&#x3092;&#x4E0A;&#x56DE;&#x308B;&#x4FA1;&#x5024;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30AF;&#x30E9;&#x30B9;&#x306F;&#x3001;&#x30B5;&#x30A4;&#x30C8;&#x30A4;&#x30F3;&#x30D5;&#x30E9;&#x5185;&#x3067;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x3069;&#x306E;&#x3088;&#x3046;&#x306B;&#x8A2D;&#x5B9A;&#x3059;&#x308B;&#x304B;&#x3092;&#x6B63;&#x78BA;&#x306B;&#x793A;&#x3059;&#x552F;&#x4E00;&#x306E;&#x60C5;&#x5831;&#x6E90;&#x3067;&#x3059;&#x3002;&#x4F8B;&#x3048;&#x3070;&#x3001;MOTD&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x306B;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x8FFD;&#x52A0;&#x3059;&#x308B;&#x5834;&#x5408;&#x306B;&#x3001;&#x5358;&#x4E00;&#x306E;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30AF;&#x30E9;&#x30B9;&#x3067;&#x305D;&#x306E;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x7C21;&#x5358;&#x306B;&#x8A2D;&#x5B9A;&#x3057;&#x3001;&#x305D;&#x306E;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x542B;&#x3080;&#x30ED;&#x30FC;&#x30EB;&#x3092;&#x6301;&#x3064;&#x3059;&#x3079;&#x3066;&#x306E;&#x30CE;&#x30FC;&#x30C9;&#x306B;&#x5909;&#x66F4;&#x3092;&#x52A0;&#x3048;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x4E00;&#x65B9;&#x3001;&#x30ED;&#x30FC;&#x30EB;&#x3084;&#x30CE;&#x30FC;&#x30C9;&#x30EC;&#x30D9;&#x30EB;&#x3067;&#x500B;&#x5225;&#x306B;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;&#x5834;&#x5408;&#x306F;&#x3001;&#x3059;&#x3079;&#x3066;&#x306E;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3067;&#x5909;&#x66F4;&#x3092;&#x7E70;&#x308A;&#x8FD4;&#x3059;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x308C;&#x3067;&#x3001;&#x3044;&#x304F;&#x3064;&#x304B;&#x306E;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x308A;&#x307E;&#x3057;&#x305F;&#x3002;&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306F;&#x3001;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x4E0A;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x3069;&#x306E;&#x3088;&#x3046;&#x306B;&#x8A2D;&#x5B9A;&#x3059;&#x3079;&#x304D;&#x304B;&#x3092;&#x5B9A;&#x7FA9;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x6B21;&#x306E;&#x30B9;&#x30C6;&#x30C3;&#x30D7;&#x306F;&#x3001;&#x305D;&#x308C;&#x3089;&#x3092;&#x7D44;&#x307F;&#x5408;&#x308F;&#x305B;&#x3066;&#x30ED;&#x30FC;&#x30EB;&#x306B;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3059;&#x3002;</p>
+<h2 id="&#x30ED;&#x30FC;&#x30EB;&#x306E;&#x8A18;&#x8FF0;">&#x30ED;&#x30FC;&#x30EB;&#x306E;&#x8A18;&#x8FF0;</h2>
+<p>&#x30ED;&#x30FC;&#x30EB;&#x306F;&#x3001;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x7D44;&#x307F;&#x5408;&#x308F;&#x305B;&#x3001;Puppet&#x3067;&#x7BA1;&#x7406;&#x3059;&#x308B;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x4E0A;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x30BB;&#x30C3;&#x30C8;&#x5168;&#x4F53;&#x3092;&#x5B9A;&#x7FA9;&#x3059;&#x308B;&#x3082;&#x306E;&#x3067;&#x3059;&#x3002;&#x30ED;&#x30FC;&#x30EB;&#x306F;&#x3001;&#x305D;&#x306E;&#x30ED;&#x30FC;&#x30EB;&#x3092;&#x69CB;&#x6210;&#x3059;&#x308B;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30AF;&#x30E9;&#x30B9;&#x306E;&#x30EA;&#x30B9;&#x30C8;&#x3092;&#x30D7;&#x30EB;&#x30A4;&#x30F3;&#x3059;&#x308B; <code>include</code>&#x6587;&#x306E;&#x307F;&#x3067;&#x69CB;&#x6210;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;&#x307E;&#x305F;&#x3001;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x306F;&#x306A;&#x3044;&#x30AF;&#x30E9;&#x30B9;&#x3084;&#x500B;&#x3005;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3092;&#x76F4;&#x63A5;&#x5BA3;&#x8A00;&#x3059;&#x308B;&#x3053;&#x3068;&#x306F;&#x3067;&#x304D;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<p>&#x30ED;&#x30FC;&#x30EB;&#x306B;&#x306F;&#x3001;&#x305D;&#x306E;&#x30ED;&#x30FC;&#x30EB;&#x3067;&#x8A18;&#x8FF0;&#x3059;&#x308B;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x306E;&#x30D3;&#x30B8;&#x30CD;&#x30B9;&#x4E0A;&#x306E;&#x76EE;&#x7684;&#x3092;&#x7C21;&#x5358;&#x306B;&#x8AAC;&#x660E;&#x3059;&#x308B;&#x540D;&#x524D;&#x3092;&#x4ED8;&#x3051;&#x307E;&#x3059;&#x3002;&#x6280;&#x8853;&#x30B9;&#x30BF;&#x30C3;&#x30AF;&#x306B;&#x95A2;&#x9023;&#x3059;&#x308B;&#x5177;&#x4F53;&#x7684;&#x306A;&#x5B9F;&#x88C5;&#x306E;&#x8A73;&#x7D30;&#x306F;&#x3001;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306B;&#x4EFB;&#x305B;&#x3066;&#x304A;&#x304D;&#x307E;&#x3059;&#x3002;&#x4F8B;&#x3048;&#x3070;&#x3001;<code>role::myapp_webserver</code>&#x3068;<code>role::myapp_database</code>&#x306F;&#x3001;&#x30ED;&#x30FC;&#x30EB;&#x30AF;&#x30E9;&#x30B9;&#x306B;&#x9069;&#x3057;&#x305F;&#x540D;&#x524D;&#x3067;&#x3059;&#x304C;&#x3001;<code>role::postgres_db</code>&#x3084;<code>role::apache_server</code>&#x306F;&#x9069;&#x5207;&#x3067;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<div class="lvm-task-number"><p>&#x30BF;&#x30B9;&#x30AF;5:</p></div>
+
+<p>&#x3053;&#x306E;&#x30B1;&#x30FC;&#x30B9;&#x3067;&#x306F;&#x3001;Pasture&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306B;&#x95A2;&#x9023;&#x3059;&#x308B;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3092;&#x5B9A;&#x7FA9;&#x3059;&#x308B;&#x3001;<code>role::pasture_app</code>&#x304A;&#x3088;&#x3073;<code>role::pasture_db</code>&#x3068;&#x3044;&#x3046;2&#x3064;&#x306E;&#x30ED;&#x30FC;&#x30EB;&#x304C;&#x5FC5;&#x8981;&#x3067;&#x3059;&#x3002;&#x307E;&#x305A;&#x3001;<code>role</code>&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x306E;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x69CB;&#x9020;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>mkdir -p role/manifests
+</code></pre><p><code>role::pasture_app</code>&#x30ED;&#x30FC;&#x30EB;&#x3092;&#x5B9A;&#x7FA9;&#x3059;&#x308B;&#x30DE;&#x30CB;&#x30D5;&#x30A7;&#x30B9;&#x30C8;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>vim role/manifests/pasture_app.pp
+</code></pre><pre><code class="lang-puppet"><span class="hljs-keyword">class</span> <span class="hljs-title">role::pasture_app</span> {
+  include profile::pasture::app
+  include profile::base::motd
+}
+</code></pre>
+<p>&#x6B21;&#x306B;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x30B5;&#x30FC;&#x30D0;&#x306E;&#x30ED;&#x30FC;&#x30EB;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>vim role/manifests/pasture_db.pp
+</code></pre><pre><code class="lang-puppet"><span class="hljs-keyword">class</span> <span class="hljs-title">role::pasture_db</span> {
+  include profile::pasture::db
+  include profile::base::motd
+}
+</code></pre>
+<h2 id="&#x5206;&#x985E;">&#x5206;&#x985E;</h2>
+<p>&#x30ED;&#x30FC;&#x30EB;&#x3092;&#x660E;&#x78BA;&#x306B;&#x5B9A;&#x7FA9;&#x3057;&#x3066;&#x3057;&#x307E;&#x3048;&#x3070;&#x3001;&#x5206;&#x985E;&#x306F;&#x3068;&#x3066;&#x3082;&#x7C21;&#x5358;&#x3067;&#x3059;&#x3002;&#x30A4;&#x30F3;&#x30D5;&#x30E9;&#x5185;&#x306E;&#x5404;&#x30CE;&#x30FC;&#x30C9;&#x3092;&#x3001;1&#x3064;&#x306E;&#x30ED;&#x30FC;&#x30EB;&#x30AF;&#x30E9;&#x30B9;&#x306B;&#x5206;&#x985E;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>Puppet&#x306E;&#x30CE;&#x30FC;&#x30C9;&#x5B9A;&#x7FA9;&#x69CB;&#x6587;&#x306E;&#x5225;&#x306E;&#x6A5F;&#x80FD;&#x3092;&#x4F7F;&#x3048;&#x3070;&#x3001;&#x5206;&#x985E;&#x30E2;&#x30C7;&#x30EB;&#x3092;&#x3055;&#x3089;&#x306B;&#x7C21;&#x6F54;&#x306B;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x3053;&#x3053;&#x307E;&#x3067;&#x306F;<code>site.pp</code>&#x30DE;&#x30CB;&#x30D5;&#x30A7;&#x30B9;&#x30C8;&#x5185;&#x306E;&#x30CE;&#x30FC;&#x30C9;&#x5B9A;&#x7FA9;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x306E;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x3068;&#x3057;&#x3066;&#x3001;&#x30B7;&#x30F3;&#x30D7;&#x30EB;&#x306A;&#x6587;&#x5B57;&#x5217;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x304D;&#x307E;&#x3057;&#x305F;&#x304C;&#x3001;&#x6587;&#x5B57;&#x5217;&#x306E;&#x4EE3;&#x308F;&#x308A;&#x306B;&#x3001;<a href="http://www.regular-expressions.info/" target="_blank">&#x6B63;&#x898F;&#x8868;&#x73FE;</a>&#x3092;&#x30CE;&#x30FC;&#x30C9;&#x5B9A;&#x7FA9;&#x306E;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x3068;&#x3057;&#x3066;&#x4F7F;&#x3046;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x306B;&#x3088;&#x308A;&#x3001;&#x6B63;&#x898F;&#x8868;&#x73FE;&#x3067;&#x6307;&#x5B9A;&#x3057;&#x305F;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x3068;&#x4E00;&#x81F4;&#x3059;&#x308B;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x3092;&#x6301;&#x3064;&#x3059;&#x3079;&#x3066;&#x306E;&#x30CE;&#x30FC;&#x30C9;&#x306B;&#x3001;&#x30CE;&#x30FC;&#x30C9;&#x5B9A;&#x7FA9;&#x3092;&#x9069;&#x7528;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x3053;&#x3067;&#x306F;&#x3001;Pasture&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30B5;&#x30FC;&#x30D0;&#x3068;&#x3057;&#x3066;&#x5206;&#x985E;&#x3059;&#x308B;2&#x3064;&#x306E;&#x30CE;&#x30FC;&#x30C9;&#x306E;&#x4E00;&#x81F4;&#x6761;&#x4EF6;&#x3068;&#x3057;&#x3066;&#x3001;<code>/^pasture-app/</code>&#x3068;&#x3044;&#x3046;&#x6B63;&#x898F;&#x8868;&#x73FE;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;&#x3002;<code>/</code>&#x306F;&#x3001;&#x901A;&#x5E38;&#x306E;&#x6587;&#x5B57;&#x5217;&#x3067;&#x306F;&#x306A;&#x304F;&#x6B63;&#x898F;&#x8868;&#x73FE;&#x3067;&#x3042;&#x308B;&#x3053;&#x3068;&#x3092;&#x793A;&#x3059;&#x30C7;&#x30EA;&#x30DF;&#x30BF;&#x30FC;&#x3067;&#x3059;&#x3002;<code>^</code> &#x306F;&#x3001;&#x6587;&#x5B57;&#x5217;&#x306E;&#x958B;&#x59CB;&#x3092;&#x793A;&#x3057;&#x307E;&#x3059;&#x3002;&#x5F8C;&#x306B;&#x7D9A;&#x304F;&#x6587;&#x5B57;&#x304C;&#x3001;&#x30CE;&#x30FC;&#x30C9;&#x540D;&#x306E;&#x4E00;&#x81F4;&#x6761;&#x4EF6;&#x3068;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x6B63;&#x898F;&#x8868;&#x73FE;&#x306B;&#x3064;&#x3044;&#x3066;&#x3055;&#x3089;&#x306B;&#x8A73;&#x3057;&#x304F;&#x5B66;&#x3076;&#x306B;&#x306F;&#x3001;<a href="http://rubular.com/" target="_blank">rubular.com</a>&#x3092;&#x53C2;&#x7167;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;&#x3053;&#x308C;&#x306F;&#x30AF;&#x30A4;&#x30C3;&#x30AF;&#x30EA;&#x30D5;&#x30A1;&#x30EC;&#x30F3;&#x30B9;&#x3068;&#x3057;&#x3066;&#x3082;&#x3001;&#x30C6;&#x30B9;&#x30C8;&#x30C4;&#x30FC;&#x30EB;&#x3068;&#x3057;&#x3066;&#x3082;&#x5F79;&#x7ACB;&#x3061;&#x307E;&#x3059;&#x3002;&#x4F8B;&#x3048;&#x3070;&#x3001;&#x4E0A;&#x8FF0;&#x306E;&#x6B63;&#x898F;&#x8868;&#x73FE;&#x3092;&#x9069;&#x7528;&#x3057;&#x3066;&#x4E00;&#x81F4;&#x3059;&#x308B;&#x30CE;&#x30FC;&#x30C9;&#x540D;&#x304C;&#x3042;&#x308B;&#x304B;&#x3069;&#x3046;&#x304B;&#x691C;&#x8A3C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x307E;&#x305F;&#x3001;&#x6B63;&#x898F;&#x8868;&#x73FE;&#x306E;&#x8A73;&#x3057;&#x3044;&#x30AC;&#x30A4;&#x30C9;&#x3068;&#x3057;&#x3066;&#x306F;&#x3001;<a href="http://www.regular-expressions.info/" target="_blank">regular-expressions.info</a>&#x3082;&#x53C2;&#x8003;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;&#x4E00;&#x822C;&#x306B;&#x3001;&#x30CE;&#x30FC;&#x30C9;&#x5B9A;&#x7FA9;&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x6B63;&#x898F;&#x8868;&#x73FE;&#x306F;&#x3001;&#x304D;&#x308F;&#x3081;&#x3066;&#x30B7;&#x30F3;&#x30D7;&#x30EB;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x30CE;&#x30FC;&#x30C9;&#x540D;&#x306E;&#x4E00;&#x81F4;&#x6761;&#x4EF6;&#x3068;&#x3057;&#x3066;&#x6B63;&#x898F;&#x8868;&#x73FE;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x5834;&#x5408;&#x3001;&#x30A8;&#x30B9;&#x30B1;&#x30FC;&#x30D7;&#x3059;&#x3079;&#x304D;&#x7279;&#x6B8A;&#x6587;&#x5B57;&#x304C;&#x3042;&#x308B;&#x70B9;&#x306B;&#x6CE8;&#x610F;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;&#x305F;&#x3068;&#x3048;&#x3070;&#x3001;&#x30C9;&#x30C3;&#x30C8;(<code>.</code>)&#x306F;&#x3001;&#x3042;&#x3089;&#x3086;&#x308B;&#x6587;&#x5B57;&#x3068;&#x4E00;&#x81F4;&#x3059;&#x308B;&#x7279;&#x6B8A;&#x6587;&#x5B57;&#x3067;&#x3059;&#x3002;&#x30C9;&#x30C3;&#x30C8;&#x306A;&#x3069;&#x306E;&#x7279;&#x6B8A;&#x6587;&#x5B57;&#x3092;&#x542B;&#x3080;&#x540D;&#x524D;&#x3068;&#x4E00;&#x81F4;&#x3055;&#x305B;&#x308B;&#x306B;&#x306F;&#x3001;&#x30D0;&#x30C3;&#x30AF;&#x30B9;&#x30E9;&#x30C3;&#x30B7;&#x30E5;(<code>\.</code>)&#x3092;&#x4ED8;&#x3051;&#x3066;&#x30A8;&#x30B9;&#x30B1;&#x30FC;&#x30D7;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;&#x30CE;&#x30FC;&#x30C9;&#x5B9A;&#x7FA9;&#x306E;&#x6B63;&#x898F;&#x8868;&#x73FE;&#x304C;&#x3042;&#x307E;&#x308A;&#x306B;&#x8907;&#x96D1;&#x306B;&#x306A;&#x308B;&#x5834;&#x5408;&#x306F;&#x3001;&#x30CE;&#x30FC;&#x30C9;&#x306E;&#x30CD;&#x30FC;&#x30DF;&#x30F3;&#x30B0;&#x30B9;&#x30AD;&#x30FC;&#x30E0;&#x3092;&#x518D;&#x8003;&#x3059;&#x308B;&#x304B;&#x3001;Puppet Enterprise Web&#x30B3;&#x30F3;&#x30BD;&#x30FC;&#x30EB;&#x306E;<a href="https://puppet.com/docs/pe/latest/grouping_and_classifying_nodes.html" target="_blank">&#x30CE;&#x30FC;&#x30C9;&#x5206;&#x985E;&#x5B50;</a>&#x3084;<a href="https://puppet.com/docs/puppet/latest/nodes_external.html" target="_blank">&#x5916;&#x90E8;&#x306E;&#x30CE;&#x30FC;&#x30C9;&#x5206;&#x985E;&#x5B50;</a>&#x306A;&#x3069;&#x3001;&#x5225;&#x306E;&#x5206;&#x985E;&#x624B;&#x6CD5;&#x306E;&#x691C;&#x8A0E;&#x304C;&#x5FC5;&#x8981;&#x304B;&#x3082;&#x3057;&#x308C;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<div class="lvm-task-number"><p>&#x30BF;&#x30B9;&#x30AF;6:</p></div>
+
+<p>&#x30CE;&#x30FC;&#x30C9;&#x5B9A;&#x7FA9;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x3001;<code>site.pp</code>&#x30DE;&#x30CB;&#x30D5;&#x30A7;&#x30B9;&#x30C8;&#x3092;&#x958B;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>vim /etc/puppetlabs/code/environments/production/manifests/site.pp
+</code></pre><p>&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3068;&#x30CE;&#x30FC;&#x30C9;&#x306E;&#x30CE;&#x30FC;&#x30C9;&#x5B9A;&#x7FA9;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30CE;&#x30FC;&#x30C9;&#x5B9A;&#x7FA9;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x306F;&#x3001;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x3068;&#x3057;&#x3066;&#x6B63;&#x898F;&#x8868;&#x73FE;&#x3092;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x3053;&#x3068;&#x3092;&#x601D;&#x3044;&#x51FA;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;&#x3053;&#x3053;&#x3067;&#x306E;&#x76EE;&#x7684;&#x306F;&#x3001;&#x30DB;&#x30B9;&#x30C8;&#x540D;&#x304C;<code>pasture-app</code>&#x3067;&#x59CB;&#x307E;&#x308B;&#x30CE;&#x30FC;&#x30C9;&#x3092;<code>role::pasture_app</code>&#x30ED;&#x30FC;&#x30EB;&#x3067;&#x5206;&#x985E;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3059;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;<code>/^pasture-app/</code>&#x306E;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x3092;&#x6301;&#x3061;&#x3001;&#x4E00;&#x81F4;&#x3059;&#x308B;&#x30CE;&#x30FC;&#x30C9;&#x306E;<code>role::pasture_app</code>&#x30ED;&#x30FC;&#x30EB;&#x3092;<code>include</code>&#x3059;&#x308B;&#x30CE;&#x30FC;&#x30C9;&#x5B9A;&#x7FA9;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;&#x540C;&#x69D8;&#x306B;&#x3001;&#x540D;&#x524D;&#x304C;<code>pasture-db</code>&#x306B;&#x4E00;&#x81F4;&#x3059;&#x308B;&#x30CE;&#x30FC;&#x30C9;&#x3092;<code>role::pasture_db</code>&#x3068;&#x5206;&#x985E;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308B;&#x305F;&#x3081;&#x3001;&#x3053;&#x306E;&#x30CE;&#x30FC;&#x30C9;&#x3092;&#x542B;&#x3080;&#x30BF;&#x30A4;&#x30C8;&#x30EB; <code>/^pasture-db/</code>&#x306E;&#x30CE;&#x30FC;&#x30C9;&#x5B9A;&#x7FA9;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x306E;&#x3067;&#x3001;<code>pasture-app.puppet.vm</code>&#x304A;&#x3088;&#x3073;<code>pasture-db.puppet.vm</code>&#x306E;&#x904E;&#x53BB;&#x306E;&#x30CE;&#x30FC;&#x30C9;&#x5B9A;&#x7FA9;&#x3092;&#x524A;&#x9664;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x524A;&#x9664;&#x3057;&#x305F;&#x3089;&#x3001;&#x6700;&#x521D;&#x306E;&#x30B3;&#x30E1;&#x30F3;&#x30C8;&#x306E;&#x5F8C;&#x306E;<code>site.pp</code>&#x30BB;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x306F;&#x3001;&#x4EE5;&#x4E0B;&#x306E;&#x3088;&#x3046;&#x306B;&#x306A;&#x308B;&#x306F;&#x305A;&#x3067;&#x3059;&#x3002;</p>
+<pre><code class="lang-puppet">node <span class="hljs-keyword">default</span> {
+  <span class="hljs-comment"># This is where you can declare classes for all nodes.</span>
+  <span class="hljs-comment"># Example:</span>
+  <span class="hljs-comment">#   class { &apos;my_class&apos;: }</span>
+}
+
+<span class="hljs-keyword">node</span> /^pasture-app/ {
+  include role::pasture_app
+}
+
+node /^pasture-db/ {
+  include role::pasture_db
+}
+</code></pre>
+<div class="lvm-task-number"><p>&#x30BF;&#x30B9;&#x30AF;7:</p></div>
+
+<p><code>puppet job</code>&#x30C4;&#x30FC;&#x30EB;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3001;<code>pasture-db.puppet.vm</code>&#x30CE;&#x30FC;&#x30C9;&#x3067;Puppet agent&#x5B9F;&#x884C;&#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;(&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x306E;&#x671F;&#x9650;&#x304C;&#x5207;&#x308C;&#x3066;&#x3044;&#x308B;&#x5834;&#x5408;&#x306F;&#x3001;<code>puppet access login learning --lifetime 1d</code>&#x3092;&#x5B9F;&#x884C;&#x3057;&#x3001;&#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;<code>puppet</code>&#x3067;&#x65B0;&#x898F;&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x751F;&#x6210;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;)&#x3002;</p>
+<pre><code>puppet job run --nodes pasture-db.puppet.vm
+</code></pre><p>&#x3053;&#x306E;&#x5B9F;&#x884C;&#x304C;&#x5B8C;&#x4E86;&#x3057;&#x305F;&#x3089;&#x3001;2&#x3064;&#x306E;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30B5;&#x30FC;&#x30D0;&#x30CE;&#x30FC;&#x30C9;&#x3067;&#x5B9F;&#x884C;&#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>puppet job run --nodes pasture-app-small.puppet.vm,pasture-app-large.puppet.vm
+</code></pre><p>&#x3053;&#x308C;&#x3089;&#x306E;Puppet&#x5B9F;&#x884C;&#x304C;&#x5B8C;&#x4E86;&#x3057;&#x305F;&#x3089;&#x3001;<code>curl</code>&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3001;2&#x7A2E;&#x985E;&#x306E;&#x30B5;&#x30FC;&#x30D0;&#x4E0A;&#x306E;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x6A5F;&#x80FD;&#x3092;&#x30C6;&#x30B9;&#x30C8;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>curl &apos;pasture-app-small.puppet.vm/api/v1/cowsay?message=&quot;hello&quot;&apos;
+curl &apos;pasture-app-large.puppet.vm/api/v1/cowsay?message=&quot;HELLO!&quot;&apos;
+</code></pre><p>&#x524D;&#x56DE;&#x306E;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3067;&#x5C0E;&#x5165;&#x3057;&#x305F;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x6A5F;&#x80FD;&#x304C;&#x3001;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306E;&apos;large&apos;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3067;&#x7A3C;&#x50CD;&#x3057;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x306B;&#x6CE8;&#x76EE;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;&apos;small&apos;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x306F;501&#x30A8;&#x30E9;&#x30FC;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>curl &apos;pasture-app-small.puppet.vm/api/v1/cowsay/sayings&apos;
+</code></pre><h2 id="&#x304A;&#x3055;&#x3089;&#x3044;">&#x304A;&#x3055;&#x3089;&#x3044;</h2>
+<p>&#x3053;&#x306E;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3067;&#x306F;&#x3001;&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x306B;&#x3064;&#x3044;&#x3066;&#x8AAC;&#x660E;&#x3057;&#x307E;&#x3057;&#x305F;&#x3002;&#x3053;&#x308C;&#x306F;&#x3001;&#x30A4;&#x30F3;&#x30D5;&#x30E9;&#x5185;&#x306E;&#x5404;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x306E;&#x30ED;&#x30FC;&#x30EB;&#x306B;&#x5FDC;&#x3058;&#x3066;&#x3001;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x306B;&#x3088;&#x3063;&#x3066;&#x63D0;&#x4F9B;&#x3055;&#x308C;&#x308B;&#x6A5F;&#x80FD;&#x3092;&#x4F53;&#x7CFB;&#x7684;&#x306B;&#x6574;&#x7406;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x65B9;&#x6CD5;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3092;&#x30E9;&#x30C3;&#x30D4;&#x30F3;&#x30B0;&#x3057;&#x3066;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x3001;&#x3053;&#x308C;&#x3089;&#x306E;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x30ED;&#x30FC;&#x30EB;&#x306B;&#x307E;&#x3068;&#x3081;&#x307E;&#x3057;&#x305F;&#x3002;</p>
+<p>&#x6700;&#x5F8C;&#x306B;&#x3001;<code>site.pp</code>&#x30DE;&#x30CB;&#x30D5;&#x30A7;&#x30B9;&#x30C8;&#x3067;&#x6B63;&#x898F;&#x8868;&#x73FE;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3001;&#x30A4;&#x30F3;&#x30D5;&#x30E9;&#x5185;&#x306E;&#x5404;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x306B;&#x9069;&#x5207;&#x306A;&#x30ED;&#x30FC;&#x30EB;&#x3092;&#x5272;&#x308A;&#x5F53;&#x3066;&#x308B;&#x67D4;&#x8EDF;&#x306A;&#x30CE;&#x30FC;&#x30C9;&#x5B9A;&#x7FA9;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3057;&#x305F;&#x3002;</p>
+<h2 id="&#x305D;&#x306E;&#x4ED6;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;">&#x305D;&#x306E;&#x4ED6;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;</h2>
+<ul>
+<li>&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x8A73;&#x7D30;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;<a href="https://puppet.com/docs/pe/latest/the_roles_and_profiles_method.html" target="_blank">&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x30DA;&#x30FC;&#x30B8;</a>&#x3092;&#x3054;&#x89A7;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;</li>
+<li><a href="http://garylarizza.com/blog/2014/02/17/puppet-workflow-part-1/" target="_blank">&#x30D6;&#x30ED;&#x30B0;&#x8A18;&#x4E8B;</a>&#x3082;&#x53C2;&#x7167;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;&#x3053;&#x308C;&#x306F;&#x3001;&#x63A8;&#x5968;&#x3055;&#x308C;&#x308B;Puppet&#x30EF;&#x30FC;&#x30AF;&#x30D5;&#x30ED;&#x30FC;&#x3068;&#x3057;&#x3066;&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x3092;&#x78BA;&#x7ACB;&#x3059;&#x308B;&#x3046;&#x3048;&#x3067;&#x5F79;&#x7ACB;&#x3061;&#x307E;&#x3059;&#x3002;</li>
+<li><a href="https://learn.puppet.com/course/an-introduction-to-roles-profiles" target="_blank">&#x81EA;&#x5206;&#x306E;&#x30DA;&#x30FC;&#x30B9;&#x3067;&#x3067;&#x304D;&#x308B;&#x30C8;&#x30EC;&#x30FC;&#x30CB;&#x30F3;&#x30B0;&#x30B3;&#x30FC;&#x30B9;</a>&#x3067;&#x3082;&#x3001;&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x6271;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</li>
+<li>&#x30ED;&#x30FC;&#x30EB;&#x3068;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;Getting Started with Puppet&#x304A;&#x3088;&#x3073;Puppet Practitioner&#x30B3;&#x30FC;&#x30B9;&#x3067;&#x8AAC;&#x660E;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x8A73;&#x7D30;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;<a href="https://learn.puppet.com/category/instructor-led-training" target="_blank">&#x5BFE;&#x9762;</a>&#x304A;&#x3088;&#x3073;<a href="https://learn.puppet.com/category/online-instructor-led-training" target="_blank">&#x30AA;&#x30F3;&#x30E9;&#x30A4;&#x30F3;</a>&#x30C8;&#x30EC;&#x30FC;&#x30CB;&#x30F3;&#x30B0;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057;&#x3066;&#x307F;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;</li>
+<li>&#x30CE;&#x30FC;&#x30C9;&#x5B9A;&#x7FA9;&#x306B;&#x304A;&#x3051;&#x308B;&#x6B63;&#x898F;&#x8868;&#x73FE;&#x306E;&#x4F7F;&#x7528;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;<a href="https://puppet.com/docs/puppet/latest/lang_node_definitions.html#regular-expression-names" target="_blank">&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x30DA;&#x30FC;&#x30B8;</a>&#x3092;&#x3054;&#x89A7;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;</li>
+<li>&#x6B63;&#x898F;&#x8868;&#x73FE;&#x3092;&#x7C21;&#x5358;&#x306B;&#x30C6;&#x30B9;&#x30C8;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30C4;&#x30FC;&#x30EB;&#x306F;&#x3001;<a href="http://rubular.com" target="_blank">&#x3053;&#x3061;&#x3089;</a>&#x306B;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="the_forge.html" class="navigation navigation-prev " aria-label="Previous page: Forge">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="hiera.html" class="navigation navigation-next " aria-label="Next page: Hiera">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"ロールとプロファイル","level":"2.13","depth":1,"next":{"title":"Hiera","level":"2.14","depth":1,"path":"quests/hiera.md","ref":"quests/hiera.md","articles":[]},"previous":{"title":"Forge","level":"2.12","depth":1,"path":"quests/the_forge.md","ref":"quests/the_forge.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-54263865-3"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"ja_jp","gitbook":"*"},"file":{"path":"quests/roles_and_profiles.md","mtime":"2019-03-27T23:53:33.370Z","type":"markdown"},"gitbook":{"version":"3.1.1","time":"2019-03-28T00:06:36.432Z"},"basePath":"..","book":{"language":"ja_jp"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,70 @@
+{
+  "welcome": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup welcome"
+  },
+  "portfolio_introduction": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup portfolio_introduction"
+  },
+  "hello_bolt": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup hello_bolt"
+  },
+  "hello_puppet": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup hello_puppet"
+  },
+  "agent_run": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup agent_run"
+  },
+  "manifests_and_classes": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup manifests_and_classes"
+  },
+  "package_file_service": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup package_file_service"
+  },
+  "variables_and_templates": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup variables_and_templates"
+  },
+  "class_parameters": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup class_parameters"
+  },
+  "facts": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup facts"
+  },
+  "conditional_statements": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup conditional_statements"
+  },
+  "the_forge": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup the_forge"
+  },
+  "roles_and_profiles": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup roles_and_profiles"
+  },
+  "hiera": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup hiera"
+  },
+  "defined_resource_types": {
+    "watch_list": ["/root/.bash_history"],
+    "setup_command": "ruby ./scripts/setup defined_resource_types"
+  },
+  "control_repository": {
+    "watch_list": ["/root/,bash_history"],
+    "setup_command": "ruby ./scripts/setup control_repository"
+  },
+  "puppetfile": {
+    "watch_list": ["/root/,bash_history"],
+    "setup_command": "ruby ./scripts/setup puppetfile"
+  }
+}

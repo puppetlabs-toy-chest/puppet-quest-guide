@@ -1,0 +1,207 @@
+#!/bin/ruby
+require 'socket'
+require 'erb'
+require 'json'
+
+#When you begin a quest, the quest tool (https://github.com/puppetlabs/quest)
+#executes an arbitrary setup_command listed for the quest in the index.json
+#file of its task_dir. For the Learning VM, those commands all follow the
+#pattern "ruby ./scripts/setup <quest_name>", thus passing the quest setup task
+#to this script. Though this adds an extra layer of abstraction, it keeps the
+#a loose coupling between the quest tool and the specific Learning VM quest
+#setup steps that this script handles.
+
+SCRIPT_DIR = File.dirname(__FILE__)
+$stdout.sync = true
+
+def create_node(opts)
+  #Pass a set of node options specified in the "./quest_nodes.json" file through to
+  #the dockeragent module to generate a new container.
+ 
+  puts "Creating #{opts['name']}..."
+
+  #This uses the https://github.com/puppetlabs/pltraining-dockeragent module
+  `puppet apply -e "dockeragent::node { '#{opts['name']}': ensure => present, image => '#{opts['image']}', require_dockeragent => false, }"`
+  wait_for_container(opts['name'])
+
+  #There doesn't seem to be a way to use existing puppet tooling to generate
+  #a CSR from the agent side outside the context of a puppet run. Instead,
+  #the following commands complete this process from the master and copy the
+  #necessary files to the /etc/docker/ssl_dir/ directory, which is mounted on
+  #the docker nodes.
+  if opts['sign_cert']
+    `/opt/puppetlabs/bin/puppetserver ca generate --certname #{opts['name']} > /dev/null 2>&1`
+    `/opt/puppetlabs/bin/puppetserver ca sign --certname #{opts['name']} > /dev/null 2>&1`
+
+    #It seems to take a moment after the puppet cert sign returns before the
+    #cert is actually signed. A sleep here isn't the most elegant, but because
+    #it only takes a moment, polling would always return after a minimal wait
+    #time anyway.
+    sleep 5
+
+    # Ensure that the ssl_dir tree exists
+    `mkdir -p /etc/docker/ssl_dir/{public_keys,private_keys}`
+    
+    # Copy keys from puppet's ssl_dir to docker ssl_dir
+    `cp -f /etc/puppetlabs/puppet/ssl/certs/#{opts['name']}.pem /etc/docker/ssl_dir/`
+    `cp -f /etc/puppetlabs/puppet/ssl/public_keys/#{opts['name']}.pem /etc/docker/ssl_dir/public_keys/`
+    `cp -f /etc/puppetlabs/puppet/ssl/private_keys/#{opts['name']}.pem /etc/docker/ssl_dir/private_keys/`
+  end
+end
+
+def run_puppet_on_nodes
+  #This initial agent run handles pxp-service init in the
+  #puppet_enterprise::profile::agent profile class and pluginsync. Doing this
+  #in setup makes the first user initiated run happen faster and more clearly
+  #show the changes the user has introduced. It also ensures that the pxp-agent
+  #service is configured and running for quests that rely on puppet job run
+  #commands.
+
+  manifests_dir = '/etc/puppetlabs/code/environments/production/manifests/'
+
+  begin
+
+    #Using the --tags puppet_enterprise::profile::agent argument ensures that
+    #only the resources in the PE agent profile are run, but compilation errors
+    #in other puppet code still abort the run. For clean catalog compilation,
+    #substitute empty site.pp file, then revert to the original after the runs
+    #are complete.
+   
+    File.rename(File.join(manifests_dir, 'site.pp'), File.join(manifests_dir, 'site.pp.bak'))
+    File.write(File.join(manifests_dir, 'site.pp'),'node default {}')
+
+    # If code manager us set up, we need to invalidate the environment cache so this change will take effect.
+    `curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -X DELETE 'https://localhost:8140/puppet-admin-api/v1/environment-cache?environment=production'`
+
+    #Rather than background these with the docker -d flag and poll for
+    #completion, run in separate threads and join threads after. This obviates
+    #the polling step and avoids race condition issues with site.pp swapping.
+    
+    thread_arr = []
+    docker_hosts.keys.each do |name|
+      puts "Running agent on #{name}..."
+      thread_arr << Thread.new{`docker exec #{name} puppet agent -t --tags puppet_enterprise::profile::agent`}
+    end
+    thread_arr.each(&:join)
+  ensure
+    # Return original site.pp
+    File.rename(File.join(manifests_dir, 'site.pp.bak'), File.join(manifests_dir, 'site.pp'))
+    `curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -X DELETE 'https://localhost:8140/puppet-admin-api/v1/environment-cache?environment=production'`
+  end
+end
+
+def wait_for_container(name, max_retries=10)
+  #Poll the `docker ps` command until the specified container name appears
+  #in the output.
+  
+  puts "Waiting for container #{name}..."
+  retries = 0
+  while !system("docker ps | grep #{name}") do
+    sleep 2
+    retries += 1
+    fail "Timed out waiting for #{name} container." if retries > max_retries
+  end
+end
+
+def docker_hosts
+  #Parse the output of the `docker ps` command to get a list of containers
+  #currently running and their IP addresses. This is similar to the
+  #docker_hosts fact provided by the dockeragent module, but we prefer to get
+  #it directly.
+  
+  hosts = {}
+  containers = `docker ps`.split("\n")
+  containers.shift
+  containers.each do |line|
+    name = line.split.last
+    hosts[name] = `docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' #{name}`.chomp
+  end
+  return hosts
+end
+
+def clear_nodes
+  #Blow away existing nodes before creating those that will be used in the
+  #quest we're starting.
+  
+  hosts = docker_hosts
+  hosts.each do |name, ip|
+    `systemctl stop docker-#{name}.service`
+    `/bin/find /etc/docker/ssl_dir /etc/puppetlabs/puppet/ssl -name #{name}.pem -delete`
+    `/opt/puppetlabs/bin/puppetserver ca clean --certname #{name}`
+  end
+end
+
+def update_docker_hosts
+  #Regenerate a /etc/hosts file to include the nodes used in this quest.
+  
+  hosts = docker_hosts
+  fqdn = `facter fqdn`.chomp
+hosts_template = <<-HEREDOC
+127.0.0.1 <%= fqdn %> learning localhost localhost.localdomain localhost4
+::2 localhost localhost.localdomain localhost6 localhost6.localdomain6
+<% hosts.each do |name, ip|  %>
+<%= ip %> <%= name %>\n
+<% end %>
+HEREDOC
+  puts 'Updating /etc/hosts...'
+  hosts_string = ERB.new(hosts_template, 3, '>').result(binding)
+  File.write('/etc/hosts', hosts_string)
+end
+
+def poll_nodes(poll_name, max_retries=10, interval=2, initial_sleep=0)
+  #Wrapper function to poll until the supplied block returns a truthy value
+  #or exceeds max retries and fails.
+
+  puts "Waiting for #{poll_name}..."
+  sleep initial_sleep
+  docker_hosts.each do |name, _|
+    retries = 0
+    while !yield(name) do
+      sleep interval
+      retries += 1
+      fail "Timed out waiting for #{poll_name}." if retries > max_retries
+    end
+  end
+end
+
+def query_ssh(name)
+  #Check if port 22 is listening on the specified container. There may be a
+  #better way to poll SSH than rescue a failed tcp connection!
+
+  begin
+    Socket.tcp(name, 22, connect_timeout: 5).close
+    return true
+  rescue
+    return false
+  end
+end
+
+def node_setup(quest)
+  #Main function of this script. Uses a quest name to look up specs of the
+  #container nodes required, generate those nodes, update /etc/hosts, trigger
+  #an initial puppet run when needed, then wait for SSH to become available on
+  #all nodes before returning.
+  
+  run_puppet_after = true
+  quest_node_hash = JSON.parse(File.read(File.expand_path('./quest_nodes.json', File.dirname(__FILE__))))
+  quest_node_hash[quest].each do |node|
+    default_opts = {
+      'image' => 'agent',
+      'sign_cert' => true,
+      'run_puppet' => true
+    }
+    opts = default_opts.merge(node)
+    #Only run puppet if run_puppet is true for all nodes. Ideally, this would
+    #be a per-quest parameter rather than per node, as it should be all or
+    #none, but currently data is structured to include opts per node, rather
+    #than per-quest.
+    run_puppet_after &= opts['run_puppet']
+    create_node(opts)
+  end
+  update_docker_hosts
+  run_puppet_on_nodes if run_puppet_after
+  poll_nodes("SSH", 10){ |name| query_ssh(name) }
+end
+
+clear_nodes
+node_setup(ARGV[0])

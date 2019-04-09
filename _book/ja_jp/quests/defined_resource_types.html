@@ -1,0 +1,788 @@
+
+<!DOCTYPE HTML>
+<html lang="ja_jp" >
+    <head>
+        <title>定義リソース型 · GitBook</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.1.1">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="control_repository.html" />
+    
+    
+    <link rel="prev" href="hiera.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    はじめに
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../SETUP.html">
+            
+                <a href="../SETUP.html">
+            
+                    
+                    セットアップ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">クエスト</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="welcome.html">
+            
+                <a href="welcome.html">
+            
+                    
+                    ようこそ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="portfolio_introduction.html">
+            
+                <a href="portfolio_introduction.html">
+            
+                    
+                    ポートフォリオの概要
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="hello_bolt.html">
+            
+                <a href="hello_bolt.html">
+            
+                    
+                    ハロー、Bolt
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="hello_puppet.html">
+            
+                <a href="hello_puppet.html">
+            
+                    
+                    ハロー、Puppet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="agent_run.html">
+            
+                <a href="agent_run.html">
+            
+                    
+                    Agentの実行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="manifests_and_classes.html">
+            
+                <a href="manifests_and_classes.html">
+            
+                    
+                    マニフェストとクラス
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.7" data-path="package_file_service.html">
+            
+                <a href="package_file_service.html">
+            
+                    
+                    パッケージファイルサービス
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.8" data-path="variables_and_templates.html">
+            
+                <a href="variables_and_templates.html">
+            
+                    
+                    変数とテンプレート
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.9" data-path="class_parameters.html">
+            
+                <a href="class_parameters.html">
+            
+                    
+                    クラスパラメータ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.10" data-path="facts.html">
+            
+                <a href="facts.html">
+            
+                    
+                    Facts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.11" data-path="conditional_statements.html">
+            
+                <a href="conditional_statements.html">
+            
+                    
+                    条件文
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.12" data-path="the_forge.html">
+            
+                <a href="the_forge.html">
+            
+                    
+                    Forge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.13" data-path="roles_and_profiles.html">
+            
+                <a href="roles_and_profiles.html">
+            
+                    
+                    ロールとプロファイル
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.14" data-path="hiera.html">
+            
+                <a href="hiera.html">
+            
+                    
+                    Hiera
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.15" data-path="defined_resource_types.html">
+            
+                <a href="defined_resource_types.html">
+            
+                    
+                    定義リソース型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.16" data-path="control_repository.html">
+            
+                <a href="control_repository.html">
+            
+                    
+                    コントロールリポジトリ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.17" data-path="puppetfile.html">
+            
+                <a href="puppetfile.html">
+            
+                    
+                    Puppetfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">付録</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="afterword.html">
+            
+                <a href="afterword.html">
+            
+                    
+                    あとがき
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../troubleshooting.html">
+            
+                <a href="../troubleshooting.html">
+            
+                    
+                    トラブルシューティング
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../releasenotes.html">
+            
+                <a href="../releasenotes.html">
+            
+                    
+                    リリースノート
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" >
+            
+                <a target="_blank" href="https://puppet.com/legal/privacy">
+            
+                    
+                    プライバシーポリシー
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >定義リソース型</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>Quest Guide <a href="../releasenotes.html">v2.5.1</a></p>
+<h1 id="&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;">&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;</h1>
+<h2 id="&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x306E;&#x76EE;&#x7684;">&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x306E;&#x76EE;&#x7684;</h2>
+<ul>
+<li><em>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;</em>&#x3092;&#x4F7F;&#x3063;&#x3066;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x30B0;&#x30EB;&#x30FC;&#x30D7;&#x3092;&#x7BA1;&#x7406;&#x3059;&#x308B;&#x3002;</li>
+<li>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x3068;&#x30AF;&#x30E9;&#x30B9;&#x306E;&#x9055;&#x3044;&#x3092;&#x7406;&#x89E3;&#x3059;&#x308B;&#x3002;</li>
+<li>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306B;&#x542B;&#x307E;&#x308C;&#x308B;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x72EC;&#x7279;&#x306E;&#x5236;&#x7D04;&#x306E;&#x6271;&#x3044;&#x65B9;&#x3092;
+&#x7406;&#x89E3;&#x3059;&#x308B;&#x3002;</li>
+<li>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x30E6;&#x30FC;&#x30B6;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3068;SSH&#x30AD;&#x30FC;&#x3092;&#x7BA1;&#x7406;&#x3059;&#x308B;&#x3002;</li>
+</ul>
+<h2 id="&#x306F;&#x3058;&#x3081;&#x306B;">&#x306F;&#x3058;&#x3081;&#x306B;</h2>
+<p>&#x3053;&#x306E;&#x30AC;&#x30A4;&#x30C9;&#x306E;&#x30AF;&#x30E9;&#x30B9;&#x306B;&#x3064;&#x3044;&#x3066;&#x306E;&#x8AAC;&#x660E;&#x3067;&#x5148;&#x306B;&#x8FF0;&#x3079;&#x305F;&#x3068;&#x304A;&#x308A;&#x3001;Puppet&#x306E;&#x30AF;&#x30E9;&#x30B9;&#x306F;<em>&#x30B7;&#x30F3;&#x30B0;&#x30EB;&#x30C8;&#x30F3;</em>&#x3067;&#x3059;&#x3002;&#x3064;&#x307E;&#x308A;&#x3001;Puppet&#x8A00;&#x8A9E;&#x306E;&#x30AF;&#x30E9;&#x30B9;&#x306F;&#x3001;1&#x3064;&#x306E;&#x30AB;&#x30BF;&#x30ED;&#x30B0;&#x306B;&#x3064;&#x304D;1&#x56DE;&#x3057;&#x304B;&#x5B58;&#x5728;&#x3067;&#x304D;&#x307E;&#x305B;&#x3093;&#x3002;Puppet&#x30B3;&#x30FC;&#x30C9;&#x3067;&#x30AF;&#x30E9;&#x30B9;&#x3092;2&#x56DE;&#x5BA3;&#x8A00;&#x3059;&#x308B;&#x3068;&#x30B3;&#x30F3;&#x30D1;&#x30A4;&#x30EB;&#x30A8;&#x30E9;&#x30FC;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;&#x591A;&#x304F;&#x306E;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306B;&#x304A;&#x3044;&#x3066;&#x3001;&#x3053;&#x306E;&#x30B7;&#x30F3;&#x30B0;&#x30EB;&#x30C8;&#x30F3;&#x30AF;&#x30E9;&#x30B9;&#x306E;&#x6982;&#x5FF5;&#x306F;&#x3001;&#x30CE;&#x30FC;&#x30C9;&#x4E0A;&#x306E;&#x30AF;&#x30E9;&#x30B9;&#x3067;&#x7BA1;&#x7406;&#x3055;&#x308C;&#x308B;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x30B7;&#x30F3;&#x30B0;&#x30EB;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x307E;&#x305F;&#x306F;&#x5358;&#x4E00;&#x306E;&#x30A4;&#x30F3;&#x30B9;&#x30C8;&#x30FC;&#x30EB;&#x306B;&#x597D;&#x9069;&#x3067;&#x3059;&#x3002;&#x305F;&#x3068;&#x3048;&#x3070;&#x3001;Apache&#x30B5;&#x30FC;&#x30D0;&#x30FC;&#x306F;&#x4E00;&#x822C;&#x7684;&#x306B;<code>httpd</code>&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x3092;1&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x306E;&#x307F;&#x5B9F;&#x884C;&#x3057;&#x3001;1&#x30BB;&#x30C3;&#x30C8;&#x306E;&#x8A2D;&#x5B9A;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x6301;&#x3061;&#x307E;&#x3059;&#x3002;&#x3053;&#x306E;&#x3088;&#x3046;&#x306A;&#x5834;&#x5408;&#x3001;Puppet&#x306E;&#x30AF;&#x30E9;&#x30B9;&#x306F;&#x30B7;&#x30F3;&#x30B0;&#x30EB;&#x30C8;&#x30F3;&#x3067;&#x3042;&#x308B;&#x305F;&#x3081;&#x3001;&#x5BFE;&#x5FDC;&#x3059;&#x308B;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x8A2D;&#x5B9A;&#x306B;&#x3064;&#x3044;&#x3066;&#x8907;&#x6570;&#x306E;&#x7AF6;&#x5408;&#x3059;&#x308B;&#x4ED5;&#x69D8;&#x304C;&#x751F;&#x3058;&#x308B;&#x3053;&#x3068;&#x304C;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<p>&#x3057;&#x304B;&#x3057;&#x3001;&#x5834;&#x5408;&#x306B;&#x3088;&#x3063;&#x3066;&#x306F;&#x3001;&#x3053;&#x306E;&#x3088;&#x3046;&#x306A;1&#x5BFE;1&#x306E;&#x5BFE;&#x5FDC;&#x304C;&#x6709;&#x52B9;&#x3067;&#x306F;&#x306A;&#x3044;&#x3053;&#x3068;&#x3082;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;&#x305F;&#x3068;&#x3048;&#x3070;&#x3001;1&#x3064;&#x306E;Apache <code>httpd</code>&#x30D7;&#x30ED;&#x30BB;&#x30B9;&#x304C;&#x8907;&#x6570;&#x306E;&#x4EEE;&#x60F3;&#x30DB;&#x30B9;&#x30C8;&#x306B;&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x3092;&#x63D0;&#x4F9B;&#x3057;&#x3066;&#x3044;&#x308B;&#x5834;&#x5408;&#x306A;&#x3069;&#x3067;&#x3059;&#x3002;&#x3053;&#x306E;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3067;&#x306F;&#x3001;&#x5358;&#x7D14;&#x306A;&#x4F8B;&#x3068;&#x3057;&#x3066;&#x30E6;&#x30FC;&#x30B6;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3092;&#x53D6;&#x308A;&#x4E0A;&#x3052;&#x307E;&#x3059;&#x3002;Puppet&#x306B;&#x306F;&#x30D3;&#x30EB;&#x30C8;&#x30A4;&#x30F3;&#x306E;<code>user</code>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x304C;&#x3001;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x7BA1;&#x7406;&#x8005;&#x306F;&#x305D;&#x306E;&#x4ED6;&#x306E;&#x5E45;&#x5E83;&#x3044;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3092;&#x30E6;&#x30FC;&#x30B6;&#x3054;&#x3068;&#x306B;&#x7BA1;&#x7406;&#x3057;&#x306A;&#x3051;&#x308C;&#x3070;&#x306A;&#x3089;&#x306A;&#x3044;&#x3053;&#x3068;&#x3082;&#x591A;&#x3044;&#x3067;&#x3057;&#x3087;&#x3046;&#x3002;&#x3053;&#x306E;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3067;&#x306F;&#x3001;&#x5404;&#x30E6;&#x30FC;&#x30B6;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x306B;SSH&#x30AD;&#x30FC;&#x3092;&#x30BB;&#x30C3;&#x30C8;&#x30A2;&#x30C3;&#x30D7;&#x3059;&#x308B;&#x30A8;&#x30AF;&#x30B5;&#x30B5;&#x30A4;&#x30BA;&#x3092;&#x884C;&#x3044;&#x307E;&#x3059;&#x304C;&#x3001;&#x305D;&#x306E;&#x539F;&#x5247;&#x306F;&#x3001;&#x305D;&#x306E;&#x4ED6;&#x306E;&#x3055;&#x307E;&#x3056;&#x307E;&#x306A;&#x30E6;&#x30FC;&#x30B6;&#x95A2;&#x9023;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306B;&#x7C21;&#x5358;&#x306B;&#x5FDC;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>Puppet&#x8A00;&#x8A9E;&#x3067;&#x3053;&#x306E;&#x3088;&#x3046;&#x306A;&#x3001;&#x53CD;&#x5FA9;&#x53EF;&#x80FD;&#x306A;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x30B0;&#x30EB;&#x30FC;&#x30D7;&#x306E;&#x30CB;&#x30FC;&#x30BA;&#x306B;&#x5BFE;&#x5FDC;&#x3059;&#x308B;&#x306B;&#x306F;&#x3001;<em>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;</em>&#x3092;&#x4F7F;&#x3044;&#x307E;&#x3059;&#x3002;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306F;&#x3001;&#x69CB;&#x6587;&#x898F;&#x5247;&#x7684;&#x306B;&#x306F;&#x30AF;&#x30E9;&#x30B9;&#x306B;&#x3088;&#x304F;&#x4F3C;&#x305F;Puppet&#x30B3;&#x30FC;&#x30C9;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3067;&#x3059;&#x3002;&#x30AF;&#x30E9;&#x30B9;&#x3068;&#x540C;&#x69D8;&#x3001;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x3068;&#x308A;&#x3001;&#x305D;&#x306E;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x95A2;&#x9023;&#x3059;&#x308B;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30B0;&#x30EB;&#x30FC;&#x30D7;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;&#x3002;&#x305F;&#x3060;&#x3057;&#x3001;&#x30AF;&#x30E9;&#x30B9;&#x3068;&#x306F;&#x7570;&#x306A;&#x308A;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306F;&#x30B7;&#x30F3;&#x30B0;&#x30EB;&#x30C8;&#x30F3;&#x3067;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;&#x3064;&#x307E;&#x308A;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306F;&#x3001;&#x540C;&#x4E00;&#x306E;&#x30CE;&#x30FC;&#x30C9;&#x3067;&#x8907;&#x6570;&#x56DE;&#x5BA3;&#x8A00;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x6E96;&#x5099;&#x304C;&#x3067;&#x304D;&#x305F;&#x3089;&#x3001;&#x4EE5;&#x4E0B;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x5165;&#x529B;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;</p>
+<pre><code>quest begin defined_resource_types
+</code></pre><h2 id="&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;">&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;</h2>
+<blockquote>
+<p>&#x53CD;&#x5FA9;&#x2015;&#x305D;&#x308C;&#x306F;&#x73FE;&#x5B9F;&#x3067;&#x3042;&#x308A;&#x3001;&#x771F;&#x306E;&#x5B58;&#x5728;&#x3067;&#x3042;&#x308B;&#x3002;</p>
+<p>-&#x30BB;&#x30FC;&#x30EC;&#x30F3;&#x30FB;&#x30AD;&#x30A7;&#x30EB;&#x30B1;&#x30B4;&#x30FC;&#x30EB;</p>
+</blockquote>
+<p><a href="https://puppet.com/docs/puppet/latest/lang_defined_types.html" target="_blank">&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;</a>&#x306F;&#x3001;&#x5358;&#x4E00;&#x306E;&#x30CE;&#x30FC;&#x30C9;&#x306E;&#x30AB;&#x30BF;&#x30ED;&#x30B0;&#x5185;&#x3067;&#x8907;&#x6570;&#x56DE;&#x8A55;&#x4FA1;&#x3059;&#x308B;&#x3053;&#x3068;&#x306E;&#x3067;&#x304D;&#x308B;Puppet&#x30B3;&#x30FC;&#x30C9;&#x306E;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x69CB;&#x6587;&#x306F;&#x3001;&#x30AF;&#x30E9;&#x30B9;&#x306E;&#x5B9A;&#x7FA9;&#x306B;&#x7528;&#x3044;&#x308B;&#x69CB;&#x6587;&#x3068;&#x3088;&#x304F;&#x4F3C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x305F;&#x3060;&#x3057;&#x3001;<code>class</code>&#x30AD;&#x30FC;&#x30EF;&#x30FC;&#x30C9;&#x3092;&#x4F7F;&#x3046;&#x4EE3;&#x308F;&#x308A;&#x306B;&#x3001;&#x3053;&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x306F;<code>define</code>&#x304B;&#x3089;&#x59CB;&#x307E;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">define</span> <span class="hljs-section">defined_type_name</span> (
+  parameter_one = default_value,
+  parameter_two = default_value,
+){
+  ...
+}
+</code></pre>
+<p>&#x5B9A;&#x7FA9;&#x3057;&#x305F;&#x5F8C;&#x306F;&#x3001;&#x4ED6;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3068;&#x540C;&#x3058;&#x3088;&#x3046;&#x306B;&#x5BA3;&#x8A00;&#x3057;&#x3066;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x3092;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">defined_type_name</span> { <span class="hljs-string">&apos;title&apos;</span>:
+  <span class="hljs-attr">parameter_one</span> =&gt; <span class="hljs-string">&apos;foo&apos;</span>,
+  <span class="hljs-attr">parameter_two</span> =&gt; <span class="hljs-string">&apos;bar&apos;</span>,
+}
+</code></pre>
+<p>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306F;&#x30B7;&#x30F3;&#x30B0;&#x30EB;&#x30C8;&#x30F3;&#x3067;&#x306F;&#x306A;&#x3044;&#x305F;&#x3081;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x3092;&#x8907;&#x6570;&#x56DE;&#x5BA3;&#x8A00;&#x3059;&#x308B;&#x969B;&#x306F;&#x3001;&#x305D;&#x3053;&#x306B;&#x542B;&#x307E;&#x308C;&#x308B;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x304C;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x4E00;&#x610F;&#x6027;&#x306E;&#x5236;&#x7D04;&#x306B;&#x9055;&#x53CD;&#x3057;&#x306A;&#x3044;&#x3088;&#x3046;&#x6CE8;&#x610F;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x6B21;&#x306B;&#x9032;&#x3080;&#x524D;&#x306B;&#x3001;&#x5C11;&#x3057;&#x6642;&#x9593;&#x3092;&#x3068;&#x3063;&#x3066;&#x3001;&#x305D;&#x306E;&#x5236;&#x7D04;&#x306B;&#x3064;&#x3044;&#x3066;&#x898B;&#x3066;&#x3044;&#x304D;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;&#x30B3;&#x30F3;&#x30D1;&#x30A4;&#x30EB;&#x4E2D;&#x306B;&#x91CD;&#x8907;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x30A8;&#x30E9;&#x30FC;&#x304C;&#x767A;&#x751F;&#x3057;&#x306A;&#x3044;&#x3088;&#x3046;&#x3001;&#x3059;&#x3079;&#x3066;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306F;&#x3001;&#x540C;&#x3058;&#x578B;&#x306E;&#x4ED6;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3068;&#x91CD;&#x8907;&#x3057;&#x306A;&#x3044;<em>title</em>&#x304A;&#x3088;&#x3073;<em>namevar</em>&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x6301;&#x3064;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x4E00;&#x610F;&#x6027;&#x306E;&#x5236;&#x7D04;">&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x4E00;&#x610F;&#x6027;&#x306E;&#x5236;&#x7D04;</h2>
+<p>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;<em>title</em>&#x306F;&#x3001;Puppet&#x30E6;&#x30FC;&#x30B6;&#x304C;&#x305D;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3092;&#x5185;&#x90E8;&#x7684;&#x306B;&#x8FFD;&#x8DE1;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x4E00;&#x610F;&#x306E;&#x8B58;&#x5225;&#x5B50;&#x3067;&#x3059;&#x3002;&#x305F;&#x3068;&#x3048;&#x3070;&#x3001;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x95A2;&#x4FC2;&#x6027;&#x306F;&#x3001;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x306B;&#x57FA;&#x3065;&#x3044;&#x3066;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x9593;&#x306E;&#x4F9D;&#x5B58;&#x95A2;&#x4FC2;&#x3092;&#x6307;&#x5B9A;&#x3057;&#x307E;&#x3059;&#x3002;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x306F;&#x3001;Puppet&#x5B9F;&#x884C;&#x4E2D;&#x306B;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x72B6;&#x614B;&#x304C;&#x5909;&#x5316;&#x3057;&#x305F;&#x3068;&#x304D;&#x306E;&#x30ED;&#x30B0;&#x3068;&#x30EC;&#x30DD;&#x30FC;&#x30C8;&#x306B;&#x3082;&#x4F7F;&#x7528;&#x3055;&#x308C;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;<em>namevar</em>&#x306F;&#x3001;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x304C;&#x7BA1;&#x7406;&#x3059;&#x308B;&#x5BFE;&#x8C61;&#x306E;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x4E0A;&#x3067;&#x4E00;&#x610F;&#x306E;&#x5074;&#x9762;&#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3067;&#x3059;&#x3002;&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x304C;&#x5B9F;&#x969B;&#x306B;<em>namevar</em>&#x3068;&#x3044;&#x3046;&#x540D;&#x524D;&#x306E;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x6301;&#x3064;&#x308F;&#x3051;&#x3067;&#x306F;&#x306A;&#x304F;&#x3001;&#x305D;&#x306E;&#x3088;&#x3046;&#x306A;&#x5F79;&#x5272;&#x3092;&#x679C;&#x305F;&#x3059;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x6307;&#x3059;&#x7528;&#x8A9E;&#x304C;namevar&#x3067;&#x3059;&#x3002;&#x305F;&#x3068;&#x3048;&#x3070;&#x3001;<code>file</code>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;namevar&#x306F;<code>path</code>&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3067;&#x3059;&#x3002;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306B;&#x4E00;&#x610F;&#x306E;namevar&#x3092;&#x8981;&#x6C42;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;Puppet&#x30D1;&#x30FC;&#x30B5;&#x306F;&#x5BFE;&#x8C61;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x306E;&#x3042;&#x308B;1&#x3064;&#x306E;&#x5074;&#x9762;&#x306E;&#x72B6;&#x614B;&#x306B;&#x3064;&#x3044;&#x3066;&#x7AF6;&#x5408;&#x3059;&#x308B;&#x8907;&#x6570;&#x306E;&#x5B9A;&#x7FA9;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x306A;&#x3044;&#x3067;&#x6E08;&#x307F;&#x307E;&#x3059;&#x3002;&#x3082;&#x3057;&#x3001;Puppet&#x304C;&#x540C;&#x4E00;&#x306E;<code>path</code>&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x6301;&#x3064;2&#x3064;&#x306E;<code>file</code>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x5B9A;&#x7FA9;&#x3092;&#x8A31;&#x5BB9;&#x3057;&#x305F;&#x3068;&#x3057;&#x305F;&#x3089;&#x3001;&#x305D;&#x306E;&#x30D1;&#x30B9;&#x3092;&#x3082;&#x3064;&#x305D;&#x306E;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306B;&#x3064;&#x3044;&#x3066;&#x3001;&#x3069;&#x3061;&#x3089;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x5B9A;&#x7FA9;&#x3092;&#x9069;&#x7528;&#x3059;&#x3079;&#x304D;&#x304B;&#x5206;&#x304B;&#x3089;&#x306A;&#x304F;&#x306A;&#x308B;&#x3067;&#x3057;&#x3087;&#x3046;&#x3002;</p>
+<p>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x3068;namevar&#x306F;&#x5225;&#x500B;&#x306E;&#x3082;&#x306E;&#x3067;&#x3059;&#x304C;&#x3001;&#x4E00;&#x822C;&#x7684;&#x306B;&#x3001;&#x3042;&#x308B;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;namevar&#x306B;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x5024;&#x306F;&#x3001;&#x5206;&#x304B;&#x308A;&#x3084;&#x3059;&#x3044;&#x4E00;&#x610F;&#x306E;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x306E;&#x826F;&#x3044;&#x5019;&#x88DC;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;&#x305F;&#x3068;&#x3048;&#x3070;&#x3001;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;<code>path</code>&#x304C;<code>/etc/hosts</code>&#x306E;&#x5834;&#x5408;&#x3001;&#x305D;&#x306E;&#x30D1;&#x30B9;&#x3092;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x306B;&#x3059;&#x308C;&#x3070;&#x3001;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x7BA1;&#x7406;&#x5BFE;&#x8C61;&#x304C;&#x3059;&#x3050;&#x5206;&#x304B;&#x308A;&#x307E;&#x3059;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;namevar&#x3092;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x3068;&#x3057;&#x3066;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x901A;&#x4F8B;&#x3067;&#x3059;&#x3002;&#x3053;&#x306E;&#x901A;&#x4F8B;&#x3092;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x3092;&#x660E;&#x793A;&#x7684;&#x306B;&#x7570;&#x306A;&#x308B;&#x5024;&#x306B;&#x8A2D;&#x5B9A;&#x3057;&#x306A;&#x3044;&#x9650;&#x308A;&#x3001;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x306E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x5024;&#x3068;&#x3057;&#x3066;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;namevar&#x304C;&#x8A2D;&#x5B9A;&#x3055;&#x308C;&#x307E;&#x3059;&#x3002;<code>file</code>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3084;<code>package</code>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x3068;&#x3057;&#x3066;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30D1;&#x30B9;&#x3084;&#x30D1;&#x30C3;&#x30B1;&#x30FC;&#x30B8;&#x540D;&#x304C;&#x4F7F;&#x7528;&#x3055;&#x308C;&#x3001;<code>path</code>&#x3084;<code>name</code>&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x304C;&#x672A;&#x8A2D;&#x5B9A;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x304C;&#x591A;&#x3044;&#x306E;&#x306F;&#x3053;&#x306E;&#x305F;&#x3081;&#x3067;&#x3059;&#x3002;</p>
+<h2 id="&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306B;&#x304A;&#x3051;&#x308B;&#x4E00;&#x610F;&#x6027;&#x306E;&#x7DAD;&#x6301;">&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306B;&#x304A;&#x3051;&#x308B;&#x4E00;&#x610F;&#x6027;&#x306E;&#x7DAD;&#x6301;</h2>
+<p>&#x3053;&#x3053;&#x307E;&#x3067;&#x3067;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x4E00;&#x610F;&#x6027;&#x306E;&#x5236;&#x7D04;&#x306B;&#x3064;&#x3044;&#x3066;&#x7406;&#x89E3;&#x3057;&#x307E;&#x3057;&#x305F;&#x304C;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306B;&#x542B;&#x307E;&#x308C;&#x308B;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x4E00;&#x610F;&#x6027;&#x3092;&#x4FDD;&#x8A3C;&#x3059;&#x308B;&#x306B;&#x306F;&#x3069;&#x3046;&#x3057;&#x305F;&#x3089;&#x3088;&#x3044;&#x3067;&#x3057;&#x3087;&#x3046;&#x304B;&#x3002;</p>
+<p>Puppet&#x306B;&#x30D3;&#x30EB;&#x30C8;&#x30A4;&#x30F3;&#x3055;&#x308C;&#x305F;&#x4EFB;&#x610F;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x3092;&#x5BA3;&#x8A00;&#x3059;&#x308B;&#x969B;&#x306B;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x3092;&#x542B;&#x3081;&#x308B;&#x306E;&#x3068;&#x540C;&#x69D8;&#x306B;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x3092;&#x5BA3;&#x8A00;&#x3059;&#x308B;&#x969B;&#x306B;&#x3082;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x3092;&#x542B;&#x3081;&#x307E;&#x3059;&#x3002;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x3092;&#x5BA3;&#x8A00;&#x3059;&#x308B;&#x969B;&#x306B;&#x6307;&#x5B9A;&#x3057;&#x305F;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x306F;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x5185;&#x3067;<code>$title</code>&#x5909;&#x6570;&#x3068;&#x3057;&#x3066;&#x5229;&#x7528;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;&#x3053;&#x306E;<code>$title</code>&#x5909;&#x6570;&#x3092;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306B;&#x542B;&#x307E;&#x308C;&#x308B;&#x5404;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x306B;&#x7D44;&#x307F;&#x8FBC;&#x3080;&#x3053;&#x3068;&#x3067;&#x3001; &#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x304C;&#x4E00;&#x610F;&#x306E;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x3067;&#x5BA3;&#x8A00;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x9650;&#x308A;&#x3001;&#x305D;&#x3053;&#x306B;&#x542B;&#x307E;&#x308C;&#x308B;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3082;&#x4E00;&#x610F;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x30E6;&#x30FC;&#x30B6;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x306E;&#x7BA1;&#x7406;">&#x30E6;&#x30FC;&#x30B6;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x306E;&#x7BA1;&#x7406;</h2>
+<p>&#x4EE5;&#x4E0A;&#x3059;&#x3079;&#x3066;&#x3092;&#x7D44;&#x307F;&#x5408;&#x308F;&#x305B;&#x3066;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x65B9;&#x6CD5;&#x306B;&#x3064;&#x3044;&#x3066;&#x3001;<code>ssh_user</code>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x3092;&#x4F8B;&#x306B;&#x898B;&#x3066;&#x3044;&#x304D;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;</p>
+<p>&#x30AF;&#x30E9;&#x30B9;&#x3068;&#x540C;&#x69D8;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306F;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x5185;&#x3067;&#x5B9A;&#x7FA9;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;&#x591A;&#x304F;&#x306E;&#x5834;&#x5408;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306F;&#x3001;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x306B;&#x542B;&#x3081;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;&#x305D;&#x306E;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x306E;&#x30AF;&#x30E9;&#x30B9;&#x304C;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x6A5F;&#x80FD;&#x3092;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3057;&#x307E;&#x3059;&#x3002;&#x305F;&#x3068;&#x3048;&#x3070;&#x3001;&#x524D;&#x56DE;&#x306E;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3067;&#x4F7F;&#x7528;&#x3057;&#x305F;<code>postgresql</code>&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3067;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306F;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x3001;&#x8A31;&#x53EF;&#x306A;&#x3069;&#x306E;&#x3055;&#x307E;&#x3056;&#x307E;&#x306A;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x8A2D;&#x5B9A;&#x7BA1;&#x7406;&#x306B;&#x95A2;&#x4FC2;&#x3059;&#x308B;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30B0;&#x30EB;&#x30FC;&#x30D7;&#x3092;&#x7BA1;&#x7406;&#x3059;&#x308B;&#x306E;&#x306B;&#x5F79;&#x7ACB;&#x3061;&#x307E;&#x3059;&#x3002;&#x3057;&#x304B;&#x3057;&#x3053;&#x3053;&#x3067;&#x306F;&#x3001;&#x5206;&#x304B;&#x308A;&#x3084;&#x3059;&#x304F;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x3092;&#x542B;&#x3080;&#x30B9;&#x30BF;&#x30F3;&#x30C9;&#x30A2;&#x30ED;&#x30F3;&#x306E;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<div class="lvm-task-number"><p>&#x30BF;&#x30B9;&#x30AF;1:</p></div>
+
+<p>&#x59CB;&#x3081;&#x308B;&#x524D;&#x306B;&#x3001;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3067;&#x4F5C;&#x696D;&#x3057;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>cd /etc/puppetlabs/code/environments/production/modules
+</code></pre><p><code>user_accounts</code>&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x306E;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x69CB;&#x9020;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>mkdir -p user_accounts/manifests
+</code></pre><div class="lvm-task-number"><p>&#x30BF;&#x30B9;&#x30AF;2:</p></div>
+
+<p>&#x6B21;&#x306B;&#x3001;<code>ssh_user.pp</code>&#x30DE;&#x30CB;&#x30D5;&#x30A7;&#x30B9;&#x30C8;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x3001;&#x305D;&#x306E;&#x4E2D;&#x306B;<code>user_accounts::ssh_user</code>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x3092;&#x542B;&#x3081;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>vim user_accounts/manifests/ssh_user.pp
+</code></pre><p>&#x3053;&#x3053;&#x3067;&#x306F;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3068;&#x305D;&#x306E;&#x30E6;&#x30FC;&#x30B6;&#x306E;SSH&#x516C;&#x958B;&#x30AD;&#x30FC;&#x3092;&#x7BA1;&#x7406;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x57FA;&#x672C;&#x7684;&#x306A;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3044;&#x304F;&#x3064;&#x304B;&#x3068;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x306E;&#x516C;&#x958B;&#x30AD;&#x30FC;&#x306E;<code>pub_key</code>&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x63D0;&#x793A;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306E;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x30EA;&#x30B9;&#x30C8;&#x306F;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x306A;&#x308B;&#x306F;&#x305A;&#x3067;&#x3059;&#x3002;</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">define</span> <span class="hljs-section">user_accounts</span>::ssh_user (
+  <span class="hljs-variable">$pub_key</span>,
+  <span class="hljs-variable">$group</span>   = undef,
+  <span class="hljs-variable">$shell</span>   = undef,
+  <span class="hljs-variable">$comment</span> = undef,
+){
+  ...
+}
+</code></pre>
+<p><code>$pub_key</code>&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x306B;&#x306F;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x5024;&#x304C;&#x5B58;&#x5728;&#x305B;&#x305A;&#x3001;&#x305D;&#x306E;&#x4ED6;&#x306E;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x306E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x5024;&#x306F;&apos;undef&apos;&#x306B;&#x8A2D;&#x5B9A;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x306B;&#x6CE8;&#x610F;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;&#x3053;&#x3053;&#x306B;&#x306F;&#x91CD;&#x8981;&#x306A;&#x9055;&#x3044;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x5024;&#x306E;&#x306A;&#x3044;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x304C;&#x5FC5;&#x8981;&#x306A;&#x306E;&#x3067;&#x3059;&#x3002;<code>$pub_key</code>&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x306E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x5024;&#x3092;&#x7701;&#x7565;&#x3059;&#x308B;&#x3068;&#x3044;&#x3046;&#x3053;&#x3068;&#x306F;&#x3001;<code>$pub_key</code>&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x306B;&#x5024;&#x3092;&#x6307;&#x5B9A;&#x305B;&#x305A;&#x306B;&#x3053;&#x306E;<code>ssh_user</code>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306E;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3092;&#x5BA3;&#x8A00;&#x3057;&#x3066;&#x3001;&#x30B3;&#x30F3;&#x30D1;&#x30A4;&#x30EB;&#x30A8;&#x30E9;&#x30FC;&#x306B;&#x306A;&#x308B;&#x3068;&#x3044;&#x3046;&#x3053;&#x3068;&#x3067;&#x3059;&#x3002;&#x3053;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306B;&#x306F;&#x3001;&#x516C;&#x958B;&#x9375;&#x8A8D;&#x8A3C;&#x306B;&#x3088;&#x3063;&#x3066;SSH&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x3092;&#x9069;&#x5207;&#x306B;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x30E6;&#x30FC;&#x30B6;&#x306E;&#x516C;&#x958B;&#x9375;&#x304C;&#x5FC5;&#x8981;&#x306A;&#x305F;&#x3081;&#x3001;&#x3053;&#x308C;&#x306F;&#x671B;&#x307E;&#x3057;&#x3044;&#x6319;&#x52D5;&#x3067;&#x3059;&#x3002;</p>
+<pre><code class="lang-puppet">  <span class="hljs-keyword">ssh_authorized_key</span> { <span class="hljs-string">&quot;${title}@puppet.vm&quot;</span>:
+    <span class="hljs-attr">ensure</span> =&gt; <span class="hljs-literal">present</span>,
+    <span class="hljs-attr">user</span>   =&gt; <span class="hljs-variable">$title</span>,
+    <span class="hljs-attr">type</span>   =&gt; <span class="hljs-string">&apos;ssh-rsa&apos;</span>,
+    <span class="hljs-attr">key</span>    =&gt; <span class="hljs-variable">$pub_key</span>,
+  }
+</code></pre>
+<p>&#x4E00;&#x65B9;&#x3001;<code>group</code>&#x3001;<code>shell</code>&#x3001;<code>comment</code>&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x306F;&#x5FC5;&#x9808;&#x3067;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;<code>ssh_user</code>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306F;&#x3001;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x4E0A;&#x306E;&#x5B9F;&#x969B;&#x306E;&#x30E6;&#x30FC;&#x30B6;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x306B;&#x5BFE;&#x3059;&#x308B;&#x901A;&#x5E38;&#x306E;<code>user</code>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3092;&#x542B;&#x3093;&#x3067;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-puppet">  <span class="hljs-keyword">user</span> { <span class="hljs-variable">$title</span>:
+    <span class="hljs-attr">ensure</span>  =&gt; <span class="hljs-literal">present</span>,
+    <span class="hljs-attr">groups</span>  =&gt; <span class="hljs-variable">$group</span>,
+    <span class="hljs-attr">shell</span>   =&gt; <span class="hljs-variable">$shell</span>,
+    <span class="hljs-attr">home</span>    =&gt; <span class="hljs-string">&quot;/home/${title}&quot;</span>,
+    <span class="hljs-attr">comment</span> =&gt; <span class="hljs-variable">$comment</span>,
+  }
+</code></pre>
+<p><code>user</code>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306B;&#x306F;&#x3001;<code>group</code>&#x3001;<code>shell</code>&#x3001;<code>comment</code>&#x3092;&#x6271;&#x3046;&#x81EA;&#x8EAB;&#x306E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x5024;&#x304C;&#x65E2;&#x306B;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x671B;&#x307E;&#x3057;&#x3044;&#x6319;&#x52D5;&#x306F;&#x3001;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3067;&#x5024;&#x304C;&#x53D7;&#x3051;&#x6E21;&#x3055;&#x308C;&#x305F;&#x5834;&#x5408;&#x306F;&#x305D;&#x306E;&#x5024;&#x3092;&#x4F7F;&#x3044;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x5BA3;&#x8A00;&#x6642;&#x306B;&#x63D0;&#x4F9B;&#x3055;&#x308C;&#x306A;&#x304B;&#x3063;&#x305F;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;<code>user</code>&#x578B;&#x81EA;&#x8EAB;&#x306E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x5024;&#x306B;&#x623B;&#x3059;&#x3053;&#x3068;&#x3067;&#x3059;&#x3002;</p>
+<p><code>undef</code>&#x3068;&#x3044;&#x3046;&#x7279;&#x5225;&#x306A;&#x5024;&#x3092;&#x4F7F;&#x3048;&#x3070;&#x3001;&#x305D;&#x306E;&#x4E21;&#x65B9;&#x3092;&#x5B9F;&#x73FE;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;<code>undef</code>&#x306F;&#x3001;&#x5185;&#x90E8;&#x7684;&#x306B;&#x306F;&#x3001;&#x672A;&#x8A2D;&#x5B9A;&#x306E;&#x5909;&#x6570;&#x307E;&#x305F;&#x306F;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x8A55;&#x4FA1;&#x3059;&#x308B;&#x3068;&#x304D;&#x306B;Puppet&#x304C;&#x6271;&#x3046;&#x5024;&#x305D;&#x306E;&#x3082;&#x306E;&#x3067;&#x3059;&#x3002;&#x3053;&#x308C;&#x3092;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x306E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x5024;&#x3068;&#x3057;&#x3066;&#x8A2D;&#x5B9A;&#x3057;&#x3066;&#x304A;&#x3051;&#x3070;&#x3001;&#x6587;&#x5B57;&#x901A;&#x308A;&#x300C;undefined=&#x672A;&#x5B9A;&#x7FA9;&#x300D;&#x306E;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x72B6;&#x614B;&#x3092;&#x914D;&#x4E0B;&#x306E;<code>user</code>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306B;&#x53D7;&#x3051;&#x6E21;&#x3057;&#x3001;<code>user</code>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x52D5;&#x4F5C;&#x306B;&#x623B;&#x3059;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x308C;&#x3089;&#x306E;<code>user</code>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x304A;&#x3088;&#x3073;<code>ssh_authorized_key</code>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3068;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x306E;&#x30DB;&#x30FC;&#x30E0;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3068;<code>.ssh</code>&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3092;&#x7BA1;&#x7406;&#x3059;&#x308B;<code>file</code>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3092;&#x7D44;&#x307F;&#x5408;&#x308F;&#x305B;&#x308B;&#x3068;&#x3001;<code>user_accounts::ssh_user</code>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306F;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">define</span> <span class="hljs-section">user_accounts</span>::ssh_user (
+  <span class="hljs-variable">$pub_key</span>,
+  <span class="hljs-variable">$group</span>   = undef,
+  <span class="hljs-variable">$shell</span>   = undef,
+  <span class="hljs-variable">$comment</span> = undef,
+){
+  <span class="hljs-keyword">ssh_authorized_key</span> { <span class="hljs-string">&quot;${title}@puppet.vm&quot;</span>:
+    <span class="hljs-attr">ensure</span> =&gt; <span class="hljs-literal">present</span>,
+    <span class="hljs-attr">user</span>   =&gt; <span class="hljs-variable">$title</span>,
+    <span class="hljs-attr">type</span>   =&gt; <span class="hljs-string">&apos;ssh-rsa&apos;</span>,
+    <span class="hljs-attr">key</span>    =&gt; <span class="hljs-variable">$pub_key</span>,
+  }
+  <span class="hljs-keyword">file</span> { <span class="hljs-string">&quot;/home/${title}/.ssh&quot;</span>:
+    <span class="hljs-attr">ensure</span> =&gt; <span class="hljs-literal">directory</span>,
+    <span class="hljs-attr">owner</span>  =&gt; <span class="hljs-variable">$title</span>,
+    <span class="hljs-attr">group</span>  =&gt; <span class="hljs-variable">$title</span>,
+    <span class="hljs-attr">mode</span>   =&gt; <span class="hljs-string">&apos;0700&apos;</span>,
+    <span class="hljs-attr">before</span> =&gt; Ssh_authorized_key[<span class="hljs-string">&quot;${title}@puppet.vm&quot;</span>],
+  }
+  <span class="hljs-keyword">user</span> { <span class="hljs-variable">$title</span>:
+    <span class="hljs-attr">ensure</span>  =&gt; <span class="hljs-literal">present</span>,
+    <span class="hljs-attr">groups</span>  =&gt; <span class="hljs-variable">$group</span>,
+    <span class="hljs-attr">shell</span>   =&gt; <span class="hljs-variable">$shell</span>,
+    <span class="hljs-attr">home</span>    =&gt; <span class="hljs-string">&quot;/home/${title}&quot;</span>,
+    <span class="hljs-attr">comment</span> =&gt; <span class="hljs-variable">$comment</span>,
+  }
+  <span class="hljs-keyword">file</span> { <span class="hljs-string">&quot;/home/${title}&quot;</span>:
+    <span class="hljs-attr">ensure</span> =&gt; <span class="hljs-literal">directory</span>,
+    <span class="hljs-attr">owner</span>  =&gt; <span class="hljs-variable">$title</span>,
+    <span class="hljs-attr">group</span>  =&gt; <span class="hljs-variable">$title</span>,
+    <span class="hljs-attr">mode</span>   =&gt; <span class="hljs-string">&apos;0755&apos;</span>,
+  }
+}
+</code></pre>
+<h2 id="&#x6587;&#x5B57;&#x5217;&#x306E;&#x88DC;&#x9593;">&#x6587;&#x5B57;&#x5217;&#x306E;&#x88DC;&#x9593;</h2>
+<p>&#x3053;&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x306B;&#x3001;&#x3082;&#x3046;1&#x3064;&#x65B0;&#x3057;&#x3044;&#x69CB;&#x6587;&#x898F;&#x5247;&#x8981;&#x7D20;&#x304C;&#x52A0;&#x308F;&#x3063;&#x305F;&#x3053;&#x3068;&#x306B;&#x304A;&#x6C17;&#x4ED8;&#x304D;&#x3067;&#x3057;&#x3087;&#x3046;&#x304B;&#x3002;&#x3053;&#x306E;&#x30DE;&#x30CB;&#x30D5;&#x30A7;&#x30B9;&#x30C8;&#x3067;&#x30C0;&#x30D6;&#x30EB;&#x30AF;&#x30A9;&#x30FC;&#x30C8;&#x3067;&#x56F2;&#x307E;&#x308C;&#x305F;&#x6587;&#x5B57;&#x5217;(<code>&quot;...&quot;</code>)&#x306B;<code>${var_name}</code>&#x5F62;&#x5F0F;&#x306E;&#x5909;&#x6570;&#x304C;&#x542B;&#x307E;&#x308C;&#x3066;&#x3044;&#x308B;&#x7B87;&#x6240;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x306F;&#x3001;Puppet&#x306E;<a href="https://puppet.com/docs/puppet/latest/lang_variables.html#interpolation" target="_blank">&#x6587;&#x5B57;&#x5217;&#x306E;&#x88DC;&#x9593;</a>&#x3068;&#x3044;&#x3046;&#x69CB;&#x6587;&#x898F;&#x5247;&#x3067;&#x3059;&#x3002;&#x6587;&#x5B57;&#x5217;&#x306E;&#x88DC;&#x9593;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3068;&#x3001;&#x30C0;&#x30D6;&#x30EB;&#x30AF;&#x30A9;&#x30FC;&#x30C8;&#x3067;&#x56F2;&#x307E;&#x308C;&#x305F;&#x4EFB;&#x610F;&#x306E;&#x6587;&#x5B57;&#x5217;&#x306B;&#x5909;&#x6570;&#x3092;&#x633F;&#x5165;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x6587;&#x5B57;&#x5217;&#x306E;&#x88DC;&#x9593;&#x306F;Puppet&#x5168;&#x4F53;&#x3067;&#x5F79;&#x306B;&#x7ACB;&#x3061;&#x307E;&#x3059;&#x304C;&#x3001;&#x305D;&#x306E;&#x4E2D;&#x3067;&#x3082;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x3067;&#x306F;&#x7279;&#x306B;&#x91CD;&#x8981;&#x306A;&#x5F79;&#x5272;&#x3092;&#x679C;&#x305F;&#x3057;&#x307E;&#x3059;&#x3002;&#x306A;&#x305C;&#x306A;&#x3089;&#x3001;&#x6587;&#x5B57;&#x5217;&#x306E;&#x88DC;&#x9593;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306E;<code>$title</code> &#x5909;&#x6570;&#x3092;&#x3001;&#x305D;&#x306E;&#x69CB;&#x6210;&#x8981;&#x7D20;&#x3067;&#x3042;&#x308B;&#x5404;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x306B;&#x7D44;&#x307F;&#x8FBC;&#x3080;&#x3053;&#x3068;&#x304C;&#x53EF;&#x80FD;&#x306B;&#x306A;&#x308B;&#x304B;&#x3089;&#x3067;&#x3059;&#x3002;&#x305F;&#x3068;&#x3048;&#x3070;&#x3001;<code>ssh_authorized_key</code>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x306F;&#x3001;<code>&quot;${title}@puppet.vm&quot;</code>&#x306E;&#x3088;&#x3046;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x306A;&#x305C;&#x3001;&#x3053;&#x308C;&#x304C;&#x305D;&#x308C;&#x307B;&#x3069;&#x91CD;&#x8981;&#x306A;&#x306E;&#x3067;&#x3057;&#x3087;&#x3046;&#x304B;&#x3002;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306E;&#x672C;&#x4F53;&#x306B;&#x542B;&#x307E;&#x308C;&#x308B;&#x3059;&#x3079;&#x3066;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306F;&#x3001;&#x305D;&#x306E;&#x4ED6;&#x306E;Puppet&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3068;&#x540C;&#x3058;&#x4E00;&#x610F;&#x6027;&#x306E;&#x5236;&#x7D04;&#x3092;&#x6E80;&#x305F;&#x3059;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308B;&#x3068;&#x3044;&#x3046;&#x3053;&#x3068;&#x3092;&#x601D;&#x3044;&#x51FA;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;<code>user</code>&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x5834;&#x5408;&#x306E;&#x3088;&#x3046;&#x306B;&#x76F4;&#x63A5;&#x7684;&#x306B;&#x3001;&#x3082;&#x3057;&#x304F;&#x306F;&#x6587;&#x5B57;&#x5217;&#x306E;&#x88DC;&#x9593;&#x306B;&#x3088;&#x3063;&#x3066;&#x9593;&#x63A5;&#x7684;&#x306B;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306B;&#x4E0E;&#x3048;&#x305F;&#x4E00;&#x610F;&#x6027;&#x3092;&#x305D;&#x306E;&#x69CB;&#x6210;&#x8981;&#x7D20;&#x3068;&#x306A;&#x308B;&#x5404;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306B;&#x53D7;&#x3051;&#x6E21;&#x3059;&#x3053;&#x3068;&#x3067;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306B;&#x542B;&#x307E;&#x308C;&#x308B;&#x3059;&#x3079;&#x3066;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x4E00;&#x610F;&#x6027;&#x3092;&#x4FDD;&#x8A3C;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x53EF;&#x80FD;&#x306B;&#x306A;&#x308B;&#x306E;&#x3067;&#x3059;&#x3002;</p>
+<div class="lvm-task-number"><p>&#x30BF;&#x30B9;&#x30AF;3:</p></div>
+
+<p>&#x901A;&#x5E38;&#x306F;&#x3001;&#x3053;&#x306E;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x4E0A;&#x306B;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3092;&#x5FC5;&#x8981;&#x3068;&#x3059;&#x308B;&#x30E6;&#x30FC;&#x30B6;&#x306B;&#x3001;&#x5404;&#x81EA;&#x306E;&#x516C;&#x958B;&#x9375;&#x3092;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x3088;&#x3046;&#x8981;&#x6C42;&#x3059;&#x308B;&#x3067;&#x3057;&#x3087;&#x3046;&#x3002;&#x3057;&#x304B;&#x3057;&#x3001;&#x3053;&#x3053;&#x3067;&#x306F;&#x30C7;&#x30E2;&#x3068;&#x3044;&#x3046;&#x76EE;&#x7684;&#x4E0A;&#x3001;&#x9375;&#x306E;&#x30DA;&#x30A2;&#x3092;1&#x3064;&#x751F;&#x6210;&#x3057;&#x3001;&#x7BA1;&#x7406;&#x5BFE;&#x8C61;&#x306E;&#x3059;&#x3079;&#x3066;&#x306E;&#x30E6;&#x30FC;&#x30B6;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x5229;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x306B;&#x3057;&#x307E;&#x3059;&#x3002;&#x305D;&#x3046;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;&#x3042;&#x306A;&#x305F;&#x3082;&#x7BA1;&#x7406;&#x5BFE;&#x8C61;&#x30E6;&#x30FC;&#x30B6;&#x306E;1&#x4EBA;&#x3068;&#x3057;&#x3066;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x3057;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x304C;&#x671F;&#x5F85;&#x901A;&#x308A;&#x306B;&#x52D5;&#x4F5C;&#x3057;&#x3066;&#x3044;&#x308B;&#x304B;&#x691C;&#x8A3C;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p><code>ssh-keygen</code>&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x65B0;&#x3057;&#x3044;&#x9375;&#x30DA;&#x30A2;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>ssh-keygen -t rsa
+</code></pre><p>&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306E;&#x30ED;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x8A31;&#x53EF;&#x3057;&#x3001;&#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;<em>puppet</em>&#x3092;&#x5165;&#x529B;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x9375;&#x304C;&#x4F5C;&#x6210;&#x3055;&#x308C;&#x305F;&#x306E;&#x3067;&#x3001;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3078;&#x306E;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x3092;&#x8A31;&#x53EF;&#x3059;&#x308B;&#x30E6;&#x30FC;&#x30B6;&#x3092;&#x5BA3;&#x8A00;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;Puppet&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x8A18;&#x8FF0;&#x3059;&#x308B;&#x6E96;&#x5099;&#x304C;&#x6574;&#x3044;&#x307E;&#x3057;&#x305F;&#x3002;</p>
+<div class="lvm-task-number"><p>&#x30BF;&#x30B9;&#x30AF;4:</p></div>
+
+<p>&#x30ED;&#x30FC;&#x30EB;&#x304A;&#x3088;&#x3073;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x306B;&#x3064;&#x3044;&#x3066;&#x5B66;&#x7FD2;&#x3059;&#x308B;&#x524D;&#x306F;&#x3001;&#x3053;&#x308C;&#x3092;<code>site.pp</code>&#x30DE;&#x30CB;&#x30D5;&#x30A7;&#x30B9;&#x30C8;&#x306B;&#x76F4;&#x63A5;&#x914D;&#x7F6E;&#x3057;&#x3066;&#x3044;&#x305F;&#x304B;&#x3082;&#x3057;&#x308C;&#x307E;&#x305B;&#x3093;&#x304C;&#x3001;&#x3053;&#x3053;&#x3067;&#x306F;&#x3001;<code>pasture_dev_users</code>&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x3001;Hiera&#x30EB;&#x30C3;&#x30AF;&#x30A2;&#x30C3;&#x30D7;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3001;&#x30A4;&#x30F3;&#x30D5;&#x30E9;&#x30B9;&#x30C8;&#x30E9;&#x30AF;&#x30C1;&#x30E3;&#x5185;&#x306E;&#x5404;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x306B;&#x5FC5;&#x8981;&#x306A;&#x30E6;&#x30FC;&#x30B6;&#x3092;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30E0;&#x7684;&#x306B;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x3053;&#x3067;&#x306F;&#x3001;<code>beauvine.vm</code>&#x30C9;&#x30E1;&#x30A4;&#x30F3;&#x306B;&#x542B;&#x307E;&#x308C;&#x308B;&#x3059;&#x3079;&#x3066;&#x306E;&#x30CE;&#x30FC;&#x30C9;&#x4E0A;&#x306E;&#x30E6;&#x30FC;&#x30B6;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3092;&#x542B;&#x3081;&#x308B;&#x305F;&#x3081;&#x3001;<code>/etc/puppetlabs/code/environments/production/data/domain/beauvine.vm.yaml</code>&#x306B;&#x3042;&#x308B;<code>domain/beauvine.vm.yaml</code> Hiera&#x30C7;&#x30FC;&#x30BF;&#x30BD;&#x30FC;&#x30B9;&#x3092;&#x7DE8;&#x96C6;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x307E;&#x3060;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3067;&#x4F5C;&#x696D;&#x3057;&#x3066;&#x3044;&#x308B;&#x3082;&#x306E;&#x3068;&#x3057;&#x3066;&#x3001;1&#x968E;&#x5C64;&#x4E0A;&#x306E;<code>/etc/puppetlabs/code/environments/production/</code>&#x306B;&#x4E0A;&#x304C;&#x308A;&#x3001;&#x3053;&#x306E;<code>data</code>&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306B;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x3057;&#x3084;&#x3059;&#x304F;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>cd ..
+</code></pre><p>&#x7DE8;&#x96C6;&#x3059;&#x308B;&#x30C7;&#x30FC;&#x30BF;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x958B;&#x304F;&#x524D;&#x306B;&#x3001;&#x5C11;&#x3005;&#x624B;&#x9593;&#x3092;&#x7701;&#x304F;&#x305F;&#x3081;&#x3001;bash&#x306E;<code>&gt;&gt;</code>&#x30A2;&#x30DA;&#x30F3;&#x30C9;&#x6F14;&#x7B97;&#x5B50;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3001;<code>id_rsa.pub</code>&#x516C;&#x958B;&#x9375;&#x3092;&#x30C7;&#x30FC;&#x30BF;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x672B;&#x5C3E;&#x306B;&#x4ED8;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>cat ~/.ssh/id_rsa.pub &gt;&gt; data/domain/beauvine.vm.yaml
+</code></pre><p>&#x6B21;&#x306E;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x958B;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>vim data/domain/beauvine.vm.yaml
+</code></pre><p><code>profile::base::dev_users::users:</code>&#x306E;Hiera&#x5024;&#x3092;&#x5B9A;&#x7FA9;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x65B0;&#x3057;&#x3044;&#x884C;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;&#x3053;&#x3053;&#x3067;&#x3001;Hiera&#x306E;&#x69CB;&#x9020;&#x5316;&#x30C7;&#x30FC;&#x30BF;&#x306E;&#x7279;&#x6027;&#x3092;&#x5229;&#x7528;&#x3057;&#x3066;&#x3001;&#x65B0;&#x898F;&#x306B;<code>ssh_user</code>&#x306E;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3092;2&#x3064;&#x5B9A;&#x7FA9;&#x3057;&#x3001;&#x305D;&#x308C;&#x305E;&#x308C;&#x306B;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;&#x3002;&#x3053;&#x3053;&#x3067;&#x306F;&#x3001;YAML&#x30C7;&#x30FC;&#x30BF;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306B;&#x3053;&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x6B63;&#x3057;&#x304F;&#x5165;&#x529B;&#x3059;&#x308B;&#x3053;&#x3068;&#x3060;&#x3051;&#x306B;&#x96C6;&#x4E2D;&#x3057;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;&#x3053;&#x306E;&#x69CB;&#x9020;&#x5316;&#x30C7;&#x30FC;&#x30BF;&#x304C;Puppet&#x30DE;&#x30CB;&#x30D5;&#x30A7;&#x30B9;&#x30C8;&#x306B;&#x3088;&#x3063;&#x3066;&#x5B9F;&#x969B;&#x306B;&#x3069;&#x306E;&#x3088;&#x3046;&#x306B;&#x5B9F;&#x88C5;&#x3055;&#x308C;&#x308B;&#x304B;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;&#x5C11;&#x3057;&#x5F8C;&#x3067;&#x8AAC;&#x660E;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x6700;&#x7D42;&#x7684;&#x306A;&#x5185;&#x5BB9;&#x3092;&#x4EE5;&#x4E0B;&#x306B;&#x793A;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x304C;&#x3001;Vim&#x306B;&#x6163;&#x308C;&#x3066;&#x3044;&#x306A;&#x3044;&#x5834;&#x5408;&#x3001;&#x5927;&#x304D;&#x3044;<code>pub_key</code>&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x306F;&#x6271;&#x3044;&#x306B;&#x304F;&#x3044;&#x304B;&#x3082;&#x3057;&#x308C;&#x307E;&#x305B;&#x3093;(Vim&#x3092;&#x4F7F;&#x3044;&#x6163;&#x308C;&#x3066;&#x3044;&#x308B;&#x5834;&#x5408;&#x306F;&#x3001;&#x3053;&#x306E;&#x6BB5;&#x843D;&#x3092;&#x7701;&#x7565;&#x3057;&#x3066;&#x69CB;&#x3044;&#x307E;&#x305B;&#x3093;)&#x3002;</p>
+<p>VM&#x307E;&#x305A;&#x3001;&#x9375;&#x306E;&#x5192;&#x982D;&#x3068;&#x672B;&#x5C3E;&#x304B;&#x3089;&#x3001;&#x6587;&#x5B57;&#x5217;<code>ssh-rsa</code>&#x304A;&#x3088;&#x3073;<code>root@learning.puppetlabs.vm</code>&#x3092;&#x524A;&#x9664;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x9375;&#x304C;&#x8A18;&#x8FF0;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x884C;&#x306B;&#x30AB;&#x30FC;&#x30BD;&#x30EB;&#x3092;&#x7F6E;&#x304D;&#x307E;&#x3059;&#x3002;&#x5FC5;&#x305A;&#x3001;<code>ESC</code>&#x30AD;&#x30FC;&#x3092;&#x62BC;&#x3057;&#x3066;&#x3001;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x30E2;&#x30FC;&#x30C9;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x3066;&#x304A;&#x3044;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x30E2;&#x30FC;&#x30C9;&#x306A;&#x3089;&#x3001;<code>^</code>&#x30AD;&#x30FC;&#x3067;&#x884C;&#x982D;&#x3001;<code>$</code>&#x30AD;&#x30FC;&#x3067;&#x884C;&#x672B;&#x3078;&#x3068;&#x7C21;&#x5358;&#x306B;&#x79FB;&#x52D5;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;<code>ssh-rsa</code>&#x307E;&#x305F;&#x306F;<code>root@learning.puppetlabs.vm</code>&#x6587;&#x5B57;&#x5217;&#x306E;&#x4E0A;&#x306B;&#x30AB;&#x30FC;&#x30BD;&#x30EB;&#x304C;&#x6765;&#x305F;&#x3089;&#x3001;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x30E2;&#x30FC;&#x30C9;&#x3067;&#x30B3;&#x30DE;&#x30F3;&#x30C9;<code>daW</code>&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x524A;&#x9664;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x540C;&#x3058;&#x9375;&#x3092;&#x4E21;&#x65B9;&#x306E;&#x30E6;&#x30FC;&#x30B6;&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;&#x9375;&#x3092;&#x30B3;&#x30D4;&#x30FC;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x3082;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;&#x30B3;&#x30DE;&#x30F3;&#x30C9;<code>yy</code>&#x3067;&#x884C;&#x3092;&#x30B3;&#x30D4;&#x30FC;&#x3057;&#x3001;<code>p</code>&#x30AD;&#x30FC;&#x3067;&#x30AB;&#x30FC;&#x30BD;&#x30EB;&#x4F4D;&#x7F6E;&#x306B;&#x30DA;&#x30FC;&#x30B9;&#x30C8;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x307E;&#x305F;&#x3001;<code>dd</code>&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3067;&#x884C;&#x3092;&#x524A;&#x9664;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x5B8C;&#x4E86;&#x3059;&#x308B;&#x3068;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306F;&#x6B21;&#x306E;&#x4F8B;&#x306E;&#x3088;&#x3046;&#x306B;&#x306A;&#x308B;&#x306F;&#x305A;&#x3067;&#x3059;(&#x516C;&#x958B;&#x9375;&#x306E;&#x5185;&#x5BB9;&#x306F;&#x4F8B;&#x3068;&#x7570;&#x306A;&#x308B;&#x53EF;&#x80FD;&#x6027;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;)&#x3002;<code>pub_key:</code>&#x306F;&#x3059;&#x3079;&#x3066;1&#x884C;&#x306B;&#x53CE;&#x307E;&#x3063;&#x3066;&#x3044;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308B;&#x3053;&#x3068;&#x306B;&#x6CE8;&#x610F;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;</p>
+<pre><code class="lang-yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">profile:</span>:pasture::app::default_message: <span class="hljs-string">&quot;Welcome to Beauvine!&quot;</span>
+<span class="hljs-attr">profile:</span>:base::dev_users::users:
+<span class="hljs-attr">  - title:</span> <span class="hljs-string">&apos;bessie&apos;</span>
+<span class="hljs-attr">    comment:</span> <span class="hljs-string">&apos;Bessie Johnson&apos;</span>
+<span class="hljs-attr">    pub_key:</span> <span class="hljs-string">&apos;AAAAB3NzaC1yc2EAAAADAQABAAABAQCVWbkvtB4G/x9eEHXUkFfQgJuxBNJ3MCJ
+3BWbYHb+Ksmd2I92G9wSVFWRDvLzciOsWkbjfSWHrql+82lgplyxBHZZYlf0eK3ytkSL5hvQtOmLW
+MDcWNbHnt7qZFA0j6/h43SG0POmkG1iHSHnlwvbcpJoYZZpKz5+Iq7P9JmOv7zf8UsJtQccWHxAHc
+J+xJ6xZJ2EBziWUCMPxLnD3zNQaW0r/B3pRMT+7F1gDHJ8HuNVklcQGCpVS+WrfpNMJ5+L25Aw/H2
+Bg33o+0esH5FL8M8IR3Xkgp80NAQqmyVi7cx+c9n4RjEdMGk3XtutPNsSLcgm8/YZqv/yTRH6wAQl
+/&apos;</span>
+<span class="hljs-attr">  - title:</span> <span class="hljs-string">&apos;gertie&apos;</span>
+<span class="hljs-attr">    comment:</span> <span class="hljs-string">&apos;Gertie Philips&apos;</span>
+<span class="hljs-attr">    pub_key:</span> <span class="hljs-string">&apos;AAAAB3NzaC1yc2EAAAADAQABAAABAQCVWbkvtB4G/x9eEHXUkFfQgJuxBNJ3MCJ
+3BWbYHb+Ksmd2I92G9wSVFWRDvLzciOsWkbjfSWHrql+82lgplyxBHZZYlf0eK3ytkSL5hvQtOmLW
+MDcWNbHnt7qZFA0j6/h43SG0POmkG1iHSHnlwvbcpJoYZZpKz5+Iq7P9JmOv7zf8UsJtQccWHxAHc
+J+xJ6xZJ2EBziWUCMPxLnD3zNQaW0r/B3pRMT+7F1gDHJ8HuNVklcQGCpVS+WrfpNMJ5+L25Aw/H2
+Bg33o+0esH5FL8M8IR3Xkgp80NAQqmyVi7cx+c9n4RjEdMGk3XtutPNsSLcgm8/YZqv/yTRH6wAQl
+/&apos;</span>
+</code></pre>
+<p>Ruby&#x306E;&#x30EF;&#x30F3;&#x30E9;&#x30A4;&#x30CA;&#x30FC;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3001;YAML&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x304C;&#x6B63;&#x5E38;&#x306B;&#x89E3;&#x6790;&#x3067;&#x304D;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>ruby -e &quot;require &apos;yaml&apos;;require &apos;pp&apos;;pp YAML.load_file(&apos;./data/domain/beauvine.vm.yaml&apos;)&quot;
+</code></pre><p>&#x30A2;&#x30A6;&#x30C8;&#x30D7;&#x30C3;&#x30C8;&#x306F;&#x4EE5;&#x4E0B;&#x306E;&#x3088;&#x3046;&#x306B;&#x306A;&#x308B;&#x306F;&#x305A;&#x3067;&#x3059;&#x3002;</p>
+<pre><code class="lang-json">{&quot;profile::pasture::app::default_message&quot;=&gt;&quot;Welcome to Beauvine!&quot;,
+ &quot;profile::base::dev_users::users&quot;=&gt;
+  [{&quot;title&quot;=&gt;&quot;bessie&quot;,
+    &quot;comment&quot;=&gt;&quot;Bessie Johnson&quot;,
+    &quot;pub_key&quot;=&gt;
+     &quot;AAAAB3NzaC1yc2EAAAADAQABAAABAQCVWbkvtB4G/x9eEHXUkFfQgJuxBNJ3MCJ3BWbYHb+
+Ksmd2I92G9wSVFWRDvLzciOsWkbjfSWHrql+82lgplyxBHZZYlf0eK3ytkSL5hvQtOmLWMDcWNbHn
+t7qZFA0j6/h43SG0POmkG1iHSHnlwvbcpJoYZZpKz5+Iq7P9JmOv7zf8UsJtQccWHxAHcJ+xJ6xZJ
+2EBziWUCMPxLnD3zNQaW0r/B3pRMT+7F1gDHJ8HuNVklcQGCpVS+WrfpNMJ5+L25Aw/H2Bg33o+0e
+sH5FL8M8IR3Xkgp80NAQqmyVi7cx+c9n4RjEdMGk3XtutPNsSLcgm8/YZqv/yTRH6wAQl/&quot;},
+   {&quot;title&quot;=&gt;&quot;gertie&quot;,
+    &quot;comment&quot;=&gt;&quot;Gertie Philips&quot;,
+    &quot;pub_key&quot;=&gt;
+     &quot;AAAAB3NzaC1yc2EAAAADAQABAAABAQCVWbkvtB4G/x9eEHXUkFfQgJuxBNJ3MCJ3BWbYHb+
+Ksmd2I92G9wSVFWRDvLzciOsWkbjfSWHrql+82lgplyxBHZZYlf0eK3ytkSL5hvQtOmLWMDcWNbHn
+t7qZFA0j6/h43SG0POmkG1iHSHnlwvbcpJoYZZpKz5+Iq7P9JmOv7zf8UsJtQccWHxAHcJ+xJ6xZJ
+2EBziWUCMPxLnD3zNQaW0r/B3pRMT+7F1gDHJ8HuNVklcQGCpVS+WrfpNMJ5+L25Aw/H2Bg33o+0e
+sH5FL8M8IR3Xkgp80NAQqmyVi7cx+c9n4RjEdMGk3XtutPNsSLcgm8/YZqv/yTRH6wAQl/&quot;}]}
+</code></pre>
+<p>&#x307E;&#x305F;&#x3001;<code>common.yaml</code>&#x30C7;&#x30FC;&#x30BF;&#x30BD;&#x30FC;&#x30B9;&#x306B;&#x5909;&#x66F4;&#x3092;&#x52A0;&#x3048;&#x3001;&#x3053;&#x306E;&#x9375;&#x306E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x5024;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;&#x3002;
+&#x3053;&#x306E;&#x5834;&#x5408;&#x3001;&#x5024;&#x306F;&#x7A7A;&#x306E;&#x30EA;&#x30B9;&#x30C8;&#x306B;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;&#x3002;&#x305D;&#x3046;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;Hiera&#x304C;<code>beauvine.vm</code>&#x30C9;&#x30E1;&#x30A4;&#x30F3;&#x306E;&#x5916;&#x3067;&#x3053;&#x306E;&#x5024;&#x3092;&#x30EB;&#x30C3;&#x30AF;&#x30A2;&#x30C3;&#x30D7;&#x3057;&#x3088;&#x3046;&#x3068;&#x3057;&#x305F;&#x5834;&#x5408;&#x3067;&#x3082;&#x3001;&#x6709;&#x52B9;&#x306A;&#x7D50;&#x679C;&#x3092;&#x5F97;&#x3089;&#x308C;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>vim data/common.yaml
+</code></pre><p><code>common.yaml</code>&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306F;&#x3001;&#x4EE5;&#x4E0B;&#x306E;&#x3088;&#x3046;&#x306B;&#x306A;&#x308B;&#x306F;&#x305A;&#x3067;&#x3059;&#x3002;</p>
+<pre><code class="lang-yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">profile:</span>:pasture::app::default_message: <span class="hljs-string">&quot;Baa&quot;</span>
+<span class="hljs-attr">profile:</span>:pasture::app::sinatra_server: <span class="hljs-string">&quot;thin&quot;</span>
+<span class="hljs-attr">profile:</span>:pasture::app::default_character: <span class="hljs-string">&quot;sheep&quot;</span>
+<span class="hljs-attr">profile:</span>:pasture::app::db: <span class="hljs-string">&quot;none&quot;</span>
+<span class="hljs-attr">profile:</span>:base::dev_users::users: []
+</code></pre>
+<div class="lvm-task-number"><p>&#x30BF;&#x30B9;&#x30AF;5:</p></div>
+
+<p>&#x3053;&#x308C;&#x3067;&#x30C7;&#x30FC;&#x30BF;&#x304C;Hiera&#x3067;&#x5229;&#x7528;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x305F;&#x306E;&#x3067;&#x3001;<code>profile/manifests/base/</code>&#x306B;<code>dev_users.pp</code>&#x30DE;&#x30CB;&#x30D5;&#x30A7;&#x30B9;&#x30C8;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>vim /etc/puppetlabs/code/environments/production/modules/profile/manifests/base/dev_users.pp
+</code></pre><p>&#x3053;&#x308C;&#x3067;&#x3001;<code>user_accounts::ssh_user</code>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x304C;&#x3001;&#x3072;&#x3068;&#x7D44;&#x306E;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x5165;&#x529B;&#x304B;&#x3089;&#x306E;SSH&#x9375;&#x3092;&#x5229;&#x7528;&#x3057;&#x3066;&#x65B0;&#x3057;&#x3044;&#x30E6;&#x30FC;&#x30B6;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x65B9;&#x6CD5;&#x3092;&#x63D0;&#x4F9B;&#x3057;&#x3001;Hiera&#x30C7;&#x30FC;&#x30BF;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x304C;&#x5404;&#x30E6;&#x30FC;&#x30B6;&#x306E;&#x305F;&#x3081;&#x306E;&#x5165;&#x529B;&#x30EA;&#x30B9;&#x30C8;&#x3092;&#x5B9A;&#x7FA9;&#x3059;&#x308B;&#x3088;&#x3046;&#x8A2D;&#x5B9A;&#x3055;&#x308C;&#x307E;&#x3057;&#x305F;&#x3002;&#x3057;&#x304B;&#x3057;&#x3001;&#x30B3;&#x30FC;&#x30C9;&#x306B;&#x304A;&#x3044;&#x3066;&#x3053;&#x308C;&#x3089;&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x7D44;&#x307F;&#x5408;&#x308F;&#x305B;&#x308B;&#x65B9;&#x6CD5;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x307E;&#x3060;&#x53D6;&#x308A;&#x7D44;&#x3093;&#x3067;&#x3044;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<p>&#x3053;&#x3053;&#x3067;&#x3001;<a href="https://puppet.com/docs/puppet/latest/lang_iteration.html" target="_blank">&#x30A4;&#x30C6;&#x30EC;&#x30FC;&#x30BF;</a>&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;Puppet&#x8A00;&#x8A9E;&#x306E;&#x6A5F;&#x80FD;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;&#x3002;&#x30A4;&#x30C6;&#x30EC;&#x30FC;&#x30BF;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3068;&#x3001;Puppet&#x30B3;&#x30FC;&#x30C9;&#x306E;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3092;&#x8907;&#x6570;&#x56DE;&#x53CD;&#x5FA9;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x3053;&#x306E;&#x3068;&#x304D;&#x3001;&#x30CF;&#x30C3;&#x30B7;&#x30E5;&#x307E;&#x305F;&#x306F;&#x914D;&#x5217;&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3001;&#x5404;&#x53CD;&#x5FA9;&#x306B;&#x3064;&#x304D;&#x3001;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x5185;&#x306E;&#x5909;&#x6570;&#x306B;&#x7570;&#x306A;&#x308B;&#x5024;&#x3092;&#x30D0;&#x30A4;&#x30F3;&#x30C9;&#x3057;&#x307E;&#x3059;&#x3002;&#x4ECA;&#x56DE;&#x306E;&#x5834;&#x5408;&#x3001;&#x30A4;&#x30C6;&#x30EC;&#x30FC;&#x30BF;&#x306F;Hiera&#x30C7;&#x30FC;&#x30BF;&#x30BD;&#x30FC;&#x30B9;&#x3067;&#x5B9A;&#x7FA9;&#x3055;&#x308C;&#x305F;&#x30E6;&#x30FC;&#x30B6;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x306E;&#x30EA;&#x30B9;&#x30C8;&#x3092;&#x51E6;&#x7406;&#x3057;&#x3066;&#x3001;&#x305D;&#x308C;&#x305E;&#x308C;&#x306B;&#x3064;&#x3044;&#x3066;<code>user_accounts::ssh_user</code>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306E;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3092;&#x5BA3;&#x8A00;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">class</span> <span class="hljs-title">profile::base::dev_users</span> {
+  lookup(profile::base::dev_users::users).each |<span class="hljs-variable">$user</span>| {
+    user_accounts::<span class="hljs-keyword">ssh_user</span> { <span class="hljs-variable">$user</span>[<span class="hljs-string">&apos;title&apos;</span>]:
+        <span class="hljs-attr">comment</span> =&gt; <span class="hljs-variable">$user</span>[<span class="hljs-string">&apos;comment&apos;</span>],
+        <span class="hljs-attr">pub_key</span> =&gt; <span class="hljs-variable">$user</span>[<span class="hljs-string">&apos;pub_key&apos;</span>],
+    }
+  }
+}
+</code></pre>
+<p>&#x53CD;&#x5FA9;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x969B;&#x306F;&#x3001;&#x30B3;&#x30FC;&#x30C9;&#x306E;&#x8AAD;&#x307F;&#x3084;&#x3059;&#x3055;&#x3068;&#x30E1;&#x30F3;&#x30C6;&#x30CA;&#x30F3;&#x30B9;&#x3057;&#x3084;&#x3059;&#x3055;&#x306B;&#x5341;&#x5206;&#x6CE8;&#x610F;&#x3092;&#x6255;&#x3063;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;Puppet&#x8A00;&#x8A9E;&#x306E;&#x826F;&#x3044;&#x70B9;&#x306E;1&#x3064;&#x306F;&#x3001;&#x5BA3;&#x8A00;&#x578B;&#x8A00;&#x8A9E;&#x3068;&#x3057;&#x3066;&#x306E;&#x7279;&#x6027;&#x4E0A;&#x3001;Puppet&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x305D;&#x306E;&#x3082;&#x306E;&#x304C;&#x4EBA;&#x9593;&#x304C;&#x7406;&#x89E3;&#x3067;&#x304D;&#x308B;&#x8A00;&#x8A9E;&#x3067;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x306E;&#x671B;&#x307E;&#x3057;&#x3044;&#x72B6;&#x614B;&#x3092;&#x8868;&#x305B;&#x308B;&#x3053;&#x3068;&#x3067;&#x3059;&#x3002;&#x53CD;&#x5FA9;&#x3092;&#x3080;&#x3084;&#x307F;&#x306B;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3068;&#x3001;Puppet&#x30B3;&#x30FC;&#x30C9;&#x306E;&#x8907;&#x96D1;&#x6027;&#x304C;&#x5897;&#x3057;&#x3001;&#x30B3;&#x30FC;&#x30C9;&#x306E;&#x8AAD;&#x307F;&#x3084;&#x3059;&#x3055;&#x304C;&#x640D;&#x306A;&#x308F;&#x308C;&#x3001;&#x30E1;&#x30F3;&#x30C6;&#x30CA;&#x30F3;&#x30B9;&#x304C;&#x56F0;&#x96E3;&#x306B;&#x306A;&#x308B;&#x3053;&#x3068;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x4ECA;&#x56DE;&#x306E;&#x5834;&#x5408;&#x3001;&#x30ED;&#x30FC;&#x30EB;&#x304A;&#x3088;&#x3073;&#x30D7;&#x30ED;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x3001;Hiera&#x3001;&#x304A;&#x3088;&#x3073;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x3092;&#x7528;&#x3044;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;&#x6B8B;&#x308A;&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x304C;&#x5341;&#x5206;&#x30B7;&#x30F3;&#x30D7;&#x30EB;&#x306A;&#x305F;&#x3081;&#x3001;&#x30A4;&#x30C6;&#x30EC;&#x30FC;&#x30BF;&#x306E;&#x5F79;&#x5272;&#x304C;&#x975E;&#x5E38;&#x306B;&#x660E;&#x78BA;&#x3067;&#x3059;&#x3002;Puppet&#x306E;&#x69CB;&#x6587;&#x898F;&#x5247;&#x306E;&#x57FA;&#x672C;&#x3092;&#x7406;&#x89E3;&#x3057;&#x3066;&#x3044;&#x308C;&#x3070;&#x3001;&#x7C21;&#x5358;&#x306B;&#x884C;&#x306B;&#x6CBF;&#x3063;&#x3066;&#x300C;Hiera&#x304B;&#x3089;&#x30E6;&#x30FC;&#x30B6;&#x306E;&#x30EA;&#x30B9;&#x30C8;&#x3092;&#x53D6;&#x5F97;&#x3059;&#x308B;&#x3001;&#x305D;&#x3057;&#x3066;&#x305D;&#x308C;&#x305E;&#x308C;&#x306B;&#x3064;&#x3044;&#x3066;&#x3001;SSH&#x30E6;&#x30FC;&#x30B6;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x300D;&#x3068;&#x3044;&#x3046;&#x3088;&#x3046;&#x306B;&#x3001;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x6587;&#x7AE0;&#x306B;&#x7FFB;&#x8A33;&#x3057;&#x3066;&#x3044;&#x304F;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x3082;&#x3057;&#x3001;&#x3053;&#x306E;&#x30EC;&#x30D9;&#x30EB;&#x3092;&#x306F;&#x308B;&#x304B;&#x306B;&#x8D85;&#x3048;&#x308B;&#x8907;&#x96D1;&#x306A;&#x30A4;&#x30C6;&#x30EC;&#x30FC;&#x30BF;&#x3092;&#x8A18;&#x8FF0;&#x3057;&#x3066;&#x3044;&#x308B;&#x3068;&#x3057;&#x305F;&#x3089;&#x3001;&#x7ACB;&#x3061;&#x6B62;&#x307E;&#x3063;&#x3066;&#x3001;&#x3088;&#x308A;&#x5206;&#x304B;&#x308A;&#x3084;&#x3059;&#x3044;Puppet&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x8A18;&#x8FF0;&#x3059;&#x308B;&#x65B9;&#x6CD5;&#x304C;&#x306A;&#x3044;&#x304B;&#x8003;&#x3048;&#x3066;&#x307F;&#x308B;&#x826F;&#x3044;&#x304D;&#x3063;&#x304B;&#x3051;&#x306B;&#x306A;&#x308B;&#x3067;&#x3057;&#x3087;&#x3046;&#x3002;</p>
+<div class="lvm-task-number"><p>&#x30BF;&#x30B9;&#x30AF;6:</p></div>
+
+<p>&#x3053;&#x306E;<code>profile::base::dev_users</code>&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x305F;&#x3089;&#x3001;&#x3053;&#x308C;&#x3092;<code>role::pasture_app</code>&#x30AF;&#x30E9;&#x30B9;&#x306B;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>vim /etc/puppetlabs/code/environments/production/modules/role/manifests/pasture_app.pp
+</code></pre><pre><code class="lang-puppet"><span class="hljs-keyword">class</span> <span class="hljs-title">role::pasture_app</span> {
+  include profile::pasture::app
+  include profile::base::dev_users
+  include profile::base::motd
+}
+</code></pre>
+<div class="lvm-task-number"><p>&#x30BF;&#x30B9;&#x30AF;7:</p></div>
+
+<p><code>puppet job</code>&#x30C4;&#x30FC;&#x30EB;&#x3092;&#x4F7F;&#x3063;&#x3066;Puppet agent&#x5B9F;&#x884C;&#x3092;&#x958B;&#x59CB;&#x3057;&#x307E;&#x3059;(&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x306E;&#x671F;&#x9650;&#x304C;&#x5207;&#x308C;&#x3066;&#x3044;&#x308B;&#x5834;&#x5408;&#x306F;&#x3001;<code>puppet access login --lifetime 1d</code>&#x3092;&#x5B9F;&#x884C;&#x3057;&#x3001;&#x8A8D;&#x8A3C;&#x60C5;&#x5831;<strong>learning</strong>&#x304A;&#x3088;&#x3073;<strong>puppet</strong>&#x3092;&#x4F7F;&#x3063;&#x3066;&#x65B0;&#x898F;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x751F;&#x6210;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;)&#x3002;</p>
+<pre><code>puppet job run --nodes pasture-app.beauvine.vm
+</code></pre><p>Puppet&#x5B9F;&#x884C;&#x304C;&#x5B8C;&#x4E86;&#x3057;&#x305F;&#x3089;&#x3001;&#x30E6;&#x30FC;&#x30B6;<code>gertie</code>&#x3068;&#x3057;&#x3066;<code>pasture-app.beauvine.vm</code>&#x306B;&#x63A5;&#x7D9A;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>ssh gertie@pasture-app.beauvine.vm
+</code></pre><p>&#x3053;&#x306E;&#x30E6;&#x30FC;&#x30B6;&#x3068;&#x3057;&#x3066;&#x63A5;&#x7D9A;&#x3067;&#x304D;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x305F;&#x3089;&#x3001;&#x305D;&#x306E;&#x307E;&#x307E;&#x63A5;&#x7D9A;&#x3092;&#x7D42;&#x4E86;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>exit
+</code></pre><h2 id="&#x304A;&#x3055;&#x3089;&#x3044;">&#x304A;&#x3055;&#x3089;&#x3044;</h2>
+<p>&#x3053;&#x306E;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3067;&#x306F;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306B;&#x3064;&#x3044;&#x3066;&#x8AAC;&#x660E;&#x3057;&#x307E;&#x3057;&#x305F;&#x3002;&#x3053;&#x308C;&#x306F;&#x3001;&#x4E00;&#x7FA4;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x5BA3;&#x8A00;&#x3092;&#x3001;&#x53CD;&#x5FA9;&#x3068;&#x8A2D;&#x5B9A;&#x304C;&#x53EF;&#x80FD;&#x306A;&#x30B0;&#x30EB;&#x30FC;&#x30D7;&#x306B;&#x307E;&#x3068;&#x3081;&#x308B;&#x305F;&#x3081;&#x306E;&#x3082;&#x306E;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x3053;&#x3067;&#x306F;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x969B;&#x306B;&#x899A;&#x3048;&#x3066;&#x304A;&#x304F;&#x3079;&#x304D;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x3092;&#x3044;&#x304F;&#x3064;&#x304B;&#x8AAC;&#x660E;&#x3057;&#x307E;&#x3057;&#x305F;&#x3002;</p>
+<ul>
+<li>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306E;&#x5B9A;&#x7FA9;&#x306F;&#x30AF;&#x30E9;&#x30B9;&#x5BA3;&#x8A00;&#x306E;&#x69CB;&#x6587;&#x3068;&#x4F3C;&#x3066;&#x3044;&#x307E;&#x3059;&#x304C;&#x3001;
+<code>class</code>&#x306E;&#x304B;&#x308F;&#x308A;&#x306B;<code>define</code>&#x30AD;&#x30FC;&#x30EF;&#x30FC;&#x30C9;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;&#x3002;</li>
+<li>&#x69CB;&#x6210;&#x8981;&#x7D20;&#x3068;&#x306A;&#x308B;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30BF;&#x30A4;&#x30C8;&#x30EB;&#x306B;<code>$title</code>&#x5909;&#x6570;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3001;
+&#x4E00;&#x610F;&#x6027;&#x3092;&#x78BA;&#x4FDD;&#x3057;&#x307E;&#x3059;&#x3002;</li>
+<li>&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x3068;&#x3057;&#x3066;<code>undef</code>&#x5024;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308C;&#x3070;&#x3001;&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306E;&#x5BA3;&#x8A00;&#x6642;&#x306B;&#x3001;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;
+&#x6307;&#x5B9A;&#x3057;&#x306A;&#x3044;&#x307E;&#x307E;&#x306B;&#x3057;&#x3066;&#x304A;&#x304F;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</li>
+</ul>
+<h2 id="&#x305D;&#x306E;&#x4ED6;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;">&#x305D;&#x306E;&#x4ED6;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;</h2>
+<ul>
+<li>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;<a href="https://puppet.com/docs/puppet/latest/lang_defined_types.html" target="_blank">&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x30DA;&#x30FC;&#x30B8;</a>&#x3092;&#x3054;&#x89A7;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;</li>
+<li>&#x5B9A;&#x7FA9;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x578B;&#x306F;&#x3001;Puppet Practitioner&#x30B3;&#x30FC;&#x30B9;&#x3067;&#x8A73;&#x3057;&#x304F;&#x8AAC;&#x660E;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x8A73;&#x7D30;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;<a href="https://learn.puppet.com/category/instructor-led-training" target="_blank">&#x5BFE;&#x9762;</a>&#x304A;&#x3088;&#x3073;<a href="https://learn.puppet.com/category/online-instructor-led-training" target="_blank">&#x30AA;&#x30F3;&#x30E9;&#x30A4;&#x30F3;</a>&#x30C8;&#x30EC;&#x30FC;&#x30CB;&#x30F3;&#x30B0;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057;&#x3066;&#x307F;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="hiera.html" class="navigation navigation-prev " aria-label="Previous page: Hiera">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="control_repository.html" class="navigation navigation-next " aria-label="Next page: コントロールリポジトリ">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"定義リソース型","level":"2.15","depth":1,"next":{"title":"コントロールリポジトリ","level":"2.16","depth":1,"path":"quests/control_repository.md","ref":"quests/control_repository.md","articles":[]},"previous":{"title":"Hiera","level":"2.14","depth":1,"path":"quests/hiera.md","ref":"quests/hiera.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-54263865-3"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"ja_jp","gitbook":"*"},"file":{"path":"quests/defined_resource_types.md","mtime":"2019-03-27T23:53:33.369Z","type":"markdown"},"gitbook":{"version":"3.1.1","time":"2019-03-28T00:06:36.432Z"},"basePath":"..","book":{"language":"ja_jp"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

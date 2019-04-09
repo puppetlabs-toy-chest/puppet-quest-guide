@@ -1,0 +1,8 @@
+<%- | $fqdn,
+      $os_family,
+      $os_name,
+      $os_release,
+| -%>
+Welcome to <%= $fqdn %>
+
+This is a <%= $os_family %> system running <%= $os_name %> <%= $os_release %>

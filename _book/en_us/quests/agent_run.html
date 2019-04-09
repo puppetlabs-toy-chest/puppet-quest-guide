@@ -1,0 +1,818 @@
+
+<!DOCTYPE HTML>
+<html lang="en_us" >
+    <head>
+        <title>Agent Run · GitBook</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.1.1">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="manifests_and_classes.html" />
+    
+    
+    <link rel="prev" href="hello_puppet.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../SETUP.html">
+            
+                <a href="../SETUP.html">
+            
+                    
+                    Setup
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Quests</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="welcome.html">
+            
+                <a href="welcome.html">
+            
+                    
+                    Welcome
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="portfolio_introduction.html">
+            
+                <a href="portfolio_introduction.html">
+            
+                    
+                    Portfolio Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="hello_bolt.html">
+            
+                <a href="hello_bolt.html">
+            
+                    
+                    Hello Bolt
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="hello_puppet.html">
+            
+                <a href="hello_puppet.html">
+            
+                    
+                    Hello Puppet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.5" data-path="agent_run.html">
+            
+                <a href="agent_run.html">
+            
+                    
+                    Agent Run
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="manifests_and_classes.html">
+            
+                <a href="manifests_and_classes.html">
+            
+                    
+                    Manifests and Classes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.7" data-path="package_file_service.html">
+            
+                <a href="package_file_service.html">
+            
+                    
+                    Package File Service
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.8" data-path="variables_and_templates.html">
+            
+                <a href="variables_and_templates.html">
+            
+                    
+                    Variables and Templates
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.9" data-path="class_parameters.html">
+            
+                <a href="class_parameters.html">
+            
+                    
+                    Class Parameters
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.10" data-path="facts.html">
+            
+                <a href="facts.html">
+            
+                    
+                    Facts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.11" data-path="conditional_statements.html">
+            
+                <a href="conditional_statements.html">
+            
+                    
+                    Conditional Statements
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.12" data-path="the_forge.html">
+            
+                <a href="the_forge.html">
+            
+                    
+                    The Forge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.13" data-path="roles_and_profiles.html">
+            
+                <a href="roles_and_profiles.html">
+            
+                    
+                    Roles and Profiles
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.14" data-path="hiera.html">
+            
+                <a href="hiera.html">
+            
+                    
+                    Hiera
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.15" data-path="defined_resource_types.html">
+            
+                <a href="defined_resource_types.html">
+            
+                    
+                    Defined Resource Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.16" data-path="control_repository.html">
+            
+                <a href="control_repository.html">
+            
+                    
+                    Control Repository
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.17" data-path="puppetfile.html">
+            
+                <a href="puppetfile.html">
+            
+                    
+                    Puppetfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Appendix</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="afterword.html">
+            
+                <a href="afterword.html">
+            
+                    
+                    Afterword
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../troubleshooting.html">
+            
+                <a href="../troubleshooting.html">
+            
+                    
+                    Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../releasenotes.html">
+            
+                <a href="../releasenotes.html">
+            
+                    
+                    Release Notes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" >
+            
+                <a target="_blank" href="https://puppet.com/legal/privacy">
+            
+                    
+                    Privacy Policy
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Agent Run</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>Quest Guide <a href="../releasenotes.html">v2.5.1</a></p>
+<h1 id="agent-run">Agent run</h1>
+<h2 id="quest-objectives">Quest objectives</h2>
+<ul>
+<li>Understand the process of a Puppet agent run.</li>
+<li>Learn how to list and sign agent certificates.</li>
+<li>Use the <em>site.pp</em> manifest to classify a node.</li>
+</ul>
+<h2 id="get-started">Get started</h2>
+<blockquote>
+<p>Now, here you see, it takes all the running you can do, to keep in the same place.</p>
+<ul>
+<li>Lewis Carroll</li>
+</ul>
+</blockquote>
+<p>The <code>puppet resource</code> command you explored in the previous quest let you see a
+system the way Puppet does&#x2014;through the site. abstraction layer. While
+exploring and manipulating resources through Puppet&apos;s command line tools are
+useful, the real value of the resource abstraction layer is to provide a single
+common language for your Puppet master to manage all the systems in your
+infrastructure.</p>
+<p>In this quest, we&apos;ll walk through a Puppet agent run to demonstrate how the
+Puppet agent communicates with the Puppet master server. We&apos;ll then write some
+Puppet code to a manifest on the Puppet master to begin defining a desired
+state for our agent system.</p>
+<p>Ready to get started? Run the following command on your Learning VM:</p>
+<pre><code>quest begin agent_run
+</code></pre><h2 id="the-agentmaster-architecture">The agent/master architecture</h2>
+<p>As we mentioned in the previous quest, Puppet is typically used in what&apos;s
+called an agent/master (client/server) architecture.</p>
+<p>In this architecture, each managed node in your infrastructure runs a <em>Puppet
+agent</em> service. One or more servers (depending on the size and complexity of
+your infrastructure) act as <em>Puppet master(s)</em> and run the Puppet server
+service to handle communication with your agents. In a default <em>monolithic</em>
+master installation, the Puppet master server also hosts several supporting
+services such as the PE console services and PuppetDB. In larger deployments
+these services may be distributed across other servers to improve performance
+and provide redundancy.</p>
+<p>By default, the Puppet agent service initiates a Puppet run every half-hour.
+This periodic run ensures that your system stays in the desired state you
+described in your Puppet code. Any configuration drift that occurs between runs
+is remediated the next time the agent runs.</p>
+<p>We&apos;ve disabled these automatic runs on the Learning VM&apos;s agent systems.
+Instead, you&apos;ll manually trigger runs to get more control and visibility as you
+learn how Puppet works.</p>
+<p><img src="../assets/SimpleDataFlow.png" alt="image"></p>
+<p>The Puppet agent begins a Puppet run by sending a <em>catalog request</em> to the
+Puppet master. This request includes some information about the agent system
+provided by a tool called <em>Facter</em>.</p>
+<p>The Puppet master uses this information from Facter along with your Puppet code
+to compile a catalog that tells the agent exactly how the resources on its
+system should be configured.</p>
+<p>Your Puppet master keeps a copy of the Puppet codebase you&apos;ve created to define
+the desired state for systems in your infrastructure. This Puppet code is
+primarily made up of resource declarations like the ones you saw in the
+previous quest. While your Puppet code&apos;s final purpose is to define resources,
+it also includes some language features such as variables, classes, and
+conditionals that can give you control over which resources you want on a
+system and how their parameters are set. The master parses this code to create
+a <em>catalog</em>. The catalog is the final list of system resources that
+define the desired state for an agent node.</p>
+<p>The Puppet master sends this catalog back to the Puppet agent, which then uses
+its <em>providers</em> to check if the desired state of each resource defined in the
+catalog matches the actual state of the resource on the system. If any
+differences are found, the providers help Puppet implement whatever changes are
+necessary to bring the actual state of the system into line with the desired
+state defined in the catalog.</p>
+<p>Finally, the Puppet agent generates a report that includes information about
+unchanged resources, successful changes, and any errors it may have encountered
+during the run. It sends this report back to the Puppet master, which stores
+it in PuppetDB and makes it available via the PE console&apos;s web GUI.</p>
+<h2 id="certificates">Certificates</h2>
+<p>There&apos;s one more thing to note before we can move on to demonstrating a Puppet
+agent run.</p>
+<p>All communications between an agent and master happen over SSL. Before the
+master communicates with an agent, it needs a way to validate that the agent
+node is authentic. This prevents unauthorized connections from spoofing
+an agent node to access sensitive data that might be included in a
+catalog. While Puppet does provide <a href="https://puppet.com/blog/encrypt-your-data-using-hiera-eyaml" target="_blank">options for encrypting
+data</a> within a
+catalog, it&apos;s best to control which systems can make a catalog request in the
+first place.</p>
+<p>Puppet requires any system contacting the Puppet master to
+authenticate with a signed certificate. The first time a Puppet agent contacts
+the Puppet master, it will submit a <em>certificate signing request (CSR)</em>. A
+Puppet administrator can then validate that the system sending the CSR should
+be allowed to request catalogs from the master before deciding to sign the
+certificate. (You can read more about the details of Puppet&apos;s cryptographic
+security and the certification system on the <a href="https://puppet.com/docs/pe/latest/ssl_and_certificates.html" target="_blank">docs
+page</a>)</p>
+<div class="lvm-task-number"><p>Task 1:</p></div>
+
+<p>Start by connecting to your agent system. When you
+began this quest, the system you used in the last quest was destroyed and a new
+one was created. This new system has the Puppet agent pre-installed, so there&apos;s
+no need to repeat the installation process. Go ahead and connect to the new
+agent system with the same credentials you used in the last quest:</p>
+<p><strong>username: learning</strong><br><strong>password: puppet</strong></p>
+<pre><code>ssh learning@agent.puppet.vm
+</code></pre><p>First, try to trigger a Puppet agent run without your agent system&apos;s certificate
+signed. The agent will attempt to contact the Puppet master, but its request
+will be rejected.</p>
+<pre><code>sudo puppet agent -t
+</code></pre><p>You&apos;ll see a notification like the following:</p>
+<pre><code>Exiting; no certificate found and waitforcert is disabled
+</code></pre><p>No problem: you just have to sign the certificate. For now, we&apos;ll show you how
+to do it from the command line. If you prefer a GUI, the PE console includes
+<a href="https://puppet.com/docs/pe/latest/adding_and_removing_nodes.html" target="_blank">tools for certificate
+management</a>.</p>
+<div class="lvm-task-number"><p>Task 2:</p></div>
+
+<p>First, exit your SSH session to return to the your Puppet master:</p>
+<pre><code>exit
+</code></pre><p>Use the <code>puppetserver ca</code> tool to list unsigned certificates:</p>
+<pre><code>puppetserver ca list
+</code></pre><p>Sign the cert for <code>agent.puppet.vm</code>:</p>
+<pre><code>puppetserver ca sign --certname agent.puppet.vm
+</code></pre><div class="lvm-task-number"><p>Task 3:</p></div>
+
+<p>With that taken care of, your Puppet agent is authorized to make catalog
+requests.</p>
+<h2 id="triggering-a-puppet-run">Triggering a Puppet run</h2>
+<p>As noted above, the default for the Puppet agent service is to initiate a
+Puppet run every thirty minutes. Because it would be hard to clearly demonstrate Puppet
+with these scheduled background runs, we&apos;ve disabled the Puppet agent
+service on your agent system. Instead, you can use the <code>puppet agent -t</code>
+command to manually trigger a run.</p>
+<p>Go ahead and connect to your agent node:</p>
+<pre><code>ssh learning@agent.puppet.vm
+</code></pre><p>Trigger an agent run. Now that the agent&apos;s certificate is signed, it will
+receive a catalog from the Puppet master.</p>
+<pre><code>sudo puppet agent -t
+</code></pre><p>While you haven&apos;t yet told Puppet to manage any resources on the system, you&apos;ll
+see a lot of text scroll by. Most of what you see is a process called
+<a href="https://puppet.com/docs/puppet/latest/plugins_in_modules.html#auto-download-of-agent-side-plug-ins-pluginsync" target="_blank">pluginsync</a>.
+During pluginsync, any extensions installed on the master (such as custom
+facts, resource types, or providers) are copied to the Puppet agent before the
+Puppet run continues. This ensures that the agent has all the tools it needs to
+correctly apply the catalog.</p>
+<p>This pluginsync process adds a lot of clutter, but we&apos;ll focus on three lines
+that look like the following. If you&apos;d like to see these lines with less
+clutter, trigger another agent run.</p>
+<pre><code>Info: Loading facts
+Info: Caching catalog for agent.puppet.vm
+Info: Applying configuration version &apos;1464919481&apos;
+</code></pre><p>This output shows you one side of the conversation between the agent and master
+we discussed at the beginning of this quest.</p>
+<p>You see that the Puppet agent loads the facts it needs to share the details
+of the system where it&apos;s running with the Puppet master.</p>
+<p>Next, you see when the agent has received a catalog because it tells you when it caches a copy of the new catalog. (The Puppet agent can be
+configured to fail over to this cached catalog if it is unable to connect to
+the master.)</p>
+<p>Finally, the Puppet agent applies the catalog. Normally after this step, you would see a list
+of all the changes made by the agent. In this case,
+however, the Puppet master didn&apos;t find any Puppet code to apply to your agent
+node, and it didn&apos;t make any changes (other than those involved in pluginsync)
+during this run.</p>
+<h2 id="classification">Classification</h2>
+<p>To make something more interesting happen, you&apos;ll have to specify a desired
+state for some resources on the <code>agent.puppet.vm</code> system.</p>
+<div class="lvm-task-number"><p>Task 4:</p></div>
+
+<p>Remember, the Puppet code you use to describe how you want a node to be
+configured is kept on the Puppet master. End your SSH session on the
+<code>agent.puppet.vm</code> agent node to return to the Puppet master:</p>
+<pre><code>exit
+</code></pre><p>Before diving in and writing some Puppet code, let&apos;s take a moment to go over
+the catalog compilation process from the Puppet master&apos;s perspective. This will
+help you understand exactly what you&apos;re doing as you write code to apply to
+your agent.</p>
+<p>When the Puppet server service on the Puppet master receives a catalog
+request with a valid certificate, it begins a process called <em>node
+classification</em> to determine what Puppet code will be compiled to generate
+a catalog for the agent making the request.</p>
+<p>There are three different ways to handle node classification.</p>
+<ol>
+<li><p>The <code>site.pp</code> manifest is a special file on the master where you can write
+node definitions. This is the method we&apos;ll be using now and in several of the
+following quests. It gives you the most direct view of how node classification
+works.</p>
+</li>
+<li><p>The PE console includes a GUI node classifier that makes it easy to manage
+node groups and classification without editing code directly. Though this is a
+very efficient way to manage node classification, you&apos;ll understand it best after you&apos;re familiar with some of the underlying Puppet concepts.</p>
+</li>
+<li><p>Finally, if you want to customize node classification, you can create your
+own <a href="https://puppet.com/docs/puppet/latest/nodes_external.html" target="_blank">external node
+classifier</a>. An external
+node classifier can be any executable that takes the name of a node as an
+argument and returns a YAML file describing the Puppet code to be applied to
+that node. This is an advanced topic and is not covered in this guide.</p>
+</li>
+</ol>
+<h2 id="the-sitepp-manifest">The site.pp manifest</h2>
+<p>When a Puppet agent contacts the Puppet master, the master checks for any node
+definitions in the <code>site.pp</code> manifest that match the agent system&apos;s name. In
+the Puppet world, the term &quot;node&quot; is used to mean any system or device in your
+infrastructure, so a node definition defines how Puppet should manage a given
+system.</p>
+<p>It will help to understand what a node definition looks like with an example.
+Go ahead and open your <code>site.pp</code> manifest:</p>
+<pre><code>vim /etc/puppetlabs/code/environments/production/manifests/site.pp
+</code></pre><p>Scroll past the comments and default node definition to the bottom of the file.
+(In Vim, you can type <code>G</code> to jump the the bottom of a file) This is where
+you&apos;ll create a new node definition for the <code>agent.puppet.vm</code> system. The
+outline of the node definition should look like this:</p>
+<pre><code class="lang-puppet">node <span class="hljs-string">&apos;agent.puppet.vm&apos;</span> {
+
+}
+</code></pre>
+<p>Normally you would include one or more class declarations in this node block. A
+class defines a group of related resources, allowing them to be declared as a
+single unit. Using classes in your node definitions keeps them simple and well
+organized and encourages the reuse of code. We&apos;ll cover the details of classes
+in the next quest. For now, however, we&apos;ll take a shortcut and write a resource
+declaration directly into your node definition. In this case, use a resource
+type called <code>notify</code> that will display a message in the output of your Puppet
+run without making any changes to the system.</p>
+<p>Add the following <code>notify</code> resource to your node definition. (You&apos;ll probably
+learn Puppet code syntax more quickly if you type out your code manually, but
+if you prefer to paste content into Vim, you can hit <code>ESC</code> to enter command
+mode and type <code>:set paste</code> to disable the automatic formatting. Press <code>i</code> to
+return to insert mode before pasting your text.)</p>
+<pre><code class="lang-puppet">node <span class="hljs-string">&apos;agent.puppet.vm&apos;</span> {
+  <span class="hljs-keyword">notify</span> { <span class="hljs-string">&apos;Hello Puppet!&apos;</span>: }
+}
+</code></pre>
+<p>Remember, use <code>ESC</code> then <code>:wq</code> to save your file and exit Vim.</p>
+<p>You may notice that this resource declaration doesn&apos;t include any parameters.
+The only feature of this <code>notify</code> resource we care about is the message it
+displays. If it&apos;s not set explicitly by the <code>message</code> parameter, this message
+will default to the resource title. This lets us save some time by leaving out
+the parameter value pairs and using the title to define the message we want the
+resource to display. (This parameter that uses the resource title as its
+default is called a <strong>namevar</strong>. You can read more about the role of the
+namevar in the <a href="https://puppet.com/docs/puppet/latest/lang_resources.html#namenamevar" target="_blank">Puppet docs</a>)</p>
+<p>Now that you have a concrete example of a node declaration, let&apos;s return to our
+review of the agent run process from the master&apos;s perspective. When the agent
+contacts the master, the master finds a matching node definition in the
+<code>site.pp</code> manifest and uses the Puppet code contained in that node definition
+to compile a catalog.</p>
+<p>The master sends that compiled catalog to the agent, which then applies the
+catalog to the system where it&apos;s running. In this case, the catalog only
+includes a <code>notify</code> resource, so the agent will display the specified message
+as it applies the catalog, but no changes will be made to the system.</p>
+<div class="lvm-task-number"><p>Task 5:</p></div>
+
+<p>Now that you have some Puppet code for the master to parse and return to the
+agent, trigger another Puppet run.</p>
+<p>SSH to your agent node:</p>
+<pre><code>ssh learning@agent.puppet.vm
+</code></pre><p>Use the <code>puppet agent</code> tool to trigger a Puppet run:</p>
+<pre><code>sudo puppet agent -t
+</code></pre><p>The output will include something like this:</p>
+<pre><code>Notice: Hello Puppet!
+Notice: /Stage[main]/Main/Node[agent.puppet.vm]/Notify[Hello Puppet!]/message: defined &apos;message&apos; as &apos;Hello Puppet!&apos;
+Notice: Applied catalog in 0.45 seconds
+</code></pre><p>Now disconnect from your agent node.</p>
+<pre><code>exit
+</code></pre><h2 id="review">Review</h2>
+<p>We began this quest with a discussion of Puppet&apos;s <em>agent/master architecture</em>
+and the communication between the Puppet master and an agent. The agent begins
+this process by sending a <em>catalog request</em> to the master. The master first
+checks to see if the agent has a valid <em>certificate</em>. If the certificate is
+valid, the master consults several methods of <em>classification</em> to begin the
+process of catalog compilation. In this quest, we used a <em>node definition</em>
+in the <code>site.pp</code> manifest to classify our node. The master then compiles a
+catalog that it returns to the agent. The agent checks if the current state
+of its system matches the desired state described in the catalog and makes
+any changes necessary to bring it in line. For the sake of simplicity in this
+quest, we used a <code>notify</code> resource to display a message rather than make
+any changes to the system. Once the agent has applied the catalog (or failed to
+apply the catalog if an error occurs), it sends a report of the run&apos;s results
+back to the master, which stores it in the PuppetDB.</p>
+<p>Now that we&apos;ve introduced the resource abstraction layer, the agent/master
+communication involved in a Puppet run, and a simple example of classification
+with the <code>site.pp</code> manifest, you&apos;ve seen the foundations that the rest of
+Puppet is built on.</p>
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+<li>Read about the basics of a Puppet agent run on our <a href="https://puppet.com/docs/pe/latest/run_puppet_on_nodes.html" target="_blank">docs page</a></li>
+<li>Puppet agent concepts are covered in-depth in our Getting Started with Puppet course. Explore our <a href="https://learn.puppet.com/category/instructor-led-training" target="_blank">in-person</a> and <a href="https://learn.puppet.com/category/online-instructor-led-training" target="_blank">online</a> training options for more information.</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="hello_puppet.html" class="navigation navigation-prev " aria-label="Previous page: Hello Puppet">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="manifests_and_classes.html" class="navigation navigation-next " aria-label="Next page: Manifests and Classes">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Agent Run","level":"2.5","depth":1,"next":{"title":"Manifests and Classes","level":"2.6","depth":1,"path":"quests/manifests_and_classes.md","ref":"quests/manifests_and_classes.md","articles":[]},"previous":{"title":"Hello Puppet","level":"2.4","depth":1,"path":"quests/hello_puppet.md","ref":"quests/hello_puppet.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-54263865-3"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_us","gitbook":"*"},"file":{"path":"quests/agent_run.md","mtime":"2019-03-27T23:53:33.358Z","type":"markdown"},"gitbook":{"version":"3.1.1","time":"2019-03-28T00:06:36.432Z"},"basePath":"..","book":{"language":"en_us"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

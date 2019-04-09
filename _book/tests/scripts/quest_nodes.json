@@ -1,0 +1,83 @@
+{
+  "portfolio_introduction": [
+    {
+      "name" : "intro.puppet.vm",
+      "image" : "no_agent",
+      "sign_cert" : false,
+      "run_puppet" : false
+    }
+  ],
+  "hello_bolt" : [
+    {
+      "name" : "bolt.puppet.vm",
+      "image" : "no_agent",
+      "sign_cert" : false,
+      "run_puppet" : false
+    }
+  ],
+  "hello_puppet" : [
+    {
+      "name" : "hello.puppet.vm",
+      "image" : "no_agent",
+      "sign_cert" : false,
+      "run_puppet" : false
+    }
+  ],
+  "agent_run" : [
+    {
+      "name" : "agent.puppet.vm",
+      "image" : "agent",
+      "sign_cert" : false,
+      "run_puppet" : false
+    }
+  ],
+  "manifests_and_classes" : [
+    {"name" : "cowsay.puppet.vm"}
+  ],
+  "package_file_service" : [
+    {"name" : "pasture.puppet.vm"}
+  ],
+  "variables_and_templates" : [
+    {"name" : "pasture.puppet.vm"}
+  ],
+  "class_parameters" : [
+    {"name" : "pasture.puppet.vm"}
+  ],
+  "facts" : [
+    {"name" : "pasture.puppet.vm"}
+  ],
+  "conditional_statements" : [
+    {"name" : "pasture-dev.puppet.vm"},
+    {"name" : "pasture-prod.puppet.vm"}
+  ],
+  "the_forge" : [
+    {"name" : "pasture-app.puppet.vm"},
+    {"name" : "pasture-db.puppet.vm"}
+  ],
+  "roles_and_profiles" : [
+    {"name" : "pasture-app-small.puppet.vm"},
+    {"name" : "pasture-app-large.puppet.vm"},
+    {"name" : "pasture-db.puppet.vm"}
+  ],
+  "hiera" : [
+    {"name" : "pasture-app.beauvine.vm"},
+    {"name" : "pasture-app.auroch.vm"},
+    {"name" : "pasture-db.auroch.vm"},
+    {"name" : "pasture-app-dragon.auroch.vm"}
+  ],
+  "defined_resource_types" : [
+    {"name" : "pasture-app.beauvine.vm"}
+  ],
+  "control_repository" : [
+    {"name" : "pasture-app.beauvine.vm"}
+  ],
+  "puppetfile" : [
+    {"name" : "pasture-app.auroch.vm"},
+    {"name" : "pasture-db.auroch.vm"}
+  ],
+  "puppethack" : [
+    {"name" : "hack1.puppet.vm"},
+    {"name" : "hack2.puppet.vm"},
+    {"name" : "hack3.puppet.vm"}
+  ]
+}

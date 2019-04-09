@@ -1,0 +1,479 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019 Puppet, Inc.
+# This file is distributed under the same license as the puppet quest guide package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: puppet quest guide \n"
+"Report-Msgid-Bugs-To: learningvm@puppet.com\n"
+"POT-Creation-Date: 2019-02-21 15:42-0800\n"
+"PO-Revision-Date: 2019-02-21 15:42-0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: ../agent_run_spec.rb:11 ../class_parameters_spec.rb:11 ../conditional_statements_spec.rb:11 ../control_repository_spec.rb:17 ../defined_resource_types_spec.rb:14 ../facts_spec.rb:11 ../hello_bolt_spec.rb:11 ../hello_puppet_spec.rb:11 ../hiera_spec.rb:14 ../manifests_and_classes_spec.rb:11 ../package_file_service_spec.rb:11 ../puppetfile_spec.rb:17 ../roles_and_profiles_spec.rb:14 ../the_forge_spec.rb:14 ../variables_and_templates_spec.rb:11 ../welcome_spec.rb:11
+msgid "Task 1:"
+msgstr ""
+
+#: ../agent_run_spec.rb:17
+msgid "Run the pre-installed agent"
+msgstr ""
+
+#: ../agent_run_spec.rb:23 ../class_parameters_spec.rb:36 ../conditional_statements_spec.rb:30 ../control_repository_spec.rb:31 ../defined_resource_types_spec.rb:28 ../facts_spec.rb:25 ../hello_bolt_spec.rb:28 ../hello_puppet_spec.rb:23 ../hiera_spec.rb:43 ../package_file_service_spec.rb:25 ../puppetfile_spec.rb:30 ../roles_and_profiles_spec.rb:28 ../the_forge_spec.rb:26 ../welcome_spec.rb:24
+msgid "Task 2:"
+msgstr ""
+
+#: ../agent_run_spec.rb:29
+msgid "Sign the agent certificate"
+msgstr ""
+
+#: ../agent_run_spec.rb:35 ../class_parameters_spec.rb:52 ../control_repository_spec.rb:51 ../defined_resource_types_spec.rb:63 ../facts_spec.rb:39 ../hello_bolt_spec.rb:47 ../hello_puppet_spec.rb:36 ../roles_and_profiles_spec.rb:46
+msgid "Task 3:"
+msgstr ""
+
+#: ../agent_run_spec.rb:41
+msgid "Check for successful agent run"
+msgstr ""
+
+#: ../agent_run_spec.rb:47 ../conditional_statements_spec.rb:63 ../control_repository_spec.rb:64 ../defined_resource_types_spec.rb:74 ../facts_spec.rb:57 ../hello_puppet_spec.rb:48 ../manifests_and_classes_spec.rb:54 ../package_file_service_spec.rb:59 ../roles_and_profiles_spec.rb:64 ../the_forge_spec.rb:67
+msgid "Task 4:"
+msgstr ""
+
+#: ../agent_run_spec.rb:53
+msgid "Check for site.pp classification"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:20
+msgid "Create application module directories"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:34
+msgid "Create sql resource type file"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:52
+msgid "Create the pasture_app::db component"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:73
+msgid "Create the pasture_app::app component"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:94
+msgid "Create the pasture_app application class"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:124
+msgid "Remove application-related classes from role classes"
+msgstr ""
+
+#: ../application_orchestrator_spec.rb:140
+msgid "Add the application classification to site.pp"
+msgstr ""
+
+#: ../class_parameters_spec.rb:17
+msgid "Add parameters to the pasture class"
+msgstr ""
+
+#: ../class_parameters_spec.rb:42
+msgid "Use resource-like syntax for classification"
+msgstr ""
+
+#: ../class_parameters_spec.rb:58 ../variables_and_templates_spec.rb:116
+msgid "Run the agent and test the changes"
+msgstr ""
+
+#: ../conditional_statements_spec.rb:17
+msgid "Add the sinatra_server parameter to the pasture main manifest"
+msgstr ""
+
+#: ../conditional_statements_spec.rb:36
+msgid "Add the sinatra_server parameter to the pasture config file template"
+msgstr ""
+
+#: ../conditional_statements_spec.rb:69
+msgid "Classify nodes"
+msgstr ""
+
+#: ../control_repository_spec.rb:23
+msgid "Create a control-repo directory tree"
+msgstr ""
+
+#: ../control_repository_spec.rb:37
+msgid "Copy site modules to your control repository"
+msgstr ""
+
+#: ../control_repository_spec.rb:57
+msgid "Copy and edit the environment.conf file"
+msgstr ""
+
+#: ../control_repository_spec.rb:73
+msgid "Copy the site.pp manifest to the manifests directory"
+msgstr ""
+
+#: ../control_repository_spec.rb:79 ../hello_puppet_spec.rb:61 ../hiera_spec.rb:99 ../package_file_service_spec.rb:72 ../roles_and_profiles_spec.rb:87 ../the_forge_spec.rb:86
+msgid "Task 5:"
+msgstr ""
+
+#: ../control_repository_spec.rb:88
+msgid "Copy the Hiera configuration file and data directory"
+msgstr ""
+
+#: ../control_repository_spec.rb:100 ../roles_and_profiles_spec.rb:121 ../the_forge_spec.rb:114 ../variables_and_templates_spec.rb:110
+msgid "Task 6:"
+msgstr ""
+
+#: ../control_repository_spec.rb:115
+msgid "Initialize the control-repo repository make an initial commit"
+msgstr ""
+
+#: ../control_repository_spec.rb:122 ../hiera_spec.rb:132
+msgid "Task 7:"
+msgstr ""
+
+#: ../control_repository_spec.rb:128
+msgid "Rename the master branch to production"
+msgstr ""
+
+#: ../control_repository_spec.rb:135 ../manifests_and_classes_spec.rb:114
+msgid "Task 8:"
+msgstr ""
+
+#: ../control_repository_spec.rb:140
+msgid "Create a Gitea user account"
+msgstr ""
+
+#: ../control_repository_spec.rb:147
+msgid "Task 9:"
+msgstr ""
+
+#: ../control_repository_spec.rb:152
+msgid "Set up an upstream remote in Gitea"
+msgstr ""
+
+#: ../control_repository_spec.rb:159
+msgid "Task 10:"
+msgstr ""
+
+#: ../control_repository_spec.rb:165
+msgid "Add the Gitea repository as upstream remote"
+msgstr ""
+
+#: ../control_repository_spec.rb:172
+msgid "Task 11:"
+msgstr ""
+
+#: ../control_repository_spec.rb:181
+msgid "Push your production branch to the upstream remote"
+msgstr ""
+
+#: ../control_repository_spec.rb:188
+msgid "Task 12:"
+msgstr ""
+
+#: ../control_repository_spec.rb:191
+msgid "Change the upstream repository's default branch to production"
+msgstr ""
+
+#: ../control_repository_spec.rb:198
+msgid "Task 13:"
+msgstr ""
+
+#: ../control_repository_spec.rb:210
+msgid "Create a deploy key"
+msgstr ""
+
+#: ../control_repository_spec.rb:216
+msgid "Task 14:"
+msgstr ""
+
+#: ../control_repository_spec.rb:222
+msgid "Add your deploy key to the upstream repository"
+msgstr ""
+
+#: ../control_repository_spec.rb:242
+msgid "Task 16:"
+msgstr ""
+
+#: ../control_repository_spec.rb:248
+msgid "Run the Puppet agent on your master"
+msgstr ""
+
+#: ../control_repository_spec.rb:255
+msgid "Task 17:"
+msgstr ""
+
+#: ../control_repository_spec.rb:261
+msgid "Add the learning user to the Code Deployers role"
+msgstr ""
+
+#: ../control_repository_spec.rb:268
+msgid "Task 18:"
+msgstr ""
+
+#: ../control_repository_spec.rb:280
+msgid "Deploy your production code"
+msgstr ""
+
+#: ../control_repository_spec.rb:286
+msgid "Task 19:"
+msgstr ""
+
+#: ../control_repository_spec.rb:292
+msgid "Trigger a puppet run on the pasture-app.beauvine.vm node"
+msgstr ""
+
+#: ../control_repository_spec.rb:299
+msgid "Task 20:"
+msgstr ""
+
+#: ../control_repository_spec.rb:308
+msgid "Modify the beauvine.vm.yaml file"
+msgstr ""
+
+#: ../control_repository_spec.rb:315
+msgid "Task 21:"
+msgstr ""
+
+#: ../control_repository_spec.rb:324
+msgid "Add and commit your change"
+msgstr ""
+
+#: ../control_repository_spec.rb:331
+msgid "Task 22:"
+msgstr ""
+
+#: ../control_repository_spec.rb:337
+msgid "Push your branch to the upstream remote"
+msgstr ""
+
+#: ../control_repository_spec.rb:344
+msgid "Task 23:"
+msgstr ""
+
+#: ../control_repository_spec.rb:351
+msgid "Merge your change to the upstream production branch"
+msgstr ""
+
+#: ../control_repository_spec.rb:358
+msgid "Task 24:"
+msgstr ""
+
+#: ../control_repository_spec.rb:364
+msgid "Deploy your modified production code"
+msgstr ""
+
+#: ../control_repository_spec.rb:371
+msgid "Task 25:"
+msgstr ""
+
+#: ../control_repository_spec.rb:377
+msgid "Trigger a second puppet run on the pasture-app.beauvine.vm node"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:20
+msgid "Create the directory structure for your accounts module"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:34
+msgid "Define the user_accounts::ssh_user defined resource type"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:69
+msgid "Create an ssh key"
+msgstr ""
+
+#: ../defined_resource_types_spec.rb:86
+msgid "Add user data to your Hiera data sources"
+msgstr ""
+
+#: ../facts_spec.rb:12
+msgid "Use the facter command"
+msgstr ""
+
+#: ../facts_spec.rb:31
+msgid "Create motd module directories"
+msgstr ""
+
+#: ../facts_spec.rb:45
+msgid "Create the motd module main manifest"
+msgstr ""
+
+#: ../facts_spec.rb:63
+msgid "Create the motd.epp template"
+msgstr ""
+
+#: ../hello_bolt_spec.rb:20
+msgid "Install bolt"
+msgstr ""
+
+#: ../hello_bolt_spec.rb:37
+msgid "Verify the bolt tool installation"
+msgstr ""
+
+#: ../hello_bolt_spec.rb:59
+msgid "Execute bolt commands"
+msgstr ""
+
+#: ../hello_puppet_spec.rb:17
+msgid "Install the Puppet agent"
+msgstr ""
+
+#: ../hello_puppet_spec.rb:29
+msgid "Investigate the /tmp/test file resource"
+msgstr ""
+
+#: ../hello_puppet_spec.rb:42
+msgid "Create the /tmp/test file resource"
+msgstr ""
+
+#: ../hello_puppet_spec.rb:54
+msgid "Change the content of the /tmp/test file resource"
+msgstr ""
+
+#: ../hello_puppet_spec.rb:67
+msgid "Investigate the package provider"
+msgstr ""
+
+#: ../hiera_spec.rb:20
+msgid "Create the hiera.yaml configuration file"
+msgstr ""
+
+#: ../hiera_spec.rb:49
+msgid "Modify the profile::pasture::app class to use Hiera lookups"
+msgstr ""
+
+#: ../hiera_spec.rb:105
+msgid "Create the beauvine.vm.yaml data source"
+msgstr ""
+
+#: ../hiera_spec.rb:121
+msgid "Create the auroch.vm.yaml data source"
+msgstr ""
+
+#: ../hiera_spec.rb:138
+msgid "Create the pasture-app-dragon.auroch.vm.yaml data source"
+msgstr ""
+
+#: ../manifests_and_classes_spec.rb:17
+msgid "Create a temporary hello.pp manifest"
+msgstr ""
+
+#: ../manifests_and_classes_spec.rb:60
+msgid "Update site.pp with classification for cowsay.puppet.vm"
+msgstr ""
+
+#: ../manifests_and_classes_spec.rb:104
+msgid "Include the cowsay::fortune class into the default class"
+msgstr ""
+
+#: ../manifests_and_classes_spec.rb:120
+msgid "Run the agent and test cowsay with fortune"
+msgstr ""
+
+#: ../package_file_service_spec.rb:17
+msgid "Create the pasture module directories"
+msgstr ""
+
+#: ../package_file_service_spec.rb:31
+msgid "Create the pasture main manifest"
+msgstr ""
+
+#: ../package_file_service_spec.rb:65
+msgid "Run the Puppet agent"
+msgstr ""
+
+#: ../package_file_service_spec.rb:84
+msgid "Start the pasture service"
+msgstr ""
+
+#: ../package_file_service_spec.rb:157
+msgid "Create the pasture service unit file"
+msgstr ""
+
+#: ../package_file_service_spec.rb:172
+msgid "Manage the pasture configuration file and service"
+msgstr ""
+
+#: ../package_file_service_spec.rb:191
+msgid "Add relationship metaparameters to the pasture main manifest"
+msgstr ""
+
+#: ../puppetfile_spec.rb:23
+msgid "Check out a new puppetfile branch"
+msgstr ""
+
+#: ../puppetfile_spec.rb:36
+msgid "Create a Puppetfile in your control repository"
+msgstr ""
+
+#: ../puppetfile_spec.rb:49
+msgid "Add dependencies to your Puppetfile"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:20
+msgid "Create the profile module directories"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:34
+msgid "Create the profile::pasture::app class"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:52
+msgid "Create the profile::pasture::db class"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:73
+msgid "Create the profile::base::motd class"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:99
+msgid "Create the role classes"
+msgstr ""
+
+#: ../roles_and_profiles_spec.rb:127
+msgid "Classify nodes with role classes"
+msgstr ""
+
+#: ../the_forge_spec.rb:20
+msgid "Install the PostgreSQL Puppet module"
+msgstr ""
+
+#: ../the_forge_spec.rb:32
+msgid "Create the pasture::db wrapper class"
+msgstr ""
+
+#: ../the_forge_spec.rb:73
+msgid "Update the pasture main manifest with a db parameter"
+msgstr ""
+
+#: ../the_forge_spec.rb:95
+msgid "Update the pasture configuration file template with a db parameter"
+msgstr ""
+
+#: ../the_forge_spec.rb:115
+msgid "has a working solution"
+msgstr ""
+
+#: ../the_forge_spec.rb:123
+msgid "Trigger an agent run on pasture-app.puppet.vm and test service"
+msgstr ""
+
+#: ../variables_and_templates_spec.rb:17
+msgid "Add variables to the pasture main manifest"
+msgstr ""
+
+#: ../welcome_spec.rb:17
+msgid "View the options for the quest tool"
+msgstr ""
+
+#: ../welcome_spec.rb:30
+msgid "View the list of available quests"
+msgstr ""
