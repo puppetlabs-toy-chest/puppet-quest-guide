@@ -6,7 +6,7 @@
 
 - Introduce Puppet the company
 - Give an overview of the Puppet portfolio of products
-- Describe Puppet Bolt
+- Describe Bolt
 
 ## Getting started
 
@@ -26,21 +26,21 @@ open-source Puppet to manage their server infrastructure.
 Over time, the company has expanded its offerings to the following portfolio
 of enterprise products:
 
-- Puppet Bolt: Perform ad hoc system configuration tasks on your infrastructure
+- Bolt: Perform ad hoc system configuration tasks on your infrastructure
 - Puppet Enterprise: Build model-driven configuration for your IT infrastructure
 - Puppet Pipelines: Simplify your application delivery and deployment process
 - Puppet Insights: Visually measure and optimize your DevOps investment
 
-Puppet Bolt and Puppet Enterprise will be the focus of the Learning VM. We
+Bolt and Puppet Enterprise will be the focus of the Learning VM. We
 invite you to visit [https://puppet.com/products](https://puppet.com/products)
 for additional information of the entire suite of Puppet products.
 
-## Puppet Bolt
+## Bolt
 
 Bolt is an open-source remote task runner that automates the manual work that you do
 to maintain your infrastructure. Use Bolt to automate tasks that you need to
 perform on your infrastructure on an ad hoc basis, such as troubleshooting,
-deploying an applications, stopping and starting services, and upgrading a
+deploying an application, stopping and starting services, and upgrading a
 database schema. Bolt connects directly to remote nodes with SSH or WinRM, so
 you are not required to install any agent software.
 
@@ -60,6 +60,6 @@ and restarting the server.
 ## Review
 
 In this quest, we introduced you to Puppet the company and its portfolio of
-products. In the Learning VM, we will focus on the use of Puppet Bolt and
+products. In the Learning VM, we will focus on the use of Bolt and
 Puppet Enterprise to show how straightforward it is to begin your
 infrastructure automation journey.

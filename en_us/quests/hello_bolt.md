@@ -4,13 +4,13 @@
 
 ## Quest objectives
 
-- Install Puppet Bolt
-- Verify the Puppet Bolt installation
+- Install Bolt
+- Verify the Bolt installation
 - Run simple commands using Bolt
 
 ## Get started
 
-In this quest, you will install Puppet Bolt and run some introductory commands.
+In this quest, you will install Bolt and run some introductory commands.
 As described in the previous quest, Bolt is a task runner that enables you
 to invoke commands on one or more target nodes. It is well-suited to
 performing actions in an ad hoc manner instead of managing a node on a
@@ -21,7 +21,7 @@ this quest:
 
     quest begin hello_bolt
 
-## Install Puppet Bolt
+## Install Bolt
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
@@ -40,11 +40,11 @@ Now run this command to install Bolt:
 
     yum install puppet-bolt
 
-## Verify the Puppet Bolt installation
+## Verify the Bolt installation
 
 <div class = "lvm-task-number"><p>Task 2:</p></div>
 
-Now that you have installed Puppet Bolt successfully, let's run some commands
+Now that you have installed Bolt successfully, let's run some commands
 to verify that it works correctly.
 
     bolt --help
@@ -75,7 +75,7 @@ Successful on 1 node: localhost
 Ran on 1 node in 0.01 seconds
 ```
 
-This demonstrates trivial usage of bolt, but since the command is running on
+This demonstrates trivial usage of Bolt, but since the command is running on
 the local machine, you could just as easily run `free -th` to get the same
 output.
 
@@ -136,7 +136,7 @@ options, and you can see them by running `bolt --help`.
 
 ## Review
 
-In this quest, you installed the Puppet Bolt tool, verified the installation
+In this quest, you installed Bolt, verified the installation
 and practiced running some simple commands to get a feel for usage. Bolt is
 a flexible task runner that can target multiple nodes at once, connect to
 different types of nodes with a variety of protocols, including SSH, WinRM
@@ -144,6 +144,6 @@ and Docker, as shown in this quest.
 
 ## Additional Resources
 
-* [Download Puppet Bolt](https://puppet.com/docs/bolt/latest/bolt_installing.html) on your own machine.
-* Read the Puppet Bolt [documentation](https://puppet.com/docs/bolt/latest/bolt.html) for more details about all of its use cases.
-* Dive deeper with a Puppet Bolt and Tasks [self-paced course](https://learn.puppet.com/course/puppet-orchestration-bolt-and-tasks) and learn how to manage nodes with Bolt, using it from the command-line and the Puppet Enterprise Console.
+* [Download Bolt](https://puppet.com/docs/bolt/latest/bolt_installing.html) on your own machine.
+* Read the Bolt [documentation](https://puppet.com/docs/bolt/latest/bolt.html) for more details about all of its use cases.
+* Dive deeper with a Bolt and Puppet tasks [self-paced course](https://learn.puppet.com/course/puppet-orchestration-bolt-and-tasks) and learn how to manage nodes with Bolt, using it from the command-line and the Puppet Enterprise Console.
