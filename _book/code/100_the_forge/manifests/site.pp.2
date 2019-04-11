@@ -1,0 +1,6 @@
+node 'pasture-app.puppet.vm' {
+  class { 'pasture':
+    sinatra_server => 'thin',
+    db             => 'postgres://pasture:m00m00@pasture-db.puppet.vm/pasture',
+  }
+}

@@ -1,0 +1,9 @@
+---
+profile::pasture::app::default_message: "Welcome to Beauvine!"
+profile::base::dev_users::users:
+  - title: 'bessie'
+    comment: 'Bessie Johnson'
+    pub_key: 
+  - title: 'gertie'
+    comment: 'Gertie Philips'
+    pub_key: 

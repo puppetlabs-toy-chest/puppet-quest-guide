@@ -1,0 +1,701 @@
+
+<!DOCTYPE HTML>
+<html lang="en_us" >
+    <head>
+        <title>Puppetfile · GitBook</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.1.1">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="afterword.html" />
+    
+    
+    <link rel="prev" href="control_repository.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../SETUP.html">
+            
+                <a href="../SETUP.html">
+            
+                    
+                    Setup
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Quests</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="welcome.html">
+            
+                <a href="welcome.html">
+            
+                    
+                    Welcome
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="portfolio_introduction.html">
+            
+                <a href="portfolio_introduction.html">
+            
+                    
+                    Portfolio Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="hello_bolt.html">
+            
+                <a href="hello_bolt.html">
+            
+                    
+                    Hello Bolt
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="hello_puppet.html">
+            
+                <a href="hello_puppet.html">
+            
+                    
+                    Hello Puppet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="agent_run.html">
+            
+                <a href="agent_run.html">
+            
+                    
+                    Agent Run
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="manifests_and_classes.html">
+            
+                <a href="manifests_and_classes.html">
+            
+                    
+                    Manifests and Classes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.7" data-path="package_file_service.html">
+            
+                <a href="package_file_service.html">
+            
+                    
+                    Package File Service
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.8" data-path="variables_and_templates.html">
+            
+                <a href="variables_and_templates.html">
+            
+                    
+                    Variables and Templates
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.9" data-path="class_parameters.html">
+            
+                <a href="class_parameters.html">
+            
+                    
+                    Class Parameters
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.10" data-path="facts.html">
+            
+                <a href="facts.html">
+            
+                    
+                    Facts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.11" data-path="conditional_statements.html">
+            
+                <a href="conditional_statements.html">
+            
+                    
+                    Conditional Statements
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.12" data-path="the_forge.html">
+            
+                <a href="the_forge.html">
+            
+                    
+                    The Forge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.13" data-path="roles_and_profiles.html">
+            
+                <a href="roles_and_profiles.html">
+            
+                    
+                    Roles and Profiles
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.14" data-path="hiera.html">
+            
+                <a href="hiera.html">
+            
+                    
+                    Hiera
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.15" data-path="defined_resource_types.html">
+            
+                <a href="defined_resource_types.html">
+            
+                    
+                    Defined Resource Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.16" data-path="control_repository.html">
+            
+                <a href="control_repository.html">
+            
+                    
+                    Control Repository
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.17" data-path="puppetfile.html">
+            
+                <a href="puppetfile.html">
+            
+                    
+                    Puppetfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Appendix</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="afterword.html">
+            
+                <a href="afterword.html">
+            
+                    
+                    Afterword
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../troubleshooting.html">
+            
+                <a href="../troubleshooting.html">
+            
+                    
+                    Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../releasenotes.html">
+            
+                <a href="../releasenotes.html">
+            
+                    
+                    Release Notes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" >
+            
+                <a target="_blank" href="https://puppet.com/legal/privacy">
+            
+                    
+                    Privacy Policy
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Puppetfile</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>Quest Guide <a href="../releasenotes.html">v2.5.1</a></p>
+<h1 id="puppetfile">Puppetfile</h1>
+<h2 id="quest-objectives">Quest objectives</h2>
+<ul>
+<li>Create a Puppetfile to manage external module dependencies</li>
+<li>Use the <code>puppet module</code> tool to calculate dependencies and help determine
+which modules you need to include in your Puppetfile.</li>
+</ul>
+<h2 id="getting-started">Getting started</h2>
+<p>In this quest, you will add external module dependencies to your control
+repository using a Puppetfile. </p>
+<p>When you&apos;re ready to get started, type the following command:</p>
+<pre><code>quest begin puppetfile
+</code></pre><h2 id="puppetfile">Puppetfile</h2>
+<p>In the Control Repository quest, you moved your Puppet modules into the
+<code>control-repo</code> git repository. So far, however, this repository only includes
+the Puppet code you wrote yourself as you worked through the previous quests
+in this guide. It doesn&apos;t contain any of the Forge modules you installed with
+the Puppet module tool.</p>
+<p>There&apos;s a good reason to leave these external modules out of your control
+repository. Adding them directly would result in a large amount of duplicated
+code. You would then need to manually manage versioning and updates for each of
+these modules. Your site-specific code, which should be the focus of your
+control repository, would be quickly overwhelmed by the bulk of this externally
+sourced code.</p>
+<p>A Puppetfile provides a more efficient solution for managing external module
+dependencies. It lets you use a single file to specify the desired version and
+source for each external module. Puppet&apos;s Code Manager installs the modules
+specified by your Puppetfile into your environment&apos;s modules directory during
+the code deployment process.</p>
+<p>This way, you can add, remove, and update external modules by changing one or
+two lines of code in your Puppetfile.</p>
+<div class="lvm-task-number"><p>Task 1:</p></div>
+
+<p>Because the database-backed version of the Pasture application depends on the
+<code>puppetlabs-postgresql</code> module, you will need to include that module in your
+Puppetfile before Puppet can manage the application.</p>
+<p>First, ensure that you&apos;re working in the <code>~/control-repo</code> directory.</p>
+<pre><code>cd ~/control-repo
+</code></pre><p>Before starting work, check the current status of the repository.</p>
+<pre><code>git status
+</code></pre><p>If you&apos;re still on the feature branch from the previous quest, return to the
+<code>production</code> branch.</p>
+<pre><code>git checkout production
+</code></pre><p>Remember, the upstream version of your <code>production</code> branch incorporated the
+changes you introduced with your feature branch. Fetch and merge those changes
+into your local <code>production</code> branch with the <code>git pull</code> command.</p>
+<pre><code>git pull upstream production
+</code></pre><p>Now that your local production branch matches the upstream remote&apos;s production
+branch, you&apos;re ready to create a new feature branch for your new work.</p>
+<pre><code>git checkout -b puppetfile
+</code></pre><div class="lvm-task-number"><p>Task 2:</p></div>
+
+<p>Open a new file called <code>Puppetfile</code> in your editor.</p>
+<pre><code>vim Puppetfile
+</code></pre><p>Add the following line to include version 5.12.1 of the <code>puppetlabs-postgresql</code>
+module:</p>
+<pre><code class="lang-ruby">mod <span class="hljs-string">&quot;puppetlabs/postgresql&quot;</span>, <span class="hljs-string">&apos;5.12.1&apos;</span>
+</code></pre>
+<p>Unfortunately you&apos;re not quite done yet. Unlike the <code>puppet module</code> tool, Code
+Manager does not automatically manage dependency trees for modules. If you have
+a large number of modules for which you need to resolve dependencies, there are
+a few third-party tools such as
+<a href="https://github.com/rnelson0/puppet-generate-puppetfile" target="_blank">puppet-generate-puppetfile</a>
+and <a href="https://github.com/voxpupuli/librarian-puppet" target="_blank">librarian-puppet</a> that can
+help with this.</p>
+<div class="lvm-task-number"><p>Task 3:</p></div>
+
+<p>In this case, however, you&apos;re only dealing with one external module, so you can
+resort to a common work-around. Install the desired version of the
+<code>puppetlabs/postgresql</code> module into a temporary directory using the <code>puppet
+module</code> tool and use the tool&apos;s output to determine the needed dependencies.</p>
+<pre><code>mkdir temp  
+puppet module install puppetlabs/postgresql --version 5.12.1 --modulepath=temp
+</code></pre><p>The tool will return the following:</p>
+<pre><code>Notice: Preparing to install into /root/control-repo/tmp ...
+Notice: Downloading from https://forge.puppet.com ...
+Notice: Installing -- do not interrupt ...
+/root/control-repo/tmp
+&#x2514;&#x2500;&#x252C; puppetlabs-postgresql (v5.12.1)
+  &#x251C;&#x2500;&#x252C; puppetlabs-apt (v6.3.0)
+  &#x2502; &#x2514;&#x2500;&#x2500; puppetlabs-translate (v1.1.0)
+  &#x251C;&#x2500;&#x2500; puppetlabs-concat (v5.3.0)
+  &#x2514;&#x2500;&#x2500; puppetlabs-stdlib (v5.2.0)
+</code></pre><p>Clean up after yourself by removing the temporary directory.</p>
+<pre><code>rm -rf temp
+</code></pre><p>Return to your Puppetfile and add entries for the <code>puppetlabs-apt</code>,
+<code>puppetlabs-translate</code>, <code>puppetlabs-concat</code>, and <code>puppetlabs-stdlib</code>
+modules using the listed versions.</p>
+<p>Your finished Puppetfile should look like this:</p>
+<pre><code class="lang-ruby">mod <span class="hljs-string">&quot;puppetlabs/postgresql&quot;</span>, <span class="hljs-string">&apos;5.12.1&apos;</span>
+mod <span class="hljs-string">&quot;puppetlabs/apt&quot;</span>, <span class="hljs-string">&apos;6.3.0&apos;</span>
+mod <span class="hljs-string">&quot;puppetlabs/translate&quot;</span>, <span class="hljs-string">&apos;1.1.0&apos;</span>
+mod <span class="hljs-string">&quot;puppetlabs/concat&quot;</span>, <span class="hljs-string">&apos;5.3.0&apos;</span>
+mod <span class="hljs-string">&quot;puppetlabs/stdlib&quot;</span>, <span class="hljs-string">&apos;5.2.0&apos;</span>
+</code></pre>
+<div class="lvm-task-number"><p>Task 4:</p></div>
+
+<p>Stage your new Puppetfile to be committed:</p>
+<pre><code>git add Puppetfile
+</code></pre><p>And commit the change:</p>
+<pre><code>git commit
+</code></pre><p>Enter a commit message like the following:</p>
+<pre><code>Add Puppetfile with puppetlabs-postgresql module
+
+The Pasture module depends on the `puppetlabs-postgresql` module for
+the database-backed version of the application. Add a Puppetfile
+to include this module and its dependencies.
+</code></pre><p>Push your branch to the upstream remote.</p>
+<pre><code>git push upstream puppetfile
+</code></pre><div class="lvm-task-number"><p>Task 5:</p></div>
+
+<p>From the Gitea UI (<code>&lt;IP ADDRESS&gt;:3000</code>), create a new pull request.</p>
+<p>Review and merge the pull request. (Keep in mind that in a real production
+environment, you should establish a team process for these review and merge
+steps. This ensures that all changes to your code base are reviewed and
+approved before being merged into production and deployed.)</p>
+<div class="lvm-task-number"><p>Task 6:</p></div>
+
+<p>Now that this change has been integrated into your control repository, use the
+<code>puppet code</code> tool to deploy to the production environment. (If your token has
+expired since you last authenticated, use <code>puppet access login --lifetime 1d</code>
+and supply the credentials <code>deployer</code>:<code>puppet</code> generate a new token.)</p>
+<pre><code>puppet code deploy production --wait
+</code></pre><p>Once the deployment completes, check the list of installed modules to verify
+that the correct modules have been installed.</p>
+<pre><code>puppet module list --tree --modulepath /etc/puppetlabs/code/environments/production/modules
+</code></pre><p>The modules you added to your Puppetfile should now be included in your
+production environment&apos;s modulepath.</p>
+<pre><code>/etc/puppetlabs/code/environments/production/modules
+&#x2514;&#x2500;&#x252C; puppetlabs-postgresql (v5.12.1)
+  &#x251C;&#x2500;&#x2500; puppetlabs-stdlib (v5.2.0)
+  &#x251C;&#x2500;&#x252C; puppetlabs-apt (v6.3.0)
+  &#x2502; &#x2514;&#x2500;&#x2500; puppetlabs-translate (v1.1.0)
+  &#x2514;&#x2500;&#x2500; puppetlabs-concat (v5.3.0)
+</code></pre><div class="lvm-task-number"><p>Task 7:</p></div>
+
+<p>Now that these external Forge modules are included in your Puppetfile, your
+control repository can support your Pasture application&apos;s database server.</p>
+<p>Use the <code>puppet job</code> tool to trigger Puppet agent runs on the <code>pasture-db.auroch.vm</code>
+and <code>pasture-app.auroch.vm</code> nodes.</p>
+<pre><code>puppet job run --nodes pasture-app.auroch.vm,pasture-db.auroch.vm
+</code></pre><p>Now that your nodes are configured, take a moment to test that your application
+can store a value in the connected database and retrieve it.</p>
+<pre><code>curl -X POST &apos;pasture-app.auroch.vm/api/v1/cowsay/sayings?message=Hello!&apos;
+curl pasture-app.auroch.vm/api/v1/cowsay/sayings/1
+</code></pre><h2 id="review">Review</h2>
+<p>In this quest, we introduced the the use of a Puppetfile to manage external
+module dependencies.</p>
+<p>After learning the basic syntax of the Puppetfile, you used the <code>puppet module
+tool</code> to resolve your set of module dependencies and versions for the
+<code>puppetlabs-postgresql</code> module by installing it to a temporary directory.</p>
+<p>With your external modules specified in your Puppetfile, you used a pull
+request to add these changes to your upstream control repository and used the
+<code>puppet code deploy</code> command to deploy that repository to the master&apos;s
+production environment. As part of the deploy process, Puppet&apos;s Code Manager
+parsed the Puppetfile and installed each listed module to the
+<code>/etc/puppetlabs/code/environments/production/modules</code> directory.</p>
+<p>With these modules installed, you were able to configure your database server
+and the application server that connects to it.</p>
+<h2 id="additional-resources">Additional Resources</h2>
+<p>You can find more information on how to use a Puppetfile on the Puppet <a href="https://puppet.com/docs/pe/latest/code_management/puppetfile.html" target="_blank">docs
+page</a>.</p>
+<p>The Puppetfile is covered in several of our <a href="https://learn.puppet.com/course-catalog" target="_blank">instructor-led trainings</a>.</p>
+<p>The example <a href="https://github.com/puppetlabs/control-repo" target="_blank">control-repo repository</a> includes a Puppetfile
+you may use as reference when creating your own.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="control_repository.html" class="navigation navigation-prev " aria-label="Previous page: Control Repository">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="afterword.html" class="navigation navigation-next " aria-label="Next page: Afterword">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Puppetfile","level":"2.17","depth":1,"next":{"title":"Afterword","level":"3.1","depth":1,"path":"quests/afterword.md","ref":"quests/afterword.md","articles":[]},"previous":{"title":"Control Repository","level":"2.16","depth":1,"path":"quests/control_repository.md","ref":"quests/control_repository.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-54263865-3"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_us","gitbook":"*"},"file":{"path":"quests/puppetfile.md","mtime":"2019-04-10T15:13:57.423Z","type":"markdown"},"gitbook":{"version":"3.1.1","time":"2019-04-10T15:40:44.771Z"},"basePath":"..","book":{"language":"en_us"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
