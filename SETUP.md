@@ -108,15 +108,6 @@ credentials provided on the VM console splash page to authenticate.
 Once you're logged in, continue on to the **Get started** section below to
 access the Quest Guide and begin the interactive lessons.
 
-## Localization
-
-The Learning VM's Quest Guide and Quest tool currently support English and
-Japanese localization. The default language is English. If you would like to
-use the Quest tool in Japanese, run the following command in the Learning VM:
-`export LANG=ja_JP.utf-8`. Note that you must use SSH to see Japanese
-characters. Japanese characters will not display correctly on the default
-VirtualBox or VMware terminal.
-
 ## Get started
 
 Once the VM is set up and you have connected, you're ready to get started on
