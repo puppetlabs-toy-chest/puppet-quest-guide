@@ -1,3 +1,0 @@
----
-profile::pasture::app::default_message: "Welcome to Auroch!"
-profile::pasture::app::db: "postgres://pasture:m00m00@pasture-db.auroch.vm/pasture"
