@@ -1,0 +1,957 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <title>Defined Resource Types · GitBook</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.1.1">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="control_repository.html" />
+    
+    
+    <link rel="prev" href="hiera.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../SETUP.html">
+            
+                <a href="../SETUP.html">
+            
+                    
+                    Setup
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Quests</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="welcome.html">
+            
+                <a href="welcome.html">
+            
+                    
+                    Welcome
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="portfolio_introduction.html">
+            
+                <a href="portfolio_introduction.html">
+            
+                    
+                    Portfolio Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="hello_bolt.html">
+            
+                <a href="hello_bolt.html">
+            
+                    
+                    Hello Bolt
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="hello_puppet.html">
+            
+                <a href="hello_puppet.html">
+            
+                    
+                    Hello Puppet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="agent_run.html">
+            
+                <a href="agent_run.html">
+            
+                    
+                    Agent Run
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="manifests_and_classes.html">
+            
+                <a href="manifests_and_classes.html">
+            
+                    
+                    Manifests and Classes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.7" data-path="package_file_service.html">
+            
+                <a href="package_file_service.html">
+            
+                    
+                    Package File Service
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.8" data-path="variables_and_templates.html">
+            
+                <a href="variables_and_templates.html">
+            
+                    
+                    Variables and Templates
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.9" data-path="class_parameters.html">
+            
+                <a href="class_parameters.html">
+            
+                    
+                    Class Parameters
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.10" data-path="facts.html">
+            
+                <a href="facts.html">
+            
+                    
+                    Facts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.11" data-path="conditional_statements.html">
+            
+                <a href="conditional_statements.html">
+            
+                    
+                    Conditional Statements
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.12" data-path="the_forge.html">
+            
+                <a href="the_forge.html">
+            
+                    
+                    The Forge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.13" data-path="roles_and_profiles.html">
+            
+                <a href="roles_and_profiles.html">
+            
+                    
+                    Roles and Profiles
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.14" data-path="hiera.html">
+            
+                <a href="hiera.html">
+            
+                    
+                    Hiera
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.15" data-path="defined_resource_types.html">
+            
+                <a href="defined_resource_types.html">
+            
+                    
+                    Defined Resource Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.16" data-path="control_repository.html">
+            
+                <a href="control_repository.html">
+            
+                    
+                    Control Repository
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.17" data-path="puppetfile.html">
+            
+                <a href="puppetfile.html">
+            
+                    
+                    Puppetfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Appendix</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="afterword.html">
+            
+                <a href="afterword.html">
+            
+                    
+                    Afterword
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../troubleshooting.html">
+            
+                <a href="../troubleshooting.html">
+            
+                    
+                    Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../releasenotes.html">
+            
+                <a href="../releasenotes.html">
+            
+                    
+                    Release Notes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" >
+            
+                <a target="_blank" href="https://puppet.com/legal/privacy">
+            
+                    
+                    Privacy Policy
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Defined Resource Types</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="defined-resource-types">Defined resource types</h1>
+<h2 id="quest-objectives">Quest objectives</h2>
+<ul>
+<li>Manage a group of resources with a <em>defined resource type</em>.</li>
+<li>Understand the difference between a defined resource type and class.</li>
+<li>Learn how to handle the uniqueness constraints of resources contained within
+a defined resource type.</li>
+<li>Use a defined resource type to manage user accounts and SSH keys.</li>
+</ul>
+<h2 id="getting-started">Getting started</h2>
+<p>As we noted in discussions of classes earlier in this guide, Puppet&apos;s classes
+are <em>singleton</em>. In other words, classes in the Puppet language can only exist
+once within a given catalog, and writing Puppet code that declares a class
+twice will result in a compilation error. For many system components, there is
+a natural fit between this idea of a singleton class and a single instance or
+installation of the class&apos;s managed component on the node. For example, an
+Apache server will generally run only a single instance of an <code>httpd</code> service
+and have one set of configuration files. In this case, Puppet&apos;s singleton
+classes ensure that you don&apos;t have multiple conflicting specifications for how
+a corresponding component should be configured.</p>
+<p>In some cases, however, this one-to-one correspondence doesn&apos;t hold. A single
+Apache <code>httpd</code> process may serve multiple virtual hosts, for example. In this
+quest, we&apos;ll focus on a simple example: user accounts. While Puppet has a
+built-in <code>user</code> resource type, a system administrator will often need to manage
+a whole range of other resources on a per-user basis. For this quest, we&apos;ll go
+through the exercise of setting up SSH keys for each user account, but the same
+principle can easily be extended to cover a range of other user-related
+resources.</p>
+<p>To address this need, of repeatable groups of resources, the Puppet language
+uses <em>defined resource types</em>. A defined resource type is a block of Puppet
+code similar in syntax to a class. Like a class, a defined resource type can
+take parameters and use these parameters to configure a related group of
+resources. Unlike a class, however, a defined resource type, is not singleton.
+This means that the defined resource type may be declared multiple times on the
+same node.</p>
+<p>When you&apos;re ready to get started, type the following command:</p>
+<pre><code>quest begin defined_resource_types
+</code></pre><h2 id="defined-resource-types">Defined resource types</h2>
+<blockquote>
+<p>Repetition - that is the actuality and the earnestness of existence.</p>
+<p>-S&#xF8;ren Kierkegaard</p>
+</blockquote>
+<p>A <a href="https://puppet.com/docs/puppet/latest/lang_defined_types.html" target="_blank">defined resource
+type</a> is a block
+of Puppet code that can be evaluated multiple times within a single node&apos;s
+catalog.</p>
+<p>The syntax to create a defined resource type is very similar to the syntax you
+would use to define a class. Rather than using the <code>class</code> keyword, however,
+you use <code>define</code> to begin the code block.</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">define</span> <span class="hljs-section">defined_type_name</span> (
+  parameter_one = default_value,
+  parameter_two = default_value,
+){
+  ...
+}
+</code></pre>
+<p>Once it&apos;s defined, you can use a defined resource type by declaring it like
+you would any other resource type.</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">defined_type_name</span> { <span class="hljs-string">&apos;title&apos;</span>:
+  <span class="hljs-attr">parameter_one</span> =&gt; <span class="hljs-string">&apos;foo&apos;</span>,
+  <span class="hljs-attr">parameter_two</span> =&gt; <span class="hljs-string">&apos;bar&apos;</span>,
+}
+</code></pre>
+<p>Because a defined resource type is not singleton, it&apos;s up to you as a module
+developer to ensure that none of the resources it contains violate resource
+uniqueness constraints when the defined resource type is declared multiple
+times.</p>
+<p>Before continuing, let&apos;s take a moment to review those constraints. To avoid
+duplicate resource errors during compilation, all resource must have a <em>title</em>
+and <em>namevar</em> parameter that are unique with respect to resources of the same
+type.</p>
+<h2 id="resource-uniqueness-constraints">Resource uniqueness constraints</h2>
+<p>A resource&apos;s <em>title</em> is the unique identifier Puppet user internally to keep
+track of that resource. Resource relationships, for example, rely on resource
+titles to specify dependency relationships between resources. Resource titles
+are also used to log and report on resource state changes across Puppet runs.</p>
+<p>A resource&apos;s <em>namevar</em> is the parameter that specifies the unique aspect on the
+target system that the resource manages. A resource doesn&apos;t actually have a
+parameter called <em>namevar</em>&#x2014;rather the term namevar refers to the parameter that
+plays this role. For example, the namevar of a <code>file</code> resource is its <code>path</code>
+parameter. By requiring that a resource has a unique namevar, the Puppet parser
+avoids creating conflicting definitions for the state of a single aspect of the
+target system. If Puppet allowed two <code>file</code> resource declarations with the same
+<code>path</code> parameter, for example, it would not be clear which of the two resource
+declarations should be enforced for the file at that path.</p>
+<p>Though a resource&apos;s title and namevar are distinct, the value you would assign
+to a resource&apos;s namevar is generally an excellent candidate for an expressive
+and unique title. For example, if the <code>path</code> of a file resource is
+<code>/etc/hosts</code>, using that path as the resource title makes it immediately clear
+what the the resource is managing. The common convention, then, is to use the
+value of a resource&apos;s namevar as its title. To support this convention, a
+resource&apos;s namevar default to the value of its title unless it is explicitly
+set to a different value. This is why, for instance, you generally see the
+filepath or package name used the title of <code>file</code> and <code>package</code> resources, and
+the <code>path</code> or <code>name</code> parameter left unset.</p>
+<h2 id="maintaining-uniqueness-in-defined-resource-types">Maintaining uniqueness in defined resource types</h2>
+<p>Now that you understand resource uniqueness constraints, how do you guarantee
+that the resources included in a defined resource type are unique?</p>
+<p>Just as you would give include a title in the declaration of any of Puppet&apos;s
+built-in resource types, you include a title when declaring a defined resource
+type. The title given to a defined resource type when it is declared is
+available within the defined resource type&apos;s code block as the <code>$title</code>
+variable. By incorporating this <code>$title</code> variable into the titles of each
+resource included in the defined resource type, you can ensure that as long as
+the defined resource type itself is declared with a unique title, the resources
+it includes are also unique.</p>
+<h2 id="managing-user-accounts">Managing user accounts</h2>
+<p>To see how this all fits together, let&apos;s get started on a <code>ssh_user</code> defined
+resource type.</p>
+<p>Like a class, a defined resource type should be defined within a module. In
+many cases, a defined resource type is included in a module to support the
+functionality provided by that module&apos;s class or classes. For example, the
+<code>postgresql</code> module you used in the previous quest provides defined resource
+types to help manage the groups of related resources that come together to
+manage aspects of your database configuration such as databases, users, and
+grants. In this case, however, we want to keep things simple, so we&apos;ll create a
+standalone module to contain our defined resource type.</p>
+<div class="lvm-task-number"><p>Task 1:</p></div>
+
+<p>Before you begin, make sure you&apos;re working in your module directory.</p>
+<pre><code>cd /etc/puppetlabs/code/environments/production/modules
+</code></pre><p>Create the <code>user_accounts</code> module&apos;s directory structure.</p>
+<pre><code>mkdir -p user_accounts/manifests
+</code></pre><div class="lvm-task-number"><p>Task 2:</p></div>
+
+<p>Next, create a <code>ssh_user.pp</code> manifest to contain the <code>user_accounts::ssh_user</code>
+defined resource type.</p>
+<pre><code>vim user_accounts/manifests/ssh_user.pp
+</code></pre><p>We want to manage the user account itself along with the user&apos;s public key for
+SSH, so we&apos;ll expose a few basic parameters for the user resource as well as a
+<code>pub_key</code> parameter for the user&apos;s public key.</p>
+<p>The parameter list for your defined type should look like this:</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">define</span> <span class="hljs-section">user_accounts</span>::ssh_user (
+  <span class="hljs-variable">$pub_key</span>,
+  <span class="hljs-variable">$group</span>   = undef,
+  <span class="hljs-variable">$shell</span>   = undef,
+  <span class="hljs-variable">$comment</span> = undef,
+){
+  ...
+}
+</code></pre>
+<p>Note that the <code>$pub_key</code> parameter has no default value, while the default
+values for the other parameters are set to &apos;undef&apos;. There is an important
+difference here.</p>
+<p>A parameter with no supplied default value is required. Leaving out a default
+value for the <code>$pub_key</code> parameter means that declaring an instance of this
+<code>ssh_user</code> defined resource type without supplying a value for the <code>$pub_key</code>
+parameter will result in a compilation error. Because this resource requires
+a user&apos;s public key in order to correctly provide SSH access with public key
+authentication, this is the desired behavior.</p>
+<pre><code class="lang-puppet">  <span class="hljs-keyword">ssh_authorized_key</span> { <span class="hljs-string">&quot;${title}@puppet.vm&quot;</span>:
+    <span class="hljs-attr">ensure</span> =&gt; <span class="hljs-literal">present</span>,
+    <span class="hljs-attr">user</span>   =&gt; <span class="hljs-variable">$title</span>,
+    <span class="hljs-attr">type</span>   =&gt; <span class="hljs-string">&apos;ssh-rsa&apos;</span>,
+    <span class="hljs-attr">key</span>    =&gt; <span class="hljs-variable">$pub_key</span>,
+  }
+</code></pre>
+<p>The <code>group</code>, <code>shell</code>, and <code>comment</code> parameters, on the other hand, are not
+required. The <code>ssh_user</code> defined resource type, includes an ordinary <code>user</code>
+resource to actual user account on the system.</p>
+<pre><code class="lang-puppet">  <span class="hljs-keyword">user</span> { <span class="hljs-variable">$title</span>:
+    <span class="hljs-attr">ensure</span>  =&gt; <span class="hljs-literal">present</span>,
+    <span class="hljs-attr">groups</span>  =&gt; <span class="hljs-variable">$group</span>,
+    <span class="hljs-attr">shell</span>   =&gt; <span class="hljs-variable">$shell</span>,
+    <span class="hljs-attr">home</span>    =&gt; <span class="hljs-string">&quot;/home/${title}&quot;</span>,
+    <span class="hljs-attr">comment</span> =&gt; <span class="hljs-variable">$comment</span>,
+  }
+</code></pre>
+<p>This <code>user</code> resource already has its own defaults for handling <code>group</code>,
+<code>shell</code>, and <code>comment</code>. The desired behavior, then, is to use the values passed
+in by parameter when they&apos;re provided, but revert to the <code>user</code> type&apos;s own
+defaults for any of these parameters that isn&apos;t supplied when the defined
+resource type is declared.</p>
+<p>The special <code>undef</code> value lets you achieve both of these things. Under the hood
+<code>undef</code> is exactly what Puppet sees when it tries to evaluate a variable or
+parameter that has not been set. By setting it as the default for your optional
+parameters, you can literally pass the &quot;undefined&quot; state of a parameter through
+to the underlying <code>user</code> resource, which will then fall back to its default
+behavior for that parameter.</p>
+<p>Putting these <code>user</code> and <code>ssh_authorized_key</code> resources together with <code>file</code>
+resources to manage the user&apos;s home directory and <code>.ssh</code> directory, your
+<code>user_accounts::ssh_user</code> defined resource type will look like this:</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">define</span> <span class="hljs-section">user_accounts</span>::ssh_user (
+  <span class="hljs-variable">$pub_key</span>,
+  <span class="hljs-variable">$group</span>   = undef,
+  <span class="hljs-variable">$shell</span>   = undef,
+  <span class="hljs-variable">$comment</span> = undef,
+){
+  <span class="hljs-keyword">ssh_authorized_key</span> { <span class="hljs-string">&quot;${title}@puppet.vm&quot;</span>:
+    <span class="hljs-attr">ensure</span> =&gt; <span class="hljs-literal">present</span>,
+    <span class="hljs-attr">user</span>   =&gt; <span class="hljs-variable">$title</span>,
+    <span class="hljs-attr">type</span>   =&gt; <span class="hljs-string">&apos;ssh-rsa&apos;</span>,
+    <span class="hljs-attr">key</span>    =&gt; <span class="hljs-variable">$pub_key</span>,
+  }
+  <span class="hljs-keyword">file</span> { <span class="hljs-string">&quot;/home/${title}/.ssh&quot;</span>:
+    <span class="hljs-attr">ensure</span> =&gt; <span class="hljs-literal">directory</span>,
+    <span class="hljs-attr">owner</span>  =&gt; <span class="hljs-variable">$title</span>,
+    <span class="hljs-attr">group</span>  =&gt; <span class="hljs-variable">$title</span>,
+    <span class="hljs-attr">mode</span>   =&gt; <span class="hljs-string">&apos;0700&apos;</span>,
+    <span class="hljs-attr">before</span> =&gt; Ssh_authorized_key[<span class="hljs-string">&quot;${title}@puppet.vm&quot;</span>],
+  }
+  <span class="hljs-keyword">user</span> { <span class="hljs-variable">$title</span>:
+    <span class="hljs-attr">ensure</span>  =&gt; <span class="hljs-literal">present</span>,
+    <span class="hljs-attr">groups</span>  =&gt; <span class="hljs-variable">$group</span>,
+    <span class="hljs-attr">shell</span>   =&gt; <span class="hljs-variable">$shell</span>,
+    <span class="hljs-attr">home</span>    =&gt; <span class="hljs-string">&quot;/home/${title}&quot;</span>,
+    <span class="hljs-attr">comment</span> =&gt; <span class="hljs-variable">$comment</span>,
+  }
+  <span class="hljs-keyword">file</span> { <span class="hljs-string">&quot;/home/${title}&quot;</span>:
+    <span class="hljs-attr">ensure</span> =&gt; <span class="hljs-literal">directory</span>,
+    <span class="hljs-attr">owner</span>  =&gt; <span class="hljs-variable">$title</span>,
+    <span class="hljs-attr">group</span>  =&gt; <span class="hljs-variable">$title</span>,
+    <span class="hljs-attr">mode</span>   =&gt; <span class="hljs-string">&apos;0755&apos;</span>,
+  }
+}
+</code></pre>
+<h2 id="string-interpolation">String interpolation</h2>
+<p>You may have noticed another new element of syntax into this code. Some of the
+double-quoted strings (<code>&quot;...&quot;</code>) in this manifest include variables in the
+<code>${var_name}</code> format. This is Puppet&apos;s <a href="https://puppet.com/docs/puppet/latest/lang_variables.html#interpolation" target="_blank">string
+interpolation</a>
+syntax. String interpolation allows you to insert a variable into any
+double-quoted string.</p>
+<p>String interpolation is useful throughout Puppet, but it is particularly
+salient in the context of defined resource types because it allows you to
+incorporate the <code>$title</code> variable of the defined resource type itself into the
+titles of its constituent resources.  The title of the <code>ssh_authorized_key</code>
+resource, for example, looks like <code>&quot;${title}@puppet.vm&quot;</code>.</p>
+<p>Why is this so important? Remember, all resources included in the body of a
+defined resource type must still meet the same uniqueness constraints of any
+other Puppet resource. By passing the unique given to the defined resource type
+itself through to each constituent resource, whether directly, as in the case
+of the <code>user</code> resource, or indirectly through string interpolation, you can
+guarantee the uniqueness of all the resources included within the defined
+resource type.</p>
+<div class="lvm-task-number"><p>Task 3:</p></div>
+
+<p>Normally you would ask the users who needed accounts on this system to provide
+their own public keys. For the sake of demonstration, however, you&apos;ll generate
+one key pair to use with all the users you&apos;re going to manage. This will allow
+you to log in as those users and validate that the defined resource type has
+worked as expected.</p>
+<p>Use the <code>ssh-keygen</code> command to create a new keypair:</p>
+<pre><code>ssh-keygen -t rsa
+</code></pre><p>Accept the default location and supply the password <em>puppet</em>.</p>
+<p>With this key created, you&apos;re ready to write the Puppet code to actually
+declare which users we want on a system.</p>
+<div class="lvm-task-number"><p>Task 4:</p></div>
+
+<p>Rather than place this directly in your <code>site.pp</code> manifest, as you might have
+before we introduced the roles and profiles pattern, we&apos;ll create a
+<code>pasture_dev_users</code> profile class, and use a Hiera lookup to programmatically
+create users as needed on each system in your infrastructure.</p>
+<p>In this case, we&apos;ll include our user accounts on all nodes in the <code>beauvine.vm</code>
+domain, so we&apos;ll be editing the <code>domain/beauvine.vm.yaml</code> Hiera data source at
+<code>/etc/puppetlabs/code/environments/production/data/domain/beauvine.vm.yaml</code>.</p>
+<p>Assuming you&apos;re still working in your modules directory, go up one level to
+<code>/etc/puppetlabs/code/environments/production/</code> to make it easier to access
+this <code>data</code> directory.</p>
+<pre><code>cd ..
+</code></pre><p>Before you open the data file to edit, save some effort by using the bash <code>&gt;&gt;</code>
+append operator to append it to your <code>id_rsa.pub</code> public key to the end of the
+data file.</p>
+<pre><code>cat ~/.ssh/id_rsa.pub &gt;&gt; data/domain/beauvine.vm.yaml
+</code></pre><p>Now open the file:</p>
+<pre><code>vim data/domain/beauvine.vm.yaml
+</code></pre><p>Create a new line to define a Hiera value for
+<code>profile::base::dev_users::users:</code>. Here, we&apos;ll take advantage of
+Hiera&apos;s structured data features to define two instances of the new <code>ssh_user</code>
+and set the parameters for each. For now, just focus on entering this data
+correctly into your YAML data file. You&apos;ll see a little later how this
+structured data is actually implemented by a Puppet manifest.</p>
+<p>The final content of the file is given below, but managing the big <code>pub_key</code>
+block may be a little awkward, especially if you&apos;re not used to Vim. (If you
+are comfortable with Vim, feel free to skip this paragraph)</p>
+<p>First, you&apos;ll need to trim the <code>ssh-rsa</code> and <code>root@learning.puppetlabs.vm</code> strings
+from the beginning and end of the key. First, position your cursor over the
+line with the key. Be sure you&apos;re in command mode by hitting the <code>ESC</code> key.
+From command mode, you can navigate easily to the beginning or end of the line
+with the <code>^</code> and <code>$</code> keys, respectively. Once your cursor is over the <code>ssh-rsa</code>
+or <code>root@learning.puppetlabs.vm</code> string, you can delete it from command mode
+with the command <code>daW</code>. You&apos;ll use the same key from both users, so you&apos;ll also
+need to copy it. You can copy a line with the command <code>yy</code> and paste it to the
+position of your cursor with the <code>p</code> key.  You can also delete a line with the
+<code>dd</code> command.</p>
+<p>When your finished, your data file should look like the following example,
+though your public key will be different from the one shown. Note that the
+<code>pub_key:</code> must all be on a single line.</p>
+<pre><code class="lang-yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">profile:</span>:pasture::app::default_message: <span class="hljs-string">&quot;Welcome to Beauvine!&quot;</span>
+<span class="hljs-attr">profile:</span>:base::dev_users::users:
+<span class="hljs-attr">  - title:</span> <span class="hljs-string">&apos;bessie&apos;</span>
+<span class="hljs-attr">    comment:</span> <span class="hljs-string">&apos;Bessie Johnson&apos;</span>
+<span class="hljs-attr">    pub_key:</span> <span class="hljs-string">&apos;AAAAB3NzaC1yc2EAAAADAQABAAABAQCVWbkvtB4G/x9eEHXUkFfQgJuxBNJ3MCJ
+3BWbYHb+Ksmd2I92G9wSVFWRDvLzciOsWkbjfSWHrql+82lgplyxBHZZYlf0eK3ytkSL5hvQtOmLW
+MDcWNbHnt7qZFA0j6/h43SG0POmkG1iHSHnlwvbcpJoYZZpKz5+Iq7P9JmOv7zf8UsJtQccWHxAHc
+J+xJ6xZJ2EBziWUCMPxLnD3zNQaW0r/B3pRMT+7F1gDHJ8HuNVklcQGCpVS+WrfpNMJ5+L25Aw/H2
+Bg33o+0esH5FL8M8IR3Xkgp80NAQqmyVi7cx+c9n4RjEdMGk3XtutPNsSLcgm8/YZqv/yTRH6wAQl
+/&apos;</span>
+<span class="hljs-attr">  - title:</span> <span class="hljs-string">&apos;gertie&apos;</span>
+<span class="hljs-attr">    comment:</span> <span class="hljs-string">&apos;Gertie Philips&apos;</span>
+<span class="hljs-attr">    pub_key:</span> <span class="hljs-string">&apos;AAAAB3NzaC1yc2EAAAADAQABAAABAQCVWbkvtB4G/x9eEHXUkFfQgJuxBNJ3MCJ
+3BWbYHb+Ksmd2I92G9wSVFWRDvLzciOsWkbjfSWHrql+82lgplyxBHZZYlf0eK3ytkSL5hvQtOmLW
+MDcWNbHnt7qZFA0j6/h43SG0POmkG1iHSHnlwvbcpJoYZZpKz5+Iq7P9JmOv7zf8UsJtQccWHxAHc
+J+xJ6xZJ2EBziWUCMPxLnD3zNQaW0r/B3pRMT+7F1gDHJ8HuNVklcQGCpVS+WrfpNMJ5+L25Aw/H2
+Bg33o+0esH5FL8M8IR3Xkgp80NAQqmyVi7cx+c9n4RjEdMGk3XtutPNsSLcgm8/YZqv/yTRH6wAQl
+/&apos;</span>
+</code></pre>
+<p>You can use a Ruby one-liner to validate that your YAML file can be parsed
+correctly.</p>
+<pre><code>ruby -e &quot;require &apos;yaml&apos;;require &apos;pp&apos;;pp YAML.load_file(&apos;./data/domain/beauvine.vm.yaml&apos;)&quot;
+</code></pre><p>The output should look like the following:</p>
+<pre><code class="lang-json">{&quot;profile::pasture::app::default_message&quot;=&gt;&quot;Welcome to Beauvine!&quot;,
+ &quot;profile::base::dev_users::users&quot;=&gt;
+  [{&quot;title&quot;=&gt;&quot;bessie&quot;,
+    &quot;comment&quot;=&gt;&quot;Bessie Johnson&quot;,
+    &quot;pub_key&quot;=&gt;
+     &quot;AAAAB3NzaC1yc2EAAAADAQABAAABAQCVWbkvtB4G/x9eEHXUkFfQgJuxBNJ3MCJ3BWbYHb+
+Ksmd2I92G9wSVFWRDvLzciOsWkbjfSWHrql+82lgplyxBHZZYlf0eK3ytkSL5hvQtOmLWMDcWNbHn
+t7qZFA0j6/h43SG0POmkG1iHSHnlwvbcpJoYZZpKz5+Iq7P9JmOv7zf8UsJtQccWHxAHcJ+xJ6xZJ
+2EBziWUCMPxLnD3zNQaW0r/B3pRMT+7F1gDHJ8HuNVklcQGCpVS+WrfpNMJ5+L25Aw/H2Bg33o+0e
+sH5FL8M8IR3Xkgp80NAQqmyVi7cx+c9n4RjEdMGk3XtutPNsSLcgm8/YZqv/yTRH6wAQl/&quot;},
+   {&quot;title&quot;=&gt;&quot;gertie&quot;,
+    &quot;comment&quot;=&gt;&quot;Gertie Philips&quot;,
+    &quot;pub_key&quot;=&gt;
+     &quot;AAAAB3NzaC1yc2EAAAADAQABAAABAQCVWbkvtB4G/x9eEHXUkFfQgJuxBNJ3MCJ3BWbYHb+
+Ksmd2I92G9wSVFWRDvLzciOsWkbjfSWHrql+82lgplyxBHZZYlf0eK3ytkSL5hvQtOmLWMDcWNbHn
+t7qZFA0j6/h43SG0POmkG1iHSHnlwvbcpJoYZZpKz5+Iq7P9JmOv7zf8UsJtQccWHxAHcJ+xJ6xZJ
+2EBziWUCMPxLnD3zNQaW0r/B3pRMT+7F1gDHJ8HuNVklcQGCpVS+WrfpNMJ5+L25Aw/H2Bg33o+0e
+sH5FL8M8IR3Xkgp80NAQqmyVi7cx+c9n4RjEdMGk3XtutPNsSLcgm8/YZqv/yTRH6wAQl/&quot;}]}
+</code></pre>
+<p>We&apos;ll also change the <code>common.yaml</code> data source to set a default for this key.
+In this case, we&apos;ll set the value to an empty list. This way, when Hiera tries
+to look up this value on a node outside of the <code>beauvine.vm</code> domain, it will
+still get a valid result.</p>
+<pre><code>vim data/common.yaml
+</code></pre><p>Your <code>common.yaml</code> file should look like the following:</p>
+<pre><code class="lang-yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">profile:</span>:pasture::app::default_message: <span class="hljs-string">&quot;Baa&quot;</span>
+<span class="hljs-attr">profile:</span>:pasture::app::sinatra_server: <span class="hljs-string">&quot;thin&quot;</span>
+<span class="hljs-attr">profile:</span>:pasture::app::default_character: <span class="hljs-string">&quot;sheep&quot;</span>
+<span class="hljs-attr">profile:</span>:pasture::app::db: <span class="hljs-string">&quot;none&quot;</span>
+<span class="hljs-attr">profile:</span>:base::dev_users::users: []
+</code></pre>
+<div class="lvm-task-number"><p>Task 5:</p></div>
+
+<p>Now that this data is available in Hiera, create a <code>dev_users.pp</code> manifest
+in <code>profile/manifests/base/</code>.</p>
+<pre><code>vim /etc/puppetlabs/code/environments/production/modules/profile/manifests/base/dev_users.pp
+</code></pre><p>Your <code>user_accounts::ssh_user</code> defined resource type gives you a way to create
+a new user account with an SSH key from a set of parameter inputs, and your
+Hiera data file defines the list of inputs for each user, but we still haven&apos;t
+addressed how to bring this data together with your code.</p>
+<p>Here, we&apos;ll use a Puppet language feature called an
+<a href="https://puppet.com/docs/puppet/latest/lang_iteration.html" target="_blank">iterator</a>. An
+iterator allows you to repeat a block of Puppet code multiple times, using
+data from a hash or array to bind different values to the variables in
+the block for each iteration. In this case, the iterator goes through a
+list of users accounts defined in your Hiera data source and declares an
+instance of the <code>user_accounts::ssh_user</code> defined resource type for each.</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">class</span> <span class="hljs-title">profile::base::dev_users</span> {
+  lookup(profile::base::dev_users::users).each |<span class="hljs-variable">$user</span>| {
+    user_accounts::<span class="hljs-keyword">ssh_user</span> { <span class="hljs-variable">$user</span>[<span class="hljs-string">&apos;title&apos;</span>]:
+        <span class="hljs-attr">comment</span> =&gt; <span class="hljs-variable">$user</span>[<span class="hljs-string">&apos;comment&apos;</span>],
+        <span class="hljs-attr">pub_key</span> =&gt; <span class="hljs-variable">$user</span>[<span class="hljs-string">&apos;pub_key&apos;</span>],
+    }
+  }
+}
+</code></pre>
+<p>When using iteration, be very mindful of your code&apos;s readability and
+maintainability. One of the Puppet language&apos;s benefits is that its declarative
+nature tends to make Puppet code itself readable description of desired state
+for your system. Used unnecessarily, iteration can increase your Puppet code&apos;s
+complexity, making it more difficult to understand and maintain.</p>
+<p>In this case, the roles and profiles pattern, Hiera, and the defined resource
+type keep the rest of the code simple enough that the iterator&apos;s role is very
+clear. With a basic understanding of Puppet syntax, you can easily translate
+the class into a sentence along the lines of &quot;Get the list of users from Hiera,
+and for each, create an SSH user account.&quot; If you find yourself writing
+iterators that go much beyond this level of complexity, it&apos;s a good cue to stop
+and consider whether there&apos;s a clearer way to write your Puppet code.</p>
+<div class="lvm-task-number"><p>Task 6:</p></div>
+
+<p>With this <code>profile::base::dev_users</code> class is set up, add it to the
+<code>role::pasture_app</code> class.</p>
+<pre><code>vim /etc/puppetlabs/code/environments/production/modules/role/manifests/pasture_app.pp
+</code></pre><pre><code class="lang-puppet"><span class="hljs-keyword">class</span> <span class="hljs-title">role::pasture_app</span> {
+  include profile::pasture::app
+  include profile::base::dev_users
+  include profile::base::motd
+}
+</code></pre>
+<div class="lvm-task-number"><p>Task 7:</p></div>
+
+<p>Use the <code>puppet job</code> tool to trigger a Puppet agent run. (If your token has
+expired, run the <code>puppet access login --lifetime 1d</code> and use the credentials
+<strong>learning</strong> and <strong>puppet</strong> to generate a new access token.)</p>
+<pre><code>puppet job run --nodes pasture-app.beauvine.vm
+</code></pre><p>When the Puppet run completes, connect to <code>pasture-app.beauvine.vm</code> as the
+user <code>gertie</code>.</p>
+<pre><code>ssh gertie@pasture-app.beauvine.vm
+</code></pre><p>Once you&apos;ve verified that the you can connect as this user, go ahead and
+disconnect.</p>
+<pre><code>exit
+</code></pre><h2 id="review">Review</h2>
+<p>In this quest, we introduced defined resource types, a way to bundle a group of
+resource declarations into a repeatable and configurable group.</p>
+<p>We covered a few key details you should keep in mind when you&apos;re working
+on a defined resource type:</p>
+<ul>
+<li>Defined resource type definitions use similar syntax to class declarations,
+but use the <code>define</code> keyword instead of <code>class</code>.</li>
+<li>Use the <code>$title</code> variable in constituent resource titles to ensure
+uniqueness.</li>
+<li>You can use the <code>undef</code> value as a default if you want to allow a parameter
+to remain unspecified when the defined type is declared.</li>
+</ul>
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+<li>Read more about defined resource types at our <a href="https://puppet.com/docs/puppet/latest/lang_defined_types.html" target="_blank">docs page</a>.</li>
+<li>Defined resource types are covered in our Puppet Practitioner course. Explore our <a href="https://learn.puppet.com/category/instructor-led-training" target="_blank">in-person</a> and <a href="https://learn.puppet.com/category/online-instructor-led-training" target="_blank">online</a> training options for more information.</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="hiera.html" class="navigation navigation-prev " aria-label="Previous page: Hiera">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="control_repository.html" class="navigation navigation-next " aria-label="Next page: Control Repository">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Defined Resource Types","level":"2.15","depth":1,"next":{"title":"Control Repository","level":"2.16","depth":1,"path":"quests/control_repository.md","ref":"quests/control_repository.md","articles":[]},"previous":{"title":"Hiera","level":"2.14","depth":1,"path":"quests/hiera.md","ref":"quests/hiera.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"3.1.1","theme":"default","variables":{},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-54263865-3"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"quests/defined_resource_types.md","mtime":"2019-04-10T15:13:57.423Z","type":"markdown"},"gitbook":{"version":"3.1.1","time":"2019-04-15T20:33:54.264Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

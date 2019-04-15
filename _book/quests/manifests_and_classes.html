@@ -1,0 +1,817 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <title>Manifests and Classes · GitBook</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.1.1">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="package_file_service.html" />
+    
+    
+    <link rel="prev" href="agent_run.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../SETUP.html">
+            
+                <a href="../SETUP.html">
+            
+                    
+                    Setup
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Quests</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="welcome.html">
+            
+                <a href="welcome.html">
+            
+                    
+                    Welcome
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="portfolio_introduction.html">
+            
+                <a href="portfolio_introduction.html">
+            
+                    
+                    Portfolio Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="hello_bolt.html">
+            
+                <a href="hello_bolt.html">
+            
+                    
+                    Hello Bolt
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="hello_puppet.html">
+            
+                <a href="hello_puppet.html">
+            
+                    
+                    Hello Puppet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="agent_run.html">
+            
+                <a href="agent_run.html">
+            
+                    
+                    Agent Run
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.6" data-path="manifests_and_classes.html">
+            
+                <a href="manifests_and_classes.html">
+            
+                    
+                    Manifests and Classes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.7" data-path="package_file_service.html">
+            
+                <a href="package_file_service.html">
+            
+                    
+                    Package File Service
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.8" data-path="variables_and_templates.html">
+            
+                <a href="variables_and_templates.html">
+            
+                    
+                    Variables and Templates
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.9" data-path="class_parameters.html">
+            
+                <a href="class_parameters.html">
+            
+                    
+                    Class Parameters
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.10" data-path="facts.html">
+            
+                <a href="facts.html">
+            
+                    
+                    Facts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.11" data-path="conditional_statements.html">
+            
+                <a href="conditional_statements.html">
+            
+                    
+                    Conditional Statements
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.12" data-path="the_forge.html">
+            
+                <a href="the_forge.html">
+            
+                    
+                    The Forge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.13" data-path="roles_and_profiles.html">
+            
+                <a href="roles_and_profiles.html">
+            
+                    
+                    Roles and Profiles
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.14" data-path="hiera.html">
+            
+                <a href="hiera.html">
+            
+                    
+                    Hiera
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.15" data-path="defined_resource_types.html">
+            
+                <a href="defined_resource_types.html">
+            
+                    
+                    Defined Resource Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.16" data-path="control_repository.html">
+            
+                <a href="control_repository.html">
+            
+                    
+                    Control Repository
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.17" data-path="puppetfile.html">
+            
+                <a href="puppetfile.html">
+            
+                    
+                    Puppetfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Appendix</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="afterword.html">
+            
+                <a href="afterword.html">
+            
+                    
+                    Afterword
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../troubleshooting.html">
+            
+                <a href="../troubleshooting.html">
+            
+                    
+                    Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../releasenotes.html">
+            
+                <a href="../releasenotes.html">
+            
+                    
+                    Release Notes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" >
+            
+                <a target="_blank" href="https://puppet.com/legal/privacy">
+            
+                    
+                    Privacy Policy
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Manifests and Classes</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="manifests-and-classes">Manifests and classes</h1>
+<h2 id="quest-objectives">Quest objectives</h2>
+<ul>
+<li>Understand how Puppet code is organized into <em>classes</em>, contained within <em>manifest</em> files.</li>
+<li>Learn how the module structure keeps your Puppet code organized in a way the Puppet master understands.</li>
+<li>Create a new Puppet module to manage the <code>cowsay</code> and <code>fortune</code> packages. </li>
+</ul>
+<h2 id="getting-started">Getting started</h2>
+<p>So far you&apos;ve learned about the basics of Puppet&apos;s <em>resource abstraction
+layer</em>, the relationship between the Puppet agent and master, and the
+communication between the agent and master involved in a Puppet agent run.
+Other than modifying a few basic resources, however, you haven&apos;t yet written
+much Puppet code.</p>
+<p>The patterns and workflows used to organize, maintain, and deploy Puppet code
+are just as important as the code itself. Though some of the examples we give
+here may seem overly complex given the simplicity of what we&apos;re managing,
+starting with good design will keep everything working smoothly as you start
+managing a more complex Puppet infrastructure.</p>
+<p>In this quest, you&apos;ll learn how Puppet code is organized into <em>manifests</em>,
+<em>classes</em>, and <em>modules</em>, and how to apply classes to nodes with the
+<code>site.pp</code> manifest. These basics will give you a solid foundation when
+you begin to work with more complex code management methods for your Puppet
+code.</p>
+<p>When you&apos;re ready to get started, enter the following command:</p>
+<pre><code>quest begin manifests_and_classes
+</code></pre><h3 id="manifests">Manifests</h3>
+<blockquote>
+<p>Imagination is a force that can actually manifest a reality.</p>
+<p>-James Cameron</p>
+</blockquote>
+<p>At its simplest, a Puppet <em>manifest</em> is Puppet code saved to a file with the
+<code>.pp</code> extension. This code is written in the Puppet <em>domain specific
+language</em> (DSL). You already saw some examples of this DSL as you learned
+about resources. The Puppet DSL includes resource declarations, along with a set
+of other language features, that let you control which resources are applied on
+a system and what values are set for those resources&apos; parameters.</p>
+<div class="lvm-task-number"><p>Task 1:</p></div>
+
+<p>Go ahead and ssh to the node we&apos;ve created for this quest. Remember, the
+password for this and all the agent systems you&apos;ll use in this Quest Guide is
+<code>puppet</code>.</p>
+<pre><code>ssh learning@cowsay.puppet.vm
+</code></pre><p>Create a throw-away manifest in our <code>/tmp/</code> directory to see how this works. </p>
+<pre><code>vim /tmp/hello.pp
+</code></pre><p>Use the same notify resource declaration you included in your <code>site.pp</code> in the
+previous quest:</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">notify</span> { <span class="hljs-string">&apos;Hello Puppet!&apos;</span>: }
+</code></pre>
+<p>(Remember, use <code>ESC</code> then <code>:wq</code> to save and exit.)</p>
+<p>Rather than classifying this node on the master and triggering a Puppet agent
+run, apply this manifest directly with the <code>puppet apply</code> tool. You can use the
+<code>puppet apply</code> tool to test Puppet code in a manifest just like you can use the 
+<code>puppet resource</code> tool to explore and modify resources directly.</p>
+<pre><code>sudo puppet apply /tmp/hello.pp 
+</code></pre><p>Now you know how to save Puppet code to a file, but how do you bridge the gap
+between this saved Puppet code and the <code>site.pp</code> manifest where you define
+node classification? The first step is to organize your Puppet code into
+<em>classes</em> and <em>modules</em>.</p>
+<h3 id="classes-and-modules">Classes and modules</h3>
+<p>A <em>class</em> is named block of Puppet code. <em>Defining</em> a class
+combines a group of resources into single reusable and configurable unit. Once
+<em>defined</em>, a class can then be <em>declared</em> to tell Puppet to apply the
+resources it contains.</p>
+<p>A class should bring together a set of resources that manage one logical
+component of a system. For example, a class written to manage a MS SQL Server
+might include resources to manage the package, configuration files, and service
+for the MS SQL Server instance. Because each of these components relies on the
+others, it makes sense to manage them together. You&apos;re not likely to want a server with
+MS SQL configuration files without the MS SQL application package itself.</p>
+<p>A <em>module</em> is a directory structure that lets Puppet keep track of where to
+find the manifests that contain your classes. A module also contains other data
+a class might rely on, such as the templates for configuration files. When you
+apply a class to a node, the Puppet master checks in a list of directories
+called a <em>modulepath</em> for a module directory matching the class name. The master then
+looks in that module&apos;s <code>manifests</code> subdirectory to find the manifest containing
+the class definition. It reads the Puppet code contained in that class
+definition and uses it to compile a catalog defining a desired state for the
+node.</p>
+<p>All this will be much easier to understand with an example in front of you.
+Let&apos;s dive in and write a simple module.</p>
+<h2 id="write-a-cowsay-module">Write a cowsay module</h2>
+<p>By way of example, we&apos;ll write a module to manage a small program called
+cowsay. Cowsay lets you print a message inside a speech bubble coming from the
+mouth of an ASCII cow.</p>
+<p>Before you create a new manifest, you need to know where to keep it. For Puppet
+to find your code, you need to place it in a module directory in Puppet&apos;s
+<em>modulepath</em>.</p>
+<p>If you&apos;re still connected to <code>cowsay.puppet.vm</code> disconnect to return to your
+master system.</p>
+<pre><code>exit
+</code></pre><p>To see what your configured modulepath is, run the following command:</p>
+<pre><code>puppet config print modulepath
+</code></pre><p>The output is a list of directories separated by the colon (<code>:</code>) character.</p>
+<pre><code>/etc/puppetlabs/code/environments/production/modules:/etc/puppetlabs/code/modules:/opt/puppetlabs/puppet/modules
+</code></pre><p>For now, we&apos;ll work in the first directory listed in the modulepath. This
+directory includes modules specific to the production environment. (The second directory
+contains modules used across all environments, and the third is modules that PE
+uses to configure itself).</p>
+<p>Because we&apos;re focusing on the structure of your module and class, we&apos;ll be
+writing our code directly to the modulepath on the master. In a real production
+environment, however, you would likely want to keep your Puppet code in a
+version control repository such as Git and use Puppet&apos;s code manager tool to
+deploy it to your master. Because we don&apos;t have any critical infrastructure
+relying on the VM, we can safely skip this step and dive right into the code.</p>
+<div class="lvm-task-number"><p>Task 2:</p></div>
+
+<p>Use <code>cd</code> to navigate to the <code>modules</code> directory.</p>
+<pre><code>cd /etc/puppetlabs/code/environments/production/modules
+</code></pre><p>Create a directory structure for a new module called <code>cowsay</code>. (The <code>-p</code>
+flag allows you to create the <code>cowsay</code> parent directory and <code>manifests</code>
+subdirectory at once.)</p>
+<pre><code>mkdir -p cowsay/manifests
+</code></pre><p>With this directory structure in place, it&apos;s time to create the manifest where
+we&apos;ll write the <code>cowsay</code> class.</p>
+<div class="lvm-task-number"><p>Task 3:</p></div>
+
+<p>Use vim to create an <code>init.pp</code> manifest in your module&apos;s <code>manifests</code> directory.</p>
+<pre><code>vim cowsay/manifests/init.pp
+</code></pre><p>If this manifest is going to contain the <code>cowsay</code> class, you might be wondering
+why we&apos;re calling it <code>init.pp</code> instead of <code>cowsay.pp</code>. Most modules contain a
+main class like this whose name corresponds with the name of the module itself.
+This main class is always kept in a manifest with the special name <code>init.pp</code>.</p>
+<p>Enter the following class definition, then save and exit (<code>:wq</code>):</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">class</span> <span class="hljs-title">cowsay</span> {
+  <span class="hljs-keyword">package</span> { <span class="hljs-string">&apos;cowsay&apos;</span>:
+    <span class="hljs-attr">ensure</span>   =&gt; <span class="hljs-literal">present</span>,
+    <span class="hljs-attr">provider</span> =&gt; <span class="hljs-string">&apos;gem&apos;</span>,
+  }
+}
+</code></pre>
+<p>(Notice that we&apos;ve specified <code>gem</code> as the provider for this package. Apparently
+<code>cowsay</code> isn&apos;t important enough to live in any of the default yum package
+repositories, so we&apos;re telling Puppet to use the <code>gem</code> provider to install a
+version of the package written in Ruby and published on RubyGems.)</p>
+<p>It&apos;s always good practice to validate your code before you try to apply it. Use
+the <code>puppet parser</code> tool to check the syntax of your new manifest.</p>
+<pre><code>puppet parser validate cowsay/manifests/init.pp
+</code></pre><p>The parser will return nothing if there are no errors. If it does detect a
+syntax error, open the file again and fix the problem before continuing. Be
+aware that this validation can only catch simple syntax errors and won&apos;t let
+you know about other possible errors in your manifests.</p>
+<p>Now that the <code>cowsay</code> class is defined in your module&apos;s <code>init.pp</code> manifest,
+your Puppet master knows exactly where to find the appropriate Puppet code when
+you apply the <code>cowsay</code> class to a node.</p>
+<div class="lvm-task-number"><p>Task 4:</p></div>
+
+<p>In the setup for this quest, the quest tool prepared a <code>cowsay.puppet.vm</code>
+node. Let&apos;s apply the <code>cowsay</code> class to this node. First, open your <code>site.pp</code>
+manifest.</p>
+<pre><code>vim /etc/puppetlabs/code/environments/production/manifests/site.pp
+</code></pre><p>At the end of the <code>site.pp</code> manifest, insert the following code:</p>
+<pre><code class="lang-puppet">node <span class="hljs-string">&apos;cowsay.puppet.vm&apos;</span> {
+  include cowsay
+}
+</code></pre>
+<p>Save and exit.</p>
+<p>This <code>include cowsay</code> line tells the Puppet master to parse the contents of the
+<code>cowsay</code> class when it compiles a catalog for the <code>cowsay.puppet.vm</code> node.</p>
+<div class="lvm-task-number"><p>Task 5:</p></div>
+
+<p>Now that you&apos;ve added the <code>cowsay</code> class to your classification for the
+<code>cowsay.puppet.vm</code> node, let&apos;s connect to that node and trigger a Puppet agent
+run to see the changes applied.</p>
+<pre><code>ssh learning@cowsay.puppet.vm
+</code></pre><p>Before applying any changes to your system, it&apos;s always a good idea to use the
+<code>--noop</code> flag to do a practice run of the Puppet agent. This will compile the
+catalog and notify you of the changes that Puppet would have made without
+actually applying any of those changes to your system. It&apos;s a good way to catch
+issues the <code>puppet parser validate</code> command can&apos;t detect, and gives you a
+chance to validate that Puppet will be making the changes you expect.</p>
+<pre><code>sudo puppet agent -t --noop
+</code></pre><p>You should see an output like the following:</p>
+<pre><code>Notice: Compiled catalog for cowsay.puppet.vm in environment production in
+0.62 seconds
+Notice: /Stage[main]/Cowsay/Package[cowsay]/ensure: current_value
+absent, should be present (noop)
+Notice: Class[Cowsay]: Would have triggered &apos;refresh&apos; from 1
+events
+Notice: Stage[main]: Would have triggered &apos;refresh&apos; from 1 events
+Notice: Finished catalog run in 1.08 seconds
+</code></pre><p>If your dry run looks good, go ahead and run the Puppet agent again without the
+<code>--noop</code> flag.</p>
+<pre><code>sudo puppet agent -t
+</code></pre><p>Now you can try out your newly installed cowsay command:</p>
+<pre><code>cowsay Puppet is awesome!
+</code></pre><p>Your bovine friend clearly knows what&apos;s up.</p>
+<pre><code> ____________________
+&lt; Puppet is awesome! &gt;
+ --------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+</code></pre><h3 id="composed-classes-and-class-scope">Composed classes and class scope</h3>
+<p>A module often includes multiple components that work together to serve a
+single function. Cowsay alone is great, but many users don&apos;t have the time to
+write out a custom high-quality message on each execution of the command. For
+this reason, cowsay is often used in conjunction with the <code>fortune</code> command,
+which provides you and your cow with a database of sayings and wisdom to draw
+on.</p>
+<div class="lvm-task-number"><p>Task 6:</p></div>
+
+<p>Disconnect from the <code>cowsay.puppet.vm</code> node to return to your master.</p>
+<pre><code>exit
+</code></pre><p>Create a new manifest for your <code>fortune</code> class definition.</p>
+<pre><code>vim cowsay/manifests/fortune.pp
+</code></pre><p>Write your class definition here:</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">class</span> <span class="hljs-title">cowsay::fortune</span> {
+  <span class="hljs-keyword">package</span> { <span class="hljs-string">&apos;fortune-mod&apos;</span>:
+    <span class="hljs-attr">ensure</span> =&gt; <span class="hljs-literal">present</span>,
+  }
+}
+</code></pre>
+<p>Note that unlike the main <code>init.pp</code> manifest, the filename of the manifest
+shows us the name of the class it defines. In fact, because this class is
+contained in the <code>cowsay</code> module, its full name is <code>cowsay::fortune</code>.  The two
+colons that connect <code>cowsay</code> and <code>fortune</code> are pronounced &quot;scope scope&quot; and
+indicate that this <code>fortune</code> class is contained in the cowsay module scope.
+Notice how the fully scoped name of the class tells Puppet exactly where to
+find it in your module path: the <code>fortune.pp</code> manifest in the <code>cowsay</code> module&apos;s
+<code>manifests</code> directory. This naming pattern also helps avoid conflicts among
+similarly named classes provided by different modules.</p>
+<div class="lvm-task-number"><p>Task 7:</p></div>
+
+<p>Again, validate your new manifest&apos;s syntax with the <code>puppet parser validate</code>
+command.</p>
+<pre><code>puppet parser validate cowsay/manifests/fortune.pp
+</code></pre><p>We could use another include statement in the <code>site.pp</code> manifest to classify
+<code>cowsay.puppet.vm</code> with this <code>cowsay::fortune</code> class. In general, however, it&apos;s
+best to keep your classification as simple as possible.</p>
+<p>In this case, use a class declaration to pull the <code>cowsay::fortune</code> class
+into our main <code>cowsay</code> class.</p>
+<pre><code>vim cowsay/manifests/init.pp
+</code></pre><p>Add an include statement for your <code>cowsay::fortune</code> class to the cowsay class.</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">class</span> <span class="hljs-title">cowsay</span> {
+  <span class="hljs-keyword">package</span> { <span class="hljs-string">&apos;cowsay&apos;</span>:
+    <span class="hljs-attr">ensure</span>   =&gt; <span class="hljs-literal">present</span>,
+    <span class="hljs-attr">provider</span> =&gt; <span class="hljs-string">&apos;gem&apos;</span>,
+  }
+  <span class="hljs-keyword">include</span> <span class="hljs-keyword">cowsay</span>::fortune
+}
+</code></pre>
+<p>Use the <code>puppet parser validate</code> command to check your syntax.</p>
+<pre><code>puppet parser validate cowsay/manifests/init.pp
+</code></pre><div class="lvm-task-number"><p>Task 8:</p></div>
+
+<p>Return to your <code>cowsay.puppet.vm</code> node so we can test out these changes.</p>
+<pre><code>ssh learning@cowsay.puppet.vm
+</code></pre><p>Trigger a Puppet agent run with the <code>--noop</code> flag to check what changes Puppet
+will make.</p>
+<pre><code>sudo puppet agent -t --noop
+</code></pre><p>Notice that because the cowsay package is already installed, Puppet
+won&apos;t make any changes to this package. Now that you&apos;ve included the
+<code>cowsay::fortune</code> package, Puppet knows that it needs to install the
+<code>fortune-mod</code> package to bring your node into the desired state you defined for
+it.</p>
+<p>Trigger another Puppet run without the <code>--noop</code> flag to make these changes.</p>
+<pre><code>sudo puppet agent -t
+</code></pre><p>Now that you have both packages installed, you can use them together. Try
+piping the output of the <code>fortune</code> command to <code>cowsay</code>.</p>
+<pre><code>fortune | cowsay
+</code></pre><p>Now that you&apos;ve seen the results of your Puppet run, disconnect to return to
+your Puppet master.</p>
+<pre><code>exit
+</code></pre><h2 id="review">Review</h2>
+<p>We began this quest with a discussion of the importance of keeping your Puppet
+code well organized. This structure of <em>classes</em>, <em>manifests</em>, and <em>modules</em>
+keeps your code organized in logical, reusable units. Keeping your modules within
+Puppet&apos;s <em>modulepath</em> allows the Puppet master to find the classes contained
+within them.</p>
+<p>Using what you learned, you created a new module to manage the <code>cowsay</code>
+package, then extended this module by creating a new class to manage the
+<code>fortune-mod</code> package.</p>
+<p>As you move ahead in this guide, you will continue to use this organizational
+scheme to structure the Puppet code you write.</p>
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+<li>Module fundamentals and structure are covered on our <a href="https://puppet.com/docs/puppet/latest/modules_fundamentals.html" target="_blank">docs page</a>, along with other topics such as module testing and publishing to the Forge.</li>
+<li>Puppet modules are covered in-depth in our Getting Started with Puppet and Puppet Practitioner courses. Explore our <a href="https://learn.puppet.com/category/instructor-led-training" target="_blank">in-person</a> and <a href="https://learn.puppet.com/category/online-instructor-led-training" target="_blank">online</a> training options for more information.</li>
+<li><a href="https://learn.puppet.com/course/classes" target="_blank">Classes</a> and <a href="https://learn.puppet.com/course/autoloading" target="_blank">Autoloading</a> are covered as self-paced lessons.</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="agent_run.html" class="navigation navigation-prev " aria-label="Previous page: Agent Run">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="package_file_service.html" class="navigation navigation-next " aria-label="Next page: Package File Service">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Manifests and Classes","level":"2.6","depth":1,"next":{"title":"Package File Service","level":"2.7","depth":1,"path":"quests/package_file_service.md","ref":"quests/package_file_service.md","articles":[]},"previous":{"title":"Agent Run","level":"2.5","depth":1,"path":"quests/agent_run.md","ref":"quests/agent_run.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"3.1.1","theme":"default","variables":{},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-54263865-3"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"quests/manifests_and_classes.md","mtime":"2019-04-10T15:13:57.423Z","type":"markdown"},"gitbook":{"version":"3.1.1","time":"2019-04-15T20:33:54.264Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

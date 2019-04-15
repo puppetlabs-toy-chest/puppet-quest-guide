@@ -1,0 +1,793 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <title>Hiera · GitBook</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.1.1">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="defined_resource_types.html" />
+    
+    
+    <link rel="prev" href="roles_and_profiles.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../SETUP.html">
+            
+                <a href="../SETUP.html">
+            
+                    
+                    Setup
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Quests</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="welcome.html">
+            
+                <a href="welcome.html">
+            
+                    
+                    Welcome
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="portfolio_introduction.html">
+            
+                <a href="portfolio_introduction.html">
+            
+                    
+                    Portfolio Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="hello_bolt.html">
+            
+                <a href="hello_bolt.html">
+            
+                    
+                    Hello Bolt
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="hello_puppet.html">
+            
+                <a href="hello_puppet.html">
+            
+                    
+                    Hello Puppet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="agent_run.html">
+            
+                <a href="agent_run.html">
+            
+                    
+                    Agent Run
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="manifests_and_classes.html">
+            
+                <a href="manifests_and_classes.html">
+            
+                    
+                    Manifests and Classes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.7" data-path="package_file_service.html">
+            
+                <a href="package_file_service.html">
+            
+                    
+                    Package File Service
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.8" data-path="variables_and_templates.html">
+            
+                <a href="variables_and_templates.html">
+            
+                    
+                    Variables and Templates
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.9" data-path="class_parameters.html">
+            
+                <a href="class_parameters.html">
+            
+                    
+                    Class Parameters
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.10" data-path="facts.html">
+            
+                <a href="facts.html">
+            
+                    
+                    Facts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.11" data-path="conditional_statements.html">
+            
+                <a href="conditional_statements.html">
+            
+                    
+                    Conditional Statements
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.12" data-path="the_forge.html">
+            
+                <a href="the_forge.html">
+            
+                    
+                    The Forge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.13" data-path="roles_and_profiles.html">
+            
+                <a href="roles_and_profiles.html">
+            
+                    
+                    Roles and Profiles
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.14" data-path="hiera.html">
+            
+                <a href="hiera.html">
+            
+                    
+                    Hiera
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.15" data-path="defined_resource_types.html">
+            
+                <a href="defined_resource_types.html">
+            
+                    
+                    Defined Resource Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.16" data-path="control_repository.html">
+            
+                <a href="control_repository.html">
+            
+                    
+                    Control Repository
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.17" data-path="puppetfile.html">
+            
+                <a href="puppetfile.html">
+            
+                    
+                    Puppetfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Appendix</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="afterword.html">
+            
+                <a href="afterword.html">
+            
+                    
+                    Afterword
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../troubleshooting.html">
+            
+                <a href="../troubleshooting.html">
+            
+                    
+                    Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../releasenotes.html">
+            
+                <a href="../releasenotes.html">
+            
+                    
+                    Release Notes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" >
+            
+                <a target="_blank" href="https://puppet.com/legal/privacy">
+            
+                    
+                    Privacy Policy
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Hiera</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="hiera">Hiera</h1>
+<h2 id="quest-objectives">Quest objectives</h2>
+<ul>
+<li>Use Hiera to abstract site-specific data from your Puppet manifests.</li>
+<li>Manage the Hiera configuration file.</li>
+<li>Set up YAML data source to use with Hiera.</li>
+<li>Use Hiera lookups in your Puppet manifests.</li>
+</ul>
+<h2 id="getting-started">Getting started</h2>
+<p>Hiera is Puppet&apos;s data lookup system. Implementing Hiera in your Puppet
+infrastructure allows you to separate site-specific data from your Puppet code
+base. Hiera lookups in your Puppet code can then be used to intelligently set
+variables according to the specific details of each node where that code is
+applied.</p>
+<p>When you&apos;re ready to get started, type the following command:</p>
+<pre><code>quest begin hiera
+</code></pre><h2 id="what-is-hiera">What is Hiera?</h2>
+<p>All of the methods for managing data you&apos;ve encountered so far in this guide,
+from variables and templates to the roles and profiles pattern, get you closer
+to a clean separation of data from code.
+<a href="https://puppet.com/docs/puppet/latest/hiera_intro.html" target="_blank">Hiera</a> is Puppet&apos;s
+built-in data lookup system. It lets you complete this separation by moving
+data out of your Puppet manifests and into a separate data source.</p>
+<p>Hiera takes its name from the fact that it allows you to organize your data
+<em>hierarchically</em>. Most Hiera implementations begin with common data to set
+default values across your whole infrastructure and end with node-specific data
+needed to configure a unique system. Any data specified on the more specific
+level overrides the default set on the more general level. Between these
+most-general and most-specific levels, Hiera allows you to specify any number
+of intermediate levels.</p>
+<p>Though we haven&apos;t addressed the topic in this guide, implementing <a href="https://puppet.com/docs/facter/latest/custom_facts.html" target="_blank">custom and
+external facts</a> gives
+you great leeway in setting up your Hiera hierarchies. For example, you might
+include a Hiera level corresponding to a country to specify default locale
+configuration for a set of workstations or a level corresponding to datacenter
+to help manage network configurations.</p>
+<p>Like Puppet itself, Hiera is a flexible tool that can be configured and used in
+a great variety of ways. The goal of this quest is not to cover the full range
+of Hiera&apos;s features or possible implementations, but to offer a simple pattern
+that many Puppet users have used successfully in both large and small-scale
+deployments.</p>
+<p>Before diving into the implementation, let&apos;s take a moment to plan out our
+goals for this quest.</p>
+<p>When you started this quest, the <code>quest</code> tool created four new nodes:</p>
+<pre><code>1. `pasture-app.beauvine.vm`
+2. `pasture-db.auroch.vm`
+3. `pasture-app.auroch.vm`
+4. `pasture-app-dragon.auroch.vm`
+</code></pre><p>In previous quests, you used a conditional statement in your
+<code>profile::pasture::app</code> class to distinguish between nodes with the words
+<code>large</code> and <code>small</code> in their host names and decide which would be connected to
+your database node.</p>
+<p>For this quest, we&apos;ll make a similar distinction, but handle it a little
+differently. Let&apos;s imagine that you&apos;ve set up a tiered pricing structure for
+your Cowsay as a Service application. Your basic tier offers only basic cowsay
+API features, while your your premium level customers get the added database
+features. The hot new startup Beauvine is paying for the basic service, while
+their competitor, the more established Auroch has opted for your premium
+service. Auroch also insists that you set up also set up a custom one-off
+instance of the application using cowsay&apos;s dragon character as the default.</p>
+<p>Your goal is to create a Hiera configuration that will provide parameter
+values to configure your Pasture application servers at the global, per-domain,
+and per-node levels.</p>
+<div class="lvm-task-number"><p>Task 1:</p></div>
+
+<p>The first step in implementing Hiera is to add a <code>hiera.yaml</code> configuration
+file to your environment&apos;s code directory. This configuration file defines the
+levels in your hierarchy and tells Hiera where to find the data source that
+corresponds to each level.</p>
+<p>First, make sure you&apos;re working in the production environment&apos;s code
+directory:</p>
+<pre><code>cd /etc/puppetlabs/code/environments/production
+</code></pre><p>Start work on a new <code>hiera.yaml</code> file.</p>
+<pre><code>vim hiera.yaml
+</code></pre><p>If there is an existing <code>hiera.yaml</code> file present, delete the content found in
+it and replace it with the content below.</p>
+<p>We&apos;ll implement a simple hierarchy with three levels: &quot;Common data&quot; to set up
+environment defaults, &quot;Per-Domain defaults&quot; to define domain-specific defaults,
+and &quot;Per-node data&quot; to define specific data values for individual nodes.</p>
+<pre><code class="lang-yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">version:</span> <span class="hljs-number">5</span>
+
+<span class="hljs-attr">defaults:</span>
+<span class="hljs-attr">  datadir:</span> data
+<span class="hljs-attr">  data_hash:</span> yaml_data
+
+<span class="hljs-attr">hierarchy:</span>
+<span class="hljs-attr">  - name:</span> <span class="hljs-string">&quot;Per-node data&quot;</span>
+<span class="hljs-attr">    path:</span> <span class="hljs-string">&quot;nodes/<span class="hljs-template-variable">%{trusted.certname}</span>.yaml&quot;</span>
+
+<span class="hljs-attr">  - name:</span> <span class="hljs-string">&quot;Per-domain data&quot;</span>
+<span class="hljs-attr">    path:</span> <span class="hljs-string">&quot;domain/<span class="hljs-template-variable">%{facts.networking.domain}</span>.yaml&quot;</span> 
+
+<span class="hljs-attr">  - name:</span> <span class="hljs-string">&quot;Common data&quot;</span>
+<span class="hljs-attr">    path:</span> <span class="hljs-string">&quot;common.yaml&quot;</span>
+</code></pre>
+<p>When Puppet uses Hiera to look for a value, it searches according to the order
+of levels listed under this configuration file&apos;s <code>hierarchy:</code> section. If
+a value is found in a data source defined for the &quot;Per-node data&quot; level, that
+value is used. If no matching value is found there, Hiera tries the next level:
+in this case, &quot;Per-domain defaults&quot;. Finally, if no value is found in the previous
+data sources, Hiera looks in the &quot;Common data&quot; level&apos;s <code>common.yaml</code> file.</p>
+<p>Because this configuration file is written in
+<a href="http://www.yaml.org/start.html" target="_blank">YAML</a>, not Puppet code you cannot use the
+<code>puppet parser validate</code> command to check your syntax. Instead use the
+following Ruby one-liner from the command line to check your YAML syntax. Keep
+in mind that like <code>puppet parser</code>, this will only verify that your file can be
+parsed, not guarantee that the content is correct.</p>
+<pre><code>ruby -e &quot;require &apos;yaml&apos;;require &apos;pp&apos;;pp YAML.load_file(&apos;./hiera.yaml&apos;)&quot;
+</code></pre><p>Expect to see the following output:</p>
+<pre><code class="lang-ruby">{<span class="hljs-string">&quot;version&quot;</span>=&gt;<span class="hljs-number">5</span>,
+ <span class="hljs-string">&quot;defaults&quot;</span>=&gt;{<span class="hljs-string">&quot;datadir&quot;</span>=&gt;<span class="hljs-string">&quot;data&quot;</span>, <span class="hljs-string">&quot;data_hash&quot;</span>=&gt;<span class="hljs-string">&quot;yaml_data&quot;</span>},
+ <span class="hljs-string">&quot;hierarchy&quot;</span>=&gt;
+  [{<span class="hljs-string">&quot;name&quot;</span>=&gt;<span class="hljs-string">&quot;Per-node data&quot;</span>, <span class="hljs-string">&quot;path&quot;</span>=&gt;<span class="hljs-string">&quot;nodes/%{trusted.certname}.yaml&quot;</span>},
+   {<span class="hljs-string">&quot;name&quot;</span>=&gt;<span class="hljs-string">&quot;Per-domain data&quot;</span>,
+    <span class="hljs-string">&quot;path&quot;</span>=&gt;<span class="hljs-string">&quot;domain/%{facts.networking.domain}.yaml&quot;</span>},
+   {<span class="hljs-string">&quot;name&quot;</span>=&gt;<span class="hljs-string">&quot;Common data&quot;</span>, <span class="hljs-string">&quot;path&quot;</span>=&gt;<span class="hljs-string">&quot;common.yaml&quot;</span>}]}
+</code></pre>
+<div class="lvm-task-number"><p>Task 2:</p></div>
+
+<p>Before setting up your data sources for these levels, let&apos;s add our Hiera
+lookups to the <code>profile::pasture::app</code> class. By doing this first, we&apos;ll know
+which values the data sources need to define.</p>
+<pre><code>vim modules/profile/manifests/pasture/app.pp
+</code></pre><p>Here, use the built-in Hiera <code>lookup()</code> function to tell Puppet to fetch data
+for each of the <code>pasture</code> component class parameters you want to manage.</p>
+<p>Replace the content of your class with the content that is shown below.</p>
+<pre><code class="lang-puppet"><span class="hljs-keyword">class</span> <span class="hljs-title">profile::pasture::app</span> {
+  <span class="hljs-keyword">class</span> { <span class="hljs-string">&apos;pasture&apos;</span>:
+    default_message   =&gt; lookup(<span class="hljs-string">&apos;profile::pasture::app::default_message&apos;</span>),
+    sinatra_server    =&gt; lookup(<span class="hljs-string">&apos;profile::pasture::app::sinatra_server&apos;</span>),
+    default_character =&gt; lookup(<span class="hljs-string">&apos;profile::pasture::app::default_character&apos;</span>),
+    db                =&gt; lookup(<span class="hljs-string">&apos;profile::pasture::app::db&apos;</span>),
+  }
+}
+</code></pre>
+<p>Note that these lookup keys include a fully qualified scope. Though Hiera
+itself doesn&apos;t require this naming pattern for these keys, this pattern allows
+anyone looking at a key in a data source to know exactly how and where it
+is used in Puppet code.</p>
+<p>(Hiera also has an implicit data binding feature which makes direct use of
+fully qualified keys to set class parameters without an explicit lookup.
+Because this feature can make the relationship between Puppet code and Hiera
+data less clear, however, the <code>lookup()</code> function is preferred, especially when
+members of your team are less familiar with Hiera.)</p>
+<p>Now that you&apos;ve added lookup functions to your profile, it&apos;s time to define
+these data in your Hiera data sources.</p>
+<p>Hiera is very flexible in the kinds of data sources it can use. The two most
+common plain-text formats for Hiera data sources are YAML and JSON, but it can
+be configured to use anything (such as a database or even a custom script) that
+can take a key as input and return a corresponding value.</p>
+<p>Though this flexibility may tempt you to implement a creative solution, it&apos;s
+best to use the simplest data source that meets your needs. For that reason,
+we&apos;ll use YAML files for all the data sources in this quest.</p>
+<div class="lvm-task-number"><p>Task 3:</p></div>
+
+<p>Create a <code>data</code> directory with <code>domain</code> and <code>nodes</code> subdirectories.</p>
+<pre><code>mkdir -p data/{domain,nodes}
+</code></pre><div class="lvm-task-number"><p>Task 4:</p></div>
+
+<p>Begin with your <code>common.yaml</code> data source, which is kept directly under the
+<code>data</code> directory.</p>
+<pre><code>vim data/common.yaml
+</code></pre><p>Here, set common defaults to be used when no value is set in a higher level.</p>
+<pre><code class="lang-yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">profile:</span>:pasture::app::default_message: <span class="hljs-string">&quot;Baa&quot;</span>
+<span class="hljs-attr">profile:</span>:pasture::app::sinatra_server: <span class="hljs-string">&quot;thin&quot;</span>
+<span class="hljs-attr">profile:</span>:pasture::app::default_character: <span class="hljs-string">&quot;sheep&quot;</span>
+<span class="hljs-attr">profile:</span>:pasture::app::db: <span class="hljs-string">&quot;none&quot;</span>
+</code></pre>
+<div class="lvm-task-number"><p>Task 5:</p></div>
+
+<p>Next, create the <code>data/domain/beauvine.vm.yaml</code> data source to define defaults
+for the <code>beauvine.vm</code> domain name. Note that because the domain level is above
+the common level in your hierarchy, the values set here take precedence over
+those set in common, while the values left undefined default to those set in
+common.</p>
+<pre><code>vim data/domain/beauvine.vm.yaml
+</code></pre><pre><code class="lang-yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">profile:</span>:pasture::app::default_message: <span class="hljs-string">&quot;Welcome to Beauvine!&quot;</span>
+</code></pre>
+<div class="lvm-task-number"><p>Task 6:</p></div>
+
+<p>Next, create the <code>data/domain/auroch.vm.yaml</code> data source.</p>
+<pre><code>vim data/domain/auroch.vm.yaml
+</code></pre><pre><code class="lang-yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">profile:</span>:pasture::app::default_message: <span class="hljs-string">&quot;Welcome to Auroch!&quot;</span>
+<span class="hljs-attr">profile:</span>:pasture::app::db: <span class="hljs-string">&quot;postgres://pasture:m00m00@pasture-db.auroch.vm/pasture&quot;</span>
+</code></pre>
+<div class="lvm-task-number"><p>Task 7:</p></div>
+
+<p>Now that the data sources for the domain level are complete, move on to the
+node level.</p>
+<pre><code>vim data/nodes/pasture-app-dragon.auroch.vm.yaml
+</code></pre><p>Here, just set the <code>default_character</code> to <code>dragon</code>.</p>
+<pre><code class="lang-yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">profile:</span>:pasture::app::default_character: <span class="hljs-string">&apos;dragon&apos;</span>
+</code></pre>
+<p>Your data directory should now look like the following:</p>
+<pre><code>[/etc/puppetlabs/code/environments/production]
+root@learning: # tree data
+data
+&#x251C;&#x2500;&#x2500; common.yaml
+&#x251C;&#x2500;&#x2500; domain
+&#x2502;   &#x251C;&#x2500;&#x2500; auroch.vm.yaml
+&#x2502;   &#x2514;&#x2500;&#x2500; beauvine.vm.yaml
+&#x2514;&#x2500;&#x2500; nodes
+    &#x2514;&#x2500;&#x2500; pasture-app-dragon.auroch.vm.yaml
+
+2 directories, 4 files
+</code></pre><div class="lvm-task-number"><p>Task 8:</p></div>
+
+<p>Next you will use the <code>puppet job</code> tool to trigger a puppet agent run on each
+of these nodes.  Remember, the Learning VM is running both your PE master and
+the containerized agent nodes themselves, both with a memory allocation below
+recommended minimums. This means you need to be a gentle when triggering
+concurrent Puppet agent runs. Use the <code>--concurrency 2</code> flag to restrict the
+number of concurrent agent runs to 2.</p>
+<pre><code>puppet job run --nodes pasture-db.auroch.vm,pasture-app-dragon.auroch.vm,pasture-app.auroch.vm,pasture-app.beauvine.vm --concurrency 2
+</code></pre><p>Now test out some of the API endpoints for these nodes to see what happens.
+Before entering each of the following commands, see if you can guess what the
+result will be!</p>
+<pre><code>curl pasture-app-dragon.auroch.vm/api/v1/cowsay/sayings
+
+curl -X POST &apos;pasture-app-dragon.auroch.vm/api/v1/cowsay/sayings?message=Hello!&apos;
+
+curl pasture-app-dragon.auroch.vm/api/v1/cowsay/sayings/1
+
+curl pasture-app.auroch.vm/api/v1/cowsay/sayings/1
+
+curl pasture-app.beauvine.vm/api/v1/cowsay
+</code></pre><h2 id="review">Review</h2>
+<p>In this quest, we introduced Hiera, a data abstraction tool that lets you
+separate data from your Puppet code.</p>
+<p>You learned about Hiera&apos;s <em>hierarchical</em> model. Hiera lookups start from the
+data source assigned to the most specific level of your Hierarchy&#x2014;in this case,
+the node level. If a value is found at this first level, it is returned and the
+lookup is complete. If no value is found, Hiera will continue checking each
+higher level of the Hierarchy until it returns a value or determines that no
+value has been set.</p>
+<p>You used the <code>hiera.yaml</code> configuration file to set up a hierarchy of data
+sources. You set environment defaults in a <code>common.yaml</code> file, a middle level
+of per-domain defaults for the <code>beauvine.vm</code> and <code>auroch.vm</code> domains, and
+finally node-specific data for the <code>pasture-app-dragon.auroch.vm</code> node.</p>
+<p>You learned how to use the <code>lookup</code> function to retrieve values from these
+data sources to be used in your Puppet manifests. Using this lookup function,
+you set parameters for the <code>pasture</code> class based on Hiera data.</p>
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+<li>Read the Puppet docs on <a href="https://puppet.com/docs/puppet/latest/hiera_intro.html" target="_blank">Hiera</a>.</li>
+<li>Check out an <a href="http://puppetlabs.github.io/hierademo/" target="_blank">interactive Hiera demo</a>
+to explore how different lookups are resolved for different Hiera hierarchy
+configurations.</li>
+<li>You can find a review of some of the changes introduced in Hiera 5 (the
+version discussed in this quest) in <a href="https://www.example42.com/2017/04/17/hiera-5/" target="_blank">this blog post</a>.</li>
+<li>Hiera is discussed in several of our online and in-person based <a href="https://learn.puppet.com/course-catalog" target="_blank">courses</a>
+and covered in a <a href="https://learn.puppet.com/category/self-paced-training" target="_blank">self-paced training module</a>.</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="roles_and_profiles.html" class="navigation navigation-prev " aria-label="Previous page: Roles and Profiles">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="defined_resource_types.html" class="navigation navigation-next " aria-label="Next page: Defined Resource Types">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Hiera","level":"2.14","depth":1,"next":{"title":"Defined Resource Types","level":"2.15","depth":1,"path":"quests/defined_resource_types.md","ref":"quests/defined_resource_types.md","articles":[]},"previous":{"title":"Roles and Profiles","level":"2.13","depth":1,"path":"quests/roles_and_profiles.md","ref":"quests/roles_and_profiles.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"3.1.1","theme":"default","variables":{},"plugins":["ga"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-54263865-3"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"quests/hiera.md","mtime":"2019-04-10T15:13:57.423Z","type":"markdown"},"gitbook":{"version":"3.1.1","time":"2019-04-15T20:33:54.264Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

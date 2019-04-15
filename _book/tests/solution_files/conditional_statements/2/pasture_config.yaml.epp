@@ -1,0 +1,12 @@
+<%- | $port,
+      $default_character,
+      $default_message,
+      $sinatra_server,
+| -%>
+# This file is managed by Puppet. Please do not make manual changes.
+---
+:default_character: <%= $default_character %>
+:default_message:   <%= $default_message %>
+:sinatra_settings:
+  :port:   <%= $port %>
+  :server: <%= $sinatra_server %>
