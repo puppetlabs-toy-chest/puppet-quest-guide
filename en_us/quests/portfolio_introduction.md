@@ -17,7 +17,7 @@ Puppet was founded in 2005 by Luke Kanies and has offered its first commercial
 product, Puppet Enterprise (PE), since 2011.
 
 Puppet is a global company with headquarters in Portland and worldwide offices
-located in London, Belfast, Sydney, Tokyo and elsewhere. The company has over
+located in London, Belfast, Sydney, Singapore, and elsewhere. The company has over
 1000 enterprise customers, including 75 of the Fortune 100. Puppet has a robust
 user community that has built many thousands of contributed modules comprising
 over 7.5M lines of code. Additionally, tens of thousands of organizations use
