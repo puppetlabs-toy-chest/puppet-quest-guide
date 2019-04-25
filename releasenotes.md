@@ -2,6 +2,9 @@
 
 ## Release Notes
 
+### 2.5.2
+  * Removed Japanese localization
+
 ### 2.5.1
   * Explain puppet-bolt package installation with host-only adapter
 
