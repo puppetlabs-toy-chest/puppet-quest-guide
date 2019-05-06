@@ -113,7 +113,7 @@ page](https://puppet.com/docs/pe/latest/ssl_and_certificates.html))
 Start by connecting to your agent system. When you
 began this quest, the system you used in the last quest was destroyed and a new
 one was created. This new system has the Puppet agent pre-installed, so there's
-no need to repeat the installation process. Go ahead and connect to the new
+no need to repeat the installation process. Connect to the new
 agent system with the same credentials you used in the last quest:
 
 **username: learning**  
@@ -163,7 +163,7 @@ with these scheduled background runs, we've disabled the Puppet agent
 service on your agent system. Instead, you can use the `puppet agent -t`
 command to manually trigger a run.
 
-Go ahead and connect to your agent node:
+Connect to your agent node:
 
     ssh learning@agent.puppet.vm
 
@@ -256,7 +256,7 @@ infrastructure, so a node definition defines how Puppet should manage a given
 system.
 
 It will help to understand what a node definition looks like with an example.
-Go ahead and open your `site.pp` manifest:
+Open your `site.pp` manifest:
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
