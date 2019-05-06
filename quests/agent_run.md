@@ -280,11 +280,11 @@ declaration directly into your node definition. In this case, use a resource
 type called `notify` that will display a message in the output of your Puppet
 run without making any changes to the system.
 
-Add the following `notify` resource to your node definition. (You'll probably
+Add the following `notify` resource to your node definition. <small>(You'll probably
 learn Puppet code syntax more quickly if you type out your code manually, but
 if you prefer to paste content into Vim, you can hit `ESC` to enter command
 mode and type `:set paste` to disable the automatic formatting. Press `i` to
-return to insert mode before pasting your text.)
+return to insert mode before pasting your text.)</small>
 
 [//]: # (code/030_agent_run/manifests/site.pp)
 
@@ -294,7 +294,7 @@ node 'agent.puppet.vm' {
 }
 ```
 
-Remember, use `ESC` then `:wq` to save your file and exit Vim.
+<small>Remember, use `ESC` then `:wq` to save your file and exit Vim.</small>
 
 You may notice that this resource declaration doesn't include any parameters.
 The only feature of this `notify` resource we care about is the message it
