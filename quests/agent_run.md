@@ -299,11 +299,11 @@ Remember, use `ESC` then `:wq` to save your file and exit Vim.
 You may notice that this resource declaration doesn't include any parameters.
 The only feature of this `notify` resource we care about is the message it
 displays. If it's not set explicitly by the `message` parameter, this message
-will default to the resource title. This lets us save some time by leaving out
+will default to the resource title. <small>This lets us save some time by leaving out
 the parameter value pairs and using the title to define the message we want the
 resource to display. (This parameter that uses the resource title as its
 default is called a **namevar**. You can read more about the role of the
-namevar in the [Puppet docs](https://puppet.com/docs/puppet/latest/lang_resources.html#namenamevar))
+namevar in the [Puppet docs](https://puppet.com/docs/puppet/latest/lang_resources.html#namenamevar))</small>
 
 Now that you have a concrete example of a node declaration, let's return to our
 review of the agent run process from the master's perspective. When the agent
