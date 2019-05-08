@@ -34,9 +34,6 @@ When you're ready to get started, enter the following command:
 
 ### Manifests
 
-> Imagination is a force that can actually manifest a reality.
-
-> -James Cameron
 
 At its simplest, a Puppet *manifest* is Puppet code saved to a file with the
 `.pp` extension. This code is written in the Puppet *domain specific
