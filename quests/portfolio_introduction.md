@@ -23,15 +23,7 @@ user community that has built many thousands of contributed modules comprising
 over 7.5M lines of code. Additionally, tens of thousands of organizations use
 open-source Puppet to manage their server infrastructure.
 
-Over time, the company has expanded its offerings to the following portfolio
-of enterprise products:
-
-- Bolt: Perform ad hoc system configuration tasks on your infrastructure
-- Puppet Enterprise: Build model-driven configuration for your IT infrastructure
-- Puppet Pipelines: Simplify your application delivery and deployment process
-- Puppet Insights: Visually measure and optimize your DevOps investment
-
-Bolt and Puppet Enterprise will be the focus of the Learning VM. We
+Over time, the company has expanded its offerings to include a range of both enterprise and open source products. The focus of the Learning VM will be on two of these products, Bolt and Puppet Enterprise. We
 invite you to visit [https://puppet.com/products](https://puppet.com/products)
 for additional information of the entire suite of Puppet products.
 
