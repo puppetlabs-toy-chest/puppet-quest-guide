@@ -10,7 +10,7 @@ end
 
 describe _("Task 1:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('rpm -Uvh https://yum.puppet.com/puppet6/puppet6-release-el-7.noarch.rpm')
+    command('rpm -Uvh https://yum.puppet.com/puppet6-release-el-7.noarch.rpm')
       .exit_status
       .should eq 0
     command('yum install -y puppet-bolt')
