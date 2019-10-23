@@ -42,7 +42,7 @@ a great number and variety of systems while maintaining a concise and
 expressive base of Puppet code. You may find that this kind of abstraction
 can be better achieved for your particular needs by modifying or abandoning the
 roles and profiles pattern. Even if this is your ultimate conclusion, however,
-you divergences should be well reasoned and based on strong understanding of
+your divergences should be well reasoned and based on strong understanding of
 the high-level abstraction that the roles and profiles pattern provides.
 
 When you're ready to get started, enter the following command:
