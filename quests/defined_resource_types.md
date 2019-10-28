@@ -84,13 +84,13 @@ uniqueness constraints when the defined resource type is declared multiple
 times.
 
 Before continuing, let's take a moment to review those constraints. To avoid
-duplicate resource errors during compilation, all resource must have a *title*
+duplicate resource errors during compilation, all resources must have a *title*
 and *namevar* parameter that are unique with respect to resources of the same
 type.
 
 ## Resource uniqueness constraints
 
-A resource's *title* is the unique identifier Puppet user internally to keep
+A resource's *title* is the unique identifier Puppet uses internally to keep
 track of that resource. Resource relationships, for example, rely on resource
 titles to specify dependency relationships between resources. Resource titles
 are also used to log and report on resource state changes across Puppet runs.
