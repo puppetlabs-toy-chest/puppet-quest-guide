@@ -8,7 +8,7 @@ parameters for the Pasture class, for example, look like the following:
 
 ```puppet
 class pasture (
-  $pasture_port        = '80',
+  $port                = '80',
   $environment         = 'production',
   $default_character   = 'sheep',
   $default_message     = '',
@@ -38,13 +38,13 @@ the module to be used. A module intended to be published on the Forge for
 general use by the community will generally be as flexible as possible, while
 a
 
-The `pasture::params` class will assign static defaults to the `$pasture_port`
+The `pasture::params` class will assign static defaults to the `$port`
 and `$pasture_config_file` variables, then use a conditional statement to
 assign a different value to the `$default_character` depending on the
 `os.family` fact.
 
 ```puppet
 class pasture::params {
-  $pasture_port = '80',
+  $port = '80',
   $
 }
