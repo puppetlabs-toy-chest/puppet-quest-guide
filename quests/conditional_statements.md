@@ -42,7 +42,7 @@ either the `httpd` or `apache2` package.
 
 This kind of **what** question is often addressed through a combination of
 conditional statements and facts or parameters.  If you look at the
-`puppetlabs-apache` module on the [Forge](forge.puppet.com), you'll see [this
+`puppetlabs-apache` module on the [Forge](https://forge.puppet.com), you'll see [this
 package name and numerous other
 variables](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/params.pp#L62)
 set based on an `if` statement using the `osfamily` fact. (You may notice that
