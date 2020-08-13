@@ -4,7 +4,7 @@
 
 For the most up-to-date version of this troubleshooting information, [check the
 GitHub
-repository](https://github.com/puppetlabs/puppet-quest-guide/blob/master/en_us/troubleshooting.md).
+repository](https://github.com/puppetlabs/puppet-quest-guide/blob/master/troubleshooting.md).
 
 [Watch a video tutorial](https://youtu.be/Y0nsM4uG9pQ) on setting up the Learning VM.
 
@@ -250,7 +250,7 @@ of PDFs of different versions was making it difficult for users of the
 guide and VM to match the correct documentation to the correct version. If
 you would like to look at the Quest Guide content without running the Learning
 VM, you can refer to the project's GitHub page:
-https://github.com/puppetlabs/puppet-quest-guide/blob/master/en_us/summary.md. Note,
+https://github.com/puppetlabs/puppet-quest-guide/blob/master/summary.md. Note,
 however, that this may include unreleased changes and may not match with task
 validation and content on your copy of the Learning VM.
 
