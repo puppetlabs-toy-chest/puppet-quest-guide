@@ -25,12 +25,12 @@ all PE services are fully started, then use the `quest` tool to restart the ques
 ### I get a "Connection refused" when trying to run a curl command against the Pasture API
 
 It is likely that your Puppet code itself is correct and able to run without error,
-but that there is a problem with the pasture_config.yaml file or pasture.service
+but that there is a problem with the `pasture_config.yaml` file or `pasture.service`
 file that causes the Pasture service to fail.
 
 You can check the pasture log by connecting to the node and running `journalctl -u pasture`.
 
-Check that the content of the pasture_config.yaml file and pasture.service
+Check that the content of the `pasture_config.yaml` file and pasture.service
 file exactly match what's given in the Quest Guide. Note that YAML is sensitive
 to whitespace, so your line-breaks and indentations must be correct. If you
 think there may be a mistake, but cannot identify it, it may be helpful to
@@ -74,7 +74,7 @@ email to learningvm@puppet.com.
 ### Do I need a password for the Quest Guide?
 
 No. The Learning VM's Quest Guide is accessible at `http://<IPAddress>` where `IPAddress`
-is the password of the Learning VM. Note that this is `http` and not `https`,
+is the IP address of the Learning VM. Note that this is `http` and not `https`,
 which is reserved for the PE console. The PE console will prompt you for a password,
 while no password is required for the Quest Guide.
 
@@ -151,7 +151,7 @@ accounts in the Defined Resource Types quest, it is an indication that there
 is a problem with your Puppet code, Hiera data, or ssh-keypair. If configured
 correctly, you should be able connect without a password. You can check manually
 by logging in to the system as the learning user and using sudo to check
-/home/gertie/.ssh/authorized_keys. There should be an entry there matching the
+`/home/gertie/.ssh/authorized_keys`. There should be an entry there matching the
 key you generated and included in your Hiera file.
   
 ### Running the puppet agent returns "Server Error: Could not parse for environment production"
@@ -194,7 +194,7 @@ installed.  Note that the "check for updates" feature of VirtualBox may not
 always work as expected, so check the website for the most recent version.
 
 Ensure that virtualization extensions enabled in the BIOS. The steps to do this
-will be specific to your system, will generally available online.
+will be specific to your system and generally available online.
 
 If you are using Mac OS X and see `Unable to retrieve kernel symbols`,
 `Failed to initialize monitor device`, or `Internal error`, please refer to
@@ -239,7 +239,7 @@ adapter for the VM.
 ### I can't scroll up in my terminal
 
 The Learning VM uses a tool called tmux to allow us to display the quest
-status. You can scroll in tmux by first hitting control-b, then `[` (left
+status. You can scroll in tmux by first hitting control-B, then `[` (left
 bracket). You will then be able to use the arrow keys to scroll. Press `q` to
 exit scrolling.
 
