@@ -30,7 +30,7 @@ SUSE, Debian, Ubuntu, and Fedora distributions, as well as Windows and macOS.
 The Learning VM is based on a CentOS (Red Hat Enterprise Linux equivalent)
 7 image, so run the following command to configure the Puppet YUM repository:
 
-    rpm -Uvh https://yum.puppet.com/puppet6/puppet6-release-el-7.noarch.rpm
+    rpm -Uvh https://yum.puppet.com/puppet-tools-release-el-7.noarch.rpm
 
 **NOTE:** If your Learning VM is configured with a host-only network, the
 previous command will fail, but the `puppet-bolt` package has been cached for
@@ -57,7 +57,7 @@ Bolt provides a command-line interface for running commands, scripts, tasks
 and plans on the local machine or remote nodes. Now let's practice running some
 simple commands:
 
-    bolt command run 'free -th' --nodes localhost
+    bolt command run 'free -th' --targets localhost
 
 This command shows a human-readable report of the total memory allocated to
 the local machine, how much is used and how much is free. The output should
@@ -85,9 +85,9 @@ of using a tool like ssh in a `for` loop, you provide a list of nodes to Bolt,
 and it will connect to each one and run the desired command. Now let's
 try some examples using a Docker-hosted machine as target node:
 
-    bolt command run hostname --nodes docker://bolt.puppet.vm
+    bolt command run hostname --targets docker://bolt.puppet.vm
 
-    bolt command run 'cat /etc/hosts' --nodes docker://bolt.puppet.vm
+    bolt command run 'cat /etc/hosts' --targets docker://bolt.puppet.vm
 
 The output from these commands will look similar to the following:
 
@@ -119,7 +119,7 @@ Ran on 1 node in 0.05 seconds
 Perhaps you want to generate machine-parseable output. That is also possible
 by using the `--format` option to the `bolt` command like so:
 
-    bolt --format json command run 'cat /etc/hosts' --nodes docker://bolt.puppet.vm
+    bolt --format json command run 'cat /etc/hosts' --targets docker://bolt.puppet.vm
 
 And the output will look similar to the following:
 

@@ -69,5 +69,5 @@ source code for the quest tool itself is
 ## Review
 
 In this quest, we introduced the concept of the quest and interactive task. You
-tried out the quest tool and reviewed the mechanics completing quests and
-tasks.
+tried out the quest tool and reviewed the mechanics of completing tasks and
+quests.

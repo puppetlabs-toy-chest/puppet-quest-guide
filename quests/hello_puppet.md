@@ -118,7 +118,7 @@ system that can access the master.
 To get started, use the `bolt` tool that was introduced in the previous quest. Copy and run the following command to
 load the agent installer from the master and run it on the agent system:
 
-    bolt command run "sh -c 'curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | sudo bash'" --nodes docker://hello.puppet.vm
+    bolt command run "sh -c 'curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | sudo bash'" --targets docker://hello.puppet.vm
 
 You will see text stream across the screen as the installation runs.
 
