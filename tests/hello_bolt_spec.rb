@@ -18,7 +18,7 @@ describe _("Task 1:"), host: :localhost do
       .should eq 0
   end
   it _('Install bolt'), :validation do
-    package('puppet6-release')
+    package('puppet-tools-release')
       .should be_installed
     package('puppet-bolt')
       .should be_installed
