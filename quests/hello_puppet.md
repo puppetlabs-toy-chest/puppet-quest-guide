@@ -333,7 +333,7 @@ This time, Puppet installs the package. The value of the
 
 ```puppet
 package { 'httpd':
-  ensure => '2.4.6-45.el7.centos',
+  ensure => '2.4.6-93.el7.centos',
 }
 ```
 
