@@ -1,5 +1,5 @@
 define user_accounts::ssh_user (
-  $key,
+  $pub_key,
   $group   = undef,
   $shell   = undef,
   $comment = undef,
@@ -8,7 +8,7 @@ define user_accounts::ssh_user (
     ensure => present,
     user   => $title,
     type   => 'ssh-rsa',
-    key    => $key,
+    key    => $pub_key,
   }
   file { "/home/${title}/.ssh":
     ensure => directory,
