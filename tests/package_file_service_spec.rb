@@ -58,6 +58,7 @@ end
 
 describe _("Task 4:"), host: :pasture do
   it 'has a working solution', :solution do
+    invalidate_environment_cache
     command("sudo puppet agent -t")
       .exit_status
       .should_not eq 1
@@ -200,6 +201,7 @@ end
 
 describe "Task 13:", host: :pasture do
   it 'has a working solution', :solution do
+    invalidate_environment_cache
     command("sudo puppet agent -t")
       .exit_status
       .should_not eq 1
