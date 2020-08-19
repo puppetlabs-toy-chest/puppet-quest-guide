@@ -275,9 +275,7 @@ describe _("Task 18:"), host: :localhost do
     command('puppet code deploy master --wait && yes | cp -rf /etc/puppetlabs/code/environments/master /etc/puppetlabs/code/environments/production && chown -R pe-puppet /etc/puppetlabs/code/environments/production')
       .exit_status
       .should_not eq 1
-    command("curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -X DELETE 'https://localhost:8140/puppet-admin-api/v1/environment-cache?environment=production'")
-      .exit_status
-      .should_not eq 1
+    invalidate_environment_cache
   end
   it _('Deploy your production code'), :validation do
     file("/etc/puppetlabs/code/environments/production/site")
