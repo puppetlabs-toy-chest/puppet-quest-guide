@@ -291,7 +291,7 @@ data
 <div class = "lvm-task-number"><p>Task 8:</p></div>
 
 Next you will use the `puppet job` tool to trigger a puppet agent run on each
-of these nodes.  Remember, the Learning VM is running both your PE master and
+of these nodes.  Remember, the Learning VM is running both your Puppet server and
 the containerized agent nodes themselves, both with a memory allocation below
 recommended minimums. This means you need to be a gentle when triggering
 concurrent Puppet agent runs. Use the `--concurrency 2` flag to restrict the

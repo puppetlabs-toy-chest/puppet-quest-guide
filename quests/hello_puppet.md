@@ -67,9 +67,9 @@ and containers. You don't have to switch languages and toolsets every time you
 start work on a new system. Learning Puppet gives you a skillset that can be
 carried across projects and roles.
 
-With a master-agent architecture, there's no need to connect to systems
+With a server-agent architecture, there's no need to connect to systems
 individually to make changes. Once the agent service is running on a system,
-it periodically establishes a secure connection to the master, fetches
+it periodically establishes a secure connection to the Puppet server, fetches
 any code you've applied to it, and makes the changes necessary to bring
 the system in line with the desired state. The fact that
 centralized control is built in from Puppet's foundations makes monitoring and
@@ -91,8 +91,8 @@ details of how it interacts with the system where it's installed.
 
 The Puppet agent runs on every system that you want Puppet to manage. The
 agent serves as the bridge between the system where it's installed and the
-Puppet master server. The agent communicates in two directions: out to the
-master to see how its system should be configured, and then inward to native
+Puppet server. The agent communicates in two directions: out to the
+Puppet server to see how its system should be configured, and then inward to native
 system tools to check the actual state of the system and to make changes
 to bring it in line with the desired state.
 
@@ -104,19 +104,19 @@ modifies the state of the system where it's running.
 ## Agent installation
 
 The Learning VM itself has Puppet Enterprise
-pre-installed, including the Puppet master service. For each quest, the quest
+pre-installed, including the Puppet server service. For each quest, the quest
 tool provides one or more agent systems that you explore and configure
 with Puppet.
 
 For this quest, there is a fresh system where you can install the Puppet
-agent and explore some of the tools it provides. The Puppet master hosts an
+agent and explore some of the tools it provides. The Puppet server hosts an
 agent install script that makes it easy to install the Puppet agent on any
-system that can access the master.
+system that can access the Puppet server.
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
 To get started, use the `bolt` tool that was introduced in the previous quest. Copy and run the following command to
-load the agent installer from the master and run it on the agent system:
+load the agent installer from the Puppet server and run it on the agent system:
 
     bolt command run "sh -c 'curl -k https://learning.puppetlabs.vm:8140/packages/current/install.bash | sudo bash'" --targets docker://hello.puppet.vm
 
@@ -342,7 +342,7 @@ defaults to installing the latest available version and displays this version
 number as the value of the `ensure` attribute.
 
 Now that you've had a chance to explore this system with the newly installed
-Puppet agent, exit to return to the Puppet master before you continue to the
+Puppet agent, exit to return to the Puppet server before you continue to the
 next quest.
 
     exit
@@ -351,7 +351,7 @@ next quest.
 
 In this quest, you learned what Puppet is and some of the advantages of
 managing your infrastructure with Puppet's declarative domain-specific
-language and master-agent architecture.
+language and server-agent architecture.
 
 You installed the Puppet agent on a new system using Bolt. Once the agent and suite of
 supporting tools were installed, you learned the fundamentals of Puppet's
@@ -365,13 +365,13 @@ resource` command is a great way to explore a system or test Puppet code, but
 it's not the tool you'll be using to automate your configuration management.
 
 In the next quest, you'll learn how to save Puppet code to a file called a
-**manifest** and organize it into a **module** within your Puppet master's
+**manifest** and organize it into a **module** within your Puppet server's
 **codedir**. This structure lets Puppet keep track of where to find all the
 resources it needs to manage your infrastructure.
 
-And you'll see how the Puppet agent communicates with your Puppet master to
+And you'll see how the Puppet agent communicates with your Puppet server to
 fetch a compiled list of resources called a **catalog** based on Puppet code
-kept on the master.
+kept on it.
 
 ## Additional Resources
 

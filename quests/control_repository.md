@@ -8,10 +8,10 @@
 - Use Git to initialize your local control repository and push its contents to
   an upstream remote.
 - Configure Puppet's Code Manager tool to access and deploy code from your
-  upstream repository to your Puppet master.
+  upstream repository to your Puppet server.
 - Understand and apply the workflow involved in promoting changes from your
   local development copy of the control repository through to deployment on the
-  Puppet master.
+  Puppet server.
 
 ## Getting started
 
@@ -56,13 +56,13 @@ configuration that define your Puppet infrastructure.
 
 Putting your Puppet codebase into source control allows each contributor to
 work on a checked-out copy of the code without directly modifying anything in
-your master's production modulepath. These code changes can then be reviewed
+your Puppet server's production modulepath. These code changes can then be reviewed
 and tested before being merged into the production codebase and deployed to the
-master's production environment.
+Puppet server's production environment.
 
 We'll begin by creating a `control-repo` directory in your home directory. The
 contents of this directory will ultimately be deployed to the
-`/etc/puppetlabs/code/environments/production/` directory on your master, so
+`/etc/puppetlabs/code/environments/production/` directory on your Puppet server, so
 the content of your control repository will be similar to what currently exists
 in that directory.
 
