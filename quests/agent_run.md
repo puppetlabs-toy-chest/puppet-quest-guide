@@ -10,10 +10,6 @@
 
 ## Get started
 
-> Now, here you see, it takes all the running you can do, to keep in the same place.
-
-> - Lewis Carroll
-
 The `puppet resource` command you explored in the previous quest let you see a
 system the way Puppet does—through the site. abstraction layer. While
 exploring and manipulating resources through Puppet's command line tools are

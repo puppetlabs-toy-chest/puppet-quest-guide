@@ -10,10 +10,6 @@
 
 ## Get started
 
-> Any sufficiently advanced technology is indistinguishable from magic.
-
-> - Arthur C. Clarke
-
 This quest kicks off a hands-on introduction to managing infrastructure with
 Puppet tools and services. You'll start by installing the agent and learning
 some of the core ideas involved in managing infrastructure. Once the agent is

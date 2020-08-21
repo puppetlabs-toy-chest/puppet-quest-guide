@@ -46,10 +46,6 @@ When you're ready to get started, type the following command:
 
 ## Defined resource types
 
-> Repetition - that is the actuality and the earnestness of existence.
-
-> -Søren Kierkegaard
-
 A [defined resource
 type](https://puppet.com/docs/puppet/latest/lang_defined_types.html) is a block
 of Puppet code that can be evaluated multiple times within a single node's

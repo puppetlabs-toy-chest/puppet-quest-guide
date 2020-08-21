@@ -18,11 +18,6 @@ To start this quest enter the following command:
 
 ## Writing for flexibility
 
->The green reed which bends in the wind is stronger than the mighty oak which
->breaks in a storm.
-
-> -Confucius
-
 Because Puppet manages configurations on a variety of systems fulfilling a
 variety of roles, great Puppet code means flexible and portable Puppet code.
 Though Puppet's *types* and *providers* can translate between Puppet's resource
@@ -86,10 +81,6 @@ resource—it doesn't actually determine the name of the package that will be
 installed.
 
 ## Conditions
-
-> Just dropped in (to see what condition my condition was in)
-
-> -Mickey Newbury
 
 Now that you've seen this real-world example of how and why a conditional
 statement can be used to create more flexible Puppet code, let's take a moment

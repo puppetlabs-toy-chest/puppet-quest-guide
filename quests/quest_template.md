@@ -8,9 +8,6 @@
 
 ## Get started
 
-> Optionally, begin with a quotation.  
-> - Kevin Henner
-
 In this quest, we cover...
 
 Ready to get started? Run the following command on your Learning VM:

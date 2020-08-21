@@ -30,10 +30,6 @@ To start this quest enter the following command:
 
 ## Facter
 
->Get your facts first, then distort them as you please.
-
-> -Mark Twain
-
 You already encountered the `facter` tool when we asked you to run `facter
 ipaddress` in the setup section of this Quest Guide. We briefly discussed
 the tool's role in a Puppet run: the Puppet agent runs `facter` to get a list

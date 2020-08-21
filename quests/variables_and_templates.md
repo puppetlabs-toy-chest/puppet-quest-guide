@@ -27,10 +27,6 @@ When you're ready to get started, enter the following command:
 
 ## Variables
 
-> Beauty is variable, ugliness is constant.
-
-> -Douglas Horton
-
 Variables allow a value to be bound to a name, which can then be used later
 in your manifest.
 
