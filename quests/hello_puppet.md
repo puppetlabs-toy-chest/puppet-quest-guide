@@ -371,7 +371,7 @@ kept on it.
 
 ## Additional Resources
 
-* Watch our on-demand webinar ["Introduction to Puppet Enterprise"](https://puppet.com/resources/webinar/introduction-puppet-enterprise)
+* Watch our on-demand webinar ["Introduction to Puppet Enterprise"](https://puppet.com/resources/webinar/introduction-to-puppet-enterprise)
 * Read about installing Puppet Enterprise on our [docs page](https://puppet.com/docs/pe/latest/installing_pe.html)
 * Take a look at our [What is Puppet](https://learn.puppet.com/course/what-is-puppet) and [What is Puppet Enterprise](https://learn.puppet.com/course/what-is-puppet-enterprise) and [Resources](https://learn.puppet.com/course/resources) [self-paced lessons](https://learn.puppet.com/category/self-paced-training).
 * Puppet basics are covered in-depth in our Getting Started with Puppet course. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.
