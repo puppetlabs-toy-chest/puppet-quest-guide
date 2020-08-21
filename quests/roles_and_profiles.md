@@ -379,7 +379,6 @@ infrastructure.
 
 * Read more about Roles and Profiles at our [docs page](https://puppet.com/docs/pe/latest/the_roles_and_profiles_method.html)
 * Have a look at the [blog post](http://garylarizza.com/blog/2014/02/17/puppet-workflow-part-1/) that helped establish the Roles and Profiles pattern as a recommended Puppet workflow.
-* Learn more about Roles and Profiles in our [self-paced course](https://learn.puppet.com/course/an-introduction-to-roles-profiles)
 * Roles and Profiles are covered in our Getting Started with Puppet and Puppet Practitioner courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.
 * You can learn more about using regular expressions in node definitions on our [docs page](https://puppet.com/docs/puppet/latest/lang_node_definitions.html#regular-expression-names) .
 * You can find a tool to easily test your regular expressions [here](http://rubular.com).
