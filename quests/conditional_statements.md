@@ -22,7 +22,7 @@ Because Puppet manages configurations on a variety of systems fulfilling a
 variety of roles, great Puppet code means flexible and portable Puppet code.
 Though Puppet's *types* and *providers* can translate between Puppet's resource
 syntax and the native tools on a wide variety of systems, there are still a lot
-questions that you as a Puppet module developer will need to answer yourself.
+of questions that you as a Puppet module developer will need to answer for yourself.
 
 A good rule of thumb is that the resource abstraction layer answers **how**
 questions, while the Puppet code itself answers **what** questions.
@@ -39,12 +39,7 @@ This kind of **what** question is often addressed through a combination of
 conditional statements and facts or parameters.  If you look at the
 `puppetlabs-apache` module on the [Forge](forge.puppet.com), you'll see [this
 package name and numerous other
-variables](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/params.pp#L62)
-set based on an `if` statement using the `osfamily` fact. (You may notice that
-this module uses an un-structured `$::osfamily` format for this fact to
-preserve backwards compatibility. You can read more about this form of
-reference on [the docs
-page](https://puppet.com/docs/puppet/latest/lang_facts_and_builtin_vars.html#classic-factname-facts))
+variables](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/params.pp) are set based on various conditional statements.
 
 Simplified to show only the values we're concerned with, the conditional
 statement looks like this:
@@ -64,7 +59,7 @@ if $::osfamily == 'RedHat' {
 Here, the `$apache_name` variable is set to either `httpd` or `apache2`
 depending on the value of the `$::osfamily` fact. Elsewhere in the module,
 you'll find a [package
-resource](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/package.pp#L32)
+resource](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/package.pp#L38)
 that uses this `$apache_name` variable to set its `name` parameter.
 
 ```puppet
@@ -109,7 +104,7 @@ clause.
 
 - If the `if` condition fails, Puppet moves on to the `elsif` condition (if one
   exists).
-- If both the `if` and `elsif` conditions fail, Puppet will execute the code in
+- If both the `if` and all `elsif` conditions fail, Puppet will execute the code in
   the `else` clause (if one exists).
 - If all the conditions fail, and there is no `else` block, Puppet will do
   nothing and move on.
@@ -257,7 +252,7 @@ class pasture (
   }
 
   service { 'pasture':
-    ensure    => running,
+    ensure => running,
   }
 
   if ($sinatra_server == 'thin') or ($sinatra_server == 'mongrel')  {
@@ -326,17 +321,16 @@ Username: **admin**
 Password: **puppetlabs**
 
 Once you're connected, click the **Access control** menu option in the
-navigation bar at near the bottom left of the screen, then select **Users**
-in the *Access Control* navigation menu.
+navigation bar, then click the **Users** tab.
 
-Create a new user with the **Full name** `Learning` and **Login** `learning`.
+Enter a new user with the **Full name** `Learning` and **Login** `learning` and click `Add local user`.
 
 Click on the name of the new user, then click the **Generate password reset**
 link. Copy the given link to a new browser tab and set the password to:
 **puppet**.
 
-Return to the original PE console browser tab, and under the **Access Control**
-navigation bar, click the **User Roles** menu option. Click on the link for the
+Return to the original PE console browser tab, and click the **Access Control**
+menu item, then click the **User Roles** tab. Click on the link for the
 **Operators** role. Select the **Learning** user from the dropdown menu, click
 the **Add user** button, and finally click the **Commit 1 change** button near
 the bottom right of the console screen. Close the new browser tab that was

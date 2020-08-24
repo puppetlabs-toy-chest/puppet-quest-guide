@@ -13,8 +13,8 @@ your companion as you make your way through the Learning VM's series of
 interactive lessons or *quests*.
 
 At this point, you should have the Learning VM set up and an open session in
-your browser-based terminal or SSH client. If not, please return to the Setup
-section for instructions on getting started.
+your SSH client. If not, please return to the Setup section for instructions
+on getting started.
 
 Before we get into Puppet itself, this lesson provides with a brief
 introduction to the `quest` tool that you will use throughout the rest of this
@@ -68,6 +68,6 @@ source code for the quest tool itself is
 
 ## Review
 
-In this quest, we introduced the concept of the quest and interactive task. You
+In this quest, we introduced the concept of quests and interactive tasks. You
 tried out the quest tool and reviewed the mechanics of completing tasks and
 quests.

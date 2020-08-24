@@ -251,7 +251,7 @@ class pasture (
   }
 
   service { 'pasture':
-    ensure    => running,
+    ensure => running,
   }
 
   if ($sinatra_server == 'thin') or ($sinatra_server == 'mongrel')  {

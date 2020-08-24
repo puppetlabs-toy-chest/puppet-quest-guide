@@ -127,7 +127,7 @@ When Puppet uses Hiera to look for a value, it searches according to the order
 of levels listed under this configuration file's `hierarchy:` section. If
 a value is found in a data source defined for the "Per-node data" level, that
 value is used. If no matching value is found there, Hiera tries the next level:
-in this case, "Per-domain defaults". Finally, if no value is found in the previous
+in this case, "Per-domain data". Finally, if no value is found in the previous
 data sources, Hiera looks in the "Common data" level's `common.yaml` file.
 
 Because this configuration file is written in

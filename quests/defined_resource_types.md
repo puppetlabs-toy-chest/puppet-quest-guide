@@ -86,7 +86,7 @@ type.
 
 ## Resource uniqueness constraints
 
-A resource's *title* is the unique identifier Puppet user internally to keep
+A resource's *title* is the unique identifier Puppet uses internally to keep
 track of that resource. Resource relationships, for example, rely on resource
 titles to specify dependency relationships between resources. Resource titles
 are also used to log and report on resource state changes across Puppet runs.
@@ -117,7 +117,7 @@ the `path` or `name` parameter left unset.
 Now that you understand resource uniqueness constraints, how do you guarantee
 that the resources included in a defined resource type are unique?
 
-Just as you would give include a title in the declaration of any of Puppet's
+Just as you would give a title in the declaration of any of Puppet's
 built-in resource types, you include a title when declaring a defined resource
 type. The title given to a defined resource type when it is declared is
 available within the defined resource type's code block as the `$title`
@@ -211,13 +211,13 @@ resource to actual user account on the system.
 This `user` resource already has its own defaults for handling `group`,
 `shell`, and `comment`. The desired behavior, then, is to use the values passed
 in by parameter when they're provided, but revert to the `user` type's own
-defaults for any of these parameters that isn't supplied when the defined
+defaults for any of these parameters that arent't supplied when the defined
 resource type is declared.
 
 The special `undef` value lets you achieve both of these things. Under the hood
 `undef` is exactly what Puppet sees when it tries to evaluate a variable or
 parameter that has not been set. By setting it as the default for your optional
-parameters, you can literally pass the "undefined" state of a parameter through
+parameters, you can pass the "undefined" state of a parameter through
 to the underlying `user` resource, which will then fall back to its default
 behavior for that parameter.
 
@@ -352,7 +352,7 @@ need to copy it. You can copy a line with the command `yy` and paste it to the
 position of your cursor with the `p` key.  You can also delete a line with the
 `dd` command.
 
-When your finished, your data file should look like the following example,
+When you're finished, your data file should look like the following example,
 though your public key will be different from the one shown. Note that the
 `pub_key:` must all be on a single line.
 
@@ -463,7 +463,7 @@ class profile::base::dev_users {
 
 When using iteration, be very mindful of your code's readability and
 maintainability. One of the Puppet language's benefits is that its declarative
-nature tends to make Puppet code itself readable description of desired state
+nature tends to make Puppet code itself a readable description of desired state
 for your system. Used unnecessarily, iteration can increase your Puppet code's
 complexity, making it more difficult to understand and maintain.
 

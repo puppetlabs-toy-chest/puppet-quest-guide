@@ -11,8 +11,8 @@
 ## Get started
 
 The `puppet resource` command you explored in the previous quest let you see a
-system the way Puppet does—through the site. abstraction layer. While
-exploring and manipulating resources through Puppet's command line tools are
+system the way Puppet does — through the resource abstraction layer. While
+exploring and manipulating resources through Puppet's command line tools is
 useful, the real value of the resource abstraction layer is to provide a single
 common language for your Puppet server to manage all the systems in your
 infrastructure.
@@ -220,7 +220,7 @@ the catalog compilation process from the Puppet server's perspective. This will
 help you understand exactly what you're doing as you write code to apply to
 your agent.
 
-When the Puppet server service on the Puppet server receives a catalog
+When the Puppet server service receives a catalog
 request with a valid certificate, it begins a process called *node
 classification* to determine what Puppet code will be compiled to generate
 a catalog for the agent making the request.
@@ -342,7 +342,9 @@ and the communication between the Puppet server and an agent. The agent begins
 this process by sending a *catalog request* to the server. The server first
 checks to see if the agent has a valid *certificate*. If the certificate is
 valid, the server consults several methods of *classification* to begin the
-process of catalog compilation. In this quest, we used a *node definition*
+process of catalog compilation.
+
+In this quest, we used a *node definition*
 in the `site.pp` manifest to classify our node. The server then compiles a
 catalog that it returns to the agent. The agent checks if the current state
 of its system matches the desired state described in the catalog and makes

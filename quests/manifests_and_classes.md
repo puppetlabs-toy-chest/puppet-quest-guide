@@ -178,10 +178,8 @@ class cowsay {
 }
 ```
 
-(Notice that we've specified `gem` as the provider for this package. Apparently
-`cowsay` isn't important enough to live in any of the default yum package
-repositories, so we're telling Puppet to use the `gem` provider to install a
-version of the package written in Ruby and published on RubyGems.)
+Notice that the `gem` provider is used to install the package from the RubyGems
+repository instead of the default yum package repositories.
 
 It's always good practice to validate your code before you try to apply it. Use
 the `puppet parser` tool to check the syntax of your new manifest.
