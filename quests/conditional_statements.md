@@ -37,7 +37,7 @@ either the `httpd` or `apache2` package.
 
 This kind of **what** question is often addressed through a combination of
 conditional statements and facts or parameters.  If you look at the
-`puppetlabs-apache` module on the [Forge](forge.puppet.com), you'll see [this
+`puppetlabs-apache` module on the [Forge](https://forge.puppet.com/puppetlabs/apache), you'll see [this
 package name and numerous other
 variables](https://github.com/puppetlabs/puppetlabs-apache/blob/master/manifests/params.pp) are set based on various conditional statements.
 
@@ -111,7 +111,7 @@ clause.
 
 ## Pick a server
 
-Let's return to our Pasture example module. The application is build on the
+Let's return to our Pasture example module. The application is built on the
 [Sinatra](http://www.sinatrarb.com/) framework. Out of the box, Sinatra
 supports a few different options for the server the service will run: WEBrick,
 Thin, or Mongrel. In production, you would likely use Sinatra with a more
@@ -120,7 +120,7 @@ robust option such as [Passenger](https://www.phusionpassenger.com/) or
 adequate for this lesson.
 
 We can easily select which server will be used in the Pasture application's
-configuration file, However, options other than the default WEBrick are not
+configuration file. However, options other than the default WEBrick are not
 included as pre-requisites when we install the Pasture package. To use these
 other options, we'll need our module to manage them as separate `package`
 resources.  However, we don't want to install these extra packages if we don't
