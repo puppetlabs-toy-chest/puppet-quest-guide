@@ -49,8 +49,6 @@ We've disabled these automatic runs on the Learning VM's agent systems.
 Instead, you'll manually trigger runs to get more control and visibility as you
 learn how Puppet works.
 
-![image](../assets/SimpleDataFlow.png)
-
 The Puppet agent begins a Puppet run by sending a *catalog request* to the
 Puppet server. This request includes some information about the agent system
 provided by a tool called *Facter*.
