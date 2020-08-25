@@ -27,14 +27,14 @@ managing production infrastructure.
 
 Though it is possible to use other SCM tools with Puppet, this quest focuses on
 Git. Learning to use Git effectively can be an undertaking in itself. This
-quest will provide all the git commands necessary to complete the included
+quest will provide all the Git commands necessary to complete the included
 tasks, but it is not focused on teaching Git itself.
 
-The git workflow included here is intended only as a working example; if Git or
+The Git workflow included here is intended only as a working example; if Git or
 another SCM tool is already implemented in your organization, there may be
 established practices that differ from the workflow outlined here.
 
-If you would like to learn git or brush up on your skills before continuing,
+If you would like to learn Git or brush up on your skills before continuing,
 the *additional resources* section at the end of this quest includes links to
 several options.
 
@@ -103,12 +103,12 @@ and get published to the Forge whenever a new version is released. Attempting
 to mirror all the changes to these modules in your own repository would be a
 large duplication of effort. Instead, external modules are generally managed by
 something called a
-[Puppetfile](https://puppet.com/docs/pe/latest/code_management/puppetfile.html).
+[Puppetfile](https://puppet.com/docs/pe/2019.8/puppetfile.html).
 
 When you use the Puppet Code Manager tool to deploy your control repository's
 code to an environment on the master, it reads the list of external modules in
 your Puppetfile and automatically installs them to the environment's `modules`
-directory. This lets easily keep your list of external module dependencies
+directory. This lets you easily keep your list of external module dependencies
 under version control without duplicating their Puppet code and managing
 specific code changes in your control repository.
 
@@ -529,7 +529,7 @@ environment on the master.
 
 There are some options for further automation of this process. For example, you
 can [configure a
-webhook](https://puppet.com/docs/pe/latest/code_management/code_mgr_webhook.html)
+webhook](https://puppet.com/docs/pe/2019.8/code_mgr_webhook.html)
 to automatically trigger a deployment whenever new code is merged to the
 upstream repository. In this case, we'll keep things simple and hands-on by
 using the `puppet code deploy` command to manually trigger a code deployment.
@@ -589,7 +589,7 @@ the node:
 ## Control repository development workflow
 
 Now that Puppet is running with code deployed from your control repository,
-let's walk through the process of introducing changes to your a local copy of
+let's walk through the process of introducing changes to your local copy of
 the repository, creating a PR to merge those changes to your upstream
 repository, and finally deploying those changes to production.
 
@@ -599,7 +599,7 @@ First, be sure you're working in this `control-repo` directory:
 
     cd ~/control-repo
 
-Before beginning work, take a moment to check the status of the git repository.
+Before beginning work, take a moment to check the status of the Git repository.
 
     git status
 
@@ -612,7 +612,7 @@ You can see that you're currently on the production branch, and that there are
 no uncommitted changes in the working directory.
 
 Next, it's good practice to check for updates to the upstream remote before
-beginning new work. Collaborators may have introduced to the upstream
+beginning new work. Collaborators may have introduced changes to the upstream
 repository. To avoid merge conflicts, pull any changes into your local
 repository before starting new work.
 
@@ -638,7 +638,7 @@ name if it doesn't already exist.
 
     git checkout -b beauvine_default_message
 
-With this new branch is set up, open the `data/domain/beauvine.vm.yaml` file
+With this new branch set up, open the `data/domain/beauvine.vm.yaml` file
 in Vim.
 
     vim data/domain/beauvine.vm.yaml
@@ -761,7 +761,7 @@ tab and click the **Merge Pull Request** button.
 <div class = "lvm-task-number"><p>Task 24:</p></div>
 
 Now that your change has been merged into your upstream repository's production
-branch, return the the Learning VM command-line. Use `puppet code deploy`
+branch, return the Learning VM command-line. Use `puppet code deploy`
 command to deploy your new code to the production environment.
 
     puppet code deploy production --wait
@@ -805,7 +805,7 @@ branch, and deploying and testing the new code.
 ## Additional Resources
 
 * Read up on using a control repository, the Code Manager tool, and other
-  relevant topics in the [managing and deploying Puppet code](https://puppet.com/docs/pe/latest/code_management/managing_puppet_code.html) section of the Puppet docs.
+  relevant topics in the [managing and deploying Puppet code](https://puppet.com/docs/pe/2019.8/managing_puppet_code.html ) section of the Puppet docs.
 * Puppet maintains a [template control repository](https://github.com/puppetlabs/control-repo)
   you can clone directly to get started on your own or use as reference.
 * You can find some good discussion of how a control repository can fit with
