@@ -497,7 +497,7 @@ Click on the **Classification** tab in the PE console navigation menu. From
 there, expand the **All nodes** and **PE Infrastructure** groups and select
 the **PE Master** node group.
 
-![image](../assets/pe_console_master.png)
+![image](../assets/pe_console_master_2019.png)
 
 In the **PE Master** node group interface, select the **Configuration** tab.
 Locate the `puppet_enterprise::profile::master` class in the class list.
@@ -511,7 +511,7 @@ parameter to `/etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa`, and
 
 Click the `Commit N changes` button to save your changes to the console.
 
-![image](../assets/pe_console_code_manager.png)
+![image](../assets/pe_console_code_manager_2019.png)
 
 <div class = "lvm-task-number"><p>Task 16:</p></div>
 
