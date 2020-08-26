@@ -337,7 +337,7 @@ Finally, we retrieve a message by ID:
 ## Review
 
 In this quest, you learned how to incorporate a module from the Forge into your
-module to allow it to manage database. We began by covering the Forge website
+module to allow it to manage the database. We began by covering the Forge website
 and its search features that help you find the right module for your project.
 
 After finding a good module, you used the `puppet module` tool to install it
@@ -353,5 +353,4 @@ create a database server and connect it to your application server.
 ## Additional Resources
 
 * Watch this [short video](https://fast.wistia.net/embed/iframe/uxfpduvk64?seo=false) for a basic introduction to the Forge.
-* For more in-depth information on the Forge, check our [Introduction to the Forge](https://learn.puppet.com/elearning/an-introduction-to-the-forge) self-paced course.
 * Our [Getting Started with Puppet](https://learn.puppet.com/instructor-led-training/getting-started-with-puppet) course focuses on using Forge modules to quickly get started managing your infrastructure with Puppet.
