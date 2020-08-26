@@ -16,7 +16,7 @@ At this point, you should have the Learning VM set up and an open session in
 your SSH client. If not, please return to the Setup section for instructions
 on getting started.
 
-Before we get into Puppet itself, this lesson provides with a brief
+Before we get into Puppet itself, this lesson provides you with a brief
 introduction to the `quest` tool that you will use throughout the rest of this
 guide to track your progress.
 
@@ -27,7 +27,7 @@ Ready to get started? Run the following command on the VM to begin the
 
 ## An introduction to the quest tool
 
-One logging in to the Learning VM, you may have noticed a colored bar at the
+After logging in to the Learning VM, you may have noticed a colored bar at the
 bottom of the terminal window. This status bar is provided by a tool called
 [tmux](http://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/). This
 status bar gives you quick access to your current *quest*, and your progress
