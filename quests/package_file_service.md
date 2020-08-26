@@ -435,4 +435,4 @@ variables and replacing your static files with templates.
 ## Additional Resources
 
 * Our [docs page](https://puppet.com/docs/puppet/latest/lang_relationships.html) covers resource relationships in more depth, including some alternative syntax forms you might run into reading others' Puppet code.
-* Resource relationships are also covered by [a lesson](https://learn.puppet.com/course/relationships) in our [self-paced course catalog](https://learn.puppet.com/category/self-paced-training).
+* Resource relationships are also covered by [a lesson](https://learn.puppet.com/course/relationships) in our [course catalog]https://learn.puppet.com/course-catalog).
