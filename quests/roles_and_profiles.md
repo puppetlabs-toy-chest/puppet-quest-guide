@@ -42,7 +42,7 @@ a great number and variety of systems while maintaining a concise and
 expressive base of Puppet code. You may find that this kind of abstraction
 can be better achieved for your particular needs by modifying or abandoning the
 roles and profiles pattern. Even if this is your ultimate conclusion, however,
-you divergences should be well reasoned and based on strong understanding of
+your divergences should be well reasoned and based on a strong understanding of
 the high-level abstraction that the roles and profiles pattern provides.
 
 When you're ready to get started, enter the following command:
@@ -302,7 +302,7 @@ To get started creating your node definitions, open your `site.pp` manifest:
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
-Create a node definition blocks for your application and database nodes.
+Create a node definition block for your application and database nodes.
 
 Remember, a node definition block can take a regular expression as its title.
 You want any node whose host name begins with `pasture-app` to be classified
@@ -364,7 +364,7 @@ will return a 501 error:
 
 ## Review
 
-In this quest, we introduce the roles and profiles pattern, a way to organize
+In this quest, we introduced the roles and profiles pattern, a way to organize
 the functionality provided by your component modules according to the role of
 each system in your infrastructure.
 
@@ -379,6 +379,6 @@ infrastructure.
 
 * Read more about Roles and Profiles at our [docs page](https://puppet.com/docs/pe/latest/the_roles_and_profiles_method.html)
 * Have a look at the [blog post](http://garylarizza.com/blog/2014/02/17/puppet-workflow-part-1/) that helped establish the Roles and Profiles pattern as a recommended Puppet workflow.
-* Roles and Profiles are covered in our Getting Started with Puppet and Puppet Practitioner courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.
+* Roles and Profiles are covered in our Getting Started with Puppet and Puppet Practitioner courses. Explore our [in-person and online](https://learn.puppet.com/category/instructor-led-training) training options for more information.
 * You can learn more about using regular expressions in node definitions on our [docs page](https://puppet.com/docs/puppet/latest/lang_node_definitions.html#regular-expression-names) .
 * You can find a tool to easily test your regular expressions [here](http://rubular.com).
