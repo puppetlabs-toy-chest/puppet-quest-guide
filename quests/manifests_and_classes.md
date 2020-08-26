@@ -77,8 +77,8 @@ node classification? The first step is to organize your Puppet code into
 
 ### Classes and modules
 
-A *class* is named block of Puppet code. *Defining* a class
-combines a group of resources into single reusable and configurable unit. Once
+A *class* is a named block of Puppet code. *Defining* a class
+combines a group of resources into a single reusable and configurable unit. Once
 *defined*, a class can then be *declared* to tell Puppet to apply the
 resources it contains.
 
@@ -112,7 +112,7 @@ Before you create a new manifest, you need to know where to keep it. For Puppet
 to find your code, you need to place it in a module directory in Puppet's
 *modulepath*.
 
-If you're still connected to `cowsay.puppet.vm` disconnect to return to your
+If you're still connected to `cowsay.puppet.vm`, disconnect to return to your
 Puppet server system.
 
     exit
@@ -390,5 +390,5 @@ scheme to structure the Puppet code you write.
 ## Additional Resources
 
 * Module fundamentals and structure are covered on our [docs page](https://puppet.com/docs/puppet/latest/modules_fundamentals.html), along with other topics such as module testing and publishing to the Forge.
-* Puppet modules are covered in-depth in our Getting Started with Puppet and Puppet Practitioner courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.
+* Puppet modules are covered in-depth in our Getting Started with Puppet and Puppet Practitioner courses. Explore our [in-person and online](https://learn.puppet.com/category/instructor-led-training) training options for more information.
 * [Classes](https://learn.puppet.com/course/classes) and [Autoloading](https://learn.puppet.com/course/autoloading) are covered as self-paced lessons.
