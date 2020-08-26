@@ -52,7 +52,7 @@ infrastructure.
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
 Let's start by setting up a few variables. We'll define the default
-character the cowsay application will use, the port we want to service to
+character the cowsay application will use, the port we want the service to
 run on, and path of the configuration file.
 
 If you're not already in the modules directory, let's go ahead and `cd` into it now.
@@ -405,4 +405,4 @@ is configured without editing code in the module where the class is defined.
 ## Additional Resources
 
 * Our docs page has more information on [variables](https://puppet.com/docs/puppet/latest/lang_variables.html) and [templates](https://puppet.com/docs/puppet/latest/lang_template.html).
-* These topics are also covered in more depth in our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) trainings.
+* These topics are also covered in more depth in our [in-person and online](https://learn.puppet.com/category/instructor-led-training) trainings.
