@@ -96,7 +96,7 @@ class pasture {
 }
 ```
 
-We haven't yet done anything with the `$pasture_port` or `$default_character`
+We haven't yet done anything with the `$port` or `$default_character`
 variables. To use these, we need a way to pass them into our configuration
 file. We'll also need to pass the `$pasture_config_file` variable to our
 service unit file so the service will start our Pasture process with the
