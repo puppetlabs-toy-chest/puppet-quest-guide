@@ -4,9 +4,9 @@
 
 ## Quest objectives
 
-- Install Bolt
-- Verify the Bolt installation
-- Run simple commands using Bolt
+- Install Bolt.
+- Verify the Bolt installation.
+- Run simple commands using Bolt.
 
 ## Get started
 
