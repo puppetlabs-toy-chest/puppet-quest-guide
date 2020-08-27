@@ -360,4 +360,4 @@ Puppet is built on.
 ## Additional Resources
 
 * Read about the basics of a Puppet agent run on our [docs page](https://puppet.com/docs/pe/latest/run_puppet_on_nodes.html)
-* Puppet agent concepts are covered in-depth in our Getting Started with Puppet course. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.
+* Puppet agent concepts are covered in-depth in our Getting Started with Puppet course. Explore our [in-person and online](https://learn.puppet.com/category/instructor-led-training) training options for more information.
