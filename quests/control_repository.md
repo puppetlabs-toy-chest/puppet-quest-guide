@@ -809,5 +809,5 @@ branch, and deploying and testing the new code.
 * Puppet maintains a [template control repository](https://github.com/puppetlabs/control-repo)
   you can clone directly to get started on your own or use as reference.
 * You can find some good discussion of how a control repository can fit with
-  the roles and profiles patterns [here](http://garylarizza.com/blog/2017/01/17/roles-and-profiles-in-a-control-repo/)
+  the roles and profiles patterns [here](http://garylarizza.com/blog/2017/01/17/roles-and-profiles-in-a-control-repo/).
 
