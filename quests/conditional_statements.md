@@ -3,7 +3,7 @@
 # Conditional Statements
 
 ## Quest objectives
- - Learn about the role of conditional statements in writing flexible Puppet code
+ - Learn about the role of conditional statements in writing flexible Puppet code.
  - Learn the syntax of the `if` statement.
  - Use an `if` statement to intelligently manage a package dependency.
 
