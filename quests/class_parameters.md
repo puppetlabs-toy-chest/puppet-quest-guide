@@ -197,7 +197,7 @@ And trigger a Puppet agent run to apply this parameterized class.
 
     sudo puppet agent -t
 
-When the run is complete, return to the Puppet server.
+When the run is complete, return to the Puppet master.
 
     exit
 

@@ -78,11 +78,11 @@ parameters should be set?
 
 Recall that a module is just a directory structure containing Puppet manifests
 and any other code or data needed to manage whatever it is the module helps
-you manage on a system. The Puppet server finds any modules in its *modulepath*
+you manage on a system. The Puppet master finds any modules in its *modulepath*
 directories and uses the module directory structure to find the classes, files,
 templates, and whatever else the module provides.
 
-Installing a module means placing the module directory into the Puppet server's
+Installing a module means placing the module directory into the Puppet master's
 modulepath. While you could download the module and manually move it to the
 modulepath, Puppet provides tools to help manage your modules.
 
@@ -96,7 +96,7 @@ the Puppetfile and code management workflow
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
-On your Puppet server, go ahead and use the `puppet module` tool to install this
+On your Puppet master, go ahead and use the `puppet module` tool to install this
 module.
 
     puppet module install puppetlabs-postgresql
@@ -115,9 +115,9 @@ users' versions of a module when you're browsing the Forge and during
 installation. When a module is installed, this account name is not
 included in the module directory name. If you aren't aware of this, it could
 cause some confusion; identically named modules will conflict if you try to
-install them on the same Puppet server.
+install them on the same Puppet master.
 
-To see a full list of modules installed in all modulepaths on your Puppet server, use
+To see a full list of modules installed in all modulepaths on your Puppet master, use
 the `puppet module` tool's `list` subcommand.
 
     puppet module list
