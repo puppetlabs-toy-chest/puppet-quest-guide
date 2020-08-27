@@ -4,7 +4,7 @@
 
 ## Quest objectives
 
-- Familiarize yourself with the Quest structure and tool
+- Familiarize yourself with the Quest structure and tool.
 
 ## Getting Started
 
