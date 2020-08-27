@@ -4,9 +4,9 @@
 
 ## Quest objectives
 
-- Introduce Puppet the company
-- Give an overview of the Puppet portfolio of products
-- Describe Bolt
+- Introduce Puppet the company.
+- Give an overview of the Puppet portfolio of products.
+- Describe Bolt.
 
 ## Getting started
 
