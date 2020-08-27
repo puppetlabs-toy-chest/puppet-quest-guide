@@ -3,42 +3,42 @@
 ## Release Notes
 
 ### 2.6.0
-  * Updated to PE 2019.8.1
-  * Various quest guide updates for new version of PE
+  * Updated to PE 2019.8.1.
+  * Various quest guide updates for new version of PE.
 
 ### 2.5.2
-  * Removed Japanese localization
+  * Removed Japanese localization.
 
 ### 2.5.1
-  * Explain puppet-bolt package installation with host-only adapter
+  * Explain puppet-bolt package installation with host-only adapter.
 
 ### 2.5.0
   * Updated to PE 2019.0.2
-  * Added new quest content describing Bolt and the Puppet product portfolio
-  * Incorporated user-reported bug fixes
+  * Added new quest content describing Bolt and the Puppet product portfolio.
+  * Incorporated user-reported bug fixes.
 
 ### v2.4.0
-  * Updated content for compatibility with PE 2019.0.1
-  * Updated content for compatibility with currently-supported Puppet modules
-  * Various typo, grammar and other verbiage fixes
-  * Fixed control repository private key name
-  * Added more specific instructions based on user feedback
+  * Updated content for compatibility with PE 2019.0.1.
+  * Updated content for compatibility with currently-supported Puppet modules.
+  * Various typo, grammar and other verbiage fixes.
+  * Fixed control repository private key name.
+  * Added more specific instructions based on user feedback.
 
 ### v2.3.0
-  * Content tested for compatibility with puppet-2017.3.5-learning-6.5.ova VM build
+  * Content tested for compatibility with puppet-2017.3.5-learning-6.5.ova VM build.
   * Added Hiera, Control Repository, and Puppetfile quests localized for English and Japanese.
   * Removed some unused packages to reduce VM archive size.
   * Minor typo and punctuation fixes.
 
 ### v2.2.1
-  * Content tested for compatibility with puppet-2017.3.2-learning-6.4 VM build
+  * Content tested for compatibility with puppet-2017.3.2-learning-6.4 VM build.
   * Modified the quest setup script to ensure that the Docker SSL directory
     tree exists before attempting to copy keys from the Puppet SSL direcory.
   * New VM release fixes regression in the build process that added ~0.5GB to
     the archive size.
 
 ### v2.2.0
-  * Content tested for compatibility with puppet-2017.3.2-learning-6.2 VM build
+  * Content tested for compatibility with puppet-2017.3.2-learning-6.2 VM build.
   * Removed Application Orchestration content pending implementation of Tasks
     quest to replace it.
   * Made several improvements to the quest setup process.
@@ -52,7 +52,7 @@
   * Replaced Stickler gem server with filesystem gem cache.
 
 ### v2.0.1
-  * Content tested for compatibility with puppet-2017.2.2-learning-6.0 VM build
+  * Content tested for compatibility with puppet-2017.2.2-learning-6.0 VM build.
   * Added missing task labels to the Defined Resource Types quest.
   * Various typo and spelling fixes.
   * Several task validation test improvements.
@@ -60,7 +60,7 @@
 
 ### v2.0.0
   * Complete re-write of quest content and task spec tests.
-  * Content tested for compatibility with puppet-2017.2.1-learning-5.15 VM build
+  * Content tested for compatibility with puppet-2017.2.1-learning-5.15 VM build.
   * Updated the [quest tool](https://github.com/puppetlabs/quest) to improve quest setup process.
   * Merged [pltraining-learning](https://github.com/puppetlabs/pltraining-learning) module into [pltraining-bootstrap](https://github.com/puppetlabs/pltraining-bootstrap).
   * Updated [pltraining-bootstrap](https://github.com/puppetlabs/pltraining-bootstrap) module to include a local gem server and Forge server.
