@@ -8,10 +8,10 @@
 - Use Git to initialize your local control repository and push its contents to
   an upstream remote.
 - Configure Puppet's Code Manager tool to access and deploy code from your
-  upstream repository to your Puppet master.
+  upstream repository to your Puppet server.
 - Understand and apply the workflow involved in promoting changes from your
   local development copy of the control repository through to deployment on the
-  Puppet master.
+  Puppet server.
 
 ## Getting started
 
@@ -56,13 +56,13 @@ configuration that define your Puppet infrastructure.
 
 Putting your Puppet codebase into source control allows each contributor to
 work on a checked-out copy of the code without directly modifying anything in
-your Puppet master's production modulepath. These code changes can then be reviewed
+your Puppet server's production modulepath. These code changes can then be reviewed
 and tested before being merged into the production codebase and deployed to the
-Puppet master's production environment.
+Puppet server's production environment.
 
 We'll begin by creating a `control-repo` directory in your home directory. The
 contents of this directory will ultimately be deployed to the
-`/etc/puppetlabs/code/environments/production/` directory on your Puppet master, so
+`/etc/puppetlabs/code/environments/production/` directory on your Puppet server, so
 the content of your control repository will be similar to what currently exists
 in that directory.
 
@@ -83,8 +83,8 @@ information and data for Hiera. The `manifests` directory contains the
 well as modules you've created yourself, including your role and profile
 modules. The
 [environment.conf](https://puppet.com/docs/puppet/latest/config_file_environment.html)
-file allows you to override certain Puppet master configuration settings when
-the Puppet master is serving nodes assigned to this environment. So far, you
+file allows you to override certain Puppet server configuration settings when
+the Puppet server is serving nodes assigned to this environment. So far, you
 haven't had to make any changes to these settings, so you haven't encountered
 this file until now.
 
@@ -106,7 +106,7 @@ something called a
 [Puppetfile](https://puppet.com/docs/pe/2019.8/puppetfile.html).
 
 When you use the Puppet Code Manager tool to deploy your control repository's
-code to an environment on the master, it reads the list of external modules in
+code to an environment on the server, it reads the list of external modules in
 your Puppetfile and automatically installs them to the environment's `modules`
 directory. This lets you easily keep your list of external module dependencies
 under version control without duplicating their Puppet code and managing
@@ -163,7 +163,7 @@ only find modules included in its `modulepath`. By default, this includes the
 `modules` directory, but not the `site` directory. For Puppet to find these
 site modules, this directory must be added to the `modulepath`. To do this,
 we'll use the `environment.conf` configuration file to override the Puppet
-master's default `modulepath` setting.
+server's default `modulepath` setting.
 
 First, copy the existing `environment.conf` file to your control repository.
 There aren't yet any settings specified in this file, but there are some useful
@@ -217,7 +217,7 @@ for a few examples.)
 First, you will need to initialize the `control-repo` directory as a Git
 repository. Next, you will set up a hosted remote repository to act as an
 upstream source for your code. Finally, you will configure Puppet to fetch code
-from the hosted control repository and deploy it to the Puppet master's
+from the hosted control repository and deploy it to the Puppet server's
 production environment.
 
 This architecture allows multiple contributors to work on the same codebase
@@ -291,7 +291,7 @@ to their changes to the main code base.
 When you initialize a new repository, Git creates a default main branch called
 `master`. The convention for Puppet, however, is to call its main branch
 `production`. This way, the branch name matches up with the `production` code
-environment on your Puppet master.
+environment on your Puppet server.
 
 Before continuing, then, rename the `master` branch to `production`.
 
@@ -306,7 +306,7 @@ service that makes it available to all collaborators and provides a permissions
 system to manage access by these collaborators. By granting Puppet itself
 permissions to this hosted repository by way of a deploy key, you will Puppet's
 Code Manager tool the ability to fetch hosted Puppet code and deploy it to the
-master.
+server.
 
 In this case, we'll be using a tool called Gitea to host this upstream remote.
 Gitea is an open-source Git hosting service with features generally similar to
@@ -405,9 +405,9 @@ and click the **Update Settings** button to save your change.
 ## Code Manager deploy key
 
 The Code Manager tool lets you automate the deployment of Puppet code to your
-master from a control repository. To configure code manager, we'll need to set
+Puppet server from a control repository. To configure code manager, we'll need to set
 up authentication with an RSA keypair. This will allow Gitea to authenticate
-the Puppet master when it requests code from the control repository to deploy.
+the Puppet server when it requests code from the control repository to deploy.
 
 First, we'll create the key on the Learning VM and give the `pe-puppet` user
 access to it. Next, we'll add the public half of this key to the upstream
@@ -475,7 +475,7 @@ key has been added successfully.
 Before you can deploy code from your control repository, you need to enable and
 configure Code Manager. Code Manager, like many of PE's internal configuration
 options, is managed by Puppet itself. Most configuration options of your Puppet
-master, including those related to Code Manager, are managed by the
+server, including those related to Code Manager, are managed by the
 `puppet_enterprise::profile::master` class. Like any Puppet class, this master
 profile can be configured through its parameters.
 
@@ -516,16 +516,16 @@ Click the `Commit N changes` button to save your changes to the console.
 <div class = "lvm-task-number"><p>Task 16:</p></div>
 
 Trigger a puppet agent run to enforce these configuration changes on the
-master.
+Puppet server.
 
     puppet agent -t
 
 ## Deploying Puppet code
 
-With Code Manager configured and your deploy key set up, the Puppet master has
+With Code Manager configured and your deploy key set up, the Puppet server has
 read access to the code in your repository. Before this code in your control
 repository is actually used, however, it will need to be deployed to a code
-environment on the master.
+environment on the Puppet server.
 
 There are some options for further automation of this process. For example, you
 can [configure a
@@ -536,7 +536,7 @@ using the `puppet code deploy` command to manually trigger a code deployment.
 
 Like the `puppet job run` command you've been using to trigger Puppet runs,
 this command can be run from any workstation with the correct credentials and
-network access to the Puppet master.
+network access to the Puppet server.
 
 <div class = "lvm-task-number"><p>Task 17:</p></div>
  
@@ -789,14 +789,14 @@ control repository and moving your existing code into that repository.
 
 Once your repository was set up locally, you used the Gitea service to create a
 remote upstream repository. This upstream repository serves as the central
-source for all the code you will be deploying to your Puppet master.
+source for all the code you will be deploying to your Puppet server.
 
 With that repository set up, you used the PE console to configure Puppet's
 Code Manager tool to connect to your control repository hosted on Gitea.
 
 After deploying the existing code to test the system, you triggered a Puppet
 agent run on the `pasture-app.beauvine.vm` node to validate that your
-master's Puppet code would still function as expected.
+server's Puppet code would still function as expected.
 
 Finally, you went through the workflow of making a change in your local
 repository, using a pull request to merge it into your upstream production

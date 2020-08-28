@@ -33,8 +33,8 @@ To start this quest enter the following command:
 You already encountered the `facter` tool when we asked you to run `facter
 ipaddress` in the setup section of this Quest Guide. We briefly discussed
 the tool's role in a Puppet run: the Puppet agent runs `facter` to get a list
-of facts about the system to send to the Puppet master as it requests a
-catalog. The Puppet master then uses these facts to help compile that catalog
+of facts about the system to send to the Puppet server as it requests a
+catalog. The Puppet server then uses these facts to help compile that catalog
 before sending it back to the Puppet agent to be applied.
 
 Before we get into integrating facts into your Puppet code, let's use the
@@ -49,7 +49,7 @@ First, connect to the agent node prepared for this quest.
 
 You can access a standard set of facts with the `facter` command. Adding the
 `-p` flag will include any custom facts that you may have installed on the
-Puppet master and synchronized with the agent during the pluginsync step of a
+Puppet server and synchronized with the agent during the pluginsync step of a
 Puppet run. We'll pass this `facter -p` command to `less` so you can scroll
 through the output in your terminal.
 	
@@ -68,7 +68,7 @@ at each child level of the hash, for example:
     facter -p os.family
 
 Now that you know how to check what data are available via `facter` and how the
-data are structured, let's return to the Puppet master so you can see how this
+data are structured, let's return to the Puppet server so you can see how this
 can be integrated into your Puppet code.
 
     exit
@@ -205,7 +205,7 @@ Now reconnect.
 
     ssh learning@pasture.puppet.vm
 
-Once you've had a chance to admire the MOTD, return to the Puppet master.
+Once you've had a chance to admire the MOTD, return to the Puppet server.
 
     exit
 

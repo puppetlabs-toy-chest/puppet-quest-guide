@@ -220,7 +220,7 @@ tool` to resolve your set of module dependencies and versions for the
 
 With your external modules specified in your Puppetfile, you used a pull
 request to add these changes to your upstream control repository and used the
-`puppet code deploy` command to deploy that repository to the master's
+`puppet code deploy` command to deploy that repository to the server's
 production environment. As part of the deploy process, Puppet's Code Manager
 parsed the Puppetfile and installed each listed module to the
 `/etc/puppetlabs/code/environments/production/modules` directory.

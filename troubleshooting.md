@@ -17,7 +17,7 @@ which is hosted on https.
 
 ### The agent node does not generate a certificate signing request or does not have a signed certificate
 
-If the pe-puppetserver service on the master is not fully started when you begin
+If the pe-puppetserver service on the Puppet server is not fully started when you begin
 a quest, the certification signing request and certificate signing process may not
 complete. In this case, use the `systemctl --all | grep pe-` command to validate that
 all PE services are fully started, then use the `quest` tool to restart the quest.
@@ -144,7 +144,7 @@ to list running container nodes. If you restart the VM, the docker service will
 be reset and the generated nodes will be removed. If this happens, you must use
 the quest tool to restart the quest. You will have to redo any tasks that
 involve changes on a generated node, such as triggering a Puppet run. Changes
-to Puppet code or configuration on the master will be preserved.
+to Puppet code or configuration on the Puppet server will be preserved.
 
 If you are prompted for a password to connect with one of the alternate user
 accounts in the Defined Resource Types quest, it is an indication that there
