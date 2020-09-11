@@ -62,7 +62,7 @@ describe _("Task 2:"), host: :localhost do
 end
 describe _("Task 3:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("echo | ssh-keygen -t rsa -P puppet")
+    command("ssh-keygen -t rsa -P puppet -f /root/.ssh/id_rsa <<< y")
       .exit_status
       .should be_zero
   end

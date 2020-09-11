@@ -65,7 +65,7 @@ end
 
 describe _("Task 4:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("mkdir /root/control-repo/manifests")
+    command("mkdir -p /root/control-repo/manifests")
       .exit_status
       .should eq 0
     command("yes | cp -f /etc/puppetlabs/code/environments/production/manifests/site.pp /root/control-repo/manifests/site.pp")
@@ -199,10 +199,10 @@ end
 
 describe _("Task 13:"), host: :localhost do
   it 'has a working solution', :solution do
-    command("mkdir /etc/puppetlabs/puppetserver/ssh")
+    command("mkdir -p /etc/puppetlabs/puppetserver/ssh")
       .exit_status
       .should eq 0
-    command('ssh-keygen -t rsa -b 4096 -C "learning@puppet.vm" -f /etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa -P ""')
+    command('ssh-keygen -t rsa -b 4096 -C "learning@puppet.vm" -f /etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa -P "" <<< y')
       .exit_status
       .should eq 0
     command('chown -R pe-puppet:pe-puppet /etc/puppetlabs/puppetserver/ssh')
@@ -275,9 +275,7 @@ describe _("Task 18:"), host: :localhost do
     command('puppet code deploy master --wait && yes | cp -rf /etc/puppetlabs/code/environments/master /etc/puppetlabs/code/environments/production && chown -R pe-puppet /etc/puppetlabs/code/environments/production')
       .exit_status
       .should_not eq 1
-    command("curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -X DELETE 'https://localhost:8140/puppet-admin-api/v1/environment-cache?environment=production'")
-      .exit_status
-      .should_not eq 1
+    invalidate_environment_cache
   end
   it _('Deploy your production code'), :validation do
     file("/etc/puppetlabs/code/environments/production/site")

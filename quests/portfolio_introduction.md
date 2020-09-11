@@ -4,9 +4,9 @@
 
 ## Quest objectives
 
-- Introduce Puppet the company
-- Give an overview of the Puppet portfolio of products
-- Describe Bolt
+- Introduce Puppet the company.
+- Give an overview of the Puppet portfolio of products.
+- Describe Bolt.
 
 ## Getting started
 
@@ -25,7 +25,7 @@ open-source Puppet to manage their server infrastructure.
 
 Over time, the company has expanded its offerings to include a range of both enterprise and open source products. The focus of the Learning VM will be on two of these products, Bolt and Puppet Enterprise. We
 invite you to visit [https://puppet.com/products](https://puppet.com/products)
-for additional information of the entire suite of Puppet products.
+for additional information on the entire suite of Puppet products.
 
 ## Bolt
 

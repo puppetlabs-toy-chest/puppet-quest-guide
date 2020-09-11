@@ -99,7 +99,7 @@ If there is an existing `hiera.yaml` file present, delete the content found in
 it and replace it with the content below.
 
 We'll implement a simple hierarchy with three levels: "Common data" to set up
-environment defaults, "Per-Domain defaults" to define domain-specific defaults,
+environment defaults, "Per-domain defaults" to define domain-specific defaults,
 and "Per-node data" to define specific data values for individual nodes.
 
 [//]: # (code/120_hiera/hiera.yaml)
@@ -127,11 +127,11 @@ When Puppet uses Hiera to look for a value, it searches according to the order
 of levels listed under this configuration file's `hierarchy:` section. If
 a value is found in a data source defined for the "Per-node data" level, that
 value is used. If no matching value is found there, Hiera tries the next level:
-in this case, "Per-domain defaults". Finally, if no value is found in the previous
+in this case, "Per-domain data". Finally, if no value is found in the previous
 data sources, Hiera looks in the "Common data" level's `common.yaml` file.
 
 Because this configuration file is written in
-[YAML](http://www.yaml.org/start.html), not Puppet code you cannot use the
+[YAML](http://www.yaml.org/start.html), not in Puppet code, you cannot use the
 `puppet parser validate` command to check your syntax. Instead use the
 following Ruby one-liner from the command line to check your YAML syntax. Keep
 in mind that like `puppet parser`, this will only verify that your file can be
@@ -291,7 +291,7 @@ data
 <div class = "lvm-task-number"><p>Task 8:</p></div>
 
 Next you will use the `puppet job` tool to trigger a puppet agent run on each
-of these nodes.  Remember, the Learning VM is running both your PE master and
+of these nodes.  Remember, the Learning VM is running both your Puppet server and
 the containerized agent nodes themselves, both with a memory allocation below
 recommended minimums. This means you need to be a gentle when triggering
 concurrent Puppet agent runs. Use the `--concurrency 2` flag to restrict the
@@ -319,10 +319,10 @@ In this quest, we introduced Hiera, a data abstraction tool that lets you
 separate data from your Puppet code.
 
 You learned about Hiera's *hierarchical* model. Hiera lookups start from the
-data source assigned to the most specific level of your Hierarchy—in this case,
+data source assigned to the most specific level of your hierarchy—in this case,
 the node level. If a value is found at this first level, it is returned and the
 lookup is complete. If no value is found, Hiera will continue checking each
-higher level of the Hierarchy until it returns a value or determines that no
+higher level of the hierarchy until it returns a value or determines that no
 value has been set.
 
 You used the `hiera.yaml` configuration file to set up a hierarchy of data
@@ -342,5 +342,3 @@ you set parameters for the `pasture` class based on Hiera data.
   configurations.
 * You can find a review of some of the changes introduced in Hiera 5 (the
   version discussed in this quest) in [this blog post](https://www.example42.com/2017/04/17/hiera-5/).
-* Hiera is discussed in several of our online and in-person based [courses](https://learn.puppet.com/course-catalog)
-  and covered in a [self-paced training module](https://learn.puppet.com/category/self-paced-training).

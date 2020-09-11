@@ -70,7 +70,7 @@ def run_puppet_on_nodes
     File.rename(File.join(manifests_dir, 'site.pp'), File.join(manifests_dir, 'site.pp.bak'))
     File.write(File.join(manifests_dir, 'site.pp'),'node default {}')
 
-    # If code manager us set up, we need to invalidate the environment cache so this change will take effect.
+    # If code manager was set up, we need to invalidate the environment cache so this change will take effect.
     `curl -i -k --cacert /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem --key /etc/puppetlabs/puppet/ssl/private_keys/learning.puppetlabs.vm.pem --cert /etc/puppetlabs/puppet/ssl/certs/learning.puppetlabs.vm.pem -X DELETE 'https://localhost:8140/puppet-admin-api/v1/environment-cache?environment=production'`
 
     #Rather than background these with the docker -d flag and poll for

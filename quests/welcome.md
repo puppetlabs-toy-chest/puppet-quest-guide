@@ -4,7 +4,7 @@
 
 ## Quest objectives
 
-- Familiarize yourself with the Quest structure and tool
+- Familiarize yourself with the Quest structure and tool.
 
 ## Getting Started
 
@@ -13,12 +13,16 @@ your companion as you make your way through the Learning VM's series of
 interactive lessons or *quests*.
 
 At this point, you should have the Learning VM set up and an open session in
-your browser-based terminal or SSH client. If not, please return to the Setup
-section for instructions on getting started.
+your SSH client. If not, please return to the Setup section for instructions
+on getting started.
 
-Before we get into Puppet itself, this lesson provides with a brief
+Before we get into Puppet itself, this lesson provides you with a brief
 introduction to the `quest` tool that you will use throughout the rest of this
 guide to track your progress.
+
+**NOTE:** Harmful terminology within the quest guide has been replaced, and
+please refer to the following post for context within the Puppet product
+ecosystem: [https://puppet.com/blog/removing-harmful-terminology-from-our-products/](https://puppet.com/blog/removing-harmful-terminology-from-our-products/)
 
 Ready to get started? Run the following command on the VM to begin the
 "Welcome" quest.
@@ -27,7 +31,7 @@ Ready to get started? Run the following command on the VM to begin the
 
 ## An introduction to the quest tool
 
-One logging in to the Learning VM, you may have noticed a colored bar at the
+After logging in to the Learning VM, you may have noticed a colored bar at the
 bottom of the terminal window. This status bar is provided by a tool called
 [tmux](http://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/). This
 status bar gives you quick access to your current *quest*, and your progress
@@ -68,6 +72,6 @@ source code for the quest tool itself is
 
 ## Review
 
-In this quest, we introduced the concept of the quest and interactive task. You
-tried out the quest tool and reviewed the mechanics completing quests and
-tasks.
+In this quest, we introduced the concept of quests and interactive tasks. You
+tried out the quest tool and reviewed the mechanics of completing tasks and
+quests.

@@ -27,10 +27,6 @@ When you're ready to get started, enter the following command:
 
 ## Variables
 
-> Beauty is variable, ugliness is constant.
-
-> -Douglas Horton
-
 Variables allow a value to be bound to a name, which can then be used later
 in your manifest.
 
@@ -45,9 +41,6 @@ $my_variable = 'look, a string!'
 Once you have defined a variable, you can use it anywhere in your manifest where
 you want to use the assigned value. Note that variables are parse-order
 dependent, which means that a variable must be defined before it can be used.
-Trying to use an undefined variable will result in a special `undef` value.
-Though this may result in explicit errors, in some cases it will still lead
-to a valid catalog with unexpected contents.
 
 Technically, Puppet variables are actually *constants* from the perspective of
 the Puppet parser as it parses your Puppet code to create a catalog. Once a
@@ -59,10 +52,10 @@ infrastructure.
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
 Let's start by setting up a few variables. We'll define the default
-character the cowsay application will use, the port we want to service to
+character the cowsay application will use, the port we want the service to
 run on, and path of the configuration file.
 
-If you're not already in the modules directory, let's go a ahead and `cd` into it now.
+If you're not already in the modules directory, let's go ahead and `cd` into it now.
 
     cd /etc/puppetlabs/code/environments/production/modules
 
@@ -90,20 +83,20 @@ class pasture {
     before   => File[$pasture_config_file],
   }
   file { $pasture_config_file:
-    source  => 'puppet:///modules/pasture/pasture_config.yaml',
-    notify  => Service['pasture'],
+    source => 'puppet:///modules/pasture/pasture_config.yaml',
+    notify => Service['pasture'],
   }
   file { '/etc/systemd/system/pasture.service':
     source => 'puppet:///modules/pasture/pasture.service',
-    notify  => Service['pasture'],
+    notify => Service['pasture'],
   }
   service { 'pasture':
-    ensure    => running,
+    ensure => running,
   }
 }
 ```
 
-We haven't yet done anything with the `$pasture_port` or `$default_character`
+We haven't yet done anything with the `$port` or `$default_character`
 variables. To use these, we need a way to pass them into our configuration
 file. We'll also need to pass the `$pasture_config_file` variable to our
 service unit file so the service will start our Pasture process with the
@@ -267,10 +260,10 @@ class pasture {
   }
   file { '/etc/systemd/system/pasture.service':
     source => 'puppet:///modules/pasture/pasture.service',
-    notify  => Service['pasture'],
+    notify => Service['pasture'],
   }
   service { 'pasture':
-    ensure    => running,
+    ensure => running,
   }
 }
 ```
@@ -351,7 +344,7 @@ class pasture {
     notify  => Service['pasture'],
   }
   service { 'pasture':
-    ensure    => running,
+    ensure => running,
   }
 }
 ```
@@ -412,4 +405,4 @@ is configured without editing code in the module where the class is defined.
 ## Additional Resources
 
 * Our docs page has more information on [variables](https://puppet.com/docs/puppet/latest/lang_variables.html) and [templates](https://puppet.com/docs/puppet/latest/lang_template.html).
-* These topics are also covered in more depth in our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) trainings.
+* These topics are also covered in more depth in our [in-person and online](https://learn.puppet.com/category/instructor-led-training) trainings.

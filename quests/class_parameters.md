@@ -15,7 +15,7 @@ In the last quest, you used variables to introduce some flexibility to your
 `pasture` module. So far, however, all of the variables are assigned within the
 class itself.
 
-A well-written module in Puppet should let you customize all its 
+A well-written module in Puppet should let you customize all of its
 important variables without editing the module itself. This is done with
 *class parameters*. Writing parameters into a class allows you to declare
 that class with a set of parameter-value pairs similar to the resource
@@ -103,7 +103,7 @@ class pasture (
   }
 
   service { 'pasture':
-    ensure    => running,
+    ensure => running,
   }
 
 }
@@ -121,16 +121,14 @@ Now that your class has parameters, let's see how these parameters are set.
 Until now, you've been using `include` to declare the class as part of your
 node classification in the `site.pp` manifest. This `include` function declares
 a class without explicitly setting any parameters, allowing any parameters in
-the class to use their default values. Any parameters without defaults take the
-special `undef` value.
+the class to use their default values.
 
 To declare a class with specific parameters, use the *resource-like class
 declaration*. As the name suggests, the syntax for a resource-like class
 declaration is very similar to a resource declaration. It consists of the
 keyword `class` followed by a set of curly braces (`{...}`) containing the
 class name with a colon (`:`) and a list of parameters and values. Any values
-left out in this declaration are set to the defaults defined within the class,
-or `undef` if no default is set.
+left out in this declaration are set to the defaults defined within the class.
 
 ```puppet
 class { 'class_name':
@@ -168,7 +166,7 @@ Open your `site.pp` manifest.
 
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
-And modify your node definition for `pasture.puppet.vm` to include a
+Modify your node definition for `pasture.puppet.vm` to include a
 resource-like class declaration. We'll set the `default_character` parameter
 to the string `'cow'`, and leave the other two parameters unset, letting them
 take their default values.
@@ -199,7 +197,7 @@ And trigger a Puppet agent run to apply this parameterized class.
 
     sudo puppet agent -t
 
-When the run is complete, return to the master.
+When the run is complete, return to the Puppet server.
 
     exit
 

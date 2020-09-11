@@ -29,6 +29,13 @@ def get_learning_user_id
   -H "Content-Type: application/json" | jq -r -c '.[] | select(.login | contains("learning")) | .id'`.chomp
 end
 
+def invalidate_environment_cache
+	`curl -s -k -X DELETE https://$(puppet config print certname):8140/puppet-admin-api/v1/environment-cache \
+	--cert $(puppet config print hostcert) \
+        --key $(puppet config print hostprivkey) \
+	--cacert $(puppet config print cacert)`
+end
+
 def make_gitea_user(username, password)
   Dir.chdir(GITEA_HOMEDIR) do
     uid = Etc.getpwnam('git').uid

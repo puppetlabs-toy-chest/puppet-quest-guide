@@ -78,11 +78,11 @@ parameters should be set?
 
 Recall that a module is just a directory structure containing Puppet manifests
 and any other code or data needed to manage whatever it is the module helps
-you manage on a system. The Puppet master finds any modules in its *modulepath*
+you manage on a system. The Puppet server finds any modules in its *modulepath*
 directories and uses the module directory structure to find the classes, files,
 templates, and whatever else the module provides.
 
-Installing a module means placing the module directory into the Puppet master's
+Installing a module means placing the module directory into the Puppet server's
 modulepath. While you could download the module and manually move it to the
 modulepath, Puppet provides tools to help manage your modules.
 
@@ -96,7 +96,7 @@ the Puppetfile and code management workflow
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
-On your master, go ahead and use the `puppet module` tool to install this
+On your Puppet server, go ahead and use the `puppet module` tool to install this
 module.
 
     puppet module install puppetlabs-postgresql
@@ -115,9 +115,9 @@ users' versions of a module when you're browsing the Forge and during
 installation. When a module is installed, this account name is not
 included in the module directory name. If you aren't aware of this, it could
 cause some confusion; identically named modules will conflict if you try to
-install them on the same master.
+install them on the same Puppet server.
 
-To see a full list of modules installed in all modulepaths on your master, use
+To see a full list of modules installed in all modulepaths on your Puppet server, use
 the `puppet module` tool's `list` subcommand.
 
     puppet module list
@@ -251,7 +251,7 @@ class pasture (
   }
 
   service { 'pasture':
-    ensure    => running,
+    ensure => running,
   }
 
   if ($sinatra_server == 'thin') or ($sinatra_server == 'mongrel')  {
@@ -337,7 +337,7 @@ Finally, we retrieve a message by ID:
 ## Review
 
 In this quest, you learned how to incorporate a module from the Forge into your
-module to allow it to manage database. We began by covering the Forge website
+module to allow it to manage the database. We began by covering the Forge website
 and its search features that help you find the right module for your project.
 
 After finding a good module, you used the `puppet module` tool to install it
@@ -353,5 +353,4 @@ create a database server and connect it to your application server.
 ## Additional Resources
 
 * Watch this [short video](https://fast.wistia.net/embed/iframe/uxfpduvk64?seo=false) for a basic introduction to the Forge.
-* For more in-depth information on the Forge, check our [Introduction to the Forge](https://learn.puppet.com/elearning/an-introduction-to-the-forge) self-paced course.
 * Our [Getting Started with Puppet](https://learn.puppet.com/instructor-led-training/getting-started-with-puppet) course focuses on using Forge modules to quickly get started managing your infrastructure with Puppet.

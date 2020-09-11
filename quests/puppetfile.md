@@ -4,7 +4,7 @@
 
 ## Quest objectives
 
-- Create a Puppetfile to manage external module dependencies
+- Create a Puppetfile to manage external module dependencies.
 - Use the `puppet module` tool to calculate dependencies and help determine
   which modules you need to include in your Puppetfile.
 
@@ -172,7 +172,7 @@ approved before being merged into production and deployed.)
 Now that this change has been integrated into your control repository, use the
 `puppet code` tool to deploy to the production environment. (If your token has
 expired since you last authenticated, use `puppet access login --lifetime 1d`
-and supply the credentials `deployer`:`puppet` generate a new token.)
+and supply the credentials `deployer`:`puppet` to generate a new token.)
 
     puppet code deploy production --wait
 
@@ -220,7 +220,7 @@ tool` to resolve your set of module dependencies and versions for the
 
 With your external modules specified in your Puppetfile, you used a pull
 request to add these changes to your upstream control repository and used the
-`puppet code deploy` command to deploy that repository to the master's
+`puppet code deploy` command to deploy that repository to the server's
 production environment. As part of the deploy process, Puppet's Code Manager
 parsed the Puppetfile and installed each listed module to the
 `/etc/puppetlabs/code/environments/production/modules` directory.
@@ -230,10 +230,8 @@ and the application server that connects to it.
 
 ## Additional Resources
 
-You can find more information on how to use a Puppetfile on the Puppet [docs
-page](https://puppet.com/docs/pe/latest/code_management/puppetfile.html).
-
-The Puppetfile is covered in several of our [instructor-led trainings](https://learn.puppet.com/course-catalog).
-
-The example [control-repo repository](https://github.com/puppetlabs/control-repo) includes a Puppetfile
+* You can find more information on how to use a Puppetfile on the Puppet [docs
+page](https://puppet.com/docs/pe/2019.8/puppetfile.html).
+* The Puppetfile is covered in several of our [instructor-led trainings](https://learn.puppet.com/course-catalog).
+* The example [control-repo repository](https://github.com/puppetlabs/control-repo) includes a Puppetfile
 you may use as reference when creating your own.

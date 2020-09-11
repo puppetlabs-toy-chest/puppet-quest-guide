@@ -10,7 +10,7 @@ end
 
 describe _("Task 1:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('rpm -Uvh https://yum.puppet.com/puppet6/puppet6-release-el-7.noarch.rpm')
+    command('rpm -Uvh https://yum.puppet.com/puppet-tools-release-el-7.noarch.rpm')
       .exit_status
       .should eq 0
     command('yum install -y puppet-bolt')
@@ -18,7 +18,7 @@ describe _("Task 1:"), host: :localhost do
       .should eq 0
   end
   it _('Install bolt'), :validation do
-    package('puppet6-release')
+    package('puppet-tools-release')
       .should be_installed
     package('puppet-bolt')
       .should be_installed
@@ -46,28 +46,28 @@ end
 
 describe _("Task 3:"), host: :localhost do
   it 'has a working solution', :solution do
-    command('bolt command run "free -th" --nodes localhost')
+    command('bolt command run "free -th" --targets localhost')
       .exit_status
       .should eq 0
-    command('bolt command run hostname --nodes docker://bolt.puppet.vm')
+    command('bolt command run hostname --targets docker://bolt.puppet.vm')
       .exit_status
       .should eq 0
-    command('bolt command run "cat /etc/hosts" --nodes docker://bolt.puppet.vm')
+    command('bolt command run "cat /etc/hosts" --targets docker://bolt.puppet.vm')
       .exit_status
       .should eq 0
   end
   it _('Execute bolt commands') do
     file('/root/.bash_history')
       .content
-      .should match /bolt\s+command\s+run\s+\'free\s+-th\'\s+\-\-nodes\s+localhost/
+      .should match /bolt\s+command\s+run\s+\'free\s+-th\'\s+\-\-targets\s+localhost/
     file('/root/.bash_history')
       .content
-      .should match /bolt\s+command\s+run\s+hostname\s+\-\-nodes\s+docker:\/\/bolt\.puppet\.vm/
+      .should match /bolt\s+command\s+run\s+hostname\s+\-\-targets\s+docker:\/\/bolt\.puppet\.vm/
     file('/root/.bash_history')
       .content
-      .should match /bolt\s+\-\-format\s+json\s+command\s+run\s+\'cat\s+\/etc\/hosts\'\s+\-\-nodes\s+docker:\/\/bolt.puppet.vm/
+      .should match /bolt\s+\-\-format\s+json\s+command\s+run\s+\'cat\s+\/etc\/hosts\'\s+\-\-targets\s+docker:\/\/bolt.puppet.vm/
     file('/root/.bash_history')
       .content
-      .should match /bolt\s+command\s+run\s+\'cat\s+\/etc\/hosts\'\s+\-\-nodes\s+docker:\/\/bolt.puppet.vm/
+      .should match /bolt\s+command\s+run\s+\'cat\s+\/etc\/hosts\'\s+\-\-targets\s+docker:\/\/bolt.puppet.vm/
   end
 end

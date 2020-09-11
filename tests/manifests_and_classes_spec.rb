@@ -69,6 +69,7 @@ end
 
 describe _("Task 5:"), host: :cowsay do
   it 'has a working solution', :solution do
+    invalidate_environment_cache
     command("sudo puppet agent -t")
       .exit_status
       .should_not eq 1
@@ -113,6 +114,7 @@ end
 
 describe _("Task 8:"), host: :cowsay do
   it 'has a working solution', :solution do
+    invalidate_environment_cache
     command("sudo puppet agent -t")
       .exit_status
       .should_not eq 1

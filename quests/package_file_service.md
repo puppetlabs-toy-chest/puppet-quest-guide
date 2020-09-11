@@ -51,7 +51,7 @@ to ensure that it's running.
 
 <div class = "lvm-task-number"><p>Task 1:</p></div>
 
-Before getting started, be sure you're in your Puppet master's `modules`
+Before getting started, be sure you're in your Puppet server's `modules`
 directory.
 
     cd /etc/puppetlabs/code/environments/production/modules
@@ -190,10 +190,10 @@ source file that will define the content of the managed file. As its value,
 this parameter takes a URI. While it's possible to point to other locations,
 you'll typically use this to specify a file in your module's `files` directory.
 Puppet uses a shortened URI format that begins with the `puppet:` prefix to
-refer to these module files kept on your Puppet master. This format follows the
+refer to these module files kept on your Puppet server. This format follows the
 pattern `puppet:///modules/<MODULE NAME>/<FILE PATH>`. Notice the triple
 forward slash just after `puppet:`. This stands in for the implied path to the
-modules on your Puppet master.
+modules on your Puppet server.
 
 Don't worry if this URI syntax seems complex. It's pretty rare that you'll need
 to use it for anything other than referring to files within your modules, so
@@ -390,7 +390,7 @@ tool.
     puppet parser validate pasture/manifests/init.pp
 
 The `pasture.puppet.vm` node is still classified with this `pasture` class.
-When you return to the node and do another puppet agent run, the master will
+When you return to the node and do another puppet agent run, the server will
 pick up these added file and service resources and include them in the catalog
 it returns to the node.
 
@@ -409,7 +409,7 @@ agent node.
 
     exit
 
-From the master, use the `curl` command to retrieve an ASCII elephant from
+From the server, use the `curl` command to retrieve an ASCII elephant from
 port 4567 of the `pasture.puppet.vm` node.
 
     curl 'pasture.puppet.vm:4567/api/v1/cowsay?message=Hello!'
@@ -434,5 +434,5 @@ variables and replacing your static files with templates.
 
 ## Additional Resources
 
-* Our [docs page](https://puppet.com/docs/puppet/latest/lang_relationships.html) covers resource relationships in more depth, including some alternative syntax forms you might run into reading others’ Puppet code.
-* Resource relationships are also covered by [a lesson](https://learn.puppet.com/course/relationships) in our [self-paced course catalog](https://learn.puppet.com/category/self-paced-training).
+* Our [docs page](https://puppet.com/docs/puppet/latest/lang_relationships.html) covers resource relationships in more depth, including some alternative syntax forms you might run into reading others' Puppet code.
+* Resource relationships are also covered by [a lesson](https://learn.puppet.com/course/relationships) in our [course catalog](https://learn.puppet.com/course-catalog).

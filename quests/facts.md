@@ -30,15 +30,11 @@ To start this quest enter the following command:
 
 ## Facter
 
->Get your facts first, then distort them as you please.
-
-> -Mark Twain
-
 You already encountered the `facter` tool when we asked you to run `facter
 ipaddress` in the setup section of this Quest Guide. We briefly discussed
 the tool's role in a Puppet run: the Puppet agent runs `facter` to get a list
-of facts about the system to send to the Puppet master as it requests a
-catalog. The Puppet master then uses these facts to help compile that catalog
+of facts about the system to send to the Puppet server as it requests a
+catalog. The Puppet server then uses these facts to help compile that catalog
 before sending it back to the Puppet agent to be applied.
 
 Before we get into integrating facts into your Puppet code, let's use the
@@ -53,7 +49,7 @@ First, connect to the agent node prepared for this quest.
 
 You can access a standard set of facts with the `facter` command. Adding the
 `-p` flag will include any custom facts that you may have installed on the
-Puppet master and synchronized with the agent during the pluginsync step of a
+Puppet server and synchronized with the agent during the pluginsync step of a
 Puppet run. We'll pass this `facter -p` command to `less` so you can scroll
 through the output in your terminal.
 	
@@ -72,7 +68,7 @@ at each child level of the hash, for example:
     facter -p os.family
 
 Now that you know how to check what data are available via `facter` and how the
-data are structured, let's return to the Puppet master so you can see how this
+data are structured, let's return to the Puppet server so you can see how this
 can be integrated into your Puppet code.
 
     exit
@@ -137,7 +133,7 @@ general variable syntax rather than the `$facts` hash syntax we suggest here.
 
 <div class = "lvm-task-number"><p>Task 4:</p></div>
 
-Now create the `motd.epp` template.
+Now, create the `motd.epp` template.
 
     vim motd/templates/motd.epp
 
@@ -197,7 +193,7 @@ Once this is complete, connect again to the `pasture.puppet.vm` node.
 
     ssh learning@pasture.puppet.vm
 
-And trigger a Puppet agent run.
+Then, trigger a Puppet agent run.
 
     sudo puppet agent -t
 
@@ -209,7 +205,7 @@ Now reconnect.
 
     ssh learning@pasture.puppet.vm
 
-Once you've had a chance to admire the MOTD, return to the Puppet master.
+Once you've had a chance to admire the MOTD, return to the Puppet server.
 
     exit
 
@@ -230,5 +226,5 @@ create intelligent defaults based on system information.
 ## Additional Resources
 
 * Check out our [docs page](https://puppet.com/docs/puppet/latest/lang_facts_and_builtin_vars.html) for more information on facter and facts in Puppet.
-* You can also find a [lesson on Facter](https://learn.puppet.com/course/an-introduction-to-facter) in our [self-paced training course catalog](https://learn.puppet.com/category/self-paced-training).
-* Facts are covered in-depth in our Getting Started with Puppet and Puppet Practitioner courses. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.
+* You can also find a [lesson on Facter](https://learn.puppet.com/course/an-introduction-to-facter) in our [course catalog](https://learn.puppet.com/course-catalog).
+* Facts are covered in-depth in our Getting Started with Puppet and Puppet Practitioner courses. Explore our [in-person and online](https://learn.puppet.com/category/instructor-led-training) training options for more information.

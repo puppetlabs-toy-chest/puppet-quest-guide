@@ -32,11 +32,11 @@ through the exercise of setting up SSH keys for each user account, but the same
 principle can easily be extended to cover a range of other user-related
 resources.
 
-To address this need, of repeatable groups of resources, the Puppet language
+To address this need for repeatable groups of resources, the Puppet language
 uses *defined resource types*. A defined resource type is a block of Puppet
 code similar in syntax to a class. Like a class, a defined resource type can
 take parameters and use these parameters to configure a related group of
-resources. Unlike a class, however, a defined resource type, is not singleton.
+resources. Unlike a class, however, a defined resource type is not singleton.
 This means that the defined resource type may be declared multiple times on the
 same node.
 
@@ -45,10 +45,6 @@ When you're ready to get started, type the following command:
     quest begin defined_resource_types
 
 ## Defined resource types
-
-> Repetition - that is the actuality and the earnestness of existence.
-
-> -Søren Kierkegaard
 
 A [defined resource
 type](https://puppet.com/docs/puppet/latest/lang_defined_types.html) is a block
@@ -84,13 +80,13 @@ uniqueness constraints when the defined resource type is declared multiple
 times.
 
 Before continuing, let's take a moment to review those constraints. To avoid
-duplicate resource errors during compilation, all resource must have a *title*
+duplicate resource errors during compilation, all resources must have a *title*
 and *namevar* parameter that are unique with respect to resources of the same
 type.
 
 ## Resource uniqueness constraints
 
-A resource's *title* is the unique identifier Puppet user internally to keep
+A resource's *title* is the unique identifier Puppet uses internally to keep
 track of that resource. Resource relationships, for example, rely on resource
 titles to specify dependency relationships between resources. Resource titles
 are also used to log and report on resource state changes across Puppet runs.
@@ -111,7 +107,7 @@ and unique title. For example, if the `path` of a file resource is
 `/etc/hosts`, using that path as the resource title makes it immediately clear
 what the the resource is managing. The common convention, then, is to use the
 value of a resource's namevar as its title. To support this convention, a
-resource's namevar default to the value of its title unless it is explicitly
+resource's namevar defaults to the value of its title unless it is explicitly
 set to a different value. This is why, for instance, you generally see the
 filepath or package name used the title of `file` and `package` resources, and
 the `path` or `name` parameter left unset.
@@ -121,7 +117,7 @@ the `path` or `name` parameter left unset.
 Now that you understand resource uniqueness constraints, how do you guarantee
 that the resources included in a defined resource type are unique?
 
-Just as you would give include a title in the declaration of any of Puppet's
+Just as you would give a title in the declaration of any of Puppet's
 built-in resource types, you include a title when declaring a defined resource
 type. The title given to a defined resource type when it is declared is
 available within the defined resource type's code block as the `$title`
@@ -215,13 +211,13 @@ resource to actual user account on the system.
 This `user` resource already has its own defaults for handling `group`,
 `shell`, and `comment`. The desired behavior, then, is to use the values passed
 in by parameter when they're provided, but revert to the `user` type's own
-defaults for any of these parameters that isn't supplied when the defined
+defaults for any of these parameters that aren't supplied when the defined
 resource type is declared.
 
 The special `undef` value lets you achieve both of these things. Under the hood
 `undef` is exactly what Puppet sees when it tries to evaluate a variable or
 parameter that has not been set. By setting it as the default for your optional
-parameters, you can literally pass the "undefined" state of a parameter through
+parameters, you can pass the "undefined" state of a parameter through
 to the underlying `user` resource, which will then fall back to its default
 behavior for that parameter.
 
@@ -284,7 +280,7 @@ resource, for example, looks like `"${title}@puppet.vm"`.
 
 Why is this so important? Remember, all resources included in the body of a
 defined resource type must still meet the same uniqueness constraints of any
-other Puppet resource. By passing the unique given to the defined resource type
+other Puppet resource. By passing the unique constraints given to the defined resource type
 itself through to each constituent resource, whether directly, as in the case
 of the `user` resource, or indirectly through string interpolation, you can
 guarantee the uniqueness of all the resources included within the defined
@@ -343,7 +339,7 @@ structured data is actually implemented by a Puppet manifest.
 
 The final content of the file is given below, but managing the big `pub_key`
 block may be a little awkward, especially if you're not used to Vim. (If you
-are comfortable with Vim, feel free to skip this paragraph)
+are comfortable with Vim, feel free to skip the next paragraph.)
 
 First, you'll need to trim the `ssh-rsa` and `root@learning.puppetlabs.vm` strings
 from the beginning and end of the key. First, position your cursor over the
@@ -356,7 +352,7 @@ need to copy it. You can copy a line with the command `yy` and paste it to the
 position of your cursor with the `p` key.  You can also delete a line with the
 `dd` command.
 
-When your finished, your data file should look like the following example,
+When you're finished, your data file should look like the following example,
 though your public key will be different from the one shown. Note that the
 `pub_key:` must all be on a single line.
 
@@ -449,7 +445,7 @@ Here, we'll use a Puppet language feature called an
 iterator allows you to repeat a block of Puppet code multiple times, using
 data from a hash or array to bind different values to the variables in
 the block for each iteration. In this case, the iterator goes through a
-list of users accounts defined in your Hiera data source and declares an
+list of user accounts defined in your Hiera data source and declares an
 instance of the `user_accounts::ssh_user` defined resource type for each.
 
 [//]: # (code/130_defined_resource_types/modules/profile/manifests/base/dev_users.pp)
@@ -466,8 +462,8 @@ class profile::base::dev_users {
 ```
 
 When using iteration, be very mindful of your code's readability and
-maintainability. One of the Puppet language's benefits is that its declarative
-nature tends to make Puppet code itself readable description of desired state
+maintainability. One of the benefits of the Puppet language is that its declarative
+nature tends to make Puppet code itself a readable description of desired state
 for your system. Used unnecessarily, iteration can increase your Puppet code's
 complexity, making it more difficult to understand and maintain.
 
@@ -532,4 +528,4 @@ on a defined resource type:
 ## Additional Resources
 
 * Read more about defined resource types at our [docs page](https://puppet.com/docs/puppet/latest/lang_defined_types.html).
-* Defined resource types are covered in our Puppet Practitioner course. Explore our [in-person](https://learn.puppet.com/category/instructor-led-training) and [online](https://learn.puppet.com/category/online-instructor-led-training) training options for more information.
+* Defined resource types are covered in our Puppet Practitioner course. Explore our [in-person and online](https://learn.puppet.com/instructor-led-training/puppet-practitioner) training options for more information.

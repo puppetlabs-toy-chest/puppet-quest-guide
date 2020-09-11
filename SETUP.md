@@ -41,7 +41,7 @@ firewall rules (ask your network administrator if you're not sure), we strongly
 suggest running the VM with an offline host-only network. This offline
 configuration requires more complex initial setup with VirtualBox software, but
 will help you avoid troubleshooting networking issues between your Puppet
-master and agent systems.
+server and agent systems.
 
 ### Online
 
