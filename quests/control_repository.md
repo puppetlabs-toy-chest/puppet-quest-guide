@@ -224,8 +224,6 @@ This architecture allows multiple contributors to work on the same codebase
 while ensuring that any changes they make can be tested and approved before
 being committed to the upstream repository and deployed to production.
 
-![image](../assets/git_workflow.png)
-
 <div class = "lvm-task-number"><p>Task 6:</p></div>
 
 First, navigate to the `control-repo` directory.
