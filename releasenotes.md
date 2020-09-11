@@ -5,6 +5,7 @@
 ### 2.6.0
   * Updated to PE 2019.8.1.
   * Various quest guide updates for new version of PE.
+  * Added advisory for removal of harmful terminology.
 
 ### 2.5.2
   * Removed Japanese localization.

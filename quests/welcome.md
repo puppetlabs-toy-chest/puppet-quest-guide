@@ -20,6 +20,10 @@ Before we get into Puppet itself, this lesson provides you with a brief
 introduction to the `quest` tool that you will use throughout the rest of this
 guide to track your progress.
 
+**NOTE:** Harmful terminology within the quest guide has been replaced, and
+please refer to the following post for context within the Puppet product
+ecosystem: [https://puppet.com/blog/removing-harmful-terminology-from-our-products/](https://puppet.com/blog/removing-harmful-terminology-from-our-products/)
+
 Ready to get started? Run the following command on the VM to begin the
 "Welcome" quest.
 
