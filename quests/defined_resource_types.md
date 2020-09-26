@@ -105,7 +105,7 @@ Though a resource's title and namevar are distinct, the value you would assign
 to a resource's namevar is generally an excellent candidate for an expressive
 and unique title. For example, if the `path` of a file resource is
 `/etc/hosts`, using that path as the resource title makes it immediately clear
-what the the resource is managing. The common convention, then, is to use the
+what the resource is managing. The common convention, then, is to use the
 value of a resource's namevar as its title. To support this convention, a
 resource's namevar defaults to the value of its title unless it is explicitly
 set to a different value. This is why, for instance, you generally see the

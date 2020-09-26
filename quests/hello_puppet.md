@@ -81,7 +81,7 @@ and control, the complexity can leave a new user wondering where to start.
 By initially introducing Bolt, and now the Puppet agent and some of the
 command line tools included in
 the agent installation, there should be a balance between the
-big-picture view of Puppet and the the bottom-up fundamentals. You'll begin to
+big-picture view of Puppet and the bottom-up fundamentals. You'll begin to
 understand the agent's role in the broader Puppet architecture, as well as the
 details of how it interacts with the system where it's installed.
 
