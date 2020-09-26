@@ -255,7 +255,7 @@ Open your `site.pp` manifest:
     vim /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 Scroll past the comments and default node definition to the bottom of the file.
-(In Vim, you can type `G` to jump the the bottom of a file) This is where
+(In Vim, you can type `G` to jump the bottom of a file) This is where
 you'll create a new node definition for the `agent.puppet.vm` system. The
 outline of the node definition should look like this:
 

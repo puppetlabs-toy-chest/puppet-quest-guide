@@ -211,7 +211,7 @@ can store a value in the connected database and retrieve it.
 
 ## Review
 
-In this quest, we introduced the the use of a Puppetfile to manage external
+In this quest, we introduced the use of a Puppetfile to manage external
 module dependencies.
 
 After learning the basic syntax of the Puppetfile, you used the `puppet module
