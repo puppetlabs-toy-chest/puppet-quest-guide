@@ -258,7 +258,7 @@ validation and content on your copy of the Learning VM.
 
 If your puppet runs still fail after trying the steps above, check the Puppet
 Enterprise [Known
-Issues](https://puppet.com/docs/pe/latest/pe_known_issues.html)
+Issues](https://puppet.com/docs/pe/latest/known_issues_pe.html)
 page or feel free to contact us at learningvm@puppet.com. Please include
 details of your host OS, virtualization software and version, and any details
 of the site network configuration where you're running the VM (for example,
