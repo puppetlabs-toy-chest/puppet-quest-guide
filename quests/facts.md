@@ -30,12 +30,10 @@ To start this quest enter the following command:
 
 ## Facter
 
-You already encountered the `facter` tool when we asked you to run `facter
-ipaddress` in the setup section of this Quest Guide. We briefly discussed
-the tool's role in a Puppet run: the Puppet agent runs `facter` to get a list
-of facts about the system to send to the Puppet server as it requests a
-catalog. The Puppet server then uses these facts to help compile that catalog
-before sending it back to the Puppet agent to be applied.
+As we briefly discussed in the setup section, the Puppet agent runs `facter` to
+get a list of facts about the system to send to the Puppet server as it 
+requests a catalog. The Puppet server then uses these facts to help compile
+that catalog before sending it back to the Puppet agent to be applied.
 
 Before we get into integrating facts into your Puppet code, let's use the
 `facter` tool from the command line to see what kinds of facts are available

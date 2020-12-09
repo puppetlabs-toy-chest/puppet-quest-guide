@@ -417,7 +417,7 @@ use to authenticate itself with Gitea.
 
 Begin by creating a new `ssh` subdirectory in `/etc/puppetlabs/puppetserver`:
 
-    mkdir /etc/puppetlabs/puppetserver/ssh
+    mkdir -p /etc/puppetlabs/puppetserver/ssh
 
 Next, use the `ssh-keygen` command to generate a new keypair.
 
@@ -491,8 +491,8 @@ First, open the PE console interface in your browser by navigating to
 **user:** admin  
 **password:** puppetlabs
 
-Click on the **Classification** tab in the PE console navigation menu. From
-there, expand the **All nodes** and **PE Infrastructure** groups and select
+Click on the **Node Groups** item in the PE console navigation menu. From
+there, expand the **All Nodes** and **PE Infrastructure** groups and select
 the **PE Master** node group.
 
 ![image](../assets/pe_console_master_2019.8.png)
