@@ -127,7 +127,7 @@ next command, just hit the `enter` key.
 <div class = "lvm-task-number"><p>Task 6:</p></div>
 
 Use the `curl` command to test the Pasture API. The request takes two
-parameters, `string`, which defines the message to be returned, and
+parameters, `message`, which defines the message to be returned, and
 `character`, which sets the character you want to speak the message. By
 default, the process listens on port 4567. Try the following command:
 
